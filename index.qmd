@@ -1,0 +1,19 @@
+# Preface {.unnumbered}
+
+The course "Mathematical Modeling" has a dual purpose: on one hand, to introduce students to some basic mathematical models in various areas of biology (demography, ecology, infectious diseases, enzyme reactions, physiology, molecular networks); on the other hand, to provide fundamental knowledge in the analysis and numerical simulation of ordinary and partial differential equations.
+
+Specifically, the first part of the course is dedicated to modeling using ordinary differential equations and introduces various analytical techniques (linearization, equilibria and their stability, bifurcation, regular and singular perturbations).
+
+- Overview of ordinary differential equations (ODEs): Solution of linear equations; equilibria and linearized stability; phase plane, limit cycles; numerical schemes for solving ODEs.
+- One- or two-dimensional models in demography, ecology, epidemiology, and immunology. Non-dimensionalization of variables and parameters.
+- Slow-fast systems, enzyme reaction models and their simplification using perturbative methods.
+- Bifurcation of equilibria and application to predator-prey systems and molecular networks. Simplified models of important biological phenomena, such as the cell cycle and glucose-insulin oscillations.
+- Excitable systems: Hodgkin-Huxley equations (overview) and FitzHugh-Nagumo equations.
+- Parameter estimation for differential models.
+
+In the second part, partial differential equation models and some techniques for constructing or approximating solutions will be studied. Additionally, some of the most interesting phenomena of reaction-diffusion equations (traveling wave solutions, Turing mechanism) will be presented in a biological context (morphogenesis).
+
+- Dynamical systems on networks. Examples in epidemiology.
+- Introduction to partial differential equations (PDEs): Solutions by separation of variables. Fourier series. The heat equation and Brownian motion. Eigenfunctions of the Laplacian. Numerical approximation.
+- Skellam and Fisher equations: Waveform solutions; stationary solutions of the boundary value problem.
+- Stability of stationary solutions of reaction-diffusion systems and Turing’s mechanism for morphogenesis. Conditions for its validity and examples. Chemotaxis: The Keller-Segel model.

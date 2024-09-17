@@ -1,0 +1,33 @@
+project:
+  type: book
+
+book:
+  title: "Mathematical Biology"
+  author: "Simone Pezzuto, Cinzia Soresina"
+  date: last-modified
+  chapters:
+    - index.qmd
+    - part: "Lectures"
+      chapters:
+      - 01_Bathtub.qmd
+      - 02_Population.qmd
+    - part: "Assignments"
+      chapters:
+      - Assignments/01_recap_ODEs.qmd
+    - part: "Labs"
+      chapters:
+      - Laboratories/01 ODE Integration/lab_ODEinteg.qmd
+  appendices:
+    - IntroODE.qmd
+    - Laboratories/00 Intro Matlab/introMATLAB.qmd
+
+bibliography: references.bib
+
+format:
+  html:
+    #self-contained: true
+    theme: cosmo
+    strip-comments: true
+    date-modified: last-modified
+  pdf:
+    documentclass: scrreprt
