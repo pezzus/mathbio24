@@ -6,10 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Simone Pezzuto, Cinzia Soresina">
-<meta name="dcterms.date" content="2024-09-18">
+<meta name="dcterms.date" content="2024-09-16">
 
-<title>Mathematical Biology</title>
+<title>1&nbsp; Bathtub model – Mathematical Biology</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -22,6 +21,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -32,7 +65,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./01_Bathtub.html" rel="next">
+<link href="./index.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -70,6 +103,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -82,7 +144,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Preface</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./01_Bathtub.html">Lectures</a></li><li class="breadcrumb-item"><a href="./01_Bathtub.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Bathtub model</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -109,7 +171,7 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Preface</span></a>
   </div>
 </li>
@@ -124,7 +186,7 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./01_Bathtub.html" class="sidebar-item-text sidebar-link">
+  <a href="./01_Bathtub.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Bathtub model</span></span></a>
   </div>
 </li>
@@ -140,40 +202,35 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#preface" id="toc-preface" class="nav-link active" data-scroll-target="#preface">Preface</a></li>
+  <li><a href="#the-bathtub-model" id="toc-the-bathtub-model" class="nav-link active" data-scroll-target="#the-bathtub-model"><span class="header-section-number">1.1</span> The bathtub 🛁 model</a></li>
+  <li><a href="#malthus-equation" id="toc-malthus-equation" class="nav-link" data-scroll-target="#malthus-equation"><span class="header-section-number">1.2</span> Malthus equation</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./01_Bathtub.html">Lectures</a></li><li class="breadcrumb-item"><a href="./01_Bathtub.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Bathtub model</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Mathematical Biology</h1>
+<h1 class="title"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Bathtub model</span></h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>Simone Pezzuto, Cinzia Soresina </p>
-          </div>
-  </div>
     
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">September 18, 2024</p>
+      <p class="date">September 16, 2024</p>
     </div>
   </div>
   
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">September 18, 2024</p>
+      <p class="date-modified">September 17, 2024</p>
     </div>
   </div>
     
@@ -184,25 +241,144 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="preface" class="level1 unnumbered">
-<h1 class="unnumbered">Preface</h1>
-<p>The course “Mathematical Modeling” has a dual purpose: on one hand, to introduce students to some basic mathematical models in various areas of biology (demography, ecology, infectious diseases, enzyme reactions, physiology, molecular networks); on the other hand, to provide fundamental knowledge in the analysis and numerical simulation of ordinary and partial differential equations.</p>
-<p>Specifically, the first part of the course is dedicated to modeling using ordinary differential equations and introduces various analytical techniques (linearization, equilibria and their stability, bifurcation, regular and singular perturbations).</p>
+<section id="the-bathtub-model" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="the-bathtub-model"><span class="header-section-number">1.1</span> The bathtub 🛁 model</h2>
+<p>The models of Newtonian physics are made of differential equations built starting from the second law of the dynamics. The structure of the models discussed here is instead simpler; they are based on the “balance equation of the bathtub”: if <span class="math inline">\(Q(t)\)</span> is the quantity of a substance in the bathtub we have <span class="math display">\[
+\frac{\mathrm{d}Q}{\mathrm{d}t} = Q'(t) = I(t) - O(t),
+\]</span></p>
+<p>where</p>
 <ul>
-<li>Overview of ordinary differential equations (ODEs): Solution of linear equations; equilibria and linearized stability; phase plane, limit cycles; numerical schemes for solving ODEs.</li>
-<li>One- or two-dimensional models in demography, ecology, epidemiology, and immunology. Non-dimensionalization of variables and parameters.</li>
-<li>Slow-fast systems, enzyme reaction models and their simplification using perturbative methods.</li>
-<li>Bifurcation of equilibria and application to predator-prey systems and molecular networks. Simplified models of important biological phenomena, such as the cell cycle and glucose-insulin oscillations.</li>
-<li>Excitable systems: Hodgkin-Huxley equations (overview) and FitzHugh-Nagumo equations.</li>
-<li>Parameter estimation for differential models.</li>
+<li><span class="math inline">\(I(t)\)</span> is the <em>input rate</em> (quantity that enters per unit time)</li>
+<li><span class="math inline">\(Q(t)\)</span> is the <em>output rate</em> (quantity that leaves per unit time).</li>
 </ul>
-<p>In the second part, partial differential equation models and some techniques for constructing or approximating solutions will be studied. Additionally, some of the most interesting phenomena of reaction-diffusion equations (traveling wave solutions, Turing mechanism) will be presented in a biological context (morphogenesis).</p>
+<p>To be more precise, the assumption is that, if <span class="math inline">\(I_{(t,t+\Delta t)}\)</span> is the quantity that enters in the interval <span class="math inline">\((t,t+\Delta t)\)</span>, we have <span class="math inline">\(I_{(t,t+\Delta t)} = I(t)\Delta t + o(\Delta t)\)</span>, where <span class="math inline">\(o(\Delta t)\)</span> is a higher order infinitesimal than <span class="math inline">\(\Delta t\)</span>. Hence: <span class="math display">\[
+I(t) = \lim_{\Delta t\to 0} \frac{I_{(t,t+\Delta t)}}{\Delta t}.
+\]</span></p>
+<p>The input rate <span class="math inline">\(I(t)\)</span> is like an instantaneous velocity: the quantity entered in a given time, when that time becomes very small. Hence <span class="math inline">\(I(t)\)</span> is measured in <span class="math inline">\([C][t^{−1}]\)</span> units where <span class="math inline">\([C]\)</span> represents the concentration of the quantity <span class="math inline">\(Q\)</span>. Similarly for the exit rate <span class="math inline">\(O(t)\)</span>.</p>
+<p>Let us start from a very simple example. Assume <span class="math inline">\(I(t) = \Lambda\)</span> constant input flux; <span class="math inline">\(O(t) = \gamma Q(t)\)</span>, i.e.&nbsp;exit flux is proportional to the quantity present at the moment; the proportionality constant <span class="math inline">\(\gamma\)</span> is often called the <em>exit rate</em> and has the dimension <span class="math inline">\([t^{−1}]\)</span>, the inverse of time. From these assumptions we get: <span id="eq-bathtub"><span class="math display">\[
+Q'(t) = \Lambda - \gamma Q(t),
+\tag{1.1}\]</span></span></p>
+<p>supplemented with some <em>initial condition</em> <span class="math display">\[
+Q(0) = Q_0.
+\]</span></p>
+<p>The solution is: <span class="math display">\[
+Q(t) = e^{-\gamma t} Q_0 + \frac{\Lambda}{\gamma}\Bigl( 1 - e^{-\gamma t} \Bigr).
+\]</span></p>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Exercise
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Solve <a href="#eq-bathtub" class="quarto-xref">Equation&nbsp;<span>1.1</span></a> with the method you prefer.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Exercise
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Solve <a href="#eq-bathtub" class="quarto-xref">Equation&nbsp;<span>1.1</span></a> with the general formula for linear ODEs, by first defining the matrix exponential (here, just a scalar function).</p>
+</div>
+</div>
+<p>Note that if <span class="math inline">\(\Lambda = 0\)</span> (no input), the solution is simply <span class="math display">\[
+Q(t) = Q_0 e^{-\gamma t}.
+\]</span></p>
+<p>This means that the survival time of a molecule initially present follows the exponential distribution: <span class="math display">\[
+\mathbb{P}[\text{a molecule present at time 0 is present at time $t &gt; 0$}] =
+\frac{Q(t)}{Q_0} = e^{-\gamma t}.
+\]</span></p>
+<p>From the properties of the exponential distribution, we obtain that the mean survival time <span class="math inline">\(\mathbb{E}[T] = 1/\gamma\)</span>; hence the exit rate <span class="math inline">\(\gamma\)</span> can be interpreted as the inverse of the mean survival time.</p>
+<p>To be more precise, let us define a continuous random variable <span class="math inline">\(T\)</span>, which measures the lifetime of a particle present in the bathtub. Then, the cumulative distribution <span class="math inline">\(F(t)\)</span> of <span class="math inline">\(T\)</span> is given by <span class="math display">\[
+\begin{split}
+F(t) &amp;= \mathbb{P}[T \le t] \\
+&amp;= 1 - \mathbb{P}[T &gt; t] \\
+&amp;= 1 - \mathbb{P}[\text{a molecule present at time 0 is present at time $t &gt; 0$}] \\
+&amp;= 1 - e^{-\gamma t}.
+\end{split}
+\]</span></p>
+<p>So, we indeed have an exponential distribution. The probability density function is: <span class="math display">\[
+f(t) = F'(t) = \gamma e^{-\gamma t},
+\]</span></p>
+<p>and the expectation is: <span class="math display">\[
+\mathbb{E}[T] = \int_0^\infty t f(t) \mathrm{d}t = \frac{1}{\gamma}.
+\]</span></p>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Exercise
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Compute the above integral explicitly.</p>
+</div>
+</div>
+</section>
+<section id="malthus-equation" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="malthus-equation"><span class="header-section-number">1.2</span> Malthus equation</h2>
+<p>The metaphor of the bathtub can be used to model the dynamics of a population. Neglecting all differences among individuals (due to age, sex, genetic,…) we can represent a population through its size <span class="math inline">\(N(t)\)</span>; this will increase through inputs due to births and outputs due to deaths (if immigration and emigration are not considered). Hence <span class="math display">\[
+N'(t) = B(t) - D(t),
+\]</span></p>
+<p>where <span class="math inline">\(B(t) = \text{births}\)</span> and <span class="math inline">\(D(t) = \text{deaths}\)</span>.</p>
+<p>Malthus model assumes</p>
 <ul>
-<li>Dynamical systems on networks. Examples in epidemiology.</li>
-<li>Introduction to partial differential equations (PDEs): Solutions by separation of variables. Fourier series. The heat equation and Brownian motion. Eigenfunctions of the Laplacian. Numerical approximation.</li>
-<li>Skellam and Fisher equations: Waveform solutions; stationary solutions of the boundary value problem.</li>
-<li>Stability of stationary solutions of reaction-diffusion systems and Turing’s mechanism for morphogenesis. Conditions for its validity and examples. Chemotaxis: The Keller-Segel model.</li>
+<li>within a (short) time period of length <span class="math inline">\(\Delta t\)</span>, each individual gives, on average, birth to <span class="math inline">\(\beta\Delta t\)</span> new individuals; hence <span class="math inline">\(B(t) = \beta N(t)\)</span>;</li>
+<li>within the same time period <span class="math inline">\(\Delta t\)</span>, each individual has probability <span class="math inline">\(\mu\Delta t\)</span> of dying; hence <span class="math inline">\(D(t) = \mu N(t)\)</span>.</li>
 </ul>
+<p>We get the following equation <span class="math display">\[
+N'(t) = \beta N(t) - \mu N(t) = (\beta - \mu)N(t),
+\]</span></p>
+<p>that represents the <em>Malthus model</em>. The parameter <span class="math inline">\(\beta\)</span> is known as <em>fertility rate</em>, while <span class="math inline">\(\mu\)</span> is the <em>mortality rate</em>. Finally, <span class="math display">\[
+r = \beta - \mu
+\]</span></p>
+<p>is the (instantaneous) <em>growth rate</em> and is also called <em>Malthus parameter</em> or <em>biological potential</em> of the population.</p>
+<p>With the initial condition <span class="math display">\[
+N(0) = N_0,
+\]</span></p>
+<p>the evolution of the population is completely determined. In fact, the solution is <span class="math display">\[
+N(t) = N_0 e^{rt},
+\]</span></p>
+<p>and we see that the population will go to extinction or will grow without limits if <span class="math inline">\(r &lt; 0\)</span> or <span class="math inline">\(r &gt; 0\)</span>, respectively. If instead <span class="math inline">\(r = 0\)</span>, the population size is constant (births and deaths compensate.)</p>
+<div id="2a42fa28" class="cell" data-execution_count="1">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>sns.set_theme(<span class="st">"notebook"</span>, style<span class="op">=</span><span class="st">"whitegrid"</span>)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>t <span class="op">=</span> np.linspace(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">100</span>)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>plt.plot(t,np.exp(<span class="dv">1</span><span class="op">*</span>t),label<span class="op">=</span><span class="st">'r &gt; 0'</span>)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>plt.plot(t,np.exp(<span class="op">-</span><span class="dv">1</span><span class="op">*</span>t),label<span class="op">=</span><span class="st">'r &lt; 0'</span>)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>plt.plot(t,np.exp(<span class="dv">0</span><span class="op">*</span>t),label<span class="op">=</span><span class="st">'r = 0'</span>)</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>plt.grid()</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Time'</span>)</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Population'</span>)</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="01_Bathtub_files/figure-html/cell-2-output-1.png" width="593" height="435" class="figure-img"></p>
+<figcaption>Example of solutions of Malthus equation</figcaption>
+</figure>
+</div>
+</div>
+</div>
 
 
 </section>
@@ -630,11 +806,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
+      <a href="./index.html" class="pagination-link" aria-label="Preface">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Preface</span>
+      </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./01_Bathtub.html" class="pagination-link" aria-label="Bathtub model">
-        <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Bathtub model</span></span> <i class="bi bi-arrow-right-short"></i>
-      </a>
   </div>
 </nav>
 </div> <!-- /content -->

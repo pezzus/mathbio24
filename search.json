@@ -8,5 +8,38 @@
     "crumbs": [
       "Preface"
     ]
+  },
+  {
+    "objectID": "01_Bathtub.html",
+    "href": "01_Bathtub.html",
+    "title": "1  Bathtub model",
+    "section": "",
+    "text": "1.1 The bathtub 🛁 model\nThe models of Newtonian physics are made of differential equations built starting from the second law of the dynamics. The structure of the models discussed here is instead simpler; they are based on the “balance equation of the bathtub”: if \\(Q(t)\\) is the quantity of a substance in the bathtub we have \\[\n\\frac{\\mathrm{d}Q}{\\mathrm{d}t} = Q'(t) = I(t) - O(t),\n\\]\nwhere\nTo be more precise, the assumption is that, if \\(I_{(t,t+\\Delta t)}\\) is the quantity that enters in the interval \\((t,t+\\Delta t)\\), we have \\(I_{(t,t+\\Delta t)} = I(t)\\Delta t + o(\\Delta t)\\), where \\(o(\\Delta t)\\) is a higher order infinitesimal than \\(\\Delta t\\). Hence: \\[\nI(t) = \\lim_{\\Delta t\\to 0} \\frac{I_{(t,t+\\Delta t)}}{\\Delta t}.\n\\]\nThe input rate \\(I(t)\\) is like an instantaneous velocity: the quantity entered in a given time, when that time becomes very small. Hence \\(I(t)\\) is measured in \\([C][t^{−1}]\\) units where \\([C]\\) represents the concentration of the quantity \\(Q\\). Similarly for the exit rate \\(O(t)\\).\nLet us start from a very simple example. Assume \\(I(t) = \\Lambda\\) constant input flux; \\(O(t) = \\gamma Q(t)\\), i.e. exit flux is proportional to the quantity present at the moment; the proportionality constant \\(\\gamma\\) is often called the exit rate and has the dimension \\([t^{−1}]\\), the inverse of time. From these assumptions we get: \\[\nQ'(t) = \\Lambda - \\gamma Q(t),\n\\tag{1.1}\\]\nsupplemented with some initial condition \\[\nQ(0) = Q_0.\n\\]\nThe solution is: \\[\nQ(t) = e^{-\\gamma t} Q_0 + \\frac{\\Lambda}{\\gamma}\\Bigl( 1 - e^{-\\gamma t} \\Bigr).\n\\]\nNote that if \\(\\Lambda = 0\\) (no input), the solution is simply \\[\nQ(t) = Q_0 e^{-\\gamma t}.\n\\]\nThis means that the survival time of a molecule initially present follows the exponential distribution: \\[\n\\mathbb{P}[\\text{a molecule present at time 0 is present at time $t &gt; 0$}] =\n\\frac{Q(t)}{Q_0} = e^{-\\gamma t}.\n\\]\nFrom the properties of the exponential distribution, we obtain that the mean survival time \\(\\mathbb{E}[T] = 1/\\gamma\\); hence the exit rate \\(\\gamma\\) can be interpreted as the inverse of the mean survival time.\nTo be more precise, let us define a continuous random variable \\(T\\), which measures the lifetime of a particle present in the bathtub. Then, the cumulative distribution \\(F(t)\\) of \\(T\\) is given by \\[\n\\begin{split}\nF(t) &= \\mathbb{P}[T \\le t] \\\\\n&= 1 - \\mathbb{P}[T &gt; t] \\\\\n&= 1 - \\mathbb{P}[\\text{a molecule present at time 0 is present at time $t &gt; 0$}] \\\\\n&= 1 - e^{-\\gamma t}.\n\\end{split}\n\\]\nSo, we indeed have an exponential distribution. The probability density function is: \\[\nf(t) = F'(t) = \\gamma e^{-\\gamma t},\n\\]\nand the expectation is: \\[\n\\mathbb{E}[T] = \\int_0^\\infty t f(t) \\mathrm{d}t = \\frac{1}{\\gamma}.\n\\]",
+    "crumbs": [
+      "Lectures",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Bathtub model</span>"
+    ]
+  },
+  {
+    "objectID": "01_Bathtub.html#the-bathtub-model",
+    "href": "01_Bathtub.html#the-bathtub-model",
+    "title": "1  Bathtub model",
+    "section": "",
+    "text": "\\(I(t)\\) is the input rate (quantity that enters per unit time)\n\\(Q(t)\\) is the output rate (quantity that leaves per unit time).\n\n\n\n\n\n\n\n\n\n\n\n\nExercise\n\n\n\nSolve Equation 1.1 with the method you prefer.\n\n\n\n\n\n\n\n\nExercise\n\n\n\nSolve Equation 1.1 with the general formula for linear ODEs, by first defining the matrix exponential (here, just a scalar function).\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nExercise\n\n\n\nCompute the above integral explicitly.",
+    "crumbs": [
+      "Lectures",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Bathtub model</span>"
+    ]
+  },
+  {
+    "objectID": "01_Bathtub.html#malthus-equation",
+    "href": "01_Bathtub.html#malthus-equation",
+    "title": "1  Bathtub model",
+    "section": "1.2 Malthus equation",
+    "text": "1.2 Malthus equation\nThe metaphor of the bathtub can be used to model the dynamics of a population. Neglecting all differences among individuals (due to age, sex, genetic,…) we can represent a population through its size \\(N(t)\\); this will increase through inputs due to births and outputs due to deaths (if immigration and emigration are not considered). Hence \\[\nN'(t) = B(t) - D(t),\n\\]\nwhere \\(B(t) = \\text{births}\\) and \\(D(t) = \\text{deaths}\\).\nMalthus model assumes\n\nwithin a (short) time period of length \\(\\Delta t\\), each individual gives, on average, birth to \\(\\beta\\Delta t\\) new individuals; hence \\(B(t) = \\beta N(t)\\);\nwithin the same time period \\(\\Delta t\\), each individual has probability \\(\\mu\\Delta t\\) of dying; hence \\(D(t) = \\mu N(t)\\).\n\nWe get the following equation \\[\nN'(t) = \\beta N(t) - \\mu N(t) = (\\beta - \\mu)N(t),\n\\]\nthat represents the Malthus model. The parameter \\(\\beta\\) is known as fertility rate, while \\(\\mu\\) is the mortality rate. Finally, \\[\nr = \\beta - \\mu\n\\]\nis the (instantaneous) growth rate and is also called Malthus parameter or biological potential of the population.\nWith the initial condition \\[\nN(0) = N_0,\n\\]\nthe evolution of the population is completely determined. In fact, the solution is \\[\nN(t) = N_0 e^{rt},\n\\]\nand we see that the population will go to extinction or will grow without limits if \\(r &lt; 0\\) or \\(r &gt; 0\\), respectively. If instead \\(r = 0\\), the population size is constant (births and deaths compensate.)\n\n\nCode\nimport numpy as np\nimport matplotlib.pyplot as plt\nimport seaborn as sns\n\nsns.set_theme(\"notebook\", style=\"whitegrid\")\nt = np.linspace(0,1,100)\n\nplt.plot(t,np.exp(1*t),label='r &gt; 0')\nplt.plot(t,np.exp(-1*t),label='r &lt; 0')\nplt.plot(t,np.exp(0*t),label='r = 0')\nplt.grid()\nplt.legend()\nplt.xlabel('Time')\nplt.ylabel('Population')\nplt.show()\n\n\n\n\n\nExample of solutions of Malthus equation",
+    "crumbs": [
+      "Lectures",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Bathtub model</span>"
+    ]
   }
 ]
