@@ -1,0 +1,1985 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.57">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Appendix C — Introduction to MATLAB – Mathematical Biology</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../bifurcations.html" rel="prev">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../IntroODE.html">Appendices</a></li><li class="breadcrumb-item"><a href="../../Laboratories/00 Intro Matlab/introMATLAB.html"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Introduction to MATLAB</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../../">Mathematical Biology</a> 
+        <div class="sidebar-tools-main">
+    <div class="dropdown">
+      <a href="" title="Download" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label="Download"><i class="bi bi-download"></i></a>
+      <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="../../Mathematical-Biology.pdf">
+              <i class="bi bi-file-pdf pe-1"></i>
+            Download PDF
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="../../Mathematical-Biology.epub">
+              <i class="bi bi-journal pe-1"></i>
+            Download ePub
+            </a>
+          </li>
+      </ul>
+    </div>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Lectures</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../01_Bathtub.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Bathtub model</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../02_Population.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Population dynamics</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Assignments</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Assignments/01_recap_ODEs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Assignment 1: Solving ODEs</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Labs</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Laboratories/01 ODE Integration/lab_ODEinteg.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab 01: Numerical integration</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">Appendices</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../IntroODE.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Introduction to ODEs</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../bifurcations.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Introduction to bifurcations</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Laboratories/00 Intro Matlab/introMATLAB.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Introduction to MATLAB</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview"><span class="header-section-number">C.1</span> Overview</a></li>
+  <li><a href="#installation" id="toc-installation" class="nav-link" data-scroll-target="#installation"><span class="header-section-number">C.2</span> Installation</a></li>
+  <li><a href="#quick-tour" id="toc-quick-tour" class="nav-link" data-scroll-target="#quick-tour"><span class="header-section-number">C.3</span> Quick tour</a>
+  <ul class="collapse">
+  <li><a href="#basics" id="toc-basics" class="nav-link" data-scroll-target="#basics"><span class="header-section-number">C.3.1</span> Basics</a></li>
+  <li><a href="#output-format" id="toc-output-format" class="nav-link" data-scroll-target="#output-format"><span class="header-section-number">C.3.2</span> Output format</a></li>
+  <li><a href="#vector-and-matrices" id="toc-vector-and-matrices" class="nav-link" data-scroll-target="#vector-and-matrices"><span class="header-section-number">C.3.3</span> Vector and matrices</a></li>
+  <li><a href="#matrix-manipulation" id="toc-matrix-manipulation" class="nav-link" data-scroll-target="#matrix-manipulation"><span class="header-section-number">C.3.4</span> Matrix manipulation</a></li>
+  <li><a href="#operations-on-matrices" id="toc-operations-on-matrices" class="nav-link" data-scroll-target="#operations-on-matrices"><span class="header-section-number">C.3.5</span> Operations on Matrices</a></li>
+  <li><a href="#elementary-mathematical-functions" id="toc-elementary-mathematical-functions" class="nav-link" data-scroll-target="#elementary-mathematical-functions"><span class="header-section-number">C.3.6</span> Elementary Mathematical Functions</a></li>
+  <li><a href="#elementary-mathematical-functions-continued" id="toc-elementary-mathematical-functions-continued" class="nav-link" data-scroll-target="#elementary-mathematical-functions-continued"><span class="header-section-number">C.3.7</span> Elementary Mathematical Functions (Continued)</a></li>
+  <li><a href="#functions-and-scripts" id="toc-functions-and-scripts" class="nav-link" data-scroll-target="#functions-and-scripts"><span class="header-section-number">C.3.8</span> Functions and Scripts</a></li>
+  <li><a href="#loops-and-control-structures" id="toc-loops-and-control-structures" class="nav-link" data-scroll-target="#loops-and-control-structures"><span class="header-section-number">C.3.9</span> Loops and Control Structures</a></li>
+  <li><a href="#plots" id="toc-plots" class="nav-link" data-scroll-target="#plots"><span class="header-section-number">C.3.10</span> Plots</a></li>
+  </ul></li>
+  <li><a href="#approximation-error" id="toc-approximation-error" class="nav-link" data-scroll-target="#approximation-error"><span class="header-section-number">C.4</span> Approximation error</a>
+  <ul class="collapse">
+  <li><a href="#floating-point-arithmetic" id="toc-floating-point-arithmetic" class="nav-link" data-scroll-target="#floating-point-arithmetic"><span class="header-section-number">C.4.1</span> Floating-Point Arithmetic</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../IntroODE.html">Appendices</a></li><li class="breadcrumb-item"><a href="../../Laboratories/00 Intro Matlab/introMATLAB.html"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Introduction to MATLAB</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">Appendix C — Introduction to MATLAB</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    <div>
+    <div class="quarto-title-meta-heading">Modified</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date-modified">September 18, 2024</p>
+    </div>
+  </div>
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="overview" class="level2" data-number="C.1">
+<h2 data-number="C.1" class="anchored" data-anchor-id="overview"><span class="header-section-number">C.1</span> Overview</h2>
+<p>MATLAB is a software for scientific computing. It is a self-contained environment, with thousands of optimized functions for many tasks. MATLAB is a proprietary software, so you need a license to use it. Most universities offer an educational license (see this <a href="https://it.mathworks.com/academia/tah-portal/universita-degli-studi-di-trento-872052.html">website</a> for UniTrento.)</p>
+<p>There are free alternatives too:</p>
+<ul>
+<li><a href="https://www.octave.org">GNU Octave</a>, an open-source software aiming at 1:1 compatibility with Matlab. You can use it, but beware that some MATLAB packages may not work (e.g., <a href="https://sourceforge.net/projects/matcont/">MatCont</a>).</li>
+<li><a href="https://www.python.org">Python</a>, probably the most popular programming language, has many libraries for scientific computing, such as <a href="https://numpy.org">numpy</a>, <a href="https://scipy.org">scipy</a>, <a href="https://matplotlib.org">matplotlib</a>, <a href="https://jax.readthedocs.io/en/latest/">jax</a>, and many others. It would be the best alternative to Matlab, if it weren’t for MatCont, that we will extensively use.</li>
+<li><a href="https://julialang.org">Julia</a>, it is a python competitor, with a similar syntax but much better performance. Many libraries have a Julia wrapper, but again not MatCont.</li>
+</ul>
+<p>You are free to use any Matlab alternative, and rely on it only for MatCont.</p>
+</section>
+<section id="installation" class="level2" data-number="C.2">
+<h2 data-number="C.2" class="anchored" data-anchor-id="installation"><span class="header-section-number">C.2</span> Installation</h2>
+<p>Matlab installation is straightforward on most OSes. Please follow the instruction on the website. We do not need special toolboxes. In case, you can install them later.</p>
+<p>You can also use the <a href="https://www.mathworks.com/products/matlab-online.html">online version of MATLAB</a>. It comes with an online storage called MATLAB Drive that you can use to sync your files.</p>
+</section>
+<section id="quick-tour" class="level2" data-number="C.3">
+<h2 data-number="C.3" class="anchored" data-anchor-id="quick-tour"><span class="header-section-number">C.3</span> Quick tour</h2>
+<p>Once open, Matlab will look like this:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Matlab.png" class="img-fluid figure-img"></p>
+<figcaption>The MATLAB interface</figcaption>
+</figure>
+</div>
+<p>You can notice different panels:</p>
+<ul>
+<li><strong>Command Window</strong> is where we type commands.</li>
+<li><strong>Current Folder</strong> is the current working directory.</li>
+<li><strong>Workspace</strong> is a summary of all variables.</li>
+</ul>
+<p>The system is waiting for an input <code>&gt;&gt;</code>.</p>
+<section id="basics" class="level3" data-number="C.3.1">
+<h3 data-number="C.3.1" class="anchored" data-anchor-id="basics"><span class="header-section-number">C.3.1</span> Basics</h3>
+<p>MATLAB stands for <strong>MA</strong>trix <strong>LAB</strong>oratory, so its philosophy is to store everything numeric as a matrix. (This is not entirely true anymore, recent versions of Matlab introduced many new types.) A scalar is a <span class="math inline">\(1\times 1\)</span> matrix. Matlab a <em>weakly typed</em> (and interpreted) programming language. A variable is a generic, and no type is needed like in C:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode matlab code-with-copy"><code class="sourceCode matlab"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="va">a</span> <span class="op">=</span> <span class="fl">2.45</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="va">a</span> <span class="op">=</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="fl">2.4500</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>As we inout <code>a = 2.45</code>, the system responds with its representation. Note that this is not the internal precision! All numbers with a period are stored as <code>double</code>. To suppress the output, just put a semicolon:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode matlab code-with-copy"><code class="sourceCode matlab"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="va">a</span> <span class="op">=</span> <span class="fl">2.45</span><span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>We can execute more commands per line (note the comma):</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode matlab code-with-copy"><code class="sourceCode matlab"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="va">a</span> <span class="op">=</span> <span class="fl">2.45</span> <span class="op">,</span> <span class="va">b</span> <span class="op">=</span> <span class="fl">3.1</span><span class="op">;</span> <span class="va">A</span> <span class="op">=</span> <span class="fl">1.2</span><span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Matlab is <a href="https://en.wikipedia.org/wiki/Case_sensitivity">case-sensitive</a>: the variable <code>a</code> and <code>A</code> are different. This is the standard behavior also for file names in POSIX systems like UNIX, but not for Windows. Also on macOS you need to be careful: by default the file system is case-insensitive like Windows.</p>
+</div>
+</div>
+<p>If a number is assigned to nothing, it will go to the variable <code>ans</code>:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode matlab code-with-copy"><code class="sourceCode matlab"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="fl">2.45</span><span class="op">;</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="va">whos</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="va">Name</span>      <span class="va">Size</span>            <span class="va">Bytes</span>  <span class="va">Class</span>     <span class="va">Attributes</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="va">ans</span>       <span class="fl">1</span><span class="va">x1</span>                 <span class="fl">8</span>  <span class="va">double</span>              </span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="va">ans</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="va">ans</span> <span class="op">=</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="fl">2.4500</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Some variables are predefined, like <code>pi</code>, <span class="math inline">\(\pi\)</span>, and <code>1i</code> or <code>1j</code>, the imaginary unit <span class="math inline">\(i\)</span>. Note that also <code>i</code> and <code>j</code> are valid for Matlab, but dangerous: <code>i</code> is often an iteration variable in a for-loop:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode matlab code-with-copy"><code class="sourceCode matlab"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="va">a</span> <span class="op">=</span> <span class="fl">5</span> <span class="op">+</span> <span class="fl">2</span><span class="op">*</span><span class="va">i</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="va">a</span> <span class="op">=</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>   <span class="fl">5.0000</span> <span class="op">+</span> <span class="fl">2.0000i</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="va">i</span> <span class="op">=</span> <span class="fl">2</span><span class="op">;</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="va">b</span> <span class="op">=</span> <span class="fl">5</span> <span class="op">+</span> <span class="fl">2</span><span class="op">*</span><span class="va">i</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="va">b</span> <span class="op">=</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>     <span class="fl">9</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="va">c</span> <span class="op">=</span> <span class="fl">5</span> <span class="op">+</span> <span class="fl">2</span><span class="op">*</span><span class="fl">1i</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="va">c</span> <span class="op">=</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>   <span class="fl">5.0000</span> <span class="op">+</span> <span class="fl">2.0000i</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>You can clear a variable by using <code>clear myvar</code>, or all variables with <code>clear</code>. The command <code>clc</code> clears the screen.</p>
+<p>If you are not sure of a command, use tab-completion: type the beginning of a command, then type “TAB”. You can also use <code>help</code> and <code>doc</code>.</p>
+</section>
+<section id="output-format" class="level3" data-number="C.3.2">
+<h3 data-number="C.3.2" class="anchored" data-anchor-id="output-format"><span class="header-section-number">C.3.2</span> Output format</h3>
+<p>By default, numbers are visualized in short format. The command <code>format</code> can change the behavior:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode matlab code-with-copy"><code class="sourceCode matlab"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="va">format</span> <span class="va">long</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="fl">1</span><span class="op">/</span><span class="fl">7</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="va">ans</span> <span class="op">=</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>   <span class="fl">0.142857142857143</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Below in the table different options:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Format</th>
+<th><code>ans</code></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>format rat</code></td>
+<td><code>1/7</code></td>
+</tr>
+<tr class="even">
+<td><code>format short</code></td>
+<td><code>0.1429</code></td>
+</tr>
+<tr class="odd">
+<td><code>format short e</code></td>
+<td><code>1.4286e-01</code></td>
+</tr>
+<tr class="even">
+<td><code>format short g</code></td>
+<td><code>0.14286</code></td>
+</tr>
+<tr class="odd">
+<td><code>format long</code></td>
+<td><code>0.142857142857143</code></td>
+</tr>
+<tr class="even">
+<td><code>format long e</code></td>
+<td><code>1.428571428571428e-01</code></td>
+</tr>
+<tr class="odd">
+<td><code>format long g</code></td>
+<td><code>0.142857142857143</code></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="vector-and-matrices" class="level3" data-number="C.3.3">
+<h3 data-number="C.3.3" class="anchored" data-anchor-id="vector-and-matrices"><span class="header-section-number">C.3.3</span> Vector and matrices</h3>
+<p>We have many ways to generate a vector in Matlab. The most direct is:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode matlab code-with-copy"><code class="sourceCode matlab"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="va">b</span> <span class="op">=</span> [<span class="fl">1</span> <span class="fl">5</span> <span class="fl">6</span> <span class="fl">7</span>]<span class="op">;</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="va">c</span> <span class="op">=</span> [<span class="fl">1</span><span class="op">,</span> <span class="fl">5</span><span class="op">,</span> <span class="fl">6</span><span class="op">,</span> <span class="fl">7</span>]<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The two vectors are identical: the comma is optional. The dimension is <span class="math inline">\(1\times 4\)</span>, that is 1 row and 4 columns. For column vector, we need to use the semi-colon (now mandatory):</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode matlab code-with-copy"><code class="sourceCode matlab"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="va">d</span> <span class="op">=</span> [<span class="fl">1</span><span class="op">;</span> <span class="fl">5</span><span class="op">;</span> <span class="fl">6</span><span class="op">;</span> <span class="fl">7</span>]<span class="op">;</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="va">whos</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="va">Name</span>      <span class="va">Size</span>            <span class="va">Bytes</span>  <span class="va">Class</span>     <span class="va">Attributes</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="va">b</span>         <span class="fl">1</span><span class="va">x4</span>                <span class="fl">32</span>  <span class="va">double</span>              </span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="va">c</span>         <span class="fl">1</span><span class="va">x4</span>                <span class="fl">32</span>  <span class="va">double</span>              </span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="va">d</span>         <span class="fl">4</span><span class="va">x1</span>                <span class="fl">32</span>  <span class="va">double</span>              </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Note that the memory requirement is 32 bytes, that it <span class="math inline">\(4\cdot 8\)</span> bytes, where 8 bytes is a 64-bit floating-point number (<code>double</code>).</p>
+<p>We can generate a vector also as follows:</p>
+<pre><code>&lt;start&gt; : &lt;increment&gt; : &lt;end&gt;</code></pre>
+<p>If we omit the increment, it is assumed one:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode matlab code-with-copy"><code class="sourceCode matlab"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="fl">1</span><span class="op">:</span><span class="fl">8</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="va">ans</span> <span class="op">=</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>     <span class="fl">1</span>     <span class="fl">2</span>     <span class="fl">3</span>     <span class="fl">4</span>     <span class="fl">5</span>     <span class="fl">6</span>     <span class="fl">7</span>     <span class="fl">8</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">:</span><span class="fl">8</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="va">ans</span> <span class="op">=</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>     <span class="fl">1</span>     <span class="fl">3</span>     <span class="fl">5</span>     <span class="fl">7</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="fl">0.5</span><span class="op">:-</span><span class="fl">0.1</span><span class="op">:</span><span class="fl">0</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="va">ans</span> <span class="op">=</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>    <span class="fl">0.5000</span>    <span class="fl">0.4000</span>    <span class="fl">0.3000</span>    <span class="fl">0.2000</span>    <span class="fl">0.1000</span>         <span class="fl">0</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The command above is quite powerful: it also compensates for rounding off errors. Alternatively, we can use <code>linspace</code>:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode matlab code-with-copy"><code class="sourceCode matlab"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="va">linspace</span>(<span class="fl">0</span><span class="op">,</span><span class="fl">1</span><span class="op">,</span><span class="fl">5</span>)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="va">ans</span> <span class="op">=</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>         <span class="fl">0</span>    <span class="fl">0.2500</span>    <span class="fl">0.5000</span>    <span class="fl">0.7500</span>    <span class="fl">1.0000</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Matrices easily follows:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode matlab code-with-copy"><code class="sourceCode matlab"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="va">A</span> <span class="op">=</span> [ <span class="fl">1</span> <span class="fl">2</span> <span class="fl">3</span> <span class="fl">4</span><span class="op">;</span> <span class="fl">5</span> <span class="fl">6</span> <span class="fl">7</span> <span class="fl">8</span> <span class="op">;</span> <span class="fl">9</span> <span class="fl">10</span> <span class="fl">11</span> <span class="fl">12</span><span class="op">;</span> <span class="fl">13</span> <span class="fl">14</span> <span class="fl">15</span> <span class="fl">16</span> ]</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="va">A</span> <span class="op">=</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>     <span class="fl">1</span>     <span class="fl">2</span>     <span class="fl">3</span>     <span class="fl">4</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>     <span class="fl">5</span>     <span class="fl">6</span>     <span class="fl">7</span>     <span class="fl">8</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>     <span class="fl">9</span>    <span class="fl">10</span>    <span class="fl">11</span>    <span class="fl">12</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>    <span class="fl">13</span>    <span class="fl">14</span>    <span class="fl">15</span>    <span class="fl">16</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>which is returning a <span class="math inline">\(4\times 4\)</span> matrix. More complex matrices can be created with <em>ad-hoc</em> functions like <code>eye</code>, <code>ones</code>, <code>zeros</code>, <code>reshape</code>, and so on.</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode matlab code-with-copy"><code class="sourceCode matlab"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="va">reshape</span>(<span class="va">A</span><span class="op">,</span> <span class="fl">2</span><span class="op">,</span> <span class="fl">8</span>)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="va">ans</span> <span class="op">=</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>     <span class="fl">1</span>     <span class="fl">9</span>     <span class="fl">2</span>    <span class="fl">10</span>     <span class="fl">3</span>    <span class="fl">11</span>     <span class="fl">4</span>    <span class="fl">12</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>     <span class="fl">5</span>    <span class="fl">13</span>     <span class="fl">6</span>    <span class="fl">14</span>     <span class="fl">7</span>    <span class="fl">15</span>     <span class="fl">8</span>    <span class="fl">16</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="va">B</span> <span class="op">=</span> [ <span class="fl">1</span><span class="op">:</span><span class="fl">3</span> <span class="fl">0</span><span class="op">;</span> <span class="fl">4</span><span class="op">:-</span><span class="fl">1</span><span class="op">:</span><span class="fl">1</span> ]</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="va">B</span> <span class="op">=</span></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>     <span class="fl">1</span>     <span class="fl">2</span>     <span class="fl">3</span>     <span class="fl">0</span></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>     <span class="fl">4</span>     <span class="fl">3</span>     <span class="fl">2</span>     <span class="fl">1</span></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="va">eye</span>(<span class="fl">2</span><span class="op">,</span><span class="fl">3</span>)</span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a><span class="va">ans</span> <span class="op">=</span></span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>     <span class="fl">1</span>     <span class="fl">0</span>     <span class="fl">0</span></span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>     <span class="fl">0</span>     <span class="fl">1</span>     <span class="fl">0</span></span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="va">ones</span>(<span class="fl">2</span><span class="op">,</span><span class="fl">2</span>)</span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a><span class="va">ans</span> <span class="op">=</span></span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>     <span class="fl">1</span>     <span class="fl">1</span></span>
+<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a>     <span class="fl">1</span>     <span class="fl">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Exercise
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Try to create the following matrix:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="exercise.png" class="img-fluid figure-img"></p>
+<figcaption>image</figcaption>
+</figure>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="sourceCode" id="cb14"><pre class="sourceCode matlab code-with-copy"><code class="sourceCode matlab"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="va">n</span> <span class="op">=</span> <span class="fl">3</span><span class="op">;</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="va">A</span> <span class="op">=</span> [<span class="va">ones</span>(<span class="va">n</span>)<span class="op">,</span> <span class="va">zeros</span>(<span class="va">n</span>)<span class="op">;</span> <span class="op">...</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>         <span class="va">eye</span>(<span class="va">n</span>)<span class="op">,</span> [<span class="fl">1</span><span class="op">:</span><span class="va">n</span><span class="op">;</span> <span class="va">n</span><span class="op">*</span><span class="va">ones</span>(<span class="va">n</span><span class="op">-</span><span class="fl">1</span><span class="op">,</span><span class="va">n</span>) ]<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="matrix-manipulation" class="level3" data-number="C.3.4">
+<h3 data-number="C.3.4" class="anchored" data-anchor-id="matrix-manipulation"><span class="header-section-number">C.3.4</span> Matrix manipulation</h3>
+<p>We can access and modify matrices quite naturally:</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode matlab code-with-copy"><code class="sourceCode matlab"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="va">v</span> <span class="op">=</span> <span class="va">linspace</span>(<span class="fl">0</span><span class="op">,</span> <span class="fl">1</span><span class="op">,</span> <span class="fl">5</span>)<span class="op">;</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="va">v</span>(<span class="fl">2</span>)</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="va">ans</span> <span class="op">=</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>    <span class="fl">0.2500</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The operator <code>( )</code> is much more poweful: we can use slices:</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode matlab code-with-copy"><code class="sourceCode matlab"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="va">v</span>([<span class="fl">1</span> <span class="fl">3</span> <span class="fl">5</span>])</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="va">ans</span> <span class="op">=</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>         <span class="fl">0</span>    <span class="fl">0.5000</span>    <span class="fl">1.0000</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="va">v</span>(<span class="fl">1</span><span class="op">:</span><span class="fl">3</span>)</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="va">ans</span> <span class="op">=</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>         <span class="fl">0</span>    <span class="fl">0.2500</span>    <span class="fl">0.5000</span></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="va">v</span>(<span class="fl">2</span><span class="op">:</span><span class="kw">end</span>)</span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a><span class="va">ans</span> <span class="op">=</span></span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>    <span class="fl">0.2500</span>    <span class="fl">0.5000</span>    <span class="fl">0.7500</span>    <span class="fl">1.0000</span></span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="va">v</span>([<span class="fl">1</span> <span class="fl">2</span><span class="op">;</span> <span class="fl">3</span> <span class="fl">2</span>])</span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a><span class="va">ans</span> <span class="op">=</span></span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>         <span class="fl">0</span>    <span class="fl">0.2500</span></span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>    <span class="fl">0.5000</span>    <span class="fl">0.2500</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>We also can use vectors or matrices of indices. For instance, if indices are <code>[1 3 5]</code>, the output is <code>[v(1) v(3) v(5)]</code>. With matrices is similar:</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode matlab code-with-copy"><code class="sourceCode matlab"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="va">A</span> <span class="op">=</span> [ <span class="fl">1</span> <span class="fl">2</span> <span class="fl">3</span> <span class="op">;</span> <span class="fl">4</span> <span class="fl">5</span> <span class="fl">6</span> <span class="op">;</span> <span class="fl">7</span> <span class="fl">8</span> <span class="fl">9</span>]</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="va">A</span> <span class="op">=</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>     <span class="fl">1</span>     <span class="fl">2</span>     <span class="fl">3</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>     <span class="fl">4</span>     <span class="fl">5</span>     <span class="fl">6</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>     <span class="fl">7</span>     <span class="fl">8</span>     <span class="fl">9</span></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="va">A</span>(<span class="fl">1</span><span class="op">,</span><span class="fl">1</span>)</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a><span class="va">ans</span> <span class="op">=</span></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>     <span class="fl">1</span></span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="va">A</span>(<span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">,</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>)</span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a><span class="va">ans</span> <span class="op">=</span></span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>     <span class="fl">1</span>     <span class="fl">2</span></span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>     <span class="fl">4</span>     <span class="fl">5</span></span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>     <span class="fl">7</span>     <span class="fl">8</span></span>
+<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="va">A</span>(<span class="fl">1</span><span class="op">:</span><span class="kw">end</span><span class="op">-</span><span class="fl">1</span><span class="op">,</span><span class="fl">2</span><span class="op">:</span><span class="kw">end</span>)</span>
+<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a><span class="va">ans</span> <span class="op">=</span></span>
+<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a>     <span class="fl">2</span>     <span class="fl">3</span></span>
+<span id="cb17-20"><a href="#cb17-20" aria-hidden="true" tabindex="-1"></a>     <span class="fl">5</span>     <span class="fl">6</span></span>
+<span id="cb17-21"><a href="#cb17-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-22"><a href="#cb17-22" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="va">A</span>([<span class="fl">1</span> <span class="fl">2</span>]<span class="op">,</span>[<span class="fl">2</span> <span class="fl">3</span>])</span>
+<span id="cb17-23"><a href="#cb17-23" aria-hidden="true" tabindex="-1"></a><span class="va">ans</span> <span class="op">=</span></span>
+<span id="cb17-24"><a href="#cb17-24" aria-hidden="true" tabindex="-1"></a>     <span class="fl">2</span>     <span class="fl">3</span></span>
+<span id="cb17-25"><a href="#cb17-25" aria-hidden="true" tabindex="-1"></a>     <span class="fl">5</span>     <span class="fl">6</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>In the last case we extract the first and the second row, and then crossed with the second and third columns.</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode matlab code-with-copy"><code class="sourceCode matlab"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="va">A</span>(<span class="fl">1</span><span class="op">:</span><span class="kw">end</span>)</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="va">ans</span> <span class="op">=</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>     <span class="fl">1</span>     <span class="fl">4</span>     <span class="fl">7</span>     <span class="fl">2</span>     <span class="fl">5</span>     <span class="fl">8</span>     <span class="fl">3</span>     <span class="fl">6</span>     <span class="fl">9</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="va">A</span>([<span class="fl">2</span> <span class="fl">3</span><span class="op">;</span> <span class="fl">9</span> <span class="fl">6</span>])</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a><span class="va">ans</span> <span class="op">=</span></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>     <span class="fl">4</span>     <span class="fl">7</span></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>     <span class="fl">9</span>     <span class="fl">8</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The operation <code>A(1:end)</code> is equivalent to <code>A(:)</code>, except for returning a column vector instead of a row vector.</p>
+</section>
+<section id="operations-on-matrices" class="level3" data-number="C.3.5">
+<h3 data-number="C.3.5" class="anchored" data-anchor-id="operations-on-matrices"><span class="header-section-number">C.3.5</span> Operations on Matrices</h3>
+<p>Let’s now discuss algebraic operations on matrices. The basic rules are as follows, for two matrices <span class="math inline">\(\mathbf{A} \in \mathbb{C}^{n\times n}\)</span> and <span class="math inline">\(\mathbf{B}\in\mathbb{C}^{p\times q}\)</span>:</p>
+<ul>
+<li>Addition is defined if and only if <span class="math inline">\(n = p\)</span> and <span class="math inline">\(m = q\)</span>, and <span class="math inline">\(\mathbf{A}+\mathbf{B} \in \mathbb{C}^{n \times m}\)</span>.</li>
+<li>Multiplication is defined if and only if <span class="math inline">\(m = p\)</span>, and <span class="math inline">\(\mathbf{A}\mathbf{B} \in \mathbb{C}^{n \times q}\)</span>.</li>
+<li>Transpose <span class="math inline">\(\mathbf{A}^T \in \mathbb{C}^{m \times n}\)</span>, with <span class="math inline">\((\mathbf{A}^T)_{ij} = (\mathbf{A})_{ji}\)</span>.</li>
+<li>Conjugate transpose <span class="math inline">\(\mathbf{A}^H \in \mathbb{C}^{m \times n}\)</span>, with <span class="math inline">\((\mathbf{A}^H)_{ij} = \overline{(\mathbf{A})_{ji}}\)</span>.</li>
+</ul>
+<p>The last two operations can be performed as follows:</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode matlab code-with-copy"><code class="sourceCode matlab"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="va">A</span> <span class="op">=</span> [ <span class="fl">1</span><span class="op">+</span><span class="fl">1i</span><span class="op">,</span> <span class="fl">3</span><span class="op">;</span> <span class="fl">1</span><span class="op">,</span> <span class="fl">1</span><span class="op">-</span><span class="fl">2i</span> ]<span class="op">;</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="va">A</span><span class="op">.'</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="va">ans</span> <span class="op">=</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>   <span class="fl">1.0000</span> <span class="op">+</span> <span class="fl">1.0000i</span>   <span class="fl">1.0000</span>          </span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>   <span class="fl">3.0000</span>             <span class="fl">1.0000</span> <span class="op">-</span> <span class="fl">2.0000i</span></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="va">A</span><span class="op">'</span></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a><span class="va">ans</span> <span class="op">=</span></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>   <span class="fl">1.0000</span> <span class="op">-</span> <span class="fl">1.0000i</span>   <span class="fl">1.0000</span>          </span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>   <span class="fl">3.0000</span>             <span class="fl">1.0000</span> <span class="op">+</span> <span class="fl">2.0000i</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>If the matrix is real, these two operations are the same. In fact, it is common to use <code>'</code> as the transpose of a matrix:</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode matlab code-with-copy"><code class="sourceCode matlab"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="va">a</span> <span class="op">=</span> [ <span class="fl">1</span> <span class="fl">2</span> <span class="fl">5</span> ]<span class="op">;</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="va">b</span> <span class="op">=</span> [ <span class="fl">4</span> <span class="fl">6</span> <span class="fl">4</span> ]<span class="op">;</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="va">H</span> <span class="op">=</span> [ <span class="fl">1</span> <span class="fl">2</span> <span class="fl">3</span> <span class="op">;</span> <span class="fl">2</span> <span class="fl">4</span> <span class="fl">7</span> <span class="op">;</span> <span class="fl">1</span> <span class="fl">4</span> <span class="fl">3</span> ]<span class="op">;</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="va">G</span> <span class="op">=</span> [ <span class="fl">4</span> <span class="fl">6</span> <span class="fl">2</span> <span class="op">;</span> <span class="fl">8</span> <span class="fl">4</span> <span class="fl">1</span> <span class="op">;</span> <span class="fl">3</span> <span class="fl">2</span> <span class="fl">9</span> ]<span class="op">;</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="va">a</span> <span class="op">+</span> <span class="va">b</span></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="va">ans</span> <span class="op">=</span></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>     <span class="fl">5</span>     <span class="fl">8</span>     <span class="fl">9</span></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="va">a</span> <span class="op">-</span> <span class="va">b</span></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a><span class="va">ans</span> <span class="op">=</span></span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>    <span class="op">-</span><span class="fl">3</span>    <span class="op">-</span><span class="fl">4</span>     <span class="fl">1</span></span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="va">H</span> <span class="op">+</span> <span class="va">G</span></span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a><span class="va">ans</span> <span class="op">=</span></span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>     <span class="fl">5</span>     <span class="fl">8</span>     <span class="fl">5</span></span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a>    <span class="fl">10</span>     <span class="fl">8</span>     <span class="fl">8</span></span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a>     <span class="fl">4</span>     <span class="fl">6</span>    <span class="fl">12</span></span>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="va">H</span> <span class="op">*</span> <span class="va">G</span></span>
+<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a><span class="va">ans</span> <span class="op">=</span></span>
+<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a>    <span class="fl">29</span>    <span class="fl">20</span>    <span class="fl">31</span></span>
+<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a>    <span class="fl">61</span>    <span class="fl">42</span>    <span class="fl">71</span></span>
+<span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a>    <span class="fl">45</span>    <span class="fl">28</span>    <span class="fl">33</span></span>
+<span id="cb20-21"><a href="#cb20-21" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="va">G</span> <span class="op">*</span> <span class="va">a</span></span>
+<span id="cb20-22"><a href="#cb20-22" aria-hidden="true" tabindex="-1"></a><span class="va">Error</span> <span class="va">using</span> <span class="op">*</span></span>
+<span id="cb20-23"><a href="#cb20-23" aria-hidden="true" tabindex="-1"></a><span class="va">Inner</span> <span class="va">matrix</span> <span class="va">dimensions</span> <span class="va">must</span> <span class="va">agree</span>.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This is the most common error. In this case, the vector <code>a</code> is <span class="math inline">\(1 \times 3\)</span>, while <code>H</code> is <span class="math inline">\(3 \times 3\)</span>, which is not valid.</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode matlab code-with-copy"><code class="sourceCode matlab"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="va">G</span> <span class="op">*</span> <span class="va">a</span><span class="op">'</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="va">ans</span> <span class="op">=</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>    <span class="fl">26</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>    <span class="fl">21</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>    <span class="fl">52</span></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="va">a</span> <span class="op">*</span> <span class="va">G</span></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a><span class="va">ans</span> <span class="op">=</span></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>    <span class="fl">35</span>    <span class="fl">24</span>    <span class="fl">49</span></span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="fl">2</span> <span class="op">*</span> <span class="va">a</span></span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a><span class="va">ans</span> <span class="op">=</span></span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>     <span class="fl">2</span>     <span class="fl">4</span>    <span class="fl">10</span></span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="va">a</span><span class="op">'</span> <span class="op">*</span> <span class="va">b</span></span>
+<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a><span class="va">ans</span> <span class="op">=</span></span>
+<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a>     <span class="fl">4</span>     <span class="fl">6</span>     <span class="fl">4</span></span>
+<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a>     <span class="fl">8</span>    <span class="fl">12</span>     <span class="fl">8</span></span>
+<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a>    <span class="fl">20</span>    <span class="fl">30</span>    <span class="fl">20</span></span>
+<span id="cb21-17"><a href="#cb21-17" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="va">a</span> <span class="op">*</span> <span class="va">b</span><span class="op">'</span></span>
+<span id="cb21-18"><a href="#cb21-18" aria-hidden="true" tabindex="-1"></a><span class="va">ans</span> <span class="op">=</span></span>
+<span id="cb21-19"><a href="#cb21-19" aria-hidden="true" tabindex="-1"></a>    <span class="fl">36</span></span>
+<span id="cb21-20"><a href="#cb21-20" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="va">A</span><span class="op">^</span><span class="fl">2</span></span>
+<span id="cb21-21"><a href="#cb21-21" aria-hidden="true" tabindex="-1"></a><span class="va">ans</span> <span class="op">=</span></span>
+<span id="cb21-22"><a href="#cb21-22" aria-hidden="true" tabindex="-1"></a>     <span class="fl">8</span>    <span class="fl">22</span>    <span class="fl">26</span></span>
+<span id="cb21-23"><a href="#cb21-23" aria-hidden="true" tabindex="-1"></a>    <span class="fl">17</span>    <span class="fl">48</span>    <span class="fl">55</span></span>
+<span id="cb21-24"><a href="#cb21-24" aria-hidden="true" tabindex="-1"></a>    <span class="fl">12</span>    <span class="fl">30</span>    <span class="fl">40</span></span>
+<span id="cb21-25"><a href="#cb21-25" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="va">a</span><span class="op">^</span><span class="fl">2</span></span>
+<span id="cb21-26"><a href="#cb21-26" aria-hidden="true" tabindex="-1"></a><span class="va">Error</span> <span class="va">using</span> <span class="op">^</span></span>
+<span id="cb21-27"><a href="#cb21-27" aria-hidden="true" tabindex="-1"></a><span class="va">Inputs</span> <span class="va">must</span> <span class="va">be</span> <span class="va">a</span> <span class="va">scalar</span> <span class="va">and</span> <span class="va">a</span> <span class="va">square</span> <span class="va">matrix</span>.</span>
+<span id="cb21-28"><a href="#cb21-28" aria-hidden="true" tabindex="-1"></a><span class="va">To</span> <span class="va">compute</span> <span class="va">elementwise</span> <span class="va">POWER</span><span class="op">,</span> <span class="va">use</span> <span class="va">POWER</span> (<span class="op">.^</span>) <span class="va">instead</span>.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The last message tells us that exponentiation is intended as matrix multiplication and is only defined for square matrices. It suggests using the dot version instead. In fact, scalar binary operations like multiplication, division, and exponentiation become element-wise operations for vectors and matrices when you put a dot in front of the operation symbol:</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode matlab code-with-copy"><code class="sourceCode matlab"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="va">a</span> <span class="op">.*</span> <span class="va">b</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="va">ans</span> <span class="op">=</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>     <span class="fl">4</span>    <span class="fl">12</span>    <span class="fl">20</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="va">a</span> <span class="op">./</span> <span class="va">b</span></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="va">ans</span> <span class="op">=</span></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>    <span class="fl">0.2500</span>    <span class="fl">0.3333</span>    <span class="fl">1.2500</span></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="va">a</span> <span class="op">.^</span> <span class="fl">2</span></span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a><span class="va">ans</span> <span class="op">=</span></span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>     <span class="fl">1</span>     <span class="fl">4</span>    <span class="fl">25</span></span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="va">a</span> <span class="op">.^</span> <span class="va">b</span></span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a><span class="va">ans</span> <span class="op">=</span></span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>     <span class="fl">1</span>    <span class="fl">64</span>   <span class="fl">625</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The only thing to keep in mind is that the two operands should have the same dimensions, or at least one of them should be a scalar (in which case it is repeated).</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Exercise
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Try to create the following vector, for arbitrary <span class="math inline">\(n\)</span>: <span class="math display">\[
+\Bigl[\:
+\overbrace{
+\underbrace{1, 1, \ldots, 1}_n,
+\underbrace{2, 2, \ldots, 2}_n,
+\ldots,
+\underbrace{n, n, \ldots, n}_n}^n
+\:\Bigr].
+\]</span></p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="sourceCode" id="cb23"><pre class="sourceCode matlab code-with-copy"><code class="sourceCode matlab"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="va">n</span> <span class="op">=</span> <span class="fl">5</span><span class="op">;</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="va">v</span> <span class="op">=</span> <span class="va">reshape</span>(<span class="va">ones</span>(<span class="va">n</span><span class="op">,</span><span class="fl">1</span>)<span class="op">*</span>(<span class="fl">1</span><span class="op">:</span><span class="va">n</span>)<span class="op">,</span><span class="fl">1</span><span class="op">,</span>[])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="elementary-mathematical-functions" class="level3" data-number="C.3.6">
+<h3 data-number="C.3.6" class="anchored" data-anchor-id="elementary-mathematical-functions"><span class="header-section-number">C.3.6</span> Elementary Mathematical Functions</h3>
+<p>One of the strengths of MATLAB is the vast number of mathematical functions (both elementary and advanced) it offers. Unless specified otherwise, almost all of these functions operate element-wise. For example, given a matrix <code>A</code>, <code>exp(A)</code> is not the matrix exponential (which is calculated with <code>expm(A)</code>), but rather a matrix whose elements are the exponentials of the original elements. Here are some elementary mathematical functions:</p>
+<ul>
+<li><code>abs(A)</code>: Absolute value of the elements of <code>A</code></li>
+<li><code>sqrt(A)</code>: Square root of the elements of <code>A</code></li>
+<li><code>exp(A)</code>: Exponential function applied to the elements of <code>A</code></li>
+<li><code>log(A)</code>: Natural logarithm of the elements of <code>A</code></li>
+<li><code>log10(A)</code>: Base 10 logarithm of the elements of <code>A</code></li>
+<li><code>log2(A)</code>: Base 2 logarithm of the elements of <code>A</code></li>
+<li><code>sin(A)</code>: Sine of the elements of <code>A</code></li>
+<li><code>cos(A)</code>: Cosine of the elements of <code>A</code></li>
+<li><code>tan(A)</code>: Tangent of the elements of <code>A</code></li>
+<li><code>asin(A)</code>: Arcsine of the elements of <code>A</code> (in radians)</li>
+<li><code>acos(A)</code>: Arccosine of the elements of <code>A</code> (in radians)</li>
+<li><code>atan(A)</code>: Arctangent of the elements of <code>A</code> (in radians)</li>
+<li><code>sinh(A)</code>: Hyperbolic sine of the elements of <code>A</code></li>
+<li><code>cosh(A)</code>: Hyperbolic cosine of the elements of <code>A</code></li>
+<li><code>tanh(A)</code>: Hyperbolic tangent of the elements of <code>A</code></li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Exercise
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li><p>Compute <span class="math inline">\(\dfrac{e^5 + \sin(\pi)}{\sqrt{\log_2 30}-10}\)</span> and <span class="math inline">\(e^{\log_{10}50} + e^{\log 30} + e^{\log_2 40}\)</span>.</p></li>
+<li><p>Define <span class="math inline">\(\mathbf{x} = [1, 3, 4]\)</span> and <span class="math inline">\(\mathbf{y} = [1, 1, 2]\)</span>. Compute <span class="math inline">\(2x_i \log_2(|y_i|+1) - y_i\log_{10}(x_i+2)\)</span> and <span class="math inline">\(\arctan\left( \dfrac{x_i}{y_i}\right) - \sin^2\left( x_i\sqrt[3]{|y_i|^2} \right)\)</span>.</p></li>
+</ol>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="sourceCode" id="cb24"><pre class="sourceCode matlab code-with-copy"><code class="sourceCode matlab"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="co">% Point 1</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> (<span class="va">exp</span>(<span class="fl">5</span>) <span class="op">+</span> <span class="va">sin</span>(<span class="va">pi</span>))<span class="op">/</span>(<span class="va">sqrt</span>(<span class="va">log2</span>(<span class="fl">30</span>))<span class="op">-</span><span class="fl">10</span>)</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="va">exp</span>(<span class="va">log10</span>(<span class="fl">50</span>)) <span class="op">+</span> <span class="va">exp</span>(<span class="va">log</span>(<span class="fl">30</span>)) <span class="op">+</span> <span class="va">exp</span>(<span class="va">log2</span>(<span class="fl">40</span>))</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="co">% Point 2</span></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="va">x</span> <span class="op">=</span> [ <span class="fl">1</span> <span class="fl">3</span> <span class="fl">4</span> ]<span class="op">;</span></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="va">y</span> <span class="op">=</span> [ <span class="fl">1</span> <span class="fl">1</span> <span class="fl">2</span> ]<span class="op">;</span></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="fl">2</span><span class="op">*</span><span class="va">x</span><span class="op">.*</span><span class="va">log2</span>(<span class="va">abs</span>(<span class="va">y</span>)<span class="op">+</span><span class="fl">1</span>) <span class="op">-</span> <span class="va">y</span><span class="op">.*</span><span class="va">log10</span>(<span class="va">x</span><span class="op">+</span><span class="fl">2</span>)</span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="va">atan</span>(<span class="va">x</span><span class="op">./</span><span class="va">y</span>) <span class="op">-</span> <span class="va">sin</span>(<span class="va">x</span><span class="op">.*</span><span class="va">abs</span>(<span class="va">y</span>)<span class="op">.^</span>(<span class="fl">2</span><span class="op">/</span><span class="fl">3</span>))<span class="op">.^</span><span class="fl">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="elementary-mathematical-functions-continued" class="level3" data-number="C.3.7">
+<h3 data-number="C.3.7" class="anchored" data-anchor-id="elementary-mathematical-functions-continued"><span class="header-section-number">C.3.7</span> Elementary Mathematical Functions (Continued)</h3>
+<p>Let <code>A</code>, <code>B</code> be two matrices, and <code>b</code> be a vector.</p>
+<ul>
+<li><code>size(A)</code>: Returns a two-element vector, where the first element is the number of rows in <code>A</code>, and the second element is the number of columns.</li>
+<li><code>size(A, 1)</code>: Returns the first element of <code>size(A)</code>, which is the number of rows.</li>
+<li><code>size(A, 2)</code>: Returns the second element of <code>size(A)</code>, which is the number of columns.</li>
+<li><code>length(b)</code>: Returns the number of elements in the vector <code>b</code>.</li>
+<li><code>max(b)</code>: Returns the largest element in the vector <code>b</code>.</li>
+<li><code>min(b)</code>: Returns the smallest element in the vector <code>b</code>.</li>
+<li><code>max(A)</code>: Returns a row vector containing the maximum element of each column of <code>A</code>.</li>
+<li><code>min(A)</code>: Returns a row vector containing the minimum element of each column of <code>A</code>.</li>
+<li><code>max(A, B)</code>: Returns a matrix of the same dimensions as <code>A</code> and <code>B</code>, containing the element-wise maximum.</li>
+<li><code>min(A, B)</code>: Returns a matrix of the same dimensions as <code>A</code> and <code>B</code>, containing the element-wise minimum.</li>
+<li><code>max(A, [], 2)</code>: Returns a column vector containing the maximum element of each row of <code>A</code>. If you replace 2 with 1, you get <code>max(A)</code>.</li>
+<li><code>min(A, [], 2)</code>: Returns a column vector containing the minimum element of each row of <code>A</code>. If you replace 2 with 1, you get <code>min(A)</code>.</li>
+<li><code>sum(b)</code>: Returns a scalar equal to the sum of the elements in the vector <code>b</code>.</li>
+<li><code>sum(A)</code>: Returns a row vector whose elements are the column-wise sum of the elements in matrix <code>A</code>.</li>
+<li><code>sum(A, 2)</code>: Returns a column vector whose elements are the row-wise sum of the elements in matrix <code>A</code>.</li>
+<li><code>diag(A)</code>: Returns the vector of the diagonal elements of matrix <code>A</code>.</li>
+<li><code>diag(A, k)</code>: Returns the vector of the <span class="math inline">\(k\)</span>-th super-diagonal of matrix <code>A</code>.</li>
+<li><code>diag(A, -k)</code>: Returns the vector of the <span class="math inline">\(k\)</span>-th sub-diagonal of matrix <code>A</code>.</li>
+<li><code>diag(b)</code>: Returns a matrix with the elements of vector <code>b</code> on its diagonal.</li>
+<li><code>diag(b, k)</code>: Returns a matrix with the elements of vector <code>b</code> on its <span class="math inline">\(k\)</span>-th super-diagonal.</li>
+<li><code>diag(b, -k)</code>: Returns a matrix with the elements of vector <code>b</code> on its <span class="math inline">\(k\)</span>-th sub-diagonal.</li>
+<li><code>tril(A)</code>: Returns the lower triangular part of matrix <code>A</code>, making all elements strictly above the diagonal zero (even in a rectangular matrix).</li>
+<li><code>triu(A)</code>: Returns the upper triangular part of matrix <code>A</code>, making all elements strictly below the diagonal zero (even in a rectangular matrix).</li>
+</ul>
+<p>There are many other important functions such as <code>det</code> (determinant of a square matrix), <code>trace</code> (trace of a matrix), <code>norm</code> (for calculating norms), and so on. We will introduce these functions as needed.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Exercise
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Try to use the function <code>magic(n)</code>. Then sum by row, column, diagonal, etc. What do you observe?</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="sourceCode" id="cb25"><pre class="sourceCode matlab code-with-copy"><code class="sourceCode matlab"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="va">n</span> <span class="op">=</span> <span class="fl">4</span><span class="op">;</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="va">A</span> <span class="op">=</span> <span class="va">magic</span>(<span class="va">n</span>)<span class="op">;</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="va">sum</span>(<span class="va">A</span><span class="op">,</span> <span class="fl">2</span>)</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="va">sum</span>(<span class="va">A</span><span class="op">,</span> <span class="fl">1</span>)</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="va">sum</span>(<span class="va">diag</span>(<span class="va">A</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>We notice that the sum is always <span class="math inline">\(34\)</span>, at least for <span class="math inline">\(n=4\)</span>. In general, the magic square contains numbers from <span class="math inline">\(1\)</span> to <span class="math inline">\(n^2\)</span>, and the magic number is <span class="math inline">\(\frac{1}{2}n(n^2+1)\)</span>. This is true even if we sum over the antidiagonal</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode matlab code-with-copy"><code class="sourceCode matlab"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="va">sum</span>(<span class="va">diag</span>(<span class="va">fliplr</span>(<span class="va">A</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The function <code>fliplr</code> (<em>flip left–right</em>) inverts the right with the left in a given matrix.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="functions-and-scripts" class="level3" data-number="C.3.8">
+<h3 data-number="C.3.8" class="anchored" data-anchor-id="functions-and-scripts"><span class="header-section-number">C.3.8</span> Functions and Scripts</h3>
+<p>Many of the commands we have introduced are defined as functions, which are procedures that take input data and provide output. In MATLAB, there are several ways to define a function.</p>
+<p>Suppose we want to create a function <code>fun(x)</code> that returns the value of <span class="math inline">\(f(x) = x\sin(x) + \cos^2(x)\)</span> for a given <span class="math inline">\(x\)</span>. The “legacy” method involves defining a string corresponding to the function and then evaluating it using the <code>eval</code> command:</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode matlab code-with-copy"><code class="sourceCode matlab"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="va">fun</span> <span class="op">=</span> <span class="ss">'x*sin(x) + (cos(x))^2'</span><span class="op">;</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="va">x</span> <span class="op">=</span> <span class="fl">1.0</span><span class="op">;</span></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="va">eval</span>(<span class="va">fun</span>)</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="va">ans</span> <span class="op">=</span></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>    <span class="fl">1.1334</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>However, there is an issue when <code>x</code> is a vector:</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode matlab code-with-copy"><code class="sourceCode matlab"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="va">x</span> <span class="op">=</span> [ <span class="fl">1</span> <span class="fl">2</span> <span class="fl">3</span> ]<span class="op">;</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="va">eval</span>(<span class="va">fun</span>)</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="va">Error</span> <span class="va">using</span> <span class="op">*</span></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="va">Inner</span> <span class="va">matrix</span> <span class="va">dimensions</span> <span class="va">must</span> <span class="va">agree</span>.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>To handle vector input correctly, we need to “vectorize” the expression by using element-wise operations:</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode matlab code-with-copy"><code class="sourceCode matlab"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="va">fun</span> <span class="op">=</span> <span class="ss">'x.*sin(x) + cos(x).^2'</span><span class="op">;</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="va">x</span> <span class="op">=</span> [ <span class="fl">1</span> <span class="fl">2</span> <span class="fl">3</span> ]<span class="op">;</span></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="va">eval</span>(<span class="va">fun</span>)</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a><span class="va">ans</span> <span class="op">=</span></span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>    <span class="fl">1.1334</span>    <span class="fl">1.9918</span>    <span class="fl">1.4034</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Alternatively, you can use the <code>vectorize</code> command to transform the function into its vectorized version.</p>
+<p>However, a more convenient way is to define functions using “anonymous functions”:</p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode matlab code-with-copy"><code class="sourceCode matlab"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="va">fun</span> <span class="op">=</span> <span class="op">@</span>(<span class="va">x</span>) <span class="va">x</span><span class="op">.*</span><span class="va">sin</span>(<span class="va">x</span>) <span class="op">+</span> <span class="va">cos</span>(<span class="va">x</span>)<span class="op">.^</span><span class="fl">2</span><span class="op">;</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="va">x</span> <span class="op">=</span> [ <span class="fl">1</span> <span class="fl">2</span> <span class="fl">3</span> ]<span class="op">;</span></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="va">fun</span>(<span class="va">x</span>)</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a><span class="va">ans</span> <span class="op">=</span></span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>    <span class="fl">1.1334</span>    <span class="fl">1.9918</span>    <span class="fl">1.4034</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The <code>@</code> symbol is called a “function handle.” Note that the <code>vectorize</code> command does not work with anonymous functions.</p>
+<p>There are at least two other methods for defining functions, such as using <code>inline</code> and the Symbolic Math Toolbox. We won’t delve into these methods here.</p>
+<p>Instead, let’s explore using scripts to define functions. An “script” is a text file with a <code>.m</code> extension containing a list of commands that MATLAB will execute when the file is called. You can edit the script using any text editor or with MATLAB’s built-in editor by running the following command:</p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode matlab code-with-copy"><code class="sourceCode matlab"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="va">edit</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Suppose, for example, that the file <code>myscript.m</code> contains the following:</p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode matlab code-with-copy"><code class="sourceCode matlab"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="va">clear</span><span class="op">;</span> <span class="va">clc</span><span class="op">;</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="co">% This is a comment:</span></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="co">% sum of squares of the diagonal</span></span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a><span class="co">% of the magic matrix</span></span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a><span class="va">n</span> <span class="op">=</span> <span class="fl">4</span><span class="op">;</span></span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a><span class="va">A</span> <span class="op">=</span> <span class="va">magic</span>(<span class="va">n</span>)<span class="op">;</span></span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a><span class="va">summa</span> <span class="op">=</span> <span class="va">sum</span>(<span class="va">diag</span>(<span class="va">A</span>)<span class="op">.^</span><span class="fl">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>If the file is in the working directory, you can run it as follows:</p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode matlab code-with-copy"><code class="sourceCode matlab"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="va">myscript</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="va">summa</span> <span class="op">=</span></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>   <span class="fl">414</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The script is executed as if you had entered the commands directly in the terminal.</p>
+<p>You can also have scripts that contain only a function with the following syntax:</p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode matlab code-with-copy"><code class="sourceCode matlab"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="va">y</span> <span class="op">=</span> <span class="va">myfun</span>(<span class="va">x</span>)</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>  <span class="va">y</span> <span class="op">=</span> <span class="va">x</span><span class="op">.*</span><span class="va">sin</span>(<span class="va">x</span>) <span class="op">+</span> (<span class="va">cos</span>(<span class="va">x</span>))<span class="op">.^</span><span class="fl">2</span><span class="op">;</span></span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>In this case, you must save the file with the same name as the function (e.g., <code>myfun.m</code>).</p>
+<p>Now you can use the function:</p>
+<div class="sourceCode" id="cb35"><pre class="sourceCode matlab code-with-copy"><code class="sourceCode matlab"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="va">x</span> <span class="op">=</span> [ <span class="fl">1</span> <span class="fl">2</span> <span class="fl">3</span> ]<span class="op">;</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="va">myfun</span>(<span class="va">x</span>)</span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a><span class="va">ans</span> <span class="op">=</span></span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>    <span class="fl">1.1334</span>    <span class="fl">1.9918</span>    <span class="fl">1.4034</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Function scripts can have multiple arguments and return multiple outputs:</p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode matlab code-with-copy"><code class="sourceCode matlab"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> [<span class="va">A</span><span class="op">,</span> <span class="va">b</span>] <span class="op">=</span> <span class="va">vecmat</span>(<span class="va">n</span><span class="op">,</span> <span class="va">m</span>)</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>  <span class="co">% Generate a matrix A of size m x n and</span></span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>  <span class="co">% a vector b of size n x 1 with random values.</span></span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>  <span class="va">A</span> <span class="op">=</span> <span class="va">rand</span>(<span class="va">n</span><span class="op">,</span> <span class="va">m</span>)<span class="op">;</span></span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>  <span class="va">b</span> <span class="op">=</span> <span class="va">rand</span>(<span class="va">n</span><span class="op">,</span> <span class="fl">1</span>)<span class="op">;</span></span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>You can call this function as follows:</p>
+<div class="sourceCode" id="cb37"><pre class="sourceCode matlab code-with-copy"><code class="sourceCode matlab"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> [<span class="va">K</span><span class="op">,</span> <span class="va">f</span>] <span class="op">=</span> <span class="va">vecmat</span>(<span class="fl">2</span><span class="op">,</span> <span class="fl">3</span>)</span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="va">K</span> <span class="op">=</span></span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>    <span class="fl">0.4387</span>    <span class="fl">0.7655</span>    <span class="fl">0.1869</span></span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>    <span class="fl">0.3816</span>    <span class="fl">0.7952</span>    <span class="fl">0.4898</span></span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a><span class="va">f</span> <span class="op">=</span></span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a>    <span class="fl">0.4456</span></span>
+<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a>    <span class="fl">0.6463</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Script functions can contain at most one function. It is also a good practice to use lowercase names without spaces. You can use functions with multiple arguments and return values as needed.</p>
+<p>There are many other advanced features and techniques for creating and using functions in MATLAB, but these are the basics to get you started.</p>
+</section>
+<section id="loops-and-control-structures" class="level3" data-number="C.3.9">
+<h3 data-number="C.3.9" class="anchored" data-anchor-id="loops-and-control-structures"><span class="header-section-number">C.3.9</span> Loops and Control Structures</h3>
+<p>MATLAB is a full-fledged interpreted programming language, and it provides many control flow operations.</p>
+<div class="sourceCode" id="cb38"><pre class="sourceCode matlab code-with-copy"><code class="sourceCode matlab"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="kw">for</span> <span class="va">i</span> <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">,</span> <span class="va">magic</span>(<span class="va">i</span>)<span class="op">,</span> <span class="kw">end</span><span class="op">;</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="va">ans</span> <span class="op">=</span></span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>     <span class="fl">1</span></span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a><span class="va">ans</span> <span class="op">=</span></span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>     <span class="fl">1</span>     <span class="fl">3</span></span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a>     <span class="fl">4</span>     <span class="fl">2</span></span>
+<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a><span class="va">ans</span> <span class="op">=</span></span>
+<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a>     <span class="fl">8</span>     <span class="fl">1</span>     <span class="fl">6</span></span>
+<span id="cb38-9"><a href="#cb38-9" aria-hidden="true" tabindex="-1"></a>     <span class="fl">3</span>     <span class="fl">5</span>     <span class="fl">7</span></span>
+<span id="cb38-10"><a href="#cb38-10" aria-hidden="true" tabindex="-1"></a>     <span class="fl">4</span>     <span class="fl">9</span>     <span class="fl">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>In the example above, a <code>for</code> loop iterates from 1 to 3, and for each iteration, the <code>magic</code> function is called.</p>
+<div class="sourceCode" id="cb39"><pre class="sourceCode matlab code-with-copy"><code class="sourceCode matlab"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="va">n</span> <span class="op">=</span> <span class="fl">1</span><span class="op">;</span> <span class="kw">while</span> <span class="va">n</span> <span class="op">&lt;</span> <span class="fl">4</span><span class="op">,</span> <span class="va">magic</span>(<span class="va">n</span>)<span class="op">,</span> <span class="va">n</span> <span class="op">=</span> <span class="va">n</span> <span class="op">+</span> <span class="fl">1</span><span class="op">;</span> <span class="kw">end</span><span class="op">;</span></span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="va">ans</span> <span class="op">=</span></span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>     <span class="fl">1</span></span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a><span class="va">ans</span> <span class="op">=</span></span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a>     <span class="fl">1</span>     <span class="fl">3</span></span>
+<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a>     <span class="fl">4</span>     <span class="fl">2</span></span>
+<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a><span class="va">ans</span> <span class="op">=</span></span>
+<span id="cb39-8"><a href="#cb39-8" aria-hidden="true" tabindex="-1"></a>     <span class="fl">8</span>     <span class="fl">1</span>     <span class="fl">6</span></span>
+<span id="cb39-9"><a href="#cb39-9" aria-hidden="true" tabindex="-1"></a>     <span class="fl">3</span>     <span class="fl">5</span>     <span class="fl">7</span></span>
+<span id="cb39-10"><a href="#cb39-10" aria-hidden="true" tabindex="-1"></a>     <span class="fl">4</span>     <span class="fl">9</span>     <span class="fl">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>In this example, a <code>while</code> loop is used. It continues to execute as long as the condition <code>n &lt; 4</code> is true. Inside the loop, the <code>magic</code> function is called, and <code>n</code> is incremented.</p>
+<div class="sourceCode" id="cb40"><pre class="sourceCode matlab code-with-copy"><code class="sourceCode matlab"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="kw">if</span> <span class="va">rand</span>(<span class="fl">1</span>) <span class="op">&gt;</span> <span class="fl">0.5</span><span class="op">,</span> <span class="va">disp</span>(<span class="ss">'Greater than 0.5'</span>)<span class="op">;</span> <span class="kw">else</span><span class="op">,</span> <span class="va">disp</span>(<span class="ss">'Less than 0.5'</span>)<span class="op">;</span> <span class="kw">end</span><span class="op">;</span></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="va">Greater</span> <span class="va">than</span> <span class="fl">0.5</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The <code>if</code> statement is used to perform conditional execution. In this example, it checks if a random number is greater than 0.5 and displays a message accordingly.</p>
+<p>As we need more details, we will add them gradually. Typically, writing these control structures directly in the command line can be cumbersome and less readable. It’s preferable to write everything in a script with proper indentation and execute the script as needed.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Exercise
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li>Write a function named <code>cubediag</code> that takes a matrix <code>A</code> as input and returns the sum of the cubes of the diagonal elements.</li>
+<li>Write another function named <code>cubeantidiag</code> that returns the sum of the cubes of the anti-diagonal elements (the diagonal that is symmetric to the main diagonal).</li>
+</ul>
+<p>You can define these functions in separate script files or directly in the MATLAB environment.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-10" class="callout-10-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="sourceCode" id="cb41"><pre class="sourceCode matlab code-with-copy"><code class="sourceCode matlab"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="va">s</span> <span class="op">=</span> <span class="va">cubediag</span>(<span class="va">A</span>)</span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>  <span class="va">s</span> <span class="op">=</span> <span class="va">sum</span>(<span class="va">diag</span>(<span class="va">A</span>)<span class="op">.^</span><span class="fl">2</span>)<span class="op">;</span></span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="va">s</span> <span class="op">=</span> <span class="va">cubeantidiag</span>(<span class="va">A</span>)</span>
+<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a>  <span class="co">% we could also use fliplr</span></span>
+<span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a>  <span class="va">Aflip</span> <span class="op">=</span> <span class="va">A</span>(<span class="op">:,</span><span class="kw">end</span><span class="op">:-</span><span class="fl">1</span><span class="op">:</span><span class="fl">1</span>)<span class="op">;</span></span>
+<span id="cb41-8"><a href="#cb41-8" aria-hidden="true" tabindex="-1"></a>  <span class="va">s</span> <span class="op">=</span> <span class="va">cubediag</span>(<span class="va">Aflip</span>)<span class="op">;</span></span>
+<span id="cb41-9"><a href="#cb41-9" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
+<span id="cb41-10"><a href="#cb41-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-11"><a href="#cb41-11" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="va">s</span> <span class="op">=</span> <span class="va">cubeantidiag</span>(<span class="va">A</span>)</span>
+<span id="cb41-12"><a href="#cb41-12" aria-hidden="true" tabindex="-1"></a>  <span class="co">% case of square matrices</span></span>
+<span id="cb41-13"><a href="#cb41-13" aria-hidden="true" tabindex="-1"></a>  <span class="va">n</span> <span class="op">=</span> <span class="va">size</span>(<span class="va">A</span><span class="op">,</span><span class="fl">1</span>)<span class="op">;</span></span>
+<span id="cb41-14"><a href="#cb41-14" aria-hidden="true" tabindex="-1"></a>  <span class="va">s</span> <span class="op">=</span> <span class="va">sum</span>(<span class="va">A</span>(<span class="va">end</span>−<span class="va">n</span><span class="op">+</span><span class="fl">1</span><span class="op">:</span><span class="fl">1</span>−<span class="va">n</span><span class="op">:</span><span class="va">n</span>))<span class="op">;</span></span>
+<span id="cb41-15"><a href="#cb41-15" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="plots" class="level3" data-number="C.3.10">
+<h3 data-number="C.3.10" class="anchored" data-anchor-id="plots"><span class="header-section-number">C.3.10</span> Plots</h3>
+<p>To create a plot of a real-valued function of a real variable in MATLAB, you can use the <code>plot</code> command. In its basic form, you provide two vectors, <code>x</code> and <code>y</code>, of the same size that represent the data points.</p>
+<div class="sourceCode" id="cb42"><pre class="sourceCode matlab code-with-copy"><code class="sourceCode matlab"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="va">x</span> <span class="op">=</span> <span class="va">linspace</span>(<span class="op">-</span><span class="fl">1</span><span class="op">,</span> <span class="fl">1</span><span class="op">,</span> <span class="fl">100</span>)<span class="op">;</span></span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="va">parab</span> <span class="op">=</span> <span class="op">@</span>(<span class="va">x</span>) <span class="va">x</span><span class="op">.^</span><span class="fl">2</span><span class="op">;</span></span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="va">plot</span>(<span class="va">x</span><span class="op">,</span> <span class="va">parab</span>(<span class="va">x</span>))<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="parabola.png" class="img-fluid figure-img"></p>
+<figcaption>Parabola Plot</figcaption>
+</figure>
+</div>
+<p>You can customize the style, size, and color of the line using various options typically provided after the data points:</p>
+<div class="sourceCode" id="cb43"><pre class="sourceCode matlab code-with-copy"><code class="sourceCode matlab"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="va">x</span> <span class="op">=</span> <span class="va">linspace</span>(<span class="op">-</span><span class="fl">1</span><span class="op">,</span> <span class="fl">1</span><span class="op">,</span> <span class="fl">20</span>)<span class="op">;</span></span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="va">plot</span>(<span class="va">x</span><span class="op">,</span> <span class="va">parab</span>(<span class="va">x</span>)<span class="op">,</span> <span class="ss">'r*--'</span><span class="op">,</span> <span class="ss">'LineWidth'</span><span class="op">,</span> <span class="fl">2.0</span><span class="op">,</span> <span class="ss">'MarkerSize'</span><span class="op">,</span> <span class="fl">15.0</span>)<span class="op">;</span></span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="va">grid</span> <span class="va">on</span><span class="op">;</span></span>
+<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="va">xlabel</span>(<span class="ss">'X-Axis'</span>)<span class="op">;</span></span>
+<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="va">ylabel</span>(<span class="ss">'Y-Axis'</span>)<span class="op">;</span></span>
+<span id="cb43-6"><a href="#cb43-6" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="va">title</span>(<span class="ss">'A Parabola'</span><span class="op">,</span> <span class="ss">'FontWeight'</span><span class="op">,</span> <span class="ss">'bold'</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="sparabola.png" class="img-fluid figure-img"></p>
+<figcaption>Styled Parabola Plot</figcaption>
+</figure>
+</div>
+<p>To see the possible combinations of line styles and markers, you can type <code>help plot</code> or <code>doc plot</code>. However, the most commonly used is the third argument, which is a string like <code>r*--</code>, which translates to:</p>
+<ul>
+<li><code>r</code>: Red line</li>
+<li><code>*</code>: Asterisk-shaped markers</li>
+<li><code>--</code>: Dashed line</li>
+</ul>
+<p>The order of styles is fixed, but each of them is optional. For example, by simply typing <code>y</code>, you will get a yellow line.</p>
+<p>To overlay multiple plots, you can follow several approaches:</p>
+<ol type="1">
+<li><p>Direct Overlay:</p>
+<div class="sourceCode" id="cb44"><pre class="sourceCode matlab code-with-copy"><code class="sourceCode matlab"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="va">x</span> <span class="op">=</span> <span class="va">linspace</span>(<span class="op">-</span><span class="fl">1</span><span class="op">,</span> <span class="fl">1</span><span class="op">,</span> <span class="fl">20</span>)<span class="op">;</span></span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="va">parab</span> <span class="op">=</span> <span class="op">@</span>(<span class="va">x</span>) <span class="va">x</span><span class="op">.^</span><span class="fl">2</span><span class="op">;</span></span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="va">cubic</span> <span class="op">=</span> <span class="op">@</span>(<span class="va">x</span>) <span class="va">x</span><span class="op">.^</span><span class="fl">3</span><span class="op">;</span></span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="va">plot</span>(<span class="va">x</span><span class="op">,</span> <span class="va">parab</span>(<span class="va">x</span>)<span class="op">,</span> <span class="va">x</span><span class="op">,</span> <span class="va">cubic</span>(<span class="va">x</span>))<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<li><p>Creating a Data Matrix:</p>
+<div class="sourceCode" id="cb45"><pre class="sourceCode matlab code-with-copy"><code class="sourceCode matlab"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="va">plot</span>(<span class="va">x</span><span class="op">,</span> [<span class="va">parab</span>(<span class="va">x</span>)<span class="op">;</span> <span class="va">cubic</span>(<span class="va">x</span>)])<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<li><p>Using the <code>hold</code> Command:</p>
+<div class="sourceCode" id="cb46"><pre class="sourceCode matlab code-with-copy"><code class="sourceCode matlab"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="va">plot</span>(<span class="va">x</span><span class="op">,</span> <span class="va">parab</span>(<span class="va">x</span>))<span class="op">;</span></span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="va">hold</span> <span class="va">all</span><span class="op">;</span></span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="va">plot</span>(<span class="va">x</span><span class="op">,</span> <span class="va">cubic</span>(<span class="va">x</span>))<span class="op">;</span></span>
+<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="va">hold</span> <span class="va">off</span><span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+</ol>
+<p>You can also add a legend to distinguish the plots:</p>
+<div class="sourceCode" id="cb47"><pre class="sourceCode matlab code-with-copy"><code class="sourceCode matlab"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="va">legend</span>(<span class="ss">'Parabola'</span><span class="op">,</span> <span class="ss">'Cubic'</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>You can add multiple plots to the same graph by using the <code>hold</code> command:</p>
+<div class="sourceCode" id="cb48"><pre class="sourceCode matlab code-with-copy"><code class="sourceCode matlab"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="va">plot</span>(<span class="va">x</span><span class="op">,</span> <span class="va">parab</span>(<span class="va">x</span>))<span class="op">;</span></span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="va">hold</span> <span class="va">on</span><span class="op">;</span></span>
+<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="va">plot</span>(<span class="va">x</span><span class="op">,</span> <span class="va">cubic</span>(<span class="va">x</span>))<span class="op">;</span></span>
+<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="va">hold</span> <span class="va">off</span><span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>You can add a legend to differentiate between the plots:</p>
+<div class="sourceCode" id="cb49"><pre class="sourceCode matlab code-with-copy"><code class="sourceCode matlab"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="va">legend</span>(<span class="ss">'Parabola'</span><span class="op">,</span> <span class="ss">'Cubic'</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Another important type of plot, especially when evaluating the behavior of errors concerning parameters, is the use of logarithmic or semilogarithmic scales. For a given function <span class="math inline">\(f(x)\)</span> with the graph <span class="math inline">\(y = f(x)\)</span>:</p>
+<ul>
+<li><code>semilogx</code> represents the points after changing the variable <span class="math inline">\(x \mapsto \log x\)</span>.</li>
+<li><code>semilogy</code> represents the points after changing the variable <span class="math inline">\(y \mapsto \log y\)</span>.</li>
+<li><code>loglog</code> performs both of the above changes.</li>
+</ul>
+<p>For example, the graph <span class="math inline">\(y = e^{\alpha x}\)</span>, in a <span class="math inline">\(y\)</span>-logarithmic scale, becomes <span class="math inline">\(\tilde{y} := \log y = \alpha x\)</span>, which is a straight line.</p>
+<div class="sourceCode" id="cb50"><pre class="sourceCode matlab code-with-copy"><code class="sourceCode matlab"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="va">x</span> <span class="op">=</span> <span class="va">linspace</span>(<span class="fl">1</span><span class="op">,</span> <span class="fl">10</span><span class="op">,</span> <span class="fl">100</span>)<span class="op">;</span></span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="va">semilogy</span>(<span class="va">x</span><span class="op">,</span> <span class="va">exp</span>(<span class="va">x</span>)<span class="op">,</span> <span class="va">x</span><span class="op">,</span> <span class="va">exp</span>(<span class="fl">2</span><span class="op">*</span><span class="va">x</span>)<span class="op">,</span> <span class="ss">'LineWidth'</span><span class="op">,</span> <span class="fl">2.0</span>)<span class="op">;</span></span>
+<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="va">grid</span> <span class="va">on</span><span class="op">;</span></span>
+<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="va">legend</span>(<span class="ss">'Slope 1'</span><span class="op">,</span> <span class="ss">'Slope 2'</span><span class="op">,</span> <span class="ss">'Location'</span><span class="op">,</span> <span class="ss">'NorthWest'</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="logplot.png" class="img-fluid figure-img"></p>
+<figcaption>Logarithmic Plot</figcaption>
+</figure>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Exercise
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li><p>Plot the graph of the function <span class="math inline">\(f(x) = 2 + (x-3)\sin(5(x-3))\)</span> for <span class="math inline">\(0 \leq x \leq 6\)</span>. Overlay dashed lines that bound this function.</p></li>
+<li><p>Consider the function <span class="math inline">\(f(x) = (\log x)^2\)</span> for <span class="math inline">\(0.1 \leq x \leq 10\)</span>. What do you expect from the graph in logarithmic scaling? Plot and verify.</p></li>
+</ol>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-12" class="callout-12-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="sourceCode" id="cb51"><pre class="sourceCode matlab code-with-copy"><code class="sourceCode matlab"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="va">x</span> <span class="op">=</span> <span class="va">linspace</span>(<span class="fl">0</span><span class="op">,</span> <span class="fl">6</span><span class="op">,</span> <span class="fl">100</span>)<span class="op">;</span></span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="va">f</span> <span class="op">=</span> <span class="fl">2</span> <span class="op">+</span> (<span class="va">x</span><span class="op">-</span><span class="fl">3</span>)<span class="op">.*</span><span class="va">sin</span>(<span class="fl">5</span><span class="op">*</span>(<span class="va">x</span><span class="op">-</span><span class="fl">3</span>))<span class="op">;</span></span>
+<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="va">r</span> <span class="op">=</span> [ <span class="fl">2</span> <span class="op">+</span> (<span class="va">x</span><span class="op">-</span><span class="fl">3</span>)<span class="op">;</span> <span class="fl">2</span> <span class="op">-</span> (<span class="va">x</span><span class="op">-</span><span class="fl">3</span>) ]<span class="op">;</span></span>
+<span id="cb51-4"><a href="#cb51-4" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="va">plot</span>(<span class="va">x</span><span class="op">,</span> <span class="va">f</span><span class="op">,</span> <span class="ss">'k-'</span><span class="op">,</span> <span class="va">x</span><span class="op">,</span> <span class="va">r</span><span class="op">,</span> <span class="ss">'k--'</span><span class="op">,</span> <span class="ss">'LineWidth'</span><span class="op">,</span> <span class="fl">2.0</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="explot.png" class="img-fluid figure-img"></p>
+<figcaption>image</figcaption>
+</figure>
+</div>
+<p>Given <span class="math inline">\(\hat{x} = \log x\)</span> and <span class="math inline">\(\hat{y}=\log y\)</span>, the plot in <span class="math inline">\(x\)</span>-log scale is <span class="math inline">\(y = (\log 2)^2 = \hat{x}^2\)</span>. We expect a parabola.</p>
+<div class="sourceCode" id="cb52"><pre class="sourceCode matlab code-with-copy"><code class="sourceCode matlab"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="va">x</span> <span class="op">=</span> <span class="fl">10</span><span class="op">.^</span><span class="va">linspace</span>(<span class="op">-</span><span class="fl">2</span><span class="op">,</span><span class="fl">2</span><span class="op">,</span><span class="fl">100</span>)<span class="op">;</span></span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="va">y</span> <span class="op">=</span> <span class="va">log</span>(<span class="va">x</span>)<span class="op">.^</span><span class="fl">2</span><span class="op">;</span></span>
+<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="va">semilogx</span>(<span class="va">x</span><span class="op">,</span> <span class="va">y</span><span class="op">,</span> <span class="ss">'LineWidth'</span><span class="op">,</span> <span class="fl">2.0</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="explot_log.png" class="img-fluid figure-img"></p>
+<figcaption>image</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="approximation-error" class="level2" data-number="C.4">
+<h2 data-number="C.4" class="anchored" data-anchor-id="approximation-error"><span class="header-section-number">C.4</span> Approximation error</h2>
+<p>When working with approximations, it’s essential to measure the accuracy of an approximation <span class="math inline">\(\hat{x}\)</span> to a number <span class="math inline">\(x \in \mathbb{R}\)</span>. Two common metrics are:</p>
+<ul>
+<li>Absolute Error: <span class="math inline">\(E_{\text{abs}}(\hat{x}) = |x - \hat{x}|\)</span></li>
+<li>Relative Error: <span class="math inline">\(E_{\text{rel}}(\hat{x}) = \frac{|x - \hat{x}|}{|x|}\)</span> for <span class="math inline">\(x \neq 0\)</span></li>
+</ul>
+<p>Significant figures are a way to represent the accuracy of an approximation. Given an approximation <span class="math inline">\(\hat{x}\)</span> to <span class="math inline">\(x\)</span>, it has <span class="math inline">\(p\)</span> significant figures if:</p>
+<p><span class="math display">\[
+E_{\text{abs}}(\hat{x}) \leq \frac{1}{2} \times 10^{s-p+1}
+\]</span></p>
+<p>Where <span class="math inline">\(s\)</span> is the largest integer such that <span class="math inline">\(|x| \geq 10^s\)</span>.</p>
+<p>When <span class="math inline">\(x\)</span> is not known (common in many practical applications), significant figures can be determined by considering successive approximations. For a sequence <span class="math inline">\(\{x_i\}_{i=0}^\infty\)</span> that converges to <span class="math inline">\(x\)</span>, you can calculate the absolute error at each step <span class="math inline">\(|x_i - x_{i-1}|\)</span>.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Exercise
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Complete the following table (use <code>format short</code> for relative error):</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 13%">
+<col style="width: 13%">
+<col style="width: 26%">
+<col style="width: 26%">
+<col style="width: 21%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><span class="math inline">\(x\)</span></th>
+<th><span class="math inline">\(\hat{x}\)</span></th>
+<th>Relative Error</th>
+<th>Absolute Error</th>
+<th>Significant Figures</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1.6925</td>
+<td>1.69285</td>
+<td>–</td>
+<td>–</td>
+<td>–</td>
+</tr>
+<tr class="even">
+<td>23.130</td>
+<td>23.129</td>
+<td>–</td>
+<td>–</td>
+<td>–</td>
+</tr>
+<tr class="odd">
+<td>23.130</td>
+<td>23.1299</td>
+<td>–</td>
+<td>–</td>
+<td>–</td>
+</tr>
+<tr class="even">
+<td>23.130</td>
+<td>23.129999</td>
+<td>–</td>
+<td>–</td>
+<td>–</td>
+</tr>
+<tr class="odd">
+<td>0.00345</td>
+<td>0.00343</td>
+<td>–</td>
+<td>–</td>
+<td>–</td>
+</tr>
+<tr class="even">
+<td>0.01008</td>
+<td>0.01012</td>
+<td>–</td>
+<td>–</td>
+<td>–</td>
+</tr>
+<tr class="odd">
+<td>0.01008</td>
+<td>0.01002</td>
+<td>–</td>
+<td>–</td>
+<td>–</td>
+</tr>
+<tr class="even">
+<td>0.01008</td>
+<td>0.0102</td>
+<td>–</td>
+<td>–</td>
+<td>–</td>
+</tr>
+</tbody>
+</table>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-14" class="callout-14-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 12%">
+<col style="width: 17%">
+<col style="width: 33%">
+<col style="width: 31%">
+<col style="width: 4%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><span class="math inline">\(x\)</span></th>
+<th><span class="math inline">\(\hat{x}\)</span></th>
+<th>Relative Error</th>
+<th>Absolute Error</th>
+<th>Significant Figures</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1.6925</td>
+<td>1.69285</td>
+<td><span class="math inline">\(0.21\cdot 10^{-3}\)</span></td>
+<td><span class="math inline">\(0.4\cdot 10^{-3}\)</span></td>
+<td>4</td>
+</tr>
+<tr class="even">
+<td>23.130</td>
+<td>23.129</td>
+<td><span class="math inline">\(0.43\cdot 10^{-4}\)</span></td>
+<td><span class="math inline">\(0.1\cdot 10^{-2}\)</span></td>
+<td>4</td>
+</tr>
+<tr class="odd">
+<td>23.130</td>
+<td>23.1299</td>
+<td><span class="math inline">\(0.43\cdot 10^{-5}\)</span></td>
+<td><span class="math inline">\(0.1\cdot 10^{-3}\)</span></td>
+<td>5</td>
+</tr>
+<tr class="even">
+<td>23.130</td>
+<td>23.129999</td>
+<td><span class="math inline">\(0.43\cdot 10^{-7}\)</span></td>
+<td><span class="math inline">\(0.1\cdot 10^{-5}\)</span></td>
+<td>7</td>
+</tr>
+<tr class="odd">
+<td>0.00345</td>
+<td>0.00343</td>
+<td><span class="math inline">\(0.58\cdot 10^{-2}\)</span></td>
+<td><span class="math inline">\(0.1\cdot 10^{-4}\)</span></td>
+<td>2</td>
+</tr>
+<tr class="even">
+<td>0.01008</td>
+<td>0.01012</td>
+<td><span class="math inline">\(0.40\cdot 10^{-2}\)</span></td>
+<td><span class="math inline">\(0.4\cdot 10^{-4}\)</span></td>
+<td>3</td>
+</tr>
+<tr class="odd">
+<td>0.01008</td>
+<td>0.01002</td>
+<td><span class="math inline">\(0.60\cdot 10^{-2}\)</span></td>
+<td><span class="math inline">\(0.6\cdot 10^{-4}\)</span></td>
+<td>2</td>
+</tr>
+<tr class="even">
+<td>0.01008</td>
+<td>0.0102</td>
+<td><span class="math inline">\(0.12\cdot 10^{-1}\)</span></td>
+<td><span class="math inline">\(0.1\cdot 10^{-3}\)</span></td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+<section id="floating-point-arithmetic" class="level3" data-number="C.4.1">
+<h3 data-number="C.4.1" class="anchored" data-anchor-id="floating-point-arithmetic"><span class="header-section-number">C.4.1</span> Floating-Point Arithmetic</h3>
+<p>Natural numbers (<span class="math inline">\(\mathbb{N}\)</span>), although infinite, can be represented exactly on a computer within a predefined range of values. For example, a 32-bit integer can represent numbers from 0 to <span class="math inline">\(2^{32}-1\)</span>. Similarly, it can represent signed integers (<span class="math inline">\(\mathbb{Z}\)</span>) from <span class="math inline">\(-2^{31}\)</span> to <span class="math inline">\(2^{31}-1\)</span>.</p>
+<p>Real numbers (<span class="math inline">\(\mathbb{R}\)</span>), on the other hand, are too numerous to be represented exactly within any chosen range. There are at least two possibilities: the first involves fixing the number of digits after the decimal point (fixed-point). The second considers the proper subset <span class="math inline">\(\mathbb{F} \subset \mathbb{R}\)</span> of floating-point numbers:</p>
+<p><span class="math display">\[y = \pm m \times \beta^{e-t},\]</span></p>
+<p>where <span class="math inline">\(\beta\)</span> is the base, <span class="math inline">\(t\)</span> is the precision, and <span class="math inline">\(e \in [e_{\text{min}}, e_{\text{max}}]\)</span> is the exponent. For example, with <span class="math inline">\(\beta=2\)</span>, <span class="math inline">\(t=3\)</span>, <span class="math inline">\(e_{\text{min}}=-1\)</span>, and <span class="math inline">\(e_{\text{max}}=3\)</span>, you can represent numbers like:</p>
+<p><span class="math display">\[
+\begin{split}
+0&amp;, 0.25, 0.3125, 0.3750, 0.4375, 0.5, 0.625, 0.750, 0.875, \\
+1.0&amp;, 1.25, 1.50, 1.75, 2.0, 2.5, 3.0, 4.0, 5.0, 6.0, 7.0.
+\end{split}
+\]</span></p>
+<p>The following graph illustrates the spacing of these numbers:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="floats.png" class="img-fluid figure-img"></p>
+<figcaption>Graphical representation of floats</figcaption>
+</figure>
+</div>
+<p>The IEEE-754 standard sets values for these parameters in two significant cases: single precision (<code>float</code> in C), where <span class="math inline">\(\beta=2\)</span>, <span class="math inline">\(t=24\)</span>, <span class="math inline">\(e_{\text{min}}=-125\)</span>, and <span class="math inline">\(e_{\text{max}}=128\)</span>, and double precision (<code>double</code> in C), where <span class="math inline">\(\beta=2\)</span>, <span class="math inline">\(t=53\)</span>, <span class="math inline">\(e_{\text{min}}=-1021\)</span>, and <span class="math inline">\(e_{\text{max}}=1024\)</span>.</p>
+<p>Machine epsilon (<span class="math inline">\(\varepsilon_{\text{M}}\)</span>) is the smallest positive number such that <span class="math inline">\(1 + \varepsilon_{\text{M}} \neq 1\)</span> in the floating-point system. It represents the distance between 1 and the next representable number in the system. For single precision, <span class="math inline">\(\varepsilon_{\text{M}}\)</span> is approximately <span class="math inline">\(1.19 \times 10^{-7}\)</span>, while for double precision, it’s approximately <span class="math inline">\(2.22 \times 10^{-16}\)</span>.</p>
+<p>In MATLAB, you can check these values using the <code>eps</code> function:</p>
+<div class="sourceCode" id="cb53"><pre class="sourceCode matlab code-with-copy"><code class="sourceCode matlab"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="va">eps</span></span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a><span class="va">ans</span> <span class="op">=</span> </span>
+<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a>   <span class="fl">2.2204e-16</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The limits of representable numbers can also be checked with <code>realmin</code> and <code>realmax</code>:</p>
+<div class="sourceCode" id="cb54"><pre class="sourceCode matlab code-with-copy"><code class="sourceCode matlab"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="va">realmax</span></span>
+<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a><span class="va">ans</span> <span class="op">=</span></span>
+<span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a>  <span class="fl">1.7977e+308</span></span>
+<span id="cb54-4"><a href="#cb54-4" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="va">realmin</span></span>
+<span id="cb54-5"><a href="#cb54-5" aria-hidden="true" tabindex="-1"></a><span class="va">ans</span> <span class="op">=</span></span>
+<span id="cb54-6"><a href="#cb54-6" aria-hidden="true" tabindex="-1"></a>  <span class="fl">2.2251e-308</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>As observed from the previous graph, the spacing between numbers in <span class="math inline">\(\mathbb{F}\)</span> is not constant. MATLAB’s <code>eps</code> command allows you to determine these spacings:</p>
+<div class="sourceCode" id="cb55"><pre class="sourceCode matlab code-with-copy"><code class="sourceCode matlab"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="va">eps</span>(<span class="fl">1</span>)</span>
+<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a><span class="va">ans</span> <span class="op">=</span> </span>
+<span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a>   <span class="fl">2.2204e-16</span></span>
+<span id="cb55-4"><a href="#cb55-4" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="va">eps</span>(<span class="fl">10</span>)</span>
+<span id="cb55-5"><a href="#cb55-5" aria-hidden="true" tabindex="-1"></a><span class="va">ans</span> <span class="op">=</span> </span>
+<span id="cb55-6"><a href="#cb55-6" aria-hidden="true" tabindex="-1"></a>   <span class="fl">1.7764e-15</span></span>
+<span id="cb55-7"><a href="#cb55-7" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="va">eps</span>(<span class="fl">100</span>)</span>
+<span id="cb55-8"><a href="#cb55-8" aria-hidden="true" tabindex="-1"></a><span class="va">ans</span> <span class="op">=</span> </span>
+<span id="cb55-9"><a href="#cb55-9" aria-hidden="true" tabindex="-1"></a>   <span class="fl">1.4211e-14</span></span>
+<span id="cb55-10"><a href="#cb55-10" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="va">eps</span>(<span class="fl">1000</span>)</span>
+<span id="cb55-11"><a href="#cb55-11" aria-hidden="true" tabindex="-1"></a><span class="va">ans</span> <span class="op">=</span></span>
+<span id="cb55-12"><a href="#cb55-12" aria-hidden="true" tabindex="-1"></a>   <span class="fl">1.1369e-13</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The set <span class="math inline">\(\mathbb{F}\)</span> also includes some exceptional cases:</p>
+<div class="sourceCode" id="cb56"><pre class="sourceCode matlab code-with-copy"><code class="sourceCode matlab"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="fl">1e400</span></span>
+<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a><span class="va">ans</span> <span class="op">=</span> </span>
+<span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a>   <span class="va">Inf</span></span>
+<span id="cb56-4"><a href="#cb56-4" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="fl">1e-400</span></span>
+<span id="cb56-5"><a href="#cb56-5" aria-hidden="true" tabindex="-1"></a><span class="va">ans</span> <span class="op">=</span></span>
+<span id="cb56-6"><a href="#cb56-6" aria-hidden="true" tabindex="-1"></a>     <span class="fl">0</span></span>
+<span id="cb56-7"><a href="#cb56-7" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="fl">1</span><span class="op">/</span><span class="fl">0</span></span>
+<span id="cb56-8"><a href="#cb56-8" aria-hidden="true" tabindex="-1"></a><span class="va">ans</span> <span class="op">=</span></span>
+<span id="cb56-9"><a href="#cb56-9" aria-hidden="true" tabindex="-1"></a>   <span class="va">Inf</span></span>
+<span id="cb56-10"><a href="#cb56-10" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="fl">0</span><span class="op">/</span><span class="fl">0</span></span>
+<span id="cb56-11"><a href="#cb56-11" aria-hidden="true" tabindex="-1"></a><span class="va">ans</span> <span class="op">=</span></span>
+<span id="cb56-12"><a href="#cb56-12" aria-hidden="true" tabindex="-1"></a>   <span class="va">NaN</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li><p>The number <code>Inf</code> represents infinity, meaning it’s beyond <code>realmax</code>. It’s not considered an error, and arithmetic operations involving infinity are still valid, although they can often lead to undesirable results.</p></li>
+<li><p>When dealing with numbers smaller than <code>realmin</code>, they are approximated to 0.</p></li>
+<li><p>The situation <code>NaN</code> (Not-a-Number) indicates that the result is undefined or has no meaningful value.</p></li>
+</ul>
+<p>Floating-point arithmetic has its limitations, including a lack of associativity for some operations, which can lead to significant errors in some cases. For example, when subtracting two nearly equal numbers, you can experience loss of precision due to the finite precision of the representation:</p>
+<div class="sourceCode" id="cb57"><pre class="sourceCode matlab code-with-copy"><code class="sourceCode matlab"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="va">x</span> <span class="op">=</span> <span class="fl">1.0e-15</span><span class="op">;</span></span>
+<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> (<span class="fl">1</span><span class="op">+</span><span class="va">x</span>)<span class="op">-</span><span class="fl">1</span></span>
+<span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a><span class="va">ans</span> <span class="op">=</span></span>
+<span id="cb57-4"><a href="#cb57-4" aria-hidden="true" tabindex="-1"></a>   <span class="fl">1.1102e-15</span></span>
+<span id="cb57-5"><a href="#cb57-5" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> (<span class="fl">1</span><span class="op">-</span><span class="fl">1</span>)<span class="op">+</span><span class="va">x</span></span>
+<span id="cb57-6"><a href="#cb57-6" aria-hidden="true" tabindex="-1"></a><span class="va">ans</span> <span class="op">=</span></span>
+<span id="cb57-7"><a href="#cb57-7" aria-hidden="true" tabindex="-1"></a>   <span class="fl">1.0000e-15</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This issue is known as <strong>cancellation error</strong> and should be avoided whenever possible in numerical computations. The problem is indeed quite serious, and it’s a common issue in numerical computations, especially when dealing with small numbers. For example, you have two functions:</p>
+<p><span class="math display">\[f(x) = \frac{1-\cos x}{x^2}, \quad g(x) = \frac{1}{2}\left(\frac{\sin(x/2)}{x/2}\right)^2.\]</span></p>
+<p>Both of these functions are identical. However, when you evaluate them for <span class="math inline">\(x = 1.2 \times 10^{-8}\)</span> in MATLAB, you get different results:</p>
+<div class="sourceCode" id="cb58"><pre class="sourceCode matlab code-with-copy"><code class="sourceCode matlab"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="va">x</span> <span class="op">=</span> <span class="fl">1.2e-8</span><span class="op">;</span></span>
+<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> (<span class="fl">1</span> <span class="op">-</span> <span class="va">cos</span>(<span class="va">x</span>)) <span class="op">/</span> <span class="va">x</span><span class="op">^</span><span class="fl">2</span><span class="op">;</span></span>
+<span id="cb58-3"><a href="#cb58-3" aria-hidden="true" tabindex="-1"></a><span class="va">ans</span> <span class="op">=</span></span>
+<span id="cb58-4"><a href="#cb58-4" aria-hidden="true" tabindex="-1"></a>    <span class="fl">0.7710</span></span>
+<span id="cb58-5"><a href="#cb58-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb58-6"><a href="#cb58-6" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="fl">0.5</span> <span class="op">*</span> (<span class="va">sin</span>(<span class="va">x</span> <span class="op">/</span> <span class="fl">2</span>) <span class="op">/</span> (<span class="va">x</span> <span class="op">/</span> <span class="fl">2</span>))<span class="op">^</span><span class="fl">2</span><span class="op">;</span></span>
+<span id="cb58-7"><a href="#cb58-7" aria-hidden="true" tabindex="-1"></a><span class="va">ans</span> <span class="op">=</span></span>
+<span id="cb58-8"><a href="#cb58-8" aria-hidden="true" tabindex="-1"></a>    <span class="fl">0.5000</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The first result is clearly incorrect, and it violates the bounds of the function, which should be between 0 and 0.5. This is a classic example of the problem of numerical precision and the limitations of finite-precision arithmetic. Small values of <code>x</code> lead to significant errors due to rounding and truncation.</p>
+<p>To address such issues, numerical analysts often use techniques like Taylor series expansions, higher precision arithmetic, or specialized algorithms to improve the accuracy of computations involving small numbers.</p>
+<p>It is good practice to avoid cases like these as much as possible, as they are quite common. For example:</p>
+<p><span class="math display">\[
+\begin{aligned}
+f(x) &amp;= \frac{e^x-1}{x}, &amp;&amp;\text{for $x \approx 1$,} \\
+x_{1,2} &amp;= \frac{-b\pm\sqrt{b^2-4ac}}{2a}, &amp;&amp;\text{for $b^2 \approx 4ac$ and $b \approx \sqrt{b^2-4ac}$,} \\
+s_n^2 &amp;= \frac{1}{n-1}\left( \sum\nolimits_{i=1}^n x_i^2 - \frac{1}{n}\left(\sum\nolimits_{i=1}^n x_i \right)^2 \right) &amp;&amp;
+\end{aligned}
+\]</span></p>
+<p>In the last case, when calculating variance, it is even possible to obtain negative results, which have no mathematical sense.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Exercise (Archimedes’ Method for <span class="math inline">\(\pi\)</span> Approximation)
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The strategy used by Archimedes to approximate <span class="math inline">\(\pi\)</span> involves considering regular polygons inscribed and circumscribed within the unit circle. In fact, if <span class="math inline">\(n\)</span> is the number of sides, the perimeter <span class="math inline">\(P_n\)</span> approaches <span class="math inline">\(2\pi\)</span> as <span class="math inline">\(n \to \infty\)</span>.</p>
+<p>Starting with a hexagon and successively doubling the number of sides, it can be found that as <span class="math inline">\(i \to \infty\)</span>, <span class="math inline">\(6 \cdot 2^i \cdot t_i\)</span> approaches <span class="math inline">\(\pi\)</span>, where <span class="math inline">\(t_i\)</span> satisfies the following relation:</p>
+<p><span class="math display">\[
+t_0 = \frac{1}{\sqrt{3}}, \qquad
+t_{i+1} = \frac{\sqrt{t_i^2+1}-1}{t_i}.
+\]</span></p>
+<p>Here are the tasks related to this approximation:</p>
+<ol type="1">
+<li><p>Implement this algorithm in MATLAB and compare the approximation with <span class="math inline">\(\pi\)</span> provided by the <code>pi</code> constant. What do you observe?</p></li>
+<li><p>Replace the recursive formula with its equivalent:</p></li>
+</ol>
+<p><span class="math display">\[
+t_0 = \frac{1}{\sqrt{3}}, \qquad
+t_{i+1} = \frac{t_i}{\sqrt{t_i^2+1}+1}.
+\]</span></p>
+<p>Comment on any differences observed.</p>
+<p><strong>Note:</strong> Use <code>format long</code> to display the differences.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-16-contents" aria-controls="callout-16" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-16" class="callout-16-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The value given by Matlab for <span class="math inline">\(\pi\)</span> is:</p>
+<div class="sourceCode" id="cb59"><pre class="sourceCode matlab code-with-copy"><code class="sourceCode matlab"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="va">format</span> <span class="va">long</span></span>
+<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="va">pi</span></span>
+<span id="cb59-3"><a href="#cb59-3" aria-hidden="true" tabindex="-1"></a><span class="va">ans</span> <span class="op">=</span></span>
+<span id="cb59-4"><a href="#cb59-4" aria-hidden="true" tabindex="-1"></a>   <span class="fl">3.141592653589793</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>We compute now <span class="math inline">\(\pi\)</span> with method 1. <code>pia</code> and method 2. <code>pib</code>:</p>
+<div class="sourceCode" id="cb60"><pre class="sourceCode matlab code-with-copy"><code class="sourceCode matlab"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="va">format</span> <span class="va">long</span><span class="op">;</span></span>
+<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="va">n</span> <span class="op">=</span> <span class="fl">30</span><span class="op">;</span></span>
+<span id="cb60-3"><a href="#cb60-3" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="va">ta</span> <span class="op">=</span> <span class="fl">1</span><span class="op">/</span><span class="va">sqrt</span>(<span class="fl">3</span>)<span class="op">;</span></span>
+<span id="cb60-4"><a href="#cb60-4" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="va">tb</span> <span class="op">=</span> <span class="fl">1</span><span class="op">/</span><span class="va">sqrt</span>(<span class="fl">3</span>)<span class="op">;</span></span>
+<span id="cb60-5"><a href="#cb60-5" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="kw">for</span> <span class="va">i</span> <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="va">n</span></span>
+<span id="cb60-6"><a href="#cb60-6" aria-hidden="true" tabindex="-1"></a>     <span class="co">% first method</span></span>
+<span id="cb60-7"><a href="#cb60-7" aria-hidden="true" tabindex="-1"></a>     <span class="va">ta</span> <span class="op">=</span> (<span class="va">sqrt</span>(<span class="va">ta</span><span class="op">^</span><span class="fl">2</span><span class="op">+</span><span class="fl">1</span>)<span class="op">-</span><span class="fl">1</span>)<span class="op">/</span><span class="va">ta</span><span class="op">;</span></span>
+<span id="cb60-8"><a href="#cb60-8" aria-hidden="true" tabindex="-1"></a>     <span class="va">pia</span> <span class="op">=</span> <span class="fl">6</span><span class="op">*</span><span class="fl">2</span><span class="op">^</span><span class="va">i</span><span class="op">*</span><span class="va">ta</span><span class="op">;</span></span>
+<span id="cb60-9"><a href="#cb60-9" aria-hidden="true" tabindex="-1"></a>     <span class="co">% second method</span></span>
+<span id="cb60-10"><a href="#cb60-10" aria-hidden="true" tabindex="-1"></a>     <span class="va">tb</span> <span class="op">=</span> <span class="va">tb</span><span class="op">/</span>(<span class="va">sqrt</span>(<span class="va">tb</span><span class="op">^</span><span class="fl">2</span><span class="op">+</span><span class="fl">1</span>)<span class="op">+</span><span class="fl">1</span>)<span class="op">;</span></span>
+<span id="cb60-11"><a href="#cb60-11" aria-hidden="true" tabindex="-1"></a>     <span class="va">pib</span> <span class="op">=</span> <span class="fl">6</span><span class="op">*</span><span class="fl">2</span><span class="op">^</span><span class="va">i</span><span class="op">*</span><span class="va">tb</span><span class="op">;</span></span>
+<span id="cb60-12"><a href="#cb60-12" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="kw">end</span></span>
+<span id="cb60-13"><a href="#cb60-13" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="va">fprintf</span>(<span class="ss">'Method 1, pi = %f, err = %e\n'</span><span class="op">,</span> <span class="va">pia</span><span class="op">,</span> <span class="va">abs</span>(<span class="va">pia</span><span class="op">-</span><span class="va">pi</span>))<span class="op">;</span></span>
+<span id="cb60-14"><a href="#cb60-14" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="va">fprintf</span>(<span class="ss">'Method 2, pi = %f, err = %e\n'</span><span class="op">,</span> <span class="va">pib</span><span class="op">,</span> <span class="va">abs</span>(<span class="va">pib</span><span class="op">-</span><span class="va">pi</span>))<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>We see that the first method suffers of cancellation errors.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Exercise (Polynomial Expansion)
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Consider the polynomial <span class="math inline">\(p(x) = (x-1)^7\)</span> for <span class="math inline">\(x \in [0.998, 1.012]\)</span>. Expand the polynomial using the binomial formula and compare it to the original unexpanded polynomial. Comment on any differences.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-18-contents" aria-controls="callout-18" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-18" class="callout-18-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Expanding we have <span class="math display">\[
+p(x) = x^7 - 7x^6 + 21x^5 - 35x^4 + 35x^3 - 21x^2 + 7x - 1.
+\]</span></p>
+<p>Now we compare</p>
+<div class="sourceCode" id="cb61"><pre class="sourceCode matlab code-with-copy"><code class="sourceCode matlab"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="va">x</span> <span class="op">=</span> <span class="fl">0.998</span><span class="op">:</span><span class="fl">0.0001</span><span class="op">:</span><span class="fl">1.012</span><span class="op">;</span></span>
+<span id="cb61-2"><a href="#cb61-2" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="va">plot</span>(<span class="va">x</span><span class="op">,</span> <span class="va">x</span><span class="op">.^</span><span class="fl">7</span><span class="op">-</span><span class="fl">7</span><span class="op">*</span><span class="va">x</span><span class="op">.^</span><span class="fl">6</span><span class="op">+</span><span class="fl">21</span><span class="op">*</span><span class="va">x</span><span class="op">.^</span><span class="fl">5</span><span class="op">-</span><span class="fl">35</span><span class="op">*</span><span class="va">x</span><span class="op">.^</span><span class="fl">4</span><span class="op">+</span><span class="fl">35</span><span class="op">*</span><span class="va">x</span><span class="op">.^</span><span class="fl">3</span><span class="op">-</span><span class="fl">21</span><span class="op">*</span><span class="va">x</span><span class="op">.^</span><span class="fl">2</span><span class="op">+</span><span class="fl">7</span><span class="op">*</span><span class="va">x</span><span class="op">-</span><span class="fl">1</span><span class="op">,</span> <span class="op">...</span></span>
+<span id="cb61-3"><a href="#cb61-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">x</span><span class="op">,</span> (<span class="va">x</span><span class="op">-</span><span class="fl">1</span>)<span class="op">.^</span><span class="fl">7</span><span class="op">,</span> <span class="ss">'LineWidth'</span><span class="op">,</span> <span class="fl">2.0</span>)<span class="op">;</span></span>
+<span id="cb61-4"><a href="#cb61-4" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="va">grid</span> <span class="va">on</span><span class="op">;</span></span>
+<span id="cb61-5"><a href="#cb61-5" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> <span class="va">legend</span>(<span class="ss">'Expanded'</span><span class="op">,</span> <span class="ss">'Original'</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="poly.png" class="img-fluid figure-img"></p>
+<figcaption>image</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../../bifurcations.html" class="pagination-link" aria-label="Introduction to bifurcations">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Introduction to bifurcations</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

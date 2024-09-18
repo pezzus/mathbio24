@@ -1,0 +1,2231 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.57">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Appendix A — Introduction to ODEs – Mathematical Biology</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./bifurcations.html" rel="next">
+<link href="./Laboratories/01 ODE Integration/lab_ODEinteg.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script src="site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./IntroODE.html">Appendices</a></li><li class="breadcrumb-item"><a href="./IntroODE.html"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Introduction to ODEs</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Mathematical Biology</a> 
+        <div class="sidebar-tools-main">
+    <div class="dropdown">
+      <a href="" title="Download" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label="Download"><i class="bi bi-download"></i></a>
+      <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="./Mathematical-Biology.pdf">
+              <i class="bi bi-file-pdf pe-1"></i>
+            Download PDF
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="./Mathematical-Biology.epub">
+              <i class="bi bi-journal pe-1"></i>
+            Download ePub
+            </a>
+          </li>
+      </ul>
+    </div>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Lectures</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01_Bathtub.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Bathtub model</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02_Population.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Population dynamics</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Assignments</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Assignments/01_recap_ODEs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Assignment 1: Solving ODEs</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Labs</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Laboratories/01 ODE Integration/lab_ODEinteg.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab 01: Numerical integration</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">Appendices</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./IntroODE.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Introduction to ODEs</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./bifurcations.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Introduction to bifurcations</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Laboratories/00 Intro Matlab/introMATLAB.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Introduction to MATLAB</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#basic-definitions" id="toc-basic-definitions" class="nav-link active" data-scroll-target="#basic-definitions"><span class="header-section-number">A.1</span> Basic definitions</a></li>
+  <li><a href="#separation-of-variables" id="toc-separation-of-variables" class="nav-link" data-scroll-target="#separation-of-variables"><span class="header-section-number">A.2</span> Separation of variables</a></li>
+  <li><a href="#well-posedness" id="toc-well-posedness" class="nav-link" data-scroll-target="#well-posedness"><span class="header-section-number">A.3</span> Well-posedness</a>
+  <ul class="collapse">
+  <li><a href="#local-well-posedness" id="toc-local-well-posedness" class="nav-link" data-scroll-target="#local-well-posedness"><span class="header-section-number">A.3.1</span> Local well-posedness</a></li>
+  <li><a href="#global-well-posedness" id="toc-global-well-posedness" class="nav-link" data-scroll-target="#global-well-posedness"><span class="header-section-number">A.3.2</span> Global well-posedness</a></li>
+  </ul></li>
+  <li><a href="#linear-odes" id="toc-linear-odes" class="nav-link" data-scroll-target="#linear-odes"><span class="header-section-number">A.4</span> Linear ODEs</a>
+  <ul class="collapse">
+  <li><a href="#well-posedness-1" id="toc-well-posedness-1" class="nav-link" data-scroll-target="#well-posedness-1"><span class="header-section-number">A.4.1</span> Well-posedness</a></li>
+  <li><a href="#solution-of-the-homogeneous-problem" id="toc-solution-of-the-homogeneous-problem" class="nav-link" data-scroll-target="#solution-of-the-homogeneous-problem"><span class="header-section-number">A.4.2</span> Solution of the homogeneous problem</a></li>
+  <li><a href="#solution-of-the-general-problem" id="toc-solution-of-the-general-problem" class="nav-link" data-scroll-target="#solution-of-the-general-problem"><span class="header-section-number">A.4.3</span> Solution of the general problem</a></li>
+  <li><a href="#matrix-exponential" id="toc-matrix-exponential" class="nav-link" data-scroll-target="#matrix-exponential"><span class="header-section-number">A.4.4</span> Matrix exponential</a></li>
+  <li><a href="#solution-of-the-case-with-constant-coefficients" id="toc-solution-of-the-case-with-constant-coefficients" class="nav-link" data-scroll-target="#solution-of-the-case-with-constant-coefficients"><span class="header-section-number">A.4.5</span> Solution of the case with constant coefficients</a></li>
+  </ul></li>
+  <li><a href="#sec-dyn" id="toc-sec-dyn" class="nav-link" data-scroll-target="#sec-dyn"><span class="header-section-number">A.5</span> Dynamical systems</a>
+  <ul class="collapse">
+  <li><a href="#orbits-and-trajectories" id="toc-orbits-and-trajectories" class="nav-link" data-scroll-target="#orbits-and-trajectories"><span class="header-section-number">A.5.1</span> Orbits and trajectories</a></li>
+  <li><a href="#types-of-orbits" id="toc-types-of-orbits" class="nav-link" data-scroll-target="#types-of-orbits"><span class="header-section-number">A.5.2</span> Types of orbits</a></li>
+  <li><a href="#lyapunov-stability-and-attractors" id="toc-lyapunov-stability-and-attractors" class="nav-link" data-scroll-target="#lyapunov-stability-and-attractors"><span class="header-section-number">A.5.3</span> Lyapunov stability and attractors</a></li>
+  <li><a href="#stability-of-linear-odes" id="toc-stability-of-linear-odes" class="nav-link" data-scroll-target="#stability-of-linear-odes"><span class="header-section-number">A.5.4</span> Stability of linear ODEs</a></li>
+  <li><a href="#sec-linearization" id="toc-sec-linearization" class="nav-link" data-scroll-target="#sec-linearization"><span class="header-section-number">A.5.5</span> Linearization method</a></li>
+  </ul></li>
+  <li><a href="#periodic-orbits" id="toc-periodic-orbits" class="nav-link" data-scroll-target="#periodic-orbits"><span class="header-section-number">A.6</span> Periodic orbits</a>
+  <ul class="collapse">
+  <li><a href="#hamiltonian-systems" id="toc-hamiltonian-systems" class="nav-link" data-scroll-target="#hamiltonian-systems"><span class="header-section-number">A.6.1</span> Hamiltonian systems</a></li>
+  <li><a href="#isolated-periodic-orbits" id="toc-isolated-periodic-orbits" class="nav-link" data-scroll-target="#isolated-periodic-orbits"><span class="header-section-number">A.6.2</span> Isolated periodic orbits</a></li>
+  </ul></li>
+  <li><a href="#limit-cycles" id="toc-limit-cycles" class="nav-link" data-scroll-target="#limit-cycles"><span class="header-section-number">A.7</span> Limit cycles</a>
+  <ul class="collapse">
+  <li><a href="#dulacs-criterium" id="toc-dulacs-criterium" class="nav-link" data-scroll-target="#dulacs-criterium"><span class="header-section-number">A.7.1</span> Dulac’s criterium</a></li>
+  <li><a href="#poincaré-bendixson-existence-theorems" id="toc-poincaré-bendixson-existence-theorems" class="nav-link" data-scroll-target="#poincaré-bendixson-existence-theorems"><span class="header-section-number">A.7.2</span> Poincaré-Bendixson existence theorems</a></li>
+  <li><a href="#index-theory" id="toc-index-theory" class="nav-link" data-scroll-target="#index-theory"><span class="header-section-number">A.7.3</span> Index theory</a></li>
+  <li><a href="#poincaré-maps" id="toc-poincaré-maps" class="nav-link" data-scroll-target="#poincaré-maps"><span class="header-section-number">A.7.4</span> Poincaré maps</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./IntroODE.html">Appendices</a></li><li class="breadcrumb-item"><a href="./IntroODE.html"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Introduction to ODEs</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">Appendix A — Introduction to ODEs</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    <div>
+    <div class="quarto-title-meta-heading">Modified</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date-modified">September 18, 2024</p>
+    </div>
+  </div>
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="basic-definitions" class="level2" data-number="A.1">
+<h2 data-number="A.1" class="anchored" data-anchor-id="basic-definitions"><span class="header-section-number">A.1</span> Basic definitions</h2>
+<p>Let us start with some simple definitions about Ordinary Differential Equations (ODEs).</p>
+<div id="def-line" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition A.1 (ODE)</strong></span> An scalar ODE is an equation (generally nonlinear) involving a function <span class="math inline">\(y(t)\)</span> and its derivatives. Let <span class="math inline">\(f\colon D\to\mathbb{R}\)</span>, <span class="math inline">\(D\subseteq\mathbb{R}^{n+1}\)</span> open set not empty. Then an ODE of order <span class="math inline">\(n\)</span> is an equation of the type: <span class="math display">\[y^{(n)} = f(t,y,y',\ldots,y^{(n-1)}).\]</span></p>
+</div>
+<p>Let’s have a look to some of the equations we are going to deal with during this course. We will analyze the equations for a purely mathematical point of view, with no biological insights: this will come later.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Example: Malthusian growth model
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><span class="math display">\[N'(t) = r\,N(t).\]</span></p>
+<p>This is a simple model of population growth where <span class="math inline">\(N(t)\)</span> represents the population size at time <span class="math inline">\(t\)</span>. We have that <span class="math inline">\(f(t,N) = rN\)</span>. It is a <em>linear</em> ODE (<span class="math inline">\(f\)</span> is linear with respect to <span class="math inline">\(N\)</span>), with <em>constant coefficients</em> (<span class="math inline">\(r\)</span> is a constant), <em>first-order</em>, and <em>autonomous</em> (<span class="math inline">\(f\)</span> does not explictly depend on <span class="math inline">\(t\)</span>).</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Example: Logistic Growth Model
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><span class="math display">\[
+N'(t) = r N\left(1 - \frac{N}{K}\right)
+\]</span> The logistic model modifies the Malthusian growth by introducing a carrying capacity. We have that <span class="math inline">\(f(t,N) = rN(1-N/K)\)</span>. It is a <em>nonlinear</em> ODE (<span class="math inline">\(f\)</span> is non-linear with respect to <span class="math inline">\(N\)</span>), <em>first-order</em>, and <em>autonomous</em>.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Example: Damped Harmonic Oscillator
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><span class="math display">\[
+y''(t) + 2\beta y'(t) + \omega_0^2 y(t) = F(t).
+\]</span> This is a second-order ODE, linear, constant coefficients, non-autonomous (because of the presence of <span class="math inline">\(F(t)\)</span>).</p>
+</div>
+</div>
+<p>In general, an ODE does not tell anything about a specific solution; it is just the law of motion. We can have many solutions. As a rule of thumb, an <span class="math inline">\(n\)</span>-order scalar ODE requires <span class="math inline">\(n\)</span> constants for uniquely defining a solution. An <strong>Initial Value Problem (IVP)</strong> is an ODE supplemented wuth additional conditions. It is called “initial condition” because it sets the value of the solution at some initial time <span class="math inline">\(t_0\)</span>. (Please note that an IVP is also called “Cauchy problem” on some books.)</p>
+<div id="def-line" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition A.2 (Initial Value Problem)</strong></span> An initial value problem (IVP) is a system of the form: <span class="math display">\[
+\left\{\begin{aligned}
+y^{(n)} &amp;= f(t,y,y',\ldots,y^{(n-1)}), &amp;\\
+y(t_0) &amp;= y_0, \\
+y'(t_0) &amp;= y_1, \\
+&amp;\vdots \\
+y^{(n-1)}(t_0) &amp;= y_{n-1}. \\
+\end{aligned}\right.
+\]</span></p>
+</div>
+<p>In all the above cases, the ODEs were scalar. A system of ODEs is the natural generalization to <span class="math inline">\(\mathbb{R}^n\)</span>. We will only consider <em>first-order system of ODEs</em>, because their extension to higher-order ODEs is superfluous (we will see why in a moment.)</p>
+<p>Consider the system of first-order ODEs: <span class="math display">\[
+\left\{\begin{aligned}
+y_1' &amp;= f_1(t,y_1,y_2,\ldots,y_n), \\
+y_2' &amp;= f_2(t,y_1,y_2,\ldots,y_n), \\
+&amp; \cdots  \\
+y_n' &amp;= f_n(t,y_1,y_2,\ldots,y_n). \\
+\end{aligned}\right.
+\]</span></p>
+<p>We set <span class="math inline">\(\boldsymbol{y}(t) = (y_1,\ldots,y_n)^\intercal\)</span> and <span class="math inline">\(\boldsymbol{f}(t,\boldsymbol{y})=(f_1,\ldots,f_n)^\intercal\)</span> so the system rewrites to <span class="math display">\[
+\boldsymbol{y}' = \boldsymbol{f}(t,\mathbf{y}).
+\]</span></p>
+<p>(Please note that the time derivative of the vector is the vector of the derivatives.) In compact form, the IVP reads as: <span id="eq-ivp"><span class="math display">\[
+\left\{\begin{aligned}
+\boldsymbol{y}' = \boldsymbol{f}(t,\mathbf{y}), \\
+\boldsymbol{y}(t_0) = \boldsymbol{y}_0. \\
+\end{aligned}\right.
+\tag{A.1}\]</span></span></p>
+<p>The <em>solution</em> <span class="math inline">\(\boldsymbol{\phi}\in\mathcal{C}^1(I,\mathbb{R}^n)\)</span> of the system is a <em>curve</em> in <span class="math inline">\(\mathbb{R}^n\)</span> such that: <span class="math display">\[
+\boldsymbol{\phi}'(t) = \boldsymbol{f}(t,\boldsymbol{\phi}(t)),\quad\text{for all $t\in I$}.
+\]</span></p>
+</section>
+<section id="separation-of-variables" class="level2" data-number="A.2">
+<h2 data-number="A.2" class="anchored" data-anchor-id="separation-of-variables"><span class="header-section-number">A.2</span> Separation of variables</h2>
+<p>Solving ODE analytically is not always possible. As for integration, sometimes we cannot find a solution in closed form. However, we have alternatives to rescue us:</p>
+<ul>
+<li><strong>Qualitative analysis</strong>: we don’t solve the ODE explicitly, we rather analyse the behaviour of the trajectories as we would do for a function study. Very often we proceed graphically (in 1-D and 2-D). It is very helpful for parametric studies.</li>
+<li><strong>Numerical integration</strong>: we solve the IVP on a computer. We have no limits, but we always need to provide all parameters and initial values. Parametric studies are more difficult.</li>
+</ul>
+<p>A combination of the above approaches in always wise. On the other hand, it is good to know how to integrate an ODE when it is possible.</p>
+<p>A simple yet effective technique to solve IVPs is the method of <em>separation of variables</em>. It applies to IVPs of the form: <span class="math display">\[
+\begin{cases}
+y' = f(t)g(y), \\
+y'(t_0) = y_0.
+\end{cases}
+\]</span></p>
+<p>for some functions <span class="math inline">\(f\)</span> and <span class="math inline">\(g\)</span>. Using the Leibniz notation, we write the ODE as follows: <span class="math display">\[
+\newcommand{\dd}{\mathrm{d}}
+\frac{\dd y}{\dd t} = f(t)g(y),
+\]</span></p>
+<p>which suggests to separate the variables <span class="math inline">\(t\)</span> and <span class="math inline">\(y\)</span>: <span class="math display">\[
+\newcommand{\dd}{\mathrm{d}}
+\frac{\dd y}{g(y)} = f(t)\,\dd t.
+\]</span></p>
+<p>Here we consider <span class="math inline">\(y\)</span> and <span class="math inline">\(t\)</span> as independent variables. The advantage is that we can integrate both sides to get rid of differentials: <span class="math display">\[
+\newcommand{\dd}{\mathrm{d}}
+\int_{y_0}^y \frac{\dd \tilde y}{g(\tilde y)} = \int_{t_0}^t f(\tilde t)\,\dd \tilde t.
+\]</span></p>
+<p>Please note that amongst all anti-derivatives, we select those satisfying the initial condition <span class="math inline">\(y(t_0)=y_0\)</span>. Suppose that <span class="math inline">\(F(t)\)</span> and <span class="math inline">\(G(y)\)</span> are respectively anti-derivatives of <span class="math inline">\(f(t)\)</span> and <span class="math inline">\(\frac{1}{g(y)}\)</span>, i.e.&nbsp;<span class="math inline">\(F'(t)=f(t)\)</span> and <span class="math inline">\(G'(y)=\frac{1}{g(y)}\)</span>. Then, according to the Fundamental Theorem of Calculus, we have: <span class="math display">\[
+G(y) - G(y_0) = F(t) - F(t_0),
+\]</span></p>
+<p>which gives an implicit expression for <span class="math inline">\(y(t)\)</span>: <span class="math display">\[
+G\bigl(y(t)\bigr) = F(t) + G(y_0) - F(t_0).
+\]</span></p>
+<p>Please note that the expression on the right hand side only contains the variable <span class="math inline">\(t\)</span>. When <span class="math inline">\(G\)</span> is invertible, the expression of <span class="math inline">\(y(t)\)</span> can be made explicit.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Example (Malthusian growth model)
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>We aim at solving the following IVP: <span id="eq-malthus"><span class="math display">\[
+\begin{cases}
+N' = r N, \\
+N(t_0) = N_0.
+\end{cases}
+\tag{A.2}\]</span></span></p>
+<p>We apply the method of separation of variables. We have: <span class="math display">\[
+\newcommand{\dd}{\mathrm{d}}
+\int_{N_0}^N \frac{\dd\tilde N}{\tilde N} = \int_{t_0}^t r\,\dd\tilde{t}.
+\]</span></p>
+<p>After integration (recall that <span class="math inline">\(\ln'(y) = 1/y\)</span>): <span class="math display">\[
+\ln\Bigl(\tfrac{N}{N_0}\Bigr) = r (t-t_0),
+\]</span></p>
+<p>or, by inverting the logarithm, <span class="math display">\[
+N(t) = N_0 e^{r (t-t_0)}.
+\]</span></p>
+</div>
+</div>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Exercise (Time-dependent Malthus equation)
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Check that <span class="math inline">\(N(t) = N_0 e^{r (t-t_0)}\)</span> solves the problem (<a href="#eq-malthus" class="quarto-xref">Equation&nbsp;<span>A.2</span></a>).</p>
+</div>
+</div>
+</section>
+<section id="well-posedness" class="level2" data-number="A.3">
+<h2 data-number="A.3" class="anchored" data-anchor-id="well-posedness"><span class="header-section-number">A.3</span> Well-posedness</h2>
+<p>Let us recall this (simplistic) view of mathematical modeling:</p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+    id1[(Physical world)] ---|Approximation| id2[(Mathematical model)] ---|Approximation| id3[(Numerical model)]
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<p>A good mathematical model shall approximate well the physical world. For instance, it is able to fit experimental data in a validation test. However, a validation test requires that we are able to <em>solve</em> the mathematical problem. For that, we require that the problem should satisfy <strong>well-posedness properties</strong>.</p>
+<p>We are dealing with IVPs. Here, well-posedness translates into:</p>
+<ol type="1">
+<li><p><strong>Existence</strong> of a solution <span class="math inline">\(\boldsymbol{\phi} \in \mathcal{C}^1([0,T],\mathbb{R}^n)\)</span> for every choice of the initial data;</p></li>
+<li><p><strong>Uniqueness</strong> of the solution, in the sense that if <span class="math inline">\(\boldsymbol{\phi}_1(t)\)</span> and <span class="math inline">\(\boldsymbol{\phi}_2(t)\)</span> are both solutions of the IVP for the <em>same</em> initial data, then <span class="math inline">\(\boldsymbol{\phi}_1(t)=\boldsymbol{\phi}_2(t)\)</span> for all <span class="math inline">\(t\)</span>.</p></li>
+<li><p><strong>Stability</strong> of the solution to perturbations, that is if <span class="math inline">\(\tilde{\boldsymbol{\phi}}(t)\)</span> is the solution of the IVP with some perturbation, e.g., applied to the initial datum or to the right hand side, then <span class="math inline">\(\|\tilde{\boldsymbol{\phi}}-\boldsymbol{\phi}\|\to 0\)</span> as the perturbation goes to zero.</p></li>
+</ol>
+<p>For IVPs, stability to perturbation is also called <strong>zero stability</strong>. The zero stability for initial data follows from the Cauchy-Lipschitz theorem, as shown below.</p>
+<p>For the numerical realm, we have a similar definition of well-posedness. Additionally, we typically need to show that the numerical solution <em>converges</em> (in some sense) to the analytical solution. That is, the approximation error goes to zero as we refine the numerical problem. For an IVP, convergence means that that the error between the numerical solution and the true solution goes to zero as the time step goes to zero.</p>
+<p>We start with a definition of a solution for the IVP.</p>
+<div id="def-line" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition A.3 (Classic solution)</strong></span> A classic solution of the IVP (<a href="#eq-ivp" class="quarto-xref">Equation&nbsp;<span>A.1</span></a>) is a function <span class="math inline">\(\boldsymbol{\phi}\in\mathcal{C}^1(I;\mathbb{R}^n)\)</span>, where <span class="math inline">\(I\subset\mathbb{R}\)</span> is a closed interval, such that</p>
+<ol type="1">
+<li><span class="math inline">\(\boldsymbol{\phi}'(t) = \boldsymbol{f}(t,\boldsymbol{\phi}(t))\)</span> for all <span class="math inline">\(t\in I\)</span>;</li>
+<li><span class="math inline">\(\boldsymbol{\phi}(t_0) = \boldsymbol{y}_0\)</span>;</li>
+<li><span class="math inline">\((t,\boldsymbol{\phi}(t))\subset D\)</span> for all <span class="math inline">\(t\in I\)</span>, where <span class="math inline">\(D\subset\mathbb{R}^{n+1}\)</span> is the domain of <span class="math inline">\(\boldsymbol{f}\)</span>.</li>
+</ol>
+</div>
+<p>The first 2 conditions are simply the IVP (equation and initial condition). The third condition concern the domain of definition of the right hand side of the ODE.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Example (lack of existence)
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>When the <span class="math inline">\(\boldsymbol{f}\)</span> is not continuous, we cannot expect existence in general. In fact, consider the IVP <span class="math display">\[
+\begin{cases} y' = \mathcal{H}(t) = \begin{cases} 0, &amp; t\le 0,\\ 1, &amp; t &gt; 0,\end{cases} \\
+y(0) = y_0.
+\end{cases}
+\]</span></p>
+<p>A possible and intuitive solution is <span class="math display">\[
+\phi(t) = y_0 + \max\{0, t\} = \begin{cases} y_0, &amp; t\le 0,\\ y_0 + t, &amp; t&gt;0.\end{cases}
+\]</span></p>
+<p>The function <span class="math inline">\(\phi(t)\)</span> is, however, not <span class="math inline">\(\mathcal{C}^1(I)\)</span> for any neighborhood <span class="math inline">\(I\)</span> of the initial time <span class="math inline">\(t_0=0\)</span>. Therefore, the function cannot be a solution, at least according to the above definition of solution. Note that with a different initial condition, say <span class="math inline">\(y(1) = y_0\)</span>, we can find a <span class="math inline">\(\mathcal{C}^1(I)\)</span> solution, for <span class="math inline">\(I\)</span> away from <span class="math inline">\(t=0\)</span>.</p>
+</div>
+</div>
+<section id="local-well-posedness" class="level3" data-number="A.3.1">
+<h3 data-number="A.3.1" class="anchored" data-anchor-id="local-well-posedness"><span class="header-section-number">A.3.1</span> Local well-posedness</h3>
+<p>A general result for the local existence of a solution is due to <a href="https://en.wikipedia.org/wiki/Giuseppe_Peano">Giuseppe Peano</a>:</p>
+<div id="thm-line" class="theorem">
+<p><span class="theorem-title"><strong>Theorem A.1 (Peano)</strong></span> Let <span class="math inline">\(\mathbf{f}\colon D \to\mathbb{R}^n\)</span>, <span class="math inline">\(D\subseteq\mathbb{R}^{n+1}\)</span> open set, be continuous. Then, for all <span class="math inline">\((t_0,\mathbf{y}_0)\in D\)</span>, there exists a neighborhood of <span class="math inline">\(t_0\)</span>, denoted by <span class="math inline">\(I_\delta = [t_0-\delta,t_0+\delta]\)</span> with <span class="math inline">\(\delta &gt; 0\)</span>, on which is possible to construct a solution <span class="math inline">\(\boldsymbol{\phi}\in\mathcal{C}^1( I_\delta; \mathbb{R}^n)\)</span> to the IVP.</p>
+</div>
+<p>Peano’s theorem ensures the existence but not the uniqueness. He also provided a simple counterexample to uniqueness.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Peano’s counterexample on uniqueness
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Consider the ODE <span class="math display">\[
+\begin{cases}
+y' = \sqrt[3]{y}, \\
+y(1) = 0.
+\end{cases}
+\]</span></p>
+<p>The function <span class="math inline">\(f(t,y) = \sqrt[3]{y}\)</span> is continuous with respect to <span class="math inline">\(t\)</span> and <span class="math inline">\(y\)</span> (note that it does not explicitly depends on time), thus Peano’s Theorem ensures the existence of at least one solution.</p>
+<p>We can find a solution by separation of variables. We have (please check!): <span class="math display">\[
+\phi_1(t) = \begin{cases}
+\bigl(\tfrac{2}{3} (t-1)\bigr)^{3/2}, &amp; t \ge 1, \\
+0, &amp; t &lt; 1.
+\end{cases}
+\]</span></p>
+<p>This solution is however not the only one. Also the following function is a solution (again, please check!) <span class="math display">\[
+\phi_2(t) = \begin{cases}
+-\bigl(\tfrac{2}{3} (t-1)\bigr)^{3/2}, &amp; t \ge 1, \\
+0, &amp; t &lt; 1.
+\end{cases}
+\]</span></p>
+<p>Yet another solution is <span class="math inline">\(\phi_3(t)\equiv 0\)</span>. Actually, the IVP is so subtle that we can build an <em>infinite</em> number of solutions with the power of continuum! In fact, for any <span class="math inline">\(\alpha\ge 1\)</span>, we have that <span class="math display">\[
+\phi_{\alpha^\pm}(t) = \begin{cases}
+\pm\bigl(\tfrac{2}{3} (t-\alpha)\bigr)^{3/2}, &amp; t \ge \alpha, \\
+0, &amp; t &lt; \alpha,
+\end{cases}
+\]</span></p>
+<p>are all solutions of the IVP. That’s a lot to deal with.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/peano.png" class="img-fluid figure-img"></p>
+<figcaption>Peano’s brush</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>The example shows that the lack of uniqueness is somehow related to a lack of stability of the solution. Consider a particle located, at <span class="math inline">\(t=1\)</span>, in <span class="math inline">\(y=0\)</span>. The velocity at some generic time <span class="math inline">\(t\)</span> is <span class="math inline">\(y'(t) = \sqrt[3]{y(t)}\)</span>. Then, the trajectory of the particle is exactly the solution of Peano’s example.</p>
+<p>The example shows that we need some control on the growth rate of <span class="math inline">\(\boldsymbol{f}\)</span>. The correct concept is the Lipschitz continuity:</p>
+<div id="def-line" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition A.4 (Lipschitz continuity)</strong></span> Let <span class="math inline">\(\boldsymbol{f}\colon \Omega \to \mathbb{R}^n\)</span>, <span class="math inline">\(\Omega\subseteq\mathbb{R}^n\)</span>, a continuous function. We say that <span class="math inline">\(\boldsymbol{f}\)</span> is <em>Lipschitz continuous</em> if there exists a constant <span class="math inline">\(L&gt;0\)</span> such that <span class="math display">\[
+\| \boldsymbol{f}(\boldsymbol{y}) - \boldsymbol{f}(\boldsymbol{z}) \| \le L\|\boldsymbol{y}-\boldsymbol{z}\|,
+\]</span></p>
+<p>for all <span class="math inline">\(\boldsymbol{y},\boldsymbol{z}\in\Omega\)</span>.</p>
+</div>
+<div id="def-line" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition A.5 (Local Lipschitz continuity)</strong></span> Let <span class="math inline">\(\mathbf{f}\colon \Omega \to \mathbb{R}^n\)</span> a continuous function, with <span class="math inline">\(\Omega\subseteq\mathbb{R}^n\)</span> open domain. We say that <span class="math inline">\(\boldsymbol{f}\)</span> is <em>locally Lipschitz continuous</em> in <span class="math inline">\(\Omega\)</span> if for every <span class="math inline">\(\boldsymbol{y}_0\in\Omega\)</span> there exists a neighborhood of <span class="math inline">\(\boldsymbol{y}_0\)</span> in which <span class="math inline">\(\boldsymbol{f}\)</span> is Lipschitz continuous, with a constant <span class="math inline">\(L\)</span> possibly depending on the neighborhood.</p>
+</div>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Exercise
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Show that <span class="math inline">\(\mathcal{C}^1\)</span> functions are always locally Lipchitz. For simplicity consider functions on <span class="math inline">\(\mathbb{R}\)</span>.</p>
+</div>
+</div>
+<div id="thm-line" class="theorem">
+<p><span class="theorem-title"><strong>Theorem A.2 (Cauchy-Lipschitz)</strong></span> Let <span class="math inline">\(\boldsymbol{f}\in\mathcal{C}(D;\mathbb{R}^n)\)</span>, <span class="math inline">\(D\subseteq\mathbb{R}^{n+1}\)</span> open domain. If <span class="math inline">\(\boldsymbol{f}\)</span> is locally Lipschitz in <span class="math inline">\(D\)</span>, with respect to <span class="math inline">\(\boldsymbol{y}\)</span> and uniformly in <span class="math inline">\(t\)</span>, then for every <span class="math inline">\((t_0,\boldsymbol{y}_0)\in D\)</span> there exists an interval <span class="math inline">\(I_\delta = [t_0-\delta,t_0+\delta]\)</span>, with <span class="math inline">\(\delta&gt;0\)</span>, on which is possible to construct a solution <span class="math inline">\(\boldsymbol{\phi}\in\mathcal{C}^1( I_\delta; \mathbb{R}^n)\)</span> to the IVP (<a href="#eq-ivp" class="quarto-xref">Equation&nbsp;<span>A.1</span></a>). Such solution is also unique, in the sense that every other solution of the IVP coincides with <span class="math inline">\(\boldsymbol{\phi}(t)\)</span> on <span class="math inline">\(I_\delta\)</span>.</p>
+</div>
+<p>The Cauchy-Lipschitz theorem has very important consequences on the study of ODEs. We mention here the following</p>
+<div id="cor-zerostab" class="theorem corollary">
+<p><span class="theorem-title"><strong>Corollary A.1 (Zero stability)</strong></span> Consider the following IVPs: <span class="math display">\[
+\left\{\begin{aligned}
+\boldsymbol{y}' &amp;= \boldsymbol{f}(t,\mathbf{y}), \\
+\boldsymbol{y}(t_0) &amp;= \boldsymbol{y}_0, \\
+\end{aligned}\right. \quad\text{and}\quad
+\left\{\begin{aligned}
+\tilde{\boldsymbol{y}}' &amp;= \boldsymbol{f}(t,\tilde{\mathbf{y}}), \\
+\tilde{\boldsymbol{y}}(\tilde{t}_0) &amp;= \tilde{\boldsymbol{y}}_0. \\
+\end{aligned}\right.
+\]</span></p>
+<p>Suppose we are under the hypotheses of the Cauchy-Lipschitz theorem. Then, we have the following stability estimate: <span class="math display">\[
+\| \tilde{\boldsymbol{y}}(t) - \boldsymbol{y}(t) \| \le M |\tilde{t}_0 - t_0| + e^{L|t-t_0|} \| \tilde{\boldsymbol{y}}_0 - \boldsymbol{y}_0 \|,
+\]</span> where <span class="math inline">\(L\)</span> is the Lipschitz constant of <span class="math inline">\(\boldsymbol{f}\)</span>.</p>
+</div>
+<p>In other words, if we perturb the initial value of the IVP, the perturbed solution remains close to the unperturbed solution as long as the perturbation is small and small time. For large time, however, the initial perturbation may grow exponentially, with a rate proportional to the Lipschitz constant.</p>
+</section>
+<section id="global-well-posedness" class="level3" data-number="A.3.2">
+<h3 data-number="A.3.2" class="anchored" data-anchor-id="global-well-posedness"><span class="header-section-number">A.3.2</span> Global well-posedness</h3>
+<p>The solution provided by the Cauchy-Lipschitz Theorem is only defined in a local interval, that is up to <span class="math inline">\(t=t_0+\delta\)</span>, with <span class="math inline">\(\delta &gt; 0\)</span>. Unfortunately, <span class="math inline">\(\delta\)</span> can be small, thus there is no guarantee that we can integrate the IVP for an arbitrarily long time.</p>
+<p>We can try to circumvent the problem as follows. Let us call <span class="math inline">\(\boldsymbol{\phi}_1(t)\)</span> the solution and <span class="math inline">\(\delta_1 = \delta\)</span>. Now we set up a new problem of the form: <span class="math display">\[
+\begin{cases}
+\boldsymbol{y}' = \boldsymbol{f}(t,\boldsymbol{y}), &amp; \\
+\boldsymbol{y}(t_1) = \boldsymbol{y}_1,  &amp; \\
+\end{cases}
+\]</span></p>
+<p>where <span class="math inline">\(t_1 = t_0 + \delta_1\)</span> and <span class="math inline">\(\boldsymbol{y}_1 = \boldsymbol{\phi}_1(t_1)\)</span>. Since also the above problem is well-posed, we get a new solution <span class="math inline">\(\boldsymbol{\phi}_2(t)\)</span> up to <span class="math inline">\(t_2=t_1+\delta_2\)</span>, for some <span class="math inline">\(\delta_2&gt;0\)</span>.</p>
+<p>So, we can define a new solution on the interval <span class="math inline">\([t_0,t_0 + \delta_1+\delta_2]\)</span> by gluing the solutions around <span class="math inline">\(t_1\)</span>: <span class="math display">\[
+\boldsymbol{\phi}(t) = \begin{cases}
+\boldsymbol{\phi}_1(t), &amp; t \in [t_0,t_0+\delta_1], \\
+\boldsymbol{\phi}_2(t), &amp; t \in [t_0+\delta_1,t_0+\delta_1+\delta_2].
+\end{cases}
+\]</span></p>
+<p>Please note that <span class="math inline">\(\boldsymbol{\phi}_1(t_1)=\boldsymbol{\phi}_2(t_1)\)</span> by construction, and the same applies to the derivative, so the full solution is still <span class="math inline">\(\mathcal{C}^1([t_0, t_0+\delta_1+\delta_2])\)</span>.</p>
+<p>By iterating the process, we obtain a sequence <span class="math inline">\(\{ \delta_n \}\)</span> of extensions. The hope is that <span class="math inline">\(\sum_n \delta_n \to \infty\)</span>, that is we can extend the solution indefinitely. However, it is certainly possible that <span class="math inline">\(t_0 + \sum_n \delta_n \to T_\text{max} &lt; \infty\)</span>.</p>
+<div id="def-line" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition A.6 (Maximal interval)</strong></span> The <em>maximal right interval</em> <span class="math inline">\([t_0,T_\text{max})\)</span> is simply the maximum time <span class="math inline">\(T_\text{max}\)</span> up to which we can extend the solution to the right. In general the interval is open. Similarly, the <em>left maximal interval</em> is <span class="math inline">\((T_\text{min},t_0]\)</span>. Finally, the <em>maximal interval</em> is just <span class="math inline">\((T_\text{min},T_\text{max})\)</span>. We denote the maximal interval of the solution with <span class="math inline">\(J_\phi\)</span>.</p>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Example (blow-up of solutions)
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Consider the problem <span class="math display">\[
+\begin{cases} y' = y^2, \\ y(0) = 1.\end{cases}
+\]</span></p>
+<p>We solve it by separation of variables. So, <span class="math display">\[
+\begin{aligned}
+&amp; \int_1^y \frac{\mathrm{d}\tilde{y}}{\tilde{y}^2} = \int_0^t \mathrm{d}\tilde{t} \\
+\Rightarrow\; &amp; \left[ -\frac{1}{\tilde{y}} \right]_1^y = t \\
+\Rightarrow\; &amp; -\frac{1}{y} + 1 = t \\
+\Rightarrow\; &amp; y(t) = \frac{1}{1-t}.
+\end{aligned}
+\]</span></p>
+<p>We know that the problem is locally well-posed, because <span class="math inline">\(f(t,y) = y^2\)</span> is continuous and locally Lipschitz. Thus, the above solution is locally unique. However, the interval of integration cannot be arbitrarily large: starting at <span class="math inline">\(t=0\)</span>, we can go forward in time only up to <span class="math inline">\(t=1-\varepsilon\)</span>, with <span class="math inline">\(\varepsilon &gt; 0\)</span>. That is, we cannot reach <span class="math inline">\(t=1\)</span>. The reason is clear: the solution exhibit a vertical asymptote at <span class="math inline">\(t=1\)</span>, thus the solution <em>blows up</em>. In mathematics, this event is indeed called <em>blow-up in finite time</em> of the solution.</p>
+<p>Conversely, backward integration exhibit no problem. Therefore, the maximal interval of well-posedness is <span class="math inline">\(J_\phi = (-\infty,1)\)</span>.</p>
+</div>
+</div>
+<p>Computing the maximal interval for a solution by hand is clearly not practical. We would like to estimate the interval without having to solve the problem analytically.</p>
+<div id="thm-line" class="theorem">
+<p><span class="theorem-title"><strong>Theorem A.3</strong></span> Let <span class="math inline">\(\|\boldsymbol{\phi}(t)\|\le M\)</span> for all <span class="math inline">\(t\in(a,b)\)</span>. Then <span class="math inline">\(J_\phi=(a,b)\)</span>.</p>
+</div>
+<p>In the theorem, we can also take <span class="math inline">\(a=-\infty\)</span> and <span class="math inline">\(b=+\infty\)</span>. In this case the maximal interval would be <span class="math inline">\(\mathbb{R}\)</span>.</p>
+<p>If the right hand side of the IVP grows almost linearly, then we have global existence as well. Indeed, the following theorem holds.</p>
+<div id="thm-glob-linear" class="theorem">
+<p><span class="theorem-title"><strong>Theorem A.4</strong></span> Let <span class="math inline">\(\boldsymbol{f}\colon (a,b)\times\mathbb{R}^n\to\mathbb{R}^n\)</span>. Suppose we are under the assumptions of the Cauchy-Lipschitz theorem. If there exist 2 non-negative constants <span class="math inline">\(k_1\)</span>, <span class="math inline">\(k_2\)</span> such that</p>
+<p><span class="math display">\[
+\| \boldsymbol{f}(t,\boldsymbol{y}) \| \le k_1 + k_2 \| \boldsymbol{y} \|
+\]</span></p>
+<p>for every <span class="math inline">\((t,\boldsymbol{y})\in [a,b] \times \mathbb{R}^n\)</span>, then for all <span class="math inline">\((t_0,\boldsymbol{y}_0)\)</span> the unique solution <span class="math inline">\(\boldsymbol{\phi}(t)\)</span> is defined in <span class="math inline">\([a,b]\)</span>.</p>
+</div>
+<p>In general, we use <em>a priori</em> information on the solution to apply the above Theorems. For that, we may use energy estimates (common for problems in physics), or we can study the qualitative behavior of the solutions for various initial conditions, e.g., in the phase space. Let us try that with a simple example.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Example (logistic equation)
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Consider the ODE <span class="math display">\[
+y' = y(1-y),
+\]</span></p>
+<p>where <span class="math inline">\(y(t)\)</span> may represent, for instance, the density of a population. We would like to show that <span class="math inline">\(J = \mathbb{R}\)</span> for every choice of the initial data <span class="math inline">\(y(0)=y_0\)</span>. Note that the right hand side <span class="math inline">\(f(t,y)=y(1-y)\)</span> is quadratic: we cannot exclude a blow up as in the above example!</p>
+<p>We have the following cases:</p>
+<ul>
+<li><p>if <span class="math inline">\(y_0 = 0\)</span> or <span class="math inline">\(y_0 = 1\)</span>, the solution is constant in time, <span class="math inline">\(y(t)=y_0\)</span>. In fact, <span class="math inline">\(f(t,y_0) = 0\)</span>, thus <span class="math inline">\(y'(t)=0\)</span> and we have a constant solution. We are going to call this type of solutions <em>fixed points</em> or <em>equilibria</em> (see the next section.)</p></li>
+<li><p>if <span class="math inline">\(y_0 \in (0,1)\)</span>, then <span class="math inline">\(y(t) \to 1^-\)</span> as <span class="math inline">\(t\to+\infty\)</span> and <span class="math inline">\(y(t) \to 0^+\)</span> as <span class="math inline">\(t\to-\infty\)</span>. Thus, <span class="math inline">\(y(t)\in(0,1)\)</span> for all <span class="math inline">\(t\)</span>. The limit follows from an analysis of the sign of <span class="math inline">\(f(t,y)\)</span>. For <span class="math inline">\(y\in(0,1)\)</span>, <span class="math inline">\(f(t,y) &gt; 0\)</span>, thus <span class="math inline">\(y' &gt; 0\)</span> for all <span class="math inline">\(t\)</span> and <span class="math inline">\(y(t)\)</span> is monotonically increasing. But <span class="math inline">\(y = 1\)</span> is an equilibrium that cannot be crossed, and there are no other equilibria in <span class="math inline">\((0,1)\)</span>. Thus, it must be that <span class="math inline">\(y\to 1\)</span> from below as <span class="math inline">\(t\to\infty\)</span>.</p></li>
+<li><p>if <span class="math inline">\(y_0 &gt; 1\)</span>, then <span class="math inline">\(y(t)\to 1^+\)</span> as <span class="math inline">\(t\to+\infty\)</span>. Again, the statement follows from <span class="math inline">\(f(t,y)&lt;0\)</span> for <span class="math inline">\(y &gt; 1\)</span>, thus <span class="math inline">\(y'&lt;0\)</span> and <span class="math inline">\(y(t)\)</span> is monotonically decreasing. Since it is bounded from below by <span class="math inline">\(y(t)=1\)</span>, we have <span class="math inline">\(y(t)\to 1\)</span>. However, for <span class="math inline">\(t\to-\infty\)</span> we have a blow up in finite time, specifically for <span class="math inline">\(t = \bar{t} &lt; 0\)</span> where (show this by explicit integration of the IVP!) <span class="math display">\[
+\bar{t} = \ln(1-y_0) - \ln(y_0).
+\]</span></p></li>
+</ul>
+<p>We conclude that the solution <span class="math inline">\(y(t)\)</span> is <em>bounded</em> in <span class="math inline">\([y_0,0]\)</span> for any choice of the initial condition <span class="math inline">\(y_0 \ge 0\)</span> and <span class="math inline">\(t\ge 0\)</span>. (Why we exclude <span class="math inline">\(y_0 &lt;0?\)</span>) Thus, we can apply the above theorem with <span class="math inline">\(a=0\)</span> and <span class="math inline">\(b=\infty\)</span>, concluding that <span class="math inline">\(J = (0,\infty)\)</span>. For <span class="math inline">\(t &lt; 0\)</span>, the solution is bounded for <span class="math inline">\(y_0 \in [0,1]\)</span>, thus <span class="math inline">\(J = \mathbb{R}\)</span>. However, for <span class="math inline">\(y_0 &gt; 1\)</span>, we have <span class="math inline">\(J = (\bar{t},\infty)\)</span>.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="linear-odes" class="level2" data-number="A.4">
+<h2 data-number="A.4" class="anchored" data-anchor-id="linear-odes"><span class="header-section-number">A.4</span> Linear ODEs</h2>
+<p>A general linear ODE is an equation of the form: <span class="math display">\[
+\mathbf{y}' = \mathbf{A}(t)\mathbf{y} + \mathbf{b}(t)
+\]</span></p>
+<p>with <span class="math display">\[
+\mathbf{y} = \begin{pmatrix}
+y_1 \\ y_2 \\ \vdots \\ y_n \end{pmatrix},\quad
+\mathbf{A}(t) = \begin{pmatrix}
+0 &amp; 1 &amp; 0 &amp; \cdots &amp; 0 \\
+0 &amp; 0 &amp; 1 &amp; \cdots &amp; 0 \\
+\vdots &amp; \vdots &amp; \ddots &amp; \ddots &amp; \vdots \\
+0 &amp; 0 &amp; \cdots &amp; 0 &amp; 1 \\
+a_n(t) &amp; a_{n-1}(t) &amp; \cdots &amp; a_2(t) &amp; a_1(t)
+\end{pmatrix},\quad
+\mathbf{b}(t) = \begin{pmatrix}
+0 \\ 0 \\ \vdots \\ b(t)
+\end{pmatrix}.
+\]</span></p>
+<p>Note that <span class="math inline">\(\mathbf{f}(t,\mathbf{y}) = \mathbf{A}(t)\mathbf{y} + \mathbf{b}(t)\)</span> is only linear in <span class="math inline">\(\mathbf{y}\)</span>, that is <span class="math display">\[
+\mathbf{f}(t,\alpha\mathbf{y}+\mathbf{z}) = \alpha \mathbf{f}(t,\mathbf{y}) + \mathbf{f}(t,\mathbf{z}),
+\]</span></p>
+<p>for all choices of <span class="math inline">\(\alpha\in\mathbb{R}\)</span> and <span class="math inline">\(\mathbf{y}, \mathbf{z}\in\mathbb{R}^n\)</span>.</p>
+<section id="well-posedness-1" class="level3" data-number="A.4.1">
+<h3 data-number="A.4.1" class="anchored" data-anchor-id="well-posedness-1"><span class="header-section-number">A.4.1</span> Well-posedness</h3>
+<div id="thm-line" class="theorem">
+<p><span class="theorem-title"><strong>Theorem A.5</strong></span> Assuming that <span class="math inline">\(\mathbf{A} \in \mathcal{C}^0([\alpha,\beta];\mathbb{R}^{n\times n})\)</span> and <span class="math inline">\(\mathbf{b}\in \mathcal{C}^0([\alpha,\beta];\mathbb{R}^n)\)</span>, that is all coefficients are continuous function of <span class="math inline">\(t\in[\alpha,\beta]\)</span>, then we have a unique global solution <span class="math inline">\(\boldsymbol{\phi}\in\mathcal{C}^1((\alpha,\beta);\mathbb{R}^n)\)</span> for each choice of the initial data.</p>
+</div>
+<p>The proof of the local well-posedness follows for the Cauchy-Lipschitz theorem, because <span class="math inline">\(\mathbf{f}(t,\mathbf{y})\)</span> is locally Lipschitz uniformly in <span class="math inline">\(t\)</span>. In fact, since <span class="math inline">\(\mathbf{A}(t)\)</span> is continous on a closed interval, it is also bounded. Thus: <span class="math display">\[
+\| \mathbf{f}(t,\mathbf{y}) - \mathbf{f}(t,\mathbf{z}) \| =
+\| \mathbf{A}(t) (\mathbf{y}-\mathbf{z}) \|
+\le \| \mathbf{A}(t) \| \| \mathbf{y}-\mathbf{z} \|
+\le \underbrace{\max_{t\in[\alpha,\beta]}\| \mathbf{A}(t) \|}_{L} \| \mathbf{y}-\mathbf{z} \|.
+\]</span></p>
+<p>The global existence follows from <a href="#thm-glob-linear" class="quarto-xref">Theorem&nbsp;<span>A.4</span></a>. <span class="math display">\[
+\| \mathbf{f}(t,\mathbf{y}) \| = \| \mathbf{A}(t)\mathbf{y} + \mathbf{b}(t) \|
+\le \| \mathbf{A}(t)\| \|\mathbf{y}\| + \| \mathbf{b}(t) \|
+\le \underbrace{\max_{t\in[\alpha,\beta]}\| \mathbf{A}(t) \|}_{k_1} \|\mathbf{y}\| + \underbrace{\max_{t\in[\alpha,\beta]}\| \mathbf{b}(t) \|}_{k_2}.
+\]</span></p>
+</section>
+<section id="solution-of-the-homogeneous-problem" class="level3" data-number="A.4.2">
+<h3 data-number="A.4.2" class="anchored" data-anchor-id="solution-of-the-homogeneous-problem"><span class="header-section-number">A.4.2</span> Solution of the homogeneous problem</h3>
+<p>An interesting aspect of linear ODEs is that we can represent explicitly all the solutions of the ODE. Obviously, a linear IVP has a unique solution. The ODE, on the other hand, can have many solutions. We start with the <em>homogeneous problem</em>: <span class="math display">\[
+\mathbf{y}' = \mathbf{A}(t)\mathbf{y}.
+\]</span></p>
+<div id="thm-line" class="theorem">
+<p><span class="theorem-title"><strong>Theorem A.6</strong></span> Let <span class="math inline">\(\mathcal{U} = \bigl\{ \boldsymbol{\phi} \in \mathcal{C}^1((\alpha,\beta);\mathbb{R}^n) : \boldsymbol{\phi}'(t) = \mathbf{A}(t)\boldsymbol{\phi}(t) \: \forall t\in(\alpha,\beta) \bigr\}\)</span> be the set of solutions of the linear ODE. Then <span class="math inline">\(\dim\mathcal{U} = n\)</span>.</p>
+</div>
+<p>Therefore, there exists a basis <span class="math inline">\(\{\boldsymbol{\phi}_1(t),\ldots,\boldsymbol{\phi}_n(t)\}\)</span> of <span class="math inline">\(\mathcal{U}\)</span> such that each solution <span class="math inline">\(\boldsymbol{\phi}(t) \in \mathcal{U}\)</span> reads as follows: <span class="math display">\[
+\boldsymbol{\phi}(t) = \sum_{i=1}^n c_i \boldsymbol{\phi}_i(t),
+\]</span></p>
+<p>for some choice of <span class="math inline">\(\mathbf{c} = [c_1, \ldots, c_n]^T \in \mathbb{R}^n\)</span>.</p>
+<div id="def-line" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition A.7 (Wronskian matrix)</strong></span> We define the Wronskian matrix <span class="math inline">\(\mathbf{W}(t)\)</span> as the column-matrix of the basis of <span class="math inline">\(\mathcal{U}\)</span>:</p>
+<p><span class="math display">\[
+\mathbf{W}(t)=\Bigl[\begin{matrix}
+&amp; \boldsymbol\phi_1(t) &amp;|&amp; \boldsymbol\phi_2(t) &amp;|&amp; \cdots &amp;|&amp; \boldsymbol\phi_n(t) &amp;
+\end{matrix}\Bigr].
+\]</span></p>
+</div>
+<p>Note that from its definition it follows that: <span class="math display">\[
+\mathbf{W}(t)' = \mathbf{A}(t)\mathbf{W}(t).
+\]</span></p>
+<p>The <em>general solution</em> of the linear ODE is: <span class="math display">\[
+\boldsymbol{\phi}(t) = \mathbf{W}(t)\mathbf{c},
+\]</span></p>
+<p>for some <span class="math inline">\(\mathbf{c}\in\mathbb{R}^n\)</span>. For an IVP with initial condition <span class="math inline">\(\mathbf{y}(t_0)=\mathbf{y}_0\)</span>, we have that: <span class="math display">\[
+\boldsymbol{\phi}(t_0) = \mathbf{W}(t_0)\mathbf{c} = \mathbf{y}_0,
+\quad\Rightarrow\quad
+\mathbf{c} = \mathbf{W}^{-1}(t_0)\mathbf{y}_0,
+\]</span></p>
+<p>thus the unique solution is: <span class="math display">\[
+\boldsymbol{\phi}(t) = \mathbf{W}(t)\mathbf{c} = \mathbf{W}(t)\mathbf{W}^{-1}(t_0)\mathbf{y}_0
+= \mathbf{W}(t,t_0)\mathbf{y}_0,
+\]</span></p>
+<p>where <span class="math inline">\(\mathbf{W}(t,t_0)\)</span> is called <em>transition matrix</em>. The transition matrix bears this name because it <em>transfers</em> the initial condition <span class="math inline">\(\mathbf y_0\)</span> at time <span class="math inline">\(t_0\)</span> to the solution at time <span class="math inline">\(t\)</span>. It is a particular case of <em>flow</em> of an ODE. We have the following very useful properties, all straightforward to prove using the definition above:</p>
+<ol type="1">
+<li><span class="math inline">\(\mathbf W(t_0,t_0) = \mathbf I\)</span>,</li>
+<li><span class="math inline">\(\mathbf W(t,s)\mathbf W(s,t_0) = \mathbf W(t,t_0)\)</span>,</li>
+<li><span class="math inline">\((\mathbf W(t,t_0))^{-1}=\mathbf W(t_0,t)\)</span>.</li>
+</ol>
+<p>Note that we haven’t proved the invertibility of <span class="math inline">\(\mathbf{W}(t_0)\)</span>. We are going to do it later for the case of <span class="math inline">\(\mathbf{A}\)</span> with constant coefficients.</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Exercise
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Prove the properties of the transfer matrix.</p>
+</div>
+</div>
+</section>
+<section id="solution-of-the-general-problem" class="level3" data-number="A.4.3">
+<h3 data-number="A.4.3" class="anchored" data-anchor-id="solution-of-the-general-problem"><span class="header-section-number">A.4.3</span> Solution of the general problem</h3>
+<p>The general solution is useful for building a <em>particular solution</em> for the non-homogeneous problem <span id="eq-linivp"><span class="math display">\[
+\mathbf{y}' = \mathbf{A}(t)\mathbf{y} + \mathbf{b}(t).
+\tag{A.3}\]</span></span></p>
+<p>Starting from the solution <span class="math inline">\(\boldsymbol{\phi}(t) = \mathbf{W}(t)\mathbf{c}\)</span>, we can apply the method of variation of constants to find a solution of the form <span class="math inline">\(\boldsymbol{\phi}(t) = \mathbf{W}(t)\mathbf{c}(t)\)</span>, for some choice of <span class="math inline">\(\mathbf{c}(t)\)</span>. It turns out that the <em>particular solution</em> is: <span class="math display">\[
+\boldsymbol\phi(t) = \mathbf{W}(t) \int^t \mathbf{W}^{-1}(s)\mathbf b(s) \mathrm{d}s
+= \int^t \mathbf{W}(t,s)\mathbf b(s) \mathrm{d}s.
+\]</span></p>
+<p>Supplemented with an initial condition <span class="math inline">\(\mathbf{y}(t_0)=\mathbf{y}_0\)</span>, the solution of the IVP is <span id="eq-gensol"><span class="math display">\[
+\boldsymbol\phi(t) = \mathbf{W}(t,t_0)\mathbf{y}_0 + \int_{t_0}^t \mathbf{W}(t,s)\mathbf{b}(s) \mathrm{d}s.
+\tag{A.4}\]</span></span></p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Exercise
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Show that (<a href="#eq-gensol" class="quarto-xref">Equation&nbsp;<span>A.4</span></a>) is the solution of the IVP (<a href="#eq-linivp" class="quarto-xref">Equation&nbsp;<span>A.3</span></a>).</p>
+</div>
+</div>
+</section>
+<section id="matrix-exponential" class="level3" data-number="A.4.4">
+<h3 data-number="A.4.4" class="anchored" data-anchor-id="matrix-exponential"><span class="header-section-number">A.4.4</span> Matrix exponential</h3>
+<p>We focus now on the following case: <span class="math display">\[\begin{cases}
+\mathbf y'=\mathbf A\mathbf y + \mathbf b(t), &amp; \\
+\mathbf y(t_0)=\mathbf y_0. &amp;
+\end{cases}\]</span></p>
+<p>We need the Wronskian matrix. For computing it, we use the fact that <span class="math inline">\(\mathbf{W}' = \mathbf{A}\mathbf{W}\)</span> and <span class="math inline">\(\mathbf{W}(0)=\mathbf{I}\)</span> (identity matrix). Formally, notice that <span class="math display">\[
+\begin{aligned}
+\mathbf{W}(0) &amp;= \mathbf{I}, \\
+\mathbf{W}'(0) &amp;= \mathbf{A}\mathbf{W} = \mathbf{A}, \\
+\mathbf{W}''(0) &amp;= \mathbf{A}\mathbf{W}' = \mathbf{A}^2, \\
+&amp;\cdots \\
+\mathbf{W}^{(k)}(0) &amp;= \mathbf{A}^n.
+\end{aligned}
+\]</span></p>
+<p>Thus we can construct the solution as a Taylor expansion: <span class="math display">\[
+\mathbf{W}(t) = \sum_{n=0}^\infty \frac{\mathbf{W}^{(n)}(0)}{n!} t^k
+= \sum_{n=0}^\infty \frac{\mathbf{A}^n}{n!} t^k
+= \mathbf{I} + t\mathbf{A} + \frac{t^2}{2} \mathbf{A}^2 + \ldots
+\]</span></p>
+<div id="def-matexp" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition A.8 (Matrix exponential)</strong></span> We define the <em>matrix exponential</em> as: <span class="math display">\[
+e^{\mathbf{A}} := \sum_{n=0}^\infty \frac{\mathbf{A}^n(t)}{n!}.
+\]</span></p>
+</div>
+<p>Thus, the Wronskian is: <span class="math display">\[
+\mathbf{W}(t) = e^{t\mathbf{A}}.
+\]</span></p>
+<p>The series converges for each <span class="math inline">\(\mathbf{A}\in\mathbb{R}^{n\times n}\)</span>. Below some useful properties:</p>
+<ol type="1">
+<li><p>If <span class="math inline">\(\mathbf A = \operatorname{diag}\{ a_1, \dots, a_n \}\)</span>, then <span class="math inline">\(e^{\mathbf A} = \operatorname{diag}\{ e^{a_1}, \dots, e^{a_n} \}\)</span>. The matrix exponential of diagonal matrices is then straightforward to compute. The proof is simple: just plug the diagonal matrix in the definition and note that <span class="math inline">\(\mathbf A^k = \operatorname{diag}\{ a_1^k, \dots, a_n^k \}\)</span>. Hence: <span class="math display">\[\sum_{k=0}^\infty \frac{\mathbf{A}^k}{k!} = \operatorname{diag}\biggl\{ \sum_{k=0}^\infty \frac{a_1^k}{k!}, \ldots, \sum_{k=0}^\infty \frac{a_n^k}{k!} \biggr\} = \operatorname{diag}\{ e^{a_1}, \dots, e^{a_n} \}.\]</span></p></li>
+<li><p><span class="math inline">\(e^{\mathbf 0} = \mathbf{I}\)</span>. If <span class="math inline">\(\mathbf A\)</span> is the matrix with all zero entries <span class="math inline">\(\mathbf{0}\)</span>, then the matrix exponential is the identity matrix <span class="math inline">\(\mathbf{I}\)</span>. This is trivial because all the entries of the sum are zero except for <span class="math inline">\(k=0\)</span>.</p></li>
+<li><p><span class="math inline">\(\det(e^{\mathbf A})=e^{\operatorname{tr}\mathbf A}\)</span>. This is reminescent of the Wronskian (determinant of Wronskian matrix), and the proof is similar, based on the Taylor expansion <span class="math inline">\(|\mathbf I + \varepsilon\mathbf A| = 1+\varepsilon\operatorname{tr}\mathbf A + \mathcal{O}(\varepsilon^2)\)</span>. We use the alternative definition of matrix exponential, and the fact that the determinant is a continuous function with respect to the coefficients of the matrix: <span class="math display">\[\begin{aligned}
+|e^{\mathbf A}| &amp;= \biggl| \lim_{n\to\infty} \Bigl(\mathbf I + \tfrac{1}{n}\mathbf A \Bigr)^n \biggr| \\
+\text{\small(continuity)} &amp;= \lim_{n\to\infty} \biggl| \Bigl( \mathbf I + \tfrac{1}{n}\mathbf A \Bigr)^n \biggr| \\
+\text{\small(det of product)} &amp;= \lim_{n\to\infty} \Bigl| \mathbf I + \tfrac{1}{n}\mathbf A \Bigr|^n \\
+\text{\small(det expansion)} &amp;= \lim_{n\to\infty} \Bigl( 1 + \tfrac{1}{n}\operatorname{tr}\mathbf A + \mathcal{O}(\tfrac{1}{n^2}) \Bigr)^n = e^{\operatorname{tr}\mathbf A}.
+\end{aligned}\]</span></p></li>
+<li><p><span class="math inline">\(e^{\mathbf A}\)</span> is invertible. This is a consequence of the previous property, since the determinant is always strictly positive.</p></li>
+<li><p>If <span class="math inline">\(\mathbf{A}\)</span> and <span class="math inline">\(\mathbf{B}\)</span> commute, that is <span class="math inline">\(\mathbf{A}\mathbf{B} = \mathbf{B}\mathbf{A}\)</span>, then <span class="math inline">\(e^{\mathbf{A}+\mathbf{B}}=e^{\mathbf{A}} e^{\mathbf{B}}\)</span>. We are not proving this fact.</p></li>
+<li><p><span class="math inline">\(e^{0\mathbf A}=\mathbf{I}\)</span>. This follows immediately from property 2. of the matrix exponential.</p></li>
+<li><p><span class="math inline">\(e^{t \mathbf A} e^{s \mathbf A} = e^{(t+s)\mathbf A}\)</span>. In this case we could use property 5., but instead we use the formula for the <a href="https://en.wikipedia.org/wiki/Cauchy_product">product of two series</a> and <a href="https://en.wikipedia.org/wiki/Binomial_theorem">Newton’s binomial formula</a>: <span class="math display">\[\begin{aligned}
+e^{t \mathbf A} e^{s \mathbf A}
+&amp;= \biggl(\sum_{k=0}^\infty \frac{t^k \mathbf A^k}{k!}\biggr)
+\cdot\biggl(\sum_{j=0}^\infty \frac{s^j \mathbf A^j}{j!}\biggr) \\
+&amp;= \sum_{k=0}^\infty \sum_{l=0}^k \frac{t^l \mathbf A^l}{l!} \frac{s^{k-l} \mathbf A^{k-l}}{(k-l)!} \\
+&amp;= \sum_{k=0}^\infty \frac{\mathbf A^k}{k!} \sum_{l=0}^k \frac{k!}{l!(k-l)!} t^l s^{k-l} \\
+&amp;= \sum_{k=0}^\infty \frac{(t+s)^k\mathbf A^k}{k!}
+= e^{(t+s)\mathbf A}.
+\end{aligned}\]</span></p></li>
+<li><p><span class="math inline">\(\frac{\mathrm d}{\mathrm d t} e^{t\mathbf A} = \mathbf A e^{t\mathbf A}\)</span>. It follows from the definition: <span class="math display">\[\tfrac{\mathrm d}{\mathrm d t} e^{t\mathbf A}
+%= \frac{\mathrm d}{\mathrm d t} \sum_{k=0}^\infty \frac{t^k \mathbf A^k}{k!}
+= \sum_{k=0}^\infty \frac{\mathrm d}{\mathrm d t} \frac{t^k \mathbf A^k}{k!}
+= \sum_{k=1}^\infty \frac{kt^{k-1} \mathbf A^k}{k!}
+= \mathbf A \sum_{k=1}^\infty \frac{t^{k-1} \mathbf A^{k-1}}{(k-1)!}
+= \mathbf A e^{t\mathbf A}.\]</span></p></li>
+</ol>
+<p>This last property in particular shows rigorously that the matrix exponential is the Wronskian matrix of the ODE <span class="math inline">\(\mathbf y' = \mathbf A\mathbf y\)</span>, while with the other properties we define the transition matrix.</p>
+</section>
+<section id="solution-of-the-case-with-constant-coefficients" class="level3" data-number="A.4.5">
+<h3 data-number="A.4.5" class="anchored" data-anchor-id="solution-of-the-case-with-constant-coefficients"><span class="header-section-number">A.4.5</span> Solution of the case with constant coefficients</h3>
+<p>The solution of <span class="math display">\[\begin{cases}
+\mathbf y'=\mathbf A\mathbf y + \mathbf b(t), &amp; \\
+\mathbf y(t_0)=\mathbf y_0, &amp;
+\end{cases}\]</span></p>
+<p>follows now trivially from the matrix exponential. We have: <span class="math display">\[
+\boldsymbol\phi(t) = e^{(t-t_0)\mathbf{A}}\mathbf{y}_0 + \int_{t_0}^t e^{(t-s)\mathbf{A}}\mathbf{b}(s) \mathrm{d}s.
+\]</span></p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Example (scalar case)
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>When <span class="math inline">\(n = 1\)</span>, with <span class="math inline">\(\mathbf{A}=a\in\mathbb{R}\)</span>, the matrix exponential is the usual exponential function. The solution is <span class="math display">\[
+\phi(t) = e^{a(t-t_0)}y_0 + \int_{t_0}^t e^{a(t-s)}b(s) \mathrm{d}s.
+\]</span></p>
+<p>For instance, with <span class="math inline">\(b = e^{\omega t}\)</span>, we have: <span class="math display">\[
+\int_{t_0}^t e^{a(t-s)}b(s) \mathrm{d}s =
+\int_{t_0}^t e^{a(t-s)}e^{\omega s} \mathrm{d}s
+= \frac{e^{a t} - e^{\omega t}}{a-\omega}.
+\]</span></p>
+<p>So the solution to the problem: <span class="math display">\[
+\begin{cases}
+y' = ay + e^{\omega t}, &amp; \\
+y(t_0) = y_0, &amp;
+\end{cases}
+\]</span></p>
+<p>is as follows: <span class="math display">\[
+\phi(t) = e^{a(t-s)} + \frac{e^{a t} - e^{\omega t}}{a-\omega}.
+\]</span></p>
+</div>
+</div>
+</section>
+</section>
+<section id="sec-dyn" class="level2" data-number="A.5">
+<h2 data-number="A.5" class="anchored" data-anchor-id="sec-dyn"><span class="header-section-number">A.5</span> Dynamical systems</h2>
+<p>Intuitively, a dynamical system is a state or a set of variables evolving over time according to some rule. The concept is very general. <a href="https://en.wikipedia.org/wiki/Markov_chain">Markov chains</a>, <a href="https://en.wikipedia.org/wiki/Cellular_automaton">cellular automata</a> and <a href="https://en.wikipedia.org/wiki/Large_language_model">large language models</a> are examples of dynamical systems. Roughly speaking, a dynamical system is composed by</p>
+<ol type="1">
+<li>A <em>state space</em>, the set of all admissible states of the system, and</li>
+<li>A <em>rule</em> for moving from the current state to the next one.</li>
+</ol>
+<p>We can associate to a system of ODEs a dynamical system. The state space (called <em>phase space</em>) is the subset of <span class="math inline">\(\mathbb{R}^n\)</span> of all possible states. The update rule is the solution of the ODE (called <em>flow</em>). For ODEs, one is not interested in studying a specific instance (or trajectory) of the system, but rather the system as a whole, for all possible initial states.</p>
+<div id="def-dynsys" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition A.9</strong></span> A dynamical system is well-posed autonomous ODE (<em>autonomous</em> means that <span class="math inline">\(\mathbf{f}\)</span> is not an explicit function of <span class="math inline">\(t\)</span>). Specifically, given <span class="math inline">\(\mathbf{f}\in\mathcal{C}^1(\Omega;\mathbb{R}^n)\)</span>, with <span class="math inline">\(\Omega\neq\emptyset\)</span> an open set of <span class="math inline">\(\mathbb{R}^n\)</span>, we suppose that for every initial condition <span class="math inline">\(\mathbf{y}_0\in\mathbb{R}^n\)</span>, the IVP <span class="math display">\[\begin{cases}
+\mathbf{y}' = \mathbf{f}(\mathbf{y}), \\
+\mathbf{y}(0) = \mathbf{y}_0,
+\end{cases}\]</span></p>
+<p>has a unique solution <span class="math inline">\(\boldsymbol{\phi}(t)\)</span> defined for <span class="math inline">\(t\in[0,\infty)\)</span>, and such that <span class="math inline">\(\boldsymbol{\phi}(t)\in\Omega\)</span> for all <span class="math inline">\(t\ge0\)</span>. We call <span class="math inline">\(\mathbf{y}' = \mathbf{f}(\mathbf{y})\)</span> <em>dynamical system</em> on the <em>phase space</em> <span class="math inline">\(\Omega\)</span>. Succintly, the dynamical system is fully qualified by the pair <span class="math inline">\((\mathbf{f},\Omega)\)</span>.</p>
+</div>
+<div id="def-flow" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition A.10</strong></span> The <em>flow</em> of an ODE is a function <span class="math inline">\(\boldsymbol{\Phi}\colon\mathbb{R}\times\Omega\to \Omega\)</span> such that <span class="math display">\[
+\boldsymbol{\Phi}(t,\mathbf{y}_0) = \boldsymbol{\phi}(t),
+\]</span></p>
+<p>where <span class="math inline">\(\boldsymbol{\phi}(t)\)</span> is the solution of the ODE with initial condition <span class="math inline">\(\mathbf{y}_0\)</span>.</p>
+</div>
+<p>For example, for a linear dynamical system <span class="math inline">\(\mathbf{y}' = \mathbf{A}\mathbf{y}\)</span> the flow is given by the transition matrix: <span class="math display">\[
+\boldsymbol{\Phi}(t,\mathbf{y}_0) = \mathbf{W}(t,0)\mathbf{y}_0 = e^{t\mathbf{A}}\mathbf{y}_0.
+\]</span></p>
+<p><strong>Note.</strong> It is worth to mention that also the general, non-autonomous ODEs <span class="math inline">\(\mathbf{y}' = \mathbf{f}(t,\mathbf{y})\)</span> in <span class="math inline">\(\mathbb{R}^n\)</span> can be recast to the autonomous form <span class="math inline">\(\mathbf{z}' = \mathbf{g}(\mathbf{z})\)</span> in <span class="math inline">\(\mathbb{R}^{n+1}\)</span> by setting <span class="math display">\[\mathbf{z}(t) = \begin{bmatrix} \tau(t) \\ \mathbf{y}(t) \end{bmatrix},\quad \mathbf{g}(\mathbf{z}) = \begin{bmatrix} 1 \\ \mathbf{f}(\tau,\mathbf{y}) \end{bmatrix},\]</span></p>
+<p>in fact, <span class="math inline">\(\tau(t)=t\)</span>.</p>
+<section id="orbits-and-trajectories" class="level3" data-number="A.5.1">
+<h3 data-number="A.5.1" class="anchored" data-anchor-id="orbits-and-trajectories"><span class="header-section-number">A.5.1</span> Orbits and trajectories</h3>
+<div id="def-orbit" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition A.11</strong></span> For a given solution (or trajectory) <span class="math inline">\(\boldsymbol{\phi}(t)\)</span>, we consider the associated <em>orbit</em> <span class="math inline">\(\mathcal{O}(\boldsymbol{\phi})\)</span> defined as follows <span class="math display">\[\mathcal{O}(\boldsymbol{\phi}) = \bigcup_{t\ge 0} \boldsymbol{\phi}(t),\]</span></p>
+<p>that is, the orbit is the “shadow” of a trajectory onto the phase space <span class="math inline">\(\Omega\)</span>.</p>
+</div>
+<p>In practice, the study of a dynamical system is not limited to a particular solution (defined by some initial condition), but rather it covers the entire domain. In some sense, there is a strong geometrical interpretation: the r.h.s. of the ODE determines a vectorial field in the phase space <span class="math inline">\(\Omega\)</span>, so that a given orbit is tangent at every point to such field.</p>
+<div id="prp-line" class="theorem proposition">
+<p><span class="theorem-title"><strong>Proposition A.1</strong></span> If <span class="math inline">\(\boldsymbol{\phi}(t)\)</span> is a trajectory of the dynamical system for all <span class="math inline">\(t\ge 0\)</span>, also <span class="math inline">\(\boldsymbol{\psi}(t) = \boldsymbol{\phi}(t+c)\)</span> is a solution for all <span class="math inline">\(t\ge -c\)</span>, with <span class="math inline">\(c\in\mathbb{R}\)</span>.</p>
+</div>
+<p>The proposition is a simple consequence of the fact that a dynamical system is an autonomous ODE, that is it <span class="math inline">\(\mathbf{f}\)</span> is not a function of time.</p>
+<div id="prp-orbits" class="theorem proposition">
+<p><span class="theorem-title"><strong>Proposition A.2</strong></span> Two distinct orbits of a dynamical system either coincide or they never intersect.</p>
+</div>
+<p>This proposition is extremely important when analyzing the phase portrait of a system, because some orbits may act as “barriers” for other orbits. Please note that the statement refers to <em>orbits</em>, not simply to the trajectories.</p>
+<p>To prove the proposition, suppose there are two distinct orbits associated to the trajectories <span class="math inline">\(\boldsymbol{\phi}\)</span> and <span class="math inline">\(\boldsymbol{\psi}\)</span>, and such that <span class="math inline">\(\boldsymbol{\phi}(t_1) = \boldsymbol{\psi}(t_2)\)</span> for some <span class="math inline">\(t_1,t_2\ge 0\)</span>. That is, the orbits intersect. Now consider the function <span class="math inline">\(\tilde{\boldsymbol{\psi}}(t) = \boldsymbol{\psi}(t+t_2-t_1)\)</span>. This function is still a solution, and <span class="math inline">\(\tilde{\boldsymbol{\psi}}(t_1) = \boldsymbol{\psi}(t_2) = \boldsymbol{\phi}(t_1)\)</span>. Thus, <span class="math inline">\(\tilde{\boldsymbol{\psi}}\)</span> and <span class="math inline">\(\boldsymbol{\phi}\)</span> have the same initial condition, and they must coincide for all <span class="math inline">\(t\)</span>, that is <span class="math inline">\(\tilde{\boldsymbol{\psi}}(t) = \boldsymbol{\phi}(t)\)</span>. In other words, <span class="math inline">\(\tilde{\boldsymbol{\psi}}\)</span> and <span class="math inline">\(\boldsymbol{\phi}\)</span> have the same orbit. But also <span class="math inline">\(\tilde{\boldsymbol{\psi}}\)</span> and <span class="math inline">\(\boldsymbol{\psi}\)</span> have the same orbit, because the system is autonomous. In conclusion, if two orbits intersect at a least one point, they must concide at all points.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Example (Van der Pol)
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Below an example of the phase space for the equation <span class="math inline">\(y'' - \mu(1-y^2)y' + y = 0\)</span>, which models a stiff oscillating system.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/trajectory.png" class="img-fluid figure-img"></p>
+<figcaption>Trajectory</figcaption>
+</figure>
+</div>
+<p>In the figure, in blue we have the orbit associated to the trajectory in orange.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/phase.png" class="img-fluid figure-img"></p>
+<figcaption>Phase space</figcaption>
+</figure>
+</div>
+<p>This second figure represents the phase portrait of the system, with the orbit and the limit cycle.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Example (positive systems)
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>An example are dynamical systems of the form: <span class="math display">\[\begin{cases}
+y_1' = y_1 \cdot f(y_1,y_2), \\
+y_2' = y_2 \cdot g(y_1,y_2).
+\end{cases}\]</span></p>
+<p>In fact, the line <span class="math inline">\((y_1,y_2) = (0,y_2)\)</span> (the ordinate) is an orbit of the system, because if we start from <span class="math inline">\((0,y_2)\)</span> we never leave the line, since <span class="math inline">\(y_1'=0\)</span>. Similarly, the line <span class="math inline">\((y_1,y_2) = (y_1,0)\)</span> (the abscissa) is also an orbit. Therefore, any other orbit starting in the positive quadrant will stay in the positive quadrant for all times. That is, the two orbits are barriers that ensures the positivity of the system for all times.</p>
+</div>
+</div>
+</section>
+<section id="types-of-orbits" class="level3" data-number="A.5.2">
+<h3 data-number="A.5.2" class="anchored" data-anchor-id="types-of-orbits"><span class="header-section-number">A.5.2</span> Types of orbits</h3>
+<p>Some orbits of a dynamical system are special. Here, we only mention the two most important ones: equilibria and periodic orbits.</p>
+<div id="def-equilibrium" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition A.12</strong></span> We say that <span class="math inline">\(\mathbf{y}_0\in\Omega\)</span> is an <em>equilibrium</em> of the system if <span class="math inline">\(\mathbf{f}(\mathbf{y}_0)=0\)</span>. In particular, the trajectory <span class="math inline">\(\boldsymbol{\phi}(t)=\mathbf{y}_0\)</span> for all <span class="math inline">\(t\in\mathbb{R}\)</span> is called solution of the equilibrium. The orbit is simply the point <span class="math inline">\(\{ y_0 \}\)</span>.</p>
+</div>
+<p>What if an orbit self-intersect at some finite time? We have a <em>periodic orbit</em>.</p>
+<div id="prp-periodic" class="theorem proposition">
+<p><span class="theorem-title"><strong>Proposition A.3</strong></span> If there exist <span class="math inline">\(\tau_1,\tau_2\ge 0\)</span> such that <span class="math inline">\(\boldsymbol{\phi}(\tau_1) = \boldsymbol{\phi}(\tau_2)\)</span>, then <span class="math inline">\(\boldsymbol{\phi}(t)\)</span> is a periodic solution.</p>
+</div>
+<p>In fact, as above, consider the trajectory <span class="math inline">\(\boldsymbol{\psi}(t) = \boldsymbol{\phi}(t-\tau_1+\tau_2)\)</span>. Then <span class="math inline">\(\boldsymbol{\psi}(\tau_1)=\boldsymbol{\phi}(\tau_2)=\boldsymbol{\phi}(\tau_1)\)</span>. So we conclude that <span class="math inline">\(\boldsymbol{\psi}(t)\)</span> and <span class="math inline">\(\boldsymbol{\phi}(t)\)</span> coincide for all time. In particular, <span class="math inline">\(\boldsymbol{\phi}(t)=\boldsymbol{\phi}(t+\tau_2-\tau_1)\)</span>, that is, <span class="math inline">\(\boldsymbol{\phi}(t)\)</span> is periodic with period <span class="math inline">\(\tau_2-\tau_1\)</span>.</p>
+<p>The kind of orbits that we may find in a dynamical system is actually limited to</p>
+<ol type="1">
+<li>Orbits consisting of a single point (equilibria);</li>
+<li>Orbits corresponding to closed regular curves (periodic solutions);</li>
+<li>Orbits corresponding to open regular curves, with no self-intersections.</li>
+</ol>
+<p>The dimension of the phase space plays a key role in the type of attractor. For <span class="math inline">\(\Omega \subset \mathbb{R}\)</span>, we can only have equilibria. In fact:</p>
+<div id="prp-line" class="theorem proposition">
+<p><span class="theorem-title"><strong>Proposition A.4</strong></span> For <span class="math inline">\(n=1\)</span> a dynamical system cannot have periodic solutions.</p>
+</div>
+<p>For the proof, suppose that <span class="math inline">\(\phi(t)\)</span> is periodic with period <span class="math inline">\(T&gt;0\)</span>. Then, we multiply by <span class="math inline">\(\phi'\)</span> both sides of the ODE and integrate in <span class="math inline">\([t,t+T]\)</span>: <span class="math display">\[
+\int_t^{t+T} \bigl( \phi'(s)\bigr)^2 \:\mathrm{d}s = \int_t^{t+T} f(\phi(s))\phi'(s)\:\mathrm{d}s
+= \int_{\phi(t)}^{\phi(t+T)} f(u)\:\mathrm{d}u = 0,
+\]</span></p>
+<p>where we applied the change of variables <span class="math inline">\(u = \phi(s)\)</span>. The last integral is zero because <span class="math inline">\(\phi(t)=\phi(t+T)\)</span>. But the first integral is strictly positive, so we have a contradiction.</p>
+<p><strong>Note.</strong> For <span class="math inline">\(n=1\)</span>, a more general non-autonomuous ODE <span class="math inline">\(y'=f(t,y)\)</span> <em>can have</em> periodic solutions. But this is not a dynamical system, unless we recast it as a system, thus <span class="math inline">\(n=2\)</span> and periodic solutions are possible.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Example (test problem)
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The dynamical system <span class="math inline">\(y'=\lambda y\)</span> has only one equilibrium, <span class="math inline">\(y^*=0\)</span>.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Example (logistic equation)
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The dynamical system <span class="math inline">\(y'=y(1-y)\)</span> has two equilibria, <span class="math inline">\(y_1=0\)</span> and <span class="math inline">\(y_2=1\)</span>.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Example (linear system)
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Given <span class="math inline">\(\mathbf{A}\in\mathbb{R}^{n\times n}\)</span>, the dynamical system <span class="math inline">\(\mathbf{y}'=\mathbf{A}\mathbf{y}\)</span> has equilibria such that <span class="math inline">\(\mathbf{A}\mathbf{y}^*=0\)</span>, that is equilibria belong to the kernel of <span class="math inline">\(\mathbf{A}\)</span>, <span class="math inline">\(\mathbf{y}^*\in\ker\mathbf{A}\)</span>. If <span class="math inline">\(\mathbf{A}\)</span> is invertible, then we only have <span class="math inline">\(\mathbf{y}^*=0\)</span>.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Example (FitzHugh-Nagumo model)
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>We consider the dynamical system defined by the ODE <span class="math display">\[\begin{cases}
+u' = f(u,r) = u(1-u)(u-\alpha) - r, \\
+r' = g(u,r) = \beta(u-\gamma r),
+\end{cases}\]</span></p>
+<p>where <span class="math inline">\(\alpha,\beta,\gamma\in\mathbb{R}\)</span> are parameters of the model. This system is an important phenomenological model of excitability of cells and for modeling the action potential.</p>
+<p>We define as <em>nullclines</em> associated to <span class="math inline">\(u'\)</span> (resp. <span class="math inline">\(r'\)</span>) the implicit curve defined by the equation <span class="math inline">\(f(u,r)=0\)</span> (resp. <span class="math inline">\(g(u,r)=0\)</span>). Equilibria are found as intersections between nullclines, because at those points all right hand sides simultaneously cancel. For the FitzHugh-Nagumo system, nullclines are: <span class="math display">\[\begin{cases}
+f(u,r) = 0, \Leftrightarrow r = u(1-u)(u-\alpha), \\
+g(u,r) = 0, \Leftrightarrow r = \gamma^{-1} u.
+\end{cases}\]</span></p>
+<p>The first nullcline is a cubic function with zeros at <span class="math inline">\(0\)</span>, <span class="math inline">\(\alpha\)</span>, and <span class="math inline">\(1\)</span>, and such that <span class="math inline">\(r\to-\infty\)</span> for <span class="math inline">\(u\to\infty\)</span>. The second nullcline is a line through the origin and with slope <span class="math inline">\(\gamma^{-1}\)</span>. One equilibrium is certainly the point <span class="math inline">\((u_1,r_1)=(0,0)\)</span>, for all choices of the parameters. The other equilibria depend on the choice of the parameters, specifically on whether the cubic function and the line intersect outside the origin. Those are such that <span class="math display">\[u(1-u)(u-\alpha) = \gamma^{-1} u,\]</span></p>
+<p>so, besides <span class="math inline">\(u=0\)</span>, the number of zeros depends on the sign of the discriminant: <span class="math display">\[\Delta = (\alpha+1)^2 - 4 \gamma^{-1}.\]</span></p>
+<p>In conclusion, we have three equilibria for <span class="math inline">\(\Delta &gt; 0\)</span>, two equilibria for <span class="math inline">\(\Delta = 0\)</span> and only one for <span class="math inline">\(\Delta &lt; 0\)</span>.</p>
+</div>
+</div>
+</section>
+<section id="lyapunov-stability-and-attractors" class="level3" data-number="A.5.3">
+<h3 data-number="A.5.3" class="anchored" data-anchor-id="lyapunov-stability-and-attractors"><span class="header-section-number">A.5.3</span> Lyapunov stability and attractors</h3>
+<p>Consider a dynamical system <span class="math inline">\((\mathbf{f},\Omega)\)</span> with <span class="math inline">\(\Omega\subseteq \mathbb{R}^n\)</span>, with an equilibrium <span class="math inline">\(\mathbf{y}_0 \in\Omega\)</span>, that is <span class="math inline">\(\mathbf{f}(\mathbf{y}_0)=0\)</span>. How does the system behave in a neighborhood of the equilibrium? Say, if we start close to <span class="math inline">\(\mathbf{y}_0\)</span>, do the stay close to it for long? Please note that the interest is purely qualitative: we are not interested in the specific form of the trajectory, but rather its behavior for <span class="math inline">\(t\to\infty\)</span>.</p>
+<div id="def-lyapunov" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition A.13 (Lyapunov stability)</strong></span> We say that <span class="math inline">\(\mathbf{y}_0\)</span> is a <em>locally stable equilibrium</em> if for each <span class="math inline">\(\varepsilon&gt;0\)</span> there exists <span class="math inline">\(\delta = \delta(\varepsilon,\mathbf{y}_0)\)</span> such that for all <span class="math inline">\(\mathbf{y}_1\in\Omega\)</span> with <span class="math inline">\(\| \mathbf{y}_1 - \mathbf{y}_0 \| &lt; \delta\)</span> we have that <span class="math inline">\(\| \boldsymbol{\Phi}(t,\mathbf{y}_1) - \mathbf{y}_0 \| &lt; \varepsilon\)</span> for all <span class="math inline">\(t\ge 0\)</span>, where <span class="math inline">\(\boldsymbol{\Phi}(t,\mathbf{y})\)</span> is the flow of the system.</p>
+<p>Moreover, we say that <span class="math inline">\(\mathbf{y}_0\)</span> is <em>asymptotically stable</em> if in the above definition we have <span class="math inline">\(\| \boldsymbol{\phi}(t;\mathbf{y}_1) - \mathbf{y}_0 \| \to 0\)</span> for <span class="math inline">\(t\to\infty\)</span>.</p>
+</div>
+<p>The difference between simple stability and asymptotic stability is that in the former case orbits stay close to the equilibrium without necessarily approaching it for <span class="math inline">\(t\to\infty\)</span>. For instance, the vertical downward position of the frictionless pendulum is only stable, because the orbits of the systems (oscillations at given amplitude) stay close to it with distance equal to the amplitude but never approach it. On the other hand, in the presence of friction, the equilibrium becomes asymptotically stable. (Thermodynamically speaking, asymptotically stable equilibria are quite boring: it often means extinction, death.)</p>
+<p>Finally, an <em>unstable equilibrium</em> is defined by (logically) negating the above definition. That is, <span class="math inline">\(\mathbf{y}_0\in\Omega\)</span> is an <em>unstable equilibrium</em> if there exists <span class="math inline">\(\varepsilon&gt;0\)</span> such that for all <span class="math inline">\(\delta &gt; 0\)</span> there exists <span class="math inline">\(\mathbf{y}_1\in\Omega\)</span> with the property that <span class="math inline">\(\|\mathbf{y}_1 - \mathbf{y}_0\| &lt; \delta\)</span> but <span class="math inline">\(\|\boldsymbol{\phi}(t_n,\mathbf{y}_1) - \mathbf{y}_0 \| \ge \varepsilon\)</span> for a sequence <span class="math inline">\(\{ t_n \}_n\to\infty\)</span> and all <span class="math inline">\(n\in\mathbb{N}\)</span>. In other words, there exists at least one initial condition that brings the associated trajectory arbitrarily far from the equilibrium at some time points <span class="math inline">\(t_n\)</span> approaching infinity. (It would be too much to ask the same for all <span class="math inline">\(t\ge M\)</span>, because we could have a diverging trajectory that periodically comes very close to the equilibrium, without really approaching it. Take for instance the function <span class="math inline">\(\phi(t)=t\sin^2 t + \varepsilon/2\)</span>, where for <span class="math inline">\(t=t_n=n\pi\)</span> is equal to <span class="math inline">\(\varepsilon/2\)</span>, but for <span class="math inline">\(t_n=n\pi/2\)</span> is diverging: it is clearly unstable.)</p>
+<p>An interesting concept associated with equilibria is that of <em>basin of attraction</em>.</p>
+<div id="def-basin" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition A.14 (Basin of attraction)</strong></span> If an equilibrium is only <em>locally asymptotically stable</em>, then we have the basin of attraction defined as <span class="math display">\[\mathcal{B}(\mathbf{y}_0) := \Bigl\{ \tilde{\mathbf{y}}\in\Omega\colon \lim_{t\to+\infty} \boldsymbol{\Phi}(t,\mathbf{y}_0) = \mathbf{y}_0 \Bigr\}.\]</span></p>
+</div>
+<p>An equilibrium is <em>globally asymptotically stable</em> when <span class="math inline">\(\mathcal{B}(\mathbf{y}_0)=\Omega\)</span>.</p>
+<p><strong>Remark.</strong> Lyapunov stability is different from the concept of stability to perturbation, or zero stability (see <a href="#cor-zerostab" class="quarto-xref">Corollary&nbsp;<span>A.1</span></a>). In the latter, the aim is check whether we are able to recover the original solution (equilibrium or not) as the perturbation in the dynamical system goes to zero. The original and perturbed solutions may diverge from each other for long time, but we can always reduce the gap between them by reducing the initial error (the perturbation): when that’s not possible, the system is not (zero) stable. Lyapunov stability, on the other hand, concerns the <em>structural</em> stability properties of the system, that is we study the long-term behavior of solutions <em>without</em> controlling the initial perturbation. Actually, all initial conditions in the basin of attraction of an equilibrium yield solutions that converge to the same equilibrium, irrespective of the gap between them.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Example (stability of the test problem)
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The stability of equilibrium <span class="math inline">\(y=0\)</span> of <span class="math inline">\(y'=\lambda y\)</span> depends clearly on <span class="math inline">\(\lambda\)</span>. Suppose that <span class="math inline">\(\lambda\in\mathbb{C}\)</span>. Then, the full solution is of the form <span class="math display">\[\phi(t) = e^{\lambda t} y_0.\]</span></p>
+<p>We can expand the exponential to get more insights: <span class="math display">\[\phi(t) = e^{\lambda t} y_0 = e^{t \operatorname{Re}\lambda}e^{t \operatorname{Im}\lambda} y_0 =
+e^{t \operatorname{Re}\lambda} \bigl(\cos(t\operatorname{Im}\lambda) + i \sin(t\operatorname{Im}\lambda)\bigr) y_0.\]</span></p>
+<p>Since the equilibrium is 0, we just need to check whether this trajectory, in modulus, stays close (or even approaches) zero over time. That is, <span class="math display">\[|\phi(t)|^2 = \phi^*(t)\phi(t) = e^{2 t \operatorname{Re}\lambda} \bigl(\cos(t\operatorname{Im}\lambda)^2 + \sin(t\operatorname{Im}\lambda)\bigr)^2 |y_0|^2,\]</span></p>
+<p>so we have: <span class="math display">\[|\phi(t)| = e^{t \operatorname{Re}\lambda}|y_0|.\]</span></p>
+<p>From this expression, we easily deduce that</p>
+<ol type="1">
+<li>If <span class="math inline">\(\operatorname{Re}\lambda &lt; 0\)</span>, then <span class="math inline">\(|\phi(t)|\to 0\)</span> for all <span class="math inline">\(y_0\in\mathbb{C}\)</span>. The equilibrium is therefore globally asymptotically stable.</li>
+<li>If <span class="math inline">\(\operatorname{Re}\lambda &gt; 0\)</span>, then <span class="math inline">\(|\phi(t)|\to\infty\)</span> for at least one non trivial <span class="math inline">\(y_0\in\mathbb{C}\)</span>. The equilibrium is therefore unstable.</li>
+<li>If <span class="math inline">\(\operatorname{Re}\lambda = 0\)</span>, then <span class="math inline">\(|\phi(t)| = |y_0|\)</span>. The equilibrium is stable.</li>
+</ol>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Example (stability of logistic equation)
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The logistic equation <span class="math inline">\(y'=y(1-y)\)</span> has two equilibria, <span class="math inline">\(y_1=0\)</span> and <span class="math inline">\(y_2=1\)</span>. We could study their stability by taking advantage of the analytical solution, available in this case, but we will not. We will proceed more generally. The dynamics is determined by the sign of <span class="math inline">\(f(y)=y(1-y)\)</span>.</p>
+<ol type="1">
+<li>If <span class="math inline">\(y_0 = y_1\)</span> or <span class="math inline">\(y_0 = y_2\)</span>, there is no dynamics over time.</li>
+<li>If <span class="math inline">\(y_0\in(0,1)\)</span> (boundaries excluded), then the solution <span class="math inline">\(\phi(t;y_0)\)</span> will never leave the interval <span class="math inline">\((0,1)\)</span>, because <span class="math inline">\(0\)</span> and <span class="math inline">\(1\)</span> are barriers (equilibria are also orbits, and orbits cannot intersect). Moreover, in this region <span class="math inline">\(f(y)&gt;0\)</span>. Therefore <span class="math inline">\(y'&gt;0\)</span>, that the solution <span class="math inline">\(\phi(t;y_0)\)</span> increases over time. Since the equilibrium <span class="math inline">\(y_2=1\)</span> cannot be crossed, <span class="math inline">\(\phi(t;y_0)\)</span> indefinitely approaches <span class="math inline">\(y_2\)</span> (from the left) without crossing it.</li>
+<li>If <span class="math inline">\(y_0 &gt; 1\)</span>, with the same reasoning as above we conclude that <span class="math inline">\(\phi(t;y_0)&gt;1\)</span> indefinitely. But here <span class="math inline">\(f(y)&lt;0\)</span>, so <span class="math inline">\(y'&lt;0\)</span> and again <span class="math inline">\(\phi(t;y_0)\)</span> approaches <span class="math inline">\(y_2\)</span> (from the right).</li>
+<li>If <span class="math inline">\(y_0 &lt; 0\)</span>, <span class="math inline">\(y' = f(y)&lt;0\)</span> and <span class="math inline">\(\phi(t;y_0)\to-\infty\)</span>.</li>
+</ol>
+<p>With the above analysis, we can easily conclude that</p>
+<ol type="1">
+<li><span class="math inline">\(y_1=0\)</span> is <em>unstable</em>, because orbits diverge from it.</li>
+<li><span class="math inline">\(y_2=0\)</span> is <em>asymptotically stable</em>, but only <em>locally</em>, with <span class="math inline">\(\mathcal{B}(y_2) = \{ y &gt; 0 \}\)</span>.</li>
+</ol>
+<p>When restricting the dynamical system to <span class="math inline">\(\Omega=\mathbb{R}^+\)</span>, as in the case of population dynamics, the equilibrium <span class="math inline">\(y_2\)</span> is almost globally attractive, except when we start from <span class="math inline">\(y_1=0\)</span>.</p>
+</div>
+</div>
+<p>Please note that the above argument is very general, as it can be straightforwardly applied to <em>any</em> 1-D dynamical system: it is enough to study the sign and the zeros of <span class="math inline">\(f(y)\)</span>.</p>
+</section>
+<section id="stability-of-linear-odes" class="level3" data-number="A.5.4">
+<h3 data-number="A.5.4" class="anchored" data-anchor-id="stability-of-linear-odes"><span class="header-section-number">A.5.4</span> Stability of linear ODEs</h3>
+<section id="computation-of-the-matrix-exponential" class="level4" data-number="A.5.4.1">
+<h4 data-number="A.5.4.1" class="anchored" data-anchor-id="computation-of-the-matrix-exponential"><span class="header-section-number">A.5.4.1</span> Computation of the matrix exponential</h4>
+<p>The computation of the matrix exponential is not a trivial task, in general. In some cases, however, it is practical. When <span class="math inline">\(\mathbf A\)</span> is diagonal we have seen that the matrix exponential is trivially the element-wise exponential.</p>
+<p>When <span class="math inline">\(\mathbf A\)</span> is diagonalizable, that is there exists a matrix <span class="math inline">\(\mathbf S\)</span> such that <span class="math display">\[\mathbf S^{-1}\mathbf A\mathbf S = \boldsymbol\Lambda,\]</span></p>
+<p>with <span class="math inline">\(\boldsymbol\Lambda\)</span> diagonal matrix, the exponential matrix follows immediately from the following observation: <span class="math display">\[(\mathbf S\boldsymbol\Lambda\mathbf S^{-1})^k = (\mathbf S\boldsymbol\Lambda\mathbf S^{-1})(\mathbf S\boldsymbol\Lambda\mathbf S^{-1})\cdots(\mathbf S\boldsymbol\Lambda\mathbf S^{-1})=\mathbf S\boldsymbol\Lambda^k \mathbf S^{-1}.\]</span></p>
+<p>In fact, we have <span class="math display">\[e^{\mathbf A} = \sum_{k=0}^\infty \frac{\mathbf A^k}{k!}
+= \sum_{k=0}^\infty \frac{(\mathbf S\boldsymbol\Lambda\mathbf S^{-1})^k}{k!}
+= \mathbf S \sum_{k=0}^\infty \frac{\boldsymbol\Lambda^k}{k!} \mathbf S^{-1}
+= \mathbf S e^{\boldsymbol\Lambda} \mathbf S^{-1}.\]</span></p>
+<p>The matrix <span class="math inline">\(e^{\boldsymbol{\Lambda}}\)</span> is easy to compute, using the above formula (at least when it is easy to compute eigenvalues and eigenvectors.)</p>
+<p>In the general case, when <span class="math inline">\(\mathbf A\)</span> is not diagonalizable, the computation is not straightforward. It is based on the so-called <a href="https://en.wikipedia.org/wiki/Jordan_normal_form">Jordan canonical form</a>. In practice, it is always possible to find a matrix <span class="math inline">\(\mathbf S\)</span> such that <span class="math inline">\(\mathbf S^{-1}\mathbf A\mathbf S = \mathbf J\)</span> is in the Jordan canonical form, that is <span class="math inline">\(\mathbf J\)</span> is a block diagonal matrix, each block with a specific structure. The matrix exponential of the Jordan canonical form is again a block diagonal matrix. The matrix exponential of each block can be computed explicitly.</p>
+<p>The Jordan canonical form is as follows: <span class="math display">\[\mathbf J = \begin{pmatrix} \mathbf{J}_1 &amp; &amp; \\ &amp; \ddots &amp; \\ &amp; &amp; \mathbf{J}_r \end{pmatrix}\]</span></p>
+<p>where <span class="math inline">\(J_i\)</span> is a matrix of the form: <span class="math display">\[\mathbf{J}_i = \begin{pmatrix} \lambda_i &amp; 1 &amp; &amp; \\ &amp; \lambda_i &amp; \ddots &amp; \\ &amp; &amp; \ddots &amp; 1 \\ &amp; &amp; &amp; \lambda_i \end{pmatrix}\]</span></p>
+<p>The eigenvalues <span class="math inline">\(\lambda_i\)</span> of the matrix <span class="math inline">\(\mathbf A\)</span> appears on the diagonal of the Jordan block <span class="math inline">\(\mathbf{J}_i\)</span>. If the matrix is diagonalizable, then there are exactly <span class="math inline">\(n\)</span> Jordan blocks each of dimension 1. In fact, the Jordan canonical form is diagonal. If some eigenvalues have geometric multiplicity strictly less than algebraic multiplicity, then the matrix is not diagonalizable. The Jordan blocks compensate for the difference in multiplicity. For instance, consider the matrix <span class="math display">\[\mathbf A = \begin{pmatrix} 0 &amp; 1 \\ -1 &amp; 2 \end{pmatrix}.\]</span></p>
+<p>The eigenvalues are <span class="math inline">\(\lambda_1 = \lambda_2 = 1\)</span>. The algebraic multiplicity is 2, but the geometric multiplicity, that is the dimension of the eigenspace <span class="math inline">\(E_\lambda = \operatorname{ker}(\mathbf A - \lambda\mathbf I)\)</span> associated to <span class="math inline">\(\lambda=1\)</span>, is only 1. The Jordan canonical form is <span class="math display">\[\mathbf J = \begin{pmatrix} 1 &amp; 1 \\ 0 &amp; 1 \end{pmatrix}.\]</span></p>
+<p>The matrix exponential of the Jordan block follows from the property (for a <span class="math inline">\(2\times 2\)</span> block): <span class="math display">\[\begin{pmatrix} \lambda_i &amp; 1 \\ 0 &amp; \lambda_i \end{pmatrix}^k
+= \begin{pmatrix} \lambda_i^k &amp; k \lambda_i^{k-1} \\ 0 &amp; \lambda_i^k \end{pmatrix}.\]</span></p>
+<p>So putting everything together we have <span class="math display">\[e^{t\mathbf J} = \begin{pmatrix} e^{\lambda_i t} &amp; t e^{\lambda_i t} \\ 0 &amp; e^{\lambda_i t} \end{pmatrix}.\]</span></p>
+<p>Please note that the appearance of the term <span class="math inline">\(t e^{\lambda_i t}\)</span>.</p>
+<p>For the sake of completeness, we just recall that the algebraic multiplicity is associated with the characteristic polynomial <span class="math inline">\(\mathcal{P}(\lambda) = \det(\lambda\mathbf{I}-\mathbf{A})\)</span>, and corresponds to the number of times a zero of <span class="math inline">\(\mathcal{P}(\lambda)\)</span> appears. More precisely, we can always write <span class="math inline">\(\mathcal{P}(\lambda) = (\lambda-\lambda_1)^{\mu_1}\cdot (\lambda-\lambda_2)^{\mu_2}\cdots (\lambda-\lambda_r)^{\mu_r}\)</span>, <span class="math inline">\(\{ \lambda_i \}_{i=1}^r\)</span>, <span class="math inline">\(r\le n\)</span>, are the eigenvalues, and <span class="math inline">\(1\le \mu_i\le n\)</span> the algebraic multiplicity of <span class="math inline">\(\lambda_i\)</span>. The geometrical multiplicity <span class="math inline">\(\mu_i\)</span> is the dimension of the eigenspace <span class="math inline">\(V_i = \ker(\lambda_i\mathbf{I}-\mathbf{A}) = \{ \mathbf{v}\in\mathbb{R}^n\colon \lambda_i\mathbf{v}=\mathbf{A}\mathbf{v} \}\)</span>. Since <span class="math inline">\(\nu_i \le \mu_i\)</span>, when at least one eigenvalue has <span class="math inline">\(\nu_i &lt; \mu_i\)</span>, the direct sum of all <span class="math inline">\(V_i\)</span>s does not fill the whole <span class="math inline">\(\mathbb{R}^n\)</span>, and additional (generalized) eigenvectors are required. These are taken from <span class="math inline">\(\mathbf{A}^k\)</span>, for some <span class="math inline">\(k=2,3,\ldots\)</span>, and leads to terms of the form <span class="math inline">\(t^{k-1}e^{t\lambda_i}\)</span> in the matrix exponential.</p>
+</section>
+<section id="stability" class="level4" data-number="A.5.4.2">
+<h4 data-number="A.5.4.2" class="anchored" data-anchor-id="stability"><span class="header-section-number">A.5.4.2</span> Stability</h4>
+<p>For the linear ODEs <span class="math inline">\(\mathbf{y}' = \mathbf{A}\mathbf{y}\)</span>, with <span class="math inline">\(\mathbf{A}\in\mathbb{R}^{n\times n}\)</span> invertible, we only have the equilibrium <span class="math inline">\(\mathbf{y}^* = \mathbf{0}\)</span>. In the more general case <span class="math inline">\(\mathbf{y}' = \mathbf{A}\mathbf{y} + \mathbf{b}\)</span>, the equilibrium is <span class="math inline">\(\mathbf{y}^* = \mathbf{A}^{-1}\mathbf{b}\)</span>. Note that in this case we can define <span class="math inline">\(\mathbf{z}(t) = \mathbf{y}(t) - \mathbf{y}^*\)</span> that satisfies the ODE <span class="math inline">\(\mathbf{z}' = \mathbf{A}\mathbf{z}\)</span> with equilibrium <span class="math inline">\(\mathbf{z}^* = \mathbf{0}\)</span>. Thus, we can focus on the homogeneous case with no loss of generality.</p>
+<p>We now try to characterize the stability of the equilibrium <span class="math inline">\(\mathbf{y}^* = \mathbf{A}\)</span> for <span class="math inline">\(\mathbf{y}' = \mathbf{A}\mathbf{y}\)</span>.</p>
+<p>Let’s first consider the case of <span class="math inline">\(\mathbf{A}\)</span> diagonalizible. Here, there exists an invertible matrix <span class="math inline">\(\mathbf{V}\in\mathbb{R}^{n\times n}\)</span> such that <span class="math inline">\(\mathbf{V}^{-1}\mathbf{A}\mathbf{V} = \boldsymbol{\Lambda}\)</span> is a diagonal matrix. The entries of this matrix are the eigenvalues of <span class="math inline">\(\mathbf{A}\)</span>. The general solution of the ODE reads: <span class="math display">\[\boldsymbol{\phi}(t) = e^{t\mathbf{A}}\mathbf{y}_0 = \mathbf{V} e^{t\boldsymbol{\Lambda}}\mathbf{V}^{-1}\mathbf{y}_0.\]</span></p>
+<p>We need to compute <span class="math display">\[
+\lim_{t\to\infty} \| \boldsymbol{\phi}(t) - \mathbf{y}^* \|,
+\]</span></p>
+<p>for an arbitrary initial condition <span class="math inline">\(\mathbf{y}_0\)</span>.</p>
+<p>Since the matrix exponential of a diagonal matrix is just the component-wise exponentiation, we have that the components of <span class="math inline">\(\mathbf{V}^{-1}\boldsymbol{\phi}\)</span> are a linear combination of terms of the form <span class="math inline">\(e^{\lambda_i t}\)</span>, being <span class="math inline">\(\lambda_i\)</span> the <span class="math inline">\(i\)</span>-th eigenvalue of <span class="math inline">\(\mathbf{A}\)</span>. Thus, we have that</p>
+<ol type="1">
+<li>If <span class="math inline">\(\operatorname{Re}\lambda_i &lt; 0\)</span> for all <span class="math inline">\(i=1,\ldots,n\)</span>, then <span class="math inline">\(0\)</span> is the only globally attractive equilibrium.</li>
+<li>If there exists at least one eigenvalue such that <span class="math inline">\(\operatorname{Re}\lambda_i &gt; 0\)</span>, the equilibrium <span class="math inline">\(0\)</span> is unstable.</li>
+<li>If <span class="math inline">\(\operatorname{Re}\lambda_i \le 0\)</span> for all <span class="math inline">\(i=1,\ldots,n\)</span>, then <span class="math inline">\(0\)</span> is stable.</li>
+</ol>
+<p>For a generic <span class="math inline">\(\mathbf{A}\in\mathbb{R}^{n\times n}\)</span> (diagonalizable or not), given the set of eigenvalues <span class="math inline">\(\lambda_i\)</span>, the solution is some linear combination of terms of the form: <span class="math display">\[e^{\lambda t}, t e^{\lambda t}, \ldots, t^m e^{\lambda t},\]</span></p>
+<p>depending on the geometric multiplicity of <span class="math inline">\(\lambda\)</span>. So we have that 1. and 2. above still applies, because the exponential is stronger than any polynomial. The non-trivial case is when <span class="math inline">\(\operatorname{Re}\lambda_i = 0\)</span> for some <span class="math inline">\(\lambda_i\)</span>. If <span class="math inline">\(\lambda_i\)</span> is such that we need extra terms of the form <span class="math inline">\(t^j e^{\lambda_i t}\)</span>, <span class="math inline">\(j\ge 1\)</span>, to complete the solution space, then the equilibrium is clearly unstable, because: <span class="math display">\[t^j e^{\lambda_i t} = t^j \bigl( \cos(t\operatorname{Im}\lambda_i) + i \sin(t\operatorname{Im}\lambda_i) \bigr) \to \infty\]</span></p>
+<p>as <span class="math inline">\(t\to\infty\)</span>. Otherwise, the equilibrium is stable (not asymptotically). The extra polynomial terms are required when the geometrical multiplicity of <span class="math inline">\(\lambda_i\)</span> is strictly lower than its algebraic multiplicity. So, in the general case we replace 3. above with</p>
+<ol start="3" type="1">
+<li>If <span class="math inline">\(\operatorname{Re}\lambda_i \le 0\)</span> for all <span class="math inline">\(i=1,\ldots,n\)</span>, and for those with <span class="math inline">\(\operatorname{Re}\lambda_i = 0\)</span> the algebraic and geometrical multiplicity coincide, then the equilibrium is stable.</li>
+</ol>
+<p>Concerning asymptotic stability, it is possible to find algebraic conditions on the coefficients of <span class="math inline">\(\mathbf{A}\)</span> such that <span class="math inline">\(\operatorname{Re}\lambda_i &lt; 0\)</span> for all eigenvalues, <em>without</em> actually computing them.</p>
+</section>
+<section id="the-n2-case" class="level4" data-number="A.5.4.3">
+<h4 data-number="A.5.4.3" class="anchored" data-anchor-id="the-n2-case"><span class="header-section-number">A.5.4.3</span> The <span class="math inline">\(n=2\)</span> case</h4>
+<p>The characteristic polynomial of the matrix <span class="math display">\[
+\mathbf{A} = \begin{bmatrix} a &amp; b \\ c &amp; d \end{bmatrix}
+\]</span></p>
+<p>is as follows <span class="math display">\[
+\mathcal{P}(\lambda) = \lambda^2 - (a+b)\lambda + (ad-bc) = \lambda^2 - \operatorname{tr}(\mathbf{A})\lambda + \det(\mathbf{A}).
+\]</span></p>
+<p>where we introduced the <em>trace</em> <span class="math inline">\(\operatorname{tr}(\mathbf{A}) = a + b\)</span> and the <em>determinant</em> <span class="math inline">\(\det(\mathbf{A}) = ad - bc\)</span>.</p>
+<div id="prp-stab2" class="theorem proposition">
+<p><span class="theorem-title"><strong>Proposition A.5</strong></span> The condition <span class="math inline">\(\operatorname{Re}\lambda_i &lt; 0\)</span> for all <span class="math inline">\(i=1,\ldots,n\)</span> is equivalent to <span class="math display">\[
+\operatorname{tr}(\mathbf{A}) &lt; 0, \quad\text{and}\quad
+\det(\mathbf{A}) &gt; 0.
+\]</span></p>
+</div>
+<p>The proof is simple. We also know that: <span class="math display">\[
+\begin{aligned}
+\operatorname{tr}(\mathbf{A}) &amp;= \lambda_1 + \lambda_2, \\
+\det(\mathbf{A}) &amp;= \lambda_1 \lambda_2,
+\end{aligned}
+\]</span></p>
+<p>because the above polynomial has always 2 roots on <span class="math inline">\(\mathbb{C}\)</span>, so it admits a factorization <span class="math inline">\(\mathcal{P}(\lambda) = (\lambda - \lambda_1)(\lambda - \lambda_2)\)</span> that expanded gives the equality.</p>
+<p><a href="#prp-stab2" class="quarto-xref">Proposition&nbsp;<span>A.5</span></a> is one of the most important results for the course, and we will use it very often.</p>
+<p>The case <span class="math inline">\(n=2\)</span> is also very common in applications, thus it is worth studying in depth the equilibria in the phase space. We suppose that the equilibrium is the origin, that is we study the equation <span class="math inline">\(\mathbf{y}'=\mathbf{A}\mathbf{y}\)</span>.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Example (real and distinct eigenvalues)
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Suppose that the eigenvalues <span class="math inline">\(\lambda_1\)</span> and <span class="math inline">\(\lambda_2\)</span> of the matrix <span class="math inline">\(\mathbf{A}\)</span> are real, with eigenvectors <span class="math inline">\(\mathbf{v}_1\)</span> and <span class="math inline">\(\mathbf{v}_2\)</span>. Then the solution is: <span class="math display">\[
+\mathbf{y}(t) = c_1 e^{t\lambda_1}\mathbf{v}_1 + c_2 e^{t\lambda_2}\mathbf{v}_2,
+\]</span> where <span class="math inline">\(\mathbf{c} = \begin{bmatrix} c_1 \\ c_2 \end{bmatrix} = \mathbf{V}^{-1}\mathbf{y}_0\)</span> and <span class="math inline">\(\mathbf{V}\)</span> is matrix with the eigenvectors. Thus, the solution is a linear combination of the eigenvectors.</p>
+<p>When <span class="math inline">\(\mathbf{y}_0 = \alpha \mathbf{v}_1\)</span>, then <span class="math inline">\(c_1=\alpha\)</span> and <span class="math inline">\(c_2=0\)</span>, so we stay along the line with direction <span class="math inline">\(\mathbf{v}_1\)</span>.Along this line, the solution is <span class="math display">\[
+\mathbf{y}(t) = \alpha e^{t\lambda_1} \mathbf{v}_1,
+\]</span></p>
+<p>thus <span class="math inline">\(\mathbf{y}(t)\)</span> stays along the line and, when <span class="math inline">\(\lambda_1 &lt;0\)</span>, approaches the equilibrium for <span class="math inline">\(t\to \infty\)</span>. In this case, we call the space generated by <span class="math inline">\(\mathbf{v}_1\)</span>, the <em>stable manifold</em> of the equilibrium. Viceversa, for <span class="math inline">\(\lambda_1 &gt; 0\)</span>, the trajectory diverges from the equilibrium; in this case, <span class="math inline">\(\mathbf{v}_1\)</span>, is the <em>unstable manifold</em>.</p>
+<p>The same applies to <span class="math inline">\(\mathbf{v}_2\)</span>. So, when <span class="math inline">\(\lambda_1&lt;0\)</span> and <span class="math inline">\(\lambda_2 &lt; 0\)</span>, the equilibrium is globally stable, with stable manifold is simply <span class="math inline">\(\mathbf{R}^2\)</span>. The equilibrium is a <em>stable node</em>. When the eigenvalues are both positive, we have the opposite behavior, and the equilibrium is an <em>unstable node</em>. Finally, when they have opposite sign, the equilibrium is a <em>saddle</em>.</p>
+</div>
+</div>
+</section>
+<section id="the-n-2-case-routh-hurwitz-criteria" class="level4" data-number="A.5.4.4">
+<h4 data-number="A.5.4.4" class="anchored" data-anchor-id="the-n-2-case-routh-hurwitz-criteria"><span class="header-section-number">A.5.4.4</span> The <span class="math inline">\(n &gt; 2\)</span> case: Routh-Hurwitz criteria</h4>
+<p>In general, for <span class="math inline">\(n&gt;2\)</span>, we can find a set of algebraic conditions ensuring the asymptotic stability, <em>without</em> computing the eigenvalues.</p>
+<p>We have the following</p>
+<div id="thm-routh" class="theorem">
+<p><span class="theorem-title"><strong>Theorem A.7</strong></span> Given the polynomial <span class="math display">\[
+\mathcal{P}(\lambda) = \lambda^n + a_1 \lambda^{n-1} + \cdots + a_{n-1}\lambda + a_n,
+\]</span></p>
+<p>where the coefficients <span class="math inline">\(a_i\)</span> are real constants, <span class="math inline">\(i=1,\ldots,n\)</span>, define the <span class="math inline">\(n\)</span> <em>Hurwitz matrices</em> using the coefficients <span class="math inline">\(a_i\)</span> of the characteristic polynomial: <span class="math display">\[
+\mathbf{H}_1 = \begin{pmatrix} a_1 \end{pmatrix},
+\quad
+\mathbf{H}_2 = \begin{pmatrix} a_1 &amp; 1 \\ a_3 &amp; a_2 \end{pmatrix},
+\quad
+\mathbf{H}_3 = \begin{pmatrix} a_1 &amp; 1 &amp; 0 \\ a_3 &amp; a_2 &amp; a_1 \\ a_5 &amp; a_4 &amp; a_3 \end{pmatrix},
+\]</span></p>
+<p>and in general <span class="math display">\[
+\mathbf{H}_n = \begin{pmatrix}
+a_1 &amp;   1 &amp;   0 &amp;   0 &amp; \cdots &amp; 0 \\
+a_3 &amp; a_2 &amp; a_1 &amp;   1 &amp; \cdots &amp; 0 \\
+a_5 &amp; a_4 &amp; a_3 &amp; a_2 &amp; \cdots &amp; 0 \\
+\vdots &amp; \vdots &amp; \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+  0 &amp;   0 &amp;   0 &amp;   0 &amp; \cdots &amp; a_n
+\end{pmatrix},
+\]</span></p>
+<p>where <span class="math inline">\(a_j = 0\)</span> if <span class="math inline">\(j&gt;n\)</span>. All the roots of the polynomial <span class="math inline">\(\mathcal{P}(\lambda)\)</span> are negative or have negative real part if and only if the determinants of all Hurwitz matrices are positive: <span class="math display">\[
+\det\mathbf{H}_j &gt; 0, \quad j=1,2,\ldots,n.
+\]</span></p>
+</div>
+<p>We can specialize the Theorem for low <span class="math inline">\(n\)</span>. We have</p>
+<ul>
+<li><p><span class="math inline">\(n=2\)</span>: <span class="math inline">\(\det\mathbf{H}_1 = a_1 &gt; 0\)</span> and <span class="math inline">\(\det\mathbf{H}_2 = a_1a_2 &gt; 0\)</span>. This is equivalent to <span class="math inline">\(a_1&gt;0\)</span> and <span class="math inline">\(a_2&gt;0\)</span>. Note that <span class="math inline">\(a_1 = -\operatorname{tr}\mathbf{A}\)</span> and <span class="math inline">\(a_2 = \det\mathbf{A}\)</span>.</p></li>
+<li><p><span class="math inline">\(n=3\)</span>: as above, <span class="math inline">\(a_1&gt;0\)</span>, <span class="math inline">\(a_1 a_2 - a_3 &gt; 0\)</span>, and <span class="math inline">\(\det\mathbf{H}_3 = a_3\det\mathbf{H}_2 &gt; 0\)</span>. So, this is equivalent to <span class="math inline">\(a_i &gt; 0\)</span> <em>and</em> <span class="math inline">\(a_1a_2 - a_3 &gt; 0\)</span>.</p></li>
+<li><p><span class="math inline">\(n=4\)</span>: it is possible to show that we need <span class="math inline">\(a_1&gt;0\)</span>, <span class="math inline">\(a_3 &gt; 0\)</span>, <span class="math inline">\(a_4 &gt; 0\)</span> and <span class="math inline">\(a_1 a_2 a_3 &gt; a_3^2 + a_1^2 a_4\)</span>.</p></li>
+</ul>
+<p>We will make use of the case <span class="math inline">\(n=3\)</span>.</p>
+</section>
+<section id="other-useful-cases" class="level4" data-number="A.5.4.5">
+<h4 data-number="A.5.4.5" class="anchored" data-anchor-id="other-useful-cases"><span class="header-section-number">A.5.4.5</span> Other useful cases</h4>
+<p>Sometimes we are going to deal with <span class="math inline">\(4\times 4\)</span> or larger matrices. Very often, though, they have a block structure. For instance: <span class="math display">\[
+\mathbf{A} = \begin{pmatrix}
+\mathbf{A}_1 &amp; \mathbf{C} \\
+\mathbf{0}   &amp; \mathbf{A}_2
+\end{pmatrix},
+\]</span></p>
+<p>where <span class="math inline">\(\mathbf{A}_1\)</span> and <span class="math inline">\(\mathbf{A}_2\)</span> can differ in dimension. Then, the eigenvalues of <span class="math inline">\(\mathbf{A}\)</span> are the union of the eigenvalues of <span class="math inline">\(\mathbf{A}_1\)</span> and <span class="math inline">\(\mathbf{A}_2\)</span>. A specific case is the triangular matrix, where eigenvalues are on the diagonal.</p>
+</section>
+</section>
+<section id="sec-linearization" class="level3" data-number="A.5.5">
+<h3 data-number="A.5.5" class="anchored" data-anchor-id="sec-linearization"><span class="header-section-number">A.5.5</span> Linearization method</h3>
+<p>The analysis of stability quickly becomes impractical for complex non-linearities. The study of <em>local</em> stability properties, however, can be carried out fairly easily. Suppose that <span class="math inline">\(\mathbf{y}^*\in\mathbb{R}^n\)</span> is an equilibrium of the dynamical system <span class="math inline">\((\mathbf{f},\Omega)\)</span>, with <span class="math inline">\(\mathbf{f}\in\mathcal{C}^1(\Omega)\)</span>. Then <span class="math display">\[\mathbf{f}(\mathbf{y}) = \mathbf{f}(\mathbf{y}^*) + D\mathbf{f}(\mathbf{y}^*)(\mathbf{y}-\mathbf{y}^*) + \ldots,\]</span> where <span class="math inline">\(D\mathbf{f}(\mathbf{y}^*)\)</span> is the Jacobian of <span class="math inline">\(\mathbf{f}\)</span>. Since <span class="math inline">\(\mathbf{f}(\mathbf{y}^*) = 0\)</span>, we have the following linear approximation of the dynamical system: <span class="math display">\[\mathbf{y}' = D\mathbf{f}(\mathbf{y}^*)(\mathbf{y}-\mathbf{y}^*) + \ldots\]</span> We now consider <span class="math inline">\(\mathbf{z}(t) = \mathbf{y}(t) - \mathbf{y}^*\)</span>, and notice that <span class="math inline">\(\mathbf{z}' = \mathbf{y}'\)</span>, to obtain: <span class="math display">\[\mathbf{z}' = \mathbf{A}\mathbf{z},\]</span> where we set <span class="math inline">\(\mathbf{A}=D\mathbf{f}(\mathbf{y}^*)\)</span>. The dynamical system in <span class="math inline">\(\mathbf{z}\)</span> is linear, and we know how to analyze the stability of the equilibrium <span class="math inline">\(\mathbf{z}=0\)</span>. (This corresponds to the equilibrium <span class="math inline">\(\mathbf{y}^*\)</span> in the original variables.) In fact, let <span class="math inline">\(\{\lambda_i \}\)</span> be the eigenvalues of <span class="math inline">\(D\mathbf{f}(\mathbf{y}^*)\)</span>. Then:</p>
+<ol type="1">
+<li>If <span class="math inline">\(\operatorname{Re}\lambda_i &lt; 0\)</span> for all <span class="math inline">\(i=1,\ldots,r\)</span>, then <span class="math inline">\(\mathbf{y}^*\)</span> is locally asymptotically stable.</li>
+<li>If there exists <span class="math inline">\(i\in\{1,\ldots,r\}\)</span> such that <span class="math inline">\(\operatorname{Re}\lambda_i &gt; 0\)</span>, the equilibrium is locally unstable.</li>
+</ol>
+<p>We cannot conclude anything regarding the case <span class="math inline">\(\operatorname{Re}\lambda_i = 0\)</span>, because in this case higher order terms in the Taylor expansion dictates the local dynamics of the system.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Example (logistic equation, alternative analysis)
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>We consider again the ODE <span class="math inline">\(y'=y(1-y)\)</span>. Given <span class="math inline">\(f(y)=y(1-y)\)</span>, we have <span class="math inline">\(f'(y)=1-2y\)</span>. At the first equilibrium, <span class="math inline">\(f'(0)=1 &gt; 0\)</span>, so it is locally unstable. For the second one, <span class="math inline">\(f'(1)=-1&lt;0\)</span>, so it is locally asympotically stable.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="periodic-orbits" class="level2" data-number="A.6">
+<h2 data-number="A.6" class="anchored" data-anchor-id="periodic-orbits"><span class="header-section-number">A.6</span> Periodic orbits</h2>
+<p>So far, we went is more great detail in the study of equilibria of a dynamical system. Equilibria as “simple”, in the sense that we can find all of them as solution of the nonlinear system <span class="math inline">\(\mathbf{f}(\mathbf{y}) = \mathbf{0}\)</span>. Their local stability follows from the linearization of the ODE around the equilibrium.</p>
+<p>Periodic orbits are more difficult to characterize, but they are extremely important in applications.</p>
+<section id="hamiltonian-systems" class="level3" data-number="A.6.1">
+<h3 data-number="A.6.1" class="anchored" data-anchor-id="hamiltonian-systems"><span class="header-section-number">A.6.1</span> Hamiltonian systems</h3>
+<p>Consider a system of 2 ODEs, written in general as <span class="math display">\[
+\left\{\begin{aligned}
+y_1' &amp;= f_1(y_1,y_2), \\
+y_2' &amp;= f_2(y_1,y_2).
+\end{aligned}\right.
+\]</span></p>
+<p>The phase space is planar. Let us introduce the vector field <span class="math display">\[
+\mathbf{f}(y_1,y_2) = \begin{pmatrix} f_1(y_1,y_2) \\ f_2(y_1,y_2) \end{pmatrix},
+\]</span></p>
+<p>and suppose that given <span class="math inline">\(\Omega\subset\mathbb{R}^2\)</span> we have a dynamical system <span class="math inline">\((\mathbf{f},\Omega)\)</span>. We introduce another vector field: <span class="math display">\[
+\mathbf{G}(y_1,y_2) = \begin{pmatrix} -f_2(y_1,y_2) \\ f_1(y_1,y_2) \\ 0 \end{pmatrix},
+\]</span></p>
+<p>with the following associated <a href="https://en.wikipedia.org/wiki/Differential_form">differential form</a> <span class="math display">\[
+\omega(y_1,y_2) = -f_2(y_1,y_2)\mathrm{d}y_1 + f_1(y_1,y_2)\mathrm{d}y_2.
+\]</span></p>
+<p>Recall the following interpretation of a differential form: given an infinitesimal displacement <span class="math inline">\(\mathrm{d}\mathbf{y}\)</span> in <span class="math inline">\(\mathbb{R}^3\)</span>, the quantity <span class="math inline">\(\omega = \langle\mathbf{G},\mathrm{d}\mathbf{y}\rangle\)</span> is the infinitesimal work done by <span class="math inline">\(\mathbf{G}\)</span> along <span class="math inline">\(\mathrm{d}\mathbf{y}\)</span>. A <span class="math inline">\(\mathcal{C}^1(\Omega)\)</span> differential form is <em>exact</em> when there exists a <span class="math inline">\(\mathcal{C}^2(\Omega)\)</span> function <span class="math inline">\(H: \Omega\to\mathbb{R}\)</span> such that <span class="math inline">\(\mathrm{d}H = \omega\)</span> in <span class="math inline">\(\Omega\)</span>. In particular, <span class="math display">\[
+\mathrm{d}H = \langle\nabla H, \mathrm{d}\mathbf{y}\rangle = \langle\mathbf{G},\mathrm{d}\mathbf{y}\rangle = \omega,
+\]</span></p>
+<p>so we conclude that <span class="math inline">\(\nabla H = \mathbf{G}\)</span>. We call <span class="math inline">\(H\)</span> potential or <a href="https://en.wikipedia.org/wiki/Hamiltonian_mechanics">Hamiltonian</a> function.</p>
+<p>A simple necessary condition for exactness is that the curl of <span class="math inline">\(\mathbf{G}\)</span> cancels, since <span class="math inline">\(\nabla\times\mathbf{G} = \nabla\times\nabla H = \mathbf{0}\)</span>, so <span class="math display">\[
+\nabla\times \mathbf{G}(y_1,y_2) = \begin{pmatrix} 0 \\ 0 \\ \frac{\partial f_1(y_1,y_2)}{\partial y_1} + \frac{\partial f_2(y_1,y_2)}{\partial y_2} \end{pmatrix} = \mathbf{0}.
+\]</span></p>
+<p>The condition <span class="math display">\[
+\frac{\partial f_1(y_1,y_2)}{\partial y_1} + \frac{\partial f_2(y_1,y_2)}{\partial y_2} = 0,
+\]</span></p>
+<p>is also sufficient for <span class="math inline">\(\omega\)</span> being exact when <span class="math inline">\(\Omega\)</span> is <a href="https://en.wikipedia.org/wiki/Simply_connected_space">simply connected</a>. In conclusion, if <span class="math inline">\(\nabla\times\mathbf{G}=\mathbf{0}\)</span> and <span class="math inline">\(\Omega\)</span> is simply connected, then there exists a Hamiltonian function <span class="math inline">\(H(y_1,y_2)\)</span> such that: <span class="math display">\[
+\left\{\begin{aligned}
+y_1' &amp;= \frac{\partial H}{\partial y_2}(y_1,y_2), \\
+y_2' &amp;= -\frac{\partial H}{\partial y_1}(y_1,y_2).
+\end{aligned}\right.
+\]</span></p>
+<p>ODEs of the above form are called <em>Hamiltonian systems</em>. They are very common in mechanics.</p>
+<p>For a Hamiltonian system, orbits are level sets of the function <span class="math inline">\(H\)</span>. Indeed, given a trajectory <span class="math inline">\(\mathbf{y}(t)\)</span> of the ODE, we have that the Hamiltonian function along the trajectory is constant: <span class="math display">\[
+\frac{\mathrm{d}}{\mathrm{d}t} H\bigl(y_1(t),y_2(t)\bigr) =
+\frac{\partial H}{\partial y_1} y_1'(t) + \frac{\partial H}{\partial y_2} y_2'(t) =
+\frac{\partial H}{\partial y_1} \frac{\partial H}{\partial y_2} - \frac{\partial H}{\partial y_2} \frac{\partial H}{\partial y_1} = 0.
+\]</span></p>
+<p>Thus, <span class="math inline">\(H\bigl(y_1(t),y_2(t)\bigr) = \text{constant}\)</span> for <span class="math inline">\(t\ge 0\)</span>. Given <span class="math inline">\(H(y_1,y_2)\)</span>, we can easily draw the phase portrait.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Example (conservative systems)
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Consider the ODE <span class="math display">\[
+m x'' = F(x),
+\]</span></p>
+<p>where <span class="math inline">\(m\)</span> is the mass of a particle and <span class="math inline">\(F(x)\)</span> is a force. We can recast this into a system: <span class="math display">\[
+\left\{\begin{aligned}
+y_1' &amp;= \tfrac{1}{m} y_2, \\
+y_2' &amp;= F(y_1),
+\end{aligned}\right.
+\]</span></p>
+<p>where <span class="math inline">\(y_1 = x\)</span> is the position and <span class="math inline">\(y_2 = m x'\)</span> is the momentum.</p>
+<p>When the force is conservative, there exists a potential energy <span class="math inline">\(U(x)\)</span> such that <span class="math inline">\(F = -U'\)</span>. This implies the existence of a Hamiltonian function <span class="math display">\[
+H(y_1,y_2) = \frac{1}{2m} y_2^2 + \frac{1}{m} U(y_1),
+\]</span></p>
+<p>which is exactly the total energy, the sum of kinetic and potential energy. This quantity is conserved and the orbits are level sets of <span class="math inline">\(H = H_0\)</span>, where <span class="math inline">\(H_0 = H(y_1(0),y_2(0))\)</span> is the initial energy of the particle.</p>
+<p>Take for instance the <a href="https://en.wikipedia.org/wiki/Lennard-Jones_potential">Lennard-Jones potential</a> below:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Graph_of_Lennard-Jones_potential.png/1024px-Graph_of_Lennard-Jones_potential.png" class="img-fluid figure-img"></p>
+<figcaption>Lennard-Jones potential</figcaption>
+</figure>
+</div>
+<p>We observe that if the initial energy is between <span class="math inline">\(-1\)</span> and <span class="math inline">\(0\)</span>, then we have closed orbits. These corresponds to periodic solutions. When the initial energy is positive, then orbits are open.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Exercise (Double-well potential)
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Find a Hamiltonian for the ODE <span class="math display">\[
+x'' = x - x^3,
+\]</span></p>
+<p>and show how orbits vary as <span class="math inline">\(H_0\)</span> increases.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Example (Lotka-Volterra system)
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Consider the system: <span class="math display">\[
+\left\{\begin{aligned}
+y_1' &amp;= y_1(a-by_2), \\
+y_2' &amp;= y_2(-c + dy_1).
+\end{aligned}\right.
+\]</span></p>
+<p>where <span class="math inline">\(y_1(t)\)</span> and <span class="math inline">\(y_2(t)\)</span> are respectively the prey and the predator density. We will study this system more in depth. We can find the Hamiltonian in the positive quadrant as follows. Note that <span class="math display">\[
+\frac{\mathrm{d}y_1}{\mathrm{d}y_2} = \frac{y_1(a-by_2)}{y_2(-c + dy_1)},
+\]</span></p>
+<p>so we can separate the variables: <span class="math display">\[
+\frac{(-c + dy_1)\mathrm{d}y_1}{y_1} = \frac{(a-by_2)\mathrm{d}y_2}{y_2},
+\]</span></p>
+<p>and integrate: <span class="math display">\[
+\int_{y_1(0)}^{y_1(t)} \Bigl(-\frac{c}{y} + d\Bigr)\mathrm{d}y = \int_{y_2(0)}^{y_2(t)} \Bigl( \frac{a}{y_2} - b \Bigr) \mathrm{d}y_2,
+\]</span></p>
+<p>we obtain that <span class="math inline">\(H(y_1(t),y_2(t)) = H(y_1(0),y_2(0))\)</span> with <span class="math display">\[
+H(y_1,y_2) = -c \ln y_1 + dy_1 - a\ln y_2 + by_2.
+\]</span></p>
+<p>This function has a minimum at <span class="math inline">\((y_1^*,y_2^*) = (\frac{a}{b}, \frac{c}{d})\)</span>, since <span class="math inline">\(\nabla H(y_1^*,y_2^*) = 0\)</span> and the Hessian is positive definite. For <span class="math inline">\(y_1\)</span> or <span class="math inline">\(y_2\to 0\)</span> we have <span class="math inline">\(H\to+\infty\)</span>, as well for <span class="math inline">\(y_{1,2}\to+\infty\)</span>. So, the function has level set that are closed curves, and those are associated with periodic orbits.</p>
+</div>
+</div>
+</section>
+<section id="isolated-periodic-orbits" class="level3" data-number="A.6.2">
+<h3 data-number="A.6.2" class="anchored" data-anchor-id="isolated-periodic-orbits"><span class="header-section-number">A.6.2</span> Isolated periodic orbits</h3>
+<p>We have seen that periodic orbits are possible in planar systems. In all the above cases, however, periodic orbits are packed, that is if we have an orbit for an energy level <span class="math inline">\(H_0\)</span>, then we can have another periodic orbit infinitesimally close to the original one. Is it possible to have <em>isolated</em> periodic orbits? In other words, is it possible that there exists an open set <span class="math inline">\(\Omega'\subseteq\Omega\)</span> such that <span class="math inline">\(\Omega'\)</span> contains only <em>one</em> periodic orbit? If so, we call this orbit a <em>limit cycle</em>.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Example
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The ODE <span class="math display">\[
+\left\{\begin{aligned}
+y_1' &amp;= y_2, \\
+y_2' &amp;= y_2(1-y_1^2+y_2^2) - y_1.
+\end{aligned}\right.
+\]</span></p>
+<p>has an isolated limit cycle for <span class="math inline">\(y_1(t)^2 + y_2(t)^2 = 1\)</span>. To see this, first note that <span class="math inline">\((y_1(t),y_2(t)) = (\cos t,\sin t)\)</span> is a (periodic) solution. Now we check the stability.</p>
+<p>Take the function <span class="math display">\[
+E(y_1,y_2) = \frac{1}{2}(y_1^2 + y_2^2),
+\]</span></p>
+<p>and note that <span class="math display">\[
+\frac{\mathrm{d}}{\mathrm{d}t} E\bigl(y_1(t),y_2(t)\bigr) =
+\bigl(1- y_1(t)^2 - y_2(t)^2\bigr)y_2(t)^2.
+\]</span></p>
+<p>Thus, if <span class="math inline">\(y_1^2 + y_2^2 \le 1\)</span> we have <span class="math inline">\(E'(t) \ge 0\)</span>, whereas if <span class="math inline">\(y_1^2 + y_2^2 \ge 1\)</span> we have <span class="math inline">\(E'(t)\le 0\)</span>. Hence, the limit cycle is attracting orbits.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="limit-cycles" class="level2" data-number="A.7">
+<h2 data-number="A.7" class="anchored" data-anchor-id="limit-cycles"><span class="header-section-number">A.7</span> Limit cycles</h2>
+<p>We have seen that periodic orbits are possible in planar systems. In all the above cases, however, periodic orbits are packed, that is if we have an orbit for an energy level <span class="math inline">\(H_0\)</span>, then we can have another periodic orbit infinitesimally close to the original one. Is it possible to have <em>isolated</em> periodic orbits? In other words, is it possible that there exists an open set <span class="math inline">\(\Omega'\subseteq\Omega\)</span> such that <span class="math inline">\(\Omega'\)</span> contains only <em>one</em> periodic orbit? If so, we call this orbit a <em>limit cycle</em>.</p>
+<section id="dulacs-criterium" class="level3" data-number="A.7.1">
+<h3 data-number="A.7.1" class="anchored" data-anchor-id="dulacs-criterium"><span class="header-section-number">A.7.1</span> Dulac’s criterium</h3>
+<p>We have the following result of non-existence of limit cycles:</p>
+<div id="thm-dulac" class="theorem">
+<p><span class="theorem-title"><strong>Theorem A.8 (Dulac’s criterium)</strong></span> Let <span class="math inline">\(\mathbf{y}' = \mathbf{f}(\mathbf{y})\)</span> a planar dynamical system with <span class="math inline">\(\mathbf{f}\in\mathcal{C}^1(\Omega)\)</span>, <span class="math inline">\(\Omega\subset\mathbb{R}^2\)</span> open. If there exists a function <span class="math inline">\(h\in\mathcal{C}^1(\Omega)\)</span> such that <span class="math inline">\(\operatorname{div}(h\mathbf{f})\)</span> does not change sign in <span class="math inline">\(\Omega'\subseteq\Omega\)</span> simply connected, then there exists no limit cycle in <span class="math inline">\(\Omega'\)</span>.</p>
+</div>
+<p>Note that the theorem applies also with <span class="math inline">\(h\equiv 1\)</span>. The proof is simple. Take a closed orbit entirely lying in the region <span class="math inline">\(\Omega'\)</span>. We denote by <span class="math inline">\(C\subset\Omega'\)</span> the interior of the orbit whose boundary <span class="math inline">\(\partial C\)</span> is the orbit itself. Then <span class="math display">\[
+\int_{C} \operatorname{div}(h\mathbf{f})\mathrm{d}\mathbb{y} = \int_{\partial C} h\langle \mathbf{f},\mathbf{n}\rangle \mathrm{d}s.
+\]</span></p>
+<p>Since <span class="math inline">\(\partial C\)</span> is an orbit, <span class="math inline">\(\langle \mathbf{f},\mathbf{n}\rangle = 0\)</span>, so the second integral is zero, no matter of the choice of <span class="math inline">\(h\)</span>. But the first integral cannot be zero, because <span class="math inline">\(\operatorname{div}(h\mathbf{f})\)</span> has a constant sign in <span class="math inline">\(C\)</span>. The contraction yields to the non-existence of such a periodic orbit.</p>
+<p>Unfortunately there is no algorithm for finding the function <span class="math inline">\(h\)</span>. Usually is of the form <span class="math inline">\((y_1y_2)^{-1}\)</span>, <span class="math inline">\(e^{y_1}\)</span>, <span class="math inline">\(e^{y_2}\)</span>, …</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Example
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Consider the ODE: <span class="math display">\[
+\left\{\begin{aligned}
+y_1' &amp;= y_1(2-y_1-y_2), \\
+y_2' &amp;= y_2(4y_1-y_1^2-3).
+\end{aligned}\right.
+\]</span></p>
+<p>We can show that the system has no closed orbits in the positive quadrant. We take <span class="math inline">\(h(y_1,y_2) = 1/(y_1 y_2)\)</span>. Then: <span class="math display">\[
+\nabla\cdot(h\mathbf{f}) = \frac{\partial}{\partial y_1}\left(\frac{2-y_1-y_2}{y_2}\right) + \frac{\partial}{\partial y_2}\left( \frac{4y_1-y_1^2-3}{y_1}\right) = -\frac{1}{y_2} &lt; 0.
+\]</span></p>
+<p>The region <span class="math inline">\(\mathrm{R}^2_+\)</span> is simply connected, and the functions are smooth, so there are no limit cycles in it.</p>
+</div>
+</div>
+</section>
+<section id="poincaré-bendixson-existence-theorems" class="level3" data-number="A.7.2">
+<h3 data-number="A.7.2" class="anchored" data-anchor-id="poincaré-bendixson-existence-theorems"><span class="header-section-number">A.7.2</span> Poincaré-Bendixson existence theorems</h3>
+<div id="thm-poincare" class="theorem">
+<p><span class="theorem-title"><strong>Theorem A.9 (Poincaré-Bendixson)</strong></span> Suppose that <span class="math inline">\((\mathbf{f},\Omega)\)</span> is a planar dynamical system, <span class="math inline">\(\Omega\subset\mathbb{R}^2\)</span>, with <span class="math inline">\(\mathbf{f}\in\mathcal{C}^1(\Omega)\)</span>. If there exists a closed and bounded region <span class="math inline">\(R\subseteq\Omega\)</span> that does not contain any equilibrium and there exists a trajectory <span class="math inline">\(C\)</span> that is “confined” in <span class="math inline">\(D\)</span>, in the sense that it starts in <span class="math inline">\(D\)</span> and stays in <span class="math inline">\(D\)</span> for all future time, then either <span class="math inline">\(C\)</span> is a closed orbit, or it spirals toward a closed orbit at <span class="math inline">\(t\to\infty\)</span>. In either case, <span class="math inline">\(D\)</span> contains a closed orbit.</p>
+</div>
+<p>In order to apply the theorem, we need to find a “trapped” orbit in <span class="math inline">\(D\)</span>. How to proceed? The idea is the following: we can construct a region <span class="math inline">\(D\)</span> that is closed and connected, and such that its boundary is <em>inflow</em> for the dynamical system. That is, the vector field <span class="math inline">\(\mathbf{f}\)</span> only enters into <span class="math inline">\(D\)</span>. So, orbits cannot leave.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/bendixson.png" class="img-fluid figure-img"></p>
+<figcaption>Trapping region</figcaption>
+</figure>
+</div>
+<p>Some comments:</p>
+<ul>
+<li>The requirement for no equilibria is important. Very often we do have an equilibrium inside (as we are going to see in a moment, a limit cycle always has an equilibrium inside of it), but we can remove it by “digging” a hole around it.</li>
+<li>Equilibria cannot be on the border of the region. Consider a homoclinic orbit as in the figure below. We see that the “punctured” region traps an orbit <span class="math inline">\(C\)</span>, but there are no limit cycles inside. The orbit tends to the homoclinic.</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/homoclinic.png" class="img-fluid figure-img"></p>
+<figcaption>Homoclinic orbit</figcaption>
+</figure>
+</div>
+<p>We can be more precise. Let us define</p>
+<div id="def-line" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition A.15 (<span class="math inline">\(\alpha\)</span>-limit and <span class="math inline">\(\omega\)</span>-limit sets)</strong></span> We define the <span class="math inline">\(\alpha\)</span>-limit and the <span class="math inline">\(\omega\)</span>-limit of an initial condition <span class="math inline">\(\mathbf{y}_0\)</span> as the set of <span class="math inline">\(\Omega\)</span> that the trajectory approches as <span class="math inline">\(t\to-\infty\)</span> and <span class="math inline">\(t\to\infty\)</span>, respectively: <span class="math display">\[
+\begin{aligned}
+\alpha(\mathbf{y}_0) &amp;= \lim_{t\to-\infty} \boldsymbol{\Phi}(t,\mathbf{y}_0), \\
+\omega(\mathbf{y}_0) &amp;= \lim_{t\to+\infty} \boldsymbol{\Phi}(t,\mathbf{y}_0).
+\end{aligned}
+\]</span></p>
+</div>
+<p>Then, we have the following</p>
+<div id="thm-bendi" class="theorem">
+<p><span class="theorem-title"><strong>Theorem A.10 (Poincaré-Bendixson Trichotomy)</strong></span> Suppose that <span class="math inline">\((\mathbf{f},\Omega)\)</span> is a planar dynamical system, <span class="math inline">\(\Omega\subset\mathbb{R}^2\)</span>, with <span class="math inline">\(\mathbf{f}\in\mathcal{C}^1(\Omega)\)</span>. Let <span class="math inline">\(C^+(\mathbf{y}_0) = \{ \boldsymbol{\Phi}(t,\mathbf{y}_0), t\ge 0\}\)</span> a positive orbit that remains in a closed, bounded region <span class="math inline">\(R\subseteq\Omega\)</span> that contains only a finite number of equilibria. Then the <span class="math inline">\(\omega\)</span>-limit set takes one of the following three forms:</p>
+<ol type="1">
+<li><span class="math inline">\(\omega(\mathbf{y}_0)\)</span> is an equilibrium,</li>
+<li><span class="math inline">\(\omega(\mathbf{y}_0)\)</span> is a periodic orbits,</li>
+<li><span class="math inline">\(\omega(\mathbf{y}_0)\)</span> is a <em>singular cycle</em>, that is <span class="math inline">\(\omega(\mathbf{y}_0)\)</span> contains a finite number of equilibria and a set of orbits whose <span class="math inline">\(\alpha\)</span>- and <span class="math inline">\(\omega\)</span>-limit sets consist of one these equilibria for each orbit.</li>
+</ol>
+</div>
+<p>The point 3. is for instance a heteroclinic, which contains two saddle equilibria connected by the stable and unstable manifolds, or a homoclinic orbit, which is a single saddle equilibrium where the stable and unstable manifolds correspond (for <span class="math inline">\(t\ge 0\)</span>).</p>
+<p>The proofs of these theorems heavily rely on concepts from topology. Here, we only recall <em>index theory</em> for a planar dynamical system.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Example (glycolysis)
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>We consider a model for glycolysis as proposed by Sel’kov (1968). In yeast cells glycolysis can proceed in a oscillatory fashion. Here is a model: <span class="math display">\[
+\left\{\begin{aligned}
+x' &amp;= -x + ay + x^2 y, \\
+y' &amp;= b - ay - x^2 y,
+\end{aligned}\right.
+\]</span></p>
+<p>where <span class="math inline">\(x(t)\)</span> is the concentration of ADP (adenosine diphosphate) and <span class="math inline">\(y(t)\)</span> is the concentration of F6P (fructose-6-phosphate). The parameters <span class="math inline">\(a&gt;0\)</span> and <span class="math inline">\(b&gt;0\)</span> comes from the kinetic of the reaction.</p>
+<p>The phase portrait is as follows:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/trapping_region.png" class="img-fluid figure-img"></p>
+<figcaption>Trapping region</figcaption>
+</figure>
+</div>
+<p>By looking at the arrows, it looks like we could have a limit cycle or some stable equilibrium. We construct the trapping region as follows:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/trapping_region_shaded.png" class="img-fluid figure-img"></p>
+<figcaption>Trapping region</figcaption>
+</figure>
+</div>
+<p>Now we check. Graphically, we note that</p>
+<ul>
+<li>Above the nullcline <span class="math inline">\(x'=0\)</span> we have <span class="math inline">\(x'&gt;0\)</span>, below <span class="math inline">\(x'&lt;0\)</span>.</li>
+<li>On the left of the nullcline <span class="math inline">\(y'=0\)</span> we have <span class="math inline">\(y'&gt;0\)</span>, on the right <span class="math inline">\(y'&lt;0\)</span>.</li>
+</ul>
+<p>Thus, the horizontal and vertical parts in of the region are easy to check, just by looking at the arrows. The diagonal part is more subtle. Intuitively, when <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> are large, the ODE is approximately <span class="math inline">\(x' \approx x^2 y\)</span> and <span class="math inline">\(y' \approx -x^2 y\)</span>. So, <span class="math inline">\(y'/x' \approx -1\)</span>, which is tangent to the trajectories. This suggests to take: <span class="math display">\[
+x' - (-y') = -x +ay + x^2y + (b - ay -x^2y) = b - x.
+\]</span></p>
+<p>Hence, for <span class="math inline">\(x&gt;b\)</span> we have <span class="math inline">\(-y' &gt; x'\)</span>, and trajectories are entering into the diagonal part, because their slope is more negative than <span class="math inline">\(-1\)</span>.</p>
+<p>We conclude that <span class="math inline">\(R\)</span> is a trapping region. However, we cannot apply the Theorem, because we still need to rule out equilibria. We have only one, at the intersection between nullclines. We can do so just by digging a hole around it, obtaining a “punctured” region.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/punctured_region.png" class="img-fluid figure-img"></p>
+<figcaption>Punctured region</figcaption>
+</figure>
+</div>
+<p>For a sufficiently small hole, we can ensure that orbits are leaving or entering the region just by looking at the stability of the equilibrium. If it is unstable, then orbits are diverging, and thus entering into <span class="math inline">\(R\)</span>. That is, <span class="math inline">\(R\)</span> traps orbits and it does not contain equilibria. Therefore, there must exist a closed orbit in it!</p>
+<p>The stability of the equilibrium is easy to check. First, the equilibrium is <span class="math display">\[
+(x^*,y^*) =  \Bigl( b, \frac{b}{a+b^2} \Bigr).
+\]</span></p>
+<p>The Jacobian is: <span class="math display">\[
+J_\mathbf{f}(x,y) = \begin{pmatrix} -1 + 2xy &amp; a + x^2 \\ -2xy &amp; -a-x^2 \end{pmatrix}.
+\]</span></p>
+<p>The trace and the determinant at <span class="math inline">\((x,y)=(x^*,y^*)\)</span>: <span class="math display">\[
+\det J=a+b^2&gt;0, \quad
+\operatorname{tr}J = -\frac{b^4 + (2a-1)b^2 + (a+a^2)}{a+b^2}.
+\]</span></p>
+<p>Depending on <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span>, the trace can be either positive or negative. Solving the numerator for <span class="math inline">\(b^2\)</span> we have that the trace is zero for <span class="math display">\[
+b^2 = \frac{1}{2}\Bigl( 1 - 2a \pm \sqrt{1-8a} \Bigr).
+\]</span></p>
+<p>For choice of the parameters such that the trace is positive, the equilibrium is unstable and the region contains a closed orbit.</p>
+</div>
+</div>
+</section>
+<section id="index-theory" class="level3" data-number="A.7.3">
+<h3 data-number="A.7.3" class="anchored" data-anchor-id="index-theory"><span class="header-section-number">A.7.3</span> Index theory</h3>
+<div id="def-index" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition A.16 (index of a closed curve)</strong></span> We define the <em>index</em> of a closed curve <span class="math inline">\(C\)</span>, denoted by <span class="math inline">\(i_C\)</span>, as the net number of counterclockwise revolutions made by the vector field <span class="math inline">\(\mathbf{f}\)</span> around <span class="math inline">\(C\)</span>. More precisely, take the angle <span class="math inline">\(\phi(t)\)</span> between the tangent to the curve <span class="math inline">\(C\)</span> and the vector field <span class="math inline">\(\mathbf{f}\)</span>. Then, <span class="math inline">\(\phi(t)\)</span> has changed by an integer multiple of <span class="math inline">\(2\pi\)</span>. Such integer is the index.</p>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/index_theory.png" class="img-fluid figure-img"></p>
+<figcaption>Index of a curve</figcaption>
+</figure>
+</div>
+<p>The index closely resembles residue theory in complex analysis. For instance, we have that</p>
+<ol type="1">
+<li><p>If <span class="math inline">\(C\)</span> can be continuously deformed into <span class="math inline">\(C'\)</span> without passing through an equilibrium, then <span class="math inline">\(i_C = i_{C'}\)</span>. (Note that <span class="math inline">\(i_C\)</span> is an integer-valued function of <span class="math inline">\(C\)</span>. The only way <span class="math inline">\(i_C\)</span> can be a continuous function of <span class="math inline">\(C\)</span> is being constant!)</p></li>
+<li><p>If <span class="math inline">\(C\)</span> does not enclose any equilibrium, then <span class="math inline">\(i_C = 0\)</span>. (Since <span class="math inline">\(C\)</span> does not contain any zero of <span class="math inline">\(\mathbf{f}\)</span>, we can shrink <span class="math inline">\(C\)</span> to a tiny circle where <span class="math inline">\(\mathbf{f}\)</span> is almost constant, so the index is zero.)</p></li>
+<li><p>If we reverse the arrows of the vector field, that is <span class="math inline">\(t\mapsto -t\)</span>, the index is unchanged.</p></li>
+<li><p>Suppose that <span class="math inline">\(C\)</span> is a closed orbit. Then <span class="math inline">\(i_C = +1\)</span>.</p></li>
+</ol>
+<p>Mathematically, given the vector field <span class="math inline">\(\mathbf{f}(x,y) = (f(x,t), g(x,y))\)</span> in <span class="math inline">\(\mathbb{R}^2\)</span>, the angle given by <span class="math display">\[
+\phi = \tan^{-1}(g/f),
+\]</span></p>
+<p>so in terms of differentials we have: <span class="math display">\[
+\mathrm{d}\phi = \mathrm{d}\bigl(\tan^{-1}(g/f)\bigr) = \frac{f\mathrm{d}g - g\mathrm{d}f}{f^2+g^2}.
+\]</span></p>
+<p>The index is, therefore, <span class="math display">\[
+i_C = \frac{1}{2\pi}\int_C \mathrm{d}\phi = \frac{1}{2\pi}\int_C \frac{f\mathrm{d}g - g\mathrm{d}f}{f^2+g^2}.
+\]</span></p>
+<div id="def-line" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition A.17 (Index of an equilibrium)</strong></span> The index of an equilibrium <span class="math inline">\(\mathbf{y}^*\)</span>, denoted by <span class="math inline">\(i_{\mathbf{y}^*}\)</span> is the index of a curve containing the equilibrium.</p>
+</div>
+<p>Note that thanks to 1. the definition of <span class="math inline">\(i_{\mathbf{y}^*}\)</span> does not depend on the choice of <span class="math inline">\(C\)</span>.</p>
+<div id="thm-line" class="theorem">
+<p><span class="theorem-title"><strong>Theorem A.11</strong></span> All hyperbolic equilibria, that is the Jacobian of <span class="math inline">\(\mathbf{f}\)</span> is non-singular at the equilibrium, have <span class="math inline">\(i_{\mathbf{y}^*} = \pm 1\)</span>. In particular, only the saddle has <span class="math inline">\(i_{\mathbf{y}^*} = -1\)</span>.</p>
+</div>
+<p>A non-hyperbolic equilibrium can also have index 0, for instance a saddle-node.</p>
+<div id="thm-line" class="theorem">
+<p><span class="theorem-title"><strong>Theorem A.12</strong></span> If a closed curve <span class="math inline">\(C\)</span> surrounds <span class="math inline">\(n\)</span> isolated equilibria <span class="math inline">\(\mathbf{y}_1^*, \mathbf{y}_2^*, \ldots,\mathbf{y}_n^*\)</span>, then <span class="math display">\[
+i_C = \sum_{k=1}^n i_{\mathbf{y}_n^*}.
+\]</span></p>
+</div>
+<p>The proof is familiar from multivariate calculus. We shrink the curve <span class="math inline">\(C\)</span> so to surround the equilibria with tiny circles and corridors connecting them. The index does not change. Then we show that the contribution of corridors cancels out, because of symmetry reasons. So, we are only left with circles around the equilibria, which is the sum of the indices of each equilibrium.</p>
+<div id="thm-line" class="theorem">
+<p><span class="theorem-title"><strong>Theorem A.13 (Poincaré)</strong></span> Any closed periodic orbit in the phase plane must enclose equilibria whose indices sum to <span class="math inline">\(+1\)</span>. If all equilibria are hyperbolic, then the limit cycle contains exactly <span class="math inline">\(2s + 1\)</span> equilibria, <span class="math inline">\(s\)</span> saddles and <span class="math inline">\(s+1\)</span> non saddles, with <span class="math inline">\(s\ge 0\)</span> integer.</p>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Example
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Consider the system: <span class="math display">\[
+\left\{\begin{aligned}
+y_1' &amp;= -y_1 - y_1^2 y_2^2, \\
+y_2' &amp;= y_1 + y_2.
+\end{aligned}\right.
+\]</span></p>
+<p>We show now that there exists no limit cycle around the origin.</p>
+<p>First, notice that the divergence of <span class="math inline">\(\mathbf{f}\)</span> is: <span class="math display">\[
+\operatorname{div}\mathbf{f} = -2y_1 y_2^2,
+\]</span></p>
+<p>which changes sign in <span class="math inline">\(\mathbb{R}^2\)</span>, so we cannot exclude the existence of a limit cycle.</p>
+<p>We have 2 equilibria, <span class="math inline">\(\mathbf{y}_1^* = (0,0)\)</span> and <span class="math inline">\(\mathbf{y}_2^* = (-1,1)\)</span>. In particular, <span class="math inline">\(\mathbf{y}_1^*\)</span> is a saddle. A limit cycle around the origin must contain the saddle, but the index of the cycle is <span class="math inline">\(+1\)</span>, whereas the index of the saddle is <span class="math inline">\(-1\)</span>. It cannot be. Even the case of a limit cycle surrounding both equilibria is not possible, because the sum of the indices is <span class="math inline">\(0\)</span>. We conclude that we cnnot have a limit cycle around the origin.</p>
+</div>
+</div>
+</section>
+<section id="poincaré-maps" class="level3" data-number="A.7.4">
+<h3 data-number="A.7.4" class="anchored" data-anchor-id="poincaré-maps"><span class="header-section-number">A.7.4</span> Poincaré maps</h3>
+<p>We still need to discuss the <em>stability</em> of limit cycles. Since they are isolated by definition, they can attract or repulse nearby orbits.</p>
+<p>Consider a periodic orbit <span class="math inline">\(\Gamma\subset\mathbb{R}^n\)</span>, and take any point <span class="math inline">\(\mathbf{y}_0\in\Gamma\)</span>. We introduce a cross-section <span class="math inline">\(\Sigma\)</span> to the cycle at this point as a smooth hypersurface of dimension <span class="math inline">\(n-1\)</span> that crosses <span class="math inline">\(\Gamma\)</span> at non-zero angle. A non-zero angle means that the normal of the hypersurface at <span class="math inline">\(\mathbf{y}_0\)</span> is not orthogonal to the tangent of <span class="math inline">\(\Gamma\)</span> at <span class="math inline">\(\mathbf{y}_0\)</span>.</p>
+<p>Note that the limit cycle reduces to a point on the cross-section <span class="math inline">\(\Sigma\)</span>. Other closeby orbits will also intersect the cross-section <span class="math inline">\(\Sigma\)</span> at some angle (by continuity the angle remains non-zero in a neighborhood of <span class="math inline">\(\mathbf{y}_0\)</span>). A point <span class="math inline">\(\mathbf{z}\in\Sigma\)</span>, close to <span class="math inline">\(\mathbf{y}_0\)</span>, will give some orbit through the flow of the ODE, and eventually return to <span class="math inline">\(\Sigma\)</span> after some time at a point <span class="math inline">\(\tilde{\mathbf{z}}\)</span>. This procedure is encoded in a map <span class="math inline">\(\mathbf{z}\mapsto \tilde{\mathbf{z}} = \mathcal{P}(\mathbf{z})\)</span>.</p>
+<p><strong>Definition (Poincaré map).</strong> We call <span class="math inline">\(\mathcal{P}:\Sigma\to \Sigma\)</span> the Poincaré map of the periodic orbit <span class="math inline">\(\Gamma\)</span>.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/poincare.png" class="img-fluid figure-img"></p>
+<figcaption>Poincaré maps</figcaption>
+</figure>
+</div>
+<p>A fixed point <span class="math inline">\(\mathbf{z}^*\)</span> of the map <span class="math inline">\(\mathcal{P}\)</span> corresponds to a limit cycle for the original system. Specifically, if <span class="math inline">\(\mathbf{z}^*\)</span> is a stable equilibrium for the <em>discrete map</em> <span class="math display">\[
+\mathbf{z}^{(k+1)} = \mathcal{P}(\mathbf{z}^{(k)}),
+\]</span></p>
+<p>that is, <span class="math inline">\(\mathbf{z}^* = \mathcal{P}(\mathbf{z}^*)\)</span>, then the limit cycle is stable. If <span class="math inline">\(\mathbf{z}^*\)</span> is asympotically stable, then the limit cycle is asymptotically stable. Otherwise, it is unstable.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Example
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Consider the following ODE is polar coordinates: <span class="math display">\[
+\left\{\begin{aligned}
+r'     &amp;= r(1-r^2), \\
+\theta' &amp;= 1.
+\end{aligned}\right.
+\]</span></p>
+<p>Since <span class="math inline">\(\theta' = 1\)</span>, we make a turn after a period of <span class="math inline">\(2\pi\)</span>. Thus, if we start from <span class="math inline">\(r_0\)</span>, we return at <span class="math inline">\(r_1\)</span> after <span class="math inline">\(\Delta t = 2\pi\)</span>. Hence: <span class="math display">\[
+\int_{r_0}^{r_1} \frac{\mathrm{d}r}{r(1-r^2)} = \int_0^{2\pi}\mathrm{d}t = 2\pi.
+\]</span></p>
+<p>Integrating we get: <span class="math display">\[
+\mathcal{P}(r) = \frac{1}{\sqrt{1+e^{-4\pi}(r^{-2}-1)}}.
+\]</span></p>
+<p>For <span class="math inline">\(r^* = 1\)</span> we have a fixed point. We can show (graphically with the cobweb plot) that the equilibrium is attractive.</p>
+</div>
+</div>
+<p>Given a parametrization of <span class="math inline">\(\mathcal{P}\)</span> in some local coordinate system <span class="math inline">\(\boldsymbol{\xi} = (\xi_1, \ldots, \xi_{n-1})\)</span> such that <span class="math inline">\(\boldsymbol{\xi}=\mathbf{0}\)</span> corresponds to <span class="math inline">\(\mathbf{z}^*\)</span>, the origin is a fixed point of the map: <span class="math inline">\(\mathcal{P}(\mathbf{0}) = \mathbf{0}\)</span>. Thanks to the contraction Theorem, the fixed-point is asymptotically stable if <span class="math inline">\(\mathcal{P}\)</span> is a contraction, which means that <span class="math display">\[
+\mathbf{B} = \left.\frac{\mathrm{d}\mathcal{P}}{\mathrm{d}\boldsymbol{\xi}}\right|_{\boldsymbol{\xi}=\mathbf{0}}
+\]</span></p>
+<p>has eigenvalues (multipliers) <span class="math inline">\(\mu_1, \ldots, \mu_{n-1}\)</span> with modulus strictly less than 1, that is <span class="math inline">\(|\mu_i|&lt;1\)</span>. It is possible to show that the multipliers are independent on the choice of the cross-section, the local parametrization, and the point <span class="math inline">\(\mathbf{y}_0\in \Gamma\)</span>. In other words, the multipliers are a characteristic of the limit cycle, from which we can deduce the stability.</p>
+<p>We can now formalize the stability for a limit cycle. Consider a periodic solution <span class="math inline">\(\boldsymbol{\phi}(t)\)</span> of the dynamical system <span class="math display">\[
+\mathbf{y}' = \mathbf{f}(\mathbf{y}),
+\]</span></p>
+<p>that is <span class="math inline">\(\boldsymbol{\phi}(t)\)</span> is a solution and <span class="math inline">\(\boldsymbol{\phi}(t+T_0) = \boldsymbol{\phi}(t)\)</span> for some <span class="math inline">\(T_0&gt;0\)</span>, called the <em>period</em> of the limit cycle. Now we perturb the periodic orbit: <span class="math display">\[
+\tilde{\boldsymbol{\phi}}(t) = \boldsymbol{\phi}(t) + \mathbf{u}(t),
+\]</span></p>
+<p>for some perturbation <span class="math inline">\(\mathbf{u}(t)\)</span>. Now notice that: <span class="math display">\[
+\mathbf{u}'(t) = \tilde{\boldsymbol{\phi}}(t) - \boldsymbol{\phi}(t) = \mathbf{f}(\boldsymbol{\phi}(t) + \mathbf{u}(t)) - \mathbf{f}(\boldsymbol{\phi}(t)) = \mathbf{A}(t)\mathbf{u}(t) + \mathcal{O}(\| \mathbf{u}(t) \|^2 ),
+\]</span></p>
+<p>where <span class="math inline">\(\mathbf{A} = J_\mathbf{f}(\boldsymbol{\phi}(t))\)</span>, and <span class="math inline">\(\mathbf{A}(t+T_0) = \mathbf{A}(t)\)</span>. The system <span class="math inline">\(\mathbf{u}' = \mathbf{A}(t)\mathbf{u}\)</span> is non-autonomous and linear. The set of solutions form the Wronskian matrix <span class="math inline">\(\mathbf{W}(t)\)</span> and are such that <span class="math display">\[
+\mathbf{W}' = \mathbf{A}(t)\mathbf{W},
+\]</span></p>
+<p>with initial condition <span class="math inline">\(\mathbf{W}(0) = \mathbf{I}\)</span>. Any solution of <span class="math inline">\(\mathbf{u}' = \mathbf{A}(t)\mathbf{u}\)</span> is of the form <span class="math inline">\(\mathbf{u}(t) = \mathbf{W}(t)\mathbf{u}(0)\)</span>. In particular, <span class="math display">\[
+\mathbf{u}(T_0) = \mathbf{W}(T_0)\mathbf{u}(0).
+\]</span></p>
+<p>We call <span class="math inline">\(\mathbf{W}(T_0)\)</span> <em>monodromy matrix</em> for the limit cycle <span class="math inline">\(\Gamma\)</span>.</p>
+<div id="thm-line" class="theorem">
+<p><span class="theorem-title"><strong>Theorem A.14</strong></span> The monodromy matrix has eigenvalues <span class="math inline">\(1, \mu_1, \ldots, \mu_{n-1}\)</span>, where <span class="math inline">\(\mu_i\)</span> are the multipliers of the Poincaré map associated to the limit cycle <span class="math inline">\(\Gamma\)</span>.</p>
+<p>Thus, the size of the perturbation <span class="math inline">\(\mathbf{u}(t)\)</span>, measured with <span class="math inline">\(\| \mathbf{u}(t) \|\)</span>, will tend to zero if <span class="math inline">\(|\mu_i| &lt; 1\)</span>. The unitary eigenvalue corresponds to the tangent direction to the limit cycle.</p>
+</div>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./Laboratories/01 ODE Integration/lab_ODEinteg.html" class="pagination-link" aria-label="Lab 01: Numerical integration">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Lab 01: Numerical integration</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./bifurcations.html" class="pagination-link" aria-label="Introduction to bifurcations">
+        <span class="nav-page-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Introduction to bifurcations</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
