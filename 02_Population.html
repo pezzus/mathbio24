@@ -195,7 +195,7 @@ window.Quarto = {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Preface</span></a>
+ <span class="menu-text">Welcome</span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -301,6 +301,7 @@ window.Quarto = {
   <li><a href="#basic-reproduction-number" id="toc-basic-reproduction-number" class="nav-link" data-scroll-target="#basic-reproduction-number"><span class="header-section-number">2.1.3</span> Basic reproduction number</a></li>
   <li><a href="#migration" id="toc-migration" class="nav-link" data-scroll-target="#migration"><span class="header-section-number">2.1.4</span> Migration</a></li>
   <li><a href="#exogenous-variability" id="toc-exogenous-variability" class="nav-link" data-scroll-target="#exogenous-variability"><span class="header-section-number">2.1.5</span> Exogenous variability</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><span class="header-section-number">2.1.6</span> References</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -328,7 +329,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">September 18, 2024</p>
+      <p class="date-modified">September 22, 2024</p>
     </div>
   </div>
     
@@ -341,7 +342,7 @@ window.Quarto = {
 
 <section id="population-growth-model" class="level2" data-number="2.1">
 <h2 data-number="2.1" class="anchored" data-anchor-id="population-growth-model"><span class="header-section-number">2.1</span> Population growth model</h2>
-<p><em>Note: this lecture is based on <span class="citation" data-cites="ip14">(<a href="#ref-ip14" role="doc-biblioref">Iannelli and Pugliese 2014, secs. 1.1–1.6</a>)</span>.</em></p>
+<p><em>Note: this lecture is based on <span class="citation" data-cites="ip14">(<a href="02_Population.html#ref-ip14" role="doc-biblioref">Iannelli and Pugliese 2014, vol. 79, secs. 1.1–1.6</a>)</span>.</em></p>
 <p>We have seen, using the bathtub analogy, that the <em>fundamental balance equation of population dynamics</em> take the form <span class="math display">\[
 N'(t) = B(t) - D(t) + I(t) - E(t),
 \]</span></p>
@@ -485,7 +486,7 @@ N(t) \to N^*
 \]</span></p>
 <p>for all <span class="math inline">\(N^0\)</span>. The equilibrium is therefore <em>globally</em> stable when <span class="math inline">\(r&lt;0\)</span>.</p>
 <p><strong>5) Phase portrait.</strong> The phase portrait of a dynamical system is the collection of all possible orbits. Here, the phase space is <span class="math inline">\(\Omega=[0,\infty)\)</span>. The only equilibrium we have, <span class="math inline">\(N^*\)</span>, is a <em>barrier</em> to other orbits, because orbits cannot intersect (See <a href="IntroODE.html#prp-orbits" class="quarto-xref">Proposition&nbsp;<span>A.2</span></a>). Therefore:</p>
-<div id="fd7e961a" class="cell" data-execution_count="1">
+<div id="a7fd642c" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -529,7 +530,7 @@ N(t) \to N^*
 <p>For this problem we actually have the general solution <span class="math display">\[
 N(t) = (N_0 - N^*)e^{rt} + N^*.
 \]</span></p>
-<div id="a69cd229" class="cell" data-execution_count="2">
+<div id="d3509d9f" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -607,13 +608,17 @@ N(t) = e^{\bar{r}(t-t_0)}N_\pi(t),
 N(t_0 + kT) = e^{\bar{r}kT}N_\pi(t_0) = e^{k\bar{r}}N(t_0),
 \]</span></p>
 <p>so after <span class="math inline">\(k\)</span> periods the solution grows by a factor <span class="math inline">\(e^{k\bar{r}}\)</span>. This factor is called <em>Floquet multiplier</em>.</p>
-
-
+</section>
+<section id="references" class="level3" data-number="2.1.6">
+<h3 data-number="2.1.6" class="anchored" data-anchor-id="references"><span class="header-section-number">2.1.6</span> References</h3>
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
 <div id="ref-ip14" class="csl-entry" role="listitem">
-Iannelli, Mimmo, and Andrea Pugliese. 2014. <em>An Introduction to Mathematical Population Dynamics</em>. Springer. <a href="https://strutture-provincia.primo.exlibrisgroup.com/permalink/39SBT_INST/ghkipk/alma991006883209706186">https://strutture-provincia.primo.exlibrisgroup.com/permalink/39SBT_INST/ghkipk/alma991006883209706186</a>.
+Iannelli, Mimmo, and Andrea Pugliese. 2014. <em>An Introduction to
+Mathematical Population Dynamics</em>. Vol. 79. Springer. <a href="https://strutture-provincia.primo.exlibrisgroup.com/permalink/39SBT_INST/ghkipk/alma991006883209706186">https://strutture-provincia.primo.exlibrisgroup.com/permalink/39SBT_INST/ghkipk/alma991006883209706186</a>.
 </div>
 </div>
+
+
 </section>
 </section>
 

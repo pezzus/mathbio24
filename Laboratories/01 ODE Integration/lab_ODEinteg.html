@@ -6,6 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="dcterms.date" content="2024-09-18">
 
 <title>Lab 01: Numerical integration – Mathematical Biology</title>
 <style>
@@ -19,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -140,7 +175,7 @@ window.Quarto = {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Preface</span></a>
+ <span class="menu-text">Welcome</span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -259,11 +294,17 @@ window.Quarto = {
 <div class="quarto-title-meta">
 
     
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">September 18, 2024</p>
+    </div>
+  </div>
   
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">September 18, 2024</p>
+      <p class="date-modified">September 22, 2024</p>
     </div>
   </div>
     
@@ -293,15 +334,316 @@ y(t_0) = y_0. &amp;
 <ol type="1">
 <li>Write down the forward Euler scheme and solve for the equation for various values of <span class="math inline">\(h\)</span>, with <span class="math inline">\(\lambda = -1\)</span>. Is it always true that <span class="math inline">\(y_n \to 0\)</span> for <span class="math inline">\(n\to\infty\)</span>? Use <span class="math inline">\(t_0=0\)</span> and <span class="math inline">\(y_0=1\)</span>.</li>
 </ol>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" aria-current="page">MATLAB</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">Python</a></li></ul>
+<div class="tab-content">
+<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
+<div class="sourceCode" id="cb1"><pre class="sourceCode matlab line-numbers code-with-copy"><code class="sourceCode matlab"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="va">lmbda</span> <span class="op">=</span> <span class="op">-</span><span class="fl">1.0</span><span class="op">;</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="va">f</span> <span class="op">=</span> <span class="op">@</span>(<span class="va">u</span>) <span class="va">lmbda</span><span class="op">*</span><span class="va">u</span><span class="op">;</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="va">T</span> <span class="op">=</span> <span class="fl">8</span><span class="op">;</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="va">u0</span> <span class="op">=</span> <span class="fl">1.0</span><span class="op">;</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="va">fig</span> <span class="op">=</span> <span class="va">figure</span><span class="op">;</span> <span class="va">hold</span> <span class="va">on</span><span class="op">;</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="kw">for</span> <span class="va">h</span> <span class="op">=</span> [<span class="fl">0.1</span><span class="op">,</span><span class="fl">0.2</span><span class="op">,</span><span class="fl">0.5</span><span class="op">,</span><span class="fl">1.0</span><span class="op">,</span><span class="fl">2.0</span><span class="op">,</span><span class="fl">2.5</span>]</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="va">t</span> <span class="op">=</span> <span class="fl">0</span><span class="op">:</span><span class="va">h</span><span class="op">:</span><span class="va">T</span><span class="op">;</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    <span class="va">u</span> <span class="op">=</span> <span class="va">zeros</span>(<span class="va">size</span>(<span class="va">t</span>))<span class="op">;</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="va">u</span>(<span class="fl">1</span>) <span class="op">=</span> <span class="va">u0</span><span class="op">;</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    <span class="kw">for</span> <span class="va">n</span> <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="va">length</span>(<span class="va">t</span>)<span class="op">-</span><span class="fl">1</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>        <span class="va">u</span>(<span class="va">n</span><span class="op">+</span><span class="fl">1</span>) <span class="op">=</span> <span class="va">u</span>(<span class="va">n</span>) <span class="op">+</span> <span class="va">h</span><span class="op">*</span><span class="va">f</span>(<span class="va">u</span>(<span class="va">n</span>))<span class="op">;</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    <span class="kw">end</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    <span class="va">plot</span>(<span class="va">t</span><span class="op">,</span><span class="va">u</span><span class="op">,</span><span class="ss">'LineWidth'</span><span class="op">,</span><span class="fl">2.0</span><span class="op">,</span><span class="ss">'DisplayName'</span><span class="op">,</span><span class="va">num2str</span>(<span class="va">h</span>))<span class="op">;</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="va">hold</span> <span class="va">off</span><span class="op">;</span> <span class="va">grid</span> <span class="va">on</span><span class="op">;</span> <span class="va">legend</span><span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="lab03_ex31.png" class="img-fluid figure-img"></p>
+<figcaption>image</figcaption>
+</figure>
+</div>
+</div>
+<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
+<div id="722edc7c" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>lmbda <span class="op">=</span> <span class="op">-</span><span class="fl">1.0</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> <span class="kw">lambda</span> u: lmbda<span class="op">*</span>u</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>T <span class="op">=</span> <span class="dv">8</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>u0 <span class="op">=</span> <span class="fl">1.0</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>fig,ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> h <span class="kw">in</span> [<span class="fl">0.1</span>,<span class="fl">0.2</span>,<span class="fl">0.5</span>,<span class="fl">1.0</span>,<span class="fl">2.0</span>,<span class="fl">2.5</span>]:</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    t <span class="op">=</span> np.arange(<span class="dv">0</span>,T,h)</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    u <span class="op">=</span> np.zeros(t.shape[<span class="dv">0</span>])</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    u[<span class="dv">0</span>] <span class="op">=</span> u0</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> n <span class="kw">in</span> <span class="bu">range</span>(t.shape[<span class="dv">0</span>]<span class="op">-</span><span class="dv">1</span>):</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>        u[n<span class="op">+</span><span class="dv">1</span>] <span class="op">=</span> u[n] <span class="op">+</span> h<span class="op">*</span>f(u[n])</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>    ax.plot(t,u,lw<span class="op">=</span><span class="fl">2.0</span>,label<span class="op">=</span><span class="ss">f'</span><span class="sc">{</span>h<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>ax.legend()</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>ax.grid(<span class="va">True</span>)</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="lab_ODEinteg_files/figure-html/cell-3-output-1.png" width="569" height="415" class="figure-img"></p>
+<figcaption>Solution</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>No, for <span class="math inline">\(h \ge2\)</span> there is no convergence.</p>
+</div>
+</div>
 <ol start="2" type="1">
 <li>Write down the backward Euler scheme and repeat the previous step.</li>
 </ol>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true">MATLAB</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" role="tab" aria-controls="tabset-2-2" aria-selected="false">Python</a></li></ul>
+<div class="tab-content">
+<div id="tabset-2-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-2-1-tab">
+<div class="sourceCode" id="cb3"><pre class="sourceCode matlab code-with-copy"><code class="sourceCode matlab"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="va">lmbda</span> <span class="op">=</span> <span class="op">-</span><span class="fl">1.0</span><span class="op">;</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="va">T</span> <span class="op">=</span> <span class="fl">8</span><span class="op">;</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="va">u0</span> <span class="op">=</span> <span class="fl">1.0</span><span class="op">;</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="va">fig</span> <span class="op">=</span> <span class="va">figure</span><span class="op">;</span> <span class="va">hold</span> <span class="va">on</span><span class="op">;</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="kw">for</span> <span class="va">h</span> <span class="op">=</span> [<span class="fl">0.1</span><span class="op">,</span><span class="fl">0.2</span><span class="op">,</span><span class="fl">0.5</span><span class="op">,</span><span class="fl">1.0</span><span class="op">,</span><span class="fl">2.0</span><span class="op">,</span><span class="fl">2.5</span>]</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="va">t</span> <span class="op">=</span> <span class="fl">0</span><span class="op">:</span><span class="va">h</span><span class="op">:</span><span class="va">T</span><span class="op">;</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    <span class="va">u</span> <span class="op">=</span> <span class="va">zeros</span>(<span class="va">size</span>(<span class="va">t</span>))<span class="op">;</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    <span class="va">u</span>(<span class="fl">1</span>) <span class="op">=</span> <span class="va">u0</span><span class="op">;</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    <span class="kw">for</span> <span class="va">n</span> <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="va">length</span>(<span class="va">t</span>)<span class="op">-</span><span class="fl">1</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>        <span class="va">u</span>(<span class="va">n</span><span class="op">+</span><span class="fl">1</span>) <span class="op">=</span> <span class="va">u</span>(<span class="va">n</span>)<span class="op">/</span>(<span class="fl">1</span><span class="op">-</span><span class="va">h</span><span class="op">*</span><span class="va">lmbda</span>)<span class="op">;</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    <span class="kw">end</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    <span class="va">plot</span>(<span class="va">t</span><span class="op">,</span><span class="va">u</span><span class="op">,</span><span class="ss">'LineWidth'</span><span class="op">,</span><span class="fl">2.0</span><span class="op">,</span><span class="ss">'DisplayName'</span><span class="op">,</span><span class="va">num2str</span>(<span class="va">h</span>))<span class="op">;</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="va">hold</span> <span class="va">off</span><span class="op">;</span> <span class="va">grid</span> <span class="va">on</span><span class="op">;</span> <span class="va">legend</span><span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="lab03_ex32.png" class="img-fluid figure-img"></p>
+<figcaption>image</figcaption>
+</figure>
+</div>
+</div>
+<div id="tabset-2-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-2-tab">
+<div id="b1c0ef99" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>fig,ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> h <span class="kw">in</span> [<span class="fl">0.1</span>,<span class="fl">0.2</span>,<span class="fl">0.5</span>,<span class="fl">1.0</span>,<span class="fl">2.0</span>,<span class="fl">2.5</span>]:</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    t <span class="op">=</span> np.arange(<span class="dv">0</span>,T,h)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    u <span class="op">=</span> np.zeros(t.shape[<span class="dv">0</span>])</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    u[<span class="dv">0</span>] <span class="op">=</span> u0</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> n <span class="kw">in</span> <span class="bu">range</span>(t.shape[<span class="dv">0</span>]<span class="op">-</span><span class="dv">1</span>):</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>        u[n<span class="op">+</span><span class="dv">1</span>] <span class="op">=</span> u[n]<span class="op">/</span>(<span class="dv">1</span> <span class="op">-</span> h<span class="op">*</span>lmbda)</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    ax.plot(t,u,lw<span class="op">=</span><span class="fl">2.0</span>,label<span class="op">=</span><span class="ss">f'</span><span class="sc">{</span>h<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>ax.legend()</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>ax.grid(<span class="va">True</span>)</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="lab_ODEinteg_files/figure-html/cell-4-output-1.png" width="573" height="415" class="figure-img"></p>
+<figcaption>Solution</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>It is always stable.</p>
+</div>
+</div>
 <ol start="3" type="1">
 <li>Solve the equation with the forward Euler scheme and compare the solution to the exact one. How does the absolute error decrease with respect to <span class="math inline">\(h\)</span>? Plot the error in the logarithmic scale. Set <span class="math inline">\(\lambda=1\)</span> and <span class="math inline">\(y(0)=1\)</span>.</li>
 </ol>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-3-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-1" role="tab" aria-controls="tabset-3-1" aria-selected="true">MATLAB</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-3-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-2" role="tab" aria-controls="tabset-3-2" aria-selected="false">Python</a></li></ul>
+<div class="tab-content">
+<div id="tabset-3-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-3-1-tab">
+<div class="sourceCode" id="cb5"><pre class="sourceCode matlab code-with-copy"><code class="sourceCode matlab"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="va">lmbda</span> <span class="op">=</span> <span class="op">-</span><span class="fl">1.0</span><span class="op">;</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="va">f</span> <span class="op">=</span> <span class="op">@</span>(<span class="va">u</span>) <span class="va">lmbda</span><span class="op">*</span><span class="va">u</span><span class="op">;</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="va">T</span> <span class="op">=</span> <span class="fl">8</span><span class="op">;</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="va">y0</span> <span class="op">=</span> <span class="fl">1.0</span><span class="op">;</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="va">Nh</span> <span class="op">=</span> <span class="fl">10</span><span class="op">;</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="va">h0</span> <span class="op">=</span> <span class="fl">0.1</span><span class="op">;</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="va">err</span> <span class="op">=</span> <span class="va">zeros</span>(<span class="fl">1</span><span class="op">,</span><span class="va">Nh</span>)<span class="op">;</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="kw">for</span> <span class="va">k</span> <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="va">Nh</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    <span class="va">h</span> <span class="op">=</span> <span class="va">h0</span><span class="op">/</span>(<span class="fl">2</span><span class="op">^</span>(<span class="va">k</span><span class="op">-</span><span class="fl">1</span>))<span class="op">;</span>  <span class="co">% divide h by 2 every iteration</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>    <span class="va">t</span> <span class="op">=</span> <span class="fl">0</span><span class="op">:</span><span class="va">h</span><span class="op">:</span><span class="va">T</span><span class="op">;</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>    <span class="va">u</span> <span class="op">=</span> <span class="va">zeros</span>(<span class="va">size</span>(<span class="va">t</span>))<span class="op">;</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>    <span class="va">uexact</span> <span class="op">=</span> <span class="va">y0</span><span class="op">*</span><span class="va">exp</span>(<span class="va">lmbda</span><span class="op">*</span><span class="va">t</span>)<span class="op">;</span>  <span class="co">% we know exact solution</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>    <span class="va">u</span>(<span class="fl">1</span>) <span class="op">=</span> <span class="va">y0</span><span class="op">;</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>    <span class="kw">for</span> <span class="va">n</span> <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="va">length</span>(<span class="va">t</span>)<span class="op">-</span><span class="fl">1</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>        <span class="co">% Forward Euler</span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>        <span class="va">u</span>(<span class="va">n</span><span class="op">+</span><span class="fl">1</span>) <span class="op">=</span> <span class="va">u</span>(<span class="va">n</span>) <span class="op">+</span> <span class="va">h</span><span class="op">*</span><span class="va">f</span>(<span class="va">u</span>(<span class="va">n</span>))<span class="op">;</span></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>    <span class="kw">end</span></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>    <span class="co">% infinity norm</span></span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>    <span class="va">err</span>(<span class="va">k</span>) <span class="op">=</span> <span class="va">norm</span>(<span class="va">u</span><span class="op">-</span><span class="va">uexact</span><span class="op">,</span><span class="va">inf</span>)<span class="op">;</span></span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a><span class="va">loglog</span>(<span class="va">h0</span><span class="op">./</span>(<span class="fl">2</span><span class="op">.^</span>(<span class="fl">0</span><span class="op">:</span><span class="va">Nh</span><span class="op">-</span><span class="fl">1</span>))<span class="op">,</span><span class="va">err</span><span class="op">,</span><span class="ss">'-*'</span><span class="op">,</span><span class="ss">'LineWidth'</span><span class="op">,</span><span class="fl">2.0</span>)<span class="op">;</span></span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a><span class="va">grid</span> <span class="va">on</span><span class="op">;</span> <span class="va">xlabel</span>(<span class="ss">'h'</span>)<span class="op">;</span> <span class="va">ylabel</span>(<span class="ss">'Error'</span>)<span class="op">;</span></span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a><span class="co">% in loglog scale we expect a line, the slope is the order</span></span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a><span class="va">p</span> <span class="op">=</span> <span class="va">polyfit</span>((<span class="fl">0</span><span class="op">:</span><span class="va">Nh</span><span class="op">-</span><span class="fl">1</span>)<span class="op">*</span><span class="va">log</span>(<span class="fl">2</span>)<span class="op">,-</span><span class="va">log</span>(<span class="va">err</span>)<span class="op">,</span><span class="fl">1</span>)<span class="op">;</span></span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a><span class="va">title</span>(<span class="va">sprintf</span>(<span class="ss">'Estimated order = %f\n'</span><span class="op">,</span><span class="va">p</span>(<span class="fl">1</span>)))<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="lab03_ex41.png" class="img-fluid figure-img"></p>
+<figcaption>image</figcaption>
+</figure>
+</div>
+</div>
+<div id="tabset-3-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-3-2-tab">
+<div id="18f635b5" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>lmbda <span class="op">=</span> <span class="op">-</span><span class="fl">1.0</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> <span class="kw">lambda</span> u: lmbda<span class="op">*</span>u</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>T <span class="op">=</span> <span class="dv">8</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>y0 <span class="op">=</span> <span class="fl">1.0</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>Nh <span class="op">=</span> <span class="dv">10</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>h0 <span class="op">=</span> <span class="fl">0.1</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>err <span class="op">=</span> np.zeros(Nh)</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> k <span class="kw">in</span> <span class="bu">range</span>(Nh):</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>    h <span class="op">=</span> h0<span class="op">/</span>(<span class="dv">2</span><span class="op">**</span>k)  <span class="co"># divide h by 2 every iteration</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>    t <span class="op">=</span> np.arange(<span class="dv">0</span>,T,h)</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>    u <span class="op">=</span> np.zeros(t.shape[<span class="dv">0</span>])</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>    uexact <span class="op">=</span> y0<span class="op">*</span>np.exp(lmbda<span class="op">*</span>t)  <span class="co"># we know exact solution</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>    u[<span class="dv">0</span>] <span class="op">=</span> y0</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> n <span class="kw">in</span> <span class="bu">range</span>(t.shape[<span class="dv">0</span>]<span class="op">-</span><span class="dv">1</span>):</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Forward Euler</span></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>        u[n<span class="op">+</span><span class="dv">1</span>] <span class="op">=</span> u[n] <span class="op">+</span> h<span class="op">*</span>f(u[n])</span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>    <span class="co"># infinity norm</span></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>    err[k] <span class="op">=</span> np.linalg.norm(u<span class="op">-</span>uexact,np.inf)</span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>fig,ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>ax.loglog(h0<span class="op">/</span>(<span class="dv">2</span><span class="op">**</span>np.arange(Nh)),err,<span class="st">'-*'</span>,lw<span class="op">=</span><span class="fl">2.0</span>)</span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>ax.grid(<span class="va">True</span>)</span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">'h'</span>)</span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">'Error'</span>)</span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a><span class="co"># in loglog scale we expect a line, the slope is the order</span></span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>p <span class="op">=</span> np.polyfit(np.arange(Nh)<span class="op">*</span>np.log(<span class="dv">2</span>),<span class="op">-</span>np.log(err),<span class="dv">1</span>)</span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="ss">f'Estimated order = </span><span class="sc">{</span>p[<span class="dv">0</span>]<span class="sc">:g}</span><span class="ss">'</span>)</span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="lab_ODEinteg_files/figure-html/cell-5-output-1.png" width="601" height="461" class="figure-img"></p>
+<figcaption>Solution</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>The method converges linearly.</p>
+</div>
+</div>
 <ol start="4" type="1">
 <li>Repeat the previous step with the Heun scheme: <span class="math display">\[y_{n+1}=y_n + \tfrac{h}{2}\bigl( f(y_n) + f(y_n + hf(y_n)) \bigr).\]</span></li>
 </ol>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-4-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-1" role="tab" aria-controls="tabset-4-1" aria-selected="true">MATLAB</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-4-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-2" role="tab" aria-controls="tabset-4-2" aria-selected="false">Python</a></li></ul>
+<div class="tab-content">
+<div id="tabset-4-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-4-1-tab">
+<p>We only need to change line 14-17 above to</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode matlab line-numbers code-with-copy"><code class="sourceCode matlab"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">for</span> <span class="va">n</span> <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="va">length</span>(<span class="va">t</span>)<span class="op">-</span><span class="fl">1</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="va">fn</span> <span class="op">=</span> <span class="va">f</span>(<span class="va">u</span>(<span class="va">n</span>))<span class="op">;</span>  <span class="co">% save, we need it twice</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="va">u</span>(<span class="va">n</span><span class="op">+</span><span class="fl">1</span>) <span class="op">=</span> <span class="va">u</span>(<span class="va">n</span>) <span class="op">+</span> <span class="va">h</span><span class="op">/</span><span class="fl">2</span><span class="op">*</span>(<span class="va">fn</span> <span class="op">+</span> <span class="va">f</span>(<span class="va">u</span>(<span class="va">n</span>) <span class="op">+</span> <span class="va">h</span><span class="op">*</span><span class="va">fn</span>))<span class="op">;</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="lab03_ex42.png" class="img-fluid figure-img"></p>
+<figcaption>image</figcaption>
+</figure>
+</div>
+</div>
+<div id="tabset-4-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-4-2-tab">
+<div id="0b94f8f4" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>lmbda <span class="op">=</span> <span class="op">-</span><span class="fl">1.0</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> <span class="kw">lambda</span> u: lmbda<span class="op">*</span>u</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>T <span class="op">=</span> <span class="dv">8</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>y0 <span class="op">=</span> <span class="fl">1.0</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>Nh <span class="op">=</span> <span class="dv">10</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>h0 <span class="op">=</span> <span class="fl">0.1</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>err <span class="op">=</span> np.zeros(Nh)</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> k <span class="kw">in</span> <span class="bu">range</span>(Nh):</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>    h <span class="op">=</span> h0<span class="op">/</span>(<span class="dv">2</span><span class="op">**</span>k)  <span class="co"># divide h by 2 every iteration</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>    t <span class="op">=</span> np.arange(<span class="dv">0</span>,T,h)</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>    u <span class="op">=</span> np.zeros(t.shape[<span class="dv">0</span>])</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>    uexact <span class="op">=</span> y0<span class="op">*</span>np.exp(lmbda<span class="op">*</span>t)  <span class="co"># we know exact solution</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>    u[<span class="dv">0</span>] <span class="op">=</span> y0</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> n <span class="kw">in</span> <span class="bu">range</span>(t.shape[<span class="dv">0</span>]<span class="op">-</span><span class="dv">1</span>):</span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Forward Euler</span></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>        fn <span class="op">=</span> f(u[n])</span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>        u[n<span class="op">+</span><span class="dv">1</span>] <span class="op">=</span> u[n] <span class="op">+</span> h<span class="op">/</span><span class="dv">2</span><span class="op">*</span>(fn <span class="op">+</span> f(u[n] <span class="op">+</span> h<span class="op">*</span>fn))</span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>    <span class="co"># infinity norm</span></span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>    err[k] <span class="op">=</span> np.linalg.norm(u<span class="op">-</span>uexact,np.inf)</span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>fig,ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>ax.loglog(h0<span class="op">/</span>(<span class="dv">2</span><span class="op">**</span>np.arange(Nh)),err,<span class="st">'-*'</span>,lw<span class="op">=</span><span class="fl">2.0</span>)</span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>ax.grid(<span class="va">True</span>)</span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">'h'</span>)</span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">'Error'</span>)</span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a><span class="co"># in loglog scale we expect a line, the slope is the order</span></span>
+<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a>p <span class="op">=</span> np.polyfit(np.arange(Nh)<span class="op">*</span>np.log(<span class="dv">2</span>),<span class="op">-</span>np.log(err),<span class="dv">1</span>)</span>
+<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="ss">f'Estimated order = </span><span class="sc">{</span>p[<span class="dv">0</span>]<span class="sc">:g}</span><span class="ss">'</span>)</span>
+<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="lab_ODEinteg_files/figure-html/cell-6-output-1.png" width="601" height="461" class="figure-img"></p>
+<figcaption>Solution with Heun method</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>Now it converges quadratically. Note that it also costs twice, as for the cost is the number of evaluations of <span class="math inline">\(f\)</span>.</p>
+</div>
+</div>
 </section>
 <section id="nonlinear-equations" class="level2">
 <h2 class="anchored" data-anchor-id="nonlinear-equations">Nonlinear equations</h2>
