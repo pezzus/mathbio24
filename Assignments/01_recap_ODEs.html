@@ -8,7 +8,7 @@
 
 <meta name="dcterms.date" content="2024-09-18">
 
-<title>Assignment 1: Solving ODEs – Mathematical Biology</title>
+<title>Solving ODEs – Mathematical Biology</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -31,7 +31,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../Laboratories/01 ODE Integration/lab_ODEinteg.html" rel="next">
+<link href="../Assignments/02_population.html" rel="next">
 <link href="../02_Population.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
@@ -110,7 +110,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../Assignments/01_recap_ODEs.html">Assignments</a></li><li class="breadcrumb-item"><a href="../Assignments/01_recap_ODEs.html">Assignment 1: Solving ODEs</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../Assignments/01_recap_ODEs.html">Assignments</a></li><li class="breadcrumb-item"><a href="../Assignments/01_recap_ODEs.html">Solving ODEs</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -179,7 +179,13 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../Assignments/01_recap_ODEs.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Assignment 1: Solving ODEs</span></a>
+ <span class="menu-text">Solving ODEs</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Assignments/02_population.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Population dynamics</span></a>
   </div>
 </li>
       </ul>
@@ -250,9 +256,10 @@ window.Quarto = {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../Assignments/01_recap_ODEs.html">Assignments</a></li><li class="breadcrumb-item"><a href="../Assignments/01_recap_ODEs.html">Assignment 1: Solving ODEs</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../Assignments/01_recap_ODEs.html">Assignments</a></li><li class="breadcrumb-item"><a href="../Assignments/01_recap_ODEs.html">Solving ODEs</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Assignment 1: Solving ODEs</h1>
+<h1 class="title">Solving ODEs</h1>
+<p class="subtitle lead">Assignment 1</p>
 </div>
 
 
@@ -270,7 +277,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">September 22, 2024</p>
+      <p class="date-modified">September 26, 2024</p>
     </div>
   </div>
     
@@ -295,15 +302,94 @@ N' = \beta(N)N - \mu(N) N,
 <ol type="1">
 <li>Show that the model can be written as <span class="math display">\[N' = r\Bigl(1-\frac{N}{K}\Bigr)N.\tag{1}\]</span></li>
 </ol>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Substituting we get: <span class="math display">\[
+\begin{split}
+N' &amp;= \beta(N)N - \mu(N)N = (\beta_0 - \mu_0)N - (\tilde{\mu}+\tilde{\beta})N^2 \\
+&amp;= (\beta_0 - \mu_0)\Bigl( 1 - \frac{\tilde{\mu}+\tilde{\beta}}{\beta_0 - \mu_0} N \Bigr) N \\
+&amp;= r \Bigl( 1 - \frac{N}{K} \Bigr) N,
+\end{split}
+\]</span></p>
+<p>with <span class="math inline">\(r = \beta_0 - \mu_0\)</span> and <span class="math inline">\(K = r / \tilde{\mu}+\tilde{\beta}\)</span>.</p>
+</div>
+</div>
+</div>
 <ol start="2" type="1">
 <li>Prove that the ODE, supplemented with an initial condition <span class="math inline">\(N(0)=N_0\)</span>, has a unique local solution. <em>Hint: verify the hypotheses of the Cauchy-Lipschitz theorem.</em></li>
 </ol>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The right hand side <span class="math display">\[
+f(t,y) = r \Bigl( 1 - \frac{N}{K} \Bigr) N
+\]</span></p>
+<p>is a polynomial in <span class="math inline">\(y\)</span> with no explicit dependency on <span class="math inline">\(t\)</span>. Thus, it is continuous and also locally Lipschitz. We can apply the Cauchy-Lipschitz theorem and conclude that there exists a unique local solution.</p>
+</div>
+</div>
+</div>
 <ol start="3" type="1">
 <li>Consider <span class="math inline">\(u(t) = 1/N(t)\)</span>. Show that <span class="math inline">\(u(t)\)</span> satisfies a linear ODE. Solve it, then use the solution to solve the original ODE in <span class="math inline">\(N(t)\)</span> with the initial condition <span class="math inline">\(N(0) = N_0 &gt; 0\)</span>.</li>
 </ol>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>We have <span class="math display">\[u'= -\frac{N'}{N^2} = -\frac{r}{N^2}\Bigl(1 - \frac{N}{K}\Bigr)N = r\Bigl(\frac{1}{K} - \frac{1}{N}\Bigr) = r\Bigl(\frac{1}{K} - u \Bigr),\]</span></p>
+<p>which is linear with respect to <span class="math inline">\(u\)</span>. To solve the ODE, we can set <span class="math inline">\(\tilde{u}=u-K^{-1}\)</span>, <span class="math inline">\(\tilde{u}'=u'\)</span>, so the ODE reduces to <span class="math inline">\(\tilde{u}'= -r\tilde{u}\)</span>. The general solution is: <span class="math display">\[u(t) = \tilde{u}(t) + \frac{1}{K} = \frac{1}{K} + C e^{-r t}.\]</span></p>
+<p>Since <span class="math inline">\(u(0) = 1/N(0) = 1/N_0\)</span>, we can determine the constant: <span class="math display">\[u(t) = \frac{1}{K} + \tilde{u}(t) = \frac{1}{K} - \Bigl(\frac{1}{N_0} - \frac{1}{K} \Bigr)e^{-rt}.\]</span></p>
+<p>If we invert <span class="math inline">\(u(t)\)</span> we obtain <span class="math display">\[N(t) = \frac{K N_0}{N_0 + (K-N_0)e^{-rt}}\]</span></p>
+<p>which is the sought solution of the logistic equation.</p>
+</div>
+</div>
+</div>
 <ol start="4" type="1">
 <li>Make the change of variables as follows: <span class="math inline">\(\tau = r t\)</span> and <span class="math inline">\(y = N/K\)</span>. Find the corresponding equation in <span class="math inline">\(y(\tau)\)</span>.</li>
 </ol>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>We simply note that <span class="math display">\[\dot{y}=\frac{\mathrm{d}y}{\mathrm{d}\tau}=\frac{1}{Kr}\frac{\mathrm{d}y}{\mathrm{d} t} = \frac{1}{Kr}r Ky(1-y) = y(1-y).\]</span></p>
+<p>So the equation does not depend on the parameters anymore.</p>
+</div>
+</div>
+</div>
 </section>
 <section id="blow-up-of-solutions" class="level2">
 <h2 class="anchored" data-anchor-id="blow-up-of-solutions">Blow-up of solutions</h2>
@@ -311,13 +397,69 @@ N' = \beta(N)N - \mu(N) N,
 <ol type="1">
 <li>This equation can be solved by the method of separation of variables. Show that the solutions of this equation with <span class="math inline">\(N(0) &gt; 0\)</span> tend to infinity in a finite time. (Blow-up of solution.)</li>
 </ol>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>We can solve by separation of variables: <span class="math display">\[\int_{N_0}^N \frac{\mathrm{d}N}{N^2}=\int_0^t \beta \mathrm{d}t,\quad\leadsto\quad N(t) = \frac{N_0}{1 - N_0 \beta t}.\]</span></p>
+<p>Since <span class="math inline">\(N_0&gt;0\)</span> and <span class="math inline">\(\beta&gt;0\)</span>, there is a vertical asymptote at <span class="math inline">\(\bar{t} = \frac{1}{\beta N_0}\)</span>. Hence, we have a blow-up of the solution in finite time.</p>
+</div>
+</div>
+</div>
 <ol start="2" type="1">
 <li>Let us correct the equation, introducing deaths: <span class="math display">\[N'(t) = \beta N^2(t) − \mu N(t).\]</span></li>
 </ol>
 <p>Discuss how the dynamics changes. In particular, does the equation still have the problem of solutions going to infinity in a finite time? <em>Hint: do not solve analytically the equation.</em></p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Yes, it does. Consider <span class="math inline">\(N_0\)</span> large, then <span class="math inline">\(f(N)=\beta N^2-\mu N \approx \beta N^2\)</span> so we expect the same problem.</p>
+</div>
+</div>
+</div>
 <ol start="3" type="1">
 <li>Solve the above equation analytically and confirm the qualitative analysis of the previous point.</li>
 </ol>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>If we rewrite the problem as <span class="math display">\[
+N' = -\mu N (1 - \tfrac{\beta}{\mu} N),
+\]</span></p>
+<p>we recover the logistic equation “with the wrong sign”, with <span class="math inline">\(r=-\mu\)</span> and <span class="math inline">\(K = \tfrac{\mu}{\beta}\)</span>. We can use the solution from the previous exercise: <span class="math display">\[N(t) = \frac{K N_0}{N_0 + (N_0-K)e^{-rt}}.\]</span></p>
+<p>Since <span class="math inline">\(r = -\mu &lt; 0\)</span>, the denominator can be zero when: <span class="math display">\[
+e^{\mu t} = \frac{N_0}{K-N_0} \ge 1,
+\]</span></p>
+<p>This is the case when <span class="math inline">\(N_0 \ge K = \tfrac{\mu}{\beta}\)</span>.</p>
+</div>
+</div>
+</div>
 </section>
 <section id="mrna" class="level2">
 <h2 class="anchored" data-anchor-id="mrna">mRNA</h2>
@@ -331,6 +473,52 @@ M'(t) &amp;= \alpha_1 P(t) − \alpha_2(t) M(t).
 <ol type="1">
 <li>Assume <span class="math inline">\(b(t) \equiv b\)</span> and <span class="math inline">\(\alpha_2(t) \equiv \alpha_2\)</span> are constant. Find the explicit solution given <span class="math inline">\(P(0)=P_0\)</span> and <span class="math inline">\(M(0)=M_0\)</span>. <em>Hint: use the method of variation of constants.</em></li>
 </ol>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>We note that the first equation does not depend on <span class="math inline">\(M(t)\)</span>, so it can be solved independently. The solution is: <span class="math display">\[
+P(t) = e^{-\alpha_1 t} P_0 + \frac{b}{\alpha_1}(1-e^{-\alpha_1 t}).
+\]</span></p>
+<p>Now we can move this into the equation for <span class="math inline">\(M(t)\)</span>: <span class="math display">\[
+M'(t) = e^{-\alpha_1 t} P_0 + b (1-e^{-\alpha_1 t}) - \alpha_2 M(t).
+\]</span></p>
+<p>Here, we use the variation of constants. The solution of the homogeneous equation, denoted by <span class="math inline">\(M_H(t)\)</span> is: <span class="math display">\[
+M_H(t) = C e^{-\alpha_2 t},
+\]</span></p>
+<p>so we look for solutions of the form: <span class="math display">\[
+M(t) = C(t) e^{-\alpha_2 t}.
+\]</span></p>
+<p>Substituting: <span class="math display">\[
+M'(t) = C'(t) e^{-\alpha_2 t} - \alpha_2 C(t) e^{-\alpha_2 t} =
+C'(t) e^{-\alpha_2 t} - \alpha_2 M(t).
+\]</span></p>
+<p>Equating this with the original equation we find an equation for <span class="math inline">\(C(t)\)</span>: <span class="math display">\[
+\begin{split}
+C'(t) &amp;= \alpha_1 e^{-(\alpha_1-\alpha_2) t} P_0 + b (1-e^{-\alpha_1 t}) e^{\alpha_2 t} \\
+&amp;= b e^{\alpha_2 t} + (\alpha_1 P_0 - b) e^{-(\alpha_1-\alpha_2) t},
+\end{split}
+\]</span></p>
+<p>that integrated gives <span class="math inline">\(C(t)\)</span> <span class="math display">\[
+C(t) = C(0) + \tfrac{b}{\alpha_2} e^{\alpha_2 t} - \tfrac{\alpha_1 P_0 - b}{\alpha_1-\alpha_2} e^{-(\alpha_1-\alpha_2) t}
+\]</span></p>
+<p>and the final solution: <span class="math display">\[
+M(t) = C(0) e^{-\alpha_2 t} + \tfrac{b}{\alpha_2} - \tfrac{\alpha_1 P_0 - b}{\alpha_1-\alpha_2} e^{-\alpha_1 t}.
+\]</span></p>
+<p>The integration constant <span class="math inline">\(C(0)\)</span> can be selected so that <span class="math inline">\(M(0)=M_0\)</span>: <span class="math display">\[
+C(0) = M_0 - \tfrac{b}{\alpha_2} + \tfrac{\alpha_1 P_0 - b}{\alpha_1-\alpha_2}.
+\]</span></p>
+</div>
+</div>
+</div>
 <ol start="2" type="1">
 <li>Assume now that <span class="math inline">\(\alpha_2(t) \equiv \alpha_2\)</span> and <span class="math display">\[
 b(t) = \begin{cases}
@@ -339,6 +527,63 @@ b(t) = \begin{cases}
 \]</span></li>
 </ol>
 <p>Show that <span class="math inline">\(M(t)\)</span> tends to <span class="math inline">\(0\)</span> as <span class="math inline">\(t\to\infty\)</span>. At which rate does it decay?</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-9" class="callout-9-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Note that <span class="math inline">\(b(t)\)</span> is <em>not</em> continuous, so we cannot expect a classical solution. However, we can proceed step by step. Informally, we can integrate up to <span class="math inline">\(t = \bar{t}^-\)</span> with <span class="math inline">\(b(t)=\bar{b}\)</span>. The solution <span class="math inline">\(P(\bar{t})\)</span> can then be used for a new problem with <span class="math inline">\(P_0 = \bar{P} = P(\bar{t})\)</span> and <span class="math inline">\(b(t) = 0\)</span>. The solution for <span class="math inline">\(P(t)\)</span> will therefore decay as <span class="math inline">\(e^{-\alpha_1 t}\)</span>. For <span class="math inline">\(M(t)\)</span>, we use the above formula, which holds true for <span class="math inline">\(t &gt; \bar{t}\)</span>, setting <span class="math inline">\(b=0\)</span> and <span class="math inline">\(P_0 = \bar{P}\)</span>: <span class="math display">\[
+M(t) = C(0) e^{-\alpha_2 t} - \tfrac{\alpha_1 \bar{P}}{\alpha_1-\alpha_2} e^{-\alpha_1 t}.
+\]</span></p>
+<p>We see that <span class="math inline">\(M(t)\to 0\)</span>, no matter of the value of the constants. However, if <span class="math inline">\(\alpha_1 &gt; \alpha_2\)</span>, the second term <span class="math inline">\(e^{-\alpha_1 t}\)</span> will vanish quickier than the first one, so <span class="math inline">\(M(t) \sim e^{-\alpha_2 t}\)</span> for large <span class="math inline">\(t\)</span>. In general <span class="math display">\[
+M(t) \sim e^{-\min\{ \alpha_1, \alpha_2 \}t}.
+\]</span></p>
+<p>Alternatively, we can do all the computations. First, we integrate up to <span class="math inline">\(t = \bar{t}\)</span>, with <span class="math inline">\(b(t) = \bar{b}\)</span>, the following problem (we neglect <span class="math inline">\(M(t)\)</span> for now): <span class="math display">\[
+\left\{ \begin{aligned}
+P_1'(t) &amp;= \bar{b} - \alpha_1 P_1(t), \\
+P_1(0)  &amp;= P_0,
+\end{aligned}\right.
+\]</span></p>
+<p>which has the solution <span class="math display">\[
+P_1(t) = e^{-\alpha_1 t}P_0 + \frac{\bar{b}}{\alpha_1}(1-e^{-\alpha_1 t}).
+\]</span></p>
+<p>for <span class="math inline">\(0 \le t &lt; \bar{t}\)</span>. Then, for <span class="math inline">\(t &gt; \bar{t}\)</span>, we solve another problem with <span class="math inline">\(b(t) = 0\)</span>: <span class="math display">\[
+\left\{ \begin{aligned}
+P_2'(t) &amp;= 0 - \alpha_1 P_2(t), \\
+P_2(\bar{t})  &amp;= P_1(\bar{t}),
+\end{aligned}\right.
+\]</span></p>
+<p>which has the solution <span class="math display">\[
+P_2(t) = e^{-\alpha_1(t-\bar{t})} P_1(\bar{t})
+= e^{-\alpha_1 t} \Bigl[ P_0 + \frac{\bar{b}}{\alpha_1} (e^{\alpha_1 \bar{t}} - 1 ) \Bigr].
+\]</span></p>
+<p>The overall solution is (which is continuous at <span class="math inline">\(t=\bar{t}\)</span> but not differentiable): <span class="math display">\[
+P(t) = \begin{cases}
+P_1(t), &amp; t \le \bar{t}, \\
+P_2(t), &amp; t &gt; \bar{t}.
+\end{cases}
+\]</span></p>
+<p>Clearly, <span class="math inline">\(P(t)\to 0\)</span> as <span class="math inline">\(t\to\infty\)</span>, and it decays as <span class="math inline">\(e^{-\alpha_1 t}\)</span>. We can use this information for <span class="math inline">\(M(t)\)</span>. In general: <span class="math display">\[
+M(t) = e^{-\alpha_2 t} M_0 + \alpha_1 \int_0^t e^{-\alpha_2(t-s)} P(s)\,\mathrm{d}s.
+\]</span></p>
+<p>Since we are interested in large <span class="math inline">\(t\)</span>, we can start from <span class="math inline">\(\bar{t}\)</span> instead of <span class="math inline">\(t=0\)</span>. So <span class="math inline">\(P(t) = P_2(t) = c e^{-\alpha_1 t}\)</span>: <span class="math display">\[
+\begin{split}
+M(t) &amp;= e^{-\alpha_2 t} M(\bar{t}) + c \alpha_1 \int_{\bar{t}}^t e^{-\alpha_2(t-s)} e^{-\alpha_1 s}\,\mathrm{d}s \\
+&amp;= e^{-\alpha_2 t} M(\bar{t}) + c \alpha_1 e^{-\alpha_2 t} \int_{\bar{t}}^t e^{(\alpha_2-\alpha_1) s} \,\mathrm{d}s \\
+&amp;= e^{-\alpha_2 t} M(\bar{t}) + c \alpha_1 e^{-\alpha_2 t} \Bigl( \frac{1}{\alpha_2-\alpha_1} e^{(\alpha_2-\alpha_1) t} - \tilde{c} \Bigr) \\
+&amp;= e^{-\alpha_2 t} \hat{c} + \frac{\alpha_1}{\alpha_2-\alpha_1} e^{-\alpha_1 t}.
+\end{split}
+\]</span></p>
+</div>
+</div>
+</div>
 </section>
 <section id="thorium-uranium-dating" class="level2">
 <h2 class="anchored" data-anchor-id="thorium-uranium-dating">Thorium-Uranium dating</h2>
@@ -354,20 +599,125 @@ T(0) &amp;= 0,
 <ol type="1">
 <li>Solve the equation for <span class="math inline">\(U(t)\)</span>.</li>
 </ol>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-10" class="callout-10-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>We have <span class="math inline">\(U(t) = e^{-a t} U_0\)</span>.</p>
+</div>
+</div>
+</div>
 <ol start="2" type="1">
 <li>How can the quantities of <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> be interpreted? From the data provided can we infer the half-life of Uranium-234 and Thorium-230?</li>
 </ol>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-11" class="callout-11-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The half-life is the time <span class="math inline">\(t_{1/2}\)</span> that takes to have <span class="math inline">\(U(t_{1/2}) = \frac{1}{2} U_0\)</span>. From the above solution we find <span class="math inline">\(t_{1/2} = \frac{\log 2}{a}\)</span>, so <span class="math inline">\(\frac{1}{a}\)</span> is proportional to the half-life. Actually, <span class="math inline">\(\frac{1}{a}\)</span> is the time that takes to <span class="math inline">\(U_0\)</span> to reach <span class="math inline">\(\frac{1}{e}U_0 \approx 0.36 U_0\)</span>. So, the half-life of Uranium-234 is <span class="math inline">\(\approx 117\,500\)</span> years, whereas for Thorium-230 (in absence of uranium) is <span class="math inline">\(\approx 36\,500\)</span> years.</p>
+</div>
+</div>
+</div>
 <ol start="3" type="1">
 <li>Calculate <span class="math inline">\(T(t)\)</span>, solution of the second differential equation.</li>
 </ol>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-12" class="callout-12-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>We substitute the solution <span class="math inline">\(U(t)\)</span> into the second equation, so we need to solve: <span class="math display">\[
+T' = a e^{-a t} U_0 - b T,
+\]</span></p>
+<p>with <span class="math inline">\(T(0)=0\)</span>. This equation is linear but non-homogeneous. The Wronskian “matrix” is <span class="math inline">\(e^{-bT}\)</span>, so we have <span class="math display">\[
+\begin{split}
+T(t) &amp;= e^{-b T}T(0) + \int_0^t e^{-b(t-s)} a e^{-a s} U_0\,\mathrm{d}s \\
+&amp;= a U_0 e^{-bt} \int_0^t e^{(b-a) s} \,\mathrm{d}s \\
+&amp;= \frac{a U_0}{b-a} e^{-bt} \Bigl( e^{(b-a) t} - 1 \Bigr) \\
+&amp;= \frac{a U_0}{b-a} \Bigl( e^{-a t} - e^{-b t} \Bigr).
+\end{split}
+\]</span></p>
+</div>
+</div>
+</div>
 <ol start="4" type="1">
 <li>Compute <span class="math display">\[
 \lim_{t\to\infty}\frac{T(t)}{U(t)}.
 \]</span></li>
 </ol>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-13" class="callout-13-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>We have the full solution, so we can easily compute it: <span class="math display">\[
+\frac{T(t)}{U(t)} = \frac{\frac{a U_0}{b-a}(e^{-a t} - e^{-b t})}{e^{-a t} U_0} = \frac{a}{b-a}\bigl(1 - e^{-(b-a)t}\bigr) \to \frac{a}{b-a}.
+\]</span></p>
+<p>Note that we could have proceeded differently, by observing that: <span class="math display">\[
+\left(\frac{T(t)}{U(t)}\right)' = \frac{T'(t)}{U(t)} - \frac{T(t)}{U^2(t)}U'(t) = a - (b-a)\frac{T(t)}{U(t)}.
+\]</span></p>
+<p>The differential equation for <span class="math inline">\(w(t) = T(t)/U(t)\)</span> is: <span class="math display">\[
+w' = a - (b-a)w.
+\]</span></p>
+<p>The solution is the same as above.</p>
+</div>
+</div>
+</div>
 <ol start="5" type="1">
 <li>Explain why it is possible to estimate the rock age from the knowledge of <span class="math inline">\(T / U\)</span> at current time, but it is not possible from the knowledge of <span class="math inline">\(T\)</span> alone. <em>Hint: study the function <span class="math inline">\(T(t)/U(t)\)</span>.</em></li>
 </ol>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-14" class="callout-14-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The function <span class="math inline">\(w(t) = T(t)/U(t)\)</span> is monotonically increasing, bounded from above by <span class="math inline">\(\frac{a}{b-a}\)</span>. It does not depend on the initial concentration <span class="math inline">\(U_0\)</span>. Thus, it is always possible to find a <em>unique</em> time <span class="math inline">\(\tilde{t}\)</span> such that <span class="math display">\[
+w(\tilde{t}) = \frac{T(\tilde{t})}{U(\tilde{t})} = \tilde{w},
+\]</span></p>
+<p>where <span class="math inline">\(\tilde{w}\)</span> is the thorium-uranium ratio at time <span class="math inline">\(\tilde{t}\)</span>. In particular: <span class="math display">\[
+\tilde{t} = \frac{1}{b}\ln\Bigl( \frac{a}{a-(b-a)\tilde{w}} \Bigr).
+\]</span></p>
+<p>We cannot use <span class="math inline">\(T(t)\)</span>, because it is not a monotone function. Thus, given <span class="math inline">\(\tilde{T}\)</span>, we cannot find a unique <span class="math inline">\(\tilde{t}\)</span> such that <span class="math inline">\(T(\tilde{t}) = \tilde{T}\)</span>.</p>
+</div>
+</div>
+</div>
 
 
 </section>
@@ -800,8 +1150,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../Laboratories/01 ODE Integration/lab_ODEinteg.html" class="pagination-link" aria-label="Lab 01: Numerical integration">
-        <span class="nav-page-text">Lab 01: Numerical integration</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../Assignments/02_population.html" class="pagination-link" aria-label="Population dynamics">
+        <span class="nav-page-text">Population dynamics</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
