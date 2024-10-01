@@ -1,0 +1,1283 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.57">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2024-10-31">
+
+<title>4&nbsp; Predation models – Mathematical Biology</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./references.html" rel="next">
+<link href="./03_Logistic.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./01_Bathtub.html">Lectures</a></li><li class="breadcrumb-item"><a href="./04_Predation.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Predation models</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Mathematical Biology</a> 
+        <div class="sidebar-tools-main">
+    <a href="./Mathematical-Biology.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Welcome</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Lectures</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01_Bathtub.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Bathtub model</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02_Population.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Population dynamics</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03_Logistic.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Logistic model</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04_Predation.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Predation models</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Assignments</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Assignments/01_recap_ODEs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Solving ODEs</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Assignments/02_population.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Population dynamics</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Labs</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Laboratories/01_ODE_Integration/lab_ODEinteg.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab 01: Numerical integration</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Laboratories/02_Predation/lab_Predation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab 02: Predation</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">Appendices</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./IntroODE.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Introduction to ODEs</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./bifurcations.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Introduction to bifurcations</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Laboratories/00_Intro_Matlab/introMATLAB.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Introduction to MATLAB</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#generalist-predation" id="toc-generalist-predation" class="nav-link active" data-scroll-target="#generalist-predation"><span class="header-section-number">4.1</span> Generalist predation</a></li>
+  <li><a href="#holling-type-predation-models" id="toc-holling-type-predation-models" class="nav-link" data-scroll-target="#holling-type-predation-models"><span class="header-section-number">4.2</span> Holling type predation models</a></li>
+  <li><a href="#spruce-budworm-model" id="toc-spruce-budworm-model" class="nav-link" data-scroll-target="#spruce-budworm-model"><span class="header-section-number">4.3</span> Spruce budworm model</a>
+  <ul class="collapse">
+  <li><a href="#equilibria-and-stability" id="toc-equilibria-and-stability" class="nav-link" data-scroll-target="#equilibria-and-stability"><span class="header-section-number">4.3.1</span> Equilibria and stability</a></li>
+  <li><a href="#bifurcation-diagram" id="toc-bifurcation-diagram" class="nav-link" data-scroll-target="#bifurcation-diagram"><span class="header-section-number">4.3.2</span> Bifurcation diagram</a></li>
+  <li><a href="#hysteresis" id="toc-hysteresis" class="nav-link" data-scroll-target="#hysteresis"><span class="header-section-number">4.3.3</span> Hysteresis</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./01_Bathtub.html">Lectures</a></li><li class="breadcrumb-item"><a href="./04_Predation.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Predation models</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Predation models</span></h1>
+<p class="subtitle lead">This lecture is based on <span class="citation" data-cites="ip14">(<a href="references.html#ref-ip14" role="doc-biblioref">Iannelli and Pugliese 2014, vol. 79, secs. 1.8–1.9</a>)</span></p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">October 31, 2024</p>
+    </div>
+  </div>
+  
+    <div>
+    <div class="quarto-title-meta-heading">Modified</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date-modified">September 29, 2024</p>
+    </div>
+  </div>
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="generalist-predation" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="generalist-predation"><span class="header-section-number">4.1</span> Generalist predation</h2>
+<p>Predation is a fundamental topic in ecology and the main interaction between species. It must be understood in a broader sense: fishing, harvesting, hunting are all form of predation.</p>
+<p>The simplest model of predation consists in formally increasing the mortality rate of <span class="math inline">\(N\)</span> by an extra rate <span class="math inline">\(aP^*\)</span>, that is <span class="math display">\[
+N' = r(N)N - aP^* N = f(N),
+\]</span></p>
+<p>where <span class="math inline">\(P^*&gt;0\)</span> is the number of predators and <span class="math inline">\(a&gt;0\)</span> is the <em>attack rate</em> or <em>effective killing rate</em>. We note that the death rate <span class="math inline">\(aP^*N\)</span> is <em>proportional</em> to both the number of predators <span class="math inline">\(P^*\)</span> and the number of preys <span class="math inline">\(N\)</span>, according to the <em>law of mass action</em>, as suggested by Volterra with the method of encounters. The idea is similar to collision theory for ideal gases.</p>
+<p>This type of predation is also called <em>generalist</em>, in the sense that predators’ survival does not depend on the survival of the prey population <span class="math inline">\(N\)</span>. If the preys go to extinction, the predator will hunt something else. A <em>specialized</em> predator, on the other hand, will suffer from a low level of <span class="math inline">\(N\)</span>, as we shall see next week.</p>
+<p>The equilibria of the equation are: <span class="math inline">\(N=E_0 = 0\)</span>, as usual, and the zeros of: <span class="math display">\[
+r(N) = aP^*.
+\]</span></p>
+<ul>
+<li>If <span class="math inline">\(aP^* &gt; r(0)\)</span>, then we have no additional equilibria, because <span class="math inline">\(r'(N)&lt;0\)</span>.</li>
+<li>If <span class="math inline">\(aP^* &lt; r(0)\)</span>, then there exists a second equilibrium <span class="math inline">\(N^* &gt; 0\)</span>.</li>
+</ul>
+<p>The stability of the second equilibrium follows from <span class="math display">\[
+f'(N^*) = r'(N^*)N^* + r(N^*) - aP^* = r'(N^*)N^* - aP^* &lt; 0,
+\]</span></p>
+<p>because <span class="math inline">\(r'(N)&lt;0\)</span>. So <span class="math inline">\(N^*\)</span> is asymptotically stable.</p>
+<p>The stability of <span class="math inline">\(E_0\)</span> is similar: <span class="math display">\[
+f'(E_0) = r'(0)\cdot 0 + r(0) - aP^* = r(0) - aP^* &gt; 0,
+\]</span></p>
+<p>meaning that it is unstable. Concluding:</p>
+<ul>
+<li>If <span class="math inline">\(aP^* &gt; r(0)\)</span>, we have one stable equilibrium <span class="math inline">\(E_0=0\)</span>, thus the population will go to extinction. In fact, the predation level is high.</li>
+<li>If <span class="math inline">\(aP^* &gt; r(0)\)</span>, <span class="math inline">\(E_0=0\)</span> is unstable but we have another equilibrium <span class="math inline">\(0&lt;N^*&lt;K\)</span> asymptotically stable. Thus, the predation is sustainable.</li>
+</ul>
+<p>The case <span class="math inline">\(aP^* = r(0)\)</span> is delicate. We have a single equilibrium, <span class="math inline">\(E_0=0\)</span>, but <span class="math inline">\(f'(E_0) = 0\)</span>, so we cannot deduce the stability from the linearization (why?). By inspecting the sign of <span class="math inline">\(E_0\)</span>, we observe that <span class="math inline">\(f(N)&lt;0\)</span> for <span class="math inline">\(N&gt;0\)</span>, so <span class="math inline">\(E_0\)</span> is attractive. However, for <span class="math inline">\(N&lt;0\)</span> we have that <span class="math inline">\(f(N)&lt;0\)</span>, thus it is repulsive (biologically, we do not care because <span class="math inline">\(N&lt;0\)</span> is irrelevant.) This type of equilibrium is called <em>saddle-node</em>.</p>
+<p>The point <span class="math inline">\(aP^* = r(0)\)</span> is a <em>bifurcation point</em>, specifically a <em>transcritical bifurcation</em> (See <a href="bifurcations.html#sec-transbif" class="quarto-xref"><span>Section B.6</span></a>). Roughly speaking, the dynamic before and after the bifurcation point is topologically different: in one case we have one equilibrium, in the other 2 equilibria. Actually, we still have 2 equilibria for <span class="math inline">\(aP^* &gt; r(0)\)</span>, one being negative. Thus, what really happens is that as we increase <span class="math inline">\(aP^*\)</span> the two curves of equilibria (<span class="math inline">\(N=0\)</span> and <span class="math inline">\(N=E_0\)</span>) crosses and swap stability.</p>
+<div id="76db0f13" class="cell" data-execution_count="1">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>sns.set_theme(<span class="st">"notebook"</span>, style<span class="op">=</span><span class="st">"whitegrid"</span>)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> plt.xkcd(scale<span class="op">=</span><span class="fl">0.5</span>):</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    sns.despine()</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    ax.xaxis.set_ticks([])</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    ax.yaxis.set_ticks([])</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    ax.plot([<span class="dv">0</span>,<span class="dv">1</span>],[<span class="dv">0</span>,<span class="dv">0</span>],<span class="st">'r-'</span>)</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    ax.plot([<span class="dv">0</span>,<span class="dv">1</span>,<span class="fl">1.2</span>],[<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>],<span class="st">'b-'</span>)</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    ax.plot([<span class="dv">1</span>,<span class="fl">1.2</span>],[<span class="dv">0</span>,<span class="op">-</span><span class="fl">0.2</span>],<span class="st">'r-'</span>,alpha<span class="op">=</span><span class="fl">0.5</span>)</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    ax.plot([<span class="dv">1</span>],[<span class="dv">0</span>],<span class="st">'k.'</span>,markersize<span class="op">=</span><span class="dv">16</span>)</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    ax.grid(<span class="va">False</span>)</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>    ax.set_xlabel(<span class="st">'$P^*$'</span>)</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>    ax.set_ylabel(<span class="st">'$N^*$'</span>)</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>    ax.set_xlim([<span class="dv">0</span>,<span class="fl">1.2</span>])</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>    [N,P] <span class="op">=</span> np.mgrid[<span class="fl">0.01</span>:<span class="fl">1.2</span>:<span class="ot">30j</span>,<span class="fl">0.01</span>:<span class="fl">1.2</span>:<span class="ot">30j</span>]</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>    D <span class="op">=</span> N<span class="op">*</span>(<span class="dv">1</span><span class="op">-</span>N) <span class="op">-</span> P<span class="op">*</span>N</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>    ax.quiver(P,N,np.zeros_like(D),D,alpha<span class="op">=</span><span class="fl">0.5</span>)</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>    plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="04_Predation_files/figure-html/cell-2-output-1.png" width="563" height="411" class="figure-img"></p>
+<figcaption>Bifurcation diagram for the model with generalist predation. In blue, the stable equilibrium, in red the unstable one. Beyond the bifurcation point (transcritical, in black) there is only one equilibrium.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="holling-type-predation-models" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="holling-type-predation-models"><span class="header-section-number">4.2</span> Holling type predation models</h2>
+<p>More generally, we define the predation as: <span class="math display">\[
+N' = r(N)N - \pi(N) P^*,
+\]</span></p>
+<p>where <span class="math inline">\(\pi(N)\)</span> is called <em>functional response</em>. The functional response can be interpreted as follows: <span class="math inline">\(\pi(N)\Delta t\)</span> is the number of preys killed in <span class="math inline">\(\Delta t\)</span> units of time by a single predator.</p>
+<p>For the simplest model, we have <span class="math inline">\(\pi(N) = aN\)</span>. However, this is not realistic, because for very large <span class="math inline">\(N\)</span> the predation rate cannot grow undefinitely, it must reach some limiting value. For instance, a predator needs some time to consume the prey, and this time cannot be reduced below a certain limit. Similarly, it is reasonable that at low density of preys, say when <span class="math inline">\(N\)</span> is small, predation is harder.</p>
+<p>In general, we can assume that:</p>
+<ol type="1">
+<li><span class="math inline">\(\pi(0)=0\)</span>, no preys no predation, and</li>
+<li><span class="math inline">\(\pi'(N)&gt;0\)</span>, the more preys, the higher the predation rate.</li>
+</ol>
+<p><span class="citation" data-cites="holling1965functional">Holling (<a href="references.html#ref-holling1965functional" role="doc-biblioref">1965</a>)</span> proposed the following types of functional responses:</p>
+<ul>
+<li><p><strong>Holling type I</strong> <span class="math display">\[
+  \pi(N) = \begin{cases} aN, &amp; 0 \le N \le N^*, \\ aN^*, &amp; N &gt; N^*. \end{cases}
+  \]</span></p>
+<p>This model is exactly like the linear one, but it assumes that for <span class="math inline">\(N &gt; N^*\)</span> we have constant predation rate <span class="math inline">\(aN^*\)</span>. The parameter <span class="math inline">\(a\)</span> is called <em>attack rate</em>, and it measures, after an encounter between prey and predator, the success rate of predation. Note that the function <span class="math inline">\(\pi(N)\)</span> is not <span class="math inline">\(\mathcal{C}^1\)</span> but it is Lipschitz.</p></li>
+<li><p><strong>Holling type II</strong></p>
+<p><span class="math display">\[
+  \pi(N) = \dfrac{a N}{1 + a \tau N},
+  \]</span></p>
+<p>with <span class="math inline">\(a, \tau&gt;0\)</span>. This is a smooth version of Holling type I. For small <span class="math inline">\(N\)</span>, <span class="math inline">\(\pi(N) \approx aN\)</span>, so the meaning of <span class="math inline">\(a\)</span> is the same as above. For large <span class="math inline">\(N\)</span>, we have that <span class="math inline">\(\pi(N)\to 1/\tau =: \alpha\)</span>, which is called <em>maximum killing rate</em>. That is, <span class="math inline">\(\alpha\)</span> is the number of preys killed by one predator in a unit of time, when the number of preys is very large. Alternatively, we can interpret <span class="math inline">\(\tau\)</span> as the time required by the predator to consume the prey.</p></li>
+<li><p><strong>Holling type III</strong> <span class="math display">\[
+  \pi(N) = \dfrac{\alpha N^\theta}{\nu^\theta + N^\theta},
+  \]</span></p>
+<p>with <span class="math inline">\(\alpha,\nu&gt;0\)</span> and <span class="math inline">\(\theta &gt; 1\)</span>. The last type also accounts for a lower predation rate as low density of preys. In fact, for small <span class="math inline">\(N\)</span> and <span class="math inline">\(\theta &gt; 1\)</span> we have <span class="math inline">\(\pi'(0)=0\)</span>. For <span class="math inline">\(N=\nu\)</span>, <span class="math inline">\(\pi(\nu) = \frac{\alpha}{2}\)</span>, and for <span class="math inline">\(N\to\infty\)</span> we have <span class="math inline">\(\pi(N)\to \alpha\)</span>, the maximum killing rate. Thus, <span class="math inline">\(\nu\)</span> is the number of preys at which the killing rate is exactly half of the maximum one.</p></li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/Holling.png" class="img-fluid figure-img"></p>
+<figcaption>Different types of Holling predations</figcaption>
+</figure>
+</div>
+<p>It is possible to justify Holling type II in a few ways. One, we will see in the completely different context of enzymatic reactions. A simpler one is as follows. In a time <span class="math inline">\(T\)</span>, a single predator will spend <span class="math inline">\(1/\pi(N)\)</span> time in hunting. (Always keep in mind the bathtub example!) But the total time splits into <span class="math inline">\(T_s\)</span>, the time spent seeking for a prey, and <span class="math inline">\(\tau\)</span>, the time needed to consume a prey. The time <span class="math inline">\(\tau\)</span> is fixed, no matter how large is <span class="math inline">\(N\)</span>. The time <span class="math inline">\(T_s\)</span>, however, is exactly <span class="math inline">\((a N)^{-1}\)</span>, because the more preys the easier is to catch them. Putting all together we have: <span class="math display">\[
+\frac{1}{\pi(N)} = T = \tau + T_s = \tau + \frac{1}{a N},\quad\Rightarrow\quad \pi(N) = \frac{a N}{1+a\tau N}.
+\]</span></p>
+</section>
+<section id="spruce-budworm-model" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="spruce-budworm-model"><span class="header-section-number">4.3</span> Spruce budworm model</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/spruce.png" class="img-fluid figure-img"></p>
+<figcaption>The effect of the spruce budworm on a forest.</figcaption>
+</figure>
+</div>
+<p>The spruce budworm is an insect that feeds on needles of balsam fir trees. If needles are removed, the tree dies. Historical data in Canada evergreen forests, where the budworm is present, shows that in most years the budworm density is very low. However, in a outbreak year, the budworm population spikes and can kill up to 80% of mature trees in the forest. The period of the outbreak is roughly 30-70 years.</p>
+<p>The spruce budworm model has been introduced in <span class="citation" data-cites="ludwig1978qualitative">Ludwig et al. (<a href="references.html#ref-ludwig1978qualitative" role="doc-biblioref">1978</a>)</span>. They proposed a system of 3 variables:</p>
+<ol type="1">
+<li><span class="math inline">\(N(t)\)</span>, the budworm density,</li>
+<li><span class="math inline">\(S(t)\)</span>, the habitat space for larvae, and</li>
+<li><span class="math inline">\(E(t)\)</span>, a measure of food energy reserves available to the budworm.</li>
+</ol>
+<p>We focus here on the equation for <span class="math inline">\(N(t)\)</span>. In fact, <span class="math inline">\(S(t)\)</span> and <span class="math inline">\(E(t)\)</span> will vary very slowly compared to <span class="math inline">\(N(t)\)</span>, thus they can be assumed constant. (This argument can be made rigorous, as we shall see for enzymatic reactions.)</p>
+<p>The equation for <span class="math inline">\(N(t)\)</span> reads as follows: <span class="math display">\[
+N' = rN\Bigl(1-\frac{N}{K}\Bigr) - \frac{\alpha P^* N^2}{\nu^2 + N^2}.
+\]</span></p>
+<p>The first term is the logistic growth. The second one is the predation of the budworms due to birds. This is Holling type III. Note that the parameters are fixed numbers (they do not depend on time), but they will depend on <span class="math inline">\(S\)</span> and <span class="math inline">\(E\)</span>, somehow. Thus, it will be interesting to see what happens to the system as we change them.</p>
+<p>Since we have too many parameters, we proceed with non-dimensionalization. Here we select: <span class="math display">\[
+\tau = \frac{t}{T}, \quad u = \frac{N}{\nu},
+\]</span></p>
+<p>for some <span class="math inline">\(T &gt; 0\)</span> to be selected. We have: <span class="math display">\[
+\frac{\nu}{T} \dot{u} = r \nu u \Bigl(1 - \frac{\nu u}{K} \Bigr) - \frac{\alpha P^* u^2}{1 + u^2},
+\]</span></p>
+<p>thus by selecting <span class="math display">\[
+T = \frac{\nu}{\alpha P^*}, \quad \rho = \frac{r\nu}{\alpha P^*}, \quad q = \frac{K}{\nu}
+\]</span></p>
+<p>we arrive at <span class="math display">\[
+\dot{u} = \rho u \Bigl(1 - \frac{u}{q} \Bigr) - \frac{u^2}{1 + u^2},
+\]</span></p>
+<p>where we are left with only 2 parameters:</p>
+<ul>
+<li><span class="math inline">\(\rho\)</span> is proportional to the intrinsic growth rate, while</li>
+<li><span class="math inline">\(q\)</span> is the carrying capacity normalized to the half-saturation population <span class="math inline">\(\nu\)</span>.</li>
+</ul>
+<section id="equilibria-and-stability" class="level3" data-number="4.3.1">
+<h3 data-number="4.3.1" class="anchored" data-anchor-id="equilibria-and-stability"><span class="header-section-number">4.3.1</span> Equilibria and stability</h3>
+<p>As usual, we start by looking for equilibria of the system, that is solutions of <span class="math display">\[
+\rho u \Bigl(1 - \frac{u}{q} \Bigr) - \frac{u^2}{1 + u^2} = 0.
+\]</span></p>
+<p>We have that <span class="math inline">\(u=0\)</span> is an equilibrium. The others solve the equation <span class="math display">\[
+\rho \Bigl(1 - \frac{u}{q} \Bigr) - \frac{u}{1 + u^2} = 0,
+\]</span></p>
+<p>which would lead to a 3rd-order polynomial equation, thus we can expect up to 3 real solutions. An analytical approach is not practical. However, equilibria are intersections of the two curves <span class="math inline">\(f(u)\)</span> and <span class="math inline">\(g(u)\)</span> where <span class="math display">\[
+f(u) = \rho \Bigl(1 - \frac{u}{q} \Bigr), \quad g(u) = \frac{u}{1 + u^2}.
+\]</span></p>
+<p>The function <span class="math inline">\(f(u)\)</span> represents the per capita growth rate of <span class="math inline">\(u\)</span>, whereas <span class="math inline">\(g(u)\)</span> is the per capita death rate due to predation. Thus, solutions of the equation are equilibria of the system. Since the function <span class="math inline">\(g(u)\)</span> does not depend on any parameters, we can fix it and simply change <span class="math inline">\(f(u)\)</span>, which is a segment.</p>
+<div id="d14abece" class="cell" data-execution_count="2">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>sns.set_theme(<span class="st">"notebook"</span>, style<span class="op">=</span><span class="st">"whitegrid"</span>)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>u  <span class="op">=</span> np.linspace(<span class="dv">0</span>,<span class="dv">12</span>,<span class="dv">1000</span>)</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>fig,axs <span class="op">=</span> plt.subplots(<span class="dv">1</span>,<span class="dv">2</span>,figsize<span class="op">=</span>(<span class="dv">9</span>,<span class="dv">3</span>))</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>q <span class="op">=</span> <span class="dv">4</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>uq <span class="op">=</span> np.linspace(<span class="dv">0</span>,q,<span class="dv">2</span>)</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>axs[<span class="dv">0</span>].plot(u, u<span class="op">/</span>(<span class="dv">1</span><span class="op">+</span>u<span class="op">**</span><span class="dv">2</span>))</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> rho <span class="kw">in</span> np.linspace(<span class="fl">0.2</span>,<span class="fl">0.8</span>,<span class="dv">10</span>):</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    pr <span class="op">=</span> np.polynomial.Polynomial([q<span class="op">*</span>rho,<span class="op">-</span>q<span class="op">-</span>rho,q<span class="op">*</span>rho,<span class="op">-</span>rho])</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>    rr <span class="op">=</span> np.real(np.array([r <span class="cf">for</span> r <span class="kw">in</span> pr.roots() <span class="cf">if</span> np.isreal(r) <span class="kw">and</span> r <span class="op">&gt;=</span> <span class="dv">0</span>]))</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>    axs[<span class="dv">0</span>].plot(uq,rho<span class="op">*</span>(<span class="dv">1</span><span class="op">-</span>uq<span class="op">/</span>q),<span class="st">'k'</span>,lw<span class="op">=</span><span class="fl">0.5</span>)</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>    axs[<span class="dv">0</span>].plot(rr,rho<span class="op">*</span>(<span class="dv">1</span><span class="op">-</span>rr<span class="op">/</span>q),<span class="st">'k.'</span>)</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>q <span class="op">=</span> <span class="dv">10</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>uq <span class="op">=</span> np.linspace(<span class="dv">0</span>,q,<span class="dv">2</span>)</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>axs[<span class="dv">1</span>].plot(u, u<span class="op">/</span>(<span class="dv">1</span><span class="op">+</span>u<span class="op">**</span><span class="dv">2</span>))</span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> rho <span class="kw">in</span> np.linspace(<span class="fl">0.1</span>,<span class="fl">0.8</span>,<span class="dv">6</span>):</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>    pr <span class="op">=</span> np.polynomial.Polynomial([q<span class="op">*</span>rho,<span class="op">-</span>q<span class="op">-</span>rho,q<span class="op">*</span>rho,<span class="op">-</span>rho])</span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>    rr <span class="op">=</span> np.real(np.array([r <span class="cf">for</span> r <span class="kw">in</span> pr.roots() <span class="cf">if</span> np.isreal(r) <span class="kw">and</span> r <span class="op">&gt;=</span> <span class="dv">0</span>]))</span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>    axs[<span class="dv">1</span>].plot(uq,rho<span class="op">*</span>(<span class="dv">1</span><span class="op">-</span>uq<span class="op">/</span>q),<span class="st">'k'</span>,lw<span class="op">=</span><span class="fl">0.5</span>)</span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>    axs[<span class="dv">1</span>].plot(rr,rho<span class="op">*</span>(<span class="dv">1</span><span class="op">-</span>rr<span class="op">/</span>q),<span class="st">'k.'</span>)</span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>p <span class="op">=</span> np.polynomial.Polynomial([q,<span class="dv">0</span>,<span class="op">-</span>q,<span class="dv">2</span>])</span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>rho <span class="op">=</span> <span class="kw">lambda</span> u: q<span class="op">*</span>u<span class="op">/</span>((<span class="dv">1</span><span class="op">+</span>u<span class="op">**</span><span class="dv">2</span>)<span class="op">*</span>(q<span class="op">-</span>u))</span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>bif_u   <span class="op">=</span> np.real(np.array([r <span class="cf">for</span> r <span class="kw">in</span> p.roots() <span class="cf">if</span> np.isreal(r) <span class="kw">and</span> r <span class="op">&gt;=</span> <span class="dv">0</span>]))</span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>bif_rho <span class="op">=</span> rho(bif_u)</span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> r,u <span class="kw">in</span> <span class="bu">zip</span>(bif_rho,bif_u):</span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>    axs[<span class="dv">1</span>].plot(uq,r<span class="op">*</span>(<span class="dv">1</span><span class="op">-</span>uq<span class="op">/</span>q),<span class="st">'r'</span>,lw<span class="op">=</span><span class="fl">1.0</span>)</span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>    axs[<span class="dv">1</span>].plot(u,r<span class="op">*</span>(<span class="dv">1</span><span class="op">-</span>u<span class="op">/</span>q),<span class="st">'r.'</span>,markersize<span class="op">=</span><span class="dv">8</span>)</span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> ax <span class="kw">in</span> axs:</span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>    ax.grid(<span class="va">False</span>)</span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>    sns.despine()</span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>    ax.xaxis.set_ticks([])</span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>    ax.yaxis.set_ticks([])</span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a>    ax.set_xlabel(<span class="st">'u'</span>,loc<span class="op">=</span><span class="st">'right'</span>)</span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a>    ax.set_xlim(<span class="dv">0</span>,<span class="dv">12</span>)</span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a>    ax.set_ylim(<span class="dv">0</span>,<span class="dv">1</span>)</span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a>axs[<span class="dv">1</span>].yaxis.set_ticks(bif_rho)</span>
+<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a>axs[<span class="dv">1</span>].yaxis.set_ticklabels([<span class="st">'$</span><span class="ch">\\</span><span class="st">rho_2$'</span>,<span class="st">'$</span><span class="ch">\\</span><span class="st">rho_1$'</span>])</span>
+<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="04_Predation_files/figure-html/cell-3-output-1.png" width="689" height="261" class="figure-img"></p>
+<figcaption>Equilibria for the spruce budworm model. On the left, the case of small <span class="math inline">\(q\)</span>, on the right the case of large <span class="math inline">\(q\)</span>.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>We can see from the figure that when <span class="math inline">\(q\)</span> is small, we only have a single equilibrium. When <span class="math inline">\(q\)</span> is large, we can have 1, 2, or 3 additional equilibria, depending on <span class="math inline">\(\rho\)</span>: given <span class="math inline">\(\rho_1 &lt; \rho_2\)</span> we have:</p>
+<ol type="1">
+<li>If <span class="math inline">\(\rho &lt; \rho_1\)</span>, then there exists a single equilibrium <span class="math inline">\(u^*_1 \ll q\)</span>. This is the <em>refuge</em> equilibrium (low population). The equilibrium is globally stable, because <span class="math inline">\(f(u)-g(u)&gt;0\)</span> for <span class="math inline">\(u&lt;u_1^*\)</span> and <span class="math inline">\(f(u)-g(u)&lt;0\)</span> for <span class="math inline">\(u&gt;u_1^*\)</span>.</li>
+<li>If <span class="math inline">\(\rho &gt; \rho_2\)</span>, then there exists a single equilibrium <span class="math inline">\(u^*_3\)</span> close to <span class="math inline">\(q\)</span>. This is the <em>outbreak</em> equilibrium (large population). The equilibrium is globally stable, because <span class="math inline">\(f(u)-g(u)&gt;0\)</span> for <span class="math inline">\(u&lt;u_3^*\)</span> and <span class="math inline">\(f(u)-g(u)&lt;0\)</span> for <span class="math inline">\(u&gt;u_3^*\)</span>.</li>
+<li>If <span class="math inline">\(\rho_1 &lt; \rho &lt; \rho_2\)</span>, then there exist 3 equilibria <span class="math inline">\(u^*_1 &lt; u^*_2 &lt; u^*_3\)</span>. The stability of <span class="math inline">\(u^*_1\)</span> and <span class="math inline">\(u^*_3\)</span> is as above, but now locally. The equilibrium <span class="math inline">\(u_2^*\)</span> is unstable.</li>
+</ol>
+<p>The case 3. is the most interesting one. If <span class="math inline">\(u(0)&lt;u_2^*\)</span>, then <span class="math inline">\(u\to u_1^*\)</span>, otherwise <span class="math inline">\(u\to u_3^*\)</span>. This is again a threshold effect.</p>
+</section>
+<section id="bifurcation-diagram" class="level3" data-number="4.3.2">
+<h3 data-number="4.3.2" class="anchored" data-anchor-id="bifurcation-diagram"><span class="header-section-number">4.3.2</span> Bifurcation diagram</h3>
+<p>As we change <span class="math inline">\(\rho\)</span>, we may have a different number of equilibria. Thus, there must be some bifurcation occurring. The equilibria are on the curve defined by <span class="math display">\[
+h(u,\rho) = \rho \Bigl(1-\frac{u}{q}\Bigr) - \frac{u}{1+u^2} = 0.
+\]</span></p>
+<p>The function <span class="math inline">\(h(u,\rho)\)</span> is smooth in <span class="math inline">\(\rho\)</span>, since <span class="math inline">\(\partial_\rho h \neq 0\)</span> for <span class="math inline">\(u\in[0,q)\)</span>. Thus we can write <span class="math inline">\(\rho\)</span> as a function of <span class="math inline">\(u\)</span>: <span class="math display">\[
+\rho(u) = \frac{q u}{(1+u^2)(q-u)}.
+\]</span></p>
+<p>Since <span class="math inline">\(h(u,\rho(u))=0\)</span>, the curve <span class="math inline">\((u,\rho(u))\)</span> with <span class="math inline">\(u\in[0,q)\)</span> defines a curve of equilibria, shown below:</p>
+<div id="91443735" class="cell" data-execution_count="3">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>sns.set_theme(<span class="st">"notebook"</span>, style<span class="op">=</span><span class="st">"whitegrid"</span>)</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>q <span class="op">=</span> <span class="dv">12</span> <span class="co">#3*np.sqrt(3)</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>u <span class="op">=</span> np.linspace(<span class="dv">0</span>,<span class="fl">0.9</span><span class="op">*</span>q,<span class="dv">1000</span>)</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>rho <span class="op">=</span> <span class="kw">lambda</span> u: q<span class="op">*</span>u<span class="op">/</span>((<span class="dv">1</span><span class="op">+</span>u<span class="op">**</span><span class="dv">2</span>)<span class="op">*</span>(q<span class="op">-</span>u))</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>p <span class="op">=</span> np.polynomial.Polynomial([q,<span class="dv">0</span>,<span class="op">-</span>q,<span class="dv">2</span>])</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>bif_u   <span class="op">=</span> np.array([r <span class="cf">for</span> r <span class="kw">in</span> p.roots() <span class="cf">if</span> np.isreal(r) <span class="kw">and</span> r <span class="op">&gt;=</span> <span class="dv">0</span>])</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>bif_rho <span class="op">=</span> rho(bif_u)</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>rho_neg <span class="op">=</span> p(u) <span class="op">&lt;</span> <span class="dv">0</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> plt.xkcd(scale<span class="op">=</span><span class="fl">0.5</span>):</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>    fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>    sns.despine()</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>    ax.xaxis.set_ticks([])</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>    ax.yaxis.set_ticks([])</span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>    ax.axhline(y<span class="op">=</span>q,color<span class="op">=</span><span class="st">'k'</span>,linestyle<span class="op">=</span><span class="st">'--'</span>,linewidth<span class="op">=</span><span class="fl">1.0</span>)</span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>    ax.plot(rho(u),<span class="dv">0</span><span class="op">*</span>u,<span class="st">'r'</span>)</span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>    ax.plot(rho(u), u, <span class="st">'b'</span>)</span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>    ax.plot(rho(u)[rho_neg], u[rho_neg], <span class="st">'r'</span>)</span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>    ax.plot([<span class="dv">0</span>],[<span class="dv">0</span>],<span class="st">'k.'</span>,markersize<span class="op">=</span><span class="dv">16</span>)</span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>    ax.plot(bif_rho,bif_u,<span class="st">'k.'</span>,markersize<span class="op">=</span><span class="dv">16</span>)</span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>    ax.grid(<span class="va">False</span>)</span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>    ax.set_xlabel(<span class="st">'$</span><span class="ch">\\</span><span class="st">rho$'</span>)</span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>    ax.set_ylabel(<span class="st">'$u^*$'</span>)</span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a>    ax.fill_between(rho(u), q, where<span class="op">=</span>rho_neg, facecolor<span class="op">=</span><span class="st">'gray'</span>, alpha<span class="op">=</span><span class="fl">.2</span>)</span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="bu">len</span>(bif_u) <span class="op">&gt;</span> <span class="dv">0</span>:</span>
+<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a>        ax.annotate(<span class="st">'  $</span><span class="ch">\\</span><span class="st">rho_2$'</span>,(bif_rho[<span class="dv">0</span>],bif_u[<span class="dv">0</span>]),ha<span class="op">=</span><span class="st">'left'</span>,va<span class="op">=</span><span class="st">'center'</span>)</span>
+<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a>        ax.annotate(<span class="st">'$</span><span class="ch">\\</span><span class="st">rho_1$  '</span>,(bif_rho[<span class="dv">1</span>],bif_u[<span class="dv">1</span>]),ha<span class="op">=</span><span class="st">'right'</span>,va<span class="op">=</span><span class="st">'center'</span>)</span>
+<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a>        ax.annotate(<span class="st">'$q$'</span>,(rho(u).<span class="bu">max</span>(),q),ha<span class="op">=</span><span class="st">'left'</span>,va<span class="op">=</span><span class="st">'top'</span>)</span>
+<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a>    plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="04_Predation_files/figure-html/cell-4-output-1.png" width="563" height="411" class="figure-img"></p>
+<figcaption>Bifurcation diagram with respect to <span class="math inline">\(\rho\)</span> for the spruce budworm system, for <span class="math inline">\(q=12\)</span>. In blue, the stable equilibrium, in red the unstable one. The shaded region is bistable.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>The plot above is a bifurcation diagram. We can interpret it as follows: given <span class="math inline">\(\rho=\bar{\rho}\)</span>, the equilibria are those corresponding to the intersections between <span class="math inline">\(\rho=\bar{\rho}\)</span> and the curve <span class="math inline">\(\rho=\rho(u)\)</span>. So, for <span class="math inline">\(\rho &lt; \rho_1\)</span> we have one equilibrium, for <span class="math inline">\(\rho_1 &lt; \rho &lt; \rho_3\)</span> we have 3, and for <span class="math inline">\(\rho &gt; \rho_3\)</span> we have one.</p>
+<p>For <span class="math inline">\(\rho = \rho_1\)</span> or <span class="math inline">\(\rho = \rho_2\)</span>, we have a <em>tangent bifurcation</em> (See <a href="bifurcations.html#sec-tangbif" class="quarto-xref"><span>Section B.5</span></a>). As we can see, the curve of equilibria is always smooth, with no branching or crossing on another curve of equilibria, like in the case of <em>transcritical bifurcation</em>. However, there is a change in stability: in fact, the branch between <span class="math inline">\(\rho_1\)</span> and <span class="math inline">\(\rho_2\)</span> corresponds to <span class="math inline">\(u_2^*\)</span>, which is unstable.</p>
+<p>When varying also <span class="math inline">\(q\)</span>, the tangent bifurcations points <span class="math inline">\(\rho_1\)</span> and <span class="math inline">\(\rho_2\)</span> moves as well. In particular, as <span class="math inline">\(q\)</span> is reduced, the two bifurcation points will get closer until they meet for <span class="math inline">\(q=3\sqrt{3}\)</span>. This point is another bifurcation, called <em>cusp bifurcation</em>. Beyond this point, the system is never bistable.</p>
+<div id="47cbae98" class="cell" data-execution_count="4">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>sns.set_theme(<span class="st">"notebook"</span>, style<span class="op">=</span><span class="st">"whitegrid"</span>)</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>rho <span class="op">=</span> <span class="kw">lambda</span> u,q: q<span class="op">*</span>u<span class="op">/</span>((<span class="dv">1</span><span class="op">+</span>u<span class="op">**</span><span class="dv">2</span>)<span class="op">*</span>(q<span class="op">-</span>u))</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>Q <span class="op">=</span> []</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>R <span class="op">=</span> []</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> q <span class="kw">in</span> np.arange(<span class="dv">1</span>,<span class="dv">15</span>,<span class="fl">0.01</span>):</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    p <span class="op">=</span> np.polynomial.Polynomial([q,<span class="dv">0</span>,<span class="op">-</span>q,<span class="dv">2</span>])</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    bif_u <span class="op">=</span> np.array([r <span class="cf">for</span> r <span class="kw">in</span> p.roots() <span class="cf">if</span> np.isreal(r) <span class="kw">and</span> r <span class="op">&gt;=</span> <span class="dv">0</span>])</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="kw">not</span> <span class="bu">len</span>(bif_u): <span class="cf">continue</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>    Q.append(q)</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>    R.append([rho(u,q) <span class="cf">for</span> u <span class="kw">in</span> bif_u])</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>R <span class="op">=</span> np.array(R)</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>Q <span class="op">=</span> np.array(Q)</span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>q_cusp <span class="op">=</span> <span class="dv">3</span><span class="op">*</span>np.sqrt(<span class="dv">3</span>)</span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>u_cusp <span class="op">=</span> np.sqrt(<span class="dv">3</span>)</span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>r_cusp <span class="op">=</span> rho(u_cusp,q_cusp)</span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>ax.plot(Q,R.<span class="bu">min</span>(axis<span class="op">=</span><span class="dv">1</span>),<span class="st">'r-'</span>)</span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>ax.plot(Q,R.<span class="bu">max</span>(axis<span class="op">=</span><span class="dv">1</span>),<span class="st">'r-'</span>)</span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>ax.plot(q_cusp, r_cusp, <span class="st">'k.'</span>,markersize<span class="op">=</span><span class="dv">16</span>)</span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>ax.fill_between(Q,R.<span class="bu">min</span>(axis<span class="op">=</span><span class="dv">1</span>),R.<span class="bu">max</span>(axis<span class="op">=</span><span class="dv">1</span>),color<span class="op">=</span><span class="st">'r'</span>,alpha<span class="op">=</span><span class="fl">0.2</span>)</span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>ax.set_xlim([<span class="dv">2</span>,<span class="va">None</span>])</span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>ax.set_ylim([<span class="fl">0.2</span>,<span class="fl">0.8</span>])</span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">'$</span><span class="ch">\\</span><span class="st">rho$'</span>)</span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">'$q$'</span>)</span>
+<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a>ax.annotate(<span class="st">'  Cusp point'</span>,(q_cusp,r_cusp),ha<span class="op">=</span><span class="st">'left'</span>)</span>
+<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a>ax.annotate(<span class="st">'Bistable region'</span>,(<span class="dv">12</span>,<span class="fl">0.45</span>),ha<span class="op">=</span><span class="st">'center'</span>)</span>
+<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a>ax.annotate(<span class="st">'Refuge region'</span>,(<span class="dv">10</span>,<span class="fl">0.25</span>),ha<span class="op">=</span><span class="st">'center'</span>)</span>
+<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a>ax.annotate(<span class="st">'Outbreak region'</span>,(<span class="dv">12</span>,<span class="fl">0.65</span>),ha<span class="op">=</span><span class="st">'center'</span>)</span>
+<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="04_Predation_files/figure-html/cell-5-output-1.png" width="593" height="441" class="figure-img"></p>
+<figcaption>Bifurcation diagram with respect to <span class="math inline">\((q,\rho)\)</span> for the spruce budworm system. The shaded region is bistable. The cusp point is a bifurcation point of co-dimension 2. It occurs for <span class="math inline">\(q=3\sqrt{3}\)</span>.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>If we plot the surface of equilibria in the space <span class="math inline">\((q,\rho,u^*)\)</span>, as the solution of the equation <span class="math inline">\(h(u,\rho,q)=0\)</span>, we obtain the plot below. This plot clearly shows the bistable region and the threshold value (in red).</p>
+<div id="d3475a85" class="cell" data-execution_count="5">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pyvista <span class="im">as</span> pv</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>pv.set_jupyter_backend(<span class="st">'static'</span>)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="dv">50</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>bnd <span class="op">=</span> np.array([[<span class="fl">0.1</span>,<span class="fl">0.1</span>,<span class="dv">0</span>],[<span class="dv">20</span>,<span class="fl">1.0</span>,<span class="dv">20</span>]])</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>grid <span class="op">=</span> pv.ImageData(dimensions<span class="op">=</span>(n,n,n),</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>                    spacing<span class="op">=</span>(bnd[<span class="dv">1</span>,:]<span class="op">-</span>bnd[<span class="dv">0</span>,:])<span class="op">/</span>n,</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>                    origin<span class="op">=</span>bnd[<span class="dv">0</span>,:])</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>Q,R,U <span class="op">=</span> grid.points[:,<span class="dv">0</span>],grid.points[:,<span class="dv">1</span>],grid.points[:,<span class="dv">2</span>]</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>vals <span class="op">=</span> R<span class="op">*</span>(<span class="dv">1</span><span class="op">-</span>U<span class="op">/</span>Q)<span class="op">-</span>U<span class="op">/</span>(<span class="dv">1</span><span class="op">+</span>U<span class="op">**</span><span class="dv">2</span>)</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>sols <span class="op">=</span> U.copy()</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>grid.point_data[<span class="st">'sols'</span>] <span class="op">=</span> sols</span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>out <span class="op">=</span> grid.contour(<span class="dv">1</span>,scalars<span class="op">=</span>vals,rng<span class="op">=</span>[<span class="dv">0</span>,<span class="dv">0</span>])</span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>out.compute_normals(inplace<span class="op">=</span><span class="va">True</span>,auto_orient_normals<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>out.point_data[<span class="st">'normals_u'</span>] <span class="op">=</span> out.point_data[<span class="st">'Normals'</span>][:,<span class="dv">2</span>] <span class="op">&gt;</span> <span class="dv">0</span></span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>plotter <span class="op">=</span> pv.Plotter()</span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>plotter.add_mesh(out,scalars<span class="op">=</span><span class="st">'normals_u'</span>,cmap<span class="op">=</span>[<span class="st">'red'</span>,<span class="st">'blue'</span>],</span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>                 smooth_shading<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>plotter.set_scale(xscale<span class="op">=</span><span class="dv">1</span>, yscale<span class="op">=</span><span class="dv">20</span>, zscale<span class="op">=</span><span class="fl">0.5</span>)</span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>plotter.remove_scalar_bar()</span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>plotter.add_axes(xlabel<span class="op">=</span><span class="st">'q'</span>,ylabel<span class="op">=</span><span class="st">'rho'</span>,zlabel<span class="op">=</span><span class="st">'u'</span>)</span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>plotter.camera_position <span class="op">=</span> [</span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">41</span>, <span class="op">-</span><span class="dv">11</span>, <span class="dv">24</span>),</span>
+<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">11</span>, <span class="dv">11</span>, <span class="fl">1.7</span>),</span>
+<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a>    (<span class="op">-</span><span class="fl">0.33</span>,<span class="fl">0.4</span>,<span class="fl">0.84</span>),</span>
+<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a>plotter.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="04_Predation_files/figure-html/cell-6-output-1.png" class="img-fluid figure-img"></p>
+<figcaption>Bifurcation diagram with respect to <span class="math inline">\((q,\rho)\)</span> in 3D.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="hysteresis" class="level3" data-number="4.3.3">
+<h3 data-number="4.3.3" class="anchored" data-anchor-id="hysteresis"><span class="header-section-number">4.3.3</span> Hysteresis</h3>
+<p>Now that we have the bifurcation diagram, we can use it to find the periodic outbreaks. Remember that <span class="math inline">\(\rho\)</span> and <span class="math inline">\(q\)</span> are functions of <span class="math inline">\(S\)</span> and <span class="math inline">\(E\)</span>, but they vary very slowly compared to <span class="math inline">\(N(t)\)</span>. On the other hand, when <span class="math inline">\(N\)</span> is at equilibrium, it does not vary anymore, so even slow and small variations of <span class="math inline">\(E\)</span> and <span class="math inline">\(S\)</span> could matter.</p>
+<p>Suppose to start with small <span class="math inline">\(\rho\)</span>, say <span class="math inline">\(\rho &lt; \rho_1\)</span>. The spruce budworms is at refuge state <span class="math inline">\(u_1^*\)</span>. Now we slowly increase <span class="math inline">\(\rho\)</span>. The equilibrium <span class="math inline">\(u_1^*(\rho)\)</span> will only slightly increase. Once we react the point <span class="math inline">\(\rho=\rho_2\)</span>, the equilibrium <span class="math inline">\(u_1^*\)</span> disappears, so <span class="math inline">\(u\to u_3^*\)</span> (outbreak), the only other stable equilibrium. Note the the outbreak is fast, even for a small change of <span class="math inline">\(\rho\)</span>. For this reason, the tangent bifurcation is a <em>catastrophic bifurcation</em>. As we keep increasing <span class="math inline">\(\rho\)</span>, the outbreak equilibrium keeps increasing, but again slowly.</p>
+<p>Since <span class="math inline">\(\rho\)</span> is the intrinsic growth rate, we can assume that <span class="math inline">\(\rho\)</span> will now start to decrease, because there are too many spruce budworm consuming the resources. As we go back, decreasing <span class="math inline">\(\rho\)</span>, we follow a specular path, jumping at <span class="math inline">\(\rho=\rho_1\)</span> from the outbreak to the refuge equilibrium. We go back to the original situation.</p>
+<div id="011a6680" class="cell" data-execution_count="6">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>sns.set_theme(<span class="st">"notebook"</span>, style<span class="op">=</span><span class="st">"whitegrid"</span>)</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>q <span class="op">=</span> <span class="dv">12</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>u <span class="op">=</span> np.linspace(<span class="dv">0</span>,<span class="fl">0.9</span><span class="op">*</span>q,<span class="dv">1000</span>)</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>rho <span class="op">=</span> <span class="kw">lambda</span> u: q<span class="op">*</span>u<span class="op">/</span>((<span class="dv">1</span><span class="op">+</span>u<span class="op">**</span><span class="dv">2</span>)<span class="op">*</span>(q<span class="op">-</span>u))</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>p <span class="op">=</span> np.polynomial.Polynomial([q,<span class="dv">0</span>,<span class="op">-</span>q,<span class="dv">2</span>])</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>bif_u   <span class="op">=</span> np.array([r <span class="cf">for</span> r <span class="kw">in</span> p.roots() <span class="cf">if</span> np.isreal(r) <span class="kw">and</span> r <span class="op">&gt;=</span> <span class="dv">0</span>])</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>bif_rho <span class="op">=</span> rho(bif_u)</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>rho1 <span class="op">=</span> bif_rho.<span class="bu">min</span>()</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>rho2 <span class="op">=</span> bif_rho.<span class="bu">max</span>()</span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>p1 <span class="op">=</span> np.polynomial.Polynomial([q<span class="op">*</span>rho1,<span class="op">-</span>q<span class="op">-</span>rho1,q<span class="op">*</span>rho1,<span class="op">-</span>rho1])</span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>p2 <span class="op">=</span> np.polynomial.Polynomial([q<span class="op">*</span>rho2,<span class="op">-</span>q<span class="op">-</span>rho2,q<span class="op">*</span>rho2,<span class="op">-</span>rho2])</span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>u0 <span class="op">=</span> p1.roots().<span class="bu">min</span>()</span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>u1 <span class="op">=</span> bif_u.<span class="bu">min</span>()</span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>u2 <span class="op">=</span> p2.roots().<span class="bu">max</span>()</span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>u3 <span class="op">=</span> bif_u.<span class="bu">max</span>()</span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>rho_neg <span class="op">=</span> p(u) <span class="op">&lt;</span> <span class="dv">0</span></span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> plt.xkcd(scale<span class="op">=</span><span class="fl">0.5</span>):</span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a>    fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>    sns.despine()</span>
+<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a>    ax.xaxis.set_ticks([])</span>
+<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a>    ax.yaxis.set_ticks([])</span>
+<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a>    ax.plot(rho(u), u, <span class="st">'k'</span>, lw<span class="op">=</span><span class="fl">1.0</span>)</span>
+<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> lb,ub <span class="kw">in</span> [[u0,u1],[u2,u3]]:</span>
+<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a>        uu <span class="op">=</span> np.linspace(lb,ub,<span class="dv">100</span>)</span>
+<span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a>        ax.plot(rho(uu),uu, <span class="st">'r'</span>)</span>
+<span id="cb6-37"><a href="#cb6-37" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> lb,ub <span class="kw">in</span> [[u1,u2],[u3,u0]]:</span>
+<span id="cb6-38"><a href="#cb6-38" aria-hidden="true" tabindex="-1"></a>        ax.plot([rho(lb),rho(ub)],[lb,ub], <span class="st">'r'</span>)</span>
+<span id="cb6-39"><a href="#cb6-39" aria-hidden="true" tabindex="-1"></a>    ax.plot([rho(<span class="fl">.7</span><span class="op">*</span>u0<span class="op">+</span><span class="fl">.3</span><span class="op">*</span>u1)],[<span class="fl">.7</span><span class="op">*</span>u0<span class="op">+</span><span class="fl">.3</span><span class="op">*</span>u1],<span class="st">'r&gt;'</span>)</span>
+<span id="cb6-40"><a href="#cb6-40" aria-hidden="true" tabindex="-1"></a>    ax.plot([rho(<span class="fl">0.5</span><span class="op">*</span>(u2<span class="op">+</span>u3))],[<span class="fl">0.5</span><span class="op">*</span>(u2<span class="op">+</span>u3)],<span class="st">'r&gt;'</span>)</span>
+<span id="cb6-41"><a href="#cb6-41" aria-hidden="true" tabindex="-1"></a>    ax.plot([rho2],[<span class="fl">0.5</span><span class="op">*</span>(u1<span class="op">+</span>u2)],<span class="st">'r^'</span>)</span>
+<span id="cb6-42"><a href="#cb6-42" aria-hidden="true" tabindex="-1"></a>    ax.plot([rho1],[<span class="fl">0.5</span><span class="op">*</span>(u3<span class="op">+</span>u0)],<span class="st">'rv'</span>)</span>
+<span id="cb6-43"><a href="#cb6-43" aria-hidden="true" tabindex="-1"></a>    ax.grid(<span class="va">False</span>)</span>
+<span id="cb6-44"><a href="#cb6-44" aria-hidden="true" tabindex="-1"></a>    ax.set_xlabel(<span class="st">'$</span><span class="ch">\\</span><span class="st">rho$'</span>)</span>
+<span id="cb6-45"><a href="#cb6-45" aria-hidden="true" tabindex="-1"></a>    ax.set_ylabel(<span class="st">'$u^*$'</span>)</span>
+<span id="cb6-46"><a href="#cb6-46" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb6-47"><a href="#cb6-47" aria-hidden="true" tabindex="-1"></a>    ax.annotate(<span class="st">'  $</span><span class="ch">\\</span><span class="st">rho_2$'</span>,(bif_rho[<span class="dv">0</span>],bif_u[<span class="dv">0</span>]),ha<span class="op">=</span><span class="st">'left'</span>,va<span class="op">=</span><span class="st">'center'</span>)</span>
+<span id="cb6-48"><a href="#cb6-48" aria-hidden="true" tabindex="-1"></a>    ax.annotate(<span class="st">'$</span><span class="ch">\\</span><span class="st">rho_1$  '</span>,(bif_rho[<span class="dv">1</span>],bif_u[<span class="dv">1</span>]),ha<span class="op">=</span><span class="st">'right'</span>,va<span class="op">=</span><span class="st">'center'</span>)</span>
+<span id="cb6-49"><a href="#cb6-49" aria-hidden="true" tabindex="-1"></a>    ax.annotate(<span class="st">'$q$'</span>,(rho(u).<span class="bu">max</span>(),q),ha<span class="op">=</span><span class="st">'left'</span>,va<span class="op">=</span><span class="st">'top'</span>)</span>
+<span id="cb6-50"><a href="#cb6-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-51"><a href="#cb6-51" aria-hidden="true" tabindex="-1"></a>    plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="04_Predation_files/figure-html/cell-7-output-1.png" width="563" height="411" class="figure-img"></p>
+<figcaption>Bifurcation diagram with respect to <span class="math inline">\(\rho\)</span> for the spruce budworm system. In blue, the stable equilibrium, in red the unstable one. The shaded region is bistable.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>The result is a <em>hysteresis loop</em>, which could explain the periodic outbreaks.</p>
+<p>We will analyze this model more in depth during the Lab session.</p>
+
+
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="ref-holling1965functional" class="csl-entry" role="listitem">
+Holling, Crawford Stanley. 1965. <span>“The Functional Response of Predators to Prey Density and Its Role in Mimicry and Population Regulation.”</span> <em>The Memoirs of the Entomological Society of Canada</em> 97 (S45): 5–60. <a href="https://doi.org/10.4039/entm9745fv">https://doi.org/10.4039/entm9745fv</a>.
+</div>
+<div id="ref-ip14" class="csl-entry" role="listitem">
+Iannelli, Mimmo, and Andrea Pugliese. 2014. <em>An Introduction to Mathematical Population Dynamics</em>. Vol. 79. Springer. <a href="https://strutture-provincia.primo.exlibrisgroup.com/permalink/39SBT_INST/ghkipk/alma991006883209706186">https://strutture-provincia.primo.exlibrisgroup.com/permalink/39SBT_INST/ghkipk/alma991006883209706186</a>.
+</div>
+<div id="ref-ludwig1978qualitative" class="csl-entry" role="listitem">
+Ludwig, Donald, Dixon D Jones, Crawford S Holling, et al. 1978. <span>“Qualitative Analysis of Insect Outbreak Systems: The Spruce Budworm and Forest.”</span> <em>Journal of Animal Ecology</em> 47 (1): 315–32. <a href="https://doi.org/10.2307/3939">https://doi.org/10.2307/3939</a>.
+</div>
+</div>
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./03_Logistic.html" class="pagination-link" aria-label="Logistic model">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Logistic model</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./references.html" class="pagination-link" aria-label="References">
+        <span class="nav-page-text">References</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

@@ -85,7 +85,7 @@ div.csl-indent {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./Assignments/01_recap_ODEs.html" rel="next">
+<link href="./03_Logistic.html" rel="next">
 <link href="./01_Bathtub.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -219,6 +219,24 @@ window.Quarto = {
  <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Population dynamics</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03_Logistic.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Logistic model</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04_Predation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Predation models</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -255,8 +273,14 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Laboratories/01 ODE Integration/lab_ODEinteg.html" class="sidebar-item-text sidebar-link">
+  <a href="./Laboratories/01_ODE_Integration/lab_ODEinteg.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Lab 01: Numerical integration</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Laboratories/02_Predation/lab_Predation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab 02: Predation</span></a>
   </div>
 </li>
       </ul>
@@ -284,7 +308,7 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Laboratories/00 Intro Matlab/introMATLAB.html" class="sidebar-item-text sidebar-link">
+  <a href="./Laboratories/00_Intro_Matlab/introMATLAB.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Introduction to MATLAB</span></span></a>
   </div>
 </li>
@@ -307,7 +331,6 @@ window.Quarto = {
   <li><a href="#basic-reproduction-number" id="toc-basic-reproduction-number" class="nav-link" data-scroll-target="#basic-reproduction-number"><span class="header-section-number">2.1.3</span> Basic reproduction number</a></li>
   <li><a href="#migration" id="toc-migration" class="nav-link" data-scroll-target="#migration"><span class="header-section-number">2.1.4</span> Migration</a></li>
   <li><a href="#exogenous-variability" id="toc-exogenous-variability" class="nav-link" data-scroll-target="#exogenous-variability"><span class="header-section-number">2.1.5</span> Exogenous variability</a></li>
-  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><span class="header-section-number">2.1.6</span> References</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -318,6 +341,7 @@ window.Quarto = {
 <header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./01_Bathtub.html">Lectures</a></li><li class="breadcrumb-item"><a href="./02_Population.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Population dynamics</span></a></li></ol></nav>
 <div class="quarto-title">
 <h1 class="title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Population dynamics</span></h1>
+<p class="subtitle lead">This lecture is based on <span class="citation" data-cites="ip14">(<a href="references.html#ref-ip14" role="doc-biblioref">Iannelli and Pugliese 2014, vol. 79, secs. 1.1–1.4</a>)</span></p>
 </div>
 
 
@@ -335,7 +359,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">September 22, 2024</p>
+      <p class="date-modified">September 29, 2024</p>
     </div>
   </div>
     
@@ -348,7 +372,6 @@ window.Quarto = {
 
 <section id="population-growth-model" class="level2" data-number="2.1">
 <h2 data-number="2.1" class="anchored" data-anchor-id="population-growth-model"><span class="header-section-number">2.1</span> Population growth model</h2>
-<p><em>Note: this lecture is based on <span class="citation" data-cites="ip14">(<a href="02_Population.html#ref-ip14" role="doc-biblioref">Iannelli and Pugliese 2014, vol. 79, secs. 1.1–1.6</a>)</span>.</em></p>
 <p>We have seen, using the bathtub analogy, that the <em>fundamental balance equation of population dynamics</em> take the form <span class="math display">\[
 N'(t) = B(t) - D(t) + I(t) - E(t),
 \]</span></p>
@@ -492,7 +515,7 @@ N(t) \to N^*
 \]</span></p>
 <p>for all <span class="math inline">\(N^0\)</span>. The equilibrium is therefore <em>globally</em> stable when <span class="math inline">\(r&lt;0\)</span>.</p>
 <p><strong>5) Phase portrait.</strong> The phase portrait of a dynamical system is the collection of all possible orbits. Here, the phase space is <span class="math inline">\(\Omega=[0,\infty)\)</span>. The only equilibrium we have, <span class="math inline">\(N^*\)</span>, is a <em>barrier</em> to other orbits, because orbits cannot intersect (See <a href="IntroODE.html#prp-orbits" class="quarto-xref">Proposition&nbsp;<span>A.2</span></a>). Therefore:</p>
-<div id="abf50430" class="cell" data-execution_count="1">
+<div id="725cdfaa" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -536,7 +559,7 @@ N(t) \to N^*
 <p>For this problem we actually have the general solution <span class="math display">\[
 N(t) = (N_0 - N^*)e^{rt} + N^*.
 \]</span></p>
-<div id="edc8d287" class="cell" data-execution_count="2">
+<div id="72514e47" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -614,17 +637,13 @@ N(t) = e^{\bar{r}(t-t_0)}N_\pi(t),
 N(t_0 + kT) = e^{\bar{r}kT}N_\pi(t_0) = e^{k\bar{r}}N(t_0),
 \]</span></p>
 <p>so after <span class="math inline">\(k\)</span> periods the solution grows by a factor <span class="math inline">\(e^{k\bar{r}}\)</span>. This factor is called <em>Floquet multiplier</em>.</p>
-</section>
-<section id="references" class="level3" data-number="2.1.6">
-<h3 data-number="2.1.6" class="anchored" data-anchor-id="references"><span class="header-section-number">2.1.6</span> References</h3>
-<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+
+
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
 <div id="ref-ip14" class="csl-entry" role="listitem">
-Iannelli, Mimmo, and Andrea Pugliese. 2014. <em>An Introduction to
-Mathematical Population Dynamics</em>. Vol. 79. Springer. <a href="https://strutture-provincia.primo.exlibrisgroup.com/permalink/39SBT_INST/ghkipk/alma991006883209706186">https://strutture-provincia.primo.exlibrisgroup.com/permalink/39SBT_INST/ghkipk/alma991006883209706186</a>.
+Iannelli, Mimmo, and Andrea Pugliese. 2014. <em>An Introduction to Mathematical Population Dynamics</em>. Vol. 79. Springer. <a href="https://strutture-provincia.primo.exlibrisgroup.com/permalink/39SBT_INST/ghkipk/alma991006883209706186">https://strutture-provincia.primo.exlibrisgroup.com/permalink/39SBT_INST/ghkipk/alma991006883209706186</a>.
 </div>
 </div>
-
-
 </section>
 </section>
 
@@ -1056,8 +1075,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./Assignments/01_recap_ODEs.html" class="pagination-link" aria-label="Solving ODEs">
-        <span class="nav-page-text">Solving ODEs</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./03_Logistic.html" class="pagination-link" aria-label="Logistic model">
+        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Logistic model</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

@@ -30,7 +30,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./Laboratories/00 Intro Matlab/introMATLAB.html" rel="next">
+<link href="./Laboratories/00_Intro_Matlab/introMATLAB.html" rel="next">
 <link href="./IntroODE.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -164,6 +164,24 @@ window.Quarto = {
  <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Population dynamics</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03_Logistic.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Logistic model</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04_Predation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Predation models</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -200,8 +218,14 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Laboratories/01 ODE Integration/lab_ODEinteg.html" class="sidebar-item-text sidebar-link">
+  <a href="./Laboratories/01_ODE_Integration/lab_ODEinteg.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Lab 01: Numerical integration</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Laboratories/02_Predation/lab_Predation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab 02: Predation</span></a>
   </div>
 </li>
       </ul>
@@ -229,7 +253,7 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Laboratories/00 Intro Matlab/introMATLAB.html" class="sidebar-item-text sidebar-link">
+  <a href="./Laboratories/00_Intro_Matlab/introMATLAB.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Introduction to MATLAB</span></span></a>
   </div>
 </li>
@@ -249,8 +273,8 @@ window.Quarto = {
   <li><a href="#structural-stability" id="toc-structural-stability" class="nav-link" data-scroll-target="#structural-stability"><span class="header-section-number">B.2</span> Structural stability</a></li>
   <li><a href="#bifurcations" id="toc-bifurcations" class="nav-link" data-scroll-target="#bifurcations"><span class="header-section-number">B.3</span> Bifurcations</a></li>
   <li><a href="#continuation-of-equilibria" id="toc-continuation-of-equilibria" class="nav-link" data-scroll-target="#continuation-of-equilibria"><span class="header-section-number">B.4</span> Continuation of equilibria</a></li>
-  <li><a href="#tangent-bifurcation" id="toc-tangent-bifurcation" class="nav-link" data-scroll-target="#tangent-bifurcation"><span class="header-section-number">B.5</span> Tangent bifurcation</a></li>
-  <li><a href="#transcritical-bifurcation" id="toc-transcritical-bifurcation" class="nav-link" data-scroll-target="#transcritical-bifurcation"><span class="header-section-number">B.6</span> Transcritical bifurcation</a></li>
+  <li><a href="#sec-tangbif" id="toc-sec-tangbif" class="nav-link" data-scroll-target="#sec-tangbif"><span class="header-section-number">B.5</span> Tangent bifurcation</a></li>
+  <li><a href="#sec-transbif" id="toc-sec-transbif" class="nav-link" data-scroll-target="#sec-transbif"><span class="header-section-number">B.6</span> Transcritical bifurcation</a></li>
   <li><a href="#hopf-bifurcation" id="toc-hopf-bifurcation" class="nav-link" data-scroll-target="#hopf-bifurcation"><span class="header-section-number">B.7</span> Hopf bifurcation</a></li>
   <li><a href="#limit-cycle-tangent-bifurcation" id="toc-limit-cycle-tangent-bifurcation" class="nav-link" data-scroll-target="#limit-cycle-tangent-bifurcation"><span class="header-section-number">B.8</span> Limit cycle tangent bifurcation</a></li>
   </ul>
@@ -273,7 +297,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">September 18, 2024</p>
+      <p class="date-modified">September 29, 2024</p>
     </div>
   </div>
     
@@ -393,8 +417,8 @@ y' = f(y,p),
 </ul>
 <p>Note that if one real eigenvalue is zero, then we cannot apply the implicit function theorem, and the curve <span class="math inline">\(\boldsymbol{\phi}\)</span> cannot be defined at <span class="math inline">\(p=\bar{p}\)</span> (this is the case of the first 2 bifurcations.)</p>
 </section>
-<section id="tangent-bifurcation" class="level2" data-number="B.5">
-<h2 data-number="B.5" class="anchored" data-anchor-id="tangent-bifurcation"><span class="header-section-number">B.5</span> Tangent bifurcation</h2>
+<section id="sec-tangbif" class="level2" data-number="B.5">
+<h2 data-number="B.5" class="anchored" data-anchor-id="sec-tangbif"><span class="header-section-number">B.5</span> Tangent bifurcation</h2>
 <p>The simplest bifurcation is perhaps the tangent bifurcation. Consider the following ODE: <span class="math display">\[
 y' = f(y,p) = p - y^2,
 \]</span></p>
@@ -419,8 +443,8 @@ y' = f(y,p) = p - y^2,
 </figure>
 </div>
 </section>
-<section id="transcritical-bifurcation" class="level2" data-number="B.6">
-<h2 data-number="B.6" class="anchored" data-anchor-id="transcritical-bifurcation"><span class="header-section-number">B.6</span> Transcritical bifurcation</h2>
+<section id="sec-transbif" class="level2" data-number="B.6">
+<h2 data-number="B.6" class="anchored" data-anchor-id="sec-transbif"><span class="header-section-number">B.6</span> Transcritical bifurcation</h2>
 <p>The transcritical bifurcation occurs when an equilibrium has 0 real part and also <span class="math inline">\(\partial_p f(\bar{y},\bar{p})=0\)</span>. The normal form is: <span class="math display">\[
 y' = py - y^2.
 \]</span></p>
@@ -1010,7 +1034,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./Laboratories/00 Intro Matlab/introMATLAB.html" class="pagination-link" aria-label="Introduction to MATLAB">
+      <a href="./Laboratories/00_Intro_Matlab/introMATLAB.html" class="pagination-link" aria-label="Introduction to MATLAB">
         <span class="nav-page-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Introduction to MATLAB</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
