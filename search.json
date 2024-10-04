@@ -284,7 +284,7 @@
     "href": "Assignments/02_population.html#periodic-solutions",
     "title": "Population dynamics",
     "section": "",
-    "text": "After showing that the function \\[\n\\pi(t) = \\int_0^t r(s)\\,\\mathrm{d}s - \\bar{r} t\n\\]\n\n\n\nShow that the solution of the ODE is \\[\nN(t) = e^{\\bar{r}t} N_\\pi(t),\n\\]\n\n\n\nModify the ODE by adding a time-dependent migration \\[\nN'(t) = r(t)N(t) + m(t),\n\\tag{3}\\]\n\n\n\n\nShow that if \\(\\bar{r} &lt; 0\\), then the solution to Equation 3 with initial condition \\(N(0)=N_0\\) is \\[\nN(t) = e^{\\int_0^t r(\\sigma)\\mathrm{d}\\sigma} N_0 + \\int_0^t e^{\\int_s^t r(\\sigma)\\mathrm{d}\\sigma} m(s)\\,\\mathrm{d}s\n\\]",
+    "text": "After showing that the function \\[\n\\pi(t) = \\int_0^t r(s)\\,\\mathrm{d}s - \\bar{r} t\n\\]\n\n\n\n\n\n\n\n\nSolution\n\n\n\n\n\nFirst, we need to show that \\(\\pi(t+T)=\\pi(t)\\) for all \\(t\\). Hence, with \\(t\\in(0,T)\\), we have: \\[\\begin{split}\\pi(t+T) &= \\int_0^{t+T} r(s)\\,\\mathrm{d}s - \\bar{r} (t+T)\\\\ &= \\int_0^t r(s)\\,\\mathrm{d}s + \\int_t^{t+T} r(s)\\,\\mathrm{d}s - \\bar{r}T - \\bar{r}t \\\\ [\\tau=s-t] &= \\pi(t) + \\int_0^T r(\\tau+T)\\,\\mathrm{d}\\tau - \\bar{r}T \\\\ [r(\\tau+T)=r(t)] &= \\pi(t) + \\int_0^T r(\\tau)\\,\\mathrm{d}\\tau - \\bar{r}T \\\\  &= \\pi(t) + \\bar{r}T - \\bar{r}T = \\pi(t). \\end{split}\\]\nNow we can compute the limit: \\[\\lim_{t\\to\\infty} \\frac{1}{t}\\int_0^t r(s)\\,\\mathrm{d}s = \\lim_{t\\to\\infty} \\frac{\\pi(t)+\\bar{r}t}{t} = \\bar{r} + \\lim_{t\\to\\infty} \\frac{\\pi(t)}{t}.\\]\nThe second term is zero: in fact, since \\(\\pi(t)\\) is periodic, we can take \\(t=t_0+nT\\), \\(n=0,1,\\ldots\\) and see that \\(a_n := \\frac{\\pi(t_0+nT)}{t_0+nT} = \\frac{\\pi(t_0)}{t_0+nT}\\to 0\\) as \\(n\\to\\infty\\).\n\n\n\n\nShow that the solution of the ODE is \\[\nN(t) = e^{\\bar{r}t} N_\\pi(t),\n\\]\n\n\n\n\n\n\n\n\nSolution\n\n\n\n\n\nThe solution of the ODE is \\[\nN(t) = N_0 e^{\\int_0^t r(s)\\,\\mathrm{d}s},\n\\]\nso using the previous point we get \\[\nN(t) = N_0 e^{\\bar{r}t + \\pi(t)} = e^{\\bar{r}t}N_\\pi(t),\n\\]\nwhere \\(N_\\pi(t) = N_0 e^{\\pi(t)}\\) is clearly \\(T\\)-periodic.\n\n\n\n\nModify the ODE by adding a time-dependent migration \\[\nN'(t) = r(t)N(t) + m(t),\n\\tag{3}\\]\n\n\n\n\n\n\n\n\n\nSolution\n\n\n\n\n\nWe observe that \\[\n\\int_s^t r(\\sigma)\\,\\mathrm{d}\\sigma = \\bar{r}(t-s) + \\pi(t)-\\pi(s),\n\\]\nso the function reads: \\[\nN_\\infty(t) = e^{\\int_0^t r(\\sigma)\\,\\mathrm{d}\\sigma} \\int_{-\\infty}^t e^{-\\bar{r}s}e^{-\\pi(s)} m(s)\\,\\mathrm{d}s.\n\\]\nThe integrand goes to zero as \\(s\\to-\\infty\\), since \\(\\bar{r}&lt;0\\) and \\(e^{-\\pi(s)}m(s)\\) is continuous and periodic, hence bounded. So \\(N_\\infty(t)\\) is well-defined. It is also continuously differentiable, because the integrand is continous. Differentiating we have: \\[\n\\begin{split}N'_\\infty(t) &= r(t) N_\\infty(t) + e^{\\int_0^t r(\\sigma)\\,\\mathrm{d}\\sigma} e^{-\\bar{r}t}e^{-\\pi(t)} m(t) \\\\\n&= r(t) N_\\infty(t) + m(t),\\end{split}\n\\]\nthus it satisfies the ODE.\nThe periodicity is shown as follows: \\[\n\\begin{split}N_\\infty(t+T) &= e^{\\bar{r}(t+T)+\\pi(t+T)} \\int_{-\\infty}^{t+T} e^{-\\bar{r}s}e^{-\\pi(s)} m(s)\\,\\mathrm{d}s \\\\ [\\tau=s-T] &= e^{\\bar{r}(t+T)+\\pi(t)} \\int_{-\\infty}^{t} e^{-\\bar{r}(\\tau+T)}e^{-\\pi(\\tau+T)} m(\\tau+T)\\,\\mathrm{d}\\tau \\\\  &= e^{\\int_0^t r(\\sigma)\\mathrm{d}\\sigma} e^{\\bar{r}T} \\int_{-\\infty}^{t} e^{-\\bar{r}T} e^{-\\bar{r}\\tau}e^{-\\pi(\\tau)} m(\\tau)\\,\\mathrm{d}\\tau = N_\\infty(t). \\end{split}\n\\]\n\n\n\n\nShow that if \\(\\bar{r} &lt; 0\\), then the solution to Equation 3 with initial condition \\(N(0)=N_0\\) is \\[\nN(t) = e^{\\int_0^t r(\\sigma)\\mathrm{d}\\sigma} N_0 + \\int_0^t e^{\\int_s^t r(\\sigma)\\mathrm{d}\\sigma} m(s)\\,\\mathrm{d}s\n\\]\n\n\n\n\n\n\n\n\nSolution\n\n\n\n\n\nWe differentiate the solution: \\[\\begin{split}N'(t) &= r(t) e^{\\int_0^t r(\\sigma)\\,\\mathrm{d}\\sigma} N_0 + r(t) e^{\\int_0^t r(\\sigma)\\,\\mathrm{d}\\sigma} \\int_0^t e^{\\int_s^t r(\\sigma)\\,\\mathrm{d}\\sigma} m(s)\\mathrm{d}s \\\\ &+ e^{\\int_0^t r(\\sigma)\\mathrm{d}\\sigma} e^{-\\int_0^t r(\\sigma)\\mathrm{d}\\sigma} m(t) \\\\ &= r(t) N(t) + m(t).\\end{split}\\]\nFor the initial condition, \\(N(0)=N_0\\). Thus it satisfies the IVP.\nFor the limit: \\[\n\\begin{split}N(t)-N_\\infty(t) &= e^{\\int_0^t r(\\sigma)\\mathrm{d}\\sigma} N_0 - e^{\\int_0^t r(\\sigma)\\mathrm{d}\\sigma} \\int_{-\\infty}^0 e^{-\\int_0^s r(\\sigma)\\mathrm{d}\\sigma} m(s)\\mathrm{d}s \\\\ &= e^{\\bar{r}t}\\Bigl( N_\\pi(t) - N_\\infty(0) \\Bigr),\\end{split}\n\\]\nwhich tends to 0 as \\(t\\to\\infty\\) since \\(\\bar{r}&lt;0\\).",
     "crumbs": [
       "Assignments",
       "Population dynamics"
@@ -295,7 +295,7 @@
     "href": "Assignments/02_population.html#logistic-model",
     "title": "Population dynamics",
     "section": "Logistic model",
-    "text": "Logistic model\nConsider the logistic equation \\[\nN'(t) = r\\Bigl(1-\\frac{N}{K}\\Bigr)N.\n\\]\n\nFind the equilibria of the ODE and study their stability.\n\n\nStudy the global stability of the equilibria.\n\n\nWould it make sense to assume \\(r&lt;0\\) and \\(K&gt;0\\)?",
+    "text": "Logistic model\nConsider the logistic equation \\[\nN'(t) = r\\Bigl(1-\\frac{N}{K}\\Bigr)N.\n\\]\n\nFind the equilibria of the ODE and study their stability.\n\n\n\n\n\n\n\nSolution\n\n\n\n\n\nThe equilibria are the zeros of the function \\[\nf(N) = rN\\Bigl(1-\\frac{N}{K}\\Bigr),\n\\]\nwhich cancels for \\(N=0\\) and \\(N=K\\). Thus there are 2 equilibria.\nThe local stability is determined by the sign of \\(f'(N)\\) at the equilibrium. We have \\[\nf'(N) = r\\Bigl(1-\\frac{2N}{K}\\Bigr),\n\\]\nso \\(f'(0) = r\\) and \\(f'(K)=-r\\). Hence, the equilibrium \\(N=0\\) is locally unstable whereas \\(N=K\\) is asymptotically stable.\n\n\n\n\nStudy the global stability of the equilibria.\n\n\n\n\n\n\n\nSolution\n\n\n\n\n\nSince \\(f(N)&gt;0\\) for \\(N\\in(0,K)\\), we have \\(N'&gt;0\\) so \\(N(t)\\) grows monotonically for its initial condition \\(N_0\\in(0,K)\\). But \\(N=K\\) is an equilibrium, which the trajectory cannot cross, hence \\(N(t)\\to K\\) from the left. Similarly, on the right of the equilibrium \\(N=K\\), we have that \\(N'=f(N)&lt;0\\) for \\(N&gt;K\\), thus \\(N(t)\\to K\\) from the right when \\(N_0&gt;K\\). In conclusion, the basin of attraction of \\(N=K\\) is \\(\\mathbb{R}^+\\) (zero excluded).\n\n\n\n\nWould it make sense to assume \\(r&lt;0\\) and \\(K&gt;0\\)?\n\n\n\n\n\n\n\nSolution\n\n\n\n\n\nIf \\(r&lt;0\\), the stability of the equilibria is swapped, that is \\(N=0\\) is locally stable and \\(N=K\\) is unstable, respectively. If \\(N_0\\in(0,K)\\), then \\(N(t)\\to 0\\). However, for \\(N_0&gt;K\\), the solution diverges. These assumptions do not make sense biologically speaking.",
     "crumbs": [
       "Assignments",
       "Population dynamics"
@@ -306,10 +306,54 @@
     "href": "Assignments/02_population.html#global-well-posedness",
     "title": "Population dynamics",
     "section": "Global well-posedness",
-    "text": "Global well-posedness\nConsider the following ODE model: \\[\nN'(t) = ( \\beta N^2 − \\mu N )(1-\\gamma N).\n\\]\nFind all non-negative equilibria and discuss their stability. From the direction field conclude that all solutions are bounded, and hence solutions are globally defined (no blow-up in finite time).",
+    "text": "Global well-posedness\nConsider the following ODE model: \\[\nN'(t) = ( \\beta N^2 − \\mu N )(1-\\gamma N).\n\\]\nFind all non-negative equilibria and discuss their stability. From the direction field conclude that all solutions are bounded, and hence solutions are globally defined (no blow-up in finite time).\n\n\n\n\n\n\nSolution\n\n\n\n\n\nEquilibria are: \\(N_1 = 0\\), \\(N_2 = \\mu/\\beta\\), and \\(N_3 = 1/\\gamma\\). With no loss of generality we can assume \\(N_1 &lt; N_2 &lt; N_3\\). From the sign of the right hand side, we see that \\(N_1\\) and \\(N_3\\) are asymptotically stable, and \\(N_2\\) is unstable. In particular, the basin of attraction of \\(N_1\\) is \\((-\\infty,N_2)\\), and the one for \\(N_2\\) is \\((N_2,\\infty)\\). Thus, if \\(N(0)\\in I\\), then \\(N(t)\\in I\\) for all \\(t\\). Since solutions are bounded, they are globally defined.",
     "crumbs": [
       "Assignments",
       "Population dynamics"
+    ]
+  },
+  {
+    "objectID": "Assignments/03_spruce.html",
+    "href": "Assignments/03_spruce.html",
+    "title": "Predation",
+    "section": "",
+    "text": "Fishery model\n(From Strogatz, 2015, exercise 3.7.4)\nA fishery model with harvesting has the form \\[\nN' = r\\Bigl(1-\\frac{N}{K}\\Bigr)N - E\\frac{N}{A+N},\n\\]\nwhere all parameters are positive. The parameter \\(E\\) is the harvest effort. Note that harvest rate increases with \\(N\\) because it is harder to catch fish when the population size is small.\nfor a suitable choice of quantities.",
+    "crumbs": [
+      "Assignments",
+      "Predation"
+    ]
+  },
+  {
+    "objectID": "Assignments/03_spruce.html#fishery-model",
+    "href": "Assignments/03_spruce.html#fishery-model",
+    "title": "Predation",
+    "section": "",
+    "text": "Give a biological interpretation of \\(A\\).\n\n\nShow that the system can be rewritten in dimensionless form as \\[\n\\dot{u} = u(1-u) - h\\frac{u}{a+u}\n\\]\n\n\n\nShow that the system can have one, two, or three equilibria, depending on the values of \\(a\\) and \\(h\\). Classify the stability in each case.\n\n\nPlot the bifurcation diagram with respect to \\(h\\), for a fixed value of \\(a\\). Determine all bifurcation points and whether they are catastrophic or not. Is there a bistable region?\n\n\nSuppose that we slowly increase the fishing effort from zero, assuming that the fish population is at the carrying capacity at the beginning. Show the dynamics.\n\n\nPlot the stability diagram of the system in \\((a,h)\\) parameter space. Can hysteresis occur in any of the stability regions?",
+    "crumbs": [
+      "Assignments",
+      "Predation"
+    ]
+  },
+  {
+    "objectID": "Assignments/03_spruce.html#spruce-budworm-model",
+    "href": "Assignments/03_spruce.html#spruce-budworm-model",
+    "title": "Predation",
+    "section": "Spruce-budworm model",
+    "text": "Spruce-budworm model\nThe spruce-budworm model describes the population of budworms over time, for a given initial population. There are only 2 relevant parameters: \\(\\rho\\), the intrinsic growth rate of budworms; and \\(q\\), the carrying capacity. An outbreak is when the stable population is very large, whereas a refuge is when it is very low.\nDepending on \\(\\rho\\), we may have various stable population levels, according to the following diagrams:\n\nIn diagram (A) we see the effect of changing \\(\\rho\\) with a fixed value of \\(q = \\bar{q}\\). In diagram (B) we visualize the region in the parameters space where 3 equilibria are present (bistable region).\nWe would like to analyze various strategies to efficiently go from an outbreak to a refuge.\n\nStrategy (1): we reduce the population by reducing \\(\\rho\\) (for instance, by preventing mating). Does it work? Use the diagrams to show how the population varies as we reduce \\(\\rho\\).\n\n\nStrategy (2): we reduce the population by using an insecticide. Does it work? Use diagram (A). Observe that if we kill worms, we move the population away from the equilibrium, hence it will quickly rebound to the closest stable equilibrium.\n\n\nStrategy (3): we reduce \\(q\\), for instance by spraying a defoliant. Does it work? Use diagram (B).\n\n\nStrategy (1+2+3): we reduce \\(q\\) and \\(\\rho\\) simultaneously, and then use the insecticide. Does it work?\n\n\nAfter the application of Strategy (1), \\(\\rho\\) starts to increase again back to its original value (large). Explain how the population varies. Does it increase in the exactly same matter as it decreased?",
+    "crumbs": [
+      "Assignments",
+      "Predation"
+    ]
+  },
+  {
+    "objectID": "Assignments/03_spruce.html#logistic-with-resources",
+    "href": "Assignments/03_spruce.html#logistic-with-resources",
+    "title": "Predation",
+    "section": "Logistic with resources",
+    "text": "Logistic with resources\nAssume that the growth rate of a population depends on available resources \\(\\rho(t)\\), according to a general law \\(r(t) = G(\\rho(t))\\).\nAssume for the moment that the total amount of resources is a fixed constant \\(C\\), but they can be free (hence available, denoted by \\(\\rho(t)\\)) or used by the population, denoted by \\(H(N(t))\\), where dependence on the population is shown. In other words \\[\n\\rho(t) = C − H(N(t)),\n\\tag{1}\\]\nand the resulting model \\[\nN' = G(C − H (N)) N,\n\\tag{2}\\]\nwill be specified when the functions \\(G(\\cdot)\\) and \\(H(\\cdot)\\) are given.\n\nExplain why reasonable assumptions are that both \\(G\\) and \\(H\\) are increasing functions with \\(G(0) &lt; 0\\), \\(H(0) = 0\\).\n\n\nChoose a linear form for \\(G\\) and \\(H\\) and show that the growth rate has the form \\(r(N) = r − \\alpha N\\).\n\n\nWith the previous assumptions, does Equation 2 always have a positive equilibrium? If not, find the conditions under which it does and find the expressions for the intrinsic rate of growth \\(r\\) and the carrying capacity \\(K\\).\n\n\nUsing generic functions \\(G\\) and \\(H\\) satisfying the assumptions in 1., find under which conditions the equation \\((2)\\) has a unique positive equilibrium. When is it asymptotically stable?\n\n\nWhat could be other reasonable assumptions for \\(\\rho\\) instead of Equation 1?\n\n\nModify the equation to \\[\n\\begin{cases}\nN' = G(R)N, & \\\\\nR' = \\rho_0 −H(R,N), &\n\\end{cases}\n\\]\n\nwhere \\[\nG(R)=m\\frac{R-a}{R+1}-\\mu_0, \\quad H(R,N)=(c+bN)\\frac{R-a}{R+1}N-R.\n\\]\nHere \\(N(t)\\) represents population density, and \\(R(t)\\) available resources, and all constants are supposed to be positive.\nWith the help of Phase Plane in MATLAB, explore the solutions of the problem using parameter values such that: \\[\\rho_0 &gt; \\frac{\\mu_0 + m a}{m - \\mu_0}.\\]",
+    "crumbs": [
+      "Assignments",
+      "Predation"
     ]
   },
   {

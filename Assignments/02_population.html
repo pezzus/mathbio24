@@ -31,7 +31,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../Laboratories/01_ODE_Integration/lab_ODEinteg.html" rel="next">
+<link href="../Assignments/03_spruce.html" rel="next">
 <link href="../Assignments/01_recap_ODEs.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
@@ -125,9 +125,7 @@ window.Quarto = {
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="../">
-      Mathematical Biology
-      </a> 
+      <a href="../">Mathematical Biology</a> 
         <div class="sidebar-tools-main">
     <a href="../Mathematical-Biology.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
 </div>
@@ -206,6 +204,12 @@ window.Quarto = {
   <div class="sidebar-item-container"> 
   <a href="../Assignments/02_population.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Population dynamics</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Assignments/03_spruce.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Predation</span></a>
   </div>
 </li>
       </ul>
@@ -302,7 +306,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">September 26, 2024</p>
+      <p class="date-modified">October 4, 2024</p>
     </div>
   </div>
     
@@ -332,12 +336,52 @@ N(0) = N_0. &amp;
 <p>is periodic with period <span class="math inline">\(T\)</span>, prove that <span class="math display">\[
 \bar r = \lim_{t\to\infty} \frac{1}{t}\int_0^t r(s)\,\mathrm{d}s.
 \]</span></p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Solution">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>First, we need to show that <span class="math inline">\(\pi(t+T)=\pi(t)\)</span> for all <span class="math inline">\(t\)</span>. Hence, with <span class="math inline">\(t\in(0,T)\)</span>, we have: <span class="math display">\[\begin{split}\pi(t+T) &amp;= \int_0^{t+T} r(s)\,\mathrm{d}s - \bar{r} (t+T)\\ &amp;= \int_0^t r(s)\,\mathrm{d}s + \int_t^{t+T} r(s)\,\mathrm{d}s - \bar{r}T - \bar{r}t \\ [\tau=s-t] &amp;= \pi(t) + \int_0^T r(\tau+T)\,\mathrm{d}\tau - \bar{r}T \\ [r(\tau+T)=r(t)] &amp;= \pi(t) + \int_0^T r(\tau)\,\mathrm{d}\tau - \bar{r}T \\  &amp;= \pi(t) + \bar{r}T - \bar{r}T = \pi(t). \end{split}\]</span></p>
+<p>Now we can compute the limit: <span class="math display">\[\lim_{t\to\infty} \frac{1}{t}\int_0^t r(s)\,\mathrm{d}s = \lim_{t\to\infty} \frac{\pi(t)+\bar{r}t}{t} = \bar{r} + \lim_{t\to\infty} \frac{\pi(t)}{t}.\]</span></p>
+<p>The second term is zero: in fact, since <span class="math inline">\(\pi(t)\)</span> is periodic, we can take <span class="math inline">\(t=t_0+nT\)</span>, <span class="math inline">\(n=0,1,\ldots\)</span> and see that <span class="math inline">\(a_n := \frac{\pi(t_0+nT)}{t_0+nT} = \frac{\pi(t_0)}{t_0+nT}\to 0\)</span> as <span class="math inline">\(n\to\infty\)</span>.</p>
+</div>
+</div>
+</div>
 <ol start="2" type="1">
 <li>Show that the solution of the ODE is <span class="math display">\[
 N(t) = e^{\bar{r}t} N_\pi(t),
 \]</span></li>
 </ol>
 <p>where <span class="math inline">\(N_\pi(t)\)</span> is a periodic function.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Solution">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The solution of the ODE is <span class="math display">\[
+N(t) = N_0 e^{\int_0^t r(s)\,\mathrm{d}s},
+\]</span></p>
+<p>so using the previous point we get <span class="math display">\[
+N(t) = N_0 e^{\bar{r}t + \pi(t)} = e^{\bar{r}t}N_\pi(t),
+\]</span></p>
+<p>where <span class="math inline">\(N_\pi(t) = N_0 e^{\pi(t)}\)</span> is clearly <span class="math inline">\(T\)</span>-periodic.</p>
+</div>
+</div>
+</div>
 <ol start="3" type="1">
 <li>Modify the ODE by adding a time-dependent migration <span id="eq-periodic-m"><span class="math display">\[
 N'(t) = r(t)N(t) + m(t),
@@ -347,12 +391,62 @@ N'(t) = r(t)N(t) + m(t),
 N_\infty(t) = \int_{-\infty}^t e^{\int_s^t r(\sigma)\,\mathrm{d}\sigma} m(s)\,\mathrm{d}s
 \]</span></p>
 <p>is well-defined, is a solution to the ODE, and is periodic with period <span class="math inline">\(T\)</span>.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Solution">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>We observe that <span class="math display">\[
+\int_s^t r(\sigma)\,\mathrm{d}\sigma = \bar{r}(t-s) + \pi(t)-\pi(s),
+\]</span></p>
+<p>so the function reads: <span class="math display">\[
+N_\infty(t) = e^{\int_0^t r(\sigma)\,\mathrm{d}\sigma} \int_{-\infty}^t e^{-\bar{r}s}e^{-\pi(s)} m(s)\,\mathrm{d}s.
+\]</span></p>
+<p>The integrand goes to zero as <span class="math inline">\(s\to-\infty\)</span>, since <span class="math inline">\(\bar{r}&lt;0\)</span> and <span class="math inline">\(e^{-\pi(s)}m(s)\)</span> is continuous and periodic, hence bounded. So <span class="math inline">\(N_\infty(t)\)</span> is well-defined. It is also continuously differentiable, because the integrand is continous. Differentiating we have: <span class="math display">\[
+\begin{split}N'_\infty(t) &amp;= r(t) N_\infty(t) + e^{\int_0^t r(\sigma)\,\mathrm{d}\sigma} e^{-\bar{r}t}e^{-\pi(t)} m(t) \\
+&amp;= r(t) N_\infty(t) + m(t),\end{split}
+\]</span></p>
+<p>thus it satisfies the ODE.</p>
+<p>The periodicity is shown as follows: <span class="math display">\[
+\begin{split}N_\infty(t+T) &amp;= e^{\bar{r}(t+T)+\pi(t+T)} \int_{-\infty}^{t+T} e^{-\bar{r}s}e^{-\pi(s)} m(s)\,\mathrm{d}s \\ [\tau=s-T] &amp;= e^{\bar{r}(t+T)+\pi(t)} \int_{-\infty}^{t} e^{-\bar{r}(\tau+T)}e^{-\pi(\tau+T)} m(\tau+T)\,\mathrm{d}\tau \\  &amp;= e^{\int_0^t r(\sigma)\mathrm{d}\sigma} e^{\bar{r}T} \int_{-\infty}^{t} e^{-\bar{r}T} e^{-\bar{r}\tau}e^{-\pi(\tau)} m(\tau)\,\mathrm{d}\tau = N_\infty(t). \end{split}
+\]</span></p>
+</div>
+</div>
+</div>
 <ol start="4" type="1">
 <li>Show that if <span class="math inline">\(\bar{r} &lt; 0\)</span>, then the solution to <a href="#eq-periodic-m" class="quarto-xref">Equation&nbsp;<span>3</span></a> with initial condition <span class="math inline">\(N(0)=N_0\)</span> is <span class="math display">\[
 N(t) = e^{\int_0^t r(\sigma)\mathrm{d}\sigma} N_0 + \int_0^t e^{\int_s^t r(\sigma)\mathrm{d}\sigma} m(s)\,\mathrm{d}s
 \]</span></li>
 </ol>
 <p>and is such that <span class="math inline">\(\lim_{t\to\infty}(N(t) - N_\infty(t)) = 0\)</span>.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Solution">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>We differentiate the solution: <span class="math display">\[\begin{split}N'(t) &amp;= r(t) e^{\int_0^t r(\sigma)\,\mathrm{d}\sigma} N_0 + r(t) e^{\int_0^t r(\sigma)\,\mathrm{d}\sigma} \int_0^t e^{\int_s^t r(\sigma)\,\mathrm{d}\sigma} m(s)\mathrm{d}s \\ &amp;+ e^{\int_0^t r(\sigma)\mathrm{d}\sigma} e^{-\int_0^t r(\sigma)\mathrm{d}\sigma} m(t) \\ &amp;= r(t) N(t) + m(t).\end{split}\]</span></p>
+<p>For the initial condition, <span class="math inline">\(N(0)=N_0\)</span>. Thus it satisfies the IVP.</p>
+<p>For the limit: <span class="math display">\[
+\begin{split}N(t)-N_\infty(t) &amp;= e^{\int_0^t r(\sigma)\mathrm{d}\sigma} N_0 - e^{\int_0^t r(\sigma)\mathrm{d}\sigma} \int_{-\infty}^0 e^{-\int_0^s r(\sigma)\mathrm{d}\sigma} m(s)\mathrm{d}s \\ &amp;= e^{\bar{r}t}\Bigl( N_\pi(t) - N_\infty(0) \Bigr),\end{split}
+\]</span></p>
+<p>which tends to 0 as <span class="math inline">\(t\to\infty\)</span> since <span class="math inline">\(\bar{r}&lt;0\)</span>.</p>
+</div>
+</div>
+</div>
 </section>
 <section id="logistic-model" class="level2">
 <h2 class="anchored" data-anchor-id="logistic-model">Logistic model</h2>
@@ -362,12 +456,67 @@ N'(t) = r\Bigl(1-\frac{N}{K}\Bigr)N.
 <ol type="1">
 <li>Find the equilibria of the ODE and study their stability.</li>
 </ol>
+<div class="callout callout-style-default callout-tip callout-titled" title="Solution">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The equilibria are the zeros of the function <span class="math display">\[
+f(N) = rN\Bigl(1-\frac{N}{K}\Bigr),
+\]</span></p>
+<p>which cancels for <span class="math inline">\(N=0\)</span> and <span class="math inline">\(N=K\)</span>. Thus there are 2 equilibria.</p>
+<p>The local stability is determined by the sign of <span class="math inline">\(f'(N)\)</span> at the equilibrium. We have <span class="math display">\[
+f'(N) = r\Bigl(1-\frac{2N}{K}\Bigr),
+\]</span></p>
+<p>so <span class="math inline">\(f'(0) = r\)</span> and <span class="math inline">\(f'(K)=-r\)</span>. Hence, the equilibrium <span class="math inline">\(N=0\)</span> is locally unstable whereas <span class="math inline">\(N=K\)</span> is asymptotically stable.</p>
+</div>
+</div>
+</div>
 <ol start="2" type="1">
 <li>Study the global stability of the equilibria.</li>
 </ol>
+<div class="callout callout-style-default callout-tip callout-titled" title="Solution">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Since <span class="math inline">\(f(N)&gt;0\)</span> for <span class="math inline">\(N\in(0,K)\)</span>, we have <span class="math inline">\(N'&gt;0\)</span> so <span class="math inline">\(N(t)\)</span> grows monotonically for its initial condition <span class="math inline">\(N_0\in(0,K)\)</span>. But <span class="math inline">\(N=K\)</span> is an equilibrium, which the trajectory cannot cross, hence <span class="math inline">\(N(t)\to K\)</span> from the left. Similarly, on the right of the equilibrium <span class="math inline">\(N=K\)</span>, we have that <span class="math inline">\(N'=f(N)&lt;0\)</span> for <span class="math inline">\(N&gt;K\)</span>, thus <span class="math inline">\(N(t)\to K\)</span> from the right when <span class="math inline">\(N_0&gt;K\)</span>. In conclusion, the basin of attraction of <span class="math inline">\(N=K\)</span> is <span class="math inline">\(\mathbb{R}^+\)</span> (zero excluded).</p>
+</div>
+</div>
+</div>
 <ol start="3" type="1">
 <li>Would it make sense to assume <span class="math inline">\(r&lt;0\)</span> and <span class="math inline">\(K&gt;0\)</span>?</li>
 </ol>
+<div class="callout callout-style-default callout-tip callout-titled" title="Solution">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>If <span class="math inline">\(r&lt;0\)</span>, the stability of the equilibria is swapped, that is <span class="math inline">\(N=0\)</span> is locally stable and <span class="math inline">\(N=K\)</span> is unstable, respectively. If <span class="math inline">\(N_0\in(0,K)\)</span>, then <span class="math inline">\(N(t)\to 0\)</span>. However, for <span class="math inline">\(N_0&gt;K\)</span>, the solution diverges. These assumptions do not make sense biologically speaking.</p>
+</div>
+</div>
+</div>
 </section>
 <section id="global-well-posedness" class="level2">
 <h2 class="anchored" data-anchor-id="global-well-posedness">Global well-posedness</h2>
@@ -375,6 +524,24 @@ N'(t) = r\Bigl(1-\frac{N}{K}\Bigr)N.
 N'(t) = ( \beta N^2 − \mu N )(1-\gamma N).
 \]</span></p>
 <p>Find all non-negative equilibria and discuss their stability. From the direction field conclude that all solutions are bounded, and hence solutions are globally defined (no blow-up in finite time).</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Solution">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Equilibria are: <span class="math inline">\(N_1 = 0\)</span>, <span class="math inline">\(N_2 = \mu/\beta\)</span>, and <span class="math inline">\(N_3 = 1/\gamma\)</span>. With no loss of generality we can assume <span class="math inline">\(N_1 &lt; N_2 &lt; N_3\)</span>. From the sign of the right hand side, we see that <span class="math inline">\(N_1\)</span> and <span class="math inline">\(N_3\)</span> are asymptotically stable, and <span class="math inline">\(N_2\)</span> is unstable. In particular, the basin of attraction of <span class="math inline">\(N_1\)</span> is <span class="math inline">\((-\infty,N_2)\)</span>, and the one for <span class="math inline">\(N_2\)</span> is <span class="math inline">\((N_2,\infty)\)</span>. Thus, if <span class="math inline">\(N(0)\in I\)</span>, then <span class="math inline">\(N(t)\in I\)</span> for all <span class="math inline">\(t\)</span>. Since solutions are bounded, they are globally defined.</p>
+</div>
+</div>
+</div>
+
+
 </section>
 
 </main> <!-- /main -->
@@ -805,8 +972,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../Laboratories/01_ODE_Integration/lab_ODEinteg.html" class="pagination-link" aria-label="Lab 01: Numerical integration">
-        <span class="nav-page-text">Lab 01: Numerical integration</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../Assignments/03_spruce.html" class="pagination-link" aria-label="Predation">
+        <span class="nav-page-text">Predation</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
