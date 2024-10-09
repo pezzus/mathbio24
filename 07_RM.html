@@ -1,0 +1,962 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.57">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2024-10-14">
+
+<title>7&nbsp; Rosenzweig-MacArthur model – Mathematical Biology</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./references.html" rel="next">
+<link href="./06_Gause.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./01_Bathtub.html">Lectures</a></li><li class="breadcrumb-item"><a href="./07_RM.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Rosenzweig-MacArthur model</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Mathematical Biology</a> 
+        <div class="sidebar-tools-main">
+    <a href="./Mathematical-Biology.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Welcome</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Lectures</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01_Bathtub.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Bathtub model</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02_Population.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Population dynamics</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03_Logistic.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Logistic model</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04_Predation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Predation models</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05_LotkaVolterra.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Lotka-Volterra model</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06_Gause.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Gause type models</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./07_RM.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Rosenzweig-MacArthur model</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Assignments</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Assignments/01_recap_ODEs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Solving ODEs</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Assignments/02_population.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Population dynamics</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Assignments/03_spruce.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Predation</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Labs</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Laboratories/01_ODE_Integration/lab_ODEinteg.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab 01: Numerical integration</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Laboratories/02_Predation/lab_Predation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab 02: Predation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Laboratories/03_Bifurcations/lab_Bifurcations.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab 03: Bifurcations</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">Appendices</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./IntroODE.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Introduction to ODEs</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./bifurcations.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Introduction to bifurcations</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Laboratories/00_Intro_Matlab/introMATLAB.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Introduction to MATLAB</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#rosenzweig-macarthur-model" id="toc-rosenzweig-macarthur-model" class="nav-link active" data-scroll-target="#rosenzweig-macarthur-model"><span class="header-section-number">7.1</span> Rosenzweig-MacArthur model</a>
+  <ul class="collapse">
+  <li><a href="#non-dimensionalization" id="toc-non-dimensionalization" class="nav-link" data-scroll-target="#non-dimensionalization"><span class="header-section-number">7.1.1</span> Non-dimensionalization</a></li>
+  <li><a href="#equilibria" id="toc-equilibria" class="nav-link" data-scroll-target="#equilibria"><span class="header-section-number">7.1.2</span> Equilibria</a></li>
+  <li><a href="#local-stability" id="toc-local-stability" class="nav-link" data-scroll-target="#local-stability"><span class="header-section-number">7.1.3</span> Local stability</a></li>
+  <li><a href="#limit-cycles" id="toc-limit-cycles" class="nav-link" data-scroll-target="#limit-cycles"><span class="header-section-number">7.1.4</span> Limit cycles</a></li>
+  <li><a href="#bifurcations" id="toc-bifurcations" class="nav-link" data-scroll-target="#bifurcations"><span class="header-section-number">7.1.5</span> Bifurcations</a></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="header-section-number">7.1.6</span> Summary</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./01_Bathtub.html">Lectures</a></li><li class="breadcrumb-item"><a href="./07_RM.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Rosenzweig-MacArthur model</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Rosenzweig-MacArthur model</span></h1>
+<p class="subtitle lead">This lecture is based on <span class="citation" data-cites="ip14">(<a href="references.html#ref-ip14" role="doc-biblioref">Iannelli and Pugliese 2014, vol. 79, sec. 6.4</a>)</span></p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">October 14, 2024</p>
+    </div>
+  </div>
+  
+    <div>
+    <div class="quarto-title-meta-heading">Modified</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date-modified">October 9, 2024</p>
+    </div>
+  </div>
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="rosenzweig-macarthur-model" class="level2" data-number="7.1">
+<h2 data-number="7.1" class="anchored" data-anchor-id="rosenzweig-macarthur-model"><span class="header-section-number">7.1</span> Rosenzweig-MacArthur model</h2>
+<p>We see that a perturbation of the Lotka-Volterra model, obtained by adding the logistic term, destroys the structural stability of the original model: no limit cycles are present.</p>
+<p>In 1963, Rosenzweig and MacArthur proposed a new model, of Gause-type, with a Holling type II predation. Again, this can bee seen as a small modification of the original system, thus we shall expect a similar dynamic for a wide range of parameters. The model reads as follows: <span class="math display">\[
+\left\{\begin{aligned}
+H' &amp;= r H (1-H/K) - a \frac{H P}{1 + a T H}, \\
+P' &amp;= -\mu P + \gamma a \frac{H P}{1 + a T H}.
+\end{aligned}\right.
+\]</span></p>
+<p>All parameters are positive. The new parameter <span class="math inline">\(T&gt;0\)</span> is the <em>handling time</em>, and the maximum killing rate is <span class="math inline">\(1/T\)</span>.</p>
+<section id="non-dimensionalization" class="level3" data-number="7.1.1">
+<h3 data-number="7.1.1" class="anchored" data-anchor-id="non-dimensionalization"><span class="header-section-number">7.1.1</span> Non-dimensionalization</h3>
+<p>We have 6 parameters in total, but we can reduce them by rescaling the quantities: <span class="math display">\[
+u = \frac{H}{K}, \quad v = \frac{P}{\gamma K}, \quad \tau = \mu t.
+\]</span></p>
+<p>The rescaled equations are: <span class="math display">\[
+\left\{\begin{aligned}
+\dot{u} &amp;= \rho u(1-u) - \alpha \frac{\delta uv}{1+\delta u}, \\
+\dot{v} &amp;= -v + \alpha \frac{\delta uv}{1+\delta u},
+\end{aligned}\right.
+\]</span></p>
+<p>where we defined the following quantities: <span class="math display">\[
+\rho = \frac{r}{\mu}, \quad \alpha = \frac{\gamma}{T\mu}, \quad \delta = a T K.
+\]</span></p>
+<p>The total number of parameters is now only 3.</p>
+</section>
+<section id="equilibria" class="level3" data-number="7.1.2">
+<h3 data-number="7.1.2" class="anchored" data-anchor-id="equilibria"><span class="header-section-number">7.1.2</span> Equilibria</h3>
+<p>The nullclines are as follows: <span class="math display">\[
+\left\{\begin{aligned}
+0 &amp;= \rho u(1-u) - \alpha \frac{\delta uv}{1+\delta u}, \\
+0 &amp;= -v + \alpha \frac{\delta uv}{1+\delta u},
+\end{aligned}\right.
+\]</span></p>
+<p>Let us rewrite the system as follows: <span class="math display">\[
+\left\{\begin{aligned}
+0 &amp;= f(u)\bigl( \Phi(u) - v \bigr), \\
+0 &amp;= v\bigl(f(u)-1\bigr),
+\end{aligned}\right.
+\]</span></p>
+<p>where we defined: <span class="math display">\[
+f(u) = \frac{\alpha \delta u}{1+\delta u}, \quad \Phi(u) = \frac{\rho}{\alpha\delta} (1-u)(1+\delta u).
+\]</span></p>
+<p>Note that <span class="math inline">\(f(0)=0\)</span>, <span class="math inline">\(0\le f(u) &lt; \alpha\)</span>, and <span class="math inline">\(f'(u)&gt;0\)</span>. The equilibria are:</p>
+<ul>
+<li><span class="math inline">\(E_0 = (0,0)\)</span>, and is always present for any choice of the parameters.</li>
+<li><span class="math inline">\(E_1 = (1,0)\)</span>, because <span class="math inline">\(\Phi(1)=0\)</span>. This equilibrium is also always present.</li>
+<li><span class="math inline">\(E^* = (u^*,v^*)\)</span> where <span class="math inline">\(f(u^*)=1\)</span> and <span class="math inline">\(v^* = \Phi(u^*)\)</span>. The existence depends on the parameters.
+<ol type="1">
+<li><span class="math inline">\(\alpha&gt;1\)</span>, otherwise there exists no <span class="math inline">\(u^* \ge 0\)</span> such that <span class="math inline">\(f(u^*)=1\)</span>. In this case, we have <span class="math inline">\(u^* = \frac{1}{\delta(\alpha-1)}\)</span>.</li>
+<li><span class="math inline">\(v^* = \Phi(u^*) \ge 0\)</span>, which implies <span class="math inline">\(u^* \le 1\)</span>. In terms of parameters, <span class="math inline">\(\delta &gt; \delta^* = \frac{1}{\alpha-1}\)</span>. (We define <span class="math inline">\(\rho^*\)</span> because is a bifurcation point, as we shall see.)</li>
+</ol></li>
+</ul>
+<p>Thus we can have 2 or 3 equilibria. Note that <span class="math inline">\(\alpha &gt; 1\)</span> means, in terms of the original parameters, <span class="math display">\[
+\frac{\gamma}{T} = \lim_{H\to 0} \omega(H) &gt; \mu,
+\]</span></p>
+<p>consistently with the hypothesis on <span class="math inline">\(\omega(H)\)</span> for general Gause-type models: for large <span class="math inline">\(H\)</span>, predator population should grow.</p>
+</section>
+<section id="local-stability" class="level3" data-number="7.1.3">
+<h3 data-number="7.1.3" class="anchored" data-anchor-id="local-stability"><span class="header-section-number">7.1.3</span> Local stability</h3>
+<p>The Jacobian is <span class="math display">\[
+J(u,v) = \begin{pmatrix} f'(u)(\Phi(u)-v) + f(u)\Phi'(u) &amp; -f(u) \\ vf'(u) &amp; f(u)-1 \end{pmatrix}.
+\]</span></p>
+<p>We have: <span class="math display">\[
+\begin{aligned}
+J(0,0) &amp;= \begin{pmatrix} f'(0)\Phi(0) &amp; 0 \\ 0 &amp; -1 \end{pmatrix}, \\
+J(1,0) &amp;= \begin{pmatrix} f(1)\Phi'(1) &amp; -f(1) \\ 0 &amp; f(1)-1 \end{pmatrix}, \\
+J(u^*,v^*) &amp;= \begin{pmatrix} \Phi'(u^*) &amp; -1 \\ v^*f'(u^*) &amp; 0 \end{pmatrix},
+\end{aligned}
+\]</span></p>
+<p>where we used the definition of the equilibria, when they exist. Therefore:</p>
+<ul>
+<li><p><span class="math inline">\(E_0 = (0,0)\)</span> has eigenvalues <span class="math inline">\(\lambda_1 = f'(0)\Phi(0)&gt;0\)</span> and <span class="math inline">\(\lambda_2 = -1 &lt; 0\)</span>, so is a <em>saddle</em> (always).</p></li>
+<li><p><span class="math inline">\(E_1 = (1,0)\)</span> has eigenvalues <span class="math inline">\(\lambda_1 = f(1)\Phi'(1)&lt;0\)</span>, because <span class="math inline">\(\Phi'(1)&lt;0\)</span>, and <span class="math inline">\(\lambda_2 = f(1)-1\)</span>, which depends on the parameters. In particular,</p>
+<ul>
+<li>if <span class="math inline">\(\delta &lt; \delta^*\)</span> then <span class="math inline">\(f(1)-1&lt;0\)</span>, so the equilibrium <span class="math inline">\(E_1\)</span> is asymptotically stable.</li>
+<li>if <span class="math inline">\(\delta &gt; \delta^*\)</span>, <span class="math inline">\(E_1\)</span> is a saddle. Note that in this case we have the existence of <span class="math inline">\(E^*\)</span>.</li>
+</ul>
+<p>So, at <span class="math inline">\(\delta = \delta^*\)</span> (or <span class="math inline">\(u^* = 1\)</span>) we have a bifurcation (transcritical).</p></li>
+<li><p><span class="math inline">\(E^* = (u^*,v^*)\)</span> has <span class="math inline">\(\det J^* = v^* f'(u^*) &gt; 0\)</span> and <span class="math inline">\(\operatorname{tr} J^* = \Phi'(u^*)\)</span>. Since <span class="math inline">\(\Phi(u)\)</span> is a concave parabola with a maximum for <span class="math inline">\(u = u_\mathrm{max} = \frac{\delta-1}{2\delta}\)</span>, we have that:</p>
+<ul>
+<li>if <span class="math inline">\(u^* &gt; u_\mathrm{max}\)</span> then <span class="math inline">\(\Phi'(u^*) &lt; 0\)</span>, thus <span class="math inline">\(E^*\)</span> is asympotically stable.</li>
+<li>if <span class="math inline">\(u^* &lt; u_\mathrm{max}\)</span> then if <span class="math inline">\(\Phi'(u^*) &gt; 0\)</span>, thus <span class="math inline">\(E^*\)</span> is a unstable.</li>
+</ul>
+<p>There is a second bifurcation point for <span class="math inline">\(u^* = u_\mathrm{max}\)</span>, because <span class="math inline">\(E^*\)</span> loses stability. In terms of parameters, this happens for <span class="math inline">\(\delta^{**} = \frac{\alpha+1}{\alpha-1}\)</span>.</p>
+<p>Additionally, the discriminant <span class="math inline">\(\Delta = (\operatorname{tr}J^*) - 4\det J^*\)</span> tells us whether <span class="math inline">\(E^*\)</span> is a spiral or not. Since <span class="math inline">\(\Delta &gt; 0\)</span> for <span class="math inline">\(u^* = 1\)</span> and <span class="math inline">\(\Delta &lt; 0\)</span> for <span class="math inline">\(u^* = u_\mathrm{max}\)</span>, it changes sign at some point.</p></li>
+</ul>
+<p>In summary, assuming <span class="math inline">\(\alpha &gt; 1\)</span>, we have 3 cases:</p>
+<ol type="1">
+<li><span class="math inline">\(\delta \in (0,\delta^*)\)</span>: 2 equilibria, <span class="math inline">\(E_0\)</span> saddle and <span class="math inline">\(E_1\)</span> asymptotically stable;</li>
+<li><span class="math inline">\(\delta \in (\delta^*, \delta^{**})\)</span>: 3 equilibria, <span class="math inline">\(E_0\)</span> and <span class="math inline">\(E_1\)</span> are saddles, and <span class="math inline">\(E^*\)</span> is asymptotically stable (and spiral at some point).</li>
+<li><span class="math inline">\(\delta &gt; \delta^{**}\)</span>: 3 equilibria, non of which is stable.</li>
+</ol>
+</section>
+<section id="limit-cycles" class="level3" data-number="7.1.4">
+<h3 data-number="7.1.4" class="anchored" data-anchor-id="limit-cycles"><span class="header-section-number">7.1.4</span> Limit cycles</h3>
+<p>For <span class="math inline">\(\delta &lt; \delta^{**}\)</span> we also have no limit cycles. This can be shown by using the Dulac’s criterium with integrating factor <span class="math display">\[
+h(u,v) = \frac{1}{2\rho\delta}\frac{u v^{q-1}}{(1+\delta u)}, \quad q = \rho u^* |u_\mathrm{max}|.
+\]</span></p>
+<p>Computing the divergence we have: <span class="math display">\[
+\operatorname{div}\bigl( h(u,v)\mathbf{f}(u,v) \bigr) = - u v^{q-1}\Bigl( u^2 + (u_\mathrm{max} + |u_\mathrm{max}|)u - u^* u_\mathrm{max} \Bigr),
+\]</span></p>
+<p>so if <span class="math inline">\(u_\mathrm{max} \le 0\)</span> the divergence is always negative. If <span class="math inline">\(u_\mathrm{max}&gt;0\)</span> and <span class="math inline">\(u_\mathrm{max}\le u^*\)</span>: <span class="math display">\[
+\begin{split}
+\operatorname{div}\bigl( h(u,v)\mathbf{f}(u,v) \bigr) &amp;= - u v^{q-1}\Bigl( u^2 + 2 u_\mathrm{max}u - u^* u_\mathrm{max} \Bigr) \\
+&amp;\le - u v^{q-1}\Bigl( u^2 + 2 u_\mathrm{max}u - u_\mathrm{max}^2 \Bigr) \\
+&amp;= - u v^{q-1}( u - u_\mathrm{max})^2,
+\end{split}
+\]</span></p>
+<p>which is negative for <span class="math inline">\(u \neq u^*\)</span>. So we cannot have limit cycles when the maximum of <span class="math inline">\(\Phi(u)\)</span> is on the negative side of, if present in the positive quadrant, when <span class="math inline">\(u^* \ge u_\mathrm{max}\)</span>. This is equivalent to <span class="math inline">\(\Phi'(u^*)&gt;0\)</span>, as seen above.</p>
+<p>On the other hand, for <span class="math inline">\(u^* \le u_\mathrm{max}\)</span> we cannot conclude anything from the Dulac criterium. Actually, we have a stable limit cycle orbiting around <span class="math inline">\(E^*\)</span> in this case. To prove it, we use the Poincaré theorem, defining a trapping region for the orbits the does not contain any stable equilibrium. The region is the following:</p>
+<p><img src="img/DiagramRA.png" class="img-fluid"></p>
+<p>The region <span class="math inline">\(\mathcal{R}\)</span> is delimited by the axes, the unstable manifold of <span class="math inline">\(E_K\)</span>, the segment <span class="math inline">\(\overline{AB}\)</span>, and a small hole around <span class="math inline">\(E^*\)</span>. Trajectories are trapped, because the segment <span class="math inline">\(\overline{AB}\)</span> and the boundary of the hole are <em>inflow</em> for the vector field. On the boundary of the region there are 2 saddles, but trajectories <em>inside</em> of <span class="math inline">\(\mathcal{R}\)</span> cannot go there, otherwise they would be part of their stable manifold. We can also exclude the saddle-saddle connection, which is a heteroclinic orbit, because trajectories cannot go there. So, there must exists at least one limit cycle inside <span class="math inline">\(\mathcal{R}\)</span>. It is also unique, but this is more difficult to prove.</p>
+</section>
+<section id="bifurcations" class="level3" data-number="7.1.5">
+<h3 data-number="7.1.5" class="anchored" data-anchor-id="bifurcations"><span class="header-section-number">7.1.5</span> Bifurcations</h3>
+<p>For <span class="math inline">\(\delta = \delta^*\)</span> we have a <em>transcritical bifurcation</em> and for <span class="math inline">\(\delta = \delta^{**}\)</span> we have a <em>Hopf bifurcation</em>. Let’s see what we mean by this.</p>
+<p>Consider a system of the form <span class="math display">\[
+\mathbf{y}' = \mathbf{f}(\mathbf{y},p),
+\]</span></p>
+<p>for some parameter <span class="math inline">\(p\in\mathbb{R}\)</span> (in our case, <span class="math inline">\(\delta\)</span>), and suppose that <span class="math inline">\(\bar{\mathbf{y}}\)</span> is an equilibrium for <span class="math inline">\(p=\bar{p}\)</span>. Then, assuming that <span class="math inline">\(\det J(\bar{\mathbf{y}},\bar{p})\neq 0\)</span>, we can locally define a curve of equilibria <span class="math inline">\(\bar{\mathbf{y}}=\bar{\mathbf{y}}(p)\)</span> such that <span class="math inline">\(\mathbf{f}(\bar{\mathbf{y}}(p),p)=0\)</span> for <span class="math inline">\(p\in\mathcal{B}_\varepsilon(\bar{p})\)</span>. Moreover, the eigenvalues are continuous functions of <span class="math inline">\(p\)</span>, so stability is not affected.</p>
+<p>If one real eigenvalue becomes zero, then we have a bifurcation and a change of stability. We consider 3 cases:</p>
+<ul>
+<li><p><strong>Tangent bifurcation.</strong> <span class="math inline">\(J(\bar{\mathbf{y}},\bar{p})\)</span> has eigenvalue 0 and <span class="math inline">\(\partial_p \mathbf{f}(\bar{\mathbf{y}},\bar{p})\neq 0\)</span>.</p></li>
+<li><p><strong>Transcritical bifurcation.</strong> <span class="math inline">\(J(\bar{\mathbf{y}},\bar{p})\)</span> has eigenvalue 0 and <span class="math inline">\(\partial_p \mathbf{f}(\bar{\mathbf{y}},\bar{p}) = 0\)</span>.</p></li>
+<li><p><strong>Hopf bifurcation.</strong> <span class="math inline">\(J(\bar{\mathbf{y}},\bar{p})\)</span> has pure imaginary eigenvalues <span class="math inline">\(\pm i\omega\)</span>.</p></li>
+</ul>
+<p>For <span class="math inline">\(\delta = \delta^*\)</span> the equilibria <span class="math inline">\(E_1\)</span> and <span class="math inline">\(E^*\)</span> coincide and one eigenvalue is 0. Since <span class="math inline">\(E_1\)</span> does not depend on <span class="math inline">\(\delta\)</span>, <span class="math inline">\(\partial_\delta \mathbf{f}(E_1,\delta) = 0\)</span>: we have a transcritical bifurcation. Graphically, the curve of equilibria of <span class="math inline">\(E_1\)</span> and <span class="math inline">\(E^*\)</span> crosses each other and exchange their stability.</p>
+<p>For <span class="math inline">\(\delta = \delta^{**}\)</span> we have a <em>Hopf bifurcation</em>: the equilibrium <span class="math inline">\(E^*\)</span> becomes unstable and an infinitesimally small and stable limit cycle appears around it. We can detect a Hopf bifurcation from the eigenvalues of <span class="math inline">\(J^*\)</span>: they are complex conjugate of the form: <span class="math display">\[
+\lambda(\delta) = \sigma(\delta) \pm i\omega(\delta).
+\]</span></p>
+<p>We have that <span class="math inline">\(\sigma(\delta^{**}) = 0\)</span> but <span class="math inline">\(\omega(\delta^{**}) = \sqrt{\rho / \delta^{**}} \neq 0\)</span>. Moreover, when eigenvalues are imaginary, the real part is twice the trace, so <span class="math inline">\(\sigma(\delta) = \Phi'(u^*(\delta))\)</span>, and we can conclude that <span class="math inline">\(\sigma'(\delta^{**})&gt;0\)</span>. The eigenvalues are crossing the imaginary axis on the complex plane from the negative to the positive real part side, as <span class="math inline">\(\delta\)</span> crosses the bifurcation. Since the new limit cycle is stable, we have a <em>supercritical</em> Hopf bifurcation. When the limit cycle is unstable, we have a <em>subcritical</em> Hopf bifurcation.</p>
+</section>
+<section id="summary" class="level3" data-number="7.1.6">
+<h3 data-number="7.1.6" class="anchored" data-anchor-id="summary"><span class="header-section-number">7.1.6</span> Summary</h3>
+<p>In conclusion, we have the following picture:</p>
+<ul>
+<li><span class="math inline">\(\delta &lt; \delta^*\)</span>: <span class="math inline">\(E_1\)</span> globally attractive.</li>
+<li><span class="math inline">\(\delta = \delta^*\)</span>: transcritical bifurcation.</li>
+<li><span class="math inline">\(\delta^* &lt; \delta &lt; \delta^{**}\)</span>: <span class="math inline">\(E^*\)</span> globally attractive.</li>
+<li><span class="math inline">\(\delta = \delta^{**}\)</span>: Hopf bifurcation.</li>
+<li><span class="math inline">\(\delta &gt; \delta^{**}\)</span>: limit cycle globally attractive.</li>
+</ul>
+<p>The global stability of <span class="math inline">\(E_1\)</span> and <span class="math inline">\(E^*\)</span> follows from the same argument above, using a trapping region (the same in the case of <span class="math inline">\(E^*\)</span>, because we know there cannot be a limit cycle and <span class="math inline">\(E^*\)</span> is stable.)</p>
+
+
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="ref-ip14" class="csl-entry" role="listitem">
+Iannelli, Mimmo, and Andrea Pugliese. 2014. <em>An Introduction to Mathematical Population Dynamics</em>. Vol. 79. Springer. <a href="https://strutture-provincia.primo.exlibrisgroup.com/permalink/39SBT_INST/ghkipk/alma991006883209706186">https://strutture-provincia.primo.exlibrisgroup.com/permalink/39SBT_INST/ghkipk/alma991006883209706186</a>.
+</div>
+</div>
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./06_Gause.html" class="pagination-link" aria-label="Gause type models">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Gause type models</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./references.html" class="pagination-link" aria-label="References">
+        <span class="nav-page-text">References</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

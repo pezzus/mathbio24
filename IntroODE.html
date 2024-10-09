@@ -31,7 +31,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
 <link href="./bifurcations.html" rel="next">
-<link href="./Laboratories/02_Predation/lab_Predation.html" rel="prev">
+<link href="./Laboratories/03_Bifurcations/lab_Bifurcations.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -181,6 +181,18 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./05_LotkaVolterra.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Lotka-Volterra model</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06_Gause.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Gause type models</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./references.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">References</span></a>
   </div>
@@ -235,6 +247,12 @@ window.Quarto = {
   <div class="sidebar-item-container"> 
   <a href="./Laboratories/02_Predation/lab_Predation.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Lab 02: Predation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Laboratories/03_Bifurcations/lab_Bifurcations.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab 03: Bifurcations</span></a>
   </div>
 </li>
       </ul>
@@ -303,7 +321,7 @@ window.Quarto = {
   </ul></li>
   <li><a href="#periodic-orbits" id="toc-periodic-orbits" class="nav-link" data-scroll-target="#periodic-orbits"><span class="header-section-number">A.6</span> Periodic orbits</a>
   <ul class="collapse">
-  <li><a href="#hamiltonian-systems" id="toc-hamiltonian-systems" class="nav-link" data-scroll-target="#hamiltonian-systems"><span class="header-section-number">A.6.1</span> Hamiltonian systems</a></li>
+  <li><a href="#sec-hamiltonian" id="toc-sec-hamiltonian" class="nav-link" data-scroll-target="#sec-hamiltonian"><span class="header-section-number">A.6.1</span> Hamiltonian systems</a></li>
   <li><a href="#isolated-periodic-orbits" id="toc-isolated-periodic-orbits" class="nav-link" data-scroll-target="#isolated-periodic-orbits"><span class="header-section-number">A.6.2</span> Isolated periodic orbits</a></li>
   </ul></li>
   <li><a href="#limit-cycles" id="toc-limit-cycles" class="nav-link" data-scroll-target="#limit-cycles"><span class="header-section-number">A.7</span> Limit cycles</a>
@@ -333,7 +351,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">October 4, 2024</p>
+      <p class="date-modified">October 9, 2024</p>
     </div>
   </div>
     
@@ -1230,8 +1248,8 @@ Example (stability of logistic equation)
 <p>Please note that the appearance of the term <span class="math inline">\(t e^{\lambda_i t}\)</span>.</p>
 <p>For the sake of completeness, we just recall that the algebraic multiplicity is associated with the characteristic polynomial <span class="math inline">\(\mathcal{P}(\lambda) = \det(\lambda\mathbf{I}-\mathbf{A})\)</span>, and corresponds to the number of times a zero of <span class="math inline">\(\mathcal{P}(\lambda)\)</span> appears. More precisely, we can always write <span class="math inline">\(\mathcal{P}(\lambda) = (\lambda-\lambda_1)^{\mu_1}\cdot (\lambda-\lambda_2)^{\mu_2}\cdots (\lambda-\lambda_r)^{\mu_r}\)</span>, <span class="math inline">\(\{ \lambda_i \}_{i=1}^r\)</span>, <span class="math inline">\(r\le n\)</span>, are the eigenvalues, and <span class="math inline">\(1\le \mu_i\le n\)</span> the algebraic multiplicity of <span class="math inline">\(\lambda_i\)</span>. The geometrical multiplicity <span class="math inline">\(\mu_i\)</span> is the dimension of the eigenspace <span class="math inline">\(V_i = \ker(\lambda_i\mathbf{I}-\mathbf{A}) = \{ \mathbf{v}\in\mathbb{R}^n\colon \lambda_i\mathbf{v}=\mathbf{A}\mathbf{v} \}\)</span>. Since <span class="math inline">\(\nu_i \le \mu_i\)</span>, when at least one eigenvalue has <span class="math inline">\(\nu_i &lt; \mu_i\)</span>, the direct sum of all <span class="math inline">\(V_i\)</span>s does not fill the whole <span class="math inline">\(\mathbb{R}^n\)</span>, and additional (generalized) eigenvectors are required. These are taken from <span class="math inline">\(\mathbf{A}^k\)</span>, for some <span class="math inline">\(k=2,3,\ldots\)</span>, and leads to terms of the form <span class="math inline">\(t^{k-1}e^{t\lambda_i}\)</span> in the matrix exponential.</p>
 </section>
-<section id="stability" class="level4" data-number="A.5.4.2">
-<h4 data-number="A.5.4.2" class="anchored" data-anchor-id="stability"><span class="header-section-number">A.5.4.2</span> Stability</h4>
+<section id="sec-stabilityLinear" class="level4" data-number="A.5.4.2">
+<h4 data-number="A.5.4.2" class="anchored" data-anchor-id="sec-stabilityLinear"><span class="header-section-number">A.5.4.2</span> Stability</h4>
 <p>For the linear ODEs <span class="math inline">\(\mathbf{y}' = \mathbf{A}\mathbf{y}\)</span>, with <span class="math inline">\(\mathbf{A}\in\mathbb{R}^{n\times n}\)</span> invertible, we only have the equilibrium <span class="math inline">\(\mathbf{y}^* = \mathbf{0}\)</span>. In the more general case <span class="math inline">\(\mathbf{y}' = \mathbf{A}\mathbf{y} + \mathbf{b}\)</span>, the equilibrium is <span class="math inline">\(\mathbf{y}^* = \mathbf{A}^{-1}\mathbf{b}\)</span>. Note that in this case we can define <span class="math inline">\(\mathbf{z}(t) = \mathbf{y}(t) - \mathbf{y}^*\)</span> that satisfies the ODE <span class="math inline">\(\mathbf{z}' = \mathbf{A}\mathbf{z}\)</span> with equilibrium <span class="math inline">\(\mathbf{z}^* = \mathbf{0}\)</span>. Thus, we can focus on the homogeneous case with no loss of generality.</p>
 <p>We now try to characterize the stability of the equilibrium <span class="math inline">\(\mathbf{y}^* = \mathbf{A}\)</span> for <span class="math inline">\(\mathbf{y}' = \mathbf{A}\mathbf{y}\)</span>.</p>
 <p>Let’s first consider the case of <span class="math inline">\(\mathbf{A}\)</span> diagonalizible. Here, there exists an invertible matrix <span class="math inline">\(\mathbf{V}\in\mathbb{R}^{n\times n}\)</span> such that <span class="math inline">\(\mathbf{V}^{-1}\mathbf{A}\mathbf{V} = \boldsymbol{\Lambda}\)</span> is a diagonal matrix. The entries of this matrix are the eigenvalues of <span class="math inline">\(\mathbf{A}\)</span>. The general solution of the ODE reads: <span class="math display">\[\boldsymbol{\phi}(t) = e^{t\mathbf{A}}\mathbf{y}_0 = \mathbf{V} e^{t\boldsymbol{\Lambda}}\mathbf{V}^{-1}\mathbf{y}_0.\]</span></p>
@@ -1372,8 +1390,8 @@ Example (logistic equation, alternative analysis)
 <h2 data-number="A.6" class="anchored" data-anchor-id="periodic-orbits"><span class="header-section-number">A.6</span> Periodic orbits</h2>
 <p>So far, we went is more great detail in the study of equilibria of a dynamical system. Equilibria as “simple”, in the sense that we can find all of them as solution of the nonlinear system <span class="math inline">\(\mathbf{f}(\mathbf{y}) = \mathbf{0}\)</span>. Their local stability follows from the linearization of the ODE around the equilibrium.</p>
 <p>Periodic orbits are more difficult to characterize, but they are extremely important in applications.</p>
-<section id="hamiltonian-systems" class="level3" data-number="A.6.1">
-<h3 data-number="A.6.1" class="anchored" data-anchor-id="hamiltonian-systems"><span class="header-section-number">A.6.1</span> Hamiltonian systems</h3>
+<section id="sec-hamiltonian" class="level3" data-number="A.6.1">
+<h3 data-number="A.6.1" class="anchored" data-anchor-id="sec-hamiltonian"><span class="header-section-number">A.6.1</span> Hamiltonian systems</h3>
 <p>Consider a system of 2 ODEs, written in general as <span class="math display">\[
 \left\{\begin{aligned}
 y_1' &amp;= f_1(y_1,y_2), \\
@@ -1580,10 +1598,14 @@ y_2' &amp;= y_2(4y_1-y_1^2-3).
 <li>The requirement for no equilibria is important. Very often we do have an equilibrium inside (as we are going to see in a moment, a limit cycle always has an equilibrium inside of it), but we can remove it by “digging” a hole around it.</li>
 <li>Equilibria cannot be on the border of the region. Consider a homoclinic orbit as in the figure below. We see that the “punctured” region traps an orbit <span class="math inline">\(C\)</span>, but there are no limit cycles inside. The orbit tends to the homoclinic.</li>
 </ul>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="img/homoclinic.png" class="img-fluid figure-img"></p>
-<figcaption>Homoclinic orbit</figcaption>
+<div id="fig-homoclinic" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-homoclinic-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="img/homoclinic.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-homoclinic-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;A.1: Homoclinic orbit
+</figcaption>
 </figure>
 </div>
 <p>We can be more precise. Let us define</p>
@@ -2233,8 +2255,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./Laboratories/02_Predation/lab_Predation.html" class="pagination-link" aria-label="Lab 02: Predation">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Lab 02: Predation</span>
+      <a href="./Laboratories/03_Bifurcations/lab_Bifurcations.html" class="pagination-link" aria-label="Lab 03: Bifurcations">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Lab 03: Bifurcations</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
