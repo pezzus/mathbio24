@@ -278,6 +278,12 @@ window.Quarto = {
  <span class="menu-text">Predation</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Assignments/04_systems.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">System of ODEs</span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -421,7 +427,7 @@ N(t) = \frac{KN_0}{N_0 + (K-N_0)e^{-rt}}.
 \]</span></p>
 <p>When <span class="math inline">\(N_0 &lt; K/2\)</span>, the resulting sigmoid curve have been called <em>logistic curve</em>, so that equation is also named <em>logistic equation</em>.</p>
 <p>The logistic equation is extremely common in experimental biology. Below, data fitted to a logistic for micro-organisms.</p>
-<div id="4c7a42eb" class="cell" data-execution_count="1">
+<div id="b66f616f" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -502,7 +508,7 @@ f'(K) = r'(K)K + \underbrace{r(K)}_{=0} = r'(K)K &lt; 0,
 r(N) = r\bigl(1-(N/K)^\theta\bigr),
 \]</span></p>
 <p>for <span class="math inline">\(\theta&gt;0\)</span>. There are a multitude of models for <span class="math inline">\(r(N)\)</span>, some we will explore in the assignments (see also figure below). Nonetheless, the above hypotheses always imply a sigmoid growth, when <span class="math inline">\(N(0)\in(0,K)\)</span>.</p>
-<div id="92babee3" class="cell" data-execution_count="2">
+<div id="f27488b9" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -592,7 +598,7 @@ f'(N) = r'(N)N + r(N).
 <li><span class="math inline">\(N=K &gt; N_m\)</span>, which is asymptotically stable, since <span class="math inline">\(f'(K) = r(K)K&lt;0\)</span>.</li>
 </ul>
 <p>Hence, we have the following result: if <span class="math inline">\(N(0) &lt; T\)</span>, then <span class="math inline">\(N(t)\to 0\)</span> (extinction), otherwise if <span class="math inline">\(N(0)&gt;T\)</span>, then <span class="math inline">\(N(t)\to K\)</span> (survival). We call <span class="math inline">\(T\)</span> the threshold population for survival.</p>
-<div id="5be46d53" class="cell" data-execution_count="3">
+<div id="a0f906e0" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>

@@ -278,6 +278,12 @@ window.Quarto = {
  <span class="menu-text">Predation</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Assignments/04_systems.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">System of ODEs</span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -383,7 +389,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">September 29, 2024</p>
+      <p class="date-modified">October 9, 2024</p>
     </div>
   </div>
     
@@ -539,7 +545,7 @@ N(t) \to N^*
 \]</span></p>
 <p>for all <span class="math inline">\(N^0\)</span>. The equilibrium is therefore <em>globally</em> stable when <span class="math inline">\(r&lt;0\)</span>.</p>
 <p><strong>5) Phase portrait.</strong> The phase portrait of a dynamical system is the collection of all possible orbits. Here, the phase space is <span class="math inline">\(\Omega=[0,\infty)\)</span>. The only equilibrium we have, <span class="math inline">\(N^*\)</span>, is a <em>barrier</em> to other orbits, because orbits cannot intersect (See <a href="IntroODE.html#prp-orbits" class="quarto-xref">Proposition&nbsp;<span>A.2</span></a>). Therefore:</p>
-<div id="01396c18" class="cell" data-execution_count="1">
+<div id="0877b9f6" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -583,7 +589,7 @@ N(t) \to N^*
 <p>For this problem we actually have the general solution <span class="math display">\[
 N(t) = (N_0 - N^*)e^{rt} + N^*.
 \]</span></p>
-<div id="933a3633" class="cell" data-execution_count="2">
+<div id="cd1f92f0" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -651,16 +657,16 @@ r^* = \lim_{t\to\infty}\frac{1}{t-t_0}\int_{t_0}^t r(s)\,\mathrm{d}s
 <p>exists then the asymptotic behavior of the solution is: <span class="math display">\[
 N(t) \approx e^{r^*(t-t_0)}, \quad t \gg 1.
 \]</span></p>
-<p>An interesting case is when <span class="math inline">\(r(t)\)</span> is <em>periodic</em>, that is there exists <span class="math inline">\(T&gt;0\)</span> such that <span class="math inline">\(r(t+T)=r(t)\)</span>. In this case the above formula still applies, but we can “forget” the limit (check Assignment 4 for a proof) and take: <span class="math display">\[
+<p>An interesting case is when <span class="math inline">\(r(t)\)</span> is <em>periodic</em>, that is there exists <span class="math inline">\(T&gt;0\)</span> such that <span class="math inline">\(r(t+T)=r(t)\)</span>. In this case the above formula still applies, but we can “forget” the limit (check Assignments for a proof) and take: <span class="math display">\[
 \bar{r} = \frac{1}{T} \int_0^T r(s)\,\mathrm{d}s,
 \]</span></p>
 <p>and write the solution for any <span class="math inline">\(t \ge t_0\)</span> as: <span class="math display">\[
 N(t) = e^{\bar{r}(t-t_0)}N_\pi(t),
 \]</span></p>
 <p>for some <span class="math inline">\(T\)</span>-periodic function <span class="math inline">\(N_\pi\)</span>. Note that <span class="math display">\[
-N(t_0 + kT) = e^{\bar{r}kT}N_\pi(t_0) = e^{k\bar{r}}N(t_0),
+N(t_0 + kT) = e^{\bar{r}kT}N_\pi(t_0) = e^{\bar{r}kT}N(t_0),
 \]</span></p>
-<p>so after <span class="math inline">\(k\)</span> periods the solution grows by a factor <span class="math inline">\(e^{k\bar{r}}\)</span>. This factor is called <em>Floquet multiplier</em>.</p>
+<p>so after <span class="math inline">\(k\)</span> periods the solution grows by a factor <span class="math inline">\(e^{\bar{r}kT}\)</span>. The factor <span class="math inline">\(e^{\bar{r}}\)</span> is called <em>Floquet multiplier</em>.</p>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
