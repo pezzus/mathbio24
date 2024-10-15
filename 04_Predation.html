@@ -245,6 +245,12 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./07_RM.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Rosenzweig-MacArthur model</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./references.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">References</span></a>
   </div>
@@ -311,6 +317,12 @@ window.Quarto = {
   <div class="sidebar-item-container"> 
   <a href="./Laboratories/03_Bifurcations/lab_Bifurcations.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Lab 03: Bifurcations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Laboratories/04_Chaos/lab_chaos.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab 04: Chaos</span></a>
   </div>
 </li>
       </ul>
@@ -429,7 +441,7 @@ f'(E_0) = r'(0)\cdot 0 + r(0) - aP^* = r(0) - aP^* &gt; 0,
 </ul>
 <p>The case <span class="math inline">\(aP^* = r(0)\)</span> is delicate. We have a single equilibrium, <span class="math inline">\(E_0=0\)</span>, but <span class="math inline">\(f'(E_0) = 0\)</span>, so we cannot deduce the stability from the linearization (why?). By inspecting the sign of <span class="math inline">\(E_0\)</span>, we observe that <span class="math inline">\(f(N)&lt;0\)</span> for <span class="math inline">\(N&gt;0\)</span>, so <span class="math inline">\(E_0\)</span> is attractive. However, for <span class="math inline">\(N&lt;0\)</span> we have that <span class="math inline">\(f(N)&lt;0\)</span>, thus it is repulsive (biologically, we do not care because <span class="math inline">\(N&lt;0\)</span> is irrelevant.) This type of equilibrium is called <em>saddle-node</em>.</p>
 <p>The point <span class="math inline">\(aP^* = r(0)\)</span> is a <em>bifurcation point</em>, specifically a <em>transcritical bifurcation</em> (See <a href="bifurcations.html#sec-transbif" class="quarto-xref"><span>Section B.6</span></a>). Roughly speaking, the dynamic before and after the bifurcation point is topologically different: in one case we have one equilibrium, in the other 2 equilibria. Actually, we still have 2 equilibria for <span class="math inline">\(aP^* &gt; r(0)\)</span>, one being negative. Thus, what really happens is that as we increase <span class="math inline">\(aP^*\)</span> the two curves of equilibria (<span class="math inline">\(N=0\)</span> and <span class="math inline">\(N=E_0\)</span>) crosses and swap stability.</p>
-<div id="072236f4" class="cell" data-execution_count="1">
+<div id="f3c79fa2" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -555,7 +567,7 @@ T = \frac{\nu}{\alpha P^*}, \quad \rho = \frac{r\nu}{\alpha P^*}, \quad q = \fra
 f(u) = \rho \Bigl(1 - \frac{u}{q} \Bigr), \quad g(u) = \frac{u}{1 + u^2}.
 \]</span></p>
 <p>The function <span class="math inline">\(f(u)\)</span> represents the per capita growth rate of <span class="math inline">\(u\)</span>, whereas <span class="math inline">\(g(u)\)</span> is the per capita death rate due to predation. Thus, solutions of the equation are equilibria of the system. Since the function <span class="math inline">\(g(u)\)</span> does not depend on any parameters, we can fix it and simply change <span class="math inline">\(f(u)\)</span>, which is a segment.</p>
-<div id="30c780c9" class="cell" data-execution_count="2">
+<div id="46ab8ec5" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -633,7 +645,7 @@ h(u,\rho) = \rho \Bigl(1-\frac{u}{q}\Bigr) - \frac{u}{1+u^2} = 0.
 \rho(u) = \frac{q u}{(1+u^2)(q-u)}.
 \]</span></p>
 <p>Since <span class="math inline">\(h(u,\rho(u))=0\)</span>, the curve <span class="math inline">\((u,\rho(u))\)</span> with <span class="math inline">\(u\in[0,q)\)</span> defines a curve of equilibria, shown below:</p>
-<div id="8170aaca" class="cell" data-execution_count="3">
+<div id="87777053" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -688,7 +700,7 @@ h(u,\rho) = \rho \Bigl(1-\frac{u}{q}\Bigr) - \frac{u}{1+u^2} = 0.
 <p>The plot above is a bifurcation diagram. We can interpret it as follows: given <span class="math inline">\(\rho=\bar{\rho}\)</span>, the equilibria are those corresponding to the intersections between <span class="math inline">\(\rho=\bar{\rho}\)</span> and the curve <span class="math inline">\(\rho=\rho(u)\)</span>. So, for <span class="math inline">\(\rho &lt; \rho_1\)</span> we have one equilibrium, for <span class="math inline">\(\rho_1 &lt; \rho &lt; \rho_3\)</span> we have 3, and for <span class="math inline">\(\rho &gt; \rho_3\)</span> we have one.</p>
 <p>For <span class="math inline">\(\rho = \rho_1\)</span> or <span class="math inline">\(\rho = \rho_2\)</span>, we have a <em>tangent bifurcation</em> (See <a href="bifurcations.html#sec-tangbif" class="quarto-xref"><span>Section B.5</span></a>). As we can see, the curve of equilibria is always smooth, with no branching or crossing on another curve of equilibria, like in the case of <em>transcritical bifurcation</em>. However, there is a change in stability: in fact, the branch between <span class="math inline">\(\rho_1\)</span> and <span class="math inline">\(\rho_2\)</span> corresponds to <span class="math inline">\(u_2^*\)</span>, which is unstable.</p>
 <p>When varying also <span class="math inline">\(q\)</span>, the tangent bifurcations points <span class="math inline">\(\rho_1\)</span> and <span class="math inline">\(\rho_2\)</span> moves as well. In particular, as <span class="math inline">\(q\)</span> is reduced, the two bifurcation points will get closer until they meet for <span class="math inline">\(q=3\sqrt{3}\)</span>. This point is another bifurcation, called <em>cusp bifurcation</em>. Beyond this point, the system is never bistable.</p>
-<div id="89be81ba" class="cell" data-execution_count="4">
+<div id="5d36648e" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -740,7 +752,7 @@ h(u,\rho) = \rho \Bigl(1-\frac{u}{q}\Bigr) - \frac{u}{1+u^2} = 0.
 </div>
 </div>
 <p>If we plot the surface of equilibria in the space <span class="math inline">\((q,\rho,u^*)\)</span>, as the solution of the equation <span class="math inline">\(h(u,\rho,q)=0\)</span>, we obtain the plot below. This plot clearly shows the bistable region and the threshold value (in red).</p>
-<div id="d6d0a575" class="cell" data-execution_count="5">
+<div id="98e32116" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -790,7 +802,7 @@ h(u,\rho) = \rho \Bigl(1-\frac{u}{q}\Bigr) - \frac{u}{1+u^2} = 0.
 <p>Now that we have the bifurcation diagram, we can use it to find the periodic outbreaks. Remember that <span class="math inline">\(\rho\)</span> and <span class="math inline">\(q\)</span> are functions of <span class="math inline">\(S\)</span> and <span class="math inline">\(E\)</span>, but they vary very slowly compared to <span class="math inline">\(N(t)\)</span>. On the other hand, when <span class="math inline">\(N\)</span> is at equilibrium, it does not vary anymore, so even slow and small variations of <span class="math inline">\(E\)</span> and <span class="math inline">\(S\)</span> could matter.</p>
 <p>Suppose to start with small <span class="math inline">\(\rho\)</span>, say <span class="math inline">\(\rho &lt; \rho_1\)</span>. The spruce budworms is at refuge state <span class="math inline">\(u_1^*\)</span>. Now we slowly increase <span class="math inline">\(\rho\)</span>. The equilibrium <span class="math inline">\(u_1^*(\rho)\)</span> will only slightly increase. Once we react the point <span class="math inline">\(\rho=\rho_2\)</span>, the equilibrium <span class="math inline">\(u_1^*\)</span> disappears, so <span class="math inline">\(u\to u_3^*\)</span> (outbreak), the only other stable equilibrium. Note the the outbreak is fast, even for a small change of <span class="math inline">\(\rho\)</span>. For this reason, the tangent bifurcation is a <em>catastrophic bifurcation</em>. As we keep increasing <span class="math inline">\(\rho\)</span>, the outbreak equilibrium keeps increasing, but again slowly.</p>
 <p>Since <span class="math inline">\(\rho\)</span> is the intrinsic growth rate, we can assume that <span class="math inline">\(\rho\)</span> will now start to decrease, because there are too many spruce budworm consuming the resources. As we go back, decreasing <span class="math inline">\(\rho\)</span>, we follow a specular path, jumping at <span class="math inline">\(\rho=\rho_1\)</span> from the outbreak to the refuge equilibrium. We go back to the original situation.</p>
-<div id="59355d29" class="cell" data-execution_count="6">
+<div id="e22d0455" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>

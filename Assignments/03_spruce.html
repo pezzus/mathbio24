@@ -21,6 +21,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -191,6 +225,12 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../07_RM.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Rosenzweig-MacArthur model</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../references.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">References</span></a>
   </div>
@@ -257,6 +297,12 @@ window.Quarto = {
   <div class="sidebar-item-container"> 
   <a href="../Laboratories/03_Bifurcations/lab_Bifurcations.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Lab 03: Bifurcations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Laboratories/04_Chaos/lab_chaos.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab 04: Chaos</span></a>
   </div>
 </li>
       </ul>
@@ -330,7 +376,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">October 4, 2024</p>
+      <p class="date-modified">October 15, 2024</p>
     </div>
   </div>
     
@@ -351,24 +397,277 @@ N' = r\Bigl(1-\frac{N}{K}\Bigr)N - E\frac{N}{A+N},
 <ol type="1">
 <li>Give a biological interpretation of <span class="math inline">\(A\)</span>.</li>
 </ol>
+<div class="callout callout-style-default callout-tip callout-titled" title="Solution">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>First note that the functional response is Holling type III, with <span class="math inline">\(\theta=1\)</span>. So, when <span class="math inline">\(N = A\)</span>, the fishing term is exactly <span class="math inline">\(E/2\)</span>. Thus, <span class="math inline">\(A\)</span> is the half-saturation value.</p>
+</div>
+</div>
+</div>
 <ol start="2" type="1">
 <li>Show that the system can be rewritten in dimensionless form as <span class="math display">\[
 \dot{u} = u(1-u) - h\frac{u}{a+u}
 \]</span></li>
 </ol>
 <p>for a suitable choice of quantities.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Solution">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>We select <span class="math display">\[
+u = \frac{N}{K}, \quad \tau = rt,
+\]</span></p>
+<p>so we obtain: <span class="math display">\[
+\dot{u} = u(1-u) - \frac{E}{rK}\frac{u}{A/K + u} = u(1-u) - h \frac{u}{a + u},
+\]</span></p>
+<p>where we selected <span class="math display">\[
+h = \frac{E}{rK}, \quad a = \frac{A}{K}.
+\]</span></p>
+</div>
+</div>
+</div>
 <ol start="3" type="1">
 <li>Show that the system can have one, two, or three equilibria, depending on the values of <span class="math inline">\(a\)</span> and <span class="math inline">\(h\)</span>. Classify the stability in each case.</li>
 </ol>
+<div class="callout callout-style-default callout-tip callout-titled" title="Solution">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Equilibria are solutions of: <span class="math display">\[
+f(u) = u(1-u) - h \frac{u}{a + u} = 0.
+\]</span></p>
+<p>One fixed point is <span class="math inline">\(u = E_0 = 0\)</span>. All other fixed points satisfy: <span class="math display">\[
+(1-u) - h\frac{1}{a + u} = 0, \quad\Leftrightarrow\quad p(u):=(1-u)(a+u) = h.
+\]</span></p>
+<p>The function on the left hand side is a parabola <span class="math inline">\(p(u)\)</span>: if its maximum is below <span class="math inline">\(h\)</span>, then we have no equilibria. Otherwise, we can have one or two depending on whether the maximum is on the boundary or not.</p>
+<p>The position of the maximum is: <span class="math display">\[
+u_\text{max} = \frac{1-a}{2}, \quad
+p_\text{max} = p(u_\text{max}) = \frac{(1+a)^2}{4}.
+\]</span></p>
+<p>If <span class="math inline">\(h &gt; p_\text{max}\)</span> there are no fixed points.</p>
+<p>If <span class="math inline">\(h \le p_\text{max}\)</span>, we have two fixed points <span class="math inline">\(E_1\)</span> and <span class="math inline">\(E_2\)</span>, specifically: <span class="math display">\[
+E_{1,2} = \frac{1-a}{2} \pm \frac{1}{2}\sqrt{(1+a)^2 - 4 h}.
+\]</span></p>
+<p>Note that <span class="math inline">\(E_2\)</span> is always non-negative, when it exists. However, <span class="math inline">\(E_1\)</span> is not always biologically feasible, because it could be negative. This is the case when <span class="math inline">\(u_\text{max} &lt; 0\)</span>, that is <span class="math inline">\(a&gt;1\)</span>. When <span class="math inline">\(a&lt;1\)</span>, then it only exists when <span class="math inline">\(p_\text{max}\le h \le p(0) = a\)</span>.</p>
+<p>For the stability, note that: <span class="math display">\[
+f(u) = \frac{u}{a+u} (p(u)-h), \quad\Rightarrow\quad f'(u) = \underbrace{\frac{\mathrm{d}}{\mathrm{d}u}\Bigl(\frac{u}{a+u}\Bigr)}_{&gt;0} (p(u)-h) + \underbrace{\frac{u}{a+u}}_{\ge 0} p'(u).
+\]</span></p>
+<p>For <span class="math inline">\(E_0\)</span>, <span class="math inline">\(f'(E_0)\)</span> has the sign of <span class="math inline">\(p(0)-h\)</span>, so <span class="math inline">\(E_0\)</span> is asympotically stable when <span class="math inline">\(a &lt; h\)</span>, otherwise is unstable.</p>
+<p>For <span class="math inline">\(E_{1,2}\)</span>, <span class="math inline">\(f'(E_{1,2})\)</span> has the sign of <span class="math inline">\(p'(E_{1,2})\)</span>: thus, <span class="math inline">\(E_1\)</span> is unstable (<span class="math inline">\(p'(E_1)&gt;0\)</span>) and <span class="math inline">\(E_2\)</span> is asymptotically stable (when they exist).</p>
+</div>
+</div>
+</div>
 <ol start="4" type="1">
 <li>Plot the bifurcation diagram with respect to <span class="math inline">\(h\)</span>, for a fixed value of <span class="math inline">\(a\)</span>. Determine all bifurcation points and whether they are catastrophic or not. Is there a bistable region?</li>
 </ol>
+<div class="callout callout-style-default callout-tip callout-titled" title="Solution">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>If <span class="math inline">\(a&gt;1\)</span>, the parabola has a maximum in <span class="math inline">\(u=0\)</span>, thus there can only exist <span class="math inline">\(E_2\)</span>, depending on <span class="math inline">\(h\)</span>. For <span class="math inline">\(h=0\)</span> we have 2 equilibria, <span class="math inline">\(E_0=0\)</span> and <span class="math inline">\(E_2=1\)</span>. As <span class="math inline">\(h\)</span> increases, <span class="math inline">\(E_2\)</span> moves along the parabola until <span class="math inline">\(h = p(0) = a\)</span>, where we have a bifurcation point (transcritical bifurcation). After that, only <span class="math inline">\(E_0\)</span> exists. The bifurcation is not catastrophic, and there is no bistable region.</p>
+<div id="4a8666ce" class="cell" data-execution_count="1">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>sns.set_theme(<span class="st">"notebook"</span>, style<span class="op">=</span><span class="st">"whitegrid"</span>)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> <span class="dv">2</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>u <span class="op">=</span> np.linspace(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">1000</span>)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>h <span class="op">=</span> <span class="kw">lambda</span> u: (<span class="dv">1</span><span class="op">-</span>u)<span class="op">*</span>(a<span class="op">+</span>u)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> plt.xkcd(scale<span class="op">=</span><span class="fl">0.5</span>):</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    sns.despine()</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    ax.xaxis.set_ticks([])</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    ax.yaxis.set_ticks([])</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    ax.plot([<span class="dv">0</span>,a],[<span class="dv">0</span>,<span class="dv">0</span>],<span class="st">'r'</span>)</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>    ax.plot([a,<span class="fl">1.2</span><span class="op">*</span>a],[<span class="dv">0</span>,<span class="dv">0</span>],<span class="st">'b'</span>)</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>    ax.plot(h(u),u,<span class="st">'b'</span>)</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>    ax.plot([a],[<span class="dv">0</span>],<span class="st">'k.'</span>,markersize<span class="op">=</span><span class="dv">16</span>)</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>    ax.set_xlabel(<span class="st">'$h$'</span>)</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>    ax.set_ylabel(<span class="st">'$u^*$'</span>)</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>    ax.set_xlim([<span class="dv">0</span>,<span class="va">None</span>])</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>    plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="03_spruce_files/figure-html/cell-2-output-1.png" width="563" height="411" class="figure-img"></p>
+<figcaption>Bifurcation diagram with respect to <span class="math inline">\(h\)</span> and for <span class="math inline">\(a=2\)</span>.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>If <span class="math inline">\(a &lt; 1\)</span>, then we can also have <span class="math inline">\(E_1\)</span>. For <span class="math inline">\(h=0\)</span>, we start as above. As <span class="math inline">\(h\)</span> increase, there will be a bifurcation point for <span class="math inline">\(h = p(0) = a\)</span>, when <span class="math inline">\(E_1\)</span> appears. Here we have 3 equilibria, until <span class="math inline">\(h = p_\text{max} = \frac{(1+a)^2}{4}\)</span>, where <span class="math inline">\(E_1\)</span> and <span class="math inline">\(E_2\)</span> collides in a tangent bifurcation. For <span class="math inline">\(h &gt; p_\text{max}\)</span> there is only <span class="math inline">\(E_0\)</span>. The tangent bifurcation is catastrophic, and there is bistable region when <span class="math inline">\(E_1\)</span> exists.</p>
+<div id="a4d5841d" class="cell" data-execution_count="2">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>sns.set_theme(<span class="st">"notebook"</span>, style<span class="op">=</span><span class="st">"whitegrid"</span>)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> <span class="fl">0.2</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>pmax <span class="op">=</span> (<span class="dv">1</span><span class="op">+</span>a)<span class="op">**</span><span class="dv">2</span><span class="op">/</span><span class="dv">4</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>umax <span class="op">=</span> (<span class="dv">1</span><span class="op">-</span>a)<span class="op">/</span><span class="dv">2</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>u1 <span class="op">=</span> np.linspace(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">1000</span>)</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>h <span class="op">=</span> <span class="kw">lambda</span> u: (<span class="dv">1</span><span class="op">-</span>u)<span class="op">*</span>(a<span class="op">+</span>u)</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> plt.xkcd(scale<span class="op">=</span><span class="fl">0.5</span>):</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>    sns.despine()</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>    ax.xaxis.set_ticks([])</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>    ax.yaxis.set_ticks([])</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>    ax.plot([<span class="dv">0</span>,a],[<span class="dv">0</span>,<span class="dv">0</span>],<span class="st">'r'</span>)</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>    ax.plot([a,<span class="fl">1.2</span><span class="op">*</span>pmax],[<span class="dv">0</span>,<span class="dv">0</span>],<span class="st">'b'</span>)</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>    ax.plot(h(u[u <span class="op">&gt;</span> umax]),u[u <span class="op">&gt;</span> umax],<span class="st">'b'</span>)</span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>    ax.plot(h(u[u <span class="op">&lt;</span> umax]),u[u <span class="op">&lt;</span> umax],<span class="st">'r'</span>)</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>    ax.plot([a],[<span class="dv">0</span>],<span class="st">'k.'</span>,markersize<span class="op">=</span><span class="dv">16</span>)</span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>    ax.plot([pmax],[umax],<span class="st">'k.'</span>,markersize<span class="op">=</span><span class="dv">16</span>)</span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>    ax.fill_between(h(u), <span class="dv">1</span>, where<span class="op">=</span>(u <span class="op">&lt;</span> umax), facecolor<span class="op">=</span><span class="st">'gray'</span>, alpha<span class="op">=</span><span class="fl">.2</span>)</span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>    ax.set_xlabel(<span class="st">'$h$'</span>)</span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>    ax.set_ylabel(<span class="st">'$u^*$'</span>)</span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>    ax.set_xlim([<span class="dv">0</span>,<span class="va">None</span>])</span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>    plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="03_spruce_files/figure-html/cell-3-output-1.png" width="563" height="411" class="figure-img"></p>
+<figcaption>Bifurcation diagram with respect to <span class="math inline">\(h\)</span> and for <span class="math inline">\(a=0.2\)</span>. The shared area is the bistable region.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
 <ol start="5" type="1">
 <li>Suppose that we slowly increase the fishing effort from zero, assuming that the fish population is at the carrying capacity at the beginning. Show the dynamics.</li>
 </ol>
+<div class="callout callout-style-default callout-tip callout-titled" title="Solution">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Suppose <span class="math inline">\(a&gt;1\)</span>. Then, as we increase <span class="math inline">\(h\)</span> the equilibrium population will decrease with carrying capacity <span class="math inline">\(E_2\)</span>, until the bifurcation point, where it goes to extinction. It is reversible: if we decrease <span class="math inline">\(h\)</span> beyond the bifurcation point and the population is not exactly zero, then it will recover up to <span class="math inline">\(E_2\)</span>.</p>
+<p>If <span class="math inline">\(a&lt;1\)</span>, the initial path is similar until the tangent bifurcation. Then, there is a fast collapse of the population down to zero. If we decrease <span class="math inline">\(h\)</span>, there is no hope for recovery of the population unless <span class="math inline">\(h &lt; a\)</span>.</p>
+</div>
+</div>
+</div>
 <ol start="6" type="1">
 <li>Plot the stability diagram of the system in <span class="math inline">\((a,h)\)</span> parameter space. Can hysteresis occur in any of the stability regions?</li>
 </ol>
+<div class="callout callout-style-default callout-tip callout-titled" title="Solution">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>We can have an hysteresis for <span class="math inline">\(a&lt;1\)</span>. In the <span class="math inline">\((a,h)\)</span> space, the bistable region (3 equilibria) is for <span class="math inline">\(a = p(0) &lt; h &lt; p_\text{max} = \frac{(1+a)^2}{4}\)</span>.</p>
+<div id="b3996fac" class="cell" data-execution_count="3">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>sns.set_theme(<span class="st">"notebook"</span>, style<span class="op">=</span><span class="st">"whitegrid"</span>)</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>amax <span class="op">=</span> <span class="fl">1.2</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> np.linspace(<span class="dv">0</span>,amax,<span class="dv">100</span>)</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>sns.despine()</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>ax.xaxis.set_ticks([<span class="fl">0.0</span>,<span class="fl">1.0</span>])</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>ax.yaxis.set_ticks([<span class="fl">0.0</span>,<span class="fl">1.0</span>])</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>ax.fill_between(a, (<span class="dv">1</span><span class="op">+</span>a)<span class="op">**</span><span class="dv">2</span><span class="op">/</span><span class="dv">4</span>, a, where<span class="op">=</span>(a <span class="op">&lt;</span> <span class="dv">1</span>), facecolor<span class="op">=</span><span class="st">'red'</span>, alpha<span class="op">=</span><span class="fl">.2</span>)</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>ax.fill_between(a, a, facecolor<span class="op">=</span><span class="st">'blue'</span>, alpha<span class="op">=</span><span class="fl">.1</span>)</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>ax.fill_between(a, amax, facecolor<span class="op">=</span><span class="st">'blue'</span>, alpha<span class="op">=</span><span class="fl">.1</span>)</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>ax.plot(a, a, <span class="st">'k--'</span>, linewidth<span class="op">=</span><span class="fl">1.0</span>)</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>ax.plot(a[a<span class="op">&lt;=</span><span class="dv">1</span>], (<span class="dv">1</span><span class="op">+</span>a[a<span class="op">&lt;=</span><span class="dv">1</span>])<span class="op">**</span><span class="dv">2</span><span class="op">/</span><span class="dv">4</span>, <span class="st">'k--'</span>, linewidth<span class="op">=</span><span class="fl">1.0</span>)</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">'$a$'</span>)</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">'$h$'</span>)</span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>ax.set_xlim([<span class="dv">0</span>,<span class="va">None</span>])</span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>ax.set_ylim([<span class="dv">0</span>,<span class="va">None</span>])</span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>ax.plot([<span class="fl">1.0</span>],[<span class="fl">1.0</span>],<span class="st">'k.'</span>,markersize<span class="op">=</span><span class="dv">16</span>)</span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>ax.set_aspect(<span class="st">'equal'</span>)</span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>ax.annotate(<span class="st">'Bistable'</span>,(<span class="fl">0.15</span>,<span class="fl">0.15</span>),ha<span class="op">=</span><span class="st">'center'</span>,rotation<span class="op">=</span><span class="dv">45</span>)</span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>ax.annotate(<span class="st">'Cusp'</span>,(<span class="fl">0.98</span>,<span class="fl">1.02</span>),ha<span class="op">=</span><span class="st">'right'</span>,va<span class="op">=</span><span class="st">'bottom'</span>)</span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>ax.annotate(<span class="st">'Two equilibria'</span>,(<span class="fl">0.7</span>,<span class="fl">0.25</span>),ha<span class="op">=</span><span class="st">'center'</span>)</span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>ax.annotate(<span class="st">'One equilibrium $E_0$'</span>,(<span class="fl">0.35</span>,<span class="fl">0.8</span>),ha<span class="op">=</span><span class="st">'center'</span>)</span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="03_spruce_files/figure-html/cell-4-output-1.png" width="429" height="435" class="figure-img"></p>
+<figcaption>Bifurcation diagram with respect to <span class="math inline">\((a,h)\)</span>.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
 </section>
 <section id="spruce-budworm-model" class="level2">
 <h2 class="anchored" data-anchor-id="spruce-budworm-model">Spruce-budworm model</h2>
@@ -380,18 +679,98 @@ N' = r\Bigl(1-\frac{N}{K}\Bigr)N - E\frac{N}{A+N},
 <ol type="1">
 <li>Strategy (1): we reduce the population by reducing <span class="math inline">\(\rho\)</span> (for instance, by preventing mating). Does it work? Use the diagrams to show how the population varies as we reduce <span class="math inline">\(\rho\)</span>.</li>
 </ol>
+<div class="callout callout-style-default callout-tip callout-titled" title="Solution">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>We can use diagram (A). By reducing <span class="math inline">\(\rho\)</span>, we slowly reduce <span class="math inline">\(u^*\)</span> (the stable equilibrium level for the population) as well, up to the tipping point (first tangent bifurcation). Then, the population suddenly drops from outbreak level to refuge level, and it will eventually continue to decrease smoothly with <span class="math inline">\(\rho\)</span>. So, the strategy works.</p>
+</div>
+</div>
+</div>
 <ol start="2" type="1">
 <li>Strategy (2): we reduce the population by using an insecticide. Does it work? Use diagram (A). Observe that if we kill worms, we move the population away from the equilibrium, hence it will quickly rebound to the closest stable equilibrium.</li>
 </ol>
+<div class="callout callout-style-default callout-tip callout-titled" title="Solution">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The insecticide does not always work. If <span class="math inline">\(\rho\)</span> is large, so we are on the right of the bistable region, the outbreak equilibrium is the only one and it is stable. So, after the application of the insecticide, the population will fully recover to the outbreak level. On the other hand, if we are in the bistable region, we need to apply a sufficient amount of insecticide to bring the population below the threshold value. In this case, the population will naturally decrease to the refuge level.</p>
+</div>
+</div>
+</div>
 <ol start="3" type="1">
 <li>Strategy (3): we reduce <span class="math inline">\(q\)</span>, for instance by spraying a defoliant. Does it work? Use diagram (B).</li>
 </ol>
+<div class="callout callout-style-default callout-tip callout-titled" title="Solution">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-9" class="callout-9-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>This is a bit more difficult to visualize. If we fix <span class="math inline">\(\rho\)</span> and reduce <span class="math inline">\(q\)</span>, the curve in diagram (A) will be squeezed vertically, and the bistable region will also become smaller, up to a critical point where it vanishes. We can visualize this in diagram (B), moving horizontally from large <span class="math inline">\(q\)</span> to small <span class="math inline">\(q\)</span>. Thus, we need to reduce <span class="math inline">\(q\)</span> as much as we need to cross the bistable region. So, it works.</p>
+</div>
+</div>
+</div>
 <ol start="4" type="1">
 <li>Strategy (1+2+3): we reduce <span class="math inline">\(q\)</span> and <span class="math inline">\(\rho\)</span> simultaneously, and then use the insecticide. Does it work?</li>
 </ol>
+<div class="callout callout-style-default callout-tip callout-titled" title="Solution">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-10" class="callout-10-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>This is a great strategy. With little effort (and money), we can reduce both so to move into the bistable region, diagram (B), then we apply the insecticide a move the population below the threshold. The population will then naturally go towards the refuge level.</p>
+</div>
+</div>
+</div>
 <ol start="5" type="1">
 <li>After the application of Strategy (1), <span class="math inline">\(\rho\)</span> starts to increase again back to its original value (large). Explain how the population varies. Does it increase in the exactly same matter as it decreased?</li>
 </ol>
+<div class="callout callout-style-default callout-tip callout-titled" title="Solution">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-11" class="callout-11-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>We proceed along the lower branch in diagram (A), up to the tipping point on the right, and then jump to the upper branch. The path is different from the previous point.</p>
+</div>
+</div>
+</div>
 </section>
 <section id="logistic-with-resources" class="level2">
 <h2 class="anchored" data-anchor-id="logistic-with-resources">Logistic with resources</h2>
@@ -406,18 +785,123 @@ N' = G(C − H (N)) N,
 <ol type="1">
 <li>Explain why reasonable assumptions are that both <span class="math inline">\(G\)</span> and <span class="math inline">\(H\)</span> are increasing functions with <span class="math inline">\(G(0) &lt; 0\)</span>, <span class="math inline">\(H(0) = 0\)</span>.</li>
 </ol>
+<div class="callout callout-style-default callout-tip callout-titled" title="Solution">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-12" class="callout-12-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>We are making the following assumptions:</p>
+<ol type="1">
+<li><span class="math inline">\(G'(\rho) &gt; 0\)</span>: more resources, higher growth rate;</li>
+<li><span class="math inline">\(H'(N) &gt; 0\)</span>: more individuals, higher use of resources;</li>
+<li><span class="math inline">\(H(0)=0\)</span>: no individuals, no usa of resources;</li>
+<li><span class="math inline">\(G(0)&lt;0\)</span>: no resources, negative growth rate.</li>
+</ol>
+</div>
+</div>
+</div>
 <ol start="2" type="1">
 <li>Choose a linear form for <span class="math inline">\(G\)</span> and <span class="math inline">\(H\)</span> and show that the growth rate has the form <span class="math inline">\(r(N) = r − \alpha N\)</span>.</li>
 </ol>
+<div class="callout callout-style-default callout-tip callout-titled" title="Solution">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-13" class="callout-13-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Assuming, consistently with the above hypotheses, that <span class="math display">\[
+\begin{aligned} G(\rho) &amp;= a\rho - b, &amp;&amp; a,b&gt;0, \\ H(N) &amp;= d N, &amp;&amp; d &gt;0,\end{aligned}
+\]</span></p>
+<p>we have that <span class="math display">\[
+\begin{split} r(N) &amp;= G(C-H(N)) = G(C - d N) = a(C-dN)-b \\ &amp;= -adN + aC - b = \bar r - \alpha N,\end{split}
+\]</span></p>
+<p>with <span class="math inline">\(\bar{r}=aC - b\)</span> and <span class="math inline">\(\alpha = ad &gt; 0\)</span>.</p>
+</div>
+</div>
+</div>
 <ol start="3" type="1">
 <li>With the previous assumptions, does <a href="#eq-resources" class="quarto-xref">Equation&nbsp;<span>2</span></a> always have a positive equilibrium? If not, find the conditions under which it does and find the expressions for the intrinsic rate of growth <span class="math inline">\(r\)</span> and the carrying capacity <span class="math inline">\(K\)</span>.</li>
 </ol>
+<div class="callout callout-style-default callout-tip callout-titled" title="Solution">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-14" class="callout-14-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>We have the equilibrium <span class="math inline">\(N=N_0=0\)</span>, as usual. The other equilibrium is for <span class="math inline">\(r(N_1)=0\)</span>, that is <span class="math inline">\(N^* = \bar r / \alpha\)</span>. This equilibrium exists only for <span class="math inline">\(\bar r &gt; 0\)</span>, so <span class="math inline">\(aC - b &gt; 0\)</span>.</p>
+<p>In the logistic equation, <span class="math inline">\(r(N)=\bar{r}(1-N/K)\)</span>, so by comparing the expressions we have that the intrinsic growth rate is <span class="math inline">\(\bar{r}\)</span> whereas the carrying capacity is <span class="math display">\[K=\frac{\bar{r}}{\alpha} = \frac{aC-b}{ad} = \frac{C}{d} - \frac{b}{ad}.\]</span></p>
+<p>The stability analysis (here not required) follows from the standard logistic equation.</p>
+</div>
+</div>
+</div>
 <ol start="4" type="1">
 <li>Using generic functions <span class="math inline">\(G\)</span> and <span class="math inline">\(H\)</span> satisfying the assumptions in 1., find under which conditions the equation <span class="math inline">\((2)\)</span> has a unique positive equilibrium. When is it asymptotically stable?</li>
 </ol>
+<div class="callout callout-style-default callout-tip callout-titled" title="Solution">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-15-contents" aria-controls="callout-15" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-15" class="callout-15-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The equilibrium <span class="math inline">\(N_0=0\)</span> is always present. For the positive equilibrium <span class="math inline">\(N^*\)</span>, we need to satisfy <span class="math inline">\(G(C-H(N^*))=0\)</span>. Even though <span class="math inline">\(G(0)&lt;0\)</span> and <span class="math inline">\(G'(\rho)&gt;0\)</span>, there is no guarantee that <span class="math inline">\(G\)</span> will cross the zero at some finite value <span class="math inline">\(\rho^*\)</span>. However, if <span class="math inline">\(\lim_{\rho\to\infty} G &gt; 0\)</span> (finite or not), then there exists a unique zero, denoted by <span class="math inline">\(\rho^*\)</span>. This is reasonable, for high level of resources the growth rate should be positive.</p>
+<p>Next, at equilibrium we have <span class="math inline">\(\rho^*=C-H(N^*)\)</span>, thus <span class="math inline">\(H(N^*)=C-\rho^*\)</span>. Since <span class="math inline">\(H(0)=0\)</span> and <span class="math inline">\(H'&gt;0\)</span>, if we further assume that <span class="math inline">\(\lim_{N\to\infty} H(N) = H_\infty &gt; C-\rho^*&gt; 0\)</span> we must have a unique zero <span class="math inline">\(N^*\)</span>, corresponding to the equilibrium. Therefore, if <span class="math inline">\(\rho^*&lt; C &lt; H_\infty + \rho^*\)</span>, then there exists a unique equilibrium <span class="math inline">\(N^*\)</span>. Note that the second condition is superflous when <span class="math inline">\(H_\infty = +\infty\)</span>.</p>
+<p>For the stability, we have <span class="math inline">\(f'(N^*)=r(N^*)+r'(N^*)N^*=r'(N^*)N^*\)</span>, so the sign is determined by the sign of <span class="math inline">\(r'(N)\)</span>. It follows: <span class="math display">\[
+r'(N) = G'(\rho(N))\rho'(N) = -G'(\rho(N))H'(N).
+\]</span></p>
+<p>Since <span class="math inline">\(G'(\rho)&lt;0\)</span>, the stability follows from the fact that <span class="math inline">\(H'(N)&gt;0\)</span>.</p>
+</div>
+</div>
+</div>
 <ol start="5" type="1">
 <li>What could be other reasonable assumptions for <span class="math inline">\(\rho\)</span> instead of <a href="#eq-rho" class="quarto-xref">Equation&nbsp;<span>1</span></a>?</li>
 </ol>
+<div class="callout callout-style-default callout-tip callout-titled" title="Solution">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-16-contents" aria-controls="callout-16" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-16" class="callout-16-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The function <span class="math inline">\(\rho(N)\)</span> denotes the available resources at some level <span class="math inline">\(N\)</span> of population. We expect this function to decrease with <span class="math inline">\(N\)</span>, and to be maximum for <span class="math inline">\(N=0\)</span>. Resources cannot be negative, thus it is also bounded from below by zero. In summary</p>
+<ol type="1">
+<li><span class="math inline">\(\rho(0)=\rho_\mathrm{max} &gt; 0\)</span>,</li>
+<li><span class="math inline">\(\rho'(N) &lt; 0\)</span>,</li>
+<li><span class="math inline">\(\rho(N) \ge 0\)</span> for all <span class="math inline">\(N\ge 0\)</span>.</li>
+</ol>
+<p>We see that if <span class="math inline">\(\rho^*&lt; \rho_\mathrm{max}\)</span>, then there exists a unique equilibrium <span class="math inline">\(N^* &gt; 0\)</span>. The equilibrium is asymptotically stable because of the second assumption.</p>
+</div>
+</div>
+</div>
 <ol start="6" type="1">
 <li>Modify the equation to <span class="math display">\[
 \begin{cases}
@@ -431,6 +915,24 @@ G(R)=m\frac{R-a}{R+1}-\mu_0, \quad H(R,N)=(c+bN)\frac{R-a}{R+1}N-R.
 \]</span></p>
 <p>Here <span class="math inline">\(N(t)\)</span> represents population density, and <span class="math inline">\(R(t)\)</span> available resources, and all constants are supposed to be positive.</p>
 <p>With the help of <a href="https://github.com/MathWorks-Teaching-Resources/Phase-Plane-and-Slope-Field">Phase Plane</a> in MATLAB, explore the solutions of the problem using parameter values such that: <span class="math display">\[\rho_0 &gt; \frac{\mu_0 + m a}{m - \mu_0}.\]</span></p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Solution">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-17-contents" aria-controls="callout-17" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-17" class="callout-17-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>For <span class="math inline">\(R\)</span> fixed, we see that the model is similar to the above in the above points. So we see that <span class="math inline">\(G(0)=-ma-\mu_0&lt;0\)</span> and <span class="math inline">\(G'(R)=\frac{m(1+a)}{(R+1)^2} &gt; 0\)</span>, as assumed above. In order to have a zero, <span class="math inline">\(G_\infty = \lim_{R\to\infty}G(R)=m-\mu_0&gt;0\)</span>, so we need <span class="math inline">\(m&gt;\mu_0\)</span> in order to have a non-trivial equilibrium. Note that <span class="math inline">\(G(R)\)</span> is a branch of hyperbola. The condition on <span class="math inline">\(\rho_0\)</span> ensures the existence of a non-trivial equilibrium.</p>
+<p><img src="PPlane_ResCons.png" class="img-fluid"></p>
+<p>We see that <span class="math inline">\(R(t)\)</span> and <span class="math inline">\(N(t)\)</span> oscillates but converges to a non-trivial equilibrium. Therefore, the equilibrium is a focus.</p>
+</div>
+</div>
+</div>
 
 
 </section>

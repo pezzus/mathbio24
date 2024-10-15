@@ -65,7 +65,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
-<link href="../../IntroODE.html" rel="next">
+<link href="../../Laboratories/04_Chaos/lab_chaos.html" rel="next">
 <link href="../../Laboratories/02_Predation/lab_Predation.html" rel="prev">
 <script src="../../site_libs/quarto-html/quarto.js"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
@@ -225,6 +225,12 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../../07_RM.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Rosenzweig-MacArthur model</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../../references.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">References</span></a>
   </div>
@@ -291,6 +297,12 @@ window.Quarto = {
   <div class="sidebar-item-container"> 
   <a href="../../Laboratories/03_Bifurcations/lab_Bifurcations.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Lab 03: Bifurcations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Laboratories/04_Chaos/lab_chaos.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab 04: Chaos</span></a>
   </div>
 </li>
       </ul>
@@ -363,7 +375,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">October 9, 2024</p>
+      <p class="date-modified">October 15, 2024</p>
     </div>
   </div>
     
@@ -378,24 +390,18 @@ window.Quarto = {
 <section id="installation-of-matcont" class="level2">
 <h2 class="anchored" data-anchor-id="installation-of-matcont">Installation of MatCont</h2>
 <p>The installation is easy, but it requires some care on macOS and Windows. In Matlab, try the following:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode matlab code-with-copy"><code class="sourceCode matlab"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="va">url</span> <span class="op">=</span> <span class="ss">'https://sourceforge.net/projects/matcont/files/latest/download'</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="va">unzip</span>(<span class="va">websave</span>(<span class="ss">'matcont.zip'</span><span class="op">,</span><span class="va">url</span>))</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="va">delete</span>(<span class="ss">'matcont.zip'</span>)</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="va">cd</span> <span class="va">MatCont7p5</span>  <span class="co">% this may vary, check the version</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="va">init</span>           <span class="co">% this returns a bunch of "MEX completed successfully."</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode matlab code-with-copy"><code class="sourceCode matlab"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="va">unzip</span>(<span class="ss">'https://gitlab.utwente.nl/m7686441/matcont/-/archive/main/matcont-main.zip'</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="va">cd</span> <span class="va">matcont</span><span class="op">-</span><span class="va">main</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="va">matcont</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>If the last command fails, then follow the instruction below and try again with the command <code>init</code>, only after <code>mex -setup</code> returns success.</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
 <ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" aria-current="page">macOS</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">Windows</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-3" role="tab" aria-controls="tabset-1-3" aria-selected="false">GNU/Linux</a></li></ul>
 <div class="tab-content">
 <div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
-<p>You need to install the Command Line Tools:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode matlab code-with-copy"><code class="sourceCode matlab"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="bn">!xcode-select --install    % beware the ! in front of the command</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="bn">!sudo xcodebuild -license  % you need to type macOS password</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Alternatively, you can also install <a href="https://apps.apple.com/it/app/xcode/id497799835?l=en&amp;mt=12">XCode</a>, which is several GBs. After installation, open it once and follow the instruction to accept the license.</p>
-<p><strong>Note</strong>: Command Line Tools might not be enough, in particular for running the command <code>xcodebuild</code>. A possible solution is found <a href="https://gist.github.com/martinandersen/1fea529ec04885c63477ccb944394494">here</a>.</p>
+<p>You need to install the <a href="https://apps.apple.com/it/app/xcode/id497799835?l=en&amp;mt=12">XCode</a>, which is several GBs. After installation, open it once and follow the instruction to accept the license.</p>
 <p>If you succeeded, then you should see in Matlab:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode matlab code-with-copy"><code class="sourceCode matlab"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="va">mex</span> <span class="op">-</span><span class="va">setup</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="va">MEX</span> <span class="va">configured</span> <span class="va">to</span> <span class="va">use</span> <span class="ss">'Xcode with Clang'</span> <span class="kw">for</span> <span class="va">C</span> <span class="va">language</span> <span class="va">compilation</span>.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode matlab code-with-copy"><code class="sourceCode matlab"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="va">mex</span> <span class="op">-</span><span class="va">setup</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="va">MEX</span> <span class="va">configured</span> <span class="va">to</span> <span class="va">use</span> <span class="ss">'Xcode with Clang'</span> <span class="kw">for</span> <span class="va">C</span> <span class="va">language</span> <span class="va">compilation</span>.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
 <p>An easy option is to install the Matlab add-on <a href="https://www.mathworks.com/matlabcentral/fileexchange/52848-matlab-support-for-mingw-w64-c-c-compiler">MiniGW</a> for Windows 10 or 11 64-bit. See the webpage. Try with <code>mex -setup</code> to check the compiler after installation.</p>
@@ -615,15 +621,15 @@ Solution
 <li><p>Try to visualize the plot in 3-D.</p>
 <p>To get an idea of the function, consider <span class="math inline">\(\rho\in[0,1]\)</span>, <span class="math inline">\(q\in[0,10]\)</span> and <span class="math inline">\(u\in[0,10]\)</span>. Find the equation that implicitly define the surface of equilibria (parametrized in <span class="math inline">\(\rho\)</span> and <span class="math inline">\(q\)</span>).</p>
 <p>Use the command <code>isosurface</code> as follows:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode matlab code-with-copy"><code class="sourceCode matlab"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>[<span class="va">R</span> <span class="va">Q</span> <span class="va">U</span>] <span class="op">=</span> <span class="va">meshgrid</span>(<span class="fl">0.0</span><span class="op">:</span><span class="fl">0.01</span><span class="op">:</span><span class="fl">1</span><span class="op">,</span><span class="fl">0.0</span><span class="op">:</span><span class="fl">0.1</span><span class="op">:</span><span class="fl">10</span><span class="op">,</span><span class="fl">0</span><span class="op">:</span><span class="fl">0.1</span><span class="op">:</span><span class="fl">10</span>)<span class="op">;</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="va">V</span> <span class="op">=</span> <span class="op">...;</span> <span class="co">% &lt;- EDIT!</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="va">p</span> <span class="op">=</span> <span class="va">patch</span>(<span class="va">isosurface</span>(<span class="va">R</span><span class="op">,</span><span class="va">Q</span><span class="op">,</span><span class="va">U</span><span class="op">,</span><span class="va">V</span><span class="op">,</span><span class="fl">0.0</span>))<span class="op">;</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="va">isonormals</span>(<span class="va">R</span><span class="op">,</span><span class="va">Q</span><span class="op">,</span><span class="va">U</span><span class="op">,</span><span class="va">V</span><span class="op">,</span><span class="va">p</span>)<span class="op">;</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="va">p</span>.<span class="va">FaceColor</span> <span class="op">=</span> <span class="ss">'red'</span><span class="op">;</span></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="va">p</span>.<span class="va">EdgeColor</span> <span class="op">=</span> <span class="ss">'none'</span><span class="op">;</span></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="va">daspect</span>([<span class="fl">1</span> <span class="fl">10</span> <span class="fl">10</span>])</span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="va">view</span>(<span class="fl">3</span>)</span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="va">camlight</span><span class="op">;</span> <span class="va">lighting</span> <span class="va">phong</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<div class="sourceCode" id="cb4"><pre class="sourceCode matlab code-with-copy"><code class="sourceCode matlab"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>[<span class="va">R</span> <span class="va">Q</span> <span class="va">U</span>] <span class="op">=</span> <span class="va">meshgrid</span>(<span class="fl">0.0</span><span class="op">:</span><span class="fl">0.01</span><span class="op">:</span><span class="fl">1</span><span class="op">,</span><span class="fl">0.0</span><span class="op">:</span><span class="fl">0.1</span><span class="op">:</span><span class="fl">10</span><span class="op">,</span><span class="fl">0</span><span class="op">:</span><span class="fl">0.1</span><span class="op">:</span><span class="fl">10</span>)<span class="op">;</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="va">V</span> <span class="op">=</span> <span class="op">...;</span> <span class="co">% &lt;- EDIT!</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="va">p</span> <span class="op">=</span> <span class="va">patch</span>(<span class="va">isosurface</span>(<span class="va">R</span><span class="op">,</span><span class="va">Q</span><span class="op">,</span><span class="va">U</span><span class="op">,</span><span class="va">V</span><span class="op">,</span><span class="fl">0.0</span>))<span class="op">;</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="va">isonormals</span>(<span class="va">R</span><span class="op">,</span><span class="va">Q</span><span class="op">,</span><span class="va">U</span><span class="op">,</span><span class="va">V</span><span class="op">,</span><span class="va">p</span>)<span class="op">;</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="va">p</span>.<span class="va">FaceColor</span> <span class="op">=</span> <span class="ss">'red'</span><span class="op">;</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="va">p</span>.<span class="va">EdgeColor</span> <span class="op">=</span> <span class="ss">'none'</span><span class="op">;</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="va">daspect</span>([<span class="fl">1</span> <span class="fl">10</span> <span class="fl">10</span>])</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="va">view</span>(<span class="fl">3</span>)</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="va">camlight</span><span class="op">;</span> <span class="va">lighting</span> <span class="va">phong</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
 </ol>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
@@ -638,7 +644,7 @@ Solution
 <div id="callout-6" class="callout-6-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>The function should be</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode matlab line-numbers code-with-copy"><code class="sourceCode matlab"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="va">V</span> <span class="op">=</span> <span class="va">RHO</span><span class="op">.*</span>(<span class="fl">1</span><span class="op">-</span><span class="va">U</span><span class="op">./</span><span class="va">Q</span>) <span class="op">-</span> <span class="va">U</span><span class="op">./</span>(<span class="fl">1</span><span class="op">+</span><span class="va">U</span><span class="op">.^</span><span class="fl">2</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode matlab line-numbers code-with-copy"><code class="sourceCode matlab"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="va">V</span> <span class="op">=</span> <span class="va">RHO</span><span class="op">.*</span>(<span class="fl">1</span><span class="op">-</span><span class="va">U</span><span class="op">./</span><span class="va">Q</span>) <span class="op">-</span> <span class="va">U</span><span class="op">./</span>(<span class="fl">1</span><span class="op">+</span><span class="va">U</span><span class="op">.^</span><span class="fl">2</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>You should see this: <img src="Budworm_3D.png" class="img-fluid"></p>
 <p>If you don’t get it, MatCont is messing up with Matlab plotting. Try closing MatCont (no worries, the last state is saved.)</p>
 </div>
@@ -679,12 +685,61 @@ v' &amp;= v\Bigl(-1 + \frac{\alpha\delta u}{1+\delta u}\Bigr),
 <ol type="1">
 <li>Implement the model in MatCont and integrate a trajectory <span class="math inline">\(\alpha = 3\)</span>, <span class="math inline">\(\rho = 1\)</span> and with initial conditions <span class="math inline">\(u(0)=0.9\)</span> and <span class="math inline">\(v(0)=0.9\)</span>. As integration time put a large number, say <span class="math inline">\(T=100\)</span>. Try different values of <span class="math inline">\(\delta\in[0,5]\)</span>, and discuss the behaviour of the system. <em>Hint: you can plot multiple trajectories on the same graph. Try to visualize the phase portrait.</em></li>
 </ol>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>This is what we get for <span class="math inline">\(\delta=1\)</span>. The equilibrium is at <span class="math inline">\((u,v) = (0.5,0.25)\)</span>. <img src="RM_traj.png" class="img-fluid"> For larger values of <span class="math inline">\(\delta\)</span> we may converge towards the carrying capacity.</p>
+<p>Note: don’t call the parameter <span class="math inline">\(\alpha\)</span> with <code>alpha</code>, MatCont will complain. Use <code>alph</code>, for instance.</p>
+</div>
+</div>
+</div>
 <ol start="2" type="1">
 <li>Approximate the equilibrium <span class="math inline">\(E^*\)</span>, intersection of the two non-trivial nullcline, for <span class="math inline">\(\delta = 0.6\)</span>. Then, continue the equilibrium with respect to <span class="math inline">\(\delta\)</span>. How many bifurcation point do you observe? Visualize the diagram in the coordinates <span class="math inline">\((\delta,v^*)\)</span> and discuss it.</li>
 </ol>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-9" class="callout-9-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>After integration for <span class="math inline">\(\delta=0.6\)</span>, we have: <img src="RM_d0.6.png" class="img-fluid"> After continuing the equilibrium with respect to <span class="math inline">\(\delta\)</span> we have: <img src="RM_continue.png" class="img-fluid"> Notice that we encounter a Hopf bifurcation for <span class="math inline">\(\delta = 2\)</span>.</p>
+</div>
+</div>
+</div>
 <ol start="3" type="1">
 <li>Is the equilibrium <span class="math inline">\(E^*\)</span> always a focus? <em>Hint: plot the imaginary part of one eigenvalue with respect to <span class="math inline">\(\delta\)</span>.</em></li>
 </ol>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-10" class="callout-10-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><img src="RM_eig1.png" class="img-fluid"> No, for <span class="math inline">\(\delta\)</span> small the eigenvalue is only real.</p>
+</div>
+</div>
+</div>
 <ol start="4" type="1">
 <li><p>At some value of <span class="math inline">\(\delta\)</span> (which one?) there is a <em>Hopf</em> (<code>H</code>) bifurcation. It means that from the equilibrium we should expect the emergence of a limit cycle. Select as initial point the Hopf point. Then do:</p>
 <ol type="1">
@@ -695,9 +750,41 @@ v' &amp;= v\Bigl(-1 + \frac{\alpha\delta u}{1+\delta u}\Bigr),
 </ol>
 <p>Try to visualize the limit cycles in 3-D, using the coordinates <span class="math inline">\((\rho,u^*,v^*)\)</span>. What’s the period of the cycle at the end of the branch?</p></li>
 </ol>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-11" class="callout-11-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><img src="RM_cycle.png" class="img-fluid"> We see that the limit cycle increases in size as <span class="math inline">\(\delta\)</span> increases.</p>
+</div>
+</div>
+</div>
 <ol start="5" type="1">
 <li>Define a user function (<code>Select-&gt;System-&gt;Manage Userfunctions</code>) to monitor when <span class="math inline">\(\delta = 2.5\)</span> (for instance, <code>res=delta-2.5</code>). Once defined, activate it in the <code>Starter</code> window when continuing the Hopf bifurcation into a limit cycle. Find the period of the cycle for <span class="math inline">\(\delta = 2.5\)</span>.</li>
 </ol>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-12" class="callout-12-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><img src="RM_myfun.png" class="img-fluid"> <img src="RM_period.png" class="img-fluid"></p>
+</div>
+</div>
+</div>
 
 
 </section>
@@ -1130,8 +1217,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../IntroODE.html" class="pagination-link" aria-label="Introduction to ODEs">
-        <span class="nav-page-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Introduction to ODEs</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../Laboratories/04_Chaos/lab_chaos.html" class="pagination-link" aria-label="Lab 04: Chaos">
+        <span class="nav-page-text">Lab 04: Chaos</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

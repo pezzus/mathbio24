@@ -191,6 +191,12 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../07_RM.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Rosenzweig-MacArthur model</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../references.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">References</span></a>
   </div>
@@ -257,6 +263,12 @@ window.Quarto = {
   <div class="sidebar-item-container"> 
   <a href="../Laboratories/03_Bifurcations/lab_Bifurcations.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Lab 03: Bifurcations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Laboratories/04_Chaos/lab_chaos.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab 04: Chaos</span></a>
   </div>
 </li>
       </ul>
@@ -331,7 +343,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">October 9, 2024</p>
+      <p class="date-modified">October 15, 2024</p>
     </div>
   </div>
     
@@ -350,12 +362,95 @@ window.Quarto = {
 <ol type="1">
 <li>Find the eigenvalues and eigenvectors of <span class="math inline">\(\mathbf{A}\)</span>.</li>
 </ol>
+<div class="callout callout-style-default callout-tip callout-titled" title="Solution">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>We need to find <span class="math inline">\(\lambda\)</span> and <span class="math inline">\(\mathbf{v}\)</span> such that <span class="math inline">\(\mathbf{A}\mathbf{v} = \lambda\mathbf{v}\)</span>. First, the eigenvalues roots of <span class="math display">\[
+\det(\mathbf{A}-\lambda\mathbf{I}) = (-3-\lambda)(2-\lambda)+4 = \lambda^2 + \lambda - 2.
+\]</span></p>
+<p>Also note that <span class="math inline">\(\det(\mathbf{A}-\lambda\mathbf{I}) = \lambda^2 - \operatorname{tr}\mathbf{A}\lambda + \det\mathbf{A}\)</span>. The eigenvalues are: <span class="math display">\[
+\lambda_1 = -2, \quad \lambda_2 = 1.
+\]</span></p>
+<p>For the eigenvectors we have: <span class="math display">\[
+\begin{aligned}
+\mathbf{A}\mathbf{v}_1 &amp;= \lambda_1\mathbf{v}_1 = -2 \mathbf{v}_1, \\
+\mathbf{A}\mathbf{v}_2 &amp;= \lambda_2\mathbf{v}_2 = 1 \mathbf{v}_2.
+\end{aligned}
+\]</span></p>
+<p>We see that a possible choice of eigenvectors is <span class="math display">\[
+\mathbf{v}_1 = \begin{bmatrix} 2 \\ 1 \end{bmatrix},
+\quad
+\mathbf{v}_2 = \begin{bmatrix} 1 \\ 2 \end{bmatrix}.
+\]</span></p>
+</div>
+</div>
+</div>
 <ol start="2" type="1">
 <li>Compute the matrix exponential of <span class="math inline">\(t\mathbf{A}\)</span> and the transition matrix.</li>
 </ol>
+<div class="callout callout-style-default callout-tip callout-titled" title="Solution">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The matrix <span class="math inline">\(\mathbf{A}\)</span> is diagonalizable. Thus, the matrix exponential is: <span class="math display">\[
+e^{t\mathbf{A}} = \mathbf{V}e^{t\Lambda}\mathbf{V}^{-1}
+\]</span></p>
+<p>where <span class="math inline">\(\Lambda = \operatorname{diag}\{\lambda_1, \lambda_2 \}\)</span>. The matrix <span class="math inline">\(\mathbf{V}\)</span> and its inverse are: <span class="math display">\[
+\mathbf{V} = \begin{bmatrix} \mathbf{v}_1 \;|\; \mathbf{v}_2 \end{bmatrix}
+= \begin{bmatrix} 2 &amp; 1 \\ 1 &amp; 2 \end{bmatrix},
+\quad
+\mathbf{V}^{-1} = \frac{1}{3} \begin{bmatrix} 2 &amp; -1 \\ -1 &amp; 2 \end{bmatrix}.
+\]</span></p>
+<p>So we get: <span class="math display">\[
+\begin{split}
+e^{t\mathbf{A}} &amp;= \begin{bmatrix} 2 &amp; 1 \\ 1 &amp; 2 \end{bmatrix}
+\begin{bmatrix} e^{-2t} &amp; 0 \\ 0 &amp; e^t \end{bmatrix}
+\frac{1}{3} \begin{bmatrix} 2 &amp; -1 \\ -1 &amp; 2 \end{bmatrix} \\
+&amp;= \frac{1}{3} \begin{bmatrix} 4 e^{-2t} - e^t &amp; 2( e^t - e^{-2t}) \\ 2( e^{-2t} - e^t) &amp; 4 e^t - e^{-2t} \end{bmatrix}.
+\end{split}
+\]</span></p>
+<p>The transition matrix is just <span class="math inline">\(\mathbf{W}(t,s) = e^{(t-s)\mathbf{A}}\)</span>.</p>
+</div>
+</div>
+</div>
 <ol start="3" type="1">
 <li>How can we approximate the behaviour of solutions for different initial conditions?</li>
 </ol>
+<div class="callout callout-style-default callout-tip callout-titled" title="Solution">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Since we have the transition matrix, the solution for <span class="math inline">\(\mathbf{y}(0)=\mathbf{y}_0\)</span> is: <span class="math display">\[
+\mathbf{y}(t) = \mathbf{W}(t,0)\mathbf{y}_0 = e^{t\mathbf{A}}\mathbf{y}_0.
+\]</span></p>
+</div>
+</div>
+</div>
 <ol start="4" type="1">
 <li>Find the equilibrium of the ODE and compute the stable and unstable manifold. Draw them on the phase portrait. Note, by definition the stable and unstable manifolds are <span class="math display">\[
 \begin{aligned}
@@ -364,9 +459,73 @@ window.Quarto = {
 \end{aligned}
 \]</span></li>
 </ol>
+<div class="callout callout-style-default callout-tip callout-titled" title="Solution">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>For this ODE we know the flow <span class="math inline">\(\boldsymbol{\phi}(t,\mathbf{y}_0)\)</span> explicitly: <span class="math display">\[
+\boldsymbol{\phi}(t,\mathbf{y}_0) = e^{t\mathbf{A}}\mathbf{y}_0 = \mathbf{V}e^{t\Lambda}\mathbf{V}^{-1}\mathbf{y}_0.
+\]</span></p>
+<p>Thus the limit is: <span class="math display">\[
+\lim_{t\to\pm\infty} \boldsymbol{\phi}(t,\mathbf{y}_0) = \mathbf{V} \Bigl( \lim_{t\to\pm\infty} e^{t\Lambda}\Bigr) \mathbf{V}^{-1}\mathbf{y}_0.
+\]</span></p>
+<p>The limit between parenthesis is a diagonal matrix formally equal to: <span class="math display">\[
+\begin{aligned}
+\lim_{t\to+\infty} e^{t\Lambda} &amp;= \operatorname{diag}\{ 0, +\infty \}, \\
+\lim_{t\to-\infty} e^{t\Lambda} &amp;= \operatorname{diag}\{ +\infty, 0 \}.
+\end{aligned}
+\]</span></p>
+<p>For the stable manifold <span class="math inline">\(\mathcal{W}^s\)</span>, the limit is <span class="math inline">\(\mathbf{y}^* = \mathbf{0}\)</span> only if <span class="math display">\[
+\mathbf{V}^{-1}\mathbf{y}_0 = \begin{bmatrix} \alpha \\ 0 \end{bmatrix}
+\quad\Rightarrow\quad
+\mathbf{y}_0 = \alpha \mathbf{v}_1,
+\]</span></p>
+<p>for some <span class="math inline">\(\alpha\in\mathbb{R}\)</span>, otherwise the second component of <span class="math inline">\(\mathbf{V}^{-1}\mathbf{y}_0\)</span> diverges. Similarly for the unstable manifold, we get that <span class="math inline">\(\mathbf{y}_0 = \alpha \mathbf{v}_2\)</span>. In conclusion, the manifolds are the linear spaces: <span class="math display">\[
+\begin{aligned}
+\mathcal{W}^s(\mathbf{y}^*) &amp;= \bigl\{ \alpha \mathbf{v}_1 \colon \alpha\in\mathbb{R} \bigr\}, \\
+\mathcal{W}^u(\mathbf{y}^*) &amp;= \bigl\{ \alpha \mathbf{v}_2 \colon \alpha\in\mathbb{R} \bigr\}.
+\end{aligned}
+\]</span></p>
+<p>In other words, the stable manifold is the line parallel to the first eigenvector and passing through the origin, whereas the unstable manifold is the one parallel to the second eigenvector.</p>
+</div>
+</div>
+</div>
 <ol start="5" type="1">
 <li>Qualitatively describe or draw the orbits.</li>
 </ol>
+<div class="callout callout-style-default callout-tip callout-titled" title="Solution">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Since we know the stable and unstable manifolds, we know already 2 orbits. Specifically, one orbit is along <span class="math inline">\(\mathcal{W}^s\)</span> with dynamic <span class="math inline">\(e^{\lambda_1 t} = e^{-2t}\)</span>, thus any non-zero point on <span class="math inline">\(\mathcal{W}^s\)</span> converges to zero with the above rate. Similarly, on the unstable manifold trajectories diverges with rate <span class="math inline">\(e^{\lambda_2 t} = e^t\)</span>.</p>
+<p>For other initial conditions, the dynamic is a linear combination of the dynamic on the stable and unstable manifold. See the picture.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="pplot_55.png" class="img-fluid figure-img"></p>
+<figcaption>image</figcaption>
+</figure>
+</div>
+<p><strong>Q3.6.</strong> Is the equilibrium <span class="math inline">\(\mathbf{y}^* = \mathbf{0}\)</span> stable?</p>
+<p>The equilibrium is unstable, specifically a saddle point.</p>
+</div>
+</div>
+</div>
 </section>
 <section id="phase-portraits" class="level2">
 <h2 class="anchored" data-anchor-id="phase-portraits">Phase portraits</h2>
@@ -380,9 +539,49 @@ window.Quarto = {
 <ol type="1">
 <li>Find the phase portrait that <em>cannot</em> be from a linear ODE.</li>
 </ol>
+<div class="callout callout-style-default callout-tip callout-titled" title="Solution">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Case 4 cannot be from a linear system, because for a saddle the stable and unstable manifold should be linear.</p>
+</div>
+</div>
+</div>
 <ol start="2" type="1">
 <li>For all the others, qualitatively describe the set of eigenvectors, eigenvalues, equilibria, and stability.</li>
 </ol>
+<div class="callout callout-style-default callout-tip callout-titled" title="Solution">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Let us go case by case:</p>
+<ol type="1">
+<li><p>Here we have <span class="math inline">\(\lambda_1 &lt; 0\)</span> (real), and <span class="math inline">\(\lambda_2 = 0\)</span>. The first eigenvector <span class="math inline">\(\mathbf{v}_1\)</span> is almost vertical, whereas <span class="math inline">\(\mathbf{v}_2\)</span> is parallel to the line with equilibria. The kernel of <span class="math inline">\(\mathbf{A}\)</span> is generated by <span class="math inline">\(\mathbf{v}_2\)</span>. For instance, we could take <span class="math inline">\(\mathbf{v}_1 = [0,1]^T\)</span> and <span class="math inline">\(\mathbf{v}_2 = [1,1]^T\)</span>.</p></li>
+<li><p>This is an asymptotically stable spiral. Thus, we have 2 complex conjugate eigenvalues, <span class="math inline">\(\lambda\)</span> and <span class="math inline">\(\bar{\lambda}\)</span>, with negative real part.</p></li>
+<li><p>A center, as above but the real part is zero: <span class="math inline">\(\lambda_{1,2} = \pm i \omega\)</span> for some <span class="math inline">\(\omega\)</span>. An example is <span class="math inline">\(\mathbf{A} = \left(\begin{smallmatrix} 0 &amp; 01 \\ \omega^2 &amp; 0 \end{smallmatrix}\right)\)</span>.</p></li>
+<li><p>Non linear.</p></li>
+<li><p>Tricky one. We only have one eigenvector <span class="math inline">\(\mathbf{v}_1\)</span> associated with an asymptotically stable eigenvalue (real). The eigenvalue is double, that is the algebraic multiplicity is 2 (double root of the characteristic polynomial), but the geometrical multiplicity is 1. Recall that the geometrical multiplicity is the dimension of the eigenspace <span class="math inline">\(\ker(\lambda\mathbf{I} - \mathbf{A})\)</span>. Along <span class="math inline">\(\mathbf{v}_1\)</span> we approach the equilibrium as usual. Components orthogonal to <span class="math inline">\(\mathbf{v}_1\)</span> will also converge to the equilibrium as <span class="math inline">\(t e^{\lambda t}\)</span>. Take <span class="math inline">\(\mathbf{A}=\left(\begin{smallmatrix} a &amp; 1 \\ 0 &amp; a \end{smallmatrix}\right)\)</span> with <span class="math inline">\(a&lt;0\)</span> as an example.</p></li>
+<li><p>Asymptotically stable equilibrium with two coincident eigenvalues, e.g., <span class="math inline">\(\mathbf{A} = \lambda \mathbf{I}\)</span> for some <span class="math inline">\(\lambda &lt; 0\)</span> real.</p></li>
+</ol>
+</div>
+</div>
+</div>
 </section>
 <section id="double-well-potential" class="level2">
 <h2 class="anchored" data-anchor-id="double-well-potential">Double-well potential</h2>
@@ -392,18 +591,117 @@ y'' = F(y) = y - y^3.
 <ol type="1">
 <li>Recast the problem as a system of ODEs.</li>
 </ol>
+<div class="callout callout-style-default callout-tip callout-titled" title="Solution">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>We set <span class="math inline">\(y_1 = y\)</span> and <span class="math inline">\(y_2 = y' = y_1'\)</span>, so: <span class="math display">\[
+\left\{\begin{aligned}
+y_1' &amp;= y_2, \\
+y_2' &amp;= y_1 - y_1^3 = F(y_1).
+\end{aligned}\right.
+\]</span></p>
+</div>
+</div>
+</div>
 <ol start="2" type="1">
 <li>Find the Hamiltonian of the system. <em>Hint: use the potential energy.</em></li>
 </ol>
+<div class="callout callout-style-default callout-tip callout-titled" title="Solution">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-9" class="callout-9-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Since <span class="math inline">\(U(y_1) = -\frac{1}{2} y_1^2 + \frac{1}{4} y_1^4\)</span> is such that <span class="math inline">\(U' = -F\)</span>, we have the Hamiltonian: <span class="math display">\[
+H(y_1,y_2) = \frac{1}{2} y_2^2 + U(y_1).
+\]</span></p>
+</div>
+</div>
+</div>
 <ol start="3" type="1">
 <li>Graphically represent the orbits in the phase plane for various choices of the initial energy. Are all orbits closed?</li>
 </ol>
+<div class="callout callout-style-default callout-tip callout-titled" title="Solution">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-10" class="callout-10-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Yes, orbits are all closed, because <span class="math inline">\(H\)</span> is bounded from below and <span class="math inline">\(H\to+\infty\)</span> as <span class="math inline">\(\|\mathbf{y}\|\to\infty\)</span>. So, <span class="math inline">\(H(y_1,y_2)=k\)</span> is always a closed curve if <span class="math inline">\(k &gt; \min_{\mathbf{y}} H\)</span>. Graphically:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="duffing.png" class="img-fluid figure-img"></p>
+<figcaption>image</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
 <ol start="4" type="1">
 <li>Show that the system has 3 equilibria, two stable (not asymptotically) and one unstable.</li>
 </ol>
+<div class="callout callout-style-default callout-tip callout-titled" title="Solution">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-11" class="callout-11-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>We can compute them by looking at stationary points of the Hamiltonian. We have 2 equilibria at <span class="math inline">\((\pm1,0)\)</span>, which are locally stable because the Hamiltonian is convex, and one saddle point at <span class="math inline">\((0,0)\)</span>. Note that linearization fails for this example, we can only deduce the stability from the phase portrait.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="duffing_eq.png" class="img-fluid figure-img"></p>
+<figcaption>image</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
 <ol start="5" type="1">
 <li>The system has 2 <em>homoclinic orbits</em>, one on the left and one on the right of the origin. Homoclinic orbits look like periodic orbits, but with an infinite period. Try to describe what happens if you start close to the origin, and then you take the initial condition that tends to the origin. What does it happen to the solution?</li>
 </ol>
+<div class="callout callout-style-default callout-tip callout-titled" title="Solution">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-12" class="callout-12-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>If we start close to the origin, we are on a periodic solution with some period <span class="math inline">\(T&gt;0\)</span>. The orbit has a shape close to the homoclinic orbit. If we start closer and closer, the orbit will tend to a drop-like shape (like the homoclinic) and the period will tend to <span class="math inline">\(\infty\)</span>.</p>
+</div>
+</div>
+</div>
 </section>
 <section id="gone-with-the-wind" class="level2">
 <h2 class="anchored" data-anchor-id="gone-with-the-wind">Gone with the Wind</h2>
@@ -419,15 +717,98 @@ S' &amp;= -S + A_R + kR e^{-R},
 <ol type="1">
 <li>Interpret the three terms on the right hand side of each equation. What do they mean, romantically speaking? In particular, what does the functional form of the exponentials terms signify about how Rhett and Scarlett react to each other’s endearments?</li>
 </ol>
+<div class="callout callout-style-default callout-tip callout-titled" title="Solution">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-13" class="callout-13-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Let us exclude for a moment the exponental terms. In this case, the equations are independent, with <span class="math inline">\(R\to A_S\)</span> and <span class="math inline">\(S\to A_R\)</span> at <span class="math inline">\(t\to\infty\)</span>. Thus, we can interpret <span class="math inline">\(A_S\)</span> as the asymptotic love of Rhett for Scarlett, in the absence of a feedback from Scarlett. The same is valid for Scarlett’s love for Rhett.</p>
+<p>The exponential terms models the interaction between the two lovers. The function <span class="math inline">\(S e^{-S}\)</span> is as follows:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="explove.png" class="img-fluid figure-img"></p>
+<figcaption>image</figcaption>
+</figure>
+</div>
+<p>So, when <span class="math inline">\(S=0\)</span> (Scarlett has no interest for Rhett), this term is also zero, providing no contribution to Rhett’s love. But as soon as <span class="math inline">\(S\)</span> increases, Rhett’s love increases even more. The peak is for <span class="math inline">\(S=1\)</span>, after that too much love from Scarlett (<span class="math inline">\(S\gg 1\)</span>) has little effect in Rhett’s love. The situation is simmetric for Scarlett reaction to Rhett’s love.</p>
+</div>
+</div>
+</div>
 <ol start="2" type="1">
 <li>Show that all trajectories that begin in the first quadrant <span class="math inline">\(R, S &gt; 0\)</span> stay in the first quadrant forever, and interpret that result psychologically.</li>
 </ol>
+<div class="callout callout-style-default callout-tip callout-titled" title="Solution">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-14" class="callout-14-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The system is not in Kolmogorov form, but we can check whether the first quadrant is a trapping region. For <span class="math inline">\(S=0\)</span>, we have <span class="math inline">\(S' = A_R + kR e^{-R} &gt; 0\)</span>, so orbits can only enter. Similarly, for <span class="math inline">\(R=0\)</span>, we have <span class="math inline">\(R' = A_S + kS e^{-S} &gt; 0\)</span>. Thus, the axes of the first quadrant are inflow, thus if we start in the first quadrant, we cannot leave.</p>
+<p>Psychologically, we could say that once they meet, they cannot avoid love between them. But I’m open to other interpretations.</p>
+</div>
+</div>
+</div>
 <ol start="3" type="1">
 <li>Using Dulac’s criterion, prove that the model has no periodic solutions. <em>Hint: the simplest <span class="math inline">\(h(R,S)\)</span> you can think of will work.</em></li>
 </ol>
+<div class="callout callout-style-default callout-tip callout-titled" title="Solution">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-15-contents" aria-controls="callout-15" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-15" class="callout-15-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Let us consider <span class="math inline">\(h\equiv 1\)</span>. We have: <span class="math display">\[
+\nabla\cdot\mathbf{f} = -2 &lt; 0.
+\]</span></p>
+<p>The sign is constant, thus we cannot have limit cycles.</p>
+</div>
+</div>
+</div>
 <ol start="4" type="1">
 <li>Using Phase Plane in Matlab, plot the phase portrait for the system, assuming parameter values <span class="math inline">\(A_S = 1.2\)</span>, <span class="math inline">\(A_R = 1\)</span>, and <span class="math inline">\(k=15\)</span>. Assuming that Rhett and Scarlett are indifferent when they meet, so that <span class="math inline">\(R(0)=S(0)=0\)</span>, plot the predicted trajectory for what happens in the first stage of their relationship. <em>Hint: don’t use the default range for the phase plane, increase it. If you spot a heart ❤️, it’s not on purpose.</em></li>
 </ol>
+<div class="callout callout-style-default callout-tip callout-titled" title="Solution">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-16-contents" aria-controls="callout-16" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-16" class="callout-16-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Scarlett.png" class="img-fluid figure-img"></p>
+<figcaption>image</figcaption>
+</figure>
+</div>
+<p>We have 3 equilibria, one saddle at the center and 2 stable and attractive equilibria. The unstable manifold of the saddle connects to the stable manifold of the equilibria, effectively providing a barrier in the lower left triangle of the phase plane. The stable manifold of the saddle roughly bisect the triangle.</p>
+<p>Starting from <span class="math inline">\((0,0)\)</span>, we intially approach the saddle, thus the <span class="math inline">\(S\)</span> and <span class="math inline">\(R\)</span> are comparable (Scarlett loves Rhett as much as Rhett loves Scarlett), but then the orbit turns to the right, and reaches an equilibrium where Rhett’s love for Scarlett is much higher than Scarlett’s love for Rhett’s.</p>
+</div>
+</div>
+</div>
 
 
 </section>

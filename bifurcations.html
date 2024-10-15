@@ -190,6 +190,12 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./07_RM.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Rosenzweig-MacArthur model</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./references.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">References</span></a>
   </div>
@@ -256,6 +262,12 @@ window.Quarto = {
   <div class="sidebar-item-container"> 
   <a href="./Laboratories/03_Bifurcations/lab_Bifurcations.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Lab 03: Bifurcations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Laboratories/04_Chaos/lab_chaos.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab 04: Chaos</span></a>
   </div>
 </li>
       </ul>
@@ -327,7 +339,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">September 29, 2024</p>
+      <p class="date-modified">October 13, 2024</p>
     </div>
   </div>
     
@@ -533,7 +545,7 @@ r\mathrm{d}r &amp;= \tfrac{1}{2}\mathrm{d}(r^2) = x\mathrm{d}x + y\mathrm{d}y \\
 <p>and <span class="math display">\[
 \begin{split}
 \mathrm{d}\theta &amp;= \frac{\mathrm{d}y/x - y\mathrm{d}x/x^2}{1 + (y/x)^2} = \frac{x\mathrm{d}y - y\mathrm{d}x}{x^2 + y^2} \\
-&amp;= \frac{x(\sigma y - \omega x + cy(x^2+y^2) - y(\sigma x + \omega y + cx(x^2+y^2)}{x^2 + y^2}\mathrm{d}t \\
+&amp;= \frac{x(\sigma y - \omega x + cy(x^2+y^2)) - y(\sigma x + \omega y + cx(x^2+y^2))}{x^2 + y^2}\mathrm{d}t \\
 &amp;= -\frac{\omega (x^2 + y^2)}{x^2 + y^2}\mathrm{d}t = -\omega\mathrm{d}t.
 \end{split}
 \]</span></p>
@@ -552,21 +564,11 @@ r' &amp;= \sigma r + c r^3, \\
 <ul>
 <li><em>Supercritical Hopf bifurcation</em> <span class="math inline">\(H^S\)</span>: <span class="math inline">\(\sigma'(\bar{p})&gt;0\)</span> and <span class="math inline">\(c(\bar{p})&lt;0\)</span>. The stable equilibrium at the origin becomes unstable and a stable limit cycle is born. The bifurcation is not catastrophical.</li>
 </ul>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="img/HSuper.jpeg" class="img-fluid figure-img"></p>
-<figcaption>image</figcaption>
-</figure>
-</div>
+<p><img src="img/HSuper.jpeg" class="img-fluid"></p>
 <ul>
 <li><em>Subrcritical Hopf bifurcation</em> <span class="math inline">\(H_S\)</span>: <span class="math inline">\(\sigma'(\bar{p})&lt;0\)</span> and <span class="math inline">\(c(\bar{p})&gt;0\)</span>. The unstable equilibrium at the origin becomes stable and an unstable limit cycle is born. The bifurcation is catastrophical.</li>
 </ul>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="img/HSub.jpeg" class="img-fluid figure-img"></p>
-<figcaption>image</figcaption>
-</figure>
-</div>
+<p><img src="img/HSub.jpeg" class="img-fluid"></p>
 <p>Note that for <span class="math inline">\(c=0\)</span> at the bifurcation point we have an infinite number of limit cycles (non-isolated periodic orbit), like the classical oscillator. This is a <em>degenerate Hopf bifurcation</em> so the condition <span class="math inline">\(c(\bar{p})\neq 0\)</span> is called <em>non-degeneracy condition</em>. The condition <span class="math inline">\(\sigma'(\bar{p})\neq 0\)</span> is called <em>trasversality condition</em>.</p>
 <p>For a general system of ODEs: <span class="math display">\[
 \left\{ \begin{aligned}
@@ -604,12 +606,7 @@ r' &amp;= r\sigma\bigl(1 + c r^2 - r^4 \bigr), \\
 \bar{r} = \sqrt{\frac{c \pm \sqrt{c^2+4\sigma}}{2}}.
 \]</span></p>
 <p>If we study the existence of limit cycles (LCs) in the <span class="math inline">\((\sigma,c)\)</span> plane we have:</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="img/LCtangent.jpeg" class="img-fluid figure-img"></p>
-<figcaption>image</figcaption>
-</figure>
-</div>
+<p><img src="img/LCtangent.jpeg" class="img-fluid"></p>
 <p>where:</p>
 <ul>
 <li><span class="math inline">\(H^S\)</span>: supercritical Hopf bifurcation,</li>
@@ -617,20 +614,10 @@ r' &amp;= r\sigma\bigl(1 + c r^2 - r^4 \bigr), \\
 <li><span class="math inline">\(T\)</span>: tangent bifurcation between limit cycles.</li>
 </ul>
 <p>In terms of stability we have:</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="img/LCtangent2.jpeg" class="img-fluid figure-img"></p>
-<figcaption>image</figcaption>
-</figure>
-</div>
+<p><img src="img/LCtangent2.jpeg" class="img-fluid"></p>
 <p>As we cross <span class="math inline">\(T\)</span> we have 2 limit cycles colliding and disappearing, exactly like the tangent bifurcation between equilibria. (In fact, this is what happens in polar coordinates.)</p>
 <p>The tangent bifurcation can be visualized as follows:</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="img/LCtang3D.png" class="img-fluid figure-img"></p>
-<figcaption>image</figcaption>
-</figure>
-</div>
+<p><img src="img/LCtang3D.png" class="img-fluid"></p>
 <p>We have seen this type of bifurcation in a negative feedback loop. It is catastrophic.</p>
 
 

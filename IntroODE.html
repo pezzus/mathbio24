@@ -31,7 +31,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
 <link href="./bifurcations.html" rel="next">
-<link href="./Laboratories/03_Bifurcations/lab_Bifurcations.html" rel="prev">
+<link href="./Laboratories/04_Chaos/lab_chaos.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -193,6 +193,12 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./07_RM.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Rosenzweig-MacArthur model</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./references.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">References</span></a>
   </div>
@@ -259,6 +265,12 @@ window.Quarto = {
   <div class="sidebar-item-container"> 
   <a href="./Laboratories/03_Bifurcations/lab_Bifurcations.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Lab 03: Bifurcations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Laboratories/04_Chaos/lab_chaos.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab 04: Chaos</span></a>
   </div>
 </li>
       </ul>
@@ -335,7 +347,7 @@ window.Quarto = {
   <li><a href="#dulacs-criterium" id="toc-dulacs-criterium" class="nav-link" data-scroll-target="#dulacs-criterium"><span class="header-section-number">A.7.1</span> Dulac’s criterium</a></li>
   <li><a href="#poincaré-bendixson-existence-theorems" id="toc-poincaré-bendixson-existence-theorems" class="nav-link" data-scroll-target="#poincaré-bendixson-existence-theorems"><span class="header-section-number">A.7.2</span> Poincaré-Bendixson existence theorems</a></li>
   <li><a href="#index-theory" id="toc-index-theory" class="nav-link" data-scroll-target="#index-theory"><span class="header-section-number">A.7.3</span> Index theory</a></li>
-  <li><a href="#poincaré-maps" id="toc-poincaré-maps" class="nav-link" data-scroll-target="#poincaré-maps"><span class="header-section-number">A.7.4</span> Poincaré maps</a></li>
+  <li><a href="#sec-poincare-map" id="toc-sec-poincare-map" class="nav-link" data-scroll-target="#sec-poincare-map"><span class="header-section-number">A.7.4</span> Poincaré maps</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -357,7 +369,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">October 9, 2024</p>
+      <p class="date-modified">October 15, 2024</p>
     </div>
   </div>
     
@@ -1768,8 +1780,8 @@ y_2' &amp;= y_1 + y_2.
 </div>
 </div>
 </section>
-<section id="poincaré-maps" class="level3" data-number="A.7.4">
-<h3 data-number="A.7.4" class="anchored" data-anchor-id="poincaré-maps"><span class="header-section-number">A.7.4</span> Poincaré maps</h3>
+<section id="sec-poincare-map" class="level3" data-number="A.7.4">
+<h3 data-number="A.7.4" class="anchored" data-anchor-id="sec-poincare-map"><span class="header-section-number">A.7.4</span> Poincaré maps</h3>
 <p>We still need to discuss the <em>stability</em> of limit cycles. Since they are isolated by definition, they can attract or repulse nearby orbits.</p>
 <p>Consider a periodic orbit <span class="math inline">\(\Gamma\subset\mathbb{R}^n\)</span>, and take any point <span class="math inline">\(\mathbf{y}_0\in\Gamma\)</span>. We introduce a cross-section <span class="math inline">\(\Sigma\)</span> to the cycle at this point as a smooth hypersurface of dimension <span class="math inline">\(n-1\)</span> that crosses <span class="math inline">\(\Gamma\)</span> at non-zero angle. A non-zero angle means that the normal of the hypersurface at <span class="math inline">\(\mathbf{y}_0\)</span> is not orthogonal to the tangent of <span class="math inline">\(\Gamma\)</span> at <span class="math inline">\(\mathbf{y}_0\)</span>.</p>
 <p>Note that the limit cycle reduces to a point on the cross-section <span class="math inline">\(\Sigma\)</span>. Other closeby orbits will also intersect the cross-section <span class="math inline">\(\Sigma\)</span> at some angle (by continuity the angle remains non-zero in a neighborhood of <span class="math inline">\(\mathbf{y}_0\)</span>). A point <span class="math inline">\(\mathbf{z}\in\Sigma\)</span>, close to <span class="math inline">\(\mathbf{y}_0\)</span>, will give some orbit through the flow of the ODE, and eventually return to <span class="math inline">\(\Sigma\)</span> after some time at a point <span class="math inline">\(\tilde{\mathbf{z}}\)</span>. This procedure is encoded in a map <span class="math inline">\(\mathbf{z}\mapsto \tilde{\mathbf{z}} = \mathcal{P}(\mathbf{z})\)</span>.</p>
@@ -2261,8 +2273,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./Laboratories/03_Bifurcations/lab_Bifurcations.html" class="pagination-link" aria-label="Lab 03: Bifurcations">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Lab 03: Bifurcations</span>
+      <a href="./Laboratories/04_Chaos/lab_chaos.html" class="pagination-link" aria-label="Lab 04: Chaos">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Lab 04: Chaos</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">

@@ -1,0 +1,1360 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.57">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2024-10-16">
+
+<title>Lab 04: Chaos – Mathematical Biology</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../IntroODE.html" rel="next">
+<link href="../../Laboratories/03_Bifurcations/lab_Bifurcations.html" rel="prev">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../Laboratories/01_ODE_Integration/lab_ODEinteg.html">Labs</a></li><li class="breadcrumb-item"><a href="../../Laboratories/04_Chaos/lab_chaos.html">Lab 04: Chaos</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../../">Mathematical Biology</a> 
+        <div class="sidebar-tools-main">
+    <a href="../../Mathematical-Biology.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Welcome</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Lectures</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../01_Bathtub.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Bathtub model</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../02_Population.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Population dynamics</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../03_Logistic.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Logistic model</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../04_Predation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Predation models</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../05_LotkaVolterra.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Lotka-Volterra model</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../06_Gause.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Gause type models</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../07_RM.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Rosenzweig-MacArthur model</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Assignments</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Assignments/01_recap_ODEs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Solving ODEs</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Assignments/02_population.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Population dynamics</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Assignments/03_spruce.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Predation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Assignments/04_systems.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">System of ODEs</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Labs</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Laboratories/01_ODE_Integration/lab_ODEinteg.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab 01: Numerical integration</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Laboratories/02_Predation/lab_Predation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab 02: Predation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Laboratories/03_Bifurcations/lab_Bifurcations.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab 03: Bifurcations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Laboratories/04_Chaos/lab_chaos.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Lab 04: Chaos</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">Appendices</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../IntroODE.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Introduction to ODEs</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../bifurcations.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Introduction to bifurcations</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Laboratories/00_Intro_Matlab/introMATLAB.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Introduction to MATLAB</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#food-chain" id="toc-food-chain" class="nav-link active" data-scroll-target="#food-chain">Food chain</a></li>
+  <li><a href="#transition-to-chaos" id="toc-transition-to-chaos" class="nav-link" data-scroll-target="#transition-to-chaos">Transition to chaos</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../Laboratories/01_ODE_Integration/lab_ODEinteg.html">Labs</a></li><li class="breadcrumb-item"><a href="../../Laboratories/04_Chaos/lab_chaos.html">Lab 04: Chaos</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">Lab 04: Chaos</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">October 16, 2024</p>
+    </div>
+  </div>
+  
+    <div>
+    <div class="quarto-title-meta-heading">Modified</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date-modified">October 15, 2024</p>
+    </div>
+  </div>
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="food-chain" class="level2">
+<h2 class="anchored" data-anchor-id="food-chain">Food chain</h2>
+<p>The standard prey-predator system only considers 2 species. In reality, many species interact and compete for survival. Ecological systems are typically very much interconnected. More species means more variables and parameters, thus more complexity.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../../img/temperate-forest-food-web.jpg" class="img-fluid figure-img"></p>
+<figcaption>A partial food web illustrating the network of feeding relationships in a North American grassland and forest. <em>(Encyclopædia Britannica, Inc./Patrick O’Neill Riley)</em></figcaption>
+</figure>
+</div>
+<p>To better appreciate the jump in complexity, we analyze here a simple system of 3 species: plant (<span class="math inline">\(X\)</span>), herbivore (<span class="math inline">\(Y\)</span>), and carnivores (<span class="math inline">\(Z\)</span>).</p>
+<p>The model reads as follows: <span class="math display">\[
+\left\{\begin{aligned}
+X' &amp;= X\Bigl( r(1-X/K) - \frac{a_1 Y}{1+b_1 X} \Bigr), &amp; \\
+Y' &amp;= Y\Bigl( -d_1 + \frac{c_1 a_1 X}{1+b_1 X} - \frac{a_2 Z}{1+b_2 Y} \Bigr), &amp; \\
+Z' &amp;= Z\Bigl( -d_2 + \frac{c_2 a_2 Y}{1+b_2 Y} \Bigr). &amp; \\
+\end{aligned}\right.
+\]</span></p>
+<p>We implement the model in a Matlab function <code>FoodChain</code> that can take <span class="math inline">\(b_1\)</span> as free parameter.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode matlab code-with-copy"><code class="sourceCode matlab"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="va">dy</span> <span class="op">=</span> <span class="va">FoodChain</span>(<span class="op">~,</span><span class="va">y</span><span class="op">,</span><span class="va">b1</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">% parameters</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="va">r</span><span class="op">=</span><span class="fl">1</span><span class="op">;</span>  <span class="va">K</span><span class="op">=</span><span class="fl">1</span><span class="op">;</span>    <span class="va">c1</span><span class="op">=</span><span class="fl">1</span><span class="op">;</span> <span class="va">c2</span><span class="op">=</span><span class="fl">1</span><span class="op">;</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="va">a1</span><span class="op">=</span><span class="fl">5</span><span class="op">;</span> <span class="va">a2</span><span class="op">=</span><span class="fl">0.1</span><span class="op">;</span> <span class="va">b2</span><span class="op">=</span><span class="fl">2</span><span class="op">;</span> <span class="va">d1</span><span class="op">=</span><span class="fl">0.4</span><span class="op">;</span> <span class="va">d2</span><span class="op">=</span><span class="fl">0.01</span><span class="op">;</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="co">% default for b1</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">if</span> (<span class="va">nargin</span> <span class="op">&lt;</span> <span class="fl">3</span>)<span class="op">,</span> <span class="va">b1</span> <span class="op">=</span> <span class="fl">2.0</span><span class="op">;</span> <span class="kw">end</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="co">% rhs</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    <span class="va">X</span> <span class="op">=</span> <span class="va">y</span>(<span class="fl">1</span>)<span class="op">;</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="va">Y</span> <span class="op">=</span> <span class="va">y</span>(<span class="fl">2</span>)<span class="op">;</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    <span class="va">Z</span> <span class="op">=</span> <span class="va">y</span>(<span class="fl">3</span>)<span class="op">;</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="va">dX</span> <span class="op">=</span> <span class="va">r</span><span class="op">*</span><span class="va">X</span><span class="op">.*</span>(<span class="fl">1</span><span class="op">-</span><span class="va">X</span><span class="op">/</span><span class="va">K</span>)<span class="op">-</span><span class="va">a1</span><span class="op">*</span><span class="va">X</span><span class="op">./</span>(<span class="fl">1</span><span class="op">+</span><span class="va">b1</span><span class="op">*</span><span class="va">X</span>)<span class="op">.*</span><span class="va">Y</span><span class="op">;</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    <span class="va">dY</span> <span class="op">=</span> <span class="va">c1</span><span class="op">*</span><span class="va">a1</span><span class="op">*</span><span class="va">X</span><span class="op">./</span>(<span class="fl">1</span><span class="op">+</span><span class="va">b1</span><span class="op">*</span><span class="va">X</span>)<span class="op">.*</span><span class="va">Y</span><span class="op">-</span><span class="va">d1</span><span class="op">*</span><span class="va">Y</span><span class="op">-</span><span class="va">a2</span><span class="op">*</span><span class="va">Y</span><span class="op">./</span>(<span class="fl">1</span><span class="op">+</span><span class="va">b2</span><span class="op">*</span><span class="va">Y</span>)<span class="op">.*</span><span class="va">Z</span><span class="op">;</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    <span class="va">dZ</span> <span class="op">=</span> <span class="va">c2</span><span class="op">*</span><span class="va">a2</span><span class="op">*</span><span class="va">Y</span><span class="op">./</span>(<span class="fl">1</span><span class="op">+</span><span class="va">b2</span><span class="op">*</span><span class="va">Y</span>)<span class="op">.*</span><span class="va">Z</span><span class="op">-</span><span class="va">d2</span><span class="op">*</span><span class="va">Z</span><span class="op">;</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    <span class="va">dy</span> <span class="op">=</span> [<span class="va">dX</span><span class="op">;</span><span class="va">dY</span><span class="op">;</span><span class="va">dZ</span>]<span class="op">;</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The parameters are set as follows:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Parameter</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(r\)</span></td>
+<td><span class="math inline">\(1\)</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(K\)</span></td>
+<td><span class="math inline">\(1\)</span></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(a_1\)</span></td>
+<td><span class="math inline">\(5\)</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(a_2\)</span></td>
+<td><span class="math inline">\(0.1\)</span></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(b_1\)</span></td>
+<td><span class="math inline">\(2.0 \div 3.0\)</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(b_2\)</span></td>
+<td><span class="math inline">\(2\)</span></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(c_1\)</span></td>
+<td><span class="math inline">\(1\)</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(c_2\)</span></td>
+<td><span class="math inline">\(1\)</span></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(d_1\)</span></td>
+<td><span class="math inline">\(0.4\)</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(d_2\)</span></td>
+<td><span class="math inline">\(0.01\)</span></td>
+</tr>
+</tbody>
+</table>
+<ol type="1">
+<li><p>Simulate the model with <code>ode45</code> for <span class="math inline">\(b_1=2\)</span>, initial conditions <span class="math inline">\(X(0)=Y(0)=Z(0)=1\)</span>, and for a final time <span class="math inline">\(T=1000\)</span>. Plot the solution both as a time series and in a phase portrait. Does the system converge towards a limit cycle? <em>Hint: try to extend the final time.</em></p>
+<p>To use <code>ode45</code>, please do as follows:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode matlab code-with-copy"><code class="sourceCode matlab"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="va">y0</span> <span class="op">=</span> [<span class="fl">1</span><span class="op">,</span><span class="fl">1</span><span class="op">,</span><span class="fl">1</span>]<span class="op">;</span>  <span class="co">% initial condition</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="va">TT</span> <span class="op">=</span> <span class="fl">1000.0</span><span class="op">;</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co">% we define a function with fixed b1</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="va">f</span> <span class="op">=</span> <span class="op">@</span>(<span class="va">t</span><span class="op">,</span><span class="va">y</span>) <span class="va">FoodChain</span>(<span class="va">t</span><span class="op">,</span><span class="va">y</span><span class="op">,</span><span class="fl">2.0</span>)<span class="op">;</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="va">opts</span>  <span class="op">=</span> <span class="va">odeset</span>(<span class="ss">'AbsTol'</span><span class="op">,</span><span class="fl">1e-10</span><span class="op">,</span><span class="ss">'RelTol'</span><span class="op">,</span><span class="fl">1e-8</span>)<span class="op">;</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>[<span class="va">T</span><span class="op">,</span><span class="va">Y</span>] <span class="op">=</span> <span class="va">ode45</span>(<span class="va">f</span><span class="op">,</span>[<span class="fl">0</span><span class="op">,</span><span class="va">TT</span>]<span class="op">,</span><span class="va">y0</span><span class="op">,</span><span class="va">opts</span>)<span class="op">;</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="va">disp</span>(<span class="va">Y</span>(<span class="kw">end</span><span class="op">,:</span>))<span class="op">;</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="va">fig</span><span class="op">=</span><span class="va">figure</span><span class="op">;</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="va">plot</span>(<span class="va">T</span><span class="op">,</span><span class="va">Y</span><span class="op">,</span><span class="ss">'LineWidth'</span><span class="op">,</span><span class="fl">1.0</span>)<span class="op">;</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="va">title</span>(<span class="ss">'Time series'</span>)<span class="op">;</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="va">legend</span>(<span class="ss">'X'</span><span class="op">,</span><span class="ss">'Y'</span><span class="op">,</span><span class="ss">'Z'</span>)<span class="op">;</span> <span class="va">grid</span> <span class="va">on</span><span class="op">;</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="va">fig</span><span class="op">=</span><span class="va">figure</span><span class="op">;</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="va">plot3</span>(<span class="va">Y</span>(<span class="op">:,</span><span class="fl">1</span>)<span class="op">,</span><span class="va">Y</span>(<span class="op">:,</span><span class="fl">2</span>)<span class="op">,</span><span class="va">Y</span>(<span class="op">:,</span><span class="fl">3</span>))<span class="op">;</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="va">title</span>(<span class="ss">'Phase portrait'</span>)<span class="op">;</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="va">grid</span> <span class="va">on</span><span class="op">;</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="va">xlabel</span>(<span class="ss">'X'</span>)<span class="op">;</span> <span class="va">ylabel</span>(<span class="ss">'Y'</span>)<span class="op">;</span> <span class="va">zlabel</span>(<span class="ss">'Z'</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+</ol>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="lab06_ex13a.png" class="img-fluid figure-img"></p>
+<figcaption>Time series for <span class="math inline">\(b_1=2\)</span> up to <span class="math inline">\(T=1000\)</span>.</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="lab06_ex13b.png" class="img-fluid figure-img"></p>
+<figcaption>Phase portrait for <span class="math inline">\(b_1=2\)</span> up to <span class="math inline">\(T=1000\)</span>.</figcaption>
+</figure>
+</div>
+<p>Note that the variable <span class="math inline">\(Z(t)\)</span> is still increasing over time. We cannot conclude that we have reached an equilibrium, although it looks like a limit cycle. We continue the integration until <span class="math inline">\(T=10^4\)</span> and:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="lab06_ex13c.png" class="img-fluid figure-img"></p>
+<figcaption>Time series for <span class="math inline">\(b_1=2\)</span> up to <span class="math inline">\(T=10000\)</span>.</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="lab06_ex13d.png" class="img-fluid figure-img"></p>
+<figcaption>Phase portrait for <span class="math inline">\(b_1=2\)</span> up to <span class="math inline">\(T=10000\)</span>.</figcaption>
+</figure>
+</div>
+<p>We see that an equilibrium <span class="math inline">\(E^* \approx (0.7499, 0.1250, 13.7500)\)</span> has been reached.</p>
+</div>
+</div>
+</div>
+<ol start="2" type="1">
+<li>Now simulate the system with <span class="math inline">\(b_1=2.2\)</span>. Do you observe a limit cycle? Report the amplitude of the oscillations for each species.</li>
+</ol>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>We reuse the code above with <span class="math inline">\(b_1 = 2.2\)</span>. The solution looks like the following.</p>
+<p><img src="lab06_ex15a.png" class="img-fluid"></p>
+<p><img src="lab06_ex15b.png" class="img-fluid"></p>
+<p>There is indeed a limit cycle. To report the amplitude and period, we continue the integration from the last point observed.</p>
+<p><img src="lab06_ex15c.png" class="img-fluid"></p>
+<p><img src="lab06_ex15d.png" class="img-fluid"></p>
+<p>The amplitude we approximate by taking the difference between max and min. For the period, we find the peaks in the error function when we shift the function.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode matlab code-with-copy"><code class="sourceCode matlab"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="va">f</span> <span class="op">=</span> <span class="op">@</span>(<span class="va">t</span><span class="op">,</span><span class="va">y</span>) <span class="va">FoodChain</span>(<span class="va">t</span><span class="op">,</span><span class="va">y</span><span class="op">,</span><span class="fl">2.2</span>)<span class="op">;</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co">% we integrate for some long time</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>[<span class="op">~,</span><span class="va">Y</span>] <span class="op">=</span> <span class="va">ode45</span>(<span class="va">f</span><span class="op">,</span>[<span class="fl">0</span><span class="op">,</span><span class="fl">1e5</span>]<span class="op">,</span><span class="va">y0</span><span class="op">,</span><span class="va">opts</span>)<span class="op">;</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co">% then we integrate again for some time on the LC</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>[<span class="va">T</span><span class="op">,</span><span class="va">Y</span>] <span class="op">=</span> <span class="va">ode45</span>(<span class="va">f</span><span class="op">,</span>[<span class="fl">0</span><span class="op">,</span><span class="fl">300</span>]<span class="op">,</span><span class="va">Y</span>(<span class="kw">end</span><span class="op">,:</span>)<span class="op">,</span><span class="va">opts</span>)<span class="op">;</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="co">% amplitude</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="va">A</span>  <span class="op">=</span> <span class="va">max</span>(<span class="va">Y</span>) <span class="op">-</span> <span class="va">min</span>(<span class="va">Y</span>)<span class="op">;</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="co">% period</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>[<span class="op">~,</span><span class="va">locs</span>] <span class="op">=</span> <span class="va">findpeaks</span>(<span class="va">sum</span>((<span class="va">Y</span> <span class="op">-</span> <span class="va">Y</span>(<span class="fl">1</span><span class="op">,:</span>))<span class="op">.^</span><span class="fl">2</span><span class="op">,</span><span class="fl">2</span>))<span class="op">;</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="va">P</span> <span class="op">=</span> <span class="va">T</span>(<span class="va">locs</span>(<span class="fl">2</span>))<span class="op">-</span><span class="va">T</span>(<span class="va">locs</span>(<span class="fl">1</span>))<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The amplitude and period are respectively <code>[0.1458, 0.0629, 0.4428]</code> and <code>57.8563</code>.</p>
+</div>
+</div>
+</div>
+<ol start="3" type="1">
+<li><p>Visualize the Poincaré map (see <a href="../../IntroODE.html#sec-poincare-map" class="quarto-xref"><span>A.7.4 Poincaré maps</span></a>) for the limit cycle. For constructing it, consider a plane orthogonal to the coordinate <span class="math inline">\(Z\)</span> and placed so that passes through the midpoint of the cycle. Hopefully, the limit cycle will intersect it at some point. MATLAB ODE integrator offers a way to estimate “events”. Events are conditions computed along the trajectory that, once met, are returned by the integrator. For us, the condition is “check if the trajectory intersects the Poincaré plane”. If this happens, the integrator will record the position and time of the event.</p>
+<p>Using the <code>ode45</code> function (but it works also for other integrators), we need to define an event function as follows:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode matlab code-with-copy"><code class="sourceCode matlab"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> [<span class="va">position</span><span class="op">,</span><span class="va">isterminal</span><span class="op">,</span><span class="va">direction</span>] <span class="op">=</span> <span class="va">PoincareMap</span>(<span class="op">~,</span><span class="va">y</span><span class="op">,</span><span class="va">c</span><span class="op">,</span><span class="va">n</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="co">% C is center of the plane</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="co">% N is normal to the plane</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="co">% when the orthogonal projection is zero, we are on the plane</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="va">position</span>   <span class="op">=</span> <span class="va">dot</span>(<span class="va">y</span>(<span class="op">:</span>)<span class="op">-</span><span class="va">c</span>(<span class="op">:</span>)<span class="op">,</span><span class="va">n</span>)<span class="op">;</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="va">isterminal</span> <span class="op">=</span>  <span class="fl">0</span><span class="op">;</span>  <span class="co">% do not halt integration at the event</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  <span class="va">direction</span>  <span class="op">=</span> <span class="op">-</span><span class="fl">1</span><span class="op">;</span>  <span class="co">% only intersection in direction n</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Use this code to visualize the Poincaré map. Try to estimate the period.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode matlab code-with-copy"><code class="sourceCode matlab"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="va">b1</span> <span class="op">=</span> <span class="fl">2.2</span><span class="op">;</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="va">f</span>  <span class="op">=</span> <span class="op">@</span>(<span class="va">t</span><span class="op">,</span><span class="va">y</span>) <span class="va">FoodChain</span>(<span class="va">t</span><span class="op">,</span><span class="va">y</span><span class="op">,</span><span class="va">b1</span>)<span class="op">;</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="va">y0</span> <span class="op">=</span> [<span class="fl">1</span><span class="op">,</span><span class="fl">1</span><span class="op">,</span><span class="fl">1</span>]<span class="op">;</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co">% we integrate for some long time</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="va">opts</span>  <span class="op">=</span> <span class="va">odeset</span>(<span class="ss">'AbsTol'</span><span class="op">,</span><span class="fl">1e-10</span><span class="op">,</span><span class="ss">'RelTol'</span><span class="op">,</span><span class="fl">1e-8</span>)<span class="op">;</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>[<span class="op">~,</span><span class="va">Y</span>] <span class="op">=</span> <span class="va">ode45</span>(<span class="va">f</span><span class="op">,</span>[<span class="fl">0</span><span class="op">,</span><span class="fl">1e5</span>]<span class="op">,</span><span class="va">y0</span><span class="op">,</span><span class="va">opts</span>)<span class="op">;</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="co">% the last point should be on the LC</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="va">yc</span> <span class="op">=</span> <span class="va">Y</span>(<span class="kw">end</span><span class="op">,:</span>)<span class="op">;</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="co">% we integrate more to get the LC</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>[<span class="va">T</span><span class="op">,</span><span class="va">Y</span>] <span class="op">=</span> <span class="va">ode45</span>(<span class="va">f</span><span class="op">,</span>[<span class="fl">0</span><span class="op">,</span><span class="fl">1e3</span>]<span class="op">,</span><span class="va">yc</span><span class="op">,</span><span class="va">opts</span>)<span class="op">;</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="co">% the Poincare' map is a plane orthogonal to nn</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="co">% and centered in pc</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="va">nn</span> <span class="op">=</span> [<span class="fl">0</span><span class="op">;</span><span class="fl">0</span><span class="op">;</span><span class="fl">1</span>]<span class="op">;</span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a><span class="va">pc</span> <span class="op">=</span> <span class="va">trapz</span>(<span class="va">T</span><span class="op">,</span><span class="va">Y</span><span class="op">,</span><span class="fl">1</span>) <span class="op">/</span> <span class="va">T</span>(<span class="kw">end</span>)<span class="op">;</span></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a><span class="co">% we can use the nullspace to get tangent vectors</span></span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a><span class="va">V</span>  <span class="op">=</span> <span class="va">null</span>(<span class="va">nn</span><span class="op">'</span>)<span class="op">;</span></span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a><span class="co">% this function is called every time 'position' is</span></span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a><span class="co">% zero in the right 'direction'</span></span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a><span class="co">% we measure the distance from the plane</span></span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a><span class="va">event_fun</span>  <span class="op">=</span> <span class="op">@</span>(<span class="va">t</span><span class="op">,</span><span class="va">y</span>) <span class="va">PoincareMap</span>(<span class="va">t</span><span class="op">,</span><span class="va">y</span><span class="op">,</span><span class="va">pc</span><span class="op">,</span><span class="va">nn</span>)<span class="op">;</span></span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a><span class="va">opts_event</span> <span class="op">=</span> <span class="va">odeset</span>(<span class="va">opts</span><span class="op">,</span><span class="ss">'Events'</span><span class="op">,</span><span class="va">event_fun</span>)<span class="op">;</span></span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a><span class="co">% integration with events</span></span>
+<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a><span class="co">% YP is the solution; te,ye are the events</span></span>
+<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a>[<span class="op">~,</span><span class="va">YP</span><span class="op">,</span><span class="va">te</span><span class="op">,</span><span class="va">ye</span><span class="op">,~</span>] <span class="op">=</span> <span class="va">ode45</span>(<span class="va">f</span><span class="op">,</span>[<span class="fl">0</span><span class="op">,</span><span class="fl">1e3</span>]<span class="op">,</span><span class="va">yc</span><span class="op">,</span><span class="va">opts_event</span>)<span class="op">;</span></span>
+<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a><span class="va">fig</span> <span class="op">=</span> <span class="va">figure</span><span class="op">;</span></span>
+<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a><span class="va">plot3</span>(<span class="va">YP</span>(<span class="op">:,</span><span class="fl">1</span>)<span class="op">,</span><span class="va">YP</span>(<span class="op">:,</span><span class="fl">2</span>)<span class="op">,</span><span class="va">YP</span>(<span class="op">:,</span><span class="fl">3</span>)<span class="op">,</span><span class="ss">'LineWidth'</span><span class="op">,</span><span class="fl">2.0</span>)<span class="op">;</span></span>
+<span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a><span class="va">hold</span> <span class="va">on</span><span class="op">;</span> <span class="va">grid</span> <span class="va">on</span><span class="op">;</span></span>
+<span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a><span class="va">plot3</span>(<span class="va">ye</span>(<span class="op">:,</span><span class="fl">1</span>)<span class="op">,</span><span class="va">ye</span>(<span class="op">:,</span><span class="fl">2</span>)<span class="op">,</span><span class="va">ye</span>(<span class="op">:,</span><span class="fl">3</span>)<span class="op">,</span><span class="ss">'r.'</span><span class="op">,</span><span class="ss">'MarkerSize'</span><span class="op">,</span><span class="fl">16</span>)<span class="op">;</span></span>
+<span id="cb5-35"><a href="#cb5-35" aria-hidden="true" tabindex="-1"></a><span class="va">title</span>(<span class="va">sprintf</span>(<span class="ss">'Phase portrait (b_1 = %g)'</span><span class="op">,</span><span class="va">b1</span>))<span class="op">;</span></span>
+<span id="cb5-36"><a href="#cb5-36" aria-hidden="true" tabindex="-1"></a><span class="va">xlabel</span>(<span class="ss">'X'</span>)<span class="op">;</span> <span class="va">ylabel</span>(<span class="ss">'Y'</span>)<span class="op">;</span> <span class="va">zlabel</span>(<span class="ss">'Z'</span>)<span class="op">;</span></span>
+<span id="cb5-37"><a href="#cb5-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-38"><a href="#cb5-38" aria-hidden="true" tabindex="-1"></a><span class="co">% plot the Poincare plane</span></span>
+<span id="cb5-39"><a href="#cb5-39" aria-hidden="true" tabindex="-1"></a><span class="va">rr</span> <span class="op">=</span> <span class="fl">0.25</span><span class="op">;</span></span>
+<span id="cb5-40"><a href="#cb5-40" aria-hidden="true" tabindex="-1"></a><span class="va">pp</span> <span class="op">=</span> [<span class="va">pc</span><span class="op">'+</span><span class="va">rr</span><span class="op">*</span><span class="va">V</span><span class="op">,</span><span class="va">pc</span><span class="op">'-</span><span class="va">rr</span><span class="op">*</span><span class="va">V</span>]<span class="op">;</span></span>
+<span id="cb5-41"><a href="#cb5-41" aria-hidden="true" tabindex="-1"></a><span class="va">p</span>  <span class="op">=</span> <span class="va">patch</span>(<span class="va">pp</span>(<span class="fl">1</span><span class="op">,:</span>)<span class="op">,</span><span class="va">pp</span>(<span class="fl">2</span><span class="op">,:</span>)<span class="op">,</span><span class="va">pp</span>(<span class="fl">3</span><span class="op">,:</span>)<span class="op">,</span><span class="ss">'r'</span>)<span class="op">;</span></span>
+<span id="cb5-42"><a href="#cb5-42" aria-hidden="true" tabindex="-1"></a><span class="va">p</span>.<span class="va">FaceAlpha</span> <span class="op">=</span> <span class="fl">0.4</span><span class="op">;</span></span>
+<span id="cb5-43"><a href="#cb5-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-44"><a href="#cb5-44" aria-hidden="true" tabindex="-1"></a><span class="co">% in-picture visualization of the Poincaré plot</span></span>
+<span id="cb5-45"><a href="#cb5-45" aria-hidden="true" tabindex="-1"></a><span class="va">ye_proj</span> <span class="op">=</span> (<span class="va">ye</span><span class="op">-</span><span class="va">pc</span>) <span class="op">-</span> ((<span class="va">ye</span><span class="op">-</span><span class="va">pc</span>) <span class="op">*</span> <span class="va">nn</span>) <span class="op">*</span> <span class="va">nn</span><span class="op">';</span></span>
+<span id="cb5-46"><a href="#cb5-46" aria-hidden="true" tabindex="-1"></a><span class="va">axes</span>(<span class="ss">'Position'</span><span class="op">,</span>[<span class="fl">.6</span> <span class="fl">.6</span> <span class="fl">.3</span> <span class="fl">.3</span>]<span class="op">,</span><span class="ss">'XTickLabel'</span><span class="op">,</span>[]<span class="op">,...</span></span>
+<span id="cb5-47"><a href="#cb5-47" aria-hidden="true" tabindex="-1"></a>    <span class="ss">'YTickLabel'</span><span class="op">,</span>[]<span class="op">,</span><span class="ss">'nextplot'</span><span class="op">,</span> <span class="ss">'add'</span>)<span class="op">;</span></span>
+<span id="cb5-48"><a href="#cb5-48" aria-hidden="true" tabindex="-1"></a><span class="va">plot</span>(<span class="va">ye_proj</span>(<span class="op">:,</span><span class="fl">1</span>)<span class="op">,</span><span class="va">ye_proj</span>(<span class="op">:,</span><span class="fl">2</span>)<span class="op">,</span><span class="ss">'r.'</span><span class="op">,...</span></span>
+<span id="cb5-49"><a href="#cb5-49" aria-hidden="true" tabindex="-1"></a>    <span class="va">ye_proj</span>(<span class="kw">end</span><span class="op">,</span><span class="fl">1</span>)<span class="op">,</span><span class="va">ye_proj</span>(<span class="kw">end</span><span class="op">,</span><span class="fl">2</span>)<span class="op">,</span><span class="ss">'b+'</span><span class="op">,</span><span class="ss">'MarkerSize'</span><span class="op">,</span><span class="fl">16</span>)<span class="op">;</span></span>
+<span id="cb5-50"><a href="#cb5-50" aria-hidden="true" tabindex="-1"></a><span class="va">xlim</span>([<span class="op">-</span><span class="va">rr</span><span class="op">,</span><span class="va">rr</span>])<span class="op">;</span> <span class="va">ylim</span>([<span class="op">-</span><span class="va">rr</span><span class="op">,</span><span class="va">rr</span>])<span class="op">;</span></span>
+<span id="cb5-51"><a href="#cb5-51" aria-hidden="true" tabindex="-1"></a><span class="va">grid</span> <span class="va">on</span><span class="op">;</span> <span class="va">box</span> <span class="va">on</span><span class="op">;</span></span>
+<span id="cb5-52"><a href="#cb5-52" aria-hidden="true" tabindex="-1"></a><span class="va">title</span>(<span class="ss">'Poincare'' map'</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+</ol>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><img src="lab06_ex17.png" class="img-fluid"></p>
+<p>To estimate the period, we can simply use <code>te</code>: the difference between two events is the period. Here, we have a period of <code>57.7923</code>.</p>
+</div>
+</div>
+</div>
+<ol start="4" type="1">
+<li><p>(Optional) A limit cycle is stable if, when perturbed, attracts the orbits. Test this in the Poincaré map, by perturbing the equilibrium within the plane, with a perturbation of <span class="math inline">\(\varepsilon = 10^{-2}\)</span>:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode matlab code-with-copy"><code class="sourceCode matlab"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">% ye is a point of the LC on the plane</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="va">y0_new</span> <span class="op">=</span>  <span class="va">ye</span>(<span class="kw">end</span><span class="op">,:</span>) <span class="op">+</span> <span class="fl">1e-1</span><span class="op">*</span>(<span class="va">V</span> <span class="op">*</span> (<span class="fl">2</span><span class="op">*</span><span class="va">rand</span>(<span class="fl">2</span><span class="op">,</span><span class="fl">1</span>)<span class="op">-</span><span class="fl">1</span>))<span class="op">';</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Adapt the previous code to see the effect of the perturbation.</p></li>
+</ol>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>A possible code is the following:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode matlab code-with-copy"><code class="sourceCode matlab"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="va">b1</span> <span class="op">=</span> <span class="fl">2.2</span><span class="op">;</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="va">f</span>  <span class="op">=</span> <span class="op">@</span>(<span class="va">t</span><span class="op">,</span><span class="va">y</span>) <span class="va">FoodChain</span>(<span class="va">t</span><span class="op">,</span><span class="va">y</span><span class="op">,</span><span class="va">b1</span>)<span class="op">;</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="va">y0_new</span> <span class="op">=</span>  <span class="va">ye</span>(<span class="kw">end</span><span class="op">,:</span>) <span class="op">+</span> <span class="fl">1e-1</span><span class="op">*</span>(<span class="va">V</span> <span class="op">*</span> (<span class="fl">2</span><span class="op">*</span><span class="va">rand</span>(<span class="fl">2</span><span class="op">,</span><span class="fl">1</span>)<span class="op">-</span><span class="fl">1</span>))<span class="op">';</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="va">event_fun</span>  <span class="op">=</span> <span class="op">@</span>(<span class="va">t</span><span class="op">,</span><span class="va">y</span>) <span class="va">PoincareMap</span>(<span class="va">t</span><span class="op">,</span><span class="va">y</span><span class="op">,</span><span class="va">pc</span><span class="op">,</span><span class="va">nn</span>)<span class="op">;</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="va">opts_event</span> <span class="op">=</span> <span class="va">odeset</span>(<span class="va">opts</span><span class="op">,</span><span class="ss">'Events'</span><span class="op">,</span><span class="va">event_fun</span>)<span class="op">;</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>[<span class="op">~,</span><span class="va">YP</span><span class="op">,~,</span><span class="va">ye</span><span class="op">,~</span>] <span class="op">=</span> <span class="va">ode45</span>(<span class="va">f</span><span class="op">,</span>[<span class="fl">0</span><span class="op">,</span><span class="fl">1e5</span>]<span class="op">,</span><span class="va">y0_new</span><span class="op">,</span><span class="va">opts_event</span>)<span class="op">;</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="va">fig</span> <span class="op">=</span> <span class="va">figure</span><span class="op">;</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="va">plot3</span>(<span class="va">YP</span>(<span class="op">:,</span><span class="fl">1</span>)<span class="op">,</span><span class="va">YP</span>(<span class="op">:,</span><span class="fl">2</span>)<span class="op">,</span><span class="va">YP</span>(<span class="op">:,</span><span class="fl">3</span>)<span class="op">,</span><span class="ss">'LineWidth'</span><span class="op">,</span><span class="fl">2.0</span>)<span class="op">;</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="va">hold</span> <span class="va">on</span><span class="op">;</span> <span class="va">grid</span> <span class="va">on</span><span class="op">;</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="va">plot3</span>(<span class="va">ye</span>(<span class="op">:,</span><span class="fl">1</span>)<span class="op">,</span><span class="va">ye</span>(<span class="op">:,</span><span class="fl">2</span>)<span class="op">,</span><span class="va">ye</span>(<span class="op">:,</span><span class="fl">3</span>)<span class="op">,</span><span class="ss">'r.'</span><span class="op">,</span><span class="ss">'MarkerSize'</span><span class="op">,</span><span class="fl">16</span>)<span class="op">;</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a><span class="va">title</span>(<span class="va">sprintf</span>(<span class="ss">'Phase portrait (b_1 = %g)'</span><span class="op">,</span><span class="va">b1</span>))<span class="op">;</span></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a><span class="va">xlabel</span>(<span class="ss">'X'</span>)<span class="op">;</span> <span class="va">ylabel</span>(<span class="ss">'Y'</span>)<span class="op">;</span> <span class="va">zlabel</span>(<span class="ss">'Z'</span>)<span class="op">;</span></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a><span class="co">% plot the Poincare plane</span></span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a><span class="va">rr</span> <span class="op">=</span> <span class="fl">0.25</span><span class="op">;</span></span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a><span class="va">pp</span> <span class="op">=</span> [<span class="va">pc</span><span class="op">'+</span><span class="va">rr</span><span class="op">*</span><span class="va">V</span><span class="op">,</span><span class="va">pc</span><span class="op">'-</span><span class="va">rr</span><span class="op">*</span><span class="va">V</span>]<span class="op">;</span></span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a><span class="va">p</span>  <span class="op">=</span> <span class="va">patch</span>(<span class="va">pp</span>(<span class="fl">1</span><span class="op">,:</span>)<span class="op">,</span><span class="va">pp</span>(<span class="fl">2</span><span class="op">,:</span>)<span class="op">,</span><span class="va">pp</span>(<span class="fl">3</span><span class="op">,:</span>)<span class="op">,</span><span class="ss">'r'</span>)<span class="op">;</span></span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a><span class="va">p</span>.<span class="va">FaceAlpha</span> <span class="op">=</span> <span class="fl">0.4</span><span class="op">;</span></span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a><span class="co">% in-picture visualization of the Poincaré plot</span></span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a><span class="va">ye_proj</span> <span class="op">=</span> (<span class="va">ye</span><span class="op">-</span><span class="va">pc</span>) <span class="op">-</span> ((<span class="va">ye</span><span class="op">-</span><span class="va">pc</span>) <span class="op">*</span> <span class="va">nn</span>) <span class="op">*</span> <span class="va">nn</span><span class="op">';</span></span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a><span class="va">axes</span>(<span class="ss">'Position'</span><span class="op">,</span>[<span class="fl">.6</span> <span class="fl">.6</span> <span class="fl">.3</span> <span class="fl">.3</span>]<span class="op">,</span><span class="ss">'XTickLabel'</span><span class="op">,</span>[]<span class="op">,...</span></span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a>     <span class="ss">'YTickLabel'</span><span class="op">,</span>[]<span class="op">,</span><span class="ss">'nextplot'</span><span class="op">,</span> <span class="ss">'add'</span>)<span class="op">;</span></span>
+<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a><span class="va">plot</span>(<span class="va">ye_proj</span>(<span class="op">:,</span><span class="fl">1</span>)<span class="op">,</span><span class="va">ye_proj</span>(<span class="op">:,</span><span class="fl">2</span>)<span class="op">,</span><span class="ss">'r.'</span><span class="op">,...</span></span>
+<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a>     <span class="va">ye_proj</span>(<span class="kw">end</span><span class="op">,</span><span class="fl">1</span>)<span class="op">,</span><span class="va">ye_proj</span>(<span class="kw">end</span><span class="op">,</span><span class="fl">2</span>)<span class="op">,</span><span class="ss">'b+'</span><span class="op">,</span><span class="ss">'MarkerSize'</span><span class="op">,</span><span class="fl">16</span>)<span class="op">;</span></span>
+<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a><span class="va">xlim</span>([<span class="op">-</span><span class="va">rr</span><span class="op">,</span><span class="va">rr</span>])<span class="op">;</span> <span class="va">ylim</span>([<span class="op">-</span><span class="va">rr</span><span class="op">,</span><span class="va">rr</span>])<span class="op">;</span></span>
+<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a><span class="va">grid</span> <span class="va">on</span><span class="op">;</span> <span class="va">box</span> <span class="va">on</span><span class="op">;</span></span>
+<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a><span class="va">title</span>(<span class="ss">'Poincare'' map'</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><img src="lab06_ex18a.png" class="img-fluid"></p>
+<p>The equilibrium on the Poincaré map is asymptotically stable, hence the limit cycle is asymptotically stable as well.</p>
+</div>
+</div>
+</div>
+<ol start="5" type="1">
+<li>Slightly increase the value of <span class="math inline">\(b_1\)</span>. Try with <span class="math inline">\(b_1=2.3\)</span>, <span class="math inline">\(b_1=2.39\)</span>, <span class="math inline">\(b_1=2.392\)</span>. What do you observe?</li>
+</ol>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>We <span class="math inline">\(b_1 = 2.3\)</span> we have this:</p>
+<p><img src="lab06_ex19a.png" class="img-fluid"></p>
+<p>We observe a so-called <a href="https://en.wikipedia.org/wiki/Period-doubling_bifurcation">period-doubling bifurcation</a>. The limit cycle splits and the period doubles. It is easier to understand the dynamics on the Poincaré map. Here the stable equilibrium (corresponding to the limit cycle) undergoes a bifurcation for some value of <span class="math inline">\(b_1\in[2.2,2.3]\)</span>. The equilibrium becomes unstable and a stable <span class="math inline">\(2\)</span>-cycle appears. The <span class="math inline">\(2\)</span>-cycle on the Poincaré map corresponds to a limit cycle that requires <em>two turns</em> to return to the original point. We observed the same phenomenon in the discrete logistic equation.</p>
+<p><img src="lab06_ex19b.png" class="img-fluid"></p>
+<p>If we increase again <span class="math inline">\(b_1\)</span>, there is a new period-doubling bifurcation for <span class="math inline">\(b_1\in[2.3,2.39]\)</span>. Now on the Poincaré map we have a <span class="math inline">\(4\)</span>-cycle.</p>
+<p><img src="lab06_ex19c.png" class="img-fluid"></p>
+<p>A further increase of <span class="math inline">\(b_1\)</span> yields yet another period-doubling bifurcation for <span class="math inline">\(b_1\in[2.39,2.392]\)</span>, corresponding to an appearance of a <span class="math inline">\(8\)</span>-cycle on the Poincaré map.</p>
+<p>The previous results closely reproduce the cascade of cycle formation in the discrete logistic equation. We expect new bifurcations with <span class="math inline">\(16\)</span>-, <span class="math inline">\(32\)</span>-, <span class="math inline">\(2^n\)</span>-cycle formation. Please note that all the cycles are still present, but they are unstable.</p>
+<p><strong>Q1.9.</strong> Keep increasing <span class="math inline">\(b_1\)</span> up to <span class="math inline">\(b_1=3\)</span>. A <em>strange attractor</em> should have appeared. Visualize it in the phase portrait and as a time series. Provide some biological insights.</p>
+<p>We reuse the code above, with <span class="math inline">\(b_1 = 3.0\)</span>.</p>
+<p><img src="lab06_ex19d.png" class="img-fluid"></p>
+<p><img src="lab06_ex19e.png" class="img-fluid"></p>
+<p>Note that the overall behavior looks almost periodic. However, we notice that every cycle is slighly different from the previous one. The dynamics is confined on a invariant set (the attractor).</p>
+</div>
+</div>
+</div>
+<ol start="6" type="1">
+<li><p>(Optional) One key feature of chaotic systems is the sensitivity to initial conditions. One measure of sensitivity is the <em>Lyapunov characteristic exponent</em>. Given two initial conditions <span class="math inline">\(\mathbf{y}_0\)</span> and <span class="math inline">\(\tilde{\mathbf{y}}_0 = \mathbf{y}_0 + \varepsilon \mathbf{z}\)</span>, we visualize the distance between the trajectories over time: <span class="math display">\[
+d(t) = \| \tilde{\mathbf{y}}(t) - \mathbf{y}(t)\| \approx e^{L t}d(0).
+\]</span></p>
+<p>We call <span class="math inline">\(L\)</span> the Lyapunov exponent. Try to visualize <span class="math inline">\(d(t)\)</span> in the case of an equilibrium (<span class="math inline">\(b_1=2\)</span>), a limit cycle (<span class="math inline">\(b_1=2.2\)</span>), or a strange attractor (<span class="math inline">\(b_1=3\)</span>). Use the <code>semilogy</code> command for visualizing the distance.</p>
+<p>The Lyapunov exponent gives a measure <em>stretching</em> of the initial data. In this system there are 3 exponents: the dominant one we have estimated above (not exactly, but we got an idea about it). The others show up only with a careful selection of <span class="math inline">\(\mathbf{y}_0\)</span>. In general we have:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Attractor</th>
+<th><span class="math inline">\(L_1\)</span></th>
+<th><span class="math inline">\(L_2\)</span></th>
+<th><span class="math inline">\(L_3\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Equilibrium</td>
+<td><span class="math inline">\({}-{}\)</span></td>
+<td><span class="math inline">\({}-{}\)</span></td>
+<td><span class="math inline">\({}-{}\)</span></td>
+</tr>
+<tr class="even">
+<td>Cycle</td>
+<td><span class="math inline">\(0\)</span></td>
+<td><span class="math inline">\({}-{}\)</span></td>
+<td><span class="math inline">\({}-{}\)</span></td>
+</tr>
+<tr class="odd">
+<td>Torus</td>
+<td><span class="math inline">\(0\)</span></td>
+<td><span class="math inline">\(0\)</span></td>
+<td><span class="math inline">\({}-{}\)</span></td>
+</tr>
+<tr class="even">
+<td>Strange attractor</td>
+<td><span class="math inline">\({}+{}\)</span></td>
+<td><span class="math inline">\(0\)</span></td>
+<td><span class="math inline">\({}-{}\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>Discuss the results. (There is no torus in this system.)</p></li>
+</ol>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>We adapt the code above:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode matlab line-numbers code-with-copy"><code class="sourceCode matlab"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">% reaching the attractor</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="va">b1</span> <span class="op">=</span> <span class="fl">3</span><span class="op">;</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="va">f</span> <span class="op">=</span> <span class="op">@</span>(<span class="va">t</span><span class="op">,</span><span class="va">y</span>) <span class="va">FoodChain</span>(<span class="va">t</span><span class="op">,</span><span class="va">y</span><span class="op">,</span><span class="va">b1</span>)<span class="op">;</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="va">opts</span> <span class="op">=</span> <span class="va">odeset</span>(<span class="ss">'AbsTol'</span><span class="op">,</span><span class="fl">1e-10</span><span class="op">,</span><span class="ss">'RelTol'</span><span class="op">,</span><span class="fl">1e-8</span>)<span class="op">;</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>[<span class="op">~,</span><span class="va">Y</span>] <span class="op">=</span> <span class="va">ode45</span>(<span class="va">f</span><span class="op">,</span>[<span class="fl">0</span><span class="op">,</span><span class="fl">1e6</span>]<span class="op">,</span>[<span class="fl">1</span><span class="op">,</span><span class="fl">1</span><span class="op">,</span><span class="fl">10</span>]<span class="op">,</span><span class="va">opts</span>)<span class="op">;</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>[<span class="va">T</span><span class="op">,</span><span class="va">Y</span>] <span class="op">=</span> <span class="va">ode45</span>(<span class="va">f</span><span class="op">,</span>[<span class="fl">0</span><span class="op">,</span><span class="fl">1e4</span>]<span class="op">,</span><span class="va">Y</span>(<span class="kw">end</span><span class="op">,:</span>)<span class="op">,</span><span class="va">opts</span>)<span class="op">;</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="va">Yavg</span> <span class="op">=</span> <span class="va">trapz</span>(<span class="va">T</span><span class="op">,</span><span class="va">Y</span><span class="op">,</span><span class="fl">1</span>) <span class="op">/</span> <span class="va">T</span>(<span class="kw">end</span>)<span class="op">;</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="co">% we compare a perturbed and an unperturbed</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="co">% trajectory on the attractor</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="va">opts</span>.<span class="va">Events</span> <span class="op">=</span> <span class="op">@</span>(<span class="va">t</span><span class="op">,</span><span class="va">y</span>) <span class="va">PoincareMap</span>(<span class="va">t</span><span class="op">,</span><span class="va">y</span><span class="op">,</span><span class="va">Yavg</span>)<span class="op">;</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>[<span class="va">T1</span><span class="op">,</span><span class="va">Y1</span><span class="op">,~,</span><span class="va">ye1</span><span class="op">,~</span>] <span class="op">=</span> <span class="va">ode45</span>(<span class="va">f</span><span class="op">,</span><span class="fl">0</span><span class="op">:</span><span class="fl">2e3</span><span class="op">,</span><span class="va">Y</span>(<span class="kw">end</span><span class="op">,:</span>)<span class="op">,</span><span class="va">opts</span>)<span class="op">;</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="co">% we perturb within the attractor</span></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a><span class="va">p</span> <span class="op">=</span> (<span class="va">ye</span>(<span class="fl">2</span>)<span class="op">-</span><span class="va">ye</span>(<span class="fl">1</span>))<span class="op">/</span><span class="va">norm</span>(<span class="va">ye</span>(<span class="fl">2</span>)<span class="op">-</span><span class="va">ye</span>(<span class="fl">1</span>))<span class="op">;</span></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a><span class="va">y0tilde</span> <span class="op">=</span> <span class="va">Y</span>(<span class="kw">end</span><span class="op">,:</span>) <span class="op">+</span> <span class="fl">1e-4</span><span class="op">*</span><span class="va">p</span><span class="op">;</span></span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>[<span class="va">T2</span><span class="op">,</span><span class="va">Y2</span>] <span class="op">=</span> <span class="va">ode45</span>(<span class="va">f</span><span class="op">,</span><span class="fl">0</span><span class="op">:</span><span class="fl">2e3</span><span class="op">,</span><span class="va">y0tilde</span><span class="op">,</span><span class="va">opts</span>)<span class="op">;</span></span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a><span class="va">f1</span> <span class="op">=</span> <span class="va">figure</span><span class="op">;</span></span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a><span class="va">plot</span>(<span class="va">T1</span><span class="op">,</span><span class="va">Y1</span>(<span class="op">:,</span><span class="fl">3</span>)<span class="op">,</span><span class="ss">'LineWidth'</span><span class="op">,</span><span class="fl">2.0</span>)<span class="op">;</span> <span class="va">hold</span> <span class="va">on</span><span class="op">;</span></span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a><span class="va">set</span>(<span class="va">gca</span><span class="op">,</span><span class="ss">'ColorOrderIndex'</span><span class="op">,</span><span class="fl">1</span>)<span class="op">;</span></span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a><span class="va">plot</span>(<span class="va">T2</span><span class="op">,</span><span class="va">Y2</span>(<span class="op">:,</span><span class="fl">3</span>)<span class="op">,</span><span class="ss">'--'</span><span class="op">,</span><span class="ss">'LineWidth'</span><span class="op">,</span><span class="fl">1.0</span>)<span class="op">;</span></span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a><span class="va">title</span>(<span class="ss">'Time series'</span>)<span class="op">;</span></span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a><span class="va">legend</span>(<span class="ss">'Z orig'</span><span class="op">,</span><span class="ss">'Z perturb'</span>)<span class="op">;</span> <span class="va">grid</span> <span class="va">on</span><span class="op">;</span></span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a><span class="va">f2</span> <span class="op">=</span> <span class="va">figure</span><span class="op">;</span></span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a><span class="va">semilogy</span>(<span class="va">T1</span><span class="op">,</span><span class="va">vecnorm</span>(<span class="va">Y1</span><span class="op">-</span><span class="va">Y2</span><span class="op">,</span><span class="fl">2</span><span class="op">,</span><span class="fl">2</span>)<span class="op">,</span><span class="ss">'LineWidth'</span><span class="op">,</span><span class="fl">2.0</span>)<span class="op">;</span></span>
+<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a><span class="va">title</span>(<span class="ss">'Error'</span>)<span class="op">;</span></span>
+<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a><span class="va">grid</span> <span class="va">on</span><span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><img src="lab06_ex111a.png" class="img-fluid"></p>
+<p>From the time series (only for the variable <span class="math inline">\(Z\)</span>, the others are similar) we observe a sensitivity to initial data. A small initial perturbation is magnified, even though we are on the attractor. This is a characteristic of strange attractors, and makes the model unpredictible for long time.</p>
+<p>We can also check the error in the log map, which should give us an indication of the Lyapunov exponent.</p>
+<p><img src="lab06_ex111b.png" class="img-fluid"></p>
+<p>Of course the error is bounded from above because the attractor itself is bounded.</p>
+</div>
+</div>
+</div>
+<ol start="7" type="1">
+<li><p>A positive dominant Lyapunov exponent means that the strange attractor is “stretching apart” orbits. Take several points as initial conditions by perturbing a single point from the strange attractor, similarly as done before. Plot the cloud of points in the phase portrait for various time instants, to highlight the mixing phenomenon.</p>
+<p>The code samples <code>1000</code> points, then shows their position along with the attractor over time.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode matlab code-with-copy"><code class="sourceCode matlab"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="va">b1</span> <span class="op">=</span> <span class="fl">3.0</span><span class="op">;</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="va">f</span>  <span class="op">=</span> <span class="op">@</span>(<span class="va">t</span><span class="op">,</span><span class="va">y</span>) <span class="va">FoodChain</span>(<span class="va">t</span><span class="op">,</span><span class="va">y</span><span class="op">,</span><span class="va">b1</span>)<span class="op">;</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="va">y0</span> <span class="op">=</span> [<span class="fl">1</span><span class="op">,</span><span class="fl">1</span><span class="op">,</span><span class="fl">1</span>]<span class="op">;</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="co">% we integrate for some long time</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="va">opts</span>  <span class="op">=</span> <span class="va">odeset</span>(<span class="ss">'AbsTol'</span><span class="op">,</span><span class="fl">1e-10</span><span class="op">,</span><span class="ss">'RelTol'</span><span class="op">,</span><span class="fl">1e-8</span>)<span class="op">;</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>[<span class="op">~,</span><span class="va">Y</span>] <span class="op">=</span> <span class="va">ode45</span>(<span class="va">f</span><span class="op">,</span>[<span class="fl">0</span><span class="op">,</span><span class="fl">1e5</span>]<span class="op">,</span><span class="va">y0</span><span class="op">,</span><span class="va">opts</span>)<span class="op">;</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="va">yc</span> <span class="op">=</span> <span class="va">Y</span>(<span class="kw">end</span><span class="op">,:</span>)<span class="op">;</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="co">% we integrate more to get the attractor</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>[<span class="va">T</span><span class="op">,</span><span class="va">Y</span>] <span class="op">=</span> <span class="va">ode45</span>(<span class="va">f</span><span class="op">,</span>[<span class="fl">0</span><span class="op">,</span><span class="fl">1e4</span>]<span class="op">,</span><span class="va">yc</span><span class="op">,</span><span class="va">opts</span>)<span class="op">;</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a><span class="co">% plot the attractor</span></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a><span class="va">f1</span> <span class="op">=</span> <span class="va">figure</span><span class="op">;</span></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a><span class="va">ll</span> <span class="op">=</span> <span class="va">plot3</span>(<span class="va">Y</span>(<span class="op">:,</span><span class="fl">1</span>)<span class="op">,</span><span class="va">Y</span>(<span class="op">:,</span><span class="fl">2</span>)<span class="op">,</span><span class="va">Y</span>(<span class="op">:,</span><span class="fl">3</span>))<span class="op">;</span></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a><span class="va">ll</span>.<span class="va">Color</span> <span class="op">=</span> [<span class="fl">0</span> <span class="fl">0.4470</span> <span class="fl">0.7410</span> <span class="fl">0.2</span>]<span class="op">;</span></span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a><span class="va">grid</span> <span class="va">on</span><span class="op">;</span> <span class="va">hold</span> <span class="va">on</span><span class="op">;</span></span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a><span class="va">title</span>(<span class="va">sprintf</span>(<span class="ss">'Phase portrait (b_1 = %g)'</span><span class="op">,</span><span class="va">b1</span>))</span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a><span class="co">% we take a cloud of points around the initial condition</span></span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a><span class="va">Np</span> <span class="op">=</span> <span class="fl">1000</span><span class="op">;</span> <span class="co">% number of points</span></span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a><span class="va">ep</span> <span class="op">=</span> <span class="fl">1e-3</span><span class="op">;</span> <span class="co">% perturbation</span></span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a><span class="va">y00</span>   <span class="op">=</span> <span class="va">yc</span> <span class="op">+</span> <span class="va">ep</span><span class="op">*</span><span class="va">randn</span>(<span class="va">Np</span><span class="op">,</span><span class="fl">3</span>)<span class="op">;</span></span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>[<span class="va">T</span><span class="op">,</span><span class="va">Y</span>] <span class="op">=</span> <span class="va">ode45</span>(<span class="va">f</span><span class="op">,</span><span class="fl">0</span><span class="op">:</span><span class="fl">1</span><span class="op">:</span><span class="fl">4e3</span><span class="op">,</span><span class="va">y00</span><span class="op">',</span><span class="va">opts</span>)<span class="op">;</span>  <span class="co">% vectorized version</span></span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a><span class="va">Ysol</span> <span class="op">=</span> <span class="va">shiftdim</span>(<span class="va">reshape</span>(<span class="va">Y</span><span class="op">,</span>[]<span class="op">,</span><span class="fl">3</span><span class="op">,</span><span class="va">Np</span>)<span class="op">,</span><span class="fl">1</span>)<span class="op">;</span></span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a><span class="va">pp</span> <span class="op">=</span> <span class="va">plot3</span>(<span class="va">Ysol</span>(<span class="fl">1</span><span class="op">,:,</span><span class="fl">1</span>)<span class="op">,</span><span class="va">Ysol</span>(<span class="fl">2</span><span class="op">,:,</span><span class="fl">1</span>)<span class="op">,</span><span class="va">Ysol</span>(<span class="fl">3</span><span class="op">,:,</span><span class="fl">1</span>)<span class="op">,</span><span class="ss">'.'</span><span class="op">,...</span></span>
+<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a>          <span class="ss">'MarkerSize'</span><span class="op">,</span><span class="fl">16.0</span><span class="op">,</span><span class="ss">'Color'</span><span class="op">,</span>[<span class="fl">1</span><span class="op">,</span><span class="fl">0</span><span class="op">,</span><span class="fl">0</span><span class="op">,</span><span class="fl">0.2</span>])<span class="op">;</span></span>
+<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a><span class="va">pause</span><span class="op">;</span></span>
+<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a><span class="kw">for</span> <span class="va">tt</span><span class="op">=</span><span class="fl">1</span><span class="op">:</span><span class="va">length</span>(<span class="va">T</span>)</span>
+<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a>    <span class="va">pp</span>.<span class="va">XData</span> <span class="op">=</span> <span class="va">Ysol</span>(<span class="fl">1</span><span class="op">,:,</span><span class="va">tt</span>)<span class="op">;</span></span>
+<span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a>    <span class="va">pp</span>.<span class="va">YData</span> <span class="op">=</span> <span class="va">Ysol</span>(<span class="fl">2</span><span class="op">,:,</span><span class="va">tt</span>)<span class="op">;</span></span>
+<span id="cb9-34"><a href="#cb9-34" aria-hidden="true" tabindex="-1"></a>    <span class="va">pp</span>.<span class="va">ZData</span> <span class="op">=</span> <span class="va">Ysol</span>(<span class="fl">3</span><span class="op">,:,</span><span class="va">tt</span>)<span class="op">;</span></span>
+<span id="cb9-35"><a href="#cb9-35" aria-hidden="true" tabindex="-1"></a>    <span class="va">pause</span>(<span class="fl">0.01</span>)<span class="op">;</span></span>
+<span id="cb9-36"><a href="#cb9-36" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
+<span id="cb9-37"><a href="#cb9-37" aria-hidden="true" tabindex="-1"></a><span class="va">hold</span> <span class="va">off</span><span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+</ol>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><img src="lab06_ex112.gif" class="img-fluid"></p>
+<p>We observe that the cloud of points is compact at the beginning, but then it is spread apart by the flow of the system. There is a mixing effect, due to stretching and compression.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="transition-to-chaos" class="level2">
+<h2 class="anchored" data-anchor-id="transition-to-chaos">Transition to chaos</h2>
+<p>A prototypical example of a chaotic system is the discrete logistic map: <span class="math display">\[
+y^{(k+1)} = f(y^{(k)}) = \alpha y^{(k)}(1-y^{(k)}),
+\]</span></p>
+<p>for some <span class="math inline">\(\alpha&gt;0\)</span>. Note that this a discrete in time equation, there is no time derivative! Still, it is a dynamical system, and we can discuss equilibria, cycles, and chaos. Surprisingly, the dynamic can be very complex even in dimension 1, whereas for ODEs we need at least 3 dimensions for chaos. The reason is that orbits in the discrete case can intersect and jump one over the other one.</p>
+<ol type="1">
+<li>Set <span class="math inline">\(\alpha \in [0,1)\)</span>. Compute the trajectory of the system for <span class="math inline">\(k\ge 1\)</span> with <span class="math inline">\(y^{(0)} \in [0,1]\)</span>. Orbits should converge toward the fixed point <span class="math inline">\(y^* = 0\)</span>. Note that fixed points (or equilibria) satisfy the equation <span class="math display">\[
+y^* = \alpha y^* (1-y^*).
+\]</span></li>
+</ol>
+<ol start="2" type="1">
+<li>Try with <span class="math inline">\(\alpha\in(1,3]\)</span>. Now you should see a new equilibrium, while zero becomes unstable.</li>
+</ol>
+<ol start="3" type="1">
+<li>Now set <span class="math inline">\(\alpha\in(3,1+\sqrt{6})\)</span>. A stable 2-cycle should appear, while the non-zero equilibrium is unstable. Note, a 2-cycle is a pair of points <span class="math inline">\(\{y_1,y_2\}\)</span> such that <span class="math inline">\(f(y_1) = y_2\)</span> and <span class="math inline">\(f(y_2) = y_1\)</span>, where <span class="math inline">\(f(y) = \alpha y(1-y)\)</span>.</li>
+</ol>
+<ol start="4" type="1">
+<li>The last part is to further increase <span class="math inline">\(\alpha\)</span> up to <span class="math inline">\(4\)</span>. We use the following Theorem (Fatou): for a fixed point iteration with <span class="math inline">\(f(y)=ay^2+by+c\)</span> with a cycle, the point <span class="math inline">\(-b/2a\)</span> is attracted by such orbit. So, we can fix the initial condition to <span class="math inline">\(-b/2a\)</span>, and then iterate until we reach the cycle. Try with various value of <span class="math inline">\(\alpha\)</span>.</li>
+</ol>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../../Laboratories/03_Bifurcations/lab_Bifurcations.html" class="pagination-link" aria-label="Lab 03: Bifurcations">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Lab 03: Bifurcations</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../../IntroODE.html" class="pagination-link" aria-label="Introduction to ODEs">
+        <span class="nav-page-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Introduction to ODEs</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

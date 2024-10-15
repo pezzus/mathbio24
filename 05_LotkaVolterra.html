@@ -245,6 +245,12 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./07_RM.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Rosenzweig-MacArthur model</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./references.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">References</span></a>
   </div>
@@ -311,6 +317,12 @@ window.Quarto = {
   <div class="sidebar-item-container"> 
   <a href="./Laboratories/03_Bifurcations/lab_Bifurcations.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Lab 03: Bifurcations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Laboratories/04_Chaos/lab_chaos.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab 04: Chaos</span></a>
   </div>
 </li>
       </ul>
@@ -388,7 +400,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">October 9, 2024</p>
+      <p class="date-modified">October 15, 2024</p>
     </div>
   </div>
     
@@ -404,7 +416,7 @@ window.Quarto = {
 <p>In all previous models, predation was only at cost of preys. Generalist predators, like humans, can survive even in absence of preys. Thus, <span class="math inline">\(P^*\)</span> can be assumed constant.</p>
 <p>What if the predator is a <em>specialist</em>, that is it can only hunt a specific prey? When the prey population gets too low, also survival of the predator could be at risk. One equation is not enough.</p>
 <p>A classic example is the Hare-Lynx dynamics, shown below:</p>
-<p><img src="https://upload.wikimedia.org/wikipedia/commons/1/16/Figure_45_06_01.jpg?20160705212352" class="img-fluid"></p>
+<p><img src="img/Figure_45_06_01.jpg" class="img-fluid"></p>
 <p>The data actually shows pelt-trading data taken from the Hudson’s Bay Company <span class="citation" data-cites="elton1942ten">Elton and Nicholson (<a href="references.html#ref-elton1942ten" role="doc-biblioref">1942</a>)</span>. We observe that data is oscillatory with a 10-year period. How is that?</p>
 </section>
 <section id="lotka-volterra-model" class="level2" data-number="5.2">
@@ -482,7 +494,7 @@ T_\mathrm{linear} = \frac{2\pi}{\sqrt{\det J(H^*,P^*)}} = \frac{2\pi}{\sqrt{\mu 
 \end{split}
 \]</span></p>
 <p>We conclude that level sets of <span class="math inline">\(\mathcal{H}\)</span> are orbits of the system. Are they closed? Yes, because the function <span class="math inline">\(\mathcal{H}(H,P)\to+\infty\)</span> as <span class="math inline">\((H,P)\to+\infty\)</span> or <span class="math inline">\((H,P)\to 0^+\)</span>. Moreover, <span class="math inline">\(\mathcal{H}\)</span> is bounded from below, with minimum for <span class="math inline">\((H,P)=(H^*,P^*)\)</span>. In fact, since <span class="math inline">\(E^*\)</span> is an equilibrium, <span class="math inline">\(\nabla\mathcal{H}|_{E^*} = 0\)</span>. Furthermore, the Hessian <span class="math inline">\(\nabla^2 \mathcal{H}|_{E^*}\)</span> is positive definite.</p>
-<div id="eb8c0a74" class="cell" data-execution_count="1">
+<div id="5e040f0f" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -538,7 +550,7 @@ T_\mathrm{linear} = \frac{2\pi}{\sqrt{\det J(H^*,P^*)}} = \frac{2\pi}{\sqrt{\mu 
 \]</span></p>
 <p>where <span class="math inline">\(\min P\)</span> and <span class="math inline">\(\min H\)</span> are taken on the curve and are certainly positive thanks to the logarithmic term in <span class="math inline">\(\mathcal{H}\)</span>. Since the velocity is strictly positive, and the length of the curve is finite, the period must be finite as well.</p>
 <p>In conclusion, all orbits are periodic. The temporal behavior of <span class="math inline">\(P(t)\)</span> and <span class="math inline">\(P(t)\)</span> is then periodic, as observed in data.</p>
-<div id="4657accc" class="cell" data-execution_count="2">
+<div id="79b1d01c" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
