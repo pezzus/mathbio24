@@ -14,7 +14,7 @@
     "href": "index.html#schedule",
     "title": "Mathematical Biology",
     "section": "Schedule",
-    "text": "Schedule\n\n\n\nSchedule of the course",
+    "text": "Schedule\n\n\n\nSchedule of the course\n\n\n\n📢 Exam’s schedule 📢\n\n1st call\n\nwritten, Jan 8th, 2025, 10:30 - 13:30 (A208)\noral, Jan 10th, 2025, 08:30 - 13:30 (A210)\n\n2nd call\n\nwritten, Feb 10th, 2025, 14:00 - 17:00 (A204)\noral, Feb 10th, 2025, 08:30 - 13:30 (A208)",
     "crumbs": [
       "Welcome"
     ]
@@ -465,6 +465,72 @@
     "crumbs": [
       "Assignments",
       "System of ODEs"
+    ]
+  },
+  {
+    "objectID": "Assignments/05_predators.html",
+    "href": "Assignments/05_predators.html",
+    "title": "Prey-predator systems",
+    "section": "",
+    "text": "Existence of cycles\nConsider the following competition model: \\[\n\\left\\{\\begin{aligned}\nN_1' &= r_1 N_1 (1 - N_1/K_1) - b_1 N_1 N_2, \\\\\nN_2' &= r_2 N_2 (1 - N_2/K_2) - b_2 N_1 N_2,\n\\end{aligned}\\right.\n\\]\nwhere \\(N_1(t)\\) and \\(N_2(t)\\) are two species. (The modeling details are unimportant now.) Show that the system has no periodic orbits. All parameters are positive. Hint: use the function \\(h(N_1,N_2)=1/(N_1 N_2)\\) in the Dulac’s criterium.",
+    "crumbs": [
+      "Assignments",
+      "Prey-predator systems"
+    ]
+  },
+  {
+    "objectID": "Assignments/05_predators.html#leslie-model",
+    "href": "Assignments/05_predators.html#leslie-model",
+    "title": "Prey-predator systems",
+    "section": "Leslie model",
+    "text": "Leslie model\nLeslie (1948) proposed the following system as a model for the predator-prey dynamics: \\[\n\\left\\{\\begin{aligned}\nH' &= H (a - bH -cP), \\\\\nP' &= P (r - s P/H ).\n\\end{aligned}\\right.\n\\]\nIn other words, the predators \\(P\\) have a logistic type dynamics with carrying capacity proportional to the density of preys \\(H\\).\n\nState clearly, and in case criticize, the assumptions of the model.\n\n\nDraw the isoclines in the phase plane, and find the positive equilibrium.\n\n\nStudy its stability.",
+    "crumbs": [
+      "Assignments",
+      "Prey-predator systems"
+    ]
+  },
+  {
+    "objectID": "Assignments/05_predators.html#optimal-hunting-strategy",
+    "href": "Assignments/05_predators.html#optimal-hunting-strategy",
+    "title": "Prey-predator systems",
+    "section": "Optimal hunting strategy",
+    "text": "Optimal hunting strategy\nConsider the general Gause model with logistic growth rate \\(r(H)\\) and numerical response \\(\\omega(H)\\) proportional to the functional response \\(\\pi(H)\\), that is \\(\\omega(H) = \\gamma \\pi(H)\\).\n\nWrite down the model.\n\n\nConsider \\(\\pi(H)\\) linear, with attack rate \\(a\\ge0\\). Compute the stable equilibrium population size of the predators.\n\n\nNow suppose that the predator species evolves over several generations, by adapting the value of \\(a\\), so to maximize its equilibrium size. Find the optimal value of \\(a\\).\n\n\nRepeat the previous point by assuming a Holling type 2 response.",
+    "crumbs": [
+      "Assignments",
+      "Prey-predator systems"
+    ]
+  },
+  {
+    "objectID": "Assignments/05_predators.html#juvenile-predators",
+    "href": "Assignments/05_predators.html#juvenile-predators",
+    "title": "Prey-predator systems",
+    "section": "Juvenile predators",
+    "text": "Juvenile predators\nOne feature not very realistic of standard predator-prey models is that predators start catching prey as soon as they are born. One way to circumvent this problem is to introduce a class of juvenile predators, say \\(J(t)\\), that do not catch prey; juveniles become adults at constant rate, say \\(\\rho\\).\nTaking all other assumption from the first model that has been presented, and assuming that death rate is the same for juvenile and adult predators, we arrive at the system \\[\n\\begin{cases}\nH' = r (1−\\frac{H}{K})H − aHP, & \\\\\nJ' = \\gamma aHP − \\rho J − \\mu J, & \\\\\nP' = \\rho J - \\mu P. &\n\\end{cases}\n\\]\n\nRead from the model, which is the probability that a newly born juvenile will still be a juvenile at time \\(t\\). And which is the probability that a newly born juvenile will still be a juvenile at time \\(t\\), conditional on being still alive at time \\(t\\)? From these computations, interpret the parameter \\(\\rho\\).\n\n\nOn the basis of the previous point discuss the realism of the assumption that juveniles become adults at constant rate (assumption necessary to frame the model in terms of ordinary differential equations). Suggest possible changes to the assumption.\n\n\nShow that using appropriate changes of variables system can be written as \\[\n\\begin{cases}\nx' = \\sigma x(1-x) − \\alpha x z, & \\\\\ny' = \\alpha x z − (\\nu+1)y, & \\\\\nz' = \\nu y - z. &\n\\end{cases}\n\\]\n\n\nShow that the new system has always the equilibria \\(E_0 = (0,0,0)\\) and \\(E_1 = (1, 0, 0)\\). Find the conditions under which it has also a positive equilibrium \\(E^+ = (x^+,y^+, z^+)\\) and compute its coordinates.\n\n\nFind the conditions for the stability of \\(E_1\\) and of \\(E^+\\). Note that there are parameter values such that all equilibria are unstable; if possible, use a computer to explore the bahaviour of solutions in such a case. Hint: use the Routh-Hurwitz criteria Theorem A.7 .",
+    "crumbs": [
+      "Assignments",
+      "Prey-predator systems"
+    ]
+  },
+  {
+    "objectID": "Assignments/05_predators.html#green-pools",
+    "href": "Assignments/05_predators.html#green-pools",
+    "title": "Prey-predator systems",
+    "section": "Green pools",
+    "text": "Green pools\nIt is often observed that, in the pools where fish have been added, water has a greenish colour, indicating a high algal biomass. Try to explain this using a prey-predator system, assuming that algae (prey)-zooplankton (predators) follow a Holling-type 2 predator-prey system, where prey grow according to the logistic equation and predators have mortality rate given by \\(d + bF\\) where \\(F\\) is fish density (assumed to be constant).\n\nWrite down the model.\n\n\nFind how equilbrium algal biomass and equilibrium stability vary with fish density \\(F\\), and comment the results.\n\n\nAssume now that the zooplankton mortality rate is \\(d + \\frac{bF}{1+cZ}\\) where \\(Z\\) is zooplankton density (Holling-type 2 functional response). Study the equilbria of the system.",
+    "crumbs": [
+      "Assignments",
+      "Prey-predator systems"
+    ]
+  },
+  {
+    "objectID": "Assignments/05_predators.html#holling-type-3-response",
+    "href": "Assignments/05_predators.html#holling-type-3-response",
+    "title": "Prey-predator systems",
+    "section": "Holling type 3 response",
+    "text": "Holling type 3 response\nConsider the following prey-predator system: \\[\n\\left\\{\\begin{aligned}\nH' &= H \\Bigl( r(1-H/K)−\\frac{a H P}{H^2 + \\beta^2} \\Bigr), \\\\\nP' &= P \\Bigl( -c + \\frac{\\gamma a H^2}{H^2 + \\beta^2} \\Bigr).\n\\end{aligned}\\right.\n\\]\nwhere all parameters are positive.\n\nGive a biological interpretation to these equations. Consider especially the functional response used in this model.\n\n\nFind all equilibria (in the first quadrant) and study their stability for \\(a\\gamma &lt; c\\).\n\n\nAssume \\(a\\gamma &gt; c\\). Find the conditions on \\(K\\) that make unstable the equilibrium without predators (but with a positive number of preys).\n\n\nShow that a positive equilibrium \\((H^*,P^*)\\), if it exists, is stable if \\[\n\\frac{r}{K} + a P^*\\phi'(H^*) &gt; 0,\\quad \\phi(H) = \\frac{H}{H^2+\\beta^2}.\n\\]\nHint: to show this, it is convenient to rewrite the system using the function \\(\\phi\\), and compute the positive equilibrium and the Jacobian through \\(\\phi(H^*)\\) and \\(\\phi'(H^*)\\), without explicitly computing these.\n\n\nShow that the previous conditions is equivalent to \\(\\Phi'(H^*) &lt; 0\\), where \\(\\Phi(H) = \\frac{r(1-H/K)(H^2+\\beta^2)}{a H}\\) is the function for the nullcline \\(H'=0\\), when \\(P=\\Phi(H)\\).\n\n\nScale the system by setting \\(x = H/\\beta\\), \\(y = P/(\\gamma\\beta)\\), \\(\\tau = ct\\). The resulting system should have only 3 parameters, that can be chosen as \\(\\eta = \\beta/K\\), \\(\\alpha = a\\gamma/c\\), \\(\\rho = r/c\\).",
+    "crumbs": [
+      "Assignments",
+      "Prey-predator systems"
     ]
   },
   {

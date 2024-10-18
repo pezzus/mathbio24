@@ -1,0 +1,927 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.57">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2025-06-09">
+
+<title>Prey-predator systems – Mathematical Biology</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../Laboratories/01_ODE_Integration/lab_ODEinteg.html" rel="next">
+<link href="../Assignments/04_systems.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../Assignments/01_recap_ODEs.html">Assignments</a></li><li class="breadcrumb-item"><a href="../Assignments/05_predators.html">Prey-predator systems</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">Mathematical Biology</a> 
+        <div class="sidebar-tools-main">
+    <a href="../Mathematical-Biology.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Welcome</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Lectures</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../01_Bathtub.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Bathtub model</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../02_Population.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Population dynamics</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../03_Logistic.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Logistic model</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../04_Predation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Predation models</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../05_LotkaVolterra.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Lotka-Volterra model</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../06_Gause.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Gause type models</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../07_RM.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Rosenzweig-MacArthur model</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Assignments</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Assignments/01_recap_ODEs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Solving ODEs</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Assignments/02_population.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Population dynamics</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Assignments/03_spruce.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Predation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Assignments/04_systems.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">System of ODEs</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Assignments/05_predators.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Prey-predator systems</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Labs</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Laboratories/01_ODE_Integration/lab_ODEinteg.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab 01: Numerical integration</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Laboratories/02_Predation/lab_Predation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab 02: Predation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Laboratories/03_Bifurcations/lab_Bifurcations.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab 03: Bifurcations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Laboratories/04_Chaos/lab_chaos.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab 04: Chaos</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">Appendices</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../IntroODE.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Introduction to ODEs</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../bifurcations.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Introduction to bifurcations</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Laboratories/00_Intro_Matlab/introMATLAB.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Introduction to MATLAB</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#existence-of-cycles" id="toc-existence-of-cycles" class="nav-link active" data-scroll-target="#existence-of-cycles">Existence of cycles</a></li>
+  <li><a href="#leslie-model" id="toc-leslie-model" class="nav-link" data-scroll-target="#leslie-model">Leslie model</a></li>
+  <li><a href="#optimal-hunting-strategy" id="toc-optimal-hunting-strategy" class="nav-link" data-scroll-target="#optimal-hunting-strategy">Optimal hunting strategy</a></li>
+  <li><a href="#juvenile-predators" id="toc-juvenile-predators" class="nav-link" data-scroll-target="#juvenile-predators">Juvenile predators</a></li>
+  <li><a href="#green-pools" id="toc-green-pools" class="nav-link" data-scroll-target="#green-pools">Green pools</a></li>
+  <li><a href="#holling-type-3-response" id="toc-holling-type-3-response" class="nav-link" data-scroll-target="#holling-type-3-response">Holling type 3 response</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../Assignments/01_recap_ODEs.html">Assignments</a></li><li class="breadcrumb-item"><a href="../Assignments/05_predators.html">Prey-predator systems</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">Prey-predator systems</h1>
+<p class="subtitle lead">Assignment 5</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">June 9, 2025</p>
+    </div>
+  </div>
+  
+    <div>
+    <div class="quarto-title-meta-heading">Modified</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date-modified">October 18, 2024</p>
+    </div>
+  </div>
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="existence-of-cycles" class="level2">
+<h2 class="anchored" data-anchor-id="existence-of-cycles">Existence of cycles</h2>
+<p>Consider the following competition model: <span class="math display">\[
+\left\{\begin{aligned}
+N_1' &amp;= r_1 N_1 (1 - N_1/K_1) - b_1 N_1 N_2, \\
+N_2' &amp;= r_2 N_2 (1 - N_2/K_2) - b_2 N_1 N_2,
+\end{aligned}\right.
+\]</span></p>
+<p>where <span class="math inline">\(N_1(t)\)</span> and <span class="math inline">\(N_2(t)\)</span> are two species. (The modeling details are unimportant now.) Show that the system has no periodic orbits. All parameters are positive. <em>Hint: use the function <span class="math inline">\(h(N_1,N_2)=1/(N_1 N_2)\)</span> in the Dulac’s criterium</em>.</p>
+</section>
+<section id="leslie-model" class="level2">
+<h2 class="anchored" data-anchor-id="leslie-model">Leslie model</h2>
+<p>Leslie (1948) proposed the following system as a model for the predator-prey dynamics: <span class="math display">\[
+\left\{\begin{aligned}
+H' &amp;= H (a - bH -cP), \\
+P' &amp;= P (r - s P/H ).
+\end{aligned}\right.
+\]</span></p>
+<p>In other words, the predators <span class="math inline">\(P\)</span> have a logistic type dynamics with carrying capacity proportional to the density of preys <span class="math inline">\(H\)</span>.</p>
+<ol type="1">
+<li>State clearly, and in case criticize, the assumptions of the model.</li>
+</ol>
+<ol start="2" type="1">
+<li>Draw the isoclines in the phase plane, and find the positive equilibrium.</li>
+</ol>
+<ol start="3" type="1">
+<li>Study its stability.</li>
+</ol>
+</section>
+<section id="optimal-hunting-strategy" class="level2">
+<h2 class="anchored" data-anchor-id="optimal-hunting-strategy">Optimal hunting strategy</h2>
+<p>Consider the general Gause model with logistic growth rate <span class="math inline">\(r(H)\)</span> and numerical response <span class="math inline">\(\omega(H)\)</span> proportional to the functional response <span class="math inline">\(\pi(H)\)</span>, that is <span class="math inline">\(\omega(H) = \gamma \pi(H)\)</span>.</p>
+<ol type="1">
+<li>Write down the model.</li>
+</ol>
+<ol start="2" type="1">
+<li>Consider <span class="math inline">\(\pi(H)\)</span> linear, with attack rate <span class="math inline">\(a\ge0\)</span>. Compute the stable equilibrium population size of the predators.</li>
+</ol>
+<ol start="3" type="1">
+<li>Now suppose that the predator species evolves over several generations, by adapting the value of <span class="math inline">\(a\)</span>, so to maximize its equilibrium size. Find the optimal value of <span class="math inline">\(a\)</span>.</li>
+</ol>
+<ol start="4" type="1">
+<li>Repeat the previous point by assuming a Holling type 2 response.</li>
+</ol>
+</section>
+<section id="juvenile-predators" class="level2">
+<h2 class="anchored" data-anchor-id="juvenile-predators">Juvenile predators</h2>
+<p>One feature not very realistic of standard predator-prey models is that predators start catching prey as soon as they are born. One way to circumvent this problem is to introduce a class of juvenile predators, say <span class="math inline">\(J(t)\)</span>, that do not catch prey; juveniles become adults at constant rate, say <span class="math inline">\(\rho\)</span>.</p>
+<p>Taking all other assumption from the first model that has been presented, and assuming that death rate is the same for juvenile and adult predators, we arrive at the system <span class="math display">\[
+\begin{cases}
+H' = r (1−\frac{H}{K})H − aHP, &amp; \\
+J' = \gamma aHP − \rho J − \mu J, &amp; \\
+P' = \rho J - \mu P. &amp;
+\end{cases}
+\]</span></p>
+<ol type="1">
+<li>Read from the model, which is the probability that a newly born juvenile will still be a juvenile at time <span class="math inline">\(t\)</span>. And which is the probability that a newly born juvenile will still be a juvenile at time <span class="math inline">\(t\)</span>, conditional on being still alive at time <span class="math inline">\(t\)</span>? From these computations, interpret the parameter <span class="math inline">\(\rho\)</span>.</li>
+</ol>
+<ol start="2" type="1">
+<li>On the basis of the previous point discuss the realism of the assumption that juveniles become adults at constant rate (assumption necessary to frame the model in terms of ordinary differential equations). Suggest possible changes to the assumption.</li>
+</ol>
+<ol start="3" type="1">
+<li>Show that using appropriate changes of variables system can be written as <span class="math display">\[
+\begin{cases}
+x' = \sigma x(1-x) − \alpha x z, &amp; \\
+y' = \alpha x z − (\nu+1)y, &amp; \\
+z' = \nu y - z. &amp;
+\end{cases}
+\]</span></li>
+</ol>
+<ol start="4" type="1">
+<li>Show that the new system has always the equilibria <span class="math inline">\(E_0 = (0,0,0)\)</span> and <span class="math inline">\(E_1 = (1, 0, 0)\)</span>. Find the conditions under which it has also a positive equilibrium <span class="math inline">\(E^+ = (x^+,y^+, z^+)\)</span> and compute its coordinates.</li>
+</ol>
+<ol start="5" type="1">
+<li>Find the conditions for the stability of <span class="math inline">\(E_1\)</span> and of <span class="math inline">\(E^+\)</span>. Note that there are parameter values such that all equilibria are unstable; if possible, use a computer to explore the bahaviour of solutions in such a case. <em>Hint: use the Routh-Hurwitz criteria <a href="../IntroODE.html#thm-routh" class="quarto-xref">Theorem&nbsp;<span>A.7</span></a> .</em></li>
+</ol>
+</section>
+<section id="green-pools" class="level2">
+<h2 class="anchored" data-anchor-id="green-pools">Green pools</h2>
+<p>It is often observed that, in the pools where fish have been added, water has a greenish colour, indicating a high algal biomass. Try to explain this using a prey-predator system, assuming that algae (prey)-zooplankton (predators) follow a Holling-type 2 predator-prey system, where prey grow according to the logistic equation and predators have mortality rate given by <span class="math inline">\(d + bF\)</span> where <span class="math inline">\(F\)</span> is fish density (assumed to be constant).</p>
+<ol type="1">
+<li>Write down the model.</li>
+</ol>
+<ol start="2" type="1">
+<li>Find how equilbrium algal biomass and equilibrium stability vary with fish density <span class="math inline">\(F\)</span>, and comment the results.</li>
+</ol>
+<ol start="3" type="1">
+<li>Assume now that the zooplankton mortality rate is <span class="math inline">\(d + \frac{bF}{1+cZ}\)</span> where <span class="math inline">\(Z\)</span> is zooplankton density (Holling-type 2 functional response). Study the equilbria of the system.</li>
+</ol>
+</section>
+<section id="holling-type-3-response" class="level2">
+<h2 class="anchored" data-anchor-id="holling-type-3-response">Holling type 3 response</h2>
+<p>Consider the following prey-predator system: <span class="math display">\[
+\left\{\begin{aligned}
+H' &amp;= H \Bigl( r(1-H/K)−\frac{a H P}{H^2 + \beta^2} \Bigr), \\
+P' &amp;= P \Bigl( -c + \frac{\gamma a H^2}{H^2 + \beta^2} \Bigr).
+\end{aligned}\right.
+\]</span></p>
+<p>where all parameters are positive.</p>
+<ol type="1">
+<li>Give a biological interpretation to these equations. Consider especially the functional response used in this model.</li>
+</ol>
+<ol start="2" type="1">
+<li>Find all equilibria (in the first quadrant) and study their stability for <span class="math inline">\(a\gamma &lt; c\)</span>.</li>
+</ol>
+<ol start="3" type="1">
+<li>Assume <span class="math inline">\(a\gamma &gt; c\)</span>. Find the conditions on <span class="math inline">\(K\)</span> that make unstable the equilibrium without predators (but with a positive number of preys).</li>
+</ol>
+<ol start="4" type="1">
+<li><p>Show that a positive equilibrium <span class="math inline">\((H^*,P^*)\)</span>, if it exists, is stable if <span class="math display">\[
+\frac{r}{K} + a P^*\phi'(H^*) &gt; 0,\quad \phi(H) = \frac{H}{H^2+\beta^2}.
+\]</span></p>
+<p><em>Hint: to show this, it is convenient to rewrite the system using the function <span class="math inline">\(\phi\)</span>, and compute the positive equilibrium and the Jacobian through <span class="math inline">\(\phi(H^*)\)</span> and <span class="math inline">\(\phi'(H^*)\)</span>, without explicitly computing these.</em></p></li>
+</ol>
+<ol start="5" type="1">
+<li>Show that the previous conditions is equivalent to <span class="math inline">\(\Phi'(H^*) &lt; 0\)</span>, where <span class="math inline">\(\Phi(H) = \frac{r(1-H/K)(H^2+\beta^2)}{a H}\)</span> is the function for the nullcline <span class="math inline">\(H'=0\)</span>, when <span class="math inline">\(P=\Phi(H)\)</span>.</li>
+</ol>
+<ol start="6" type="1">
+<li>Scale the system by setting <span class="math inline">\(x = H/\beta\)</span>, <span class="math inline">\(y = P/(\gamma\beta)\)</span>, <span class="math inline">\(\tau = ct\)</span>. The resulting system should have only 3 parameters, that can be chosen as <span class="math inline">\(\eta = \beta/K\)</span>, <span class="math inline">\(\alpha = a\gamma/c\)</span>, <span class="math inline">\(\rho = r/c\)</span>.</li>
+</ol>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../Assignments/04_systems.html" class="pagination-link" aria-label="System of ODEs">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">System of ODEs</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../Laboratories/01_ODE_Integration/lab_ODEinteg.html" class="pagination-link" aria-label="Lab 01: Numerical integration">
+        <span class="nav-page-text">Lab 01: Numerical integration</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
