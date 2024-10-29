@@ -6,9 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="dcterms.date" content="2024-09-17">
+<meta name="dcterms.date" content="2024-10-22">
 
-<title>2&nbsp; Population dynamics – Mathematical Biology</title>
+<title>10&nbsp; Inhibition – Mathematical Biology</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,40 +20,6 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
-}
-/* CSS for syntax highlighting */
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 /* CSS for citations */
 div.csl-bib-body { }
@@ -85,8 +51,8 @@ div.csl-indent {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./03_Logistic.html" rel="next">
-<link href="./01_Bathtub.html" rel="prev">
+<link href="./references.html" rel="next">
+<link href="./09_FastSlow.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -164,7 +130,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./01_Bathtub.html">Lectures</a></li><li class="breadcrumb-item"><a href="./02_Population.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Population dynamics</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./01_Bathtub.html">Lectures</a></li><li class="breadcrumb-item"><a href="./10_Inhibition.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Inhibition</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -215,7 +181,7 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./02_Population.html" class="sidebar-item-text sidebar-link active">
+  <a href="./02_Population.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Population dynamics</span></span></a>
   </div>
 </li>
@@ -263,7 +229,7 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./10_Inhibition.html" class="sidebar-item-text sidebar-link">
+  <a href="./10_Inhibition.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Inhibition</span></span></a>
   </div>
 </li>
@@ -408,13 +374,14 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#population-growth-model" id="toc-population-growth-model" class="nav-link active" data-scroll-target="#population-growth-model"><span class="header-section-number">2.1</span> Population growth model</a>
+  <li><a href="#competitive-inhibition" id="toc-competitive-inhibition" class="nav-link active" data-scroll-target="#competitive-inhibition"><span class="header-section-number">10.1</span> Competitive inhibition</a>
   <ul class="collapse">
-  <li><a href="#malthus-model" id="toc-malthus-model" class="nav-link" data-scroll-target="#malthus-model"><span class="header-section-number">2.1.1</span> Malthus model</a></li>
-  <li><a href="#expected-life" id="toc-expected-life" class="nav-link" data-scroll-target="#expected-life"><span class="header-section-number">2.1.2</span> Expected life</a></li>
-  <li><a href="#basic-reproduction-number" id="toc-basic-reproduction-number" class="nav-link" data-scroll-target="#basic-reproduction-number"><span class="header-section-number">2.1.3</span> Basic reproduction number</a></li>
-  <li><a href="#migration" id="toc-migration" class="nav-link" data-scroll-target="#migration"><span class="header-section-number">2.1.4</span> Migration</a></li>
-  <li><a href="#exogenous-variability" id="toc-exogenous-variability" class="nav-link" data-scroll-target="#exogenous-variability"><span class="header-section-number">2.1.5</span> Exogenous variability</a></li>
+  <li><a href="#example-ttx" id="toc-example-ttx" class="nav-link" data-scroll-target="#example-ttx"><span class="header-section-number">10.1.1</span> Example: TTX</a></li>
+  </ul></li>
+  <li><a href="#allosteric-inhibition" id="toc-allosteric-inhibition" class="nav-link" data-scroll-target="#allosteric-inhibition"><span class="header-section-number">10.2</span> Allosteric inhibition</a></li>
+  <li><a href="#cooperation" id="toc-cooperation" class="nav-link" data-scroll-target="#cooperation"><span class="header-section-number">10.3</span> Cooperation</a>
+  <ul class="collapse">
+  <li><a href="#example-hemoglobin" id="toc-example-hemoglobin" class="nav-link" data-scroll-target="#example-hemoglobin"><span class="header-section-number">10.3.1</span> Example: hemoglobin</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -422,10 +389,10 @@ window.Quarto = {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./01_Bathtub.html">Lectures</a></li><li class="breadcrumb-item"><a href="./02_Population.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Population dynamics</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./01_Bathtub.html">Lectures</a></li><li class="breadcrumb-item"><a href="./10_Inhibition.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Inhibition</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Population dynamics</span></h1>
-<p class="subtitle lead">This lecture is based on <span class="citation" data-cites="ip14">(<a href="references.html#ref-ip14" role="doc-biblioref">Iannelli and Pugliese 2014, vol. 79, secs. 1.1–1.4</a>)</span></p>
+<h1 class="title"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Inhibition</span></h1>
+<p class="subtitle lead">This lecture is based on <span class="citation" data-cites="ks08_vol1">(<a href="references.html#ref-ks08_vol1" role="doc-biblioref">Keener and Sneyd 2009, vol. 8/I, secs. 1.4.3–4</a>)</span></p>
 </div>
 
 
@@ -436,14 +403,14 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">September 17, 2024</p>
+      <p class="date">October 22, 2024</p>
     </div>
   </div>
   
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">October 9, 2024</p>
+      <p class="date-modified">October 21, 2024</p>
     </div>
   </div>
     
@@ -454,278 +421,256 @@ window.Quarto = {
 </header>
 
 
-<section id="population-growth-model" class="level2" data-number="2.1">
-<h2 data-number="2.1" class="anchored" data-anchor-id="population-growth-model"><span class="header-section-number">2.1</span> Population growth model</h2>
-<p>We have seen, using the bathtub analogy, that the <em>fundamental balance equation of population dynamics</em> take the form <span class="math display">\[
-N'(t) = B(t) - D(t) + I(t) - E(t),
+<section id="competitive-inhibition" class="level2" data-number="10.1">
+<h2 data-number="10.1" class="anchored" data-anchor-id="competitive-inhibition"><span class="header-section-number">10.1</span> Competitive inhibition</h2>
+<p>We have seen that a basic reaction involving enzymes proceeds according to the Michaelis-Menten law: <span class="math display">\[
+V = \frac{V_\mathrm{max}[\ce{S}]}{K_m + [\ce{S}]}.
 \]</span></p>
-<p>where at time <span class="math inline">\(t\)</span> we have that</p>
+<p>where <span class="math inline">\(V\)</span> is the velocity of production.</p>
+<p>A very important aspect in the regulation of molecular networks comes from the fact that the presence of an inhibitory molecule may decrease the rate at which an enzymatic reaction occurs. Very schematically, we can think of two main mechanism: competitive inhibition, or allosteric inhibition. In the first case the inhibiting molecule binds to the enzyme in the same site where it binds to the substrate, thus preventing the formation of <span class="math inline">\(\ce{SE}\)</span> complexes; in the latter case, the inhibiting molecule binds to the enzyme in a different site, but this changes the conformation of the enzyme reducing its affinity to the substrate.</p>
+<p>We present now a very simple models of the first case. Letting <span class="math inline">\(\ce{I}\)</span> represent the inhibitory molecule, can be drawn as <span class="math display">\[
+\begin{aligned}
+\ce{S + E &amp;&lt;=&gt;[$k_1$][$k_{-1}$] SE -&gt;[$k_2$] P + E}, \\
+\ce{I + E &amp;&lt;=&gt;[$k_3$][$k_{-3}$] IE}.
+\end{aligned}
+\]</span></p>
+<p>where <span class="math inline">\(\ce{SE}\)</span> is the first complex, and <span class="math inline">\(\ce{IE}\)</span> is a new complex combining the inhibitor and the enzyme.</p>
+<p>Let us define <span class="math inline">\(s = [\ce{S}]\)</span>, <span class="math inline">\(e = [\ce{E}]\)</span>, <span class="math inline">\(i = [\ce{I}]\)</span>, <span class="math inline">\(c_1 = [\ce{SE}]\)</span>, <span class="math inline">\(c_2 = [\ce{IE}]\)</span>, and <span class="math inline">\(p = [\ce{P}]\)</span>. The corresponding system is: <span class="math display">\[
+\left\{\begin{aligned}
+s'   &amp;= - k_1 se + k_{-1}c_1, \\
+e'   &amp;= - k_1 s e + (k_{-1}+k_2) c_1 - k_3 ie + k_{-3} c_2, \\
+c_1' &amp;= k_1 se - (k_{-1}+k_2)c_1, \\
+i'   &amp;= - k_3 ie + k_{-3}c_2, \\
+c_2' &amp;= k_3 ie - k_{-3} c_2, \\
+p'   &amp;= k_2 c_1.
+\end{aligned}\right.
+\]</span></p>
+<p>We can simply the system by noting that: <span class="math display">\[
+i' + c_2' = 0, \quad\text{and}\quad e' + c'_1 + c'_2 = 0.
+\]</span></p>
+<p>Since at the beginning <span class="math inline">\(c_1(0)=c_2(0)=0\)</span>, we have <span class="math inline">\(e = e_0 - c_1 - c_2\)</span> and <span class="math inline">\(i = i_0 - c_2\)</span>. We obtain: <span class="math display">\[
+\left\{\begin{aligned}
+s'   &amp;= - k_1 s(e_0 - c_1 - c_2) + k_{-1}c_1, \\
+c_1' &amp;= k_1 s(e_0 - c_1 - c_2) - (k_{-1}+k_2)c_1, \\
+c_2' &amp;= k_3 (i_0 - c_2)(e_0 - c_1 - c_2) - k_{-3} c_2.
+\end{aligned}\right.
+\]</span></p>
+<p>Now we proceed with a rescaling. Here we use: <span class="math display">\[
+x = \frac{s}{s_0}, \quad
+y_1 = \frac{c_1}{e_0}, \quad
+y_2 = \frac{c_2}{e_0}, \quad
+\tau = k_1 e_0 t.
+\]</span></p>
+<p>The system in the new variables is: <span class="math display">\[
+\left\{\begin{aligned}
+\dot{x}   &amp;= - x(1-y_1-y_2) + \frac{k_{-1}}{k_1 s_0} y_1, \\
+\frac{e_0}{s_0} \dot{y}_1 &amp;= x(1 - y_1 - y_2) - \frac{(k_{-1}+k_2)}{k_1 s_0}y_1, \\
+\frac{e_0}{s_0} \dot{y}_2 &amp;= \frac{k_3}{k_1 s_0}\Bigl(\frac{i_0}{s_0} - \frac{e_0}{s_0} y_2\Bigr)(1 - y_1 - y_2) - \frac{k_{-3}}{k_1 s_0} y_2.
+\end{aligned}\right.
+\]</span></p>
+<p>We define several constants: <span class="math display">\[
+\alpha_1 = \frac{k_{-1}}{k_1 s_0}, \quad
+\alpha_2 = \frac{(k_{-1}+k_2)}{k_1 s_0}, \quad
+\alpha_3 = \frac{k_{-3}}{k_1 s_0}, \quad
+\varepsilon = \frac{e_0}{s_0}, \quad
+\]</span></p>
+<p>so the system reduces to: <span class="math display">\[
+\left\{\begin{aligned}
+\dot{x}   &amp;= - x(1-y_1-y_2) + \alpha_1 y_1, \\
+\varepsilon \dot{y}_1 &amp;= x(1 - y_1 - y_2) - \alpha_2 y_1, \\
+\varepsilon \dot{y}_2 &amp;= \frac{k_3}{k_1}\Bigl(\frac{i_0}{s_0} - \varepsilon y_2\Bigr)(1 - y_1 - y_2) - \alpha_3 y_2.
+\end{aligned}\right.
+\]</span></p>
+<p>We assume that <span class="math inline">\(\varepsilon \ll 1\)</span>, so <span class="math inline">\(y_1\)</span> and <span class="math inline">\(y_2\)</span> are <em>fast</em>. Thus, with the quasi-steady-state approximation we get: <span class="math display">\[
+\left\{\begin{aligned}
+0 &amp;= x(1 - y_1 - y_2) - \alpha_2 y_1, \\
+0 &amp;= \beta (1 - y_1 - y_2) - \alpha_3 y_2,
+\end{aligned}\right.
+\]</span></p>
+<p>where <span class="math inline">\(\beta = \frac{k_3}{k_1}\frac{i_0}{s_0}\)</span>. We can solve with respect to <span class="math inline">\(c_1\)</span> and <span class="math inline">\(c_2\)</span>: <span class="math display">\[
+\left\{\begin{aligned}
+y_1 &amp;= \frac{x}{x + \alpha_2 + \frac{\alpha_2}{\alpha_3}\beta}, \\
+y_2 &amp;= \frac{\alpha_2}{\frac{\alpha_3}{\alpha_2} x + \alpha_3 + \beta}.
+\end{aligned}\right.
+\]</span></p>
+<p>This equilibrium for the fast system is also asymptotically stable, because the Jacobian: <span class="math display">\[
+J = \begin{pmatrix} -x-\alpha_2 &amp; -x \\ -\beta &amp; -\alpha_3 - \beta \end{pmatrix}
+\]</span></p>
+<p>has negative trace and positive determinant. Thus, according to <a href="09_FastSlow.html#thm-tichonov" class="quarto-xref">Tichonov theorem&nbsp;<span>9.1</span></a>, the system quickly converges to the stable equilibrium, and then the slow dynamics kicks in, and its given by the equation for <span class="math inline">\(x\)</span>.</p>
+<p>Since the second complex has no product, we are only interested in <span class="math inline">\(y_1\)</span>. Thus: <span class="math display">\[
+V = [\ce{P}]' = k_2 c_1 = k_2 e_0 y_1 = \frac{k_2 e_0 x}{x + \alpha_2 + \frac{\alpha_2}{\alpha_3}\beta}.
+\]</span></p>
+<p>Replacing the constants we have: <span class="math display">\[
+V = \frac{k_2 e_0 \ce{[S]}}{\ce{[S]} + K_m(1 + K_m \frac{i_0}{K_3})}
+\]</span></p>
+<p>Going back to the production, we have that <span class="math display">\[
+V = k_2 e_0 y_1 = \frac{V_\mathrm{max} s}{s + K_m (1 + i_0/K_3)},
+\]</span></p>
+<p>where <span class="math inline">\(K_m = \frac{k_{-1}+k_2}{k_1}\)</span> is the half-saturation rate. The effect of the competitive inhibition is to <em>increase</em> the half-saturation rate by a factor <span class="math inline">\((1+i_0/K_3) &gt; 1\)</span>. The Michaelis-Menten curves shifts to the right.</p>
+<p>Note that <span class="math inline">\(i_0 = i + c_2 = i + e_0 y_2\)</span>, so <span class="math inline">\(i_0/s_0 = i/s_0 + \varepsilon y_2\)</span> and hence <span class="math inline">\(i_0 \approx i\)</span>. The variable <span class="math inline">\(i\)</span> is also <em>slow</em>, like <span class="math inline">\(s\)</span>, we could therefore replace <span class="math inline">\(i_0\)</span> with <span class="math inline">\(i = [\ce{I}]\)</span> in the equation: <span class="math display">\[
+V = \frac{V_\mathrm{max} [\ce{S}]}{[\ce{S}] + K_m (1 + [\ce{I}]/K_3)}.
+\]</span></p>
+<p>An alternative derivation is to keep the equation for <span class="math inline">\(i\)</span>, rescale it with respect to <span class="math inline">\(i_0\)</span> and then observe that <span class="math inline">\(e_0/i_0 \ll 1\)</span>. In this case, the system has 2 slow variables, <span class="math inline">\(i\)</span> and <span class="math inline">\(s\)</span>, and two fast variables, <span class="math inline">\(y_1\)</span> and <span class="math inline">\(y_2\)</span>.</p>
+<section id="example-ttx" class="level3" data-number="10.1.1">
+<h3 data-number="10.1.1" class="anchored" data-anchor-id="example-ttx"><span class="header-section-number">10.1.1</span> Example: TTX</h3>
+<p>Tetrodotoxin (TTX) is a powerful toxin that can quickly kill an adult even at very small dosage. It is a blocker of <span class="math inline">\(\ce{Na+}\)</span> channels, which are fundamental for impulse transmission in nerves and muscles. The effect of the drug is quite simple: suppose that <span class="math inline">\([\ce{P}]\)</span> is the number of available channels for correct conduction, <span class="math inline">\([\ce{B}]\)</span> is the number of blocked channels (thus not transmitting the signal), and <span class="math inline">\([\ce{D}]\)</span> is the concentration of the drug. Then: <span class="math display">\[
+\ce{P + D &lt;=&gt;[$k_1$][$k_{-1}$] B}.
+\]</span></p>
+<p>At equilibrium we have: <span class="math display">\[
+[\ce{P}][\ce{D}] = K_1 [\ce{B}],
+\]</span></p>
+<p>and, since <span class="math inline">\([\ce{P}]+[\ce{B}] = P_0\)</span>, the total number of channels, we have: <span class="math display">\[
+[\ce{P}] = \frac{P_0}{[\ce{D}]/K_1 + 1},
+\]</span></p>
+<p>so the presence of the drug reduces by a factor <span class="math inline">\(([\ce{D}]/K_1 + 1)\)</span> the number of available channels. For TTX, <span class="math inline">\(K_1\approx \text{1-5 nM}\)</span>, so a very small quantity can block most of the channels.</p>
+</section>
+</section>
+<section id="allosteric-inhibition" class="level2" data-number="10.2">
+<h2 data-number="10.2" class="anchored" data-anchor-id="allosteric-inhibition"><span class="header-section-number">10.2</span> Allosteric inhibition</h2>
+<p>Allosteric inhibition is when the inhibitor binds in another site, but can still inhibit the production. The picture is the following</p>
+<p><img src="img/allosteric.png" class="img-fluid"></p>
+<p>We have several equations to write, and the analysis with QSS approximation can be tedious. We opt here for the quasi-equilibrium approximation. The reactions involved are <span class="math display">\[
+\begin{aligned}
+\ce{S + E &amp;&lt;=&gt;[$k_1$][$k_{-1}$] SE -&gt;[$k_2$] P + E}, \\
+\ce{I + E &amp;&lt;=&gt;[$k_3$][$k_{-3}$] IE}, \\
+\ce{S + IE &amp;&lt;=&gt;[$k_1$][$k_{-1}$] IES}, \\
+\ce{I + SE &amp;&lt;=&gt;[$k_3$][$k_{-3}$] IES}. \\
+\end{aligned}
+\]</span></p>
+<p>Assuming all at equilibrium, and taking <span class="math inline">\(s = [\ce{S}]\)</span>, <span class="math inline">\(e = [\ce{E}]\)</span>, <span class="math inline">\(i = [\ce{I}]\)</span>, <span class="math inline">\(c_1 = [\ce{SE}]\)</span>, <span class="math inline">\(c_2 = [\ce{IE}]\)</span>, and <span class="math inline">\(c_3 = [\ce{IES}]\)</span> we have: <span class="math display">\[
+\left\{\begin{aligned}
+k_1 s e &amp;= k_{-1} c_1, \\
+k_3 i e &amp;= k_{-3} c_2, \\
+k_1 s c_2 &amp;= k_{-1} c_3, \\
+k_3 i c_1 &amp;= k_{-3} c_3.
+\end{aligned}\right.
+\]</span></p>
+<p>Note that <span class="math inline">\(K_1 = \frac{k_{-1}}{k_1}\)</span>, <span class="math inline">\(K_3 = \frac{k_{-3}}{k_3}\)</span>, and <span class="math inline">\(e = e_0 - c_1 - c_2 - c_3\)</span>. The system becomes: <span class="math display">\[
+\left\{\begin{aligned}
+s (e_0 - c_1 - c_2 - c_3) - K_1 c_1 &amp;= 0, \\
+i (e_0 - c_1 - c_2 - c_3) - K_3 c_2 &amp;= 0, \\
+s c_2 - K_1 c_3 &amp;= 0, \\
+i c_1 - K_3 c_3 &amp;= 0.
+\end{aligned}\right.
+\]</span></p>
+<p>Remember that<span class="math inline">\(s\)</span> and <span class="math inline">\(i\)</span> are fixed, and the unknowns are <span class="math inline">\(c_1\)</span>, <span class="math inline">\(c_2\)</span>, and <span class="math inline">\(c_3\)</span>. The system is <em>linear</em>: <span class="math display">\[
+\begin{pmatrix}
+1 + K_1/s &amp; 1 &amp; 1 \\
+1 &amp; 1 + K_3/i &amp; 1 \\
+0 &amp; 1 &amp; -K_1/s \\
+1 &amp; 0 &amp; -K_3/i
+\end{pmatrix}
+\begin{pmatrix} c_1 \\ c_2 \\ c_3 \end{pmatrix} =
+\begin{pmatrix} e_0 \\ e_0 \\ 0 \\ 0 \end{pmatrix}
+\]</span></p>
+<p>and of rank 3, although it is not immediate to see. So we have a unique solution. Note that we are only interested in <span class="math inline">\(c_1\)</span>, and this is easy to find since from the last two equations: <span class="math display">\[
+c_2 = \frac{K_1}{s} c_3, \quad c_3 = \frac{i}{K_3} c_1,
+\]</span></p>
+<p>which can be substituted into the first equation to get: <span class="math display">\[
+(s+K_1)(1 + i/K_3) c_1 = e_0 s,
+\]</span></p>
+<p>or, in terms of production rate: In this case we obtain: <span class="math display">\[
+V = k_2 c_1 = \frac{V_\mathrm{max}}{1+[\ce{I}]/K_3}\frac{[\ce{S}]}{K_1 + [\ce{S}]},
+\]</span></p>
+<p>which <span class="math inline">\(V_\mathrm{max} = k_2 e_0\)</span>. Again, we find the Michaelis-Menten law, but this time we have a reduction in <span class="math inline">\(V_\mathrm{max}\)</span> by a factor of <span class="math inline">\((1+[\ce{I}]/K_3) &gt; 1\)</span>.</p>
+</section>
+<section id="cooperation" class="level2" data-number="10.3">
+<h2 data-number="10.3" class="anchored" data-anchor-id="cooperation"><span class="header-section-number">10.3</span> Cooperation</h2>
+<p>Consider the following reaction: <span class="math display">\[
+\begin{aligned}
+\ce{S + E &amp;&lt;=&gt;[$k_1$][$k_{-1}$] SE -&gt;[$k_2$] P + E}, \\
+\ce{S + SE &amp;&lt;=&gt;[$k_3$][$k_{-3}$] S_2E -&gt;[$k_4$] P + SE}.
+\end{aligned}
+\]</span></p>
+<p>The enzyme has 2 (different) sites for binding. When the first complex is formed, there is still room for another substrate, but the rate is different (could be higher, for instance.)</p>
+<p>Let us define <span class="math inline">\(s = [\ce{S}]\)</span>, <span class="math inline">\(e = [\ce{E}]\)</span>, <span class="math inline">\(c_1 = [\ce{SE}]\)</span>, <span class="math inline">\(c_2 = [\ce{S2E}]\)</span>, and <span class="math inline">\(p = [\ce{P}]\)</span>. The system is: <span class="math display">\[
+\left\{\begin{aligned}
+s'   &amp;= - k_1 se + k_{-1}c_1 - k_3 sc_1 + k_{-3}c_2, \\
+c_1' &amp;= k_1 se - (k_{-1}+k_2)c_1 - k_3sc_1 + (k_4+k_{-3})c_2, \\
+c_2' &amp;= k_3 sc_1 - (k_4+k_{-3}) c_2, \\
+p'   &amp;= k_2 c_1 + k_4 c_2.
+\end{aligned}\right.
+\]</span></p>
+<p>As usual, we have <span class="math inline">\(e+c_1+c_2=e_0\)</span>, so we ignore the equation for <span class="math inline">\(e\)</span>. Note that the equation for <span class="math inline">\(p\)</span> is different from what we are used to, but still independent from the rest of the system. We have 3 ODEs: <span class="math display">\[
+\left\{\begin{aligned}
+s'   &amp;= - k_1 s(e_0-c_1-c_2) + k_{-1}c_1 - k_3 sc_1 + k_{-3}c_2, \\
+c_1' &amp;= k_1 s(e_0-c_1-c_2) - (k_{-1}+k_2)c_1 - k_3sc_1 + (k_4+k_{-3})c_2, \\
+c_2' &amp;= k_3 sc_1 - (k_4+k_{-3}) c_2.
+\end{aligned}\right.
+\]</span></p>
+<p>We consider the usual non-dimensionalization: <span class="math display">\[
+x = \frac{s}{s_0}, \quad
+y_1 = \frac{c_1}{e_0}, \quad
+y_2 = \frac{c_2}{e_0}, \quad
+\tau = k_1 e_0 t,
+\]</span></p>
+<p>and obtain the following system: <span class="math display">\[
+\left\{\begin{aligned}
+\dot{x} &amp;= - x(1-y_1-y_2) + \frac{k_{-1}}{k_1 s_0} y_1 - \frac{k_3}{k_1} x y_1 + \frac{k_{-3}}{k_1 s_0} y_2, \\
+\frac{e_0}{s_0} \dot{y}_1 &amp;= x(1-y_1-y_2) - \frac{k_{-1}+k_2}{k_1 s_0} y_1 - \frac{k_3}{k_1} x y_1 + \frac{k_4+k_{-3}}{k_1 s_0} y_2, \\
+\frac{e_0}{s_0} \dot{y}_2 &amp;= \frac{k_3}{k_1} x y_1 - \frac{k_4+k_{-3}}{k_1 s_0} y_2.
+\end{aligned}\right.
+\]</span></p>
+<p>Defining as usual <span class="math inline">\(\varepsilon = \frac{e_0}{s_0} \ll 1\)</span>, we recognise the fast dynamic in <span class="math inline">\((y_1,y_2)\)</span> and the slow dynamic in <span class="math inline">\(x\)</span>. The fast system on the <span class="math inline">\(\eta = \tau/\varepsilon\)</span> time scale reads: <span class="math display">\[
+\left\{\begin{aligned}
+\frac{\mathrm{d}y_1}{\mathrm{d}\eta} &amp;= x(1-y_1-y_2) - \alpha_1 y_1 - \beta x y_1 + \alpha_2 y_2, \\
+\frac{\mathrm{d}y_2}{\mathrm{d}\eta} &amp;= \beta x y_1 - \alpha_2 y_2.
+\end{aligned}\right.
+\]</span></p>
+<p>where we introduces some constants, <span class="math inline">\(\alpha_1 = \frac{k_{-1}+k_2}{k_1 s_0}\)</span>, <span class="math inline">\(\alpha_2 = \frac{k_{-3}+k_2}{k_1 s_0}\)</span>, and <span class="math inline">\(\beta = \frac{k_3}{k_1}\)</span>. The equilibrium is: <span class="math display">\[
+\left\{\begin{aligned}
+y_1 &amp;= \frac{\alpha_2 x}{\beta x^2 + \alpha_1\alpha_2 + x \alpha_2}, \\
+y_2 &amp;= \frac{\beta x^2}{\beta x^2 + \alpha_1\alpha_2 + x \alpha_2}. \\
+\end{aligned}\right.
+\]</span></p>
+<p>Going back to the original variables, we have: <span class="math display">\[
+\left\{\begin{aligned}
+c_1 &amp;= \frac{K_{m_2} e_0 s}{K_{m_1} K_{m_2} + K_{m_2} s + s^2}, \\
+c_2 &amp;= \frac{e_0 s^2}{K_{m_1} K_{m_2} + K_{m_2} s + s^2},
+\end{aligned}\right.
+\]</span></p>
+<p>where <span class="math inline">\(K_{m_1} = \frac{k_{-1}+k_2}{k_1}\)</span> and <span class="math inline">\(K_{m_2} = \frac{k_{-3}+k_4}{k_3}\)</span>. The equilibrium is also asymptotically stable in the fast dynamic, since: <span class="math display">\[
+J = \begin{pmatrix} -(1+\beta)x - \alpha_1 &amp; -x -\alpha_2 \\ \beta x &amp; - \alpha_2 \end{pmatrix}.
+\]</span></p>
+<p>The Jacobian has negative trace, and the determinant is positive. We can apply Tichonov theorem, so the QSS approximation is valid. The total production rate is: <span class="math display">\[
+V = k_2 c_1 + k_2 c_2 = \frac{(k_2 K_{m_2} + k_4 s)e_0 s^2}{K_{m_1} K_{m_2} + K_{m_2} s + s^2}.
+\]</span></p>
+<p>We can have different cases:</p>
 <ul>
-<li><span class="math inline">\(N(t)\)</span> is the population,</li>
-<li><span class="math inline">\(B(t)\)</span> is the birth rate,</li>
-<li><span class="math inline">\(D(t)\)</span> is the death rate,</li>
-<li><span class="math inline">\(I(t)\)</span> is the immigration rate, and</li>
-<li><span class="math inline">\(E(t)\)</span> is the emigration rate.</li>
+<li><p><strong>Case 1:</strong> Identical, independent sites, so <span class="math inline">\(k_1 = 2k_3\)</span>, <span class="math inline">\(k_{-3} = 2k_{-1}\)</span>, and <span class="math inline">\(k_4 = 2k_2\)</span> so: <span class="math display">\[
+V = 2 \frac{k_2 e_0 s}{K_{m_1} + s}.
+\]</span></p>
+<p>This is expected: the sites are independent, so they can work in parallel. The maximum rate is just twice. For <span class="math inline">\(n\)</span> independent sites, we have the same formula with <span class="math inline">\(V_\mathrm{max} = n\cdot k_2 e_0\)</span>.</p></li>
+<li><p><strong>Case 2:</strong> We assume that the first reaction is very slow, but the second is fast. So, <span class="math inline">\(k_1\to 0\)</span>, <span class="math inline">\(k_3\to\infty\)</span> with <span class="math inline">\(k_1k_3\)</span> bounded. Therefore, <span class="math inline">\(K_{m_1}\to \infty\)</span>, <span class="math inline">\(K_{m_2}\to 0\)</span>, and <span class="math inline">\(K_{m_1}K_{m_2}\)</span> bounded. The production rate is: <span class="math display">\[
+V = \frac{k_4 e_0 s^2}{K_{m_1} K_{m_2} + s^2} = \frac{V_\mathrm{max}s^2}{K_m^2 + s^2},
+\]</span></p>
+<p>where <span class="math inline">\(K_m^2 = K_{m_1} K_{m_2}\)</span>. This function is <em>sigmoidal</em>, very much like Holling type III.</p>
+<p>For <span class="math inline">\(n\)</span> sites we can prove that: <span class="math display">\[
+  V = \frac{V_\mathrm{max} s^n}{K^n_m + s^n}.
+  \]</span></p>
+<p>where <span class="math inline">\(K_m = \prod_{i=1}^n K_{m_i}\)</span>. This is an example of a switch-like behavior: at low concentration of <span class="math inline">\(s\)</span>, say <span class="math inline">\(s\ll K_m\)</span>, the production rate is low, otherwise is very high.</p></li>
 </ul>
-<p>There is also an integral interpretation, in fact: <span class="math display">\[
-N(t) - N(t_0) =
-\underbrace{\int_{t_0}^t B(s)\,\mathrm{d}s}_\text{births} - \underbrace{\int_{t_0}^t D(s)\,\mathrm{d}s}_\text{deaths} + \underbrace{\int_{t_0}^t I(s)\,\mathrm{d}s}_\text{immigration} - \underbrace{\int_{t_0}^t E(s)\,\mathrm{d}s}_\text{emigration}.
+<section id="example-hemoglobin" class="level3" data-number="10.3.1">
+<h3 data-number="10.3.1" class="anchored" data-anchor-id="example-hemoglobin"><span class="header-section-number">10.3.1</span> Example: hemoglobin</h3>
+<p>An example is the hemoglobin, which binds oxygen within the blood. The reaction is: <span class="math display">\[
+\ce{4 O2 + Hb &lt;=&gt; Hb(O2)4}
 \]</span></p>
-<p>A population growth model is an ODE of the above form with some specific form for each term above. Note that we could provide functions above explicitly, as function of time alone. However, it should be clear that some of them like <span class="math inline">\(B(t)\)</span> or <span class="math inline">\(D(t)\)</span> should depend on <span class="math inline">\(N\)</span>.</p>
-<section id="malthus-model" class="level3" data-number="2.1.1">
-<h3 data-number="2.1.1" class="anchored" data-anchor-id="malthus-model"><span class="header-section-number">2.1.1</span> Malthus model</h3>
-<p>Quoting Thomas R. Malthus (1766-1834):</p>
-<blockquote class="blockquote">
-<p><em>Population, when unchecked, increases in a geometrical ratio. Subsistence increases only in an arithmetical ratio. A slight acquaintance with numbers will show the immensity of the first power in comparison of the second.</em></p>
-<p><a href="https://en.wikipedia.org/wiki/An_Essay_on_the_Principle_of_Population">Essay on the Principle of Population, 1798</a></p>
-</blockquote>
-<p>Malthus’ model is mathematical formulation of the above statement. We already derived Malthus model, but let us recall the hypotheses.</p>
-<ol type="1">
-<li>The population is <em>homogeneous</em>, that is all individuals are identical. We have a single class to represent them, that is <span class="math inline">\(N(t)\)</span>.</li>
-<li>The population is <em>isolated</em>, so <span class="math inline">\(E(t)=I(t)=0\)</span>.</li>
-<li>The habitat is <em>invariant</em>, so resources and life conditions are not affected by the environment nor the population itself.</li>
-<li>The population is <em>very large</em>, so we can consider continuous functions.</li>
-<li>On a short time scale <span class="math inline">\(\Delta t\)</span>, each individual gives birth to <span class="math inline">\(\beta \Delta t\)</span> new individuals, <span class="math inline">\(B(t) = \beta N(t)\)</span>.</li>
-<li>On a short time scale <span class="math inline">\(\Delta t\)</span>, each individual has probability <span class="math inline">\(\mu \Delta t\)</span> of dying, <span class="math inline">\(D(t) = \mu N(t)\)</span>.</li>
-</ol>
-<p>The non-negative parameters <span class="math inline">\(\beta\)</span> and <span class="math inline">\(\mu\)</span> are the fertility and mortality rate, respectively. From hypothesis 4, we have that <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\beta\)</span> are constant. We introduce the <em>growth rate</em> <span class="math display">\[
-r = \beta - \mu,
+<p>Hemoglobin has 4 sites, but they are not identical, in these sense that after the first oxygen molecule is binded, the second one binds easier, and so more the third and fourth ones.</p>
+<p>We can rewrite the reaction as: <span class="math display">\[
+\ce{O2 + Hb(O2)_{j-1} &lt;=&gt;[$k_j$][$k_{-j}$] Hb(O2)_j}
 \]</span></p>
-<p>also called <em>Malthus parameter</em> or <em>biological potential</em>.</p>
-<p>The Malthus’ model reads: <span class="math display">\[
-N' = rN, \quad\Rightarrow\quad N(t) = e^{rt}N(0),
+<p>where <span class="math inline">\(\ce{Hb(O2)_{j}}\)</span> is hemoglobin with <span class="math inline">\(j\)</span> oxygen molecules attached. Hence, at equilibrium we have: <span class="math display">\[
+[\ce{Hb(O2)_j}] = \frac{[\ce{Hb(O2)_{j-1}}][\ce{O2}]}{K_j} = \ldots = \frac{[\ce{Hb}][\ce{O2}]^j}{K_1 \cdots K_j}
 \]</span></p>
-<p>thus, when <span class="math inline">\(r&gt;0\)</span>, the growth of population is geometrical and unbounded, as predicted by Malthus.</p>
-</section>
-<section id="expected-life" class="level3" data-number="2.1.2">
-<h3 data-number="2.1.2" class="anchored" data-anchor-id="expected-life"><span class="header-section-number">2.1.2</span> Expected life</h3>
-<p>We have seen that, in absence of births, the population goes like <span class="math display">\[
-N(t) = e^{-\mu t} N_0,
+<p>The saturation curve <span class="math inline">\(Y\)</span> is the amount of hemoglobin bounded to oxygen over the total available one, and it reads: <span class="math display">\[
+Y = \frac{\sum_{j=0}^4 j [\ce{Hb(O2)_j}]}{4 \sum_{j=0}^4 [\ce{Hb(O2)_j}]}.
 \]</span></p>
-<p>thus, we could say that the probability of surviving up to time <span class="math inline">\(t\)</span> is <span class="math inline">\(e^{-\mu t}\)</span>. Specifically, the <em>life expectancy</em> <span class="math inline">\(L\)</span> is a random variable such that <span class="math display">\[
-\mathbb{P}[L &gt; t] = e^{-\mu t}.
-\]</span></p>
-<p>Thus, the cumulative distribution of <span class="math inline">\(L\)</span> is <span class="math display">\[
-F_L(t) = \mathbb{P}[L &lt; t] = 1 - \mathbb{P}[L &gt; t] = 1-e^{-\mu t},
-\]</span></p>
-<p>and the probability density function is <span class="math display">\[
-f_L(t) = F_L'(t) = \mu e^{-\mu t}.
-\]</span></p>
-<p>We conclude that <span class="math inline">\(L\sim \mathrm{Exp}[\mu]\)</span>, the exponential distribution. The <em>average life expectancy</em> is: <span class="math display">\[
-\mathbb{E}[L] = \int_0^\infty s f_L(s)\:\mathrm{d}s = \int_0^\infty s \mu e^{-\mu s}\:\mathrm{d}s = \frac{1}{\mu}.
-\]</span></p>
-<p>We have another interpretation of <span class="math inline">\(\mu\)</span>: it is the reciprocal of the expected life time.</p>
-</section>
-<section id="basic-reproduction-number" class="level3" data-number="2.1.3">
-<h3 data-number="2.1.3" class="anchored" data-anchor-id="basic-reproduction-number"><span class="header-section-number">2.1.3</span> Basic reproduction number</h3>
-<p>Let us rescale the equation and put it in non-dimensionalized form. This is a fundamental step in general, because</p>
-<ol type="1">
-<li>it reduces the number of parameters,</li>
-<li>it removed scale effects (units are removed),</li>
-<li>it highlights the determining factors of the model (maybe what matters is not this or that parameter, by their ratio or sum).</li>
-</ol>
-<p>Here, we rescale as follows: <span class="math display">\[
-\tau = \mu t, \quad u = N,
-\]</span></p>
-<p>so that time is now in units of “expected life time”: <span class="math inline">\(\tau=1\)</span> means <span class="math inline">\(t=\mu^{-1} = \mathbb{E}[L]\)</span>. We have that <span class="math display">\[
-N' = \frac{\mathrm{d}N}{\mathrm{d}t} = \frac{\mathrm{d}u}{\mu^{-1}\mathrm{d}\tau} = \mu\frac{\mathrm{d}u}{\mathrm{d}\tau} = \mu\dot{u}.
-\]</span></p>
-<p>We use the “dot” notation <span class="math inline">\(\dot{u}\)</span> for the derivative for the non-dimensional form, just to remember that now the time is <span class="math inline">\(\tau\)</span> and not <span class="math inline">\(t\)</span>. We finally obtain: <span class="math display">\[
-\dot{u} = \mu^{-1}N' = \frac{\beta}{\mu} N - N = (R_0 - 1) u,
-\]</span></p>
-<p>where we defined the <em>basic reproduction number</em> <span class="math display">\[
-R_0 = \frac{\beta}{\mu} = \beta\mathbb{E}[L].
-\]</span></p>
-<p>We could interpret it as the average number of newborns produced by one individual during his whole life. Note that <span class="math inline">\(R_0\)</span> is non-dimensional.</p>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Exercise
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Why it does not make much sense to use the scaling <span class="math inline">\(\tau = r t\)</span>?</p>
-</div>
-</div>
-</section>
-<section id="migration" class="level3" data-number="2.1.4">
-<h3 data-number="2.1.4" class="anchored" data-anchor-id="migration"><span class="header-section-number">2.1.4</span> Migration</h3>
-<p>In the presence of migration, say with a constant rate, we have the ODE: <span id="eq-migration"><span class="math display">\[
-N' = rN + m = f(N),
-\tag{2.1}\]</span></span></p>
-<p>where <span class="math inline">\(m = I - E\)</span>. If positive, there is a net immigration, otherwise emigration.</p>
-<p>In order to study how the model will behave, we have 3 options:</p>
-<ol type="1">
-<li>Solve the problem analytically, that is finding <span class="math inline">\(N(t) = \ldots\)</span> explicitly.</li>
-<li>Solve the problem numerically, which is always possible.</li>
-<li>Study the problem qualitatively.</li>
-</ol>
-<p>The last option has the advantage that we can be generic, there is no need for a specific value of the parameters or the initial condition. The qualitative study consists in the following steps:</p>
-<p><strong>1) Fixed points of the system.</strong> A fixed point or equilibrium (see <a href="IntroODE.html#def-equilibrium" class="quarto-xref">Definition&nbsp;<span>A.12</span></a>) is a constant solution of the ODE. We can find it by setting the right hand side to zero: <span class="math display">\[
-N'=0 \quad\Leftrightarrow\quad r N + m = 0.
-\]</span></p>
-<p>The model has a single equilibrium for <span class="math display">\[N = N^* = -\frac{m}{r} = \frac{m\mathbb{E}[L]}{1-R_0}\]</span></p>
-<p><strong>2) Biological feasibility.</strong> Equilibria must be biologically feasible. For this model, we need to check that <span class="math inline">\(N^*\)</span> is non-negative, otherwise it doesn’t make sense biologically speaking. Therefore <span class="math display">\[
-N^* \ge 0, \quad\Leftrightarrow\quad \text{$m$ and $r$ have opposite sign and $r\neq 0$.}
-\]</span></p>
-<p><strong>3) Local stability.</strong> Informally, an equilibrium is <em>locally stable</em> when, starting from a neighborhood of it, the solution stays close to it for <span class="math inline">\(t\to\infty\)</span>. It is <em>asymptotically stable</em> when the solution converges toward the equilibrium for <span class="math inline">\(t\to\infty\)</span>. It is <em>unstable</em> otherwise. See <a href="IntroODE.html#def-lyapunov" class="quarto-xref">Definition&nbsp;<span>A.13</span></a> for a more precise statement.</p>
-<p>The local stability is determined by the sign of the derivative of the right hand side, that is <span class="math inline">\(f'(N^*)\)</span> for <span class="math inline">\(f(N)=rN+m\)</span>. In general (see <a href="IntroODE.html#sec-linearization" class="quarto-xref"><span>Section A.5.5</span></a>),</p>
-<ul>
-<li>when <span class="math inline">\(f'(N^*)&lt;0\)</span>, the equilibrium is asymptotically stable, and</li>
-<li>when <span class="math inline">\(f'(N^*)&gt;0\)</span>, the equilibrium is unstable.</li>
-</ul>
-<p>To see this in this specific case, let us define <span class="math inline">\(w(t)=N(t)-N^*\)</span>. Then, <span class="math display">\[
-w' = N' = rN + m = r(N - N^*) = rw.
-\]</span></p>
-<p>Note that <span class="math inline">\(f'(N) = r\)</span>. We have that: <span class="math display">\[
-w(t) = w_0 e^{rt},
-\]</span></p>
-<p>hence,</p>
-<ul>
-<li>if <span class="math inline">\(r &lt; 0\)</span>, then <span class="math inline">\(w \to 0\)</span> for all <span class="math inline">\(w_0\)</span>, so <span class="math inline">\(N(t)\to N^*\)</span>. The equilibrium is locally asymptotically stable.</li>
-<li>if <span class="math inline">\(r &gt; 0\)</span>, then <span class="math inline">\(w \to \infty\)</span> and the equilibrium is unstable.</li>
-</ul>
-<p><strong>4) Global stability.</strong> What if we start very far away from the equilibrium? In this particular case, with a linear ODE, the local stability argument applies also globally, thus the equilibrium is globally attractive. But for general, nonlinear ODEs this may not be the case, so we perform the analysis anyway. Note that if <span class="math inline">\(N(0)=N_0 &gt; N^*\)</span>, then <span class="math display">\[
-N'(0) = rN(0) + m = r (N_0 - N^*) &lt; 0,
-\]</span></p>
-<p>so the derivative of the solution is negative (assuming <span class="math inline">\(r&lt;0\)</span>). Furthermore, for <span class="math inline">\(N(t) &gt; N^*\)</span>, the derivative is always negative. So, the solution must be monotonically decreasing. But the solution is bounded from below by the equilibrium <span class="math inline">\(N(t)=N^*\)</span>, so we conclude that: <span class="math display">\[
-N(t) \to N^*
-\]</span></p>
-<p>for all <span class="math inline">\(N_0 \ge N^*\)</span>. Symmetrically, when <span class="math inline">\(N_0 &lt; N^*\)</span>, the derivative is positive and stays positive for all <span class="math inline">\(t\)</span>, so the solution is monotonically increasing. Hence: <span class="math display">\[
-N(t) \to N^*
-\]</span></p>
-<p>for all <span class="math inline">\(N^0\)</span>. The equilibrium is therefore <em>globally</em> stable when <span class="math inline">\(r&lt;0\)</span>.</p>
-<p><strong>5) Phase portrait.</strong> The phase portrait of a dynamical system is the collection of all possible orbits. Here, the phase space is <span class="math inline">\(\Omega=[0,\infty)\)</span>. The only equilibrium we have, <span class="math inline">\(N^*\)</span>, is a <em>barrier</em> to other orbits, because orbits cannot intersect (See <a href="IntroODE.html#prp-orbits" class="quarto-xref">Proposition&nbsp;<span>A.2</span></a>). Therefore:</p>
-<div id="36d98aec" class="cell" data-execution_count="1">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>sns.reset_defaults()</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>sns.set_context(<span class="st">'notebook'</span>)</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>r,m <span class="op">=</span> <span class="op">-</span><span class="fl">0.5</span>,<span class="fl">1.7</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>Neq <span class="op">=</span> <span class="op">-</span>m<span class="op">/</span>r</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> <span class="kw">lambda</span> N: r<span class="op">*</span>N <span class="op">+</span> m</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>N <span class="op">=</span> np.linspace(<span class="fl">1.5</span>,<span class="dv">5</span>,<span class="dv">10</span>)</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>ax.spines[[<span class="st">"bottom"</span>]].set_position((<span class="st">"data"</span>, <span class="dv">0</span>))</span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>ax.spines[[<span class="st">"top"</span>, <span class="st">"right"</span>, <span class="st">"left"</span>]].set_visible(<span class="va">False</span>)</span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>ax.xaxis.set_ticks([])</span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>ax.yaxis.set_ticks([])</span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>ax.plot(<span class="dv">1</span>, <span class="dv">0</span>, <span class="st">"&gt;k"</span>, transform<span class="op">=</span>ax.get_yaxis_transform(), clip_on<span class="op">=</span><span class="va">False</span>)</span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">'N'</span>, loc<span class="op">=</span><span class="st">'right'</span>, labelpad<span class="op">=</span><span class="fl">10.0</span>)</span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>ax.plot(Neq,<span class="dv">0</span>,<span class="st">'r.'</span>,markersize<span class="op">=</span><span class="dv">16</span>, zorder<span class="op">=</span><span class="dv">99</span>)</span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>ax.text(Neq, <span class="fl">3e-3</span>, <span class="vs">r'$N^*$'</span>, fontsize<span class="op">=</span><span class="dv">12</span>, ha<span class="op">=</span><span class="st">'center'</span>, va<span class="op">=</span><span class="st">'bottom'</span>)</span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>ax.quiver(N,<span class="dv">0</span><span class="op">*</span>N, f(N), <span class="fl">0.0</span>, color<span class="op">=</span><span class="st">'blue'</span>, zorder<span class="op">=</span><span class="dv">80</span>)</span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>ax.set_xlim((<span class="dv">0</span>,<span class="dv">6</span>))</span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>ax.set_ylim((<span class="op">-</span><span class="fl">1e-2</span>,<span class="fl">1e-2</span>))</span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>fig.subplots_adjust(left<span class="op">=</span><span class="dv">0</span>, right<span class="op">=</span><span class="dv">1</span>, top<span class="op">=</span><span class="fl">0.1</span>, bottom<span class="op">=</span><span class="fl">0.05</span>)</span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="02_Population_files/figure-html/cell-2-output-1.png" width="664" height="71" class="figure-img"></p>
-<figcaption>Phase space</figcaption>
-</figure>
-</div>
-</div>
-</div>
-<p>For this problem we actually have the general solution <span class="math display">\[
-N(t) = (N_0 - N^*)e^{rt} + N^*.
-\]</span></p>
-<div id="ccdb8188" class="cell" data-execution_count="2">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>r,m <span class="op">=</span> <span class="op">-</span><span class="fl">0.5</span>,<span class="fl">1.7</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>Neq <span class="op">=</span> <span class="op">-</span>m<span class="op">/</span>r</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>sns.set_theme(<span class="st">"notebook"</span>, style<span class="op">=</span><span class="st">"whitegrid"</span>)</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>t <span class="op">=</span> np.linspace(<span class="dv">0</span>,<span class="dv">10</span>,<span class="dv">100</span>)</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>N <span class="op">=</span> <span class="kw">lambda</span> N0: (N0<span class="op">-</span>Neq)<span class="op">*</span>np.exp(r<span class="op">*</span>t) <span class="op">+</span> Neq</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>ax.plot(t,N(Neq <span class="op">-</span> <span class="dv">1</span>),<span class="st">'b'</span>,label<span class="op">=</span><span class="st">'$N_0 &lt; N^*$'</span>)</span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>ax.plot(t,N(Neq <span class="op">+</span> <span class="dv">1</span>),<span class="st">'b'</span>,label<span class="op">=</span><span class="st">'$N_0 &gt; N^*$'</span>)</span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> delta <span class="kw">in</span> np.arange(<span class="fl">0.1</span>,<span class="fl">0.9</span>,<span class="fl">0.1</span>):</span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>    ax.plot(t,N(Neq <span class="op">+</span> delta),<span class="st">'b'</span>,lw<span class="op">=</span><span class="fl">0.4</span>)</span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>    ax.plot(t,N(Neq <span class="op">-</span> delta),<span class="st">'b'</span>,lw<span class="op">=</span><span class="fl">0.4</span>)</span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>ax.plot(t,N(Neq),<span class="st">'r-'</span>,lw<span class="op">=</span><span class="dv">2</span>,label<span class="op">=</span><span class="st">'$N^*$'</span>)</span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>ax.grid()</span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>ax.legend()</span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">'Time'</span>)</span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">'Population'</span>)</span>
-<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="02_Population_files/figure-html/cell-3-output-1.png" width="580" height="443" class="figure-img"></p>
-<figcaption>Example of trajectories</figcaption>
-</figure>
-</div>
-</div>
-</div>
-<p>The case <span class="math inline">\(m&lt;0\)</span> and <span class="math inline">\(r&gt;0\)</span> is also interesting. Here, the equilibrium <span class="math inline">\(N^*\)</span> is positive, but unstable. For <span class="math inline">\(N_0 &gt; N^*\)</span> the population still grows exponentially, so emigration as no effect on the overall population. But for <span class="math inline">\(N_0 &lt; N^*\)</span> the solution will become negative in finite time: the model is not correct. The reason is simple: the emigration <span class="math inline">\(m\)</span> cannot be constant (like the immigration), it must depend on <span class="math inline">\(N\)</span> as well.</p>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Exercise
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Solve <a href="#eq-migration" class="quarto-xref">Equation&nbsp;<span>2.1</span></a> with separation of variables.</p>
-</div>
-</div>
-</section>
-<section id="exogenous-variability" class="level3" data-number="2.1.5">
-<h3 data-number="2.1.5" class="anchored" data-anchor-id="exogenous-variability"><span class="header-section-number">2.1.5</span> Exogenous variability</h3>
-<p>By exogenous variability we mean variability in the parameter <span class="math inline">\(r\)</span> that does not depend on the population. (Endogenous variability is when the parameters depend on internal variables like <span class="math inline">\(N\)</span>.) Thus, we consider the problem: <span class="math display">\[
-N' = r(t)N,
-\]</span></p>
-<p>for <span class="math inline">\(r(t)\)</span> continuous function. An example could births and deaths that depend on climate or temperature. The solution is: <span class="math display">\[
-N(t) = N_0 e^{\int_{t_0}^t r(s)\,\mathrm{d}s}
-\]</span></p>
-<p>We can also rewrite the solution as: <span class="math display">\[
-N(t) = N_0 e^{(t-t_0)\frac{1}{t-t_0}\int_{t_0}^t r(s)\,\mathrm{d}s},
-\]</span></p>
-<p>showing that if the limit <span class="math display">\[
-r^* = \lim_{t\to\infty}\frac{1}{t-t_0}\int_{t_0}^t r(s)\,\mathrm{d}s
-\]</span></p>
-<p>exists then the asymptotic behavior of the solution is: <span class="math display">\[
-N(t) \approx e^{r^*(t-t_0)}, \quad t \gg 1.
-\]</span></p>
-<p>An interesting case is when <span class="math inline">\(r(t)\)</span> is <em>periodic</em>, that is there exists <span class="math inline">\(T&gt;0\)</span> such that <span class="math inline">\(r(t+T)=r(t)\)</span>. In this case the above formula still applies, but we can “forget” the limit (check Assignments for a proof) and take: <span class="math display">\[
-\bar{r} = \frac{1}{T} \int_0^T r(s)\,\mathrm{d}s,
-\]</span></p>
-<p>and write the solution for any <span class="math inline">\(t \ge t_0\)</span> as: <span class="math display">\[
-N(t) = e^{\bar{r}(t-t_0)}N_\pi(t),
-\]</span></p>
-<p>for some <span class="math inline">\(T\)</span>-periodic function <span class="math inline">\(N_\pi\)</span>. Note that <span class="math display">\[
-N(t_0 + kT) = e^{\bar{r}kT}N_\pi(t_0) = e^{\bar{r}kT}N(t_0),
-\]</span></p>
-<p>so after <span class="math inline">\(k\)</span> periods the solution grows by a factor <span class="math inline">\(e^{\bar{r}kT}\)</span>. The factor <span class="math inline">\(e^{\bar{r}}\)</span> is called <em>Floquet multiplier</em>.</p>
+<p>It is possible to fit <span class="math inline">\(K_j\)</span> for <span class="math inline">\(j=1,\ldots,4\)</span> so to match real data, and it is observed that <span class="math inline">\(K_j\)</span> increases with <span class="math inline">\(j\)</span>.</p>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
-<div id="ref-ip14" class="csl-entry" role="listitem">
-Iannelli, Mimmo, and Andrea Pugliese. 2014. <em>An Introduction to Mathematical Population Dynamics</em>. Vol. 79. Springer. <a href="https://strutture-provincia.primo.exlibrisgroup.com/permalink/39SBT_INST/ghkipk/alma991006883209706186">https://strutture-provincia.primo.exlibrisgroup.com/permalink/39SBT_INST/ghkipk/alma991006883209706186</a>.
+<div id="ref-ks08_vol1" class="csl-entry" role="listitem">
+Keener, James, and James Sneyd. 2009. <em>Mathematical Physiology: I: Cellular Physiology</em>. Second. Vol. 8/I. Springer. <a href="https://strutture-provincia.primo.exlibrisgroup.com/permalink/39SBT_INST/ghkipk/alma991012367489706186">https://strutture-provincia.primo.exlibrisgroup.com/permalink/39SBT_INST/ghkipk/alma991012367489706186</a>.
 </div>
 </div>
 </section>
@@ -1154,13 +1099,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./01_Bathtub.html" class="pagination-link" aria-label="Bathtub model">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Bathtub model</span></span>
+      <a href="./09_FastSlow.html" class="pagination-link" aria-label="Fast-Slow systems">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Fast-Slow systems</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./03_Logistic.html" class="pagination-link" aria-label="Logistic model">
-        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Logistic model</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./references.html" class="pagination-link" aria-label="References">
+        <span class="nav-page-text">References</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

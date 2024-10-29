@@ -21,6 +21,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -209,12 +243,24 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../10_Inhibition.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Inhibition</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../references.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">References</span></a>
   </div>
 </li>
       </ul>
   </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../projects2024.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Projects</span></a>
+  </div>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
@@ -375,7 +421,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">October 18, 2024</p>
+      <p class="date-modified">October 28, 2024</p>
     </div>
   </div>
     
@@ -395,6 +441,28 @@ N_2' &amp;= r_2 N_2 (1 - N_2/K_2) - b_2 N_1 N_2,
 \end{aligned}\right.
 \]</span></p>
 <p>where <span class="math inline">\(N_1(t)\)</span> and <span class="math inline">\(N_2(t)\)</span> are two species. (The modeling details are unimportant now.) Show that the system has no periodic orbits. All parameters are positive. <em>Hint: use the function <span class="math inline">\(h(N_1,N_2)=1/(N_1 N_2)\)</span> in the Dulac’s criterium</em>.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Solution">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>We need to compute the divergence of <span class="math inline">\(h\mathbf{f}\)</span>, and check whether the sign is constant: <span class="math display">\[
+\begin{split}
+\nabla\cdot(h\mathbf{f}) &amp;= \frac{\partial}{\partial N_1}\Bigl( r_1 \frac{1 - N_1/K_1}{N_2} - b_1 \Bigr) + \frac{\partial}{\partial N_2}\Bigl( r_2 \frac{1 - N_2/K_2}{N_1} - b_2 \Bigr) \\
+&amp;= - \frac{r_1}{K_1 N_2} - \frac{r_2}{K_2 N_1} &lt; 0
+\end{split}
+\]</span></p>
+<p>in the first quadrant. Thus, there cannot be limit cycles.</p>
+</div>
+</div>
+</div>
 </section>
 <section id="leslie-model" class="level2">
 <h2 class="anchored" data-anchor-id="leslie-model">Leslie model</h2>
@@ -408,12 +476,68 @@ P' &amp;= P (r - s P/H ).
 <ol type="1">
 <li>State clearly, and in case criticize, the assumptions of the model.</li>
 </ol>
+<div class="callout callout-style-default callout-tip callout-titled" title="Solution">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The predator equation follows a logistic growth, with carrying capacity <span class="math inline">\(K_p = r H/s\)</span>, thus proportional to the prey population. The prey population has a logistic growth as well, with carrying capacity <span class="math inline">\(K_h = a/b\)</span>, and a linear hunting term with attack rate <span class="math inline">\(c\)</span>. This last point is unrealistic, but more importantly the growth rate of the predators is unbounded for <span class="math inline">\(H\to 0^+\)</span>.</p>
+</div>
+</div>
+</div>
 <ol start="2" type="1">
 <li>Draw the isoclines in the phase plane, and find the positive equilibrium.</li>
 </ol>
+<div class="callout callout-style-default callout-tip callout-titled" title="Solution">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Both nullclines are straight lines. Besides the equilibrium <span class="math inline">\(E_K=(K_a,0)\)</span>, there is always an additional equilibrium <span class="math display">\[
+E_* = \Bigl(\frac{sa}{rc+bs}, \frac{ra}{rc+bs}\Bigr).
+\]</span></p>
+</div>
+</div>
+</div>
 <ol start="3" type="1">
 <li>Study its stability.</li>
 </ol>
+<div class="callout callout-style-default callout-tip callout-titled" title="Solution">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The Jacobian at the equilibrium is <span class="math display">\[
+J_* = \left[ \begin{matrix} -bH_* &amp; -c H_* \\ r^2/s &amp; -r \end{matrix} \right].
+\]</span></p>
+<p>We have: <span class="math display">\[
+\begin{aligned} \operatorname{tr}J_* &amp;= -bH_*- r &lt; 0, \\ \det J_* &amp;= brH_* + cr^2/s H_* = ar &gt; 0.\end{aligned}
+\]</span></p>
+<p>So the point is always asymptotically stable.</p>
+</div>
+</div>
+</div>
 </section>
 <section id="optimal-hunting-strategy" class="level2">
 <h2 class="anchored" data-anchor-id="optimal-hunting-strategy">Optimal hunting strategy</h2>
@@ -421,15 +545,105 @@ P' &amp;= P (r - s P/H ).
 <ol type="1">
 <li>Write down the model.</li>
 </ol>
+<div class="callout callout-style-default callout-tip callout-titled" title="Solution">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>We have: <span class="math display">\[
+\left\{ \begin{aligned} H' &amp;= r H(1-H/K) - \pi(H)P, \\ P' &amp;= -\mu P + \gamma \pi(H)P.\end{aligned}\right.
+\]</span></p>
+</div>
+</div>
+</div>
 <ol start="2" type="1">
 <li>Consider <span class="math inline">\(\pi(H)\)</span> linear, with attack rate <span class="math inline">\(a\ge0\)</span>. Compute the stable equilibrium population size of the predators.</li>
 </ol>
+<div class="callout callout-style-default callout-tip callout-titled" title="Solution">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The model reads: <span class="math display">\[
+\left\{ \begin{aligned} H' &amp;= H (r(1-H/K) - a P), \\ P' &amp;= P(-\mu + \gamma a H).\end{aligned}\right.
+\]</span></p>
+<p>We can have 2 or 3 equilibria. Besides the trivial equilibrium <span class="math inline">\(E_0=(0,0)\)</span>, we have <span class="math inline">\(E_K=(K,0)\)</span> and <span class="math inline">\(E^*=(H^*,P^*)\)</span>, with <span class="math inline">\(H^* = \frac{\mu}{\gamma a}\)</span> and <span class="math inline">\(P^*=\frac{r}{a}(1-\frac{H^*}{K})\)</span>. The equilibrium <span class="math inline">\(E^*\)</span> exists only when <span class="math inline">\(P^*\ge 0\)</span>.</p>
+<p>Therefore we have: <span class="math display">\[
+P^*= \begin{cases} 0, &amp; H^* \ge K, \\ \frac{r}{a}(1-\frac{H^*}{K}), &amp; H^* &lt; K. \end{cases}
+\]</span></p>
+</div>
+</div>
+</div>
 <ol start="3" type="1">
 <li>Now suppose that the predator species evolves over several generations, by adapting the value of <span class="math inline">\(a\)</span>, so to maximize its equilibrium size. Find the optimal value of <span class="math inline">\(a\)</span>.</li>
 </ol>
+<div class="callout callout-style-default callout-tip callout-titled" title="Solution">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>We need to maximize the function <span class="math inline">\(P^*(a)\)</span> from above. Let’s put <span class="math inline">\(1/a=\frac{\gamma H^*}{\mu}\)</span>, so we have: <span class="math display">\[
+P^*(H^*)=\frac{\gamma r H^*}{\mu} \Bigl(1- \frac{H^*}{K} \Bigr),
+\]</span></p>
+<p>for <span class="math inline">\(H^*&lt;K\)</span>, and zero otherwise. The function is maximized for <span class="math inline">\(H^*_\mathrm{opt}=\frac{K}{2}\)</span>, corresponding to: <span class="math display">\[
+a_\mathrm{opt} = \frac{\mu}{\gamma H^*_\mathrm{opt}} = \frac{2\mu}{\gamma K}.
+\]</span></p>
+</div>
+</div>
+</div>
 <ol start="4" type="1">
 <li>Repeat the previous point by assuming a Holling type 2 response.</li>
 </ol>
+<div class="callout callout-style-default callout-tip callout-titled" title="Solution">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The model in this case is <span class="math display">\[
+\left\{ \begin{aligned} H' &amp;= H \Bigl(r(1-H/K) - \frac{a P}{1+a T_h H}\Bigr), \\ P' &amp;= P\Bigr(-\mu + \gamma \frac{a H}{1+a T_h H}\Bigl).\end{aligned}\right.
+\]</span></p>
+<p>As before, we have the equilibria <span class="math inline">\(E_0\)</span> and <span class="math inline">\(E_1\)</span>. For <span class="math inline">\(E^*\)</span> we have: <span class="math display">\[
+H^* = \frac{\mu}{a(\gamma - \mu T_h)}.
+\]</span></p>
+<p>The condition is as above, <span class="math inline">\(H^*&lt; K\)</span> so to have <span class="math inline">\(E^*\)</span>.</p>
+<p>The equilibrium value of <span class="math inline">\(P^*\)</span> is <span class="math display">\[
+P^* = \frac{r}{a}(1-H^*/K)(1+a T_h H^*).
+\]</span></p>
+<p>Now, <span class="math inline">\(a H^*= \frac{\mu}{\gamma - \mu T_h}\)</span>, and <span class="math inline">\(\frac{1}{a} = \frac{H^*(\gamma - \mu T_h)}{\mu}\)</span>, so <span class="math display">\[
+P^*(H^*) = \frac{r}{\mu}H^*(\gamma-\mu T_h)(1-H^*/K)\Bigl(1+\frac{\mu T_h}{\gamma-\mu T_h}\Bigr),
+\]</span></p>
+<p>which again is maximized for <span class="math inline">\(H^*_\mathrm{opt} = \frac{K}{2}\)</span> (it is a quadratic function of <span class="math inline">\(H^*\)</span>, the vertex is for <span class="math inline">\(H^*_\mathrm{opt}\)</span>), corresponding to <span class="math inline">\(a_\mathrm{opt} = \frac{2 \mu}{K(\gamma-\mu T_h)}\)</span>. Note that this is consistent with the previous formula, with <span class="math inline">\(T_h=0\)</span>.</p>
+</div>
+</div>
+</div>
 </section>
 <section id="juvenile-predators" class="level2">
 <h2 class="anchored" data-anchor-id="juvenile-predators">Juvenile predators</h2>
@@ -444,9 +658,47 @@ P' = \rho J - \mu P. &amp;
 <ol type="1">
 <li>Read from the model, which is the probability that a newly born juvenile will still be a juvenile at time <span class="math inline">\(t\)</span>. And which is the probability that a newly born juvenile will still be a juvenile at time <span class="math inline">\(t\)</span>, conditional on being still alive at time <span class="math inline">\(t\)</span>? From these computations, interpret the parameter <span class="math inline">\(\rho\)</span>.</li>
 </ol>
+<div class="callout callout-style-default callout-tip callout-titled" title="Solution">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-9" class="callout-9-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The main ingredient for this question is the following fact. For the Malthus model <span class="math inline">\(N'=-\nu N\)</span>, the solution <span class="math inline">\(N(t)=N_0 e^{-\nu t}\)</span> can be interpreted as a <em>survival probability</em>. Suppose that the random variable <span class="math inline">\(L \sim \operatorname{Exp}[\nu]\)</span> represent the life duration, with probability density function <span class="math inline">\(\ell(t) = \nu e^{-\nu t}\)</span>. Then the survival probability up to age <span class="math inline">\(t\)</span> is <span class="math inline">\(\mathbb{P}[L &gt; t] = 1 - \mathbb{P}[L \le t] = e^{-\nu t}\)</span>, which is (up to a constant) the solution of the ODE. The average life duration is <span class="math inline">\(1/\nu\)</span>.</p>
+<p>The answer to the first question is therefore <span class="math inline">\(e^{-(\rho+\mu) t}\)</span>, because the average time spent in the “compartment” <span class="math inline">\(J\)</span> is <span class="math inline">\(\frac{1}{\rho+\mu}\)</span>.</p>
+<p>Regarding the second question, we need consider only the term <span class="math inline">\(-\mu J\)</span>, which accounts for individual dying before becoming adults. So the answer is <span class="math inline">\(e^{-\mu t}\)</span>.</p>
+<p>The interpretation of <span class="math inline">\(\rho\)</span> is therefore the probability of being juvenile at time <span class="math inline">\(t\)</span>, conditional to not dying: <span class="math display">\[
+\mathbb{P}[\text{juvenile} | \text{die}] = \frac{e^{-(\rho+\mu)t}}{e^{-\mu t}} = e^{-\rho t}
+\]</span></p>
+<p>In other words, <span class="math inline">\(\frac{1}{\rho}\)</span> is the average juvenile period neglecting death.</p>
+</div>
+</div>
+</div>
 <ol start="2" type="1">
 <li>On the basis of the previous point discuss the realism of the assumption that juveniles become adults at constant rate (assumption necessary to frame the model in terms of ordinary differential equations). Suggest possible changes to the assumption.</li>
 </ol>
+<div class="callout callout-style-default callout-tip callout-titled" title="Solution">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-10" class="callout-10-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Given the above observation, we can interpret the length of the juvenile period for those surviving as an exponential distribution with parameter <span class="math inline">\(\rho\)</span>. The distribution is not realistic, because the probability decreases with the length. A more realistic distribution would assume a peak probability around puberty, similar to a Gaussian. However this type of model cannot be captured by an ODE.</p>
+</div>
+</div>
+</div>
 <ol start="3" type="1">
 <li>Show that using appropriate changes of variables system can be written as <span class="math display">\[
 \begin{cases}
@@ -456,12 +708,99 @@ z' = \nu y - z. &amp;
 \end{cases}
 \]</span></li>
 </ol>
+<div class="callout callout-style-default callout-tip callout-titled" title="Solution">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-11" class="callout-11-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>One strategy is to assume a general rescaling of the form <span class="math display">\[
+x = \frac{H}{h},\quad y = \frac{J}{j},\quad z = \frac{P}{p},\quad s=\tau t.
+\]</span></p>
+<p>Then we try to match the terms. We see that <span class="math display">\[
+h=K,\quad j=p=\gamma K,\quad \tau=\mu,
+\]</span></p>
+<p>from which we can define the parameters of the model <span class="math display">\[
+\sigma = \frac{r}{\mu},\quad \alpha=\frac{a\gamma K}{\mu},\quad \nu=\frac{\rho}{\mu}.
+\]</span></p>
+</div>
+</div>
+</div>
 <ol start="4" type="1">
 <li>Show that the new system has always the equilibria <span class="math inline">\(E_0 = (0,0,0)\)</span> and <span class="math inline">\(E_1 = (1, 0, 0)\)</span>. Find the conditions under which it has also a positive equilibrium <span class="math inline">\(E^+ = (x^+,y^+, z^+)\)</span> and compute its coordinates.</li>
 </ol>
+<div class="callout callout-style-default callout-tip callout-titled" title="Solution">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-12" class="callout-12-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>We check the isoclines, which are <span class="math display">\[
+\begin{aligned}
+&amp;x'=0,\quad\Leftrightarrow\quad x = 0, &amp; z = \tfrac{\sigma}{\alpha}(1-x), \\
+&amp;y'=0,\quad\Leftrightarrow\quad y = \tfrac{\alpha}{1+\nu}xz, &amp; \\
+&amp;z'=0,\quad\Leftrightarrow\quad z = \nu y. &amp; \end{aligned}
+\]</span></p>
+<p>We see that <span class="math inline">\(E_0=(0,0,0)\)</span> and <span class="math inline">\(E_1=(1,0,0)\)</span> are both equilibria. The third one we find by substituting <span class="math inline">\(y = \nu z\)</span> into the isocline for <span class="math inline">\(y'=0\)</span>. This leads to <span class="math inline">\(\bar x=\frac{\nu+1}{\nu\alpha}\)</span>. It follows that <span class="math inline">\(\bar z = \frac{\sigma}{\alpha^2\nu}(\alpha\nu-\nu -1)\)</span> and <span class="math inline">\(\bar y = \frac{\sigma}{\alpha^2\nu^2}(\alpha\nu-\nu -1)\)</span>.</p>
+<p>Note that the equilibrium is meaningful only when <span class="math inline">\(\bar x \ge 0\)</span>, <span class="math inline">\(\bar y \ge 0\)</span>, and <span class="math inline">\(\bar z \ge 0\)</span>. So when have the extra condition for <span class="math inline">\(E^+\)</span> to exists: <span class="math display">\[
+(\alpha-1)\nu - 1\ge 0.
+\]</span></p>
+</div>
+</div>
+</div>
 <ol start="5" type="1">
 <li>Find the conditions for the stability of <span class="math inline">\(E_1\)</span> and of <span class="math inline">\(E^+\)</span>. Note that there are parameter values such that all equilibria are unstable; if possible, use a computer to explore the bahaviour of solutions in such a case. <em>Hint: use the Routh-Hurwitz criteria <a href="../IntroODE.html#thm-routh" class="quarto-xref">Theorem&nbsp;<span>A.7</span></a> .</em></li>
 </ol>
+<div class="callout callout-style-default callout-tip callout-titled" title="Solution">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-13" class="callout-13-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The Jacobian of the system is <span class="math display">\[
+J(x,y,z) = \left[\begin{matrix} \sigma (1-2x) &amp; 0 &amp; -\alpha x \\ \alpha z &amp; -(\nu+1) &amp; \alpha x \\ 0 &amp; \nu &amp; -1 \end{matrix}\right].
+\]</span></p>
+<p>For <span class="math inline">\(E_1\)</span>, we have: <span class="math display">\[
+J_1 = \left[\begin{matrix} -\sigma &amp; 0 &amp; -\alpha \\ 0 &amp; -(\nu+1) &amp; \alpha \\ 0 &amp; \nu &amp; -1 \end{matrix}\right],
+\]</span></p>
+<p>which is block triangular. One eigenvalue is <span class="math inline">\(-\sigma &lt; 0\)</span>. The other eigenvalues are those of the bottom-right <span class="math inline">\(2\times 2\)</span> block. The trace of the block is always negative and the determinant is <span class="math inline">\((\nu+1)-\alpha\nu=(1-\alpha)\nu+1\)</span>, which is positive only when <span class="math inline">\(E^+\)</span> does not exist. So, when <span class="math inline">\(\bar z &lt; 0\)</span>, the block has eigenvalues with negative real part, hence the <span class="math inline">\(E_1\)</span> is asymptotically stable, otherwise <span class="math inline">\(E_1\)</span> is a saddle (dimension of the stable and unstable manifold are respectively <span class="math inline">\(n_S=2\)</span> and <span class="math inline">\(n_U=1\)</span>).</p>
+<p>Concerning <span class="math inline">\(E^+\)</span> we have <span class="math display">\[
+J^+ = \left[\begin{matrix} -\sigma\bar x &amp; 0 &amp; -\alpha\bar x \\ \sigma(1-\bar x) &amp; -(\nu+1) &amp; \alpha\bar x \\ 0 &amp; \nu &amp; -1 \end{matrix}\right].
+\]</span></p>
+<p>The stability is not trivial, as it requires the <a href="https://en.wikipedia.org/wiki/Routh–Hurwitz_stability_criterion">Routh-Hurwitz stability criterion</a>. The characteristic polynomial is <span class="math display">\[
+\mathcal{P}(\lambda)=\lambda^3+ a_1 \lambda^2 + a_2 \lambda + a_3,
+\]</span></p>
+<p>where <span class="math display">\[
+\begin{aligned}a_3 &amp;= -\det J^+ = \sigma \bar x (1 + \nu + \alpha\nu - 2\bar x\nu \alpha), \\ a_2 &amp;= (1 + \nu) +\bar x\alpha\nu + \bar x (2 + \nu)\sigma, \\ a_1 &amp;= -\operatorname{tr} J^+ = 2 + \nu + \sigma\bar x. \end{aligned}
+\]</span></p>
+<p>These numbers are (minus) the invariants of the matrix <span class="math inline">\(J^+\)</span>. The Routh-Hurwitz criterion for <span class="math inline">\(3\times 3\)</span> matrices says that all the roots of <span class="math inline">\(\mathcal{P}(\lambda)\)</span> have negative real parts if and only if <span class="math display">\[
+\begin{aligned}a_1 &amp;&gt; 0, \\ a_2 &amp;&gt; 0, \\ a_3 &amp;&gt; 0, \\ a_1a_2 &amp;&gt; a_3. \end{aligned}
+\]</span></p>
+<p>We see that <span class="math display">\[
+\begin{aligned}a_1 &amp;&gt; 0, &amp;&amp; \text{always}, \\ a_2 &amp;&gt; 0, &amp;&amp; \text{always}, \\ a_3 &amp;&gt; 0, &amp;&amp; \text{when $\alpha&gt;1$ and $\nu &gt; \frac{1}{\alpha-1}$}, \\ a_1a_2 &amp;&gt; a_3, &amp;&amp; \text{depends on $\alpha$.} \end{aligned}
+\]</span></p>
+<p>For the last condition, we see that for sufficiently large <span class="math inline">\(\alpha\)</span> we have <span class="math inline">\(a_1a_2-a_3 \to -\infty\)</span>. On the other hand, for <span class="math inline">\(\bar x=1\)</span> and so <span class="math inline">\(\alpha=\frac{1+\nu}{\nu}\)</span> the quantity is positive. We conclude that there exists at least a point <span class="math inline">\(\alpha^*\)</span> such that for <span class="math inline">\(\alpha &gt; \alpha^*\)</span> the quantity is negative. <span class="math inline">\(E^+\)</span> is asymptotically stable for <span class="math inline">\(\frac{1+\nu}{\nu} &lt; \alpha &lt; \alpha^*\)</span>, and possibly unstable otherwise.</p>
+</div>
+</div>
+</div>
 </section>
 <section id="green-pools" class="level2">
 <h2 class="anchored" data-anchor-id="green-pools">Green pools</h2>
@@ -469,12 +808,137 @@ z' = \nu y - z. &amp;
 <ol type="1">
 <li>Write down the model.</li>
 </ol>
+<div class="callout callout-style-default callout-tip callout-titled" title="Solution">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-14" class="callout-14-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>We use the variables <span class="math inline">\(A(t)\)</span> and <span class="math inline">\(Z(t)\)</span> for algae and zooplankton population, respectively. The general model reads: <span class="math display">\[
+\left\{ \begin{aligned} A' &amp;= r(A)A - \pi(A)Z, \\ Z' &amp;= Z(-\mu(Z) + \gamma\pi(A)). \end{aligned} \right.
+\]</span></p>
+<p>With the assumptions, we have: <span class="math display">\[
+\begin{aligned} \pi(A) &amp;= \frac{a A}{1+aT_h A}, \\ r(A) &amp;= r(1-A/K), \\ \mu(Z) &amp;= d+b F. \end{aligned}
+\]</span></p>
+</div>
+</div>
+</div>
 <ol start="2" type="1">
 <li>Find how equilbrium algal biomass and equilibrium stability vary with fish density <span class="math inline">\(F\)</span>, and comment the results.</li>
 </ol>
+<div class="callout callout-style-default callout-tip callout-titled" title="Solution">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-15-contents" aria-controls="callout-15" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-15" class="callout-15-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The model fits the Gause modeling framework. The best strategy is to first non-dimensionalize. We can use: <span class="math display">\[
+x = \frac{A}{K},\quad z = \frac{Z}{\gamma K},\quad \tau = d t.
+\]</span></p>
+<p>We obtain: <span class="math display">\[
+\left\{\begin{aligned} x' &amp;= x\Bigl(\rho(1-x) + \frac{\alpha\delta z}{1+\delta x} \Bigr), \\ z' &amp;= z\Bigl( -f + \frac{\alpha\delta x}{1+\delta x} \Bigr). \end{aligned}\right.
+\]</span></p>
+<p>where the only interesting parameter is <span class="math inline">\(f\)</span>, which is proportional to <span class="math inline">\(F\)</span>. Specifically: <span class="math display">\[
+\rho = \frac{r}{d}, \quad \alpha = a T_h K,\quad \delta = \frac{\gamma}{d T_h}, \quad f = \frac{bF}{d}+1.
+\]</span></p>
+<p>Two equilibria are always present: <span class="math inline">\(E_0 = (0,0)\)</span> and <span class="math inline">\(E_1=(1,0)\)</span>. The positive equilibrium <span class="math inline">\(E_* = (x_*,z_*)\)</span> follows from the isoclines: <span class="math display">\[
+\left\{ \begin{aligned} z &amp;= \frac{\rho}{\alpha\delta}(1-x)(1+\delta x) = \phi(x), \\ x &amp;= \frac{f}{\delta(\alpha-f)} = x_*. \end{aligned} \right.
+\]</span></p>
+<p>We note that only <span class="math inline">\(x_*\)</span> depends on <span class="math inline">\(f\)</span>, and hence the fish density <span class="math inline">\(F\)</span> (linearly).</p>
+<p>Before studying the function <span class="math inline">\(x_*(f)\)</span>, let us recall the equilibrium diagram with respect to <span class="math inline">\(x_*\)</span>.</p>
+<ul>
+<li><span class="math inline">\(x_* &gt; 1\)</span>: <span class="math inline">\(E_1\)</span> is globally stable, and <span class="math inline">\(E_*\)</span> does not exist because <span class="math inline">\(z_* &lt; 0\)</span>;</li>
+<li><span class="math inline">\(x_\mathrm{max} &lt; x_*&lt; 1\)</span>: <span class="math inline">\(E_*\)</span> is globally stable, where <span class="math inline">\(x_\mathrm{max}=(\delta-1)/2\delta\)</span> is the ascissa of the vertex of <span class="math inline">\(\phi(x)\)</span>, which does not depend on <span class="math inline">\(f\)</span>.</li>
+<li><span class="math inline">\(x_* &lt; x_\mathrm{max}\)</span>: there is a unique, globally stable limit cycle around the (unstable) equilibrium <span class="math inline">\(E_*\)</span>.</li>
+</ul>
+<p>Now we turn our attention to <span class="math inline">\(x_*(f)\)</span>. The function is increasing and has a vertical asymptote for <span class="math inline">\(f=\alpha\)</span>, so it is positive. Therefore, the intervals above for <span class="math inline">\(x_*\)</span> are nicely mapped on interval for <span class="math inline">\(f\)</span>, as below.</p>
+<div id="d6eeb878" class="cell" data-execution_count="1">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>rho <span class="op">=</span> <span class="fl">1.0</span><span class="op">;</span> alpha <span class="op">=</span> <span class="fl">2.0</span><span class="op">;</span> delta <span class="op">=</span> <span class="dv">5</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>xstar <span class="op">=</span> <span class="kw">lambda</span> f: f<span class="op">/</span>(delta<span class="op">*</span>(alpha<span class="op">-</span>f))</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> np.linspace(<span class="dv">0</span>,alpha<span class="op">*</span><span class="fl">0.9</span>,<span class="dv">1000</span>)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>xmax <span class="op">=</span> (delta<span class="op">-</span><span class="dv">1</span>)<span class="op">/</span>(<span class="dv">2</span><span class="op">*</span>delta)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>f1 <span class="op">=</span> delta<span class="op">*</span>alpha<span class="op">/</span>(<span class="dv">1</span><span class="op">+</span>delta)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>f2 <span class="op">=</span> delta<span class="op">*</span>alpha<span class="op">*</span>xmax<span class="op">/</span>(<span class="dv">1</span><span class="op">+</span>delta<span class="op">*</span>xmax)</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>plt.axvline(x<span class="op">=</span>alpha,linestyle<span class="op">=</span><span class="st">'--'</span>)</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>plt.axhline(y<span class="op">=</span><span class="dv">1</span>,color<span class="op">=</span><span class="st">'r'</span>,linewidth<span class="op">=</span><span class="fl">0.5</span>)</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>plt.axhline(y<span class="op">=</span>xmax,color<span class="op">=</span><span class="st">'r'</span>,linewidth<span class="op">=</span><span class="fl">0.5</span>)</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>plt.axvline(x<span class="op">=</span>f1,color<span class="op">=</span><span class="st">'r'</span>,linestyle<span class="op">=</span><span class="st">'--'</span>,linewidth<span class="op">=</span><span class="fl">0.5</span>)</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>plt.axvline(x<span class="op">=</span>f2,color<span class="op">=</span><span class="st">'r'</span>,linestyle<span class="op">=</span><span class="st">'--'</span>,linewidth<span class="op">=</span><span class="fl">0.5</span>)</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>plt.plot(f,xstar(f),linewidth<span class="op">=</span><span class="fl">2.0</span>)</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>plt.xticks([<span class="dv">0</span>,f1,f2,alpha],[<span class="st">'0'</span>,<span class="st">'$f_1$'</span>,<span class="st">'$f_2$'</span>,<span class="st">'$</span><span class="ch">\\</span><span class="st">alpha$'</span>])</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>plt.yticks([<span class="dv">1</span>, xmax], [<span class="st">'1'</span>,<span class="st">'$x_</span><span class="sc">{max}</span><span class="st">$'</span>])</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>plt.gca().spines.right.set_color(<span class="st">'none'</span>)</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>plt.gca().spines.top.set_color(<span class="st">'none'</span>)</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>plt.subplots_adjust(left<span class="op">=</span><span class="fl">0.08</span>, bottom<span class="op">=</span><span class="fl">0.1</span>, right<span class="op">=</span><span class="fl">0.8</span>, top<span class="op">=</span><span class="fl">0.95</span>, wspace<span class="op">=</span><span class="dv">0</span>, hspace<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="05_predators_files/figure-html/cell-2-output-1.png" width="542" height="451" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>For <span class="math inline">\(f &gt; \alpha\)</span> the function is negative, so the globally attractive equilibrium is <span class="math inline">\(E_1\)</span>. Hence, no zooplancton and high-level of algae. Similarly for <span class="math inline">\(f &gt; f_1\)</span>, <span class="math inline">\(E_1\)</span> is globally attractive. For <span class="math inline">\(f_2 &lt; f &lt; f_1\)</span> the equilibrium <span class="math inline">\(E_*\)</span> is globally attractive. Finally, for <span class="math inline">\(f &lt; f_2\)</span>, there exists a unique limit cycle around <span class="math inline">\(E_*\)</span>.</p>
+<p>In conclusion, the pond is greenish for <span class="math inline">\(f &gt; f_1\)</span>. Note that for <span class="math inline">\(F=0\)</span> (no fish population) we have <span class="math inline">\(f=1\)</span>, from which we recover the original Rosenzweig-MacArthur model.</p>
+</div>
+</div>
+</div>
 <ol start="3" type="1">
 <li>Assume now that the zooplankton mortality rate is <span class="math inline">\(d + \frac{bF}{1+cZ}\)</span> where <span class="math inline">\(Z\)</span> is zooplankton density (Holling-type 2 functional response). Study the equilbria of the system.</li>
 </ol>
+<div class="callout callout-style-default callout-tip callout-titled" title="Solution">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-16-contents" aria-controls="callout-16" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-16" class="callout-16-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>We can use the above non-dimensionalization and obtain <span class="math display">\[
+\left\{\begin{aligned} x' &amp;= x\Bigl(\rho(1-x) + \frac{\alpha\delta z}{1+\delta x} \Bigr), \\ z' &amp;= z\Bigl( -\frac{f + \eta z}{1+\eta z} + \frac{\alpha\delta x}{1+\delta x} \Bigr). \end{aligned}\right.
+\]</span></p>
+<p>where we have <span class="math inline">\(\eta = c\gamma K\)</span>.</p>
+<p>As above, two equilibria are always present: <span class="math inline">\(E_0 = (0,0)\)</span> and <span class="math inline">\(E_1=(1,0)\)</span>. Other equilibria follow from the isoclines: <span class="math display">\[
+\left\{ \begin{aligned} z &amp;= \frac{\rho}{\alpha\delta}(1-x)(1+\delta x) = \phi(x), \\ z &amp;= \frac{f+(f-\alpha)x\delta}{\eta (\alpha-1)\delta x - \eta} = \psi(x). \end{aligned} \right.
+\]</span></p>
+<p>The curve <span class="math inline">\(\phi(x)\)</span> is a parabola as above. The curve <span class="math inline">\(\psi(x)\)</span> is a branch of hyperbola. We have that: <span class="math display">\[
+\begin{aligned}\lim_{x\to \bar{x}^+} \psi(x) &amp;= +\infty, \quad \bar x = \frac{1}{\delta(\alpha-1)} \\ \lim_{x\to\infty} \psi(x) &amp;= \frac{f-\alpha}{\eta(\alpha-1)}.\end{aligned}
+\]</span></p>
+<p>For <span class="math inline">\(0 \le x &lt; \bar{x}\)</span> the function <span class="math inline">\(\psi\)</span> is negative. Moreover, <span class="math inline">\(\psi' &gt; 0\)</span> for <span class="math inline">\(f &gt; 1\)</span> (that is, <span class="math inline">\(F&gt;0\)</span>). The effect of reducing <span class="math inline">\(f\)</span> is to lower the right endpoint of the curve <span class="math inline">\(z=\psi(x)\)</span>, thus potentially intersecting the other nullcline.</p>
+<p>The most interesting case is when <span class="math inline">\(\bar{x}\)</span> is to the left of <span class="math inline">\(x_\mathrm{max}\)</span>, which corresponds to the case of a unique limit cycle for <span class="math inline">\(F=0\)</span>. Here, we have 3 possible situations:</p>
+<ol type="1">
+<li><span class="math inline">\(1 \le f &lt; f_1 = \frac{\delta\alpha}{\delta+1}\)</span>: one intersection, because <span class="math inline">\(\psi(x)\)</span> becomes negative before <span class="math inline">\(x=1\)</span>, and thus the additional intersection would be biologically non-feasible. If the only intersection occurs at a point for <span class="math inline">\(\phi'(x)&lt;0\)</span>, then we have a limit cycle, otherwise the equilibrium is asymptotically stable;</li>
+<li><span class="math inline">\(f_1 &lt; f &lt; f_2\)</span>: two intersections, yielding two new equilibria <span class="math inline">\(E_*\)</span> and <span class="math inline">\(E_{**}\)</span>. This case is much more complicated to study. Firstly, <span class="math inline">\(E_1\)</span> is locally stable, meaning that depending it attracts some trajectories, depending on the initial conditions. The equilibrium <span class="math inline">\(E_{**}\)</span> (we suppose it is the one on the right) is always a saddle. The equilibrium <span class="math inline">\(E_*\)</span> is either asymptotically stable or unstable spiral, depending on its position. When it is unstable, it is surrounded by a limit cycle. For a specific range of <span class="math inline">\(f\)</span>, there is also a homoclinic orbit, corresponding to a limit cycle of infinite period.</li>
+<li><span class="math inline">\(f &gt; f_2\)</span>: no intersections, <span class="math inline">\(E_1\)</span> is the only globally stable equilibrium, thus we have a greenish pool;</li>
+</ol>
+<p>In conclusion, the pond is greenish when <span class="math inline">\(f\)</span> is large, but it may happen also at some moderate value of <span class="math inline">\(f\)</span>, depending on the initial conditions.</p>
+</div>
+</div>
+</div>
 </section>
 <section id="holling-type-3-response" class="level2">
 <h2 class="anchored" data-anchor-id="holling-type-3-response">Holling type 3 response</h2>
@@ -488,24 +952,186 @@ P' &amp;= P \Bigl( -c + \frac{\gamma a H^2}{H^2 + \beta^2} \Bigr).
 <ol type="1">
 <li>Give a biological interpretation to these equations. Consider especially the functional response used in this model.</li>
 </ol>
+<div class="callout callout-style-default callout-tip callout-titled" title="Solution">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-17-contents" aria-controls="callout-17" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-17" class="callout-17-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>This is a Gause-type model with Holling type III functional response, logistic growth of the preys, and numerical response proportional to the functional response. A Holling type III response means that at low level of <span class="math inline">\(H\)</span>, predation is also low, whereas it significantly increases with maximum derivative at <span class="math inline">\(H=\beta\)</span>. For very large value of <span class="math inline">\(H\)</span>, the response tends to <span class="math inline">\(a\)</span>, the maximum killing rate.</p>
+</div>
+</div>
+</div>
 <ol start="2" type="1">
 <li>Find all equilibria (in the first quadrant) and study their stability for <span class="math inline">\(a\gamma &lt; c\)</span>.</li>
 </ol>
+<div class="callout callout-style-default callout-tip callout-titled" title="Solution">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-18-contents" aria-controls="callout-18" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-18" class="callout-18-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>We always have 2 equilibria:</p>
+<ul>
+<li><span class="math inline">\(E_0=(0,0)\)</span> and</li>
+<li><span class="math inline">\(E_K=(K,0)\)</span>.</li>
+</ul>
+<p>An additional equilibrium <span class="math inline">\(E_*=(H_*,P_*)\)</span> is present only when it is in the positive quadrant. Specifically we have <span class="math display">\[
+H_*^2 = \frac{c\beta^2}{\gamma a-c},
+\]</span></p>
+<p>thus <span class="math inline">\(H_*\)</span> is well-defined only for <span class="math inline">\(\gamma a \ge c\)</span>. Hence, for <span class="math inline">\(a\gamma&lt;c\)</span> we only have 2 equilibria.</p>
+<p>For the stability, we have the Jacobian: <span class="math display">\[
+J(H,P) = \left[ \begin{matrix} r(1-2H/K) - \pi'(H)P &amp; -\pi(H) \\ \gamma\pi'(H)P &amp; -c + \gamma\pi(H) \end{matrix}\right],
+\]</span></p>
+<p>where <span class="math inline">\(\pi(H)\)</span> is the functional response. Thus, we have <span class="math display">\[
+J_0 = J(0,0) = \left[ \begin{matrix} r &amp; 0 \\ 0 &amp; -c \end{matrix}\right],
+\]</span></p>
+<p>from which we conclude that <span class="math inline">\(E_0\)</span> is a saddle point. Moreover, <span class="math display">\[
+J_K = J(K,0) = \left[ \begin{matrix} -r &amp; -\pi(K) \\ 0 &amp; -c + \gamma\pi(K) \end{matrix}\right],
+\]</span></p>
+<p>which has eigenvalues <span class="math inline">\(\lambda_1 = -r &lt; 0\)</span> and <span class="math inline">\(\lambda_2 = -c + \gamma\pi(K)\)</span>. The condition <span class="math inline">\(\lambda_2 &lt; 0\)</span> would ensure the stability of <span class="math inline">\(E_K\)</span>. Specifically, <span class="math display">\[
+-c + \gamma\pi(K) = -c + \gamma a\frac{K^2}{\beta^2 + K^2} &lt; 0.
+\]</span></p>
+<p>Since <span class="math inline">\(a\gamma &lt; c\)</span> by hypothesis, the right hand side is negative so <span class="math inline">\(E_K\)</span> is always asymptotically stable.</p>
+</div>
+</div>
+</div>
 <ol start="3" type="1">
 <li>Assume <span class="math inline">\(a\gamma &gt; c\)</span>. Find the conditions on <span class="math inline">\(K\)</span> that make unstable the equilibrium without predators (but with a positive number of preys).</li>
 </ol>
+<div class="callout callout-style-default callout-tip callout-titled" title="Solution">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-19-contents" aria-controls="callout-19" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-19" class="callout-19-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>As we have seen above, for <span class="math inline">\(a\gamma&gt;c\)</span> the eigenvalue <span class="math inline">\(\lambda_2\)</span> of <span class="math inline">\(J_K\)</span> becomes positive when <span class="math inline">\(K^2 &gt; H_*^2\)</span> (note that the right hand side in the above inequality is exactly <span class="math inline">\(H_*^2\)</span>), thus the condition on <span class="math inline">\(K\)</span> is <span class="math inline">\(K &gt; H_*\)</span>.</p>
+</div>
+</div>
+</div>
 <ol start="4" type="1">
 <li><p>Show that a positive equilibrium <span class="math inline">\((H^*,P^*)\)</span>, if it exists, is stable if <span class="math display">\[
 \frac{r}{K} + a P^*\phi'(H^*) &gt; 0,\quad \phi(H) = \frac{H}{H^2+\beta^2}.
 \]</span></p>
 <p><em>Hint: to show this, it is convenient to rewrite the system using the function <span class="math inline">\(\phi\)</span>, and compute the positive equilibrium and the Jacobian through <span class="math inline">\(\phi(H^*)\)</span> and <span class="math inline">\(\phi'(H^*)\)</span>, without explicitly computing these.</em></p></li>
 </ol>
+<div class="callout callout-style-default callout-tip callout-titled" title="Solution">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-20-contents" aria-controls="callout-20" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-20" class="callout-20-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>For <span class="math inline">\(E_*\)</span> to exists, we need <span class="math inline">\(H_*&gt; 0\)</span> and <span class="math inline">\(P_*&gt; 0\)</span>. The first condition is statisfied for <span class="math inline">\(\gamma a &gt; c\)</span>. The second one, we have <span class="math display">\[
+P_* = \frac{r}{a H_*}(1-H_*/K)(H_*^2 + \beta^2) &gt; 0,
+\]</span></p>
+<p>which occurs for <span class="math inline">\(H_*&lt; K\)</span>.</p>
+<p>Note that <span class="math inline">\(a\phi(H)H = \pi(H)\)</span>, so <span class="math inline">\(aH\phi'(H)+a\phi(H)=\pi'(H)\)</span>. Thus, we can reuse <span class="math inline">\(J(H,P)\)</span> as above. Substituting we have: <span class="math display">\[
+J_* = J(H_*,P_*) = \left[ \begin{matrix} r(1-2H_*/K) - \pi'(H_*)P_* &amp; -\pi(H_*) \\ \gamma\pi'(H_*)P_* &amp; -c + \gamma\pi(H_*) \end{matrix}\right].
+\]</span></p>
+<p>Note that <span class="math inline">\(-c+\gamma\pi(H)=0\)</span> is a nullcline for <span class="math inline">\(P'=0\)</span>, so <span class="math inline">\(-c+\gamma\pi(H_*)=0\)</span>. Since <span class="math inline">\(\pi(H) &gt; 0\)</span>, <span class="math inline">\(\pi(H)&gt;0\)</span>, and <span class="math inline">\(P_*&gt;0\)</span>, we have that <span class="math display">\[
+\det J_* = \pi(H_*)\gamma \pi'(H_*)P_* &gt; 0.
+\]</span></p>
+<p>So the equilibrium is not a saddle. By looking at the trace, the asymptotic stability is ensured when: <span class="math display">\[
+\operatorname{tr} J_* = r(1-2H_*/K) - \pi'(H_*)P_* &lt; 0.
+\]</span></p>
+<p>Since the non-trivial nullcline for <span class="math inline">\(H'=0\)</span> indicates that <span class="math inline">\(r(1-H/K)−aP\phi(H)=0\)</span>, we obtain: <span class="math display">\[
+\operatorname{tr} J_* = -r/K - a P_*\phi'(H_*) &lt; 0,
+\]</span></p>
+<p>which is equivalent to the above condition.</p>
+</div>
+</div>
+</div>
 <ol start="5" type="1">
 <li>Show that the previous conditions is equivalent to <span class="math inline">\(\Phi'(H^*) &lt; 0\)</span>, where <span class="math inline">\(\Phi(H) = \frac{r(1-H/K)(H^2+\beta^2)}{a H}\)</span> is the function for the nullcline <span class="math inline">\(H'=0\)</span>, when <span class="math inline">\(P=\Phi(H)\)</span>.</li>
 </ol>
+<div class="callout callout-style-default callout-tip callout-titled" title="Solution">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-21-contents" aria-controls="callout-21" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-21" class="callout-21-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>We observe that <span class="math display">\[
+\Phi(H) = \frac{r(1-H/K)}{a\phi(H)}.
+\]</span></p>
+<p>Therefore we have <span class="math display">\[
+a \Phi(H)\phi(H) = r(1-H/K),
+\]</span></p>
+<p>thus, <span class="math display">\[
+a \Phi'(H_*) \phi(H_*) + a \Phi(H_*) \phi'(H_*) = -r/K.
+\]</span></p>
+<p>Now, <span class="math inline">\(\Phi(H_*)=P_*\)</span>, and thanks to <strong>Q1.4</strong> we obtain that: <span class="math display">\[
+a \Phi'(H_*) \phi(H_*) = -r/K - a P_*\phi'(H_*) &lt; 0.
+\]</span></p>
+<p>Since <span class="math inline">\(a\phi(H_*) &gt; 0\)</span>, we conclude that <span class="math inline">\(\Phi'(H_*) &lt; 0\)</span>. Viceversa, if <span class="math inline">\(\Phi'(H_*) &lt; 0\)</span> then the above condition holds. So they are equivalent.</p>
+</div>
+</div>
+</div>
 <ol start="6" type="1">
 <li>Scale the system by setting <span class="math inline">\(x = H/\beta\)</span>, <span class="math inline">\(y = P/(\gamma\beta)\)</span>, <span class="math inline">\(\tau = ct\)</span>. The resulting system should have only 3 parameters, that can be chosen as <span class="math inline">\(\eta = \beta/K\)</span>, <span class="math inline">\(\alpha = a\gamma/c\)</span>, <span class="math inline">\(\rho = r/c\)</span>.</li>
 </ol>
+<div class="callout callout-style-default callout-tip callout-titled" title="Solution">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-22-contents" aria-controls="callout-22" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-22" class="callout-22-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>After rewriting the previous conditions for the existence of a positive equilibrium in terms of the new parameters, study (with the help of a computer) how its stability changes as <span class="math inline">\(K\)</span> increases, i.e.&nbsp;<span class="math inline">\(\eta\)</span> decreases.</p>
+<p>The system we obtain is: <span class="math display">\[
+\left\{\begin{aligned}
+H' &amp;= x \Bigl( \rho (1-\eta x)− \alpha \frac{x y}{x^2 + 1} \Bigr), \\
+P' &amp;= y \Bigl( -1 + \alpha \frac{x^2}{x^2 + 1} \Bigr).
+\end{aligned}\right.
+\]</span></p>
+<p>The condition on the existence of <span class="math inline">\(E_*\)</span> is <span class="math inline">\(\gamma a &gt; c\)</span>, so <span class="math inline">\(\alpha &gt; 1\)</span>, and <span class="math inline">\(H_*&lt; K\)</span>, hence <span class="math inline">\(\eta &lt; \sqrt{\alpha-1}\)</span>. The stability of <span class="math inline">\(E_*\)</span> is determined by the inequality <span class="math inline">\(\Phi'(H_*)&lt; 0\)</span>. Since <span class="math inline">\(\Phi(H)\)</span> was defined as the nullcline <span class="math inline">\(P=\Phi(H)\)</span>, we can change the variables and define <span class="math display">\[
+\tilde\Phi(x) = \frac{\rho(1-\eta x)(x^2+1)}{\alpha x},
+\]</span></p>
+<p>and the condition for the new system is <span class="math inline">\(\tilde{\Phi}'(x_*)&lt;0\)</span>, that is <span class="math display">\[
+\tilde{\Phi}(x_*) = \rho \frac{x_*^2 - 1 - 2\eta x_*^3}{\alpha x_*^2} &lt; 0.
+\]</span></p>
+<p>Equivalently, the condition of stability is: <span class="math display">\[
+\eta &gt; \bar\eta = \frac{x_*^2 - 1}{2 x_*^3} = (1-\alpha/2)\sqrt{\alpha-1}.
+\]</span></p>
+<p>Thus, for <span class="math inline">\(\bar\eta &lt; \eta &lt; \sqrt{\alpha-1}\)</span> the equilibrium <span class="math inline">\(E_*\)</span> is stable. Note that for <span class="math inline">\(\alpha \ge 2\)</span>, the equilibrium is always stable, when there exists, because <span class="math inline">\(\bar\eta \le 0\)</span>.</p>
+<p>As <span class="math inline">\(\eta\)</span> decreases below the value of <span class="math inline">\(\bar\eta\)</span>, the equilibrium <span class="math inline">\(E_*\)</span> becomes unstable. Since <span class="math inline">\(E_*\)</span> is never a saddle, because <span class="math inline">\(\det J_* &gt; 0\)</span>, the change of stability must occur with a change of sign of the real part of both the eigenvalues simultaneously, hence they are complex conjugate. We have a supercritical Hopf bifurcation for <span class="math inline">\(\eta=\bar\eta\)</span>.</p>
+</div>
+</div>
+</div>
 
 
 </section>

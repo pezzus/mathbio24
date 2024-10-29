@@ -1,0 +1,1188 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.57">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2024-10-21">
+
+<title>11&nbsp; Feedback loops – Mathematical Biology</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./references.html" rel="next">
+<link href="./10_Inhibition.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./01_Bathtub.html">Lectures</a></li><li class="breadcrumb-item"><a href="./11_FeedbackLoops.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Feedback loops</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Mathematical Biology</a> 
+        <div class="sidebar-tools-main">
+    <a href="./Mathematical-Biology.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Welcome</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Lectures</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01_Bathtub.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Bathtub model</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02_Population.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Population dynamics</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03_Logistic.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Logistic model</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04_Predation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Predation models</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05_LotkaVolterra.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Lotka-Volterra model</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06_Gause.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Gause type models</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./07_RM.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Rosenzweig-MacArthur model</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./08_MichaelinMenten.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Michaelin-Menten law</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./09_FastSlow.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Fast-Slow systems</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10_Inhibition.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Inhibition</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./11_FeedbackLoops.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Feedback loops</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./projects2024.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Projects</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Assignments</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Assignments/01_recap_ODEs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Solving ODEs</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Assignments/02_population.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Population dynamics</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Assignments/03_spruce.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Predation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Assignments/04_systems.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">System of ODEs</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Assignments/05_predators.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Prey-predator systems</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Assignments/06_reactions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Reactions</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Labs</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Laboratories/01_ODE_Integration/lab_ODEinteg.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab 01: Numerical integration</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Laboratories/02_Predation/lab_Predation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab 02: Predation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Laboratories/03_Bifurcations/lab_Bifurcations.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab 03: Bifurcations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Laboratories/04_Chaos/lab_chaos.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab 04: Chaos</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Laboratories/05_Feedbacks/lab_feedback.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab 05: Feedback loops</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">Appendices</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./IntroODE.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Introduction to ODEs</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./bifurcations.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Introduction to bifurcations</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Laboratories/00_Intro_Matlab/introMATLAB.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Introduction to MATLAB</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#feedback-loops" id="toc-feedback-loops" class="nav-link active" data-scroll-target="#feedback-loops"><span class="header-section-number">11.1</span> Feedback loops</a>
+  <ul class="collapse">
+  <li><a href="#linear-response" id="toc-linear-response" class="nav-link" data-scroll-target="#linear-response"><span class="header-section-number">11.1.1</span> Linear response</a></li>
+  <li><a href="#hyperbolic-response" id="toc-hyperbolic-response" class="nav-link" data-scroll-target="#hyperbolic-response"><span class="header-section-number">11.1.2</span> Hyperbolic response</a></li>
+  <li><a href="#sigmoidal-response" id="toc-sigmoidal-response" class="nav-link" data-scroll-target="#sigmoidal-response"><span class="header-section-number">11.1.3</span> Sigmoidal response</a></li>
+  <li><a href="#perfectly-adapted-response" id="toc-perfectly-adapted-response" class="nav-link" data-scroll-target="#perfectly-adapted-response"><span class="header-section-number">11.1.4</span> Perfectly adapted response</a></li>
+  <li><a href="#positive-feedback-mutual-inhibition" id="toc-positive-feedback-mutual-inhibition" class="nav-link" data-scroll-target="#positive-feedback-mutual-inhibition"><span class="header-section-number">11.1.5</span> Positive feedback: mutual inhibition</a></li>
+  <li><a href="#negative-feedback-homeostatis" id="toc-negative-feedback-homeostatis" class="nav-link" data-scroll-target="#negative-feedback-homeostatis"><span class="header-section-number">11.1.6</span> Negative feedback: homeostatis</a></li>
+  <li><a href="#negative-feedback-oscillations" id="toc-negative-feedback-oscillations" class="nav-link" data-scroll-target="#negative-feedback-oscillations"><span class="header-section-number">11.1.7</span> Negative feedback: oscillations</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./01_Bathtub.html">Lectures</a></li><li class="breadcrumb-item"><a href="./11_FeedbackLoops.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Feedback loops</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Feedback loops</span></h1>
+<p class="subtitle lead">This lecture is based on <span class="citation" data-cites="ks08_vol1">(<a href="references.html#ref-ks08_vol1" role="doc-biblioref">Keener and Sneyd 2009, vol. 8/I, sec. 1.4.6</a>)</span></p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">October 21, 2024</p>
+    </div>
+  </div>
+  
+    <div>
+    <div class="quarto-title-meta-heading">Modified</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date-modified">October 29, 2024</p>
+    </div>
+  </div>
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="feedback-loops" class="level2" data-number="11.1">
+<h2 data-number="11.1" class="anchored" data-anchor-id="feedback-loops"><span class="header-section-number">11.1</span> Feedback loops</h2>
+<p>Actual molecular networks consist of a large number of molecular species with very complex patterns of interaction among them. We have seen the <em>lac operon</em> for instance.</p>
+<p>Wishing to go beyond the simple reactions analyzed in the previous lectures, the natural next step is to consider reaction loops, i.e.&nbsp;networks with two molecular species, each acting on the rates, either of synthesis or of decay, of the other. Since the overall action may be positive (favouring the synthesis or inhibiting the decay) or negative (favouring the decay or inhibiting the formation), in principle there are 3 possible cases:</p>
+<ol type="1">
+<li><em>mutual activation</em>: each molecular species has a positive effect on the other;</li>
+<li><em>mutual inhibition</em>: each has a negative effect on the other;</li>
+<li><em>activation-inhibition</em>: one has a positive effect on the other, which has a negative on the first one.</li>
+</ol>
+<p>This matches exactly the Kolmogorov formalist in ecology: <em>mutualism</em>, <em>competition</em>, <em>prey-predator</em>.</p>
+<p>We distinguish two kinds of feedback loops: <em>positive</em> and <em>negative</em>. Each can be realized in several different reaction schemes and each reaction may be modeled as linear or Michaelis-Menten-type or cooperative. The dynamical properties will then depend on the details of reactions; we will show however (by way of examples) that there are some common properties of positive vs.&nbsp;negative feedback loops.</p>
+<p>As an initial point, we discuss how the concentration of a substance responds to a stimulus that increase its rate of synthesis in some simple reaction schemes. This is inspired to the article <a href="https://www.sciencedirect.com/science/article/pii/S0955067403000176">“<em>Sniffers, buzzers, toggles and blinkers: dynamics of regulatory and signaling pathways in the cell</em>”</a>, by Tyson, Chen, and Novak (2003). that classified the schemes according to the type of the signal-response curve, and used these as building blocks for more complex reaction networks.</p>
+<section id="linear-response" class="level3" data-number="11.1.1">
+<h3 data-number="11.1.1" class="anchored" data-anchor-id="linear-response"><span class="header-section-number">11.1.1</span> Linear response</h3>
+<p>A simple scheme is following, where <span class="math inline">\(\ce{S}\)</span> (that may be the concentration of some substance favouring the synthesis of <span class="math inline">\(\ce{X}\)</span>) is the signal and the equilibrium concentration of <span class="math inline">\(\ce{X}\)</span> is the response:</p>
+<p><img src="img/LinearF.png" class="img-fluid"></p>
+<p>The corresponding equation is: <span class="math display">\[
+[\ce{X}]' = (k_1 + k_1'[\ce{S}]) - k_2 [\ce{X}],
+\]</span></p>
+<p>hence the equilibrium is: <span class="math display">\[
+[\ce{X}]_\mathrm{eq} = \frac{k_1 + k_1'[\ce{S}]}{k_2}.
+\]</span></p>
+<p>The equilibrium is <em>linear</em> in <span class="math inline">\([\ce{S}]\)</span>. Note that we allow for a production of <span class="math inline">\([\ce{X}]\)</span> at constant rate <span class="math inline">\(k_1\)</span> even in the absence of <span class="math inline">\([\ce{S}]\)</span>.</p>
+</section>
+<section id="hyperbolic-response" class="level3" data-number="11.1.2">
+<h3 data-number="11.1.2" class="anchored" data-anchor-id="hyperbolic-response"><span class="header-section-number">11.1.2</span> Hyperbolic response</h3>
+<p>We assume that now the molecule <span class="math inline">\(\ce{X}\)</span> can be in active <span class="math inline">\(\ce{X_a}\)</span> or inactive <span class="math inline">\(\ce{X_i}\)</span> form, and that <span class="math inline">\(\ce{S}\)</span> favours the reaction that activates <span class="math inline">\(\ce{X}\)</span>:</p>
+<p><img src="img/HyperbolicF.png" class="img-fluid"></p>
+<p>The corresponding system is: <span class="math display">\[
+\left\{\begin{aligned}
+[\ce{X_a}]' &amp;= -k_{-1} [\ce{X_a}] + k_1 [\ce{S}][\ce{X_i}], \\
+[\ce{X_i}]' &amp;=  k_{-1} [\ce{X_a}] - k_1 [\ce{S}][\ce{X_i}].
+\end{aligned} \right.
+\]</span></p>
+<p>Since the total sum is conserved, say <span class="math inline">\(\ce{X}_\mathrm{tot} = [\ce{X_a}] + [\ce{X_i}]\)</span>, we drop the second equation and keep the following <span class="math display">\[
+[\ce{X_a}]' = -k_{-1} [\ce{X_a}] + k_1 [\ce{S}](\ce{X}_\mathrm{tot} - [\ce{X_a}]).
+\]</span></p>
+<p>The equilibrium is globally attractive and equal to: <span class="math display">\[
+\frac{[\ce{X_a}]_\mathrm{eq}}{\ce{X}_\mathrm{tot}} = \frac{S}{S + K_1}.
+\]</span></p>
+<p>where <span class="math inline">\(K_1 = \frac{k_{-1}}{k_1}\)</span>. This yields a hyperbolic response to the signal, as in the figure. Note that this one is the Michaelis-Menten law (with quasi-equilibrium approximation).</p>
+</section>
+<section id="sigmoidal-response" class="level3" data-number="11.1.3">
+<h3 data-number="11.1.3" class="anchored" data-anchor-id="sigmoidal-response"><span class="header-section-number">11.1.3</span> Sigmoidal response</h3>
+<p>The scheme is like the previous one, but we assume that the activation and inactivation rates follow a Michaelis-Menten law (the curved edge is a symbol for this).</p>
+<p><img src="img/SigmoidF.png" class="img-fluid"></p>
+<p>An example is phosphorylation, where we can have two enzymes acting on <span class="math inline">\(\ce{X_a}\)</span> and <span class="math inline">\(\ce{X_i}\)</span>: the first enzyme phosphorylate <span class="math inline">\(\ce{X_a}\)</span> into <span class="math inline">\(\ce{X_i}\)</span>, and the second one does the opposite. This “game” can reach an equilibrium.</p>
+<p>We just need one equation, say for <span class="math inline">\(\ce{X_a}\)</span>, because as before <span class="math inline">\(\ce{X}_\mathrm{tot} = [\ce{X_a}] + [\ce{X_i}]\)</span>: <span class="math display">\[
+[\ce{X_a}]' = -\frac{V_2 [\ce{X_a}]}{K_{m_2} + [\ce{X_a}]} + \frac{V_1 [\ce{S}](\ce{X}_\mathrm{tot} - [\ce{X_a}])}{K_{m_1} + \ce{X}_\mathrm{tot} - [\ce{X_a}]},
+\]</span></p>
+<p>where <span class="math inline">\(K_{m_2}\)</span> and <span class="math inline">\(K_{m_1}\)</span> are the half-saturation constants of the two reactions.</p>
+<p>The activated fraction at equilibrium <span class="math inline">\(x = [\ce{X_a}]/\ce{X}_\mathrm{tot}\)</span> is then a solution of <span class="math display">\[
+\frac{x(L_1 + 1 - x)}{(1-x)(L_2 + x)} = \frac{\nu_1}{\nu_2},
+\]</span></p>
+<p>where: <span class="math display">\[
+L_1 = \frac{K_{m_1}}{\ce{X}_\mathrm{tot}}, \quad
+L_2 = \frac{K_{m_2}}{\ce{X}_\mathrm{tot}}, \quad
+\nu_1 = V_1 [\ce{S}], \quad \nu_2 = V_2.
+\]</span></p>
+<p>First, we show that there exists a unique solution <span class="math inline">\(x\)</span> of the above equation. Indeed, the problem is equivalent to: <span class="math display">\[
+Q(x) = \frac{\nu_1}{\nu_2}(1-x)(L_2 + x) - x(L_1 + 1 - x) = 0
+\]</span></p>
+<p>where <span class="math inline">\(Q(x)\)</span> is a quadratic function. Note that <span class="math inline">\(Q(0)=\frac{\nu_1}{\nu_2}&gt;0\)</span> and <span class="math inline">\(Q(1) = - L_1 &lt; 0\)</span>, so there must be a unique <span class="math inline">\(x\in(0,1)\)</span> such that <span class="math inline">\(Q(x)=0\)</span>. We call this solution as a function of the parameters as <em>Goldbeter-Koshland function</em> <span class="math inline">\(G\)</span>: <span class="math display">\[
+G(\nu_1,\nu_2,L_1,L_2) \quad\text{such that}\quad Q\bigl( G(\nu_1,\nu_2L_1,L_2) \bigr) = 0.
+\]</span></p>
+<p>We can explicitly write the solution using the quadratic formula: <span class="math display">\[
+G(\nu_1,\nu_2,L_1,L_2) = \frac{\beta - \sqrt{\beta^2 - 4\alpha\gamma}}{2\alpha},
+\]</span></p>
+<p>where the parameters are: <span class="math display">\[
+\alpha = \nu_2-\nu_1, \quad \beta = \nu_1(1 - L_1) -(1+L_2)\nu_2, \quad \gamma = L_2 \nu_1.
+\]</span></p>
+<p>Note that <span class="math inline">\(\nu_1 = V_1[\ce{S}]\)</span>, so the response of the system is: <span class="math display">\[
+[\ce{X_a}] = \ce{X}_\mathrm{tot} G(V_1 [\ce{S}],\nu_2,L_1,L_2),
+\]</span></p>
+<p>which is not very informative. We proceed differently. Note that the Goldbeter-Koshland function satisfies following equation: <span class="math display">\[
+g_{L_1,L_2}(x) = \frac{x(L_1 + 1 - x)}{(1-x)(L_2 + x)} = \frac{\nu_1}{\nu_2},
+\]</span></p>
+<p>with <span class="math inline">\(x = G(\nu_1,\nu_2,L_1,L_2)\)</span>. So, we can study the function <span class="math inline">\(g_{L_1,L_2}(x)\)</span> with <span class="math inline">\(L_1\)</span> and <span class="math inline">\(L_2\)</span> as parameters, and then notice that <span class="math inline">\(g\)</span> is the inverse function of <span class="math inline">\(G\)</span>, because <span class="math display">\[
+g_{L_1,L_2}\bigl( G(\nu_1,\nu_2,L_1,L_2) \bigr) = \frac{\nu_1}{\nu_2}.
+\]</span></p>
+<p>Graphically, the inverse is obtained by switching the axes. The function <span class="math inline">\(g_{L_1,L_2}\)</span> is defined for <span class="math inline">\(x\in[0,1)\)</span>: <span class="math display">\[
+\begin{aligned}
+g_{L_1,L_2}(0)   &amp;= 0, \\
+g_{L_1,L_2}(1^-) &amp;= +\infty, \\
+g_{L_1,L_2}'(x)  &amp;= \frac{L_2(x-1)^2+L_1(L_2+x^2)}{(x-1)^2(L_2+x)^2} &gt; 0, \\
+g_{L_1,L_2}''(x) &amp;= \frac{2}{1+L_2} \frac{L_1(L_2+x)^3 - L_2(1+L_1+L_2)(1-x)^3}{(1-x)^3(L_2+x)^3},
+\end{aligned}
+\]</span></p>
+<p>The function is monotonically increasing with a vertical asymptote in <span class="math inline">\(x=1\)</span>. The second derivative may change sign depending on <span class="math inline">\(L_1\)</span> and <span class="math inline">\(L_2\)</span>. However, the numerator of <span class="math inline">\(g_{L_1,L_2}''(x)\)</span> is an increasing function of <span class="math inline">\(x\)</span>, so if <span class="math inline">\(g_{L_1,L_2}''(0) \ge 0\)</span> then the function is convex in <span class="math inline">\(x\in[0,1)\)</span>. On the other hand, if <span class="math inline">\(g_{L_1,L_2}''(0) &lt; 0\)</span>, then there is a change of concavity for some <span class="math inline">\(\bar{x}\in(0,1)\)</span>, because <span class="math inline">\(g_{L_1,L_2}''(x)\to +\infty\)</span> as <span class="math inline">\(x\to 1^-\)</span>. Specifically: <span class="math display">\[
+g_{L_1,L_2}''(0) = -2\frac{1+L_1-L_1 L_2}{L_2^2},
+\]</span></p>
+<p>hence when <span class="math inline">\(L_1\)</span> or <span class="math inline">\(L_2\)</span> are small, the function has a concave-convex shape; when they are large, it is a convex function. Since <span class="math inline">\(G(\nu_1,\nu_2,L_1,L_2)\)</span> as a function of <span class="math inline">\(\nu_1/\nu_2\)</span> is the inverse function of <span class="math inline">\(g_{L_1,L_2}(x)\)</span>, it turns out that when <span class="math inline">\(1 + L_1 − L_1 L_2 &gt; 0\)</span>, <span class="math inline">\(G\)</span> is a sigmoidal function, when <span class="math inline">\(1 + L_1 − L_1 L_2 &gt; 0\)</span> it is a concave saturating function.</p>
+<p><img src="img/Goldbeter.png" class="img-fluid"></p>
+<p>The Goldbeter-Koshland function is quite important in feedback networks. It can create a sigmoidal response with respect to the signal <span class="math inline">\([\ce{S}]\)</span>. It is a switch-like behavior, different from cooperativity. It is also called zero-order ultrasensitivity.</p>
+</section>
+<section id="perfectly-adapted-response" class="level3" data-number="11.1.4">
+<h3 data-number="11.1.4" class="anchored" data-anchor-id="perfectly-adapted-response"><span class="header-section-number">11.1.4</span> Perfectly adapted response</h3>
+<p>There are several physiological systems organized so as to give a constant response, independent of the strength of the signal. Tyson and Novak propose a simple reaction scheme with this property; they call it “sniffer” as receptors get adapted to a smell. The scheme is the following</p>
+<p><img src="img/SnifferF.png" class="img-fluid"></p>
+<p>The corresponding differential equations are <span class="math display">\[
+\left\{\begin{aligned}
+[\ce{X}]' &amp;= k_1 [\ce{S}] - k_2 [\ce{X}][\ce{Y}], \\
+[\ce{Y}]' &amp;= k_3 [\ce{S}] - k_4 [\ce{Y}].
+\end{aligned} \right.
+\]</span></p>
+<p>At equilibrium <span class="math display">\[
+[\ce{Y}]_\mathrm{eq} = \frac{k_3}{k_4}[\ce{S}],\quad
+[\ce{X}]_\mathrm{eq} = \frac{k_1[\ce{S}]}{k_2[\ce{X}]_\mathrm{eq}} = \frac{k_1 k_4}{k_2 k_3},
+\]</span></p>
+<p>as long as <span class="math inline">\([\ce{S}]=0\)</span>, otherwise the unique equilibrium is <span class="math inline">\((0,0)\)</span>. Considering <span class="math inline">\(\ce{X}\)</span> as the response to the signal <span class="math inline">\(\ce{S}\)</span>, one sees that the circuit in the figure (often named as a <a href="https://en.wikipedia.org/wiki/Feed_forward_(control)">feed-forward control</a>, since the signal <span class="math inline">\(\ce{S}\)</span> acts on both <span class="math inline">\(\ce{Y}\)</span> and the molecule <span class="math inline">\(\ce{X}\)</span> that is controlled by <span class="math inline">\(\ce{Y}\)</span>) has the property that the response is independent of the signal, as long as it is not 0.</p>
+<p>Beyond the response to a constant signal <span class="math inline">\(\ce{S}\)</span>, it is also interesting seeing how <span class="math inline">\(\ce{X}\)</span> responds to an increasing signal. Below we see how <span class="math inline">\(\ce{X}\)</span> and <span class="math inline">\(\ce{Y}\)</span> change, assuming that <span class="math inline">\([\ce{S}](t)\)</span> is a piecewise constant function increasing every 5 time unit. It can be seen that after each increase of <span class="math inline">\(\ce{S}\)</span>, there is a transient increase of <span class="math inline">\(\ce{X}\)</span> that then goes back towards the equilibrium, the exact pattern depending on the parameter values.</p>
+<p><span class="citation" data-cites="import">(<a href="references.html#ref-import" role="doc-biblioref"><strong>import?</strong></a>)</span> “https://cdn.plot.ly/plotly-latest.min.js”</p>
+<div class="sourceCode" id="cb1" data-cmd="true" data-element="<div id='tester'></div>" data-hide="true"><pre class="sourceCode javascript code-with-copy"><code class="sourceCode javascript"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> TESTER <span class="op">=</span> <span class="bu">document</span><span class="op">.</span><span class="fu">getElementById</span>(<span class="st">'tester'</span>)<span class="op">;</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> n <span class="op">=</span> <span class="dv">2000</span><span class="op">;</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> t <span class="op">=</span> []<span class="op">,</span> X <span class="op">=</span> []<span class="op">,</span> Y <span class="op">=</span> []<span class="op">,</span> S <span class="op">=</span> []<span class="op">;</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> x0 <span class="op">=</span> <span class="fl">1.0</span><span class="op">,</span> y0 <span class="op">=</span> <span class="fl">0.9</span><span class="op">,</span> t0 <span class="op">=</span> <span class="fl">0.0</span><span class="op">,</span> s0 <span class="op">=</span> <span class="fl">0.9</span><span class="op">;</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> Tend <span class="op">=</span> <span class="fl">20.0</span><span class="op">;</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> dt <span class="op">=</span> Tend<span class="op">/</span>n<span class="op">;</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>t[<span class="dv">0</span>] <span class="op">=</span> t0<span class="op">;</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>X[<span class="dv">0</span>] <span class="op">=</span> x0<span class="op">;</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>Y[<span class="dv">0</span>] <span class="op">=</span> y0<span class="op">;</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>S[<span class="dv">0</span>] <span class="op">=</span> s0<span class="op">;</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (<span class="kw">var</span> i<span class="op">=</span><span class="dv">1</span><span class="op">;</span> i<span class="op">&lt;</span>n<span class="op">;</span> <span class="op">++</span>i)</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>{</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    t[i] <span class="op">=</span> t0 <span class="op">+</span> i<span class="op">*</span>dt<span class="op">;</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    S[i] <span class="op">=</span> s0 <span class="op">+</span> <span class="bu">Math</span><span class="op">.</span><span class="fu">floor</span>(t[i]<span class="op">/</span><span class="dv">5</span>)<span class="op">;</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    <span class="kw">var</span> F <span class="op">=</span> <span class="fu">f</span>(t[i<span class="op">-</span><span class="dv">1</span>]<span class="op">,</span>{<span class="dv">0</span><span class="op">:</span> X[i<span class="op">-</span><span class="dv">1</span>]<span class="op">,</span> <span class="dv">1</span><span class="op">:</span> Y[i<span class="op">-</span><span class="dv">1</span>]}<span class="op">,</span> S[i<span class="op">-</span><span class="dv">1</span>])<span class="op">;</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>    X[i] <span class="op">=</span> X[i<span class="op">-</span><span class="dv">1</span>] <span class="op">+</span> dt<span class="op">*</span>F[<span class="dv">0</span>]<span class="op">;</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>    Y[i] <span class="op">=</span> Y[i<span class="op">-</span><span class="dv">1</span>] <span class="op">+</span> dt<span class="op">*</span>F[<span class="dv">1</span>]<span class="op">;</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> traceS <span class="op">=</span> {</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>    <span class="dt">x</span><span class="op">:</span> t<span class="op">,</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>    <span class="dt">y</span><span class="op">:</span> S<span class="op">,</span> </span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>    <span class="dt">name</span><span class="op">:</span> <span class="st">'S'</span></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> traceX <span class="op">=</span> {</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>    <span class="dt">x</span><span class="op">:</span> t<span class="op">,</span></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>    <span class="dt">y</span><span class="op">:</span> X<span class="op">,</span> </span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>    <span class="dt">name</span><span class="op">:</span> <span class="st">'X'</span></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> traceY <span class="op">=</span> {</span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>    <span class="dt">x</span><span class="op">:</span> t<span class="op">,</span></span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>    <span class="dt">y</span><span class="op">:</span> Y<span class="op">,</span></span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>    <span class="dt">name</span><span class="op">:</span> <span class="st">'Y'</span> </span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>Plotly<span class="op">.</span><span class="fu">newPlot</span>(TESTER<span class="op">,</span> [traceS<span class="op">,</span> traceX<span class="op">,</span> traceY])<span class="op">;</span></span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">f</span>(t<span class="op">,</span>y<span class="op">,</span>S)</span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>{</span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>    <span class="kw">var</span> k1 <span class="op">=</span> <span class="fl">2.0</span><span class="op">,</span> k2 <span class="op">=</span> <span class="fl">2.0</span><span class="op">,</span> k3 <span class="op">=</span> <span class="fl">1.0</span><span class="op">,</span> k4 <span class="op">=</span> <span class="fl">1.0</span><span class="op">;</span></span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>    <span class="kw">var</span> X <span class="op">=</span> y[<span class="dv">0</span>]<span class="op">,</span> Y <span class="op">=</span> y[<span class="dv">1</span>]<span class="op">;</span></span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>    <span class="kw">var</span> dX <span class="op">=</span> k1<span class="op">*</span>S <span class="op">-</span> k2<span class="op">*</span>X<span class="op">*</span>Y<span class="op">;</span></span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>    <span class="kw">var</span> dY <span class="op">=</span> k3<span class="op">*</span>S <span class="op">-</span> k4<span class="op">*</span>Y<span class="op">;</span></span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> {<span class="dv">0</span><span class="op">:</span> dX<span class="op">,</span> <span class="dv">1</span><span class="op">:</span> dY}<span class="op">;</span></span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="positive-feedback-mutual-inhibition" class="level3" data-number="11.1.5">
+<h3 data-number="11.1.5" class="anchored" data-anchor-id="positive-feedback-mutual-inhibition"><span class="header-section-number">11.1.5</span> Positive feedback: mutual inhibition</h3>
+<p>The following is an example of feedback loop, of positive type.</p>
+<p><img src="img/MutualIn.png" class="img-fluid"></p>
+<p>Indeed, it assumed that the enzyme <span class="math inline">\(\ce{E}\)</span> in the unphosphorylated form favours the decay of <span class="math inline">\(\ce{X}\)</span>, hence decreases its concentration; on the other hand, <span class="math inline">\(\ce{X}\)</span> favours the phosphorylation of <span class="math inline">\(\ce{E}\)</span>. Hence an increase in the concentration of <span class="math inline">\(\ce{X}\)</span> decreases the concentration of <span class="math inline">\(\ce{E}\)</span>; this decrease decreases the decay rate of <span class="math inline">\(\ce{X}\)</span>, thus increasing its concentration. This is why this is a positive feedback loop.</p>
+<p>The corresponding equations are <span class="math display">\[
+\left\{\begin{aligned}{}
+[\ce{X}]' &amp;= k_0 + k_1 [\ce{S}] - (k_2 + k_2'[\ce{E}])[\ce{X}], \\
+[\ce{E}]' &amp;= \frac{V_1 (\ce{E}_\mathrm{tot} - [\ce{E}])}{K_{m_1} + \ce{E}_\mathrm{tot} - [\ce{E}]} -\frac{V_2 [\ce{E}][\ce{X}]}{K_{m_2} + [\ce{E}]}.
+\end{aligned} \right.
+\]</span></p>
+<p>We rescale the equations with: <span class="math display">\[
+y = \frac{\ce{E}}{\ce{E}_\mathrm{tot}}, \quad
+L_1 = \frac{K_{m_1}}{\ce{E}_\mathrm{tot}}, \quad
+L_2 = \frac{K_{m_2}}{\ce{E}_\mathrm{tot}}, \quad
+\nu_1 = \frac{V_1}{\ce{E}_\mathrm{tot}}, \quad
+\nu_2 = \frac{V_2}{\ce{E}_\mathrm{tot}}.
+\]</span></p>
+<p>so we obtain: <span class="math display">\[
+\left\{\begin{aligned}{}
+[\ce{X}]' &amp;= k_0 + k_1 [\ce{S}] - (k_2 + k_2'[\ce{E}]_\mathrm{tot} y)[\ce{X}], \\
+y' &amp;= \frac{\nu_1 (1 - y)}{L_1 + 1 - y} -\frac{\nu_2 y [\ce{X}] }{L_2 + y}.
+\end{aligned} \right.
+\]</span></p>
+<p>At equilibrium we have: <span class="math display">\[
+\begin{aligned}{}
+[\ce{X}] &amp;= f(y) = \frac{k_0 + k_1[\ce{S}]}{k_2 + k_2'[\ce{E}]_\mathrm{tot} y}, \\
+[\ce{X}] &amp;= \frac{\nu_1}{\nu_2}\frac{(1-y)(L_1+y)}{y(L_2+1-y)} = \frac{\nu_1}{\nu_2}g_{L_1,L_2}(1-y).
+\end{aligned}
+\]</span></p>
+<p>If <span class="math inline">\(L_1\)</span> and <span class="math inline">\(L_2\)</span> are very small, the function <span class="math inline">\(g_{L_1,L_2}(1-y)\)</span> has a very sharp concave-convex shape. Hence a hyperbolic function like <span class="math inline">\(f(y)\)</span> can cross it either once or three times, depending on parameter values.</p>
+<p><img src="img/MutualSigm.png" class="img-fluid"></p>
+<p>In the right panel of the figure, we show how the equilibrium values of <span class="math inline">\(\ce{X}\)</span> and <span class="math inline">\(y\)</span> depend on <span class="math inline">\(\ce{S}\)</span>. By studying the vector field when there are three equilibria, it is easy to see that the intermediate equilibrium is unstable, while the exterior ones are asymptotically stable. The scheme is called “switch” because, depending on the value of <span class="math inline">\(\ce{S}\)</span>, can give rise to a response in one of two possible stable states. In the generic model for the cell cycle it is shown how this scheme can be embedded in a more complex reaction network to give rise to repeated switches from one state to the other, and vice versa. We have hysteresis: an example is the <em>lac operon</em>.</p>
+</section>
+<section id="negative-feedback-homeostatis" class="level3" data-number="11.1.6">
+<h3 data-number="11.1.6" class="anchored" data-anchor-id="negative-feedback-homeostatis"><span class="header-section-number">11.1.6</span> Negative feedback: homeostatis</h3>
+<p>A simple variation on the previous loop provides an example of a negative feedback loop. Now <span class="math inline">\(\ce{X}\)</span> increases the rate at which <span class="math inline">\(\ce{E}\)</span> becomes active (de-phosphorylated in this scheme) at increasing the decay rate of <span class="math inline">\(\ce{X}\)</span>; hence if the concentration of <span class="math inline">\(\ce{X}\)</span> is increased, the same will occur for the concentration of <span class="math inline">\(\ce{E}\)</span> that will then increase the decay of <span class="math inline">\(\ce{X}\)</span>, tending to reduce the concentration of <span class="math inline">\(\ce{X}\)</span>. Mechanisms of this kind are at the basis of homeostasis, the property of many biological systems to maintain some quantities as constant as possible.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/NegativeF.png" class="img-fluid figure-img"></p>
+<figcaption>image</figcaption>
+</figure>
+</div>
+<p>The equations corresponding to this scheme are: <span class="math display">\[
+\left\{\begin{aligned}
+[\ce{X}]' &amp;= k_0 + k_1 [\ce{S}] - (k_2 + k_2'[\ce{E}])[\ce{X}], \\
+[\ce{E}]' &amp;= \frac{V_1 [\ce{X}](\ce{E}_\mathrm{tot} - [\ce{E}])}{K_{m_1} + \ce{E}_\mathrm{tot} - [\ce{E}]} -\frac{V_2 [\ce{E}]}{K_{m_2} + [\ce{E}]}.
+\end{aligned} \right.
+\]</span></p>
+<p>We proceed as before, with the same rescaling, and the equilibrium is such that: <span class="math display">\[
+\left\{\begin{aligned}
+[\ce{X}] &amp;= f(y) = \frac{k_0 + k_1[\ce{S}]}{k_2 + k_2'[\ce{E}]_\mathrm{tot} y}, \\
+[\ce{X}] &amp;= \frac{\nu_2}{\nu_1}\frac{y(L_1+1-y)}{(1-y)(L_2+y)} = \frac{\nu_2}{\nu_1}g_{L_1,L_2}(y).
+\end{aligned}\right.
+\]</span></p>
+<p>We observe that <span class="math inline">\(g_{L_1,L_2}(y)\)</span> is an increasing function of <span class="math inline">\(y\)</span>, and <span class="math inline">\(f(y)\)</span> is a decreasing function. Moreover, <span class="math display">\[
+\begin{aligned}
+f(0) &amp;= \frac{k_0 + k_1[\ce{S}]}{k_2} &gt; 0, \\
+g_{L_1,L_2}(0) &amp; = 0, \\
+f(1) &amp;&lt; \lim_{y\to 1^-} g_{L_1,L_2}(y) = \infty,
+\end{aligned}
+\]</span></p>
+<p>it follows that there always exists a unique equilibrium <span class="math inline">\(([\ce{X}]^*,y^*)\)</span> with <span class="math inline">\([\ce{X}]^* &gt; 0\)</span> and <span class="math inline">\(0&lt;y&lt;1\)</span>.</p>
+<p>Furthermore, it is easy to see that the equilibrium is asymptotically stable. To this purpose, it is enough computing the Jacobian at equilbrium <span class="math display">\[
+J([\ce{X}],y) = \begin{pmatrix}
+-(k_2 + k_2'E_\mathrm{tot} y) &amp; -k_2'E_\mathrm{tot} [\ce{X}] \\
+\frac{\nu_1(1-y)}{L_1+1-y} &amp; -\frac{\nu_1 L_1 [\ce{X}]}{(1+L_1-y)^2} - \frac{\nu_2 L_2}{(L_2 + y)^2}
+\end{pmatrix}
+= \begin{pmatrix} - &amp; - \\ + &amp; - \end{pmatrix}.
+\]</span></p>
+<p>Because of the signs of the matrix entries, it is immediate to see that the trace is negative and the determinant is positive, implying asymptotic stability. This implies that after perturbations, the system is taken back to the equilibrium; furthermore, it can be observed through the Figure that the equilibrium values depend only weakly on the exact value of <span class="math inline">\(\ce{S}\)</span> in an intermediate range of <span class="math inline">\(\ce{S}\)</span>.</p>
+</section>
+<section id="negative-feedback-oscillations" class="level3" data-number="11.1.7">
+<h3 data-number="11.1.7" class="anchored" data-anchor-id="negative-feedback-oscillations"><span class="header-section-number">11.1.7</span> Negative feedback: oscillations</h3>
+<p>A system with a negative feedback loop may oscillate around the equilibrium (it can be seen by computing the vector field), but we have seen that in a feedback loop of length 2, the oscillations are damped as the equilibrium is asymptotically stable.</p>
+<p>It then becomes natural asking whether a negative feedback loop of length 3 can give rise to sustained oscillations. A positive answer has been given by Goldbeter in 1991. The scheme proposed was the following (identical to the previous one, except that <span class="math inline">\(\ce{E}\)</span> instead of having a direct effect on the decay rate of <span class="math inline">\(\ce{X}\)</span> activates <span class="math inline">\(\ce{Y}\)</span> that in turn increases the decay rate of <span class="math inline">\(\ce{X}\)</span>):</p>
+<p><img src="img/Oscill.png" class="img-fluid"></p>
+<p>Letting <span class="math inline">\(e = [\ce{E}]/[\ce{E}]_\mathrm{tot}\)</span> and <span class="math inline">\(y = [\ce{Y}]/[\ce{Y}]_\mathrm{tot}\)</span> the resulting equations are <span class="math display">\[
+\left\{\begin{aligned}{}
+[\ce{X}]' &amp;= k_0 + k_1 [\ce{S}] - (k_2 + k_2'[\ce{Y}]_\mathrm{tot} y)[\ce{X}], \\
+e' &amp;= \frac{\nu_1[\ce{X}] (1 - e)}{L_1 + 1 - e} -\frac{\nu_2 e}{L_2 + e}, \\
+y' &amp;= \frac{\nu_3 e (1 - y)}{L_3 + 1 - y} -\frac{\nu_4 y}{L_4 + y}.
+\end{aligned} \right.
+\]</span></p>
+<p>Setting the third equation equal to 0, we find that <span class="math display">\[
+e = \frac{\nu_4}{\nu_3} g_{L_3,L_4}(y),
+\]</span></p>
+<p>hence an increasing function of <span class="math inline">\(y\)</span>. Similarly, setting the second equation to 0, we find that <span class="math display">\[
+[\ce{X}] = \frac{\nu_2}{\nu_1} g_{L_1,L_2}(e),
+\]</span></p>
+<p>hence, setting second and third equation equal to 0, we see that <span class="math inline">\([\ce{X}]\)</span> is given by an increasing function of <span class="math inline">\(y\)</span>; on the other hand, setting the first equation to 0, we obtain <span class="math display">\[
+[\ce{X}] = f(y) = \frac{k_0 + k_1[\ce{S}]}{k_2 + k_2'[\ce{Y}]_\mathrm{tot} y},
+\]</span></p>
+<p>a decreasing function of <span class="math inline">\(y\)</span>. Necessarily there is unique <span class="math inline">\(y\)</span> at which the two functions are equal, yielding a unique equilibrium <span class="math inline">\(([\ce{X}]^*, e^*, y^*)\)</span>.</p>
+<p>In order to study its stability, consider the Jacobian: <span class="math display">\[
+\begin{split}
+J([\ce{X}],e,y) &amp;= \begin{pmatrix}
+-(k_2 + k_2'Y_\mathrm{tot} y) &amp; 0 &amp; -k_2'Y_\mathrm{tot} [\ce{X}] \\
+\frac{\nu_1(1-e)}{L_1+1-e} &amp; -\frac{\nu_1 L_1 [\ce{X}]}{(1+L_1-e)^2} - \frac{\nu_2 L_2}{(L_2 + e)^2} &amp; 0 \\
+0 &amp; \frac{\nu_3(1-y)}{L_3+1-y} &amp; -\frac{\nu_3 L_3 [\ce{X}]}{(1+L_3-y)^2} - \frac{\nu_4 L_4}{(L_4 + y)^2}
+\end{pmatrix} \\
+&amp;= \begin{pmatrix} - &amp; 0 &amp; - \\ + &amp; - &amp; 0 \\ 0 &amp; + &amp; - \end{pmatrix}
+\end{split}
+\]</span></p>
+<p>In order to study the stability, we can use the Routh-Hurwitz criterion. We recall that the invariants of a <span class="math inline">\(3\times 3\)</span> matrix are: <span class="math display">\[
+\begin{aligned}
+I_1 &amp;= -a_1 = \operatorname{tr} J, \\
+I_2 &amp;= +a_2 = \tfrac{1}{2}\bigl( (\operatorname{tr} J)^2 - \operatorname{tr} J^2 \bigr), \\
+I_3 &amp;= -a_3 = \det J, \\
+\end{aligned}
+\]</span></p>
+<p>and they are such that: <span class="math display">\[
+\mathcal{P}_J(\lambda) = \lambda^3 - I_1 \lambda^2 + I_2 \lambda - I_3 = \lambda^3 + a_1 \lambda^2 + a_2 \lambda + a_3.
+\]</span></p>
+<p>The Routh-Hurwitz requires that <span class="math inline">\(a_1 &gt; 0\)</span>, <span class="math inline">\(a_2 &gt; 0\)</span>, <span class="math inline">\(a_3 &gt; 0\)</span>, and <span class="math inline">\(a_1 a_2 − a_3\)</span>. Using the signs, <span class="math inline">\(\operatorname{tr} J &lt; 0\)</span> and <span class="math inline">\(\det J &lt; 0\)</span>, so <span class="math inline">\(a_1 &gt; 0\)</span> and <span class="math inline">\(a_3 &gt; 0\)</span>. For <span class="math inline">\(a_2\)</span> is slightly more complicated, but we have <span class="math inline">\(a_2\)</span>. However, <span class="math inline">\(a_1 a_2 - a_3\)</span> may change sign. For some choice of the parameters, the equilibrium may stability through a Hopf bifurcation, giving rise to periodic solutions.</p>
+
+
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="ref-ks08_vol1" class="csl-entry" role="listitem">
+Keener, James, and James Sneyd. 2009. <em>Mathematical Physiology: I: Cellular Physiology</em>. Second. Vol. 8/I. Springer. <a href="https://strutture-provincia.primo.exlibrisgroup.com/permalink/39SBT_INST/ghkipk/alma991012367489706186">https://strutture-provincia.primo.exlibrisgroup.com/permalink/39SBT_INST/ghkipk/alma991012367489706186</a>.
+</div>
+</div>
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./10_Inhibition.html" class="pagination-link" aria-label="Inhibition">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Inhibition</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./references.html" class="pagination-link" aria-label="References">
+        <span class="nav-page-text">References</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

@@ -263,12 +263,24 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../../10_Inhibition.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Inhibition</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../../references.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">References</span></a>
   </div>
 </li>
       </ul>
   </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../projects2024.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Projects</span></a>
+  </div>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
@@ -424,7 +436,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">October 22, 2024</p>
+      <p class="date-modified">October 23, 2024</p>
     </div>
   </div>
     
@@ -503,24 +515,145 @@ q &amp;= \frac{2}{1+\sqrt{1 + 8 K_\mathrm{eq} P}},
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="va">MM</span><span class="op">'=</span><span class="va">vm</span><span class="op">/</span>(<span class="fl">1</span><span class="op">+</span>( <span class="va">PP</span><span class="op">*</span>(<span class="fl">1</span><span class="op">-</span><span class="va">q</span>)<span class="op">/</span>(<span class="fl">2</span><span class="op">*</span><span class="va">Pcrit</span>) )<span class="op">^</span><span class="fl">2</span>) <span class="op">-</span> <span class="va">km</span><span class="op">*</span><span class="va">MM</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="va">PP</span><span class="op">'=</span><span class="va">vp</span><span class="op">*</span><span class="va">MM</span><span class="op">-</span>(<span class="va">kp1</span><span class="op">*</span><span class="va">PP</span><span class="op">*</span><span class="va">q</span><span class="op">+</span><span class="va">kp2</span><span class="op">*</span><span class="va">PP</span>)<span class="op">/</span>(<span class="va">Jp</span><span class="op">+</span><span class="va">PP</span>)<span class="op">-</span><span class="va">kp3</span><span class="op">*</span><span class="va">PP</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
 </ol>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>We obtain the following orbit (counterclockwise):</p>
+<p><img src="lab08_es21.png" class="img-fluid"></p>
+</div>
+</div>
+</div>
 <ol start="2" type="1">
 <li>Manually find the period. To do so, start from any point on the cycle and then integrate for enough time so to close the cycle. To get the exact value, do <code>Select-&gt;Initial Point</code> and select <code>LC Select Cycle</code>. It will ask for tolerance and number of discretization points.</li>
 </ol>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The period is 24.178 hours, as expected.</p>
+</div>
+</div>
+</div>
 <ol start="3" type="1">
 <li>A limit cycle should contain an (unstable) equilibrium or another unstable limit cycle (why?) Integrate the system backward in time to approximate it.</li>
 </ol>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The interior of a limit cycle in 2-D is a bounded trapping region. Any orbit starting inside, must stay inside. Since the limit cycle is asymptotically stable, such trajectories will approach the boundary of the region. However, integrating backward in time renders the limit cycle unstable, and orbits must go to some equilibrium point (or another inner limit cycle) because of the Poincaré-Bendixson Theorem.</p>
+<p>Integrating backwards in time gives an unstable equilibrium at <span class="math inline">\(M \approx 1.36\)</span> and <span class="math inline">\(P \approx 0.54\)</span>.</p>
+<p><img src="lab08_ex23.png" class="img-fluid"></p>
+</div>
+</div>
+</div>
 <ol start="4" type="1">
 <li>Continue the unstable equilibrium with respect to <span class="math inline">\(k_{p_1}\)</span>, both backward and forward. Report all bifurcations.</li>
 </ol>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The bifurcation diagram looks like the following</p>
+<p><img src="lab08_ex24.png" class="img-fluid"></p>
+<p>We have two supercritical Hopf bifurcations: one at <span class="math inline">\(k_{p_1} \approx 6.16\)</span> and another at <span class="math inline">\(k_{p_2} \approx 46.48\)</span>.</p>
+</div>
+</div>
+</div>
 <ol start="5" type="1">
 <li>Continue the first Hopf point with respect to both <span class="math inline">\(k_{p_1}\)</span> and <span class="math inline">\(K_\mathrm{eq}\)</span>, and find a region in the <span class="math inline">\((k_{p_1},K_\mathrm{eq})\)</span> plane that allows for a limit cycle to exist. <em>Hint: if it is too slow, increase <code>Maxstepsize</code> in the <code>Continuer</code>.</em></li>
 </ol>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>We obtain the region between the two curves:</p>
+<p><img src="lab08_ex25.png" class="img-fluid"></p>
+<p>Actually, it is a single curve, as at the bottom there is a very narrow gap.</p>
+</div>
+</div>
+</div>
 <ol start="6" type="1">
 <li>Go back to the original Hopf point, and now continue it with respect to the period and <span class="math inline">\(k_{p_1}\)</span>. Plot how the period varies with respect to <span class="math inline">\(k_{p_1}\)</span>.</li>
 </ol>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The period is automatically computed by MatCont for limit cycles (how?) We can easily visualize it as a function of <span class="math inline">\(k_{p_1}\)</span>.</p>
+<p><img src="lab08_ex26.png" class="img-fluid"></p>
+<p>Note that the period has a plateau for a wide range of <span class="math inline">\(k_{p_1}\)</span> with values around 24 hours. This ensures the stability of the system to perturbation of the parameters.</p>
+</div>
+</div>
+</div>
 <ol start="7" type="1">
 <li>Select the original LC of 24 hours. Then, try to continue it with respect to <span class="math inline">\(k_{p_1}\)</span> and <span class="math inline">\(K_\mathrm{eq}\)</span>. The curve should represent all possible combinations of the parameters giving a cycle of period 24 hours. Notice that you will see some limit point of cycles (LPC).</li>
 </ol>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><img src="lab08_ex27.png" class="img-fluid"></p>
+</div>
+</div>
+</div>
 </section>
 <section id="activator-inhibitor-oscillations" class="level2">
 <h2 class="anchored" data-anchor-id="activator-inhibitor-oscillations">Activator-inhibitor oscillations</h2>
@@ -571,18 +704,107 @@ q &amp;= \frac{2}{1+\sqrt{1 + 8 K_\mathrm{eq} P}},
 </tr>
 </tbody>
 </table>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>We converge towards a limit cycle.</p>
+<p><img src="lab06ex22.png" class="img-fluid"></p>
+</div>
+</div>
+</div>
 <ol start="2" type="1">
 <li>Try to approximate the period of the limit cycle.</li>
 </ol>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-9" class="callout-9-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Starting from a point in the limit cycle, we obtain a period <span class="math inline">\(T\approx 51.147\)</span>. <img src="lab06ex23.png" class="img-fluid"></p>
+</div>
+</div>
+</div>
 <ol start="3" type="1">
 <li>For larger <span class="math inline">\([\ce{S}]\)</span>, say <span class="math inline">\([\ce{S}] = 0.5\)</span>, there is no limit cycle. Approximate the equilibrium (it should be a spiral), then continue the curve backward with respect to <span class="math inline">\([\ce{S}]\)</span>. Stop at <span class="math inline">\([\ce{S}]\approx 0\)</span>. Do you observe bifurcations?</li>
 </ol>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-10" class="callout-10-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="lab06ex24.png" class="img-fluid figure-img"></p>
+<figcaption>image</figcaption>
+</figure>
+</div>
+<p>We have 2 Hopf bifurcations: one for <span class="math inline">\([\ce{S}]\approx 0.33\)</span> is supercritical, because the 1st Lyapunov coefficient is negative; the second one is for <span class="math inline">\([\ce{S}]\approx 0.096\)</span>, and it is subcritical (positive Lyapunov coefficient).</p>
+</div>
+</div>
+</div>
 <ol start="4" type="1">
 <li>Select the Hopf bifurcation, and continue the limit cycle with respect to <span class="math inline">\([\ce{S}]\)</span>. You should obtain a limit point of cycle. Find the corresponding value of it.</li>
 </ol>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-11" class="callout-11-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The limit point of cycles occurs for <span class="math inline">\([\ce{S}]\approx 0.088\)</span>.</p>
+</div>
+</div>
+</div>
 <ol start="5" type="1">
 <li>Plot in 3D the limit cycle family with respect to <span class="math inline">\([\ce{S}]\)</span>. Notice that for a range of <span class="math inline">\({\ce[S]}\)</span> (which one?) the system is bistable. The leftmost Hopf is subcritical, whereas the other one is supercrical. Which one is a catastrophic bifurcation?</li>
 </ol>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-12" class="callout-12-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><img src="lab06ex25.png" class="img-fluid"></p>
+<p>For <span class="math inline">\([\ce{S}]\in[0.088,0.096]\)</span> the system is bistable, because if we start from inside the unstable (red) cycle, we converge towards the stable equilibrium inside, otherwise we go towards the outer limit cycle.</p>
+<p>The Hopf bifurcation at <span class="math inline">\([\ce{S}]\approx 0.096\)</span> is catastrophic, because a point close to the stable equilibrium before the Hopf will go towards a (much larger) limit cycle after the Hopf. A small change in the parameters gives a large change in the solution. In the case of supercritical Hopf bifurcation, like the second one, a small change in the parameters leads to a small change in the solution, because the limit cycle after the Hopf bifurcation has a very small radius.</p>
+</div>
+</div>
+</div>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
