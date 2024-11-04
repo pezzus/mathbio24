@@ -51,7 +51,7 @@ div.csl-indent {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../Laboratories/01_ODE_Integration/lab_ODEinteg.html" rel="next">
+<link href="../Assignments/07_feedbacks.html" rel="next">
 <link href="../Assignments/05_predators.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
@@ -235,6 +235,12 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../11_FeedbackLoops.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Feedback loops</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../references.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">References</span></a>
   </div>
@@ -290,6 +296,12 @@ window.Quarto = {
   <div class="sidebar-item-container"> 
   <a href="../Assignments/06_reactions.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Reactions</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Assignments/07_feedbacks.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Feedbacks</span></a>
   </div>
 </li>
       </ul>
@@ -406,7 +418,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">October 22, 2024</p>
+      <p class="date-modified">November 4, 2024</p>
     </div>
   </div>
     
@@ -430,18 +442,155 @@ y' &amp;= bx - \frac{bxy}{1+x^2},
 <ol type="1">
 <li>Find the equilibrium of the system, and prove that it is never a saddle point.</li>
 </ol>
+<div class="callout callout-style-default callout-tip callout-titled" title="Solution">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The nullclines are <span class="math display">\[
+\begin{aligned}
+x'=0 &amp;&amp;\Rightarrow&amp;&amp; (a - x)(1+x^2) - 4xy &amp;= 0, \\
+y'=0 &amp;&amp;\Rightarrow&amp;&amp; bx(1+x^2-y) &amp;= 0.
+\end{aligned}
+\]</span></p>
+<p>We note that <span class="math inline">\(1+x^2 = y\)</span> from the second equation, which gives: <span class="math display">\[
+x^*=\frac{a}{5}, \quad y^* = 1 + \frac{a^2}{25}.
+\]</span></p>
+<p>For the stability, we check the Jacobian: <span class="math display">\[
+J = \begin{bmatrix} -1 + \frac{4y(x^2-1)}{(1+x^2)^2} &amp; -\frac{4x}{1+x^2} \\ b + \frac{by(x^2-1)}{(1+x^2)^2} &amp; -\frac{bx}{1+x^2} \end{bmatrix}
+\]</span></p>
+<p>So at the equilibrium we have: <span class="math display">\[
+J^* = \frac{1}{25 + a^2}\begin{bmatrix} a^2 - 125 &amp; -20a \\ 2a^2b &amp; -5ab \end{bmatrix}.
+\]</span></p>
+<p>An equilibrium is a saddle when 2 eigenvalues are of opposite sign. This can only happen when <span class="math inline">\(\det J^*&lt;0\)</span>. But we have: <span class="math display">\[
+\det J^* = \frac{25ab}{25+a^2} &gt; 0,
+\]</span></p>
+<p>for <span class="math inline">\(a &gt; 0\)</span> and <span class="math inline">\(b&gt;0\)</span>. Hence, the equilibrium is never a saddle.</p>
+</div>
+</div>
+</div>
 <ol start="2" type="1">
 <li>In the <span class="math inline">\((a,b)\)</span> plane, find the region <span class="math inline">\(\mathcal{S}\)</span> such that the equilibrium is asymptotically stable.</li>
 </ol>
+<div class="callout callout-style-default callout-tip callout-titled" title="Solution">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Since <span class="math inline">\(\det J^*&gt;0\)</span>, the asymptotic stability of the equilibrium follows from the condition <span class="math inline">\(\operatorname{tr}J^*&lt;0\)</span>. This is the case when: <span class="math display">\[
+\operatorname{tr}J^* = \frac{3a^2-5ab-125}{25+a^2} &lt; 0.
+\]</span></p>
+<p>Hence: <span class="math display">\[
+\mathcal{S} = \bigl\{ (a,b)\in\mathbb{R}_+^2\colon 3a^2 - 5ab - 125 &lt; 0 \bigr\}.
+\]</span></p>
+<p>To visualize the region, we can either solve the quadratic inequality in <span class="math inline">\(a\)</span>, or simply notice that <span class="math display">\[
+(a,b)\in\mathcal{S} \quad\Leftrightarrow\quad b &gt; \frac{3}{5}a - \frac{25}{a}.
+\]</span></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="StabOsci.png" class="img-fluid figure-img"></p>
+<figcaption>Stability region</figcaption>
+</figure>
+</div>
+<p>The region <span class="math inline">\(\mathcal{S}\)</span> is above the curve <span class="math inline">\(b = \frac{3}{5}a - \frac{25}{a}\)</span>, which is zero for <span class="math inline">\(a = \frac{5}{3}\sqrt{15}\)</span> and tends to a line of slope <span class="math inline">\(\frac{5}{3}b\)</span> for <span class="math inline">\(a\to\infty\)</span>.</p>
+</div>
+</div>
+</div>
 <ol start="3" type="1">
 <li>Show that there exists a limit cycle for any choice of the parameters <span class="math inline">\((a,b)\)</span> in the complement of <span class="math inline">\(\mathcal{S}\)</span>. <em>Hint: apply the Poincaré-Bendixson theorem, by constructing an equilibrium-free region in the phase space that traps all the orbits.</em></li>
 </ol>
+<div class="callout callout-style-default callout-tip callout-titled" title="Solution">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>In the complement of <span class="math inline">\(\mathcal{S}\)</span> the equilibrium is unstable, because the trace is positive. Since there are no other equilibria, if we show that the trajectories are bounded in the <span class="math inline">\((x,y)\)</span> plane, then there must exist at least one limit cycle. In other words, we apply the Poincaré-Bendixson in a trapping region <span class="math inline">\(\mathcal{R}\)</span> where we removed a small neighborhood of the equilibrium.</p>
+<p>A simple approach is to start with the axes. We will consider a rectangular region.</p>
+<ul>
+<li>Axis <span class="math inline">\(x=0\)</span>: <span class="math inline">\(x'=a&gt;0\)</span> and <span class="math inline">\(y'=0\)</span>, so the vector field points (horizontally) towards the positive side.</li>
+<li>Axis <span class="math inline">\(y=0\)</span>: <span class="math inline">\(y'=bx&gt;0\)</span>, so the vector field always points towards <span class="math inline">\(y&gt;0\)</span>.</li>
+<li>Axis <span class="math inline">\(x=a\)</span>: <span class="math inline">\(x'=-\frac{4xy}{1+a^2}&lt;0\)</span>, so the vector field always points towards <span class="math inline">\(x&lt;a\)</span>.</li>
+<li>Axis <span class="math inline">\(y=1+a^2\)</span>: <span class="math inline">\(y'=bx(1-\frac{1+a^2}{1+x^2})&gt;0\)</span>, so the vector field always points towards <span class="math inline">\(y&lt;1+a^2\)</span> when <span class="math inline">\(x&lt;a\)</span>.</li>
+</ul>
+<p>The region <span class="math display">\[
+\mathcal{R} = \bigl\{ (x,y)\colon 0\le x \le a, 0 \le y \le 1+a^2, (x-x^*)^2 + (y-y^*)^2 \ge \varepsilon^2 \bigr\}
+\]</span></p>
+<p>is a trapping region for the trajectories that contains no equilibria. Hence, there exists a limit cycle in <span class="math inline">\(\mathcal{R}\)</span>.</p>
+</div>
+</div>
+</div>
 <ol start="4" type="1">
 <li>What does it happen when we are on the boundary of <span class="math inline">\(\mathcal{S}\)</span>? <em>Hint: the eigenvalues of the linearized system are purely imaginary, thus the equilibrium is actually an infinitesimally small limit cycle.</em></li>
 </ol>
+<div class="callout callout-style-default callout-tip callout-titled" title="Solution">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>First notice that the eigenvalues satisfy the equation <span class="math display">\[
+\lambda^2 - (\operatorname{tr}J^*)\lambda + \det J^* = 0.
+\]</span></p>
+<p>The discriminant is <span class="math display">\[
+\Delta = (\operatorname{tr}J^*)^2 - 4\det J^*.
+\]</span></p>
+<p>On the non-trivial boundary of the region we have <span class="math inline">\(\operatorname{tr}J^*=0\)</span>, hence the discriminant is negative: the eigenvalues are complex conjugate with zero real part. The trace of <span class="math inline">\(J^*\)</span> is also (twice) the real part of the eigenvalues, and as we cross the boundary while leaving <span class="math inline">\(\mathcal{S}\)</span> the real part from negative it becomes positive. Hence, the equilibrium becomes an unstable spiral. We notice that in <span class="math inline">\(\mathcal{S}\)</span> we have a stable limit cycle, so trajectories go there.</p>
+</div>
+</div>
+</div>
 <ol start="5" type="1">
 <li>Find the period of the (infinitesimally small) limit cycle on the boundary as a function of <span class="math inline">\(a\)</span>. Show that as <span class="math inline">\(a\to\infty\)</span>, <span class="math inline">\(T\to\frac{2\pi}{\sqrt{15}}\)</span>. <em>Hint: since eigenvalues are purely imaginary, locally the solution is of the form <span class="math inline">\(e^{i\omega t}\)</span> for some <span class="math inline">\(\omega\)</span>. Use this fact to obtain the period.</em></li>
 </ol>
+<div class="callout callout-style-default callout-tip callout-titled" title="Solution">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>On the boundary of <span class="math inline">\(\mathcal{S}\)</span>, the eigenvalues are imaginary: <span class="math display">\[
+\lambda_{1,2} = \pm i \sqrt{\det J^*}.
+\]</span></p>
+<p>Similarly to a harmonic oscillator, the period is simply <span class="math inline">\(2\pi/\omega\)</span>, with <span class="math inline">\(\omega = \sqrt{\det J^*}\)</span>.</p>
+<p>Since we are on the curve <span class="math inline">\(\operatorname{tr}{J}^*=0\)</span>, we have <span class="math inline">\(b = \frac{3}{5}a - \frac{25}{a}\)</span> and hence: <span class="math display">\[
+\det J^* = \frac{25ab}{25+a^2} = \frac{15a^2-25^2}{25+a^2}\to 15,
+\]</span></p>
+<p>when <span class="math inline">\(a\to\infty\)</span>. So the period tends to <span class="math inline">\(2\pi/\sqrt{15}\)</span>.</p>
+</div>
+</div>
+</div>
 </section>
 <section id="fast-slow-systems" class="level2">
 <h2 class="anchored" data-anchor-id="fast-slow-systems">Fast-slow systems</h2>
@@ -456,9 +605,74 @@ z' &amp;= \frac{1}{\varepsilon}(z - z^3 - y).
 <ol type="1">
 <li>Explain why the system has fast-slow dynamics, and identify the fast and the slow variable.</li>
 </ol>
+<div class="callout callout-style-default callout-tip callout-titled" title="Solution">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The variable <span class="math inline">\(z\)</span> is fast, because its time derivative is very large, since <span class="math inline">\(\varepsilon \ll 1\)</span>.</p>
+<p>By rescaling the time with <span class="math inline">\(\tau = t/\varepsilon\)</span>, we obtain the system: <span class="math display">\[
+\left\{\begin{aligned} \dot{y} &amp;= \varepsilon z, \\ \dot{z} &amp;= z - z^3 - y,\end{aligned}\right.
+\]</span></p>
+<p>where we denoted with a dot the derivative with respect to <span class="math inline">\(\tau\)</span>. Thus, <span class="math inline">\(y\)</span> is the slow variable, because on the fast scale <span class="math inline">\(\tau\)</span> its derivative is almost zero.</p>
+</div>
+</div>
+</div>
 <ol start="2" type="1">
 <li>With the help of Tikhonov’s theorem, qualitatively study the dynamics of the system.</li>
 </ol>
+<div class="callout callout-style-default callout-tip callout-titled" title="Solution">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Since <span class="math inline">\(z\)</span> is very fast, it can be assumed at quasi-steady-state compared to <span class="math inline">\(y\)</span>. In other words, we can go to the fast time-scale <span class="math inline">\(\tau\)</span> and consider <span class="math inline">\(y\)</span> as a parameter, since <span class="math inline">\(\dot{y}\approx 0\)</span>. We are left with a single equation for <span class="math inline">\(z\)</span>.</p>
+<p>The equilibria are such that <span class="math inline">\(y = z-z^3\)</span>. We can have up to three solutions, depending on <span class="math inline">\(y\)</span>. (Remember, <span class="math inline">\(y\)</span> is a parameter now.) With the help of a graph, denoting by <span class="math inline">\(y_M\)</span> and <span class="math inline">\(y_m\)</span> respectively the local maximum and minimum of the plot, we see that</p>
+<ul>
+<li>If <span class="math inline">\(y &gt; y_M\)</span> we have one negative solution, globally stable;</li>
+<li>If <span class="math inline">\(y &lt; y_m\)</span> we have one positive solution, globally stable;</li>
+<li>If <span class="math inline">\(y_m &lt; y &lt; y_M\)</span> we have 3 solutions, the one in the middle unstable.</li>
+</ul>
+<p>We can apply the Tikhonov’s theorem only when we can write <span class="math inline">\(z=\phi(y)\)</span>, which is not always possible here. We can only do for the upper and lower branch, respectively for <span class="math inline">\(y\in(-\infty,y_M)\)</span> for the upper branch and for <span class="math inline">\(y\in(y_m,\infty)\)</span> for the lower branch. The intermediate branch is unstable, so we cannot apply the theorem.</p>
+<p>Now we can study the dynamics of the full system. Given an initial condition, say for convinience on the upper branch (if not, the fast dynamics would bring the system quickly to the stable manifold, either upper or lower branch), we follow the dynamics on the slow manifold. Here, the <em>slow</em> dynamics applies, that is <span class="math inline">\(y' = z = \phi(y)\)</span>. Since in the upper branch <span class="math inline">\(z &gt; 0\)</span>, we have <span class="math inline">\(y'&gt;0\)</span>, we follow the branch from left to the right, until the limit point at <span class="math inline">\(y=y_M\)</span>. After that, the theorem does not apply.</p>
+<p>However, we can now go back to the fast system in the variable <span class="math inline">\(\tau\)</span>, and notice that we can keep <span class="math inline">\(y=y_M\)</span> (or slightly larger) and notice that the new equilibrium is now on the <em>lower</em> branch, which is stable. Once there, we apply again the theorem. Since <span class="math inline">\(y'=z\)</span> is now negative, we move to the left. We do until we reach the point <span class="math inline">\(y=y_m\)</span>, and then we must go to the positive branch again.</p>
+<p>Concluding, the overall dynamics for <span class="math inline">\(\varepsilon\to 0\)</span> is a (singular) limit cycle or hysteresis around the origin, running clockwise. We can check this in Matlab with <code>PhasePlane</code> app.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="hys0.2.png" class="img-fluid figure-img"></p>
+<figcaption><span class="math inline">\(\varepsilon = 0.2\)</span></figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="hys0.05.png" class="img-fluid figure-img"></p>
+<figcaption><span class="math inline">\(\varepsilon = 0.05\)</span></figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="hys0.001.png" class="img-fluid figure-img"></p>
+<figcaption><span class="math inline">\(\varepsilon = 0.001\)</span></figcaption>
+</figure>
+</div>
+<p>Notice that we are only changing the “speed” in the vertical direction. At the limit, the speed is infinite, and the solution in time is actually discontinuous.</p>
+</div>
+</div>
+</div>
 </section>
 <section id="reversible-reactions" class="level2">
 <h2 class="anchored" data-anchor-id="reversible-reactions">Reversible reactions</h2>
@@ -468,20 +682,156 @@ z' &amp;= \frac{1}{\varepsilon}(z - z^3 - y).
 <ol type="1">
 <li>Write down the system of equations corresponding to this scheme. Assume that at the start, there is neither complex <span class="math inline">\(C\)</span> nor product <span class="math inline">\(P\)</span>.</li>
 </ol>
+<div class="callout callout-style-default callout-tip callout-titled" title="Solution">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>We apply the law of mass action: <span class="math display">\[
+\begin{cases}
+[S]' = -k_1[S][E] + k_{-1}[C], &amp; \\
+[E]' = -k_1[S][E] + (k_{-1}+k_2)[C] - k_{-2}[P][E], &amp; \\
+[C]' =  k_1[S][E] - (k_{-1}+k_2)[C] + k_{-2}[P][E], &amp; \\
+[P]' = k_2[C] - k_{-2}[P][E]. &amp;
+\end{cases}
+\]</span></p>
+<p>The initial conditions are: <span class="math inline">\([S](0)=s_0\)</span>, <span class="math inline">\([E](0)=e_0\)</span>, <span class="math inline">\([C](0)=0\)</span>, and <span class="math inline">\([P](0)=0\)</span>.</p>
+</div>
+</div>
+</div>
 <ol start="2" type="1">
 <li>Note that two quantities are conserved: <span class="math inline">\([E] + [C]\)</span> and <span class="math inline">\([S] + [C] + [P]\)</span>. Use this to decrease the number of equations.</li>
 </ol>
+<div class="callout callout-style-default callout-tip callout-titled" title="Solution">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-9" class="callout-9-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Simply note that: <span class="math display">\[
+\begin{aligned}{}
+[E]' + [C]' = 0, &amp;\quad\Rightarrow\quad [E] + [C] = e_0, \\
+[S]' + [C]' + [P]' = 0, &amp;\quad\Rightarrow\quad [S] + [C] + [P] = s_0.
+\end{aligned}
+\]</span></p>
+<p>We can remove 2 equation, by using <span class="math display">\[
+\begin{cases}
+[E] = e_0 - [C], \\
+[P] = s_0 - [S] - [C].
+\end{cases}
+\]</span></p>
+<p>We obtain: <span class="math display">\[
+\begin{cases}
+[S]' = -k_1[S](e_0 - [C]) + k_{-1}[C], &amp; \\
+[C]' =  k_1[S](e_0 - [C]) - (k_{-1}+k_2)[C] + k_{-2}(s_0 - [S] - [C])(e_0 - [C]). &amp;
+\end{cases}
+\]</span></p>
+</div>
+</div>
+</div>
 <ol start="3" type="1">
 <li>Make the equations non-dimensional, and in so doing introduce the parameter <span class="math inline">\(\varepsilon = \frac{e_0}{s_0}\)</span>, the ratio of initial values of enzyme and substrate.</li>
 </ol>
+<div class="callout callout-style-default callout-tip callout-titled" title="Solution">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-10" class="callout-10-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>We have <span class="math inline">\([S] = s_0 s\)</span>, <span class="math inline">\([C] = e_0 c\)</span>, <span class="math inline">\(\varepsilon = \frac{e_0}{s_0}\)</span> and <span class="math inline">\(\tau = k_1 e_0 t\)</span>: <span class="math display">\[
+\left\{\begin{aligned}
+\frac{\mathrm{d}s}{\mathrm{d}\tau} &amp;= -s(1 - c) + \frac{k_{-1}}{k_1 s_0} c, \\
+\varepsilon \frac{\mathrm{d}c}{\mathrm{d}\tau} &amp;= s(1 - c) - \frac{k_{-1}+k_2}{k_1 s_0} c + \frac{k_{-2}}{k_1} (1 - s - \varepsilon c)(1 - c).
+\end{aligned}\right.
+\]</span></p>
+</div>
+</div>
+</div>
 <ol start="4" type="1">
 <li>Go to the limit <span class="math inline">\(\varepsilon \to 0^+\)</span> which amounts to make the quasi-steady-state approximation.</li>
 </ol>
+<div class="callout callout-style-default callout-tip callout-titled" title="Solution">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-11" class="callout-11-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>We formally set <span class="math inline">\(\varepsilon = 0\)</span>, and get: <span class="math display">\[
+s(1 - c) - \frac{k_{-1}+k_2}{k_1 s_0} c + \frac{k_{-2}}{k_1} (1 - s)(1 - c) = 0.
+\]</span></p>
+<p>We solve for <span class="math inline">\(c\)</span>: <span class="math display">\[
+c = \frac{k_{-2} + (k_1 - k_{-2}) s}{\frac{k_2 + k_{-1}}{s_0} + k_{-2} + (k_1 - k_{-2}) s}.
+\]</span></p>
+<p>We need to check that the equilibrium curve <span class="math inline">\(c=c(s)\)</span> is stable. The derivative (with respect to <span class="math inline">\(c\)</span>) of the nullcline <span class="math inline">\(c'=0\)</span> is: <span class="math display">\[
+-\frac{k_{-2}(1-s)}{k_1} - s - \frac{k_2 + k_{-1}}{k_1 s_0} &lt; 0,
+\]</span></p>
+<p>which is negative because <span class="math inline">\(s\in[0,1]\)</span> and all parameters are positive. Thus, the branch of equilibria <span class="math inline">\(c=c(s)\)</span> is asymptotically stable.</p>
+</div>
+</div>
+</div>
 <ol start="5" type="1">
 <li>Consider the resulting differential equation for <span class="math inline">\(S(t)\)</span> and show that it will converge to an equilibrium <span class="math inline">\(S_*\)</span> where the concentrations of substrate and product will satisfy Haldane’s relationship: <span class="math display">\[
 \frac{P_*}{S_*} = \frac{k_1k_2}{k_{-1}k_{-2}}.
 \]</span></li>
 </ol>
+<div class="callout callout-style-default callout-tip callout-titled" title="Solution">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-12" class="callout-12-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Rewrite the system in the <span class="math inline">\(([S],[P])\)</span> coordinates: <span class="math display">\[
+\begin{cases}
+[S]' = -k_1[S][E] + k_{-1}[C], &amp; \\
+[P]' = k_2[C] - k_{-2}[P][E]. &amp;
+\end{cases}
+\]</span></p>
+<p>Now observe that at equilibrium <span class="math inline">\([S]'=0\)</span> and <span class="math inline">\([P]'=0\)</span>. There is no need to solve the system: <span class="math display">\[
+\begin{cases}
+0 = -k_1 S_* E_* + k_{-1}C_*, &amp; \\
+0 = k_2 C_* - k_{-2}P_* E_*. &amp;
+\end{cases}
+\]</span></p>
+<p>From the first equation we deduce that: <span class="math display">\[
+C_* = \frac{k_1}{k_{-1}} S_* E_*.
+\]</span></p>
+<p>From the second equation we have: <span class="math display">\[
+0 = k_2 \frac{k_1}{k_{-1}} S_* E_* - k_{-2}P_* E_* \quad\Rightarrow\quad \frac{P_*}{S_*} = \frac{k_1k_2}{k_{-1}k_{-2}}.
+\]</span></p>
+</div>
+</div>
+</div>
 </section>
 <section id="phosphorylation" class="level2">
 <h2 class="anchored" data-anchor-id="phosphorylation">Phosphorylation</h2>
@@ -494,12 +844,126 @@ z' &amp;= \frac{1}{\varepsilon}(z - z^3 - y).
 <ol type="1">
 <li>Write down the system of equations corresponding to this scheme. Assume that at the start, there are no complexes <span class="math inline">\(C_1\)</span> or <span class="math inline">\(C_2\)</span>.</li>
 </ol>
+<div class="callout callout-style-default callout-tip callout-titled" title="Solution">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-13" class="callout-13-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>According to the law of mass action: <span class="math display">\[
+\begin{cases}
+[S]' = -k_1[S][E] + k_{-1}[C_1] + k_4 [C_2], &amp; \\
+[E]' = -k_1[S][E] + (k_{-1}+k_2)[C_1], &amp; \\
+[C_1]' =  k_1[S][E] - (k_{-1}+k_2)[C_1], &amp; \\
+[S_p]' = k_2 [C_1] + k_{-3}[C_2] - k_3[S_p][F], &amp; \\
+[F]' = -k_3[S_p][F] + (k_{-3}+k_4)[C_2], &amp; \\
+[C_2]' =  k_3[S_p][F] - (k_{-3}+k_4)[C_2]. &amp; \\
+\end{cases}
+\]</span></p>
+<p>The initial conditions are: <span class="math inline">\([S](0)=s_0\)</span>, <span class="math inline">\([E](0)=e_0\)</span>, <span class="math inline">\([C_1](0)=[C_2](0)=0\)</span>, <span class="math inline">\([S_p](0)=p_0\)</span>, and <span class="math inline">\([F](0)=f_0\)</span>.</p>
+</div>
+</div>
+</div>
 <ol start="2" type="1">
 <li>Prove that two quantities are conserved: <span class="math inline">\([E] + [C_1]\)</span> and <span class="math inline">\([F] + [C_2]\)</span>. Use this to decrease the number of equations.</li>
 </ol>
+<div class="callout callout-style-default callout-tip callout-titled" title="Solution">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-14" class="callout-14-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Note that: <span class="math display">\[
+\begin{aligned}{}
+[E]' + [C_1]' = 0, &amp;\quad\Rightarrow\quad [E] + [C_1] = e_0, \\
+[F]' + [C_2]' = 0, &amp;\quad\Rightarrow\quad [F] + [C_2] = f_0.\end{aligned}
+\]</span></p>
+</div>
+</div>
+</div>
 <ol start="3" type="1">
 <li>Following the same approach used in the derivation of Michaelis-Menten equation, arrive at a single equation for the (appropriately scaled) variable <span class="math inline">\([S]\)</span>.</li>
 </ol>
+<div class="callout callout-style-default callout-tip callout-titled" title="Solution">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-15-contents" aria-controls="callout-15" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-15" class="callout-15-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>We can remove the equations for <span class="math inline">\([E]\)</span> and <span class="math inline">\([F]\)</span>: <span class="math display">\[
+\begin{cases}
+[S]' = -k_1[S](e_0-[C_1]) + k_{-1}[C_1] + k_4 [C_2], &amp; \\
+[C_1]' =  k_1[S](e_0-[C_1]) - (k_{-1}+k_2)[C_1], &amp; \\
+[S_p]' = k_2 [C_1] + k_{-3}[C_2] - k_3[S_p](f_0-[C_2]), &amp; \\
+[C_2]' =  k_3[S_p](f_0-[C_2]) - (k_{-3}+k_4)[C_2]. &amp; \\
+\end{cases}
+\]</span></p>
+<p>The equations for <span class="math inline">\([S]\)</span> and <span class="math inline">\([S_p]\)</span>, when considered independently, fully matches the derivation of the Michaelis-Menten law. Note that there is an additional conserved quantity: <span class="math display">\[
+[S]'+[C_1]'+[S_p]'+[C_2]' = 0 \quad\Rightarrow\quad [S](0)+[S_p](0)=s_0+p_0=s_\mathrm{tot}.
+\]</span></p>
+<p>Thus, it is convenient to rescale with respect to <span class="math inline">\(s_\mathrm{tot}\)</span>. Rescale the variables with <span class="math display">\[
+\begin{aligned}{}
+[S](t) &amp;= s_\mathrm{tot} s(t),&amp; [S_p](t) &amp;= s_\mathrm{tot} p(t), &amp; \\
+[C_1](t) &amp;= e_0 c_1(t), &amp; [C_2](t) &amp;= f_0 c_2(t), &amp; \tau &amp;= k_1 e_0 t.
+\end{aligned}
+\]</span></p>
+<p>We plug the above expression in the system to obtain <span class="math display">\[
+\left\{\begin{aligned}
+s' &amp;= -s (1-c_1) + \frac{k_{-1}}{s_\mathrm{tot} k_1} c_1 + \frac{k_4 f_0}{k_1 s_\mathrm{tot} e_0} c_2, \\
+\varepsilon c_1' &amp;=  s(1-c_1) - \frac{k_{-1}+k_2}{k_1 s_\mathrm{tot}} c_1, \\
+p' &amp;= - \frac{k_3 f_0}{k_1 e_0} p (1 - c_2) + \frac{k_2}{k_1 s_\mathrm{tot}} c_1 + \frac{k_{-3} f_0}{k_1 e_0 s_\mathrm{tot}} c_2, \\
+\varepsilon c_2' &amp;=  \frac{k_3}{k_1} p (1-c_2) - \frac{(k_{-3}+k_4)}{k_1 s_\mathrm{tot}} c_2.
+\end{aligned}\right.
+\]</span></p>
+<p>where <span class="math inline">\(\varepsilon = e_0/s_\mathrm{tot} \ll 1\)</span> and <span class="math inline">\(f_0/s_\mathrm{tot} \ll 1\)</span>. So the slow variables are <span class="math inline">\([S]\)</span> and <span class="math inline">\([S_p]\)</span>, while <span class="math inline">\([C_1]\)</span> and <span class="math inline">\([C_2]\)</span> are fast. The quasi-steady-state approximation we get with <span class="math inline">\(\varepsilon = 0\)</span>: <span class="math display">\[
+\left\{\begin{aligned}
+0 &amp;= s(1-c_1) - \frac{k_{-1}+k_2}{k_1 s_\mathrm{tot}} c_1, \\
+0 &amp;= \frac{k_3}{k_1} p (1-c_2) - \frac{(k_{-3}+k_4)}{k_1 s_\mathrm{tot}} c_2.
+\end{aligned}\right.
+\]</span></p>
+<p>We can solve with respect to <span class="math inline">\(c_1\)</span> and <span class="math inline">\(c_2\)</span>: <span class="math display">\[
+\begin{aligned}
+c_1 &amp;= \frac{s}{\frac{k_{-1}+k_2}{k_1 s_\mathrm{tot}} + s} = \frac{s}{K_s + s},  \\
+c_2 &amp;= \frac{p}{\frac{k_{-3}+k_4}{k_3 s_\mathrm{tot}} + p} = \frac{p}{K_p + p}.
+\end{aligned}
+\]</span></p>
+<p>In the original variables we have: <span class="math display">\[
+\begin{aligned}{}
+[C_1] &amp;= \frac{e_0[S]}{\frac{k_{-1}+k_2}{k_1} + [S]},  \\
+[C_2] &amp;= \frac{f_0[S_p]}{\frac{k_{-3}+k_4}{k_3} + [S_p]},
+\end{aligned}
+\]</span></p>
+<p>which is exactly the Michaelis-Menten law.</p>
+<p>To arrive at a single equation for <span class="math inline">\(s\)</span>, we use the above expression for <span class="math inline">\(c_1=c_1(s)\)</span> and <span class="math inline">\(c_2=c_2(p)\)</span>. We can express <span class="math inline">\(p\)</span> from the above conservation law to obtain: <span class="math display">\[
+s_\mathrm{tot} p = s_\mathrm{tot} - e_0 c_1 - f_0 c_2 - s_\mathrm{tot} s,
+\]</span></p>
+<p>or, in other words: <span class="math display">\[
+p = 1 - \varepsilon c_1 - \varepsilon\frac{f_0}{e_0} c_2 - s,
+\]</span></p>
+<p>therefore we can assume, on the slow scale, that <span class="math inline">\(p=1-s\)</span>. We find the equation: <span class="math display">\[
+s' = -\frac{K_s s}{K_s + s} + \frac{k_{-1}}{k_1 s_\mathrm{tot}}\frac{s}{K_s + s} + \frac{k_4 f_0}{k_1 s_\mathrm{tot} e_0}\frac{1-s}{K_p + 1-s}.
+\]</span></p>
+</div>
+</div>
+</div>
 </section>
 <section id="chain-of-reactions" class="level2">
 <h2 class="anchored" data-anchor-id="chain-of-reactions">Chain of reactions</h2>
@@ -515,14 +979,107 @@ z' &amp;= \frac{1}{\varepsilon}(z - z^3 - y).
 <ol type="1">
 <li>Write down the system of equations corresponding to this scheme.</li>
 </ol>
+<div class="callout callout-style-default callout-tip callout-titled" title="Solution">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-16-contents" aria-controls="callout-16" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-16" class="callout-16-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>According to the law of mass action the system reads: <span class="math display">\[
+\begin{cases}
+[E]' = -k_1[E][A] + k_{-1}[E_1] + k_3[S][E_1], &amp; \\
+[A]' = -k_1[E][A] + k_{-1}[E_1] - k_2[E_1][A] + k_{-2}[E_2], &amp; \\
+[E_1]' = k_1[E][A] - k_{-1}[E_1] - k_2[E_1][A] + k_{-2}[E_2] - k_3 [S][E_1], &amp; \\
+[E_2]' = k_2 [E_1][A] - k_{-2}[E_2], &amp; \\
+[S]' = -k_3[E_1][S], &amp; \\
+[P]' =  k_3[E_1][S]. &amp;
+\end{cases}
+\]</span></p>
+<p>As for the initial concentrations, we have <span class="math inline">\([E](0)=e_0\)</span>, <span class="math inline">\([A](0)=a_0\)</span>, <span class="math inline">\([S](0)=s_0\)</span>, <span class="math inline">\([P](0)=[E_1](0)=[E_2](0)=0\)</span>.</p>
+</div>
+</div>
+</div>
 <ol start="2" type="1">
 <li>After having identified quantities that are conserved, rescale the variables with the initial concentrations of <span class="math inline">\(E\)</span> or <span class="math inline">\(A\)</span>. Using the assumption <span class="math inline">\(e_0 \ll a_0\)</span> (while the values of all rates are comparable), show that the equations result in a slow-fast system.</li>
 </ol>
+<div class="callout callout-style-default callout-tip callout-titled" title="Solution">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-17-contents" aria-controls="callout-17" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-17" class="callout-17-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>First notice that <span class="math inline">\([S]' + [P]' = 0\)</span>, so we can remove the equation for <span class="math inline">\([P]\)</span>. Similarly, we have <span class="math display">\[
+[E]'+[E_1]'+[E_2]'=0,\quad\Rightarrow\quad [E] = e_0-[E_1]-[E_2].
+\]</span></p>
+<p>By removing the equation for <span class="math inline">\([E]\)</span>, the system reduces to 4 equations. There is no need to further reduce the system, even though it would be possible to find additional conservation laws. Instead, we directly rescale the system assuming: <span class="math display">\[
+[A](t) = a_0 x(t),\quad [E_1](t)=e_0 y(t),\quad [E_2](t)=e_0 z(t),\quad [S](t)=s_0 s(t),\quad \tau = k_1 e_0 t.
+\]</span></p>
+<p>Note that the rescaling is exactly as done in the derivation of Michaelis-Menten law. After substitution we obtain: <span class="math display">\[
+\left\{\begin{aligned}
+x' &amp;= - x(1-y-z) + \frac{k_{-1}}{k_1 a_0} y - \frac{k_2}{k_1} xy + \frac{k_{-2}}{k_1 a_0} z, \\
+\frac{e_0}{a_0} y' &amp;= x(1-y-z) - \frac{k_{-1}}{k_1 a_0} y - \frac{k_2}{k_1} xy + \frac{k_{-2}}{k_1 a_0} z - \frac{k_3 s_0}{k_1 a_0} s y, \\
+\frac{e_0}{a_0} z' &amp;= \frac{k_2}{k_1} xy - \frac{k_{-2}}{k_1 a_0} z, \\
+s' &amp;= -\frac{k_3}{k_1} y s,
+\end{aligned}\right.
+\]</span></p>
+<p>There are a few parameters, but we know from the assumptions that <span class="math inline">\(y(t)\)</span> and <span class="math inline">\(z(t)\)</span> are the fast variables, whereas <span class="math inline">\(s(t)\)</span> and <span class="math inline">\(x(t)\)</span> are the slow variables.</p>
+</div>
+</div>
+</div>
 <ol start="3" type="1">
 <li>Using the quasi-steady-state analysis, show that <span class="math inline">\(x = [A]/a_0\)</span> satisfies an equation of the type: <span class="math display">\[
 x' = − \frac{\beta x s}{1 + \alpha x + \delta s + \gamma x^2}.
 \]</span></li>
 </ol>
+<div class="callout callout-style-default callout-tip callout-titled" title="Solution">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-18-contents" aria-controls="callout-18" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-18" class="callout-18-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Following the quasi-steady-state approximation, we get: <span class="math display">\[
+\left\{\begin{aligned}
+0 &amp;= x(1-y-z) - \frac{k_{-1}}{k_1 a_0} y - \frac{k_2}{k_1} xy + \frac{k_{-2}}{k_1 a_0} z - \frac{k_3 s_0}{k_1 a_0} s y, \\
+0 &amp;= \frac{k_2}{k_1} xy - \frac{k_{-2}}{k_1 a_0} z.
+\end{aligned}\right.
+\]</span></p>
+<p>We can work on additional “symmetries”. Notice that most of the terms defining the slow manifold (the sytem above), also appear in the equation for the slow variable <span class="math inline">\(x'\)</span>. In particular we have: <span class="math display">\[
+x(1-y-z) - \frac{k_{-1}}{k_1 a_0} y = \frac{k_3 s_0}{k_1 a_0} s y.
+\]</span></p>
+<p>We plug this and the equation <span class="math inline">\(z'=0\)</span> in the equation for <span class="math inline">\(x'\)</span> and obtain: <span class="math display">\[
+x' = \frac{k_3 s_0}{k_1 a_0} s y.
+\]</span></p>
+<p>To find <span class="math inline">\(y\)</span> and <span class="math inline">\(z\)</span> we solve the (linear) system above. We first solve for <span class="math inline">\(z\)</span>: <span class="math display">\[
+z = \frac{k_2 a_0}{k_{-2}} xy,
+\]</span></p>
+<p>then we replace <span class="math inline">\(z\)</span> in the first equation and solve for <span class="math inline">\(y\)</span>, <span class="math display">\[
+y = - \frac{a_0 k_1 x}{k_{-1}k_{-2} + k_3 k_{-2} s_0 s + a_0 k_1 x (k_{-2}+a_0 k_2 x)},
+\]</span></p>
+<p>and finally we plug this expression in the above equation for <span class="math inline">\(x'\)</span>: <span class="math display">\[
+x' = - \frac{k_3 s_0}{k_{-1}k_{-2}} \frac{x s}{1 + \frac{k_3}{k_{-1}} s_0 s + a_0 \frac{k_1}{k_{-1}} x + a_0^2 \frac{k_1 k_2}{k_{-1}k_{-2}} x^2},
+\]</span></p>
+<p>which corresponds to the sought expression.</p>
+</div>
+</div>
+</div>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
@@ -963,8 +1520,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../Laboratories/01_ODE_Integration/lab_ODEinteg.html" class="pagination-link" aria-label="Lab 01: Numerical integration">
-        <span class="nav-page-text">Lab 01: Numerical integration</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../Assignments/07_feedbacks.html" class="pagination-link" aria-label="Feedbacks">
+        <span class="nav-page-text">Feedbacks</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
