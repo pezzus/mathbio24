@@ -55,27 +55,7 @@ div.sourceCode
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-/* CSS for citations */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-  margin-bottom: 0em;
-}
-.hanging-indent div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}</style>
+</style>
 
 
 <script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -577,263 +557,22 @@ C_\mathrm{m} \frac{\mathrm{d}V_\mathrm{m}}{\mathrm{d}t} + \mathcal{I}_\mathrm{io
 <ol type="1">
 <li>Compute the resting membrane potential and the equilibrium values for the gating variables.</li>
 </ol>
-<div class="callout callout-style-default callout-tip callout-titled" title="Solution">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Solution
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>We integrate for very long time, e.g., <span class="math inline">\(T_\mathrm{end} = 2000\,\text{ms}\)</span>. Then we take the final values. A possible code is:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode matlab code-with-copy"><code class="sourceCode matlab"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="va">y0</span> <span class="op">=</span> [<span class="fl">0</span><span class="op">,</span><span class="fl">0</span><span class="op">,</span><span class="fl">0</span><span class="op">,</span><span class="fl">0</span>]<span class="op">;</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="va">Te</span> <span class="op">=</span> <span class="fl">2000</span><span class="op">;</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co">% the ODE is stiff, we use ode15s</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="va">opts</span> <span class="op">=</span> <span class="va">odeset</span>(<span class="ss">'AbsTol'</span><span class="op">,</span><span class="fl">1e-8</span><span class="op">,</span><span class="ss">'RelTol'</span><span class="op">,</span><span class="fl">1e-8</span>)<span class="op">;</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>[<span class="va">T</span><span class="op">,</span><span class="va">Y</span>] <span class="op">=</span> <span class="va">ode15s</span>(<span class="op">@</span><span class="va">hhmodel</span><span class="op">,</span> [<span class="fl">0</span> <span class="va">Te</span>]<span class="op">,</span> <span class="va">y0</span><span class="op">,</span> <span class="va">opts</span>)<span class="op">;</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="va">disp</span>(<span class="va">Y</span>(<span class="kw">end</span><span class="op">,:</span>))<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>The resting membrane potential is <span class="math inline">\(V_r\approx -64.9538\)</span>, and <span class="math inline">\(m\approx 0.0532\)</span>, <span class="math inline">\(h\approx 0.5945\)</span>, <span class="math inline">\(n \approx 0.3184\)</span>. Note that these values corresponds to <span class="math inline">\(m_\infty(V_r)\)</span>, <span class="math inline">\(h_\infty(V_r)\)</span>, and <span class="math inline">\(n_\infty(V_r)\)</span>, respectively, where <span class="math display">\[
-p_\infty(V) = \frac{\alpha_p(V)}{\alpha_p(V)+\beta_p(V)},
-\]</span></p>
-<p>for <span class="math inline">\(p\in\{m,h,n\}\)</span>.</p>
-</div>
-</div>
-</div>
 <ol start="2" type="1">
 <li>Try to simulate an action potential by raising the initial resting potential. Find the threshold potential, that is minimal deviation from the resting potential so to obtain an action potential.</li>
 </ol>
-<div class="callout callout-style-default callout-tip callout-titled" title="Solution">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Solution
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-2" class="callout-2-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>We can try manually, and obtain that an increase of <span class="math inline">\(\Delta V\approx 6.15\,\text{mV}\)</span> is sufficient to trigger an action potential. Hence, the threshold is roughly <span class="math inline">\(V_\mathrm{rest} + \Delta V \approx -58.8\,\text{mV}\)</span>.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode matlab code-with-copy"><code class="sourceCode matlab"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="va">dV</span> <span class="op">=</span> <span class="fl">6.15</span><span class="op">;</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>[<span class="va">T</span><span class="op">,</span><span class="va">Y</span>] <span class="op">=</span> <span class="va">ode15s</span>(<span class="op">@</span><span class="va">hhmodel</span><span class="op">,</span> [<span class="fl">0</span> <span class="fl">20</span>]<span class="op">,</span> <span class="va">y0</span> <span class="op">+</span> [<span class="va">dV</span><span class="op">,</span><span class="fl">0</span><span class="op">,</span><span class="fl">0</span><span class="op">,</span><span class="fl">0</span>]<span class="op">,</span> <span class="va">opts</span>)<span class="op">;</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="va">Vrest</span>  <span class="op">=</span> <span class="va">y0</span>(<span class="fl">1</span>)<span class="op">;</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="va">Vthres</span> <span class="op">=</span> <span class="va">Vrest</span><span class="op">+</span><span class="va">dV</span><span class="op">;</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="va">disp</span>(<span class="va">Vthres</span>)<span class="op">;</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="va">subplot</span>(<span class="fl">121</span>)<span class="op">;</span></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="va">plot</span>(<span class="va">T</span><span class="op">,</span><span class="va">Y</span>(<span class="op">:,</span><span class="fl">1</span>)<span class="op">,</span><span class="ss">'LineWidth'</span><span class="op">,</span><span class="fl">2.0</span>)<span class="op">;</span></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="va">xlabel</span>(<span class="ss">'Time [ms]'</span>)<span class="op">;</span></span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="va">ylabel</span>(<span class="ss">'Potential [mV]'</span>)<span class="op">;</span></span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="va">grid</span> <span class="va">on</span><span class="op">;</span> <span class="va">ylim</span>([<span class="op">-</span><span class="fl">80</span><span class="op">,</span><span class="fl">60</span>])<span class="op">;</span></span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="va">subplot</span>(<span class="fl">122</span>)<span class="op">;</span></span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="va">plot</span>(<span class="va">T</span><span class="op">,</span><span class="va">Y</span>(<span class="op">:,</span><span class="fl">2</span><span class="op">:</span><span class="kw">end</span>)<span class="op">,</span><span class="ss">'LineWidth'</span><span class="op">,</span><span class="fl">2.0</span>)<span class="op">;</span></span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="va">xlabel</span>(<span class="ss">'Time [ms]'</span>)<span class="op">;</span></span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="va">ylabel</span>(<span class="ss">'Gates'</span>)<span class="op">;</span></span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="va">legend</span>(<span class="ss">'m'</span><span class="op">,</span><span class="ss">'h'</span><span class="op">,</span><span class="ss">'n'</span>)<span class="op">;</span></span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="va">grid</span> <span class="va">on</span><span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p><img src="lab13_es12.png" class="img-fluid"></p>
-</div>
-</div>
-</div>
 <ol start="3" type="1">
 <li>Implement a square-pulse for the stimulus current, and find the combination of height (intensity) and width (duration) that yields an action potential. As initial condition, use the resting state from point 1., and set <span class="math inline">\(T_\mathrm{end} = 20.0\,\text{ms}\)</span>.</li>
 </ol>
-<div class="callout callout-style-default callout-tip callout-titled" title="Solution">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Solution
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-3" class="callout-3-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>The square pulse has the form: <span class="math display">\[
-I_\mathrm{stim}(t) = \begin{cases} I_\mathrm{max}, &amp; 0 &lt; t - t_0 &lt; t_\mathrm{dur}, \\ 0, &amp; \text{otherwise}.\end{cases}
-\]</span></p>
-<p>where <span class="math inline">\(t_0\)</span> is the onset, <span class="math inline">\(t_\mathrm{dur}\)</span> the duration, and <span class="math inline">\(I_\mathrm{max}\)</span> the current intensity.</p>
-<p>A possible implementation is as follows:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode matlab code-with-copy"><code class="sourceCode matlab"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">% square stimulus</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="va">t0</span>   <span class="op">=</span> <span class="fl">1</span><span class="op">;</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="va">tdur</span> <span class="op">=</span> <span class="fl">0.5</span><span class="op">;</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="va">Imax</span> <span class="op">=</span> <span class="fl">80</span><span class="op">;</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="va">I_square</span> <span class="op">=</span> <span class="op">@</span>(<span class="va">t</span>) <span class="va">Imax</span><span class="op">*</span>(<span class="va">sign</span>(<span class="va">t</span><span class="op">-</span><span class="va">t0</span>)<span class="op">-</span><span class="va">sign</span>(<span class="va">t</span><span class="op">-</span><span class="va">t0</span><span class="op">-</span><span class="va">tdur</span>))<span class="op">/</span><span class="fl">2.0</span><span class="op">;</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co">%I_square = @(t) Imax*(t&gt;t0)*(t&lt;t0+tdur);</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="co">% we need this to capture the stimulus</span></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="va">opts</span> <span class="op">=</span> <span class="va">odeset</span>(<span class="va">opts</span><span class="op">,</span><span class="ss">'MaxStep'</span><span class="op">,</span><span class="fl">0.1</span>)<span class="op">;</span></span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="va">fun</span>  <span class="op">=</span> <span class="op">@</span>(<span class="va">t</span><span class="op">,</span><span class="va">y</span>) <span class="va">hhmodel</span>(<span class="va">t</span><span class="op">,</span><span class="va">y</span><span class="op">,</span><span class="ss">'Istim'</span><span class="op">,</span><span class="va">I_square</span>)<span class="op">;</span></span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="va">Te</span> <span class="op">=</span> <span class="fl">20.0</span><span class="op">;</span></span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>[<span class="va">T</span><span class="op">,</span><span class="va">Y</span>] <span class="op">=</span> <span class="va">ode15s</span>(<span class="va">fun</span><span class="op">,</span> [<span class="fl">0</span> <span class="va">Te</span>]<span class="op">,</span> <span class="va">y0</span><span class="op">,</span> <span class="va">opts</span>)<span class="op">;</span></span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="va">fig</span> <span class="op">=</span> <span class="va">figure</span>()<span class="op">;</span></span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="va">subplot</span>(<span class="fl">121</span>)<span class="op">;</span></span>
-<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="va">plot</span>(<span class="va">T</span><span class="op">,</span><span class="va">Y</span>(<span class="op">:,</span><span class="fl">1</span>)<span class="op">,</span><span class="ss">'LineWidth'</span><span class="op">,</span><span class="fl">2.0</span>)<span class="op">;</span></span>
-<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a><span class="va">xlabel</span>(<span class="ss">'Time [ms]'</span>)<span class="op">;</span></span>
-<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a><span class="va">ylabel</span>(<span class="ss">'Potential [mV]'</span>)<span class="op">;</span></span>
-<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a><span class="va">grid</span> <span class="va">on</span><span class="op">;</span> <span class="va">ylim</span>([<span class="op">-</span><span class="fl">80</span><span class="op">,</span><span class="fl">60</span>])<span class="op">;</span></span>
-<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a><span class="va">subplot</span>(<span class="fl">122</span>)<span class="op">;</span></span>
-<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a><span class="va">plot</span>(<span class="va">T</span><span class="op">,</span><span class="va">Y</span>(<span class="op">:,</span><span class="fl">2</span><span class="op">:</span><span class="kw">end</span>)<span class="op">,</span><span class="ss">'LineWidth'</span><span class="op">,</span><span class="fl">2.0</span>)<span class="op">;</span></span>
-<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a><span class="va">xlabel</span>(<span class="ss">'Time [ms]'</span>)<span class="op">;</span></span>
-<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a><span class="va">ylabel</span>(<span class="ss">'Gates'</span>)<span class="op">;</span></span>
-<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a><span class="va">legend</span>(<span class="ss">'m'</span><span class="op">,</span><span class="ss">'h'</span><span class="op">,</span><span class="ss">'n'</span>)<span class="op">;</span></span>
-<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a><span class="va">grid</span> <span class="va">on</span><span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p><img src="lab13_es13.png" class="img-fluid"></p>
-<p>The duration and intensity must be such that the transmembrane potential reaches a threshold value. We approximate the model as: <span class="math display">\[
-C_\mathrm{m} \frac{\mathrm{d}V_\mathrm{m}}{\mathrm{d}t} + g_\mathrm{eff}(V_\mathrm{m}-V_\mathrm{rest}) = I_\mathrm{stim}(t),
-\]</span></p>
-<p>where <span class="math inline">\(g_\mathrm{eff}\)</span> is the effective conductivity at the resting membrane potential <span class="math inline">\(V_\mathrm{rest}\)</span>. The solution for a generic current, assuming <span class="math inline">\(V_\mathrm{m}(0)=V_\mathrm{rest}\)</span>, is as follows: <span id="eq-gensol"><span class="math display">\[
-V_\mathrm{m}(t) = V_\mathrm{rest} + \frac{1}{C_\mathrm{m}} \int_0^t e^{-(t-s)/\tau} I_\mathrm{stim}(s)\,\mathrm{d}s,
-\tag{1}\]</span></span></p>
-<p>where <span class="math inline">\(\tau = C_\mathrm{m}/g_\mathrm{eff}\)</span>. For the square pulse we can carry out the integral and find: <span class="math display">\[
-V_\mathrm{m}(t) = V_\mathrm{rest} + \left\{\begin{aligned} &amp; 0, &amp;&amp; t \le t_0, \\ &amp; \frac{I_\mathrm{max}}{g_\mathrm{eff}} \Bigl(1-e^{-(t-t_0)/\tau}\Bigr), &amp;&amp; t_0 &lt; t &lt; t_0 + t_\mathrm{dur}, \\ &amp; \frac{I_\mathrm{max}}{g_\mathrm{eff}} \Bigl(1-e^{-t_\mathrm{dur}/\tau}\Bigr)e^{-(t-t_0-t_\mathrm{dur})/\tau} , &amp;&amp; t \ge t_0 + t_\mathrm{dur}.
-\end{aligned}\right.
-\]</span></p>
-<p>It is the same as charging a capacitor. Suppose that <span class="math inline">\(V_\mathrm{thres}\)</span> is the threshold potential for an action potential. Then, the condition is: <span class="math display">\[
-V_\mathrm{rest} + \frac{I_\mathrm{max}}{g_\mathrm{eff}} \Bigl(1-e^{-t_\mathrm{dur}/\tau}\Bigr) &gt; V_\mathrm{thres}.
-\]</span></p>
-<p>We can approximate <span class="math inline">\(g_\mathrm{eff}\)</span> in at least 2 ways. The first approach is based on the observation that the function <code>hhmodel</code> implements the right hand side of the ODE, so we can easily obtain the total ionic current <span class="math inline">\(\mathcal{I}_\mathrm{ion}\)</span> at a given voltage <span class="math inline">\(V_\mathrm{m}\)</span>. Comparing the Hodgkin-Huxley model with the approximation <a href="../../IntroODE.html#eq-gensol" class="quarto-xref">Equation&nbsp;<span>A.4</span></a> we have that <span class="math display">\[
-g_\mathrm{eff} = \left. \frac{\partial\mathcal{I}_\mathrm{ion}}{\partial V_\mathrm{m}}\right|_{\mathrm{rest}}.
-\]</span></p>
-<p>we can approximate this value numerically,</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode matlab code-with-copy"><code class="sourceCode matlab"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="va">dV</span> <span class="op">=</span> <span class="fl">1e-6</span><span class="op">;</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="va">dy</span> <span class="op">=</span> (<span class="va">hhmodel</span>(<span class="fl">0</span><span class="op">,</span><span class="va">y0</span><span class="op">+</span>[<span class="va">dV</span><span class="op">,</span><span class="fl">0</span><span class="op">,</span><span class="fl">0</span><span class="op">,</span><span class="fl">0</span>])<span class="op">-</span><span class="va">hhmodel</span>(<span class="fl">0</span><span class="op">,</span><span class="va">y0</span>))<span class="op">/</span><span class="va">dV</span><span class="op">;</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="va">g_eff</span> <span class="op">=</span> <span class="op">-</span><span class="va">dy</span>(<span class="fl">1</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>and we obtain <span class="math inline">\(g_\mathrm{eff} \approx 0.6807\,\text{mS}\)</span>.</p>
-<p>The second approach consists in noting that if we rearrange the terms we can always write <span class="math display">\[
-\mathcal{I}_\mathrm{ion} = g\cdot(V_\mathrm{m}-V_\mathrm{rest}),
-\]</span></p>
-<p>hence we have that: <span class="math display">\[
-g_\mathrm{eff} = g_\mathrm{Na} m^3_\infty(V_\mathrm{rest}) h_\infty(V_\mathrm{rest}) + g_\mathrm{K} n^4_\infty(V_\mathrm{rest}) + g_\ell.
-\]</span></p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode matlab code-with-copy"><code class="sourceCode matlab"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="va">V</span> <span class="op">=</span> <span class="va">y0</span>(<span class="fl">1</span>)<span class="op">;</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="va">alpha_m</span> <span class="op">=</span> <span class="op">-</span><span class="fl">0.1</span><span class="op">*</span>(<span class="fl">40</span><span class="op">+</span><span class="va">V</span>)<span class="op">./</span>(<span class="va">exp</span>(<span class="op">-</span>(<span class="fl">40</span><span class="op">+</span><span class="va">V</span>)<span class="op">/</span><span class="fl">10</span>)<span class="op">-</span><span class="fl">1</span>)<span class="op">;</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="va">beta_m</span>  <span class="op">=</span> <span class="fl">4</span><span class="op">*</span><span class="va">exp</span>(<span class="op">-</span>(<span class="va">V</span><span class="op">+</span><span class="fl">65</span>)<span class="op">/</span><span class="fl">18</span>)<span class="op">;</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="va">alpha_h</span> <span class="op">=</span> <span class="fl">0.07</span><span class="op">*</span><span class="va">exp</span>(<span class="op">-</span>(<span class="va">V</span><span class="op">+</span><span class="fl">65</span>)<span class="op">/</span><span class="fl">20</span>)<span class="op">;</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="va">beta_h</span>  <span class="op">=</span> <span class="fl">1</span><span class="op">./</span>(<span class="va">exp</span>(<span class="op">-</span>(<span class="fl">35</span><span class="op">+</span><span class="va">V</span>)<span class="op">/</span><span class="fl">10</span>)<span class="op">+</span><span class="fl">1</span>)<span class="op">;</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="va">alpha_n</span> <span class="op">=</span> <span class="op">-</span><span class="fl">0.01</span><span class="op">*</span>(<span class="fl">55</span><span class="op">+</span><span class="va">V</span>)<span class="op">./</span>(<span class="va">exp</span>(<span class="op">-</span>(<span class="fl">55</span><span class="op">+</span><span class="va">V</span>)<span class="op">/</span><span class="fl">10</span>)<span class="op">-</span><span class="fl">1</span>)<span class="op">;</span></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="va">beta_n</span>  <span class="op">=</span> <span class="fl">0.125</span><span class="op">*</span><span class="va">exp</span>(<span class="op">-</span>(<span class="va">V</span><span class="op">+</span><span class="fl">65</span>)<span class="op">/</span><span class="fl">80</span>)<span class="op">;</span></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="va">m_inf</span> <span class="op">=</span> <span class="va">alpha_m</span><span class="op">./</span>(<span class="va">alpha_m</span> <span class="op">+</span> <span class="va">beta_m</span>)<span class="op">;</span></span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="va">h_inf</span> <span class="op">=</span> <span class="va">alpha_h</span><span class="op">./</span>(<span class="va">alpha_h</span> <span class="op">+</span> <span class="va">beta_h</span>)<span class="op">;</span></span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="va">n_inf</span> <span class="op">=</span> <span class="va">alpha_n</span><span class="op">./</span>(<span class="va">alpha_n</span> <span class="op">+</span> <span class="va">beta_n</span>)<span class="op">;</span></span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="va">g_Na</span> <span class="op">=</span> <span class="fl">120</span><span class="op">;</span></span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="va">g_K</span>  <span class="op">=</span>  <span class="fl">36</span><span class="op">;</span></span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="va">g_l</span>  <span class="op">=</span> <span class="fl">0.3</span><span class="op">;</span></span>
-<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a><span class="va">g_eff</span> <span class="op">=</span> <span class="va">g_Na</span><span class="op">*</span><span class="va">m_inf</span><span class="op">^</span><span class="fl">3</span><span class="op">*</span><span class="va">h_inf</span> <span class="op">+</span> <span class="va">g_K</span><span class="op">*</span><span class="va">n_inf</span><span class="op">^</span><span class="fl">4</span> <span class="op">+</span> <span class="va">g_l</span><span class="op">;</span></span>
-<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a><span class="va">disp</span>(<span class="va">g_eff</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Since <span class="math inline">\(C_\mathrm{m} = 1\,\mu\text{F}\)</span>, we have <span class="math inline">\(\tau \approx 1.45\,\text{ms}\)</span>. For instance, with <span class="math inline">\(t_\mathrm{dur} = 1\,\text{ms}\)</span>, we obtain a threshold value of <span class="math inline">\(I_\mathrm{max}\approx 8.5\,\mu\text{A}\)</span>. In practice, it is enough <span class="math inline">\(I_\mathrm{max}\approx 6.5\,\mu\text{A}\)</span>. The reason for the discrepancy is that <span class="math inline">\(g_\mathrm{eff}\)</span> is not constant, because as soon as <span class="math inline">\(V_\mathrm{m}\)</span> increases, also the gating variables changes (see the above figure.)</p>
-</div>
-</div>
-</div>
 <ol start="4" type="1">
 <li>Visualize the currents using the extended output, that is</li>
 </ol>
-<div class="sourceCode" id="cb7"><pre class="sourceCode matlab code-with-copy"><code class="sourceCode matlab"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>[<span class="va">dy</span><span class="op">,</span><span class="va">currents</span>] <span class="op">=</span> <span class="va">hhmodel</span>(<span class="va">T</span><span class="op">,</span><span class="va">Y</span><span class="op">,</span><span class="ss">'Istim'</span><span class="op">,</span><span class="va">Istim</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="callout callout-style-default callout-tip callout-titled" title="Solution">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Solution
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-4" class="callout-4-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p><img src="lab13_es13bis.png" class="img-fluid"></p>
-</div>
-</div>
-</div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode matlab code-with-copy"><code class="sourceCode matlab"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>[<span class="va">dy</span><span class="op">,</span><span class="va">currents</span>] <span class="op">=</span> <span class="va">hhmodel</span>(<span class="va">T</span><span class="op">,</span><span class="va">Y</span><span class="op">,</span><span class="ss">'Istim'</span><span class="op">,</span><span class="va">Istim</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ol start="5" type="1">
 <li>Take <span class="math inline">\(t_\mathrm{dur} = 2\,\text{ms}\)</span> and <span class="math inline">\(I_\mathrm{max} = 5\,\mu\text{A}\)</span>. Implement a periodic stimulation protocol with a fixed value of cycle length <span class="math inline">\(T_\mathrm{CL}\)</span>. Start from <span class="math inline">\(T_\mathrm{CL} = 100\,\text{ms}\)</span> and reduce it until it not possible to provoke an action potential anymore.</li>
 </ol>
-<div class="callout callout-style-default callout-tip callout-titled" title="Solution">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Solution
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-5" class="callout-5-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>We can use the function <code>mod</code> to implement a periodic stimulus:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode matlab code-with-copy"><code class="sourceCode matlab"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">% train of stimuli</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="va">t0</span>   <span class="op">=</span> <span class="fl">1</span><span class="op">;</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="va">tdur</span> <span class="op">=</span> <span class="fl">1.0</span><span class="op">;</span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="va">Imax</span> <span class="op">=</span> <span class="fl">10</span><span class="op">;</span></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="va">tCL</span>  <span class="op">=</span> <span class="fl">20</span><span class="op">;</span></span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="va">I_train</span> <span class="op">=</span> <span class="op">@</span>(<span class="va">t</span>) <span class="va">Imax</span><span class="op">*</span>(<span class="va">mod</span>(<span class="va">t</span><span class="op">-</span><span class="va">t0</span><span class="op">,</span><span class="va">tCL</span>)<span class="op">&lt;</span><span class="va">tdur</span>)<span class="op">;</span></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="va">opts</span> <span class="op">=</span> <span class="va">odeset</span>(<span class="va">opts</span><span class="op">,</span><span class="ss">'MaxStep'</span><span class="op">,</span><span class="fl">0.1</span>)<span class="op">;</span></span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="va">fun</span>  <span class="op">=</span> <span class="op">@</span>(<span class="va">t</span><span class="op">,</span><span class="va">y</span>) <span class="va">hhmodel</span>(<span class="va">t</span><span class="op">,</span><span class="va">y</span><span class="op">,</span><span class="ss">'Istim'</span><span class="op">,</span><span class="va">I_train</span>)<span class="op">;</span></span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="va">Te</span> <span class="op">=</span> <span class="fl">200.0</span><span class="op">;</span></span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>[<span class="va">T</span><span class="op">,</span><span class="va">Y</span>] <span class="op">=</span> <span class="va">ode15s</span>(<span class="va">fun</span><span class="op">,</span> [<span class="fl">0</span> <span class="va">Te</span>]<span class="op">,</span> <span class="va">y0</span><span class="op">,</span> <span class="va">opts</span>)<span class="op">;</span></span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="va">fig</span> <span class="op">=</span> <span class="va">figure</span>()<span class="op">;</span></span>
-<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a><span class="va">plot</span>(<span class="va">T</span><span class="op">,</span><span class="va">Y</span>(<span class="op">:,</span><span class="fl">1</span>)<span class="op">,</span><span class="ss">'LineWidth'</span><span class="op">,</span><span class="fl">2.0</span>)<span class="op">;</span></span>
-<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a><span class="va">xlabel</span>(<span class="ss">'Time [ms]'</span>)<span class="op">;</span></span>
-<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a><span class="va">ylabel</span>(<span class="ss">'Potential [mV]'</span>)<span class="op">;</span></span>
-<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a><span class="va">grid</span> <span class="va">on</span><span class="op">;</span> <span class="va">ylim</span>([<span class="op">-</span><span class="fl">80</span><span class="op">,</span><span class="fl">60</span>])<span class="op">;</span></span>
-<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a><span class="va">title</span>(<span class="va">sprintf</span>(<span class="ss">'T_{CL} = %g ms'</span><span class="op">,</span><span class="va">tCL</span>))<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p><img src="lab13_es14a.png" class="img-fluid"></p>
-<p><img src="lab13_es14b.png" class="img-fluid"></p>
-<p><img src="lab13_es14c.png" class="img-fluid"></p>
-<p>This phenomenon is called <em>refractoriness</em> of the action potential. It is very important in cardiac electrophysiology, as it prevents ectopic stimuli to cause a dangerous arrythmia.</p>
-</div>
-</div>
-</div>
 <ol start="6" type="1">
 <li>Implement a constant-in-time current <span class="math inline">\(I_\mathrm{stim}(t)\equiv I_\mathrm{max}\)</span>. Increase the current from zero and show that in a certain range the system has a limit cycle. Is the transition smooth or catastrophic?</li>
 </ol>
-<div class="callout callout-style-default callout-tip callout-titled" title="Solution">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Solution
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-6" class="callout-6-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<div class="sourceCode" id="cb9"><pre class="sourceCode matlab code-with-copy"><code class="sourceCode matlab"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="va">Imax</span>  <span class="op">=</span> <span class="fl">150</span><span class="op">;</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="va">I_const</span> <span class="op">=</span> <span class="op">@</span>(<span class="va">t</span>) <span class="va">Imax</span><span class="op">;</span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>[<span class="va">T</span><span class="op">,</span><span class="va">Y</span>] <span class="op">=</span> <span class="va">ode15s</span>(<span class="op">@</span>(<span class="va">t</span><span class="op">,</span><span class="va">y</span>) <span class="va">hhmodel</span>(<span class="va">t</span><span class="op">,</span><span class="va">y</span><span class="op">,</span><span class="ss">'Istim'</span><span class="op">,</span><span class="va">I_const</span>)<span class="op">,</span> [<span class="fl">0</span> <span class="fl">200</span>]<span class="op">,</span> <span class="va">y0</span>)<span class="op">;</span></span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="va">fig</span> <span class="op">=</span> <span class="va">figure</span>()<span class="op">;</span></span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="va">plot</span>(<span class="va">T</span><span class="op">,</span><span class="va">Y</span>(<span class="op">:,</span><span class="fl">1</span>)<span class="op">,</span><span class="ss">'LineWidth'</span><span class="op">,</span><span class="fl">2.0</span>)<span class="op">;</span></span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="va">xlabel</span>(<span class="ss">'Time [ms]'</span>)<span class="op">;</span></span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="va">ylabel</span>(<span class="ss">'Potential [mV]'</span>)<span class="op">;</span></span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="va">title</span>(<span class="va">sprintf</span>(<span class="ss">'I = %g uA\n'</span><span class="op">,</span><span class="va">Imax</span>))<span class="op">;</span></span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="va">grid</span> <span class="va">on</span><span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p><img src="lab13_es15.png" class="img-fluid"></p>
-<p>The transition occurs around <span class="math inline">\(I_\mathrm{max} \approx 5.5\,\mu\text{A}\)</span>, and it is <em>catastrophic</em>, because the amplitude of the oscillations is not small initially. The second bifurcation occurs at <span class="math inline">\(I_\mathrm{max} \approx 180\,\mu\text{A}\)</span>, and it is a supercritical Hopf bifurcation, hence not <em>catastrophic</em>.</p>
-<p>Actually, something more complicated happens.</p>
-<p><img src="bifHH.png" class="img-fluid"></p>
-<p>In the diagram above (Figure 5.7 from <span class="citation" data-cites="ks08_vol1">Keener and Sneyd (<a href="../../references.html#ref-ks08_vol1" role="doc-biblioref">2009</a>)</span>), we have a subcritical Hopf bifurcation at some point. However, stable oscillations are possible also for <span class="math inline">\(I_\mathrm{max}\)</span> less than the bifurcation value, because we have 2 limit cycles, one stable and another unstable. At some value of <span class="math inline">\(I_\mathrm{max}\)</span>, there is a limit point of cycles (a collision between the cycles), and they both disappear. Hence, the system has no limit cycles only before the limit point. You can try to compute the same diagram with MatCont.</p>
-</div>
-</div>
-</div>
 </section>
 <section id="voltage-clamp" class="level3">
 <h3 class="anchored" data-anchor-id="voltage-clamp">Voltage-clamp</h3>
@@ -842,47 +581,6 @@ Solution
 C_\mathrm{m} \frac{\mathrm{d}V_\mathrm{m}}{\mathrm{d}t} + \mathcal{I}_\mathrm{ion}(V) = -\kappa (V - V_\text{clamp}),
 \]</span></p>
 <p>for some large <span class="math inline">\(\kappa&gt;0\)</span>. In fact, for <span class="math inline">\(\kappa \gg 1\)</span>, the system has a stable equilibrium <span class="math inline">\(V=V_\text{clamp}\)</span>. Implement the voltage clamp. Note that the function <code>hhmodel</code> allows <code>Istim</code> to be a function of time <em>and</em> voltage.</p>
-<div class="callout callout-style-default callout-tip callout-titled" title="Solution">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Solution
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-7" class="callout-7-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>This is a possible solution:</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode matlab code-with-copy"><code class="sourceCode matlab"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="va">kappa</span> <span class="op">=</span> <span class="fl">1e5</span><span class="op">;</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="va">V0</span> <span class="op">=</span> <span class="op">-</span><span class="fl">65</span><span class="op">;</span> <span class="va">V1</span> <span class="op">=</span> <span class="op">-</span><span class="fl">9</span><span class="op">;</span></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="va">t0</span> <span class="op">=</span> <span class="fl">1.0</span><span class="op">;</span></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="va">tdur</span> <span class="op">=</span> <span class="fl">10.0</span><span class="op">;</span></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="va">Vclamp</span> <span class="op">=</span> <span class="op">@</span>(<span class="va">t</span>) <span class="va">V0</span> <span class="op">+</span> (<span class="va">V1</span><span class="op">-</span><span class="va">V0</span>)<span class="op">.*</span>(<span class="va">t</span> <span class="op">&gt;=</span> <span class="va">t0</span>)<span class="op">.*</span>(<span class="va">t</span> <span class="op">&lt;=</span> <span class="va">t0</span> <span class="op">+</span> <span class="va">tdur</span>)<span class="op">;</span></span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="va">I_clamp</span> <span class="op">=</span> <span class="op">@</span>(<span class="va">t</span><span class="op">,</span><span class="va">V</span>) <span class="op">-</span><span class="va">kappa</span><span class="op">*</span>(<span class="va">V</span> <span class="op">-</span> <span class="va">Vclamp</span>(<span class="va">t</span>))<span class="op">;</span></span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="va">hhmodel_clamped</span> <span class="op">=</span> <span class="op">@</span>(<span class="va">t</span><span class="op">,</span><span class="va">y</span>) <span class="va">hhmodel</span>(<span class="va">t</span><span class="op">,</span><span class="va">y</span><span class="op">,</span><span class="ss">'Istim'</span><span class="op">,</span><span class="va">I_clamp</span>)<span class="op">;</span></span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="va">sol</span> <span class="op">=</span> <span class="va">ode15s</span>(<span class="va">hhmodel_clamped</span><span class="op">,</span> [<span class="fl">0</span> <span class="fl">20.0</span>]<span class="op">,</span> <span class="va">y0</span>)<span class="op">;</span></span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>[<span class="op">~,</span><span class="va">currents</span><span class="op">,</span><span class="va">params</span>] <span class="op">=</span> <span class="va">hhmodel_clamped</span>(<span class="va">sol</span>.<span class="va">x</span><span class="op">,</span><span class="va">sol</span>.<span class="va">y</span>)<span class="op">;</span></span>
-<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a><span class="va">Itot</span> <span class="op">=</span> <span class="va">sum</span>(<span class="va">currents</span>(<span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">,:</span>)<span class="op">,</span><span class="fl">1</span>)<span class="op">/</span><span class="fl">1e3</span><span class="op">;</span></span>
-<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a><span class="va">fig</span> <span class="op">=</span> <span class="va">figure</span>()<span class="op">;</span></span>
-<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a><span class="va">subplot</span>(<span class="fl">211</span>)<span class="op">;</span></span>
-<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a><span class="va">plot</span>(<span class="va">sol</span>.<span class="va">x</span><span class="op">,</span><span class="va">sol</span>.<span class="va">y</span>(<span class="fl">1</span><span class="op">,:</span>)<span class="op">,</span><span class="ss">'LineWidth'</span><span class="op">,</span><span class="fl">2.0</span>)<span class="op">;</span></span>
-<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a><span class="va">xlabel</span>(<span class="ss">'Time [ms]'</span>)<span class="op">;</span></span>
-<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a><span class="va">ylabel</span>(<span class="ss">'Potential [mV]'</span>)<span class="op">;</span></span>
-<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a><span class="va">grid</span> <span class="va">on</span><span class="op">;</span> <span class="va">ylim</span>([<span class="op">-</span><span class="fl">80</span><span class="op">,</span><span class="fl">60</span>])<span class="op">;</span></span>
-<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a><span class="va">subplot</span>(<span class="fl">212</span>)<span class="op">;</span></span>
-<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a><span class="va">plot</span>(<span class="va">sol</span>.<span class="va">x</span><span class="op">,</span><span class="va">Itot</span><span class="op">,</span><span class="ss">'LineWidth'</span><span class="op">,</span><span class="fl">2.0</span>)<span class="op">;</span></span>
-<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a><span class="va">xlabel</span>(<span class="ss">'Time [ms]'</span>)<span class="op">;</span></span>
-<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a><span class="va">ylabel</span>(<span class="ss">'Current [mA]'</span>)<span class="op">;</span></span>
-<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a><span class="va">title</span>(<span class="va">sprintf</span>(<span class="ss">'V_{clamp} = %g mV\n'</span><span class="op">,</span><span class="va">V1</span>))<span class="op">;</span></span>
-<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a><span class="va">grid</span> <span class="va">on</span><span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p><img src="lab13_vclamp.png" class="img-fluid"></p>
-</div>
-</div>
-</div>
 </section>
 <section id="hyperkalemia" class="level3">
 <h3 class="anchored" data-anchor-id="hyperkalemia">Hyperkalemia</h3>
@@ -890,22 +588,6 @@ Solution
 V_\mathrm{K} = \frac{R T}{F}\log \Bigl(\frac{[\mathrm{K}]_e}{[\mathrm{K}]_i}\Bigr),
 \]</span></p>
 <p>show that as <span class="math inline">\([\mathrm{K}]_e\)</span> increases from <span class="math inline">\(20\,\text{mM}\)</span> self-sustained oscillations appear. Find the values of bifurcations, as above. For the constants, use <span class="math inline">\(R = 8.314\,\text{J}\cdot\text{K}^{-1}\cdot\text{mol}^{-1}\)</span> (gas constant), <span class="math inline">\(F = 9.648\cdot 10^4\,\text{C}\cdot\text{mol}^{-1}\)</span> (Farad constant), <span class="math inline">\(T = 26 + 273.15\,\mathrm{K}\)</span>, <span class="math inline">\([\mathrm{K}]_i = 397\,\text{mM}\)</span>.</p>
-<div class="callout callout-style-default callout-tip callout-titled" title="Solution">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Solution
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-8" class="callout-8-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>We can slightly modify <code>hmodel.m</code> so to allow for a change of <span class="math inline">\(V_\mathrm{K}\)</span>. Then we have that for <span class="math inline">\([\mathrm{K}]_e \approx 30\,\text{mM}\)</span> we have oscillations, until <span class="math inline">\([\mathrm{K}]_e \approx 60\,\text{mM}\)</span>. The first bifurcation is catastrophic, the second one is not.</p>
-</div>
-</div>
-</div>
 </section>
 <section id="tetrodotoxin" class="level3">
 <h3 class="anchored" data-anchor-id="tetrodotoxin">Tetrodotoxin</h3>
@@ -921,44 +603,8 @@ Solution
 g_\mathrm{Na}(\ce{TTX}) = \frac{120}{1 + \ce{TTX}/K_1}.
 \]</span></p>
 <p>Find the quantity of <span class="math inline">\(\ce{TTX}\)</span> that blocks axonal propagation.</p>
-<div class="callout callout-style-default callout-tip callout-titled" title="Solution">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Solution
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-9" class="callout-9-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>Here below a possible implementation:</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode matlab code-with-copy"><code class="sourceCode matlab"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="va">K1</span> <span class="op">=</span> <span class="fl">2.5</span><span class="op">;</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="va">TTX</span> <span class="op">=</span> <span class="fl">0.57</span><span class="op">;</span></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="va">g_Na</span> <span class="op">=</span> <span class="fl">120</span><span class="op">/</span>(<span class="fl">1</span><span class="op">+</span><span class="va">TTX</span><span class="op">/</span><span class="va">K1</span>)<span class="op">;</span></span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="va">t0</span>   <span class="op">=</span> <span class="fl">1</span><span class="op">;</span></span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="va">tdur</span> <span class="op">=</span> <span class="fl">2.0</span><span class="op">;</span></span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="va">Imax</span> <span class="op">=</span> <span class="fl">5</span><span class="op">;</span></span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="va">Istim</span> <span class="op">=</span> <span class="op">@</span>(<span class="va">t</span>) <span class="va">Imax</span><span class="op">*</span>(<span class="va">sign</span>(<span class="va">t</span><span class="op">-</span><span class="va">t0</span>)<span class="op">-</span><span class="va">sign</span>(<span class="va">t</span><span class="op">-</span><span class="va">t0</span><span class="op">-</span><span class="va">tdur</span>))<span class="op">/</span><span class="fl">2.0</span><span class="op">;</span></span>
-<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a><span class="va">fun</span> <span class="op">=</span> <span class="op">@</span>(<span class="va">t</span><span class="op">,</span><span class="va">y</span>) <span class="va">hhmodel</span>(<span class="va">t</span><span class="op">,</span><span class="va">y</span><span class="op">,</span><span class="va">Istim</span><span class="op">,-</span><span class="fl">77</span><span class="op">,</span><span class="va">g_Na</span>)<span class="op">;</span></span>
-<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a><span class="va">opts</span> <span class="op">=</span> <span class="va">odeset</span>(<span class="va">opts</span><span class="op">,</span><span class="ss">'MaxStep'</span><span class="op">,</span><span class="fl">0.1</span>)<span class="op">;</span></span>
-<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>[<span class="va">T</span><span class="op">,</span><span class="va">Y</span>] <span class="op">=</span> <span class="va">ode15s</span>(<span class="va">fun</span><span class="op">,</span> [<span class="fl">0</span> <span class="fl">100</span>]<span class="op">,</span> <span class="va">y0</span><span class="op">,</span><span class="va">opts</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>A value of <span class="math inline">\(\ce{TTX} = 0.57\,\text{nM}\)</span> is already sufficient to block the propogation.</p>
-</div>
-</div>
-</div>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
-<div id="ref-ks08_vol1" class="csl-entry" role="listitem">
-Keener, James, and James Sneyd. 2009. <em>Mathematical Physiology: I: Cellular Physiology</em>. Second. Vol. 8/I. Springer. <a href="https://strutture-provincia.primo.exlibrisgroup.com/permalink/39SBT_INST/ghkipk/alma991012367489706186">https://strutture-provincia.primo.exlibrisgroup.com/permalink/39SBT_INST/ghkipk/alma991012367489706186</a>.
-</div>
-</div>
 </section>
 </section>
 
