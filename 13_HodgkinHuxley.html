@@ -1,0 +1,1626 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.57">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2024-11-05">
+
+<title>13&nbsp; Hodgkin-Huxley model – Mathematical Biology</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./references.html" rel="next">
+<link href="./12_Bioelectricity.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./01_Bathtub.html">Lectures</a></li><li class="breadcrumb-item"><a href="./13_HodgkinHuxley.html"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Hodgkin-Huxley model</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Mathematical Biology</a> 
+        <div class="sidebar-tools-main">
+    <a href="./Mathematical-Biology.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Welcome</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Lectures</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01_Bathtub.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Bathtub model</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02_Population.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Population dynamics</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03_Logistic.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Logistic model</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04_Predation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Predation models</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05_LotkaVolterra.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Lotka-Volterra model</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06_Gause.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Gause type models</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./07_RM.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Rosenzweig-MacArthur model</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./08_MichaelinMenten.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Michaelin-Menten law</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./09_FastSlow.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Fast-Slow systems</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10_Inhibition.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Inhibition</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./11_FeedbackLoops.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Feedback loops</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./12_Bioelectricity.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Bioelectricity</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./13_HodgkinHuxley.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Hodgkin-Huxley model</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./projects2024.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Projects</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Assignments</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Assignments/01_recap_ODEs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Solving ODEs</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Assignments/02_population.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Population dynamics</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Assignments/03_spruce.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Predation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Assignments/04_systems.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">System of ODEs</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Assignments/05_predators.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Prey-predator systems</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Assignments/06_reactions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Reactions</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Assignments/07_feedbacks.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Feedbacks</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Labs</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Laboratories/01_ODE_Integration/lab_ODEinteg.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab 01: Numerical integration</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Laboratories/02_Predation/lab_Predation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab 02: Predation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Laboratories/03_Bifurcations/lab_Bifurcations.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab 03: Bifurcations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Laboratories/04_Chaos/lab_chaos.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab 04: Chaos</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Laboratories/05_Feedbacks/lab_feedback.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab 05: Feedback loops</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Laboratories/06_Electrophysiology/lab_ep.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab 06: Electrophysiology</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">Appendices</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./IntroODE.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Introduction to ODEs</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./bifurcations.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Introduction to bifurcations</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Laboratories/00_Intro_Matlab/introMATLAB.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Introduction to MATLAB</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#the-model" id="toc-the-model" class="nav-link active" data-scroll-target="#the-model"><span class="header-section-number">13.1</span> The model</a></li>
+  <li><a href="#fast-fast-analysis" id="toc-fast-fast-analysis" class="nav-link" data-scroll-target="#fast-fast-analysis"><span class="header-section-number">13.2</span> Fast-fast analysis</a></li>
+  <li><a href="#fast-slow-analysis" id="toc-fast-slow-analysis" class="nav-link" data-scroll-target="#fast-slow-analysis"><span class="header-section-number">13.3</span> Fast-slow analysis</a></li>
+  <li><a href="#the-fitzhugh-nagumo-model" id="toc-the-fitzhugh-nagumo-model" class="nav-link" data-scroll-target="#the-fitzhugh-nagumo-model"><span class="header-section-number">13.4</span> The FitzHugh-Nagumo model</a>
+  <ul class="collapse">
+  <li><a href="#fast-dynamics" id="toc-fast-dynamics" class="nav-link" data-scroll-target="#fast-dynamics"><span class="header-section-number">13.4.1</span> Fast dynamics</a></li>
+  <li><a href="#slow-dynamics" id="toc-slow-dynamics" class="nav-link" data-scroll-target="#slow-dynamics"><span class="header-section-number">13.4.2</span> Slow dynamics</a></li>
+  <li><a href="#oscillations" id="toc-oscillations" class="nav-link" data-scroll-target="#oscillations"><span class="header-section-number">13.4.3</span> Oscillations</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./01_Bathtub.html">Lectures</a></li><li class="breadcrumb-item"><a href="./13_HodgkinHuxley.html"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Hodgkin-Huxley model</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Hodgkin-Huxley model</span></h1>
+<p class="subtitle lead">This lecture is based on <span class="citation" data-cites="ks08_vol1">(<a href="references.html#ref-ks08_vol1" role="doc-biblioref">Keener and Sneyd 2009, vol. 8/I, chap. 4</a>)</span></p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">November 5, 2024</p>
+    </div>
+  </div>
+  
+    <div>
+    <div class="quarto-title-meta-heading">Modified</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date-modified">November 11, 2024</p>
+    </div>
+  </div>
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="the-model" class="level2" data-number="13.1">
+<h2 data-number="13.1" class="anchored" data-anchor-id="the-model"><span class="header-section-number">13.1</span> The model</h2>
+<p>The complete form of the Hodgkin-Huxley model is the following: <span class="math display">\[
+\left\{ \begin{aligned}
+- C_\mathrm{m} \frac{\mathrm{d}V_\mathrm{m}}{\mathrm{d}t} &amp;= \bar{g}_\text{Na} m^3 h (V - V_\text{Na}) + \bar{g}_\text{K} n^4 (V - V_\text{K})+ \bar{g}_\text{leak} (V - V_\text{leak}) - I_\mathrm{stim}(t), \\
+\frac{\mathrm{d}n}{\mathrm{d}t} &amp;= \alpha_n(V_\mathrm{m}) (1-n) - \beta_n(V_\mathrm{m}) n, \\
+\frac{\mathrm{d}m}{\mathrm{d}t} &amp;= \alpha_m(V_\mathrm{m}) (1-m) - \beta_m(V_\mathrm{m}) m, \\
+\frac{\mathrm{d}h}{\mathrm{d}t} &amp;= \alpha_h(V_\mathrm{m}) (1-h) - \beta_h(V_\mathrm{m}) h.
+\end{aligned}\right.
+\]</span></p>
+<p>The parameters of the model per <span class="math inline">\(1\,text{cm}^2\)</span> are as follows: <span class="math inline">\(C_\mathrm{m} = 1\,\text{$\mu$F}\)</span>, <span class="math inline">\(g_\text{Na} = 120\,\text{mS}\)</span>, <span class="math inline">\(g_\text{K} = 36\,\text{mS}\)</span>, <span class="math inline">\(g_\text{leak} = 0.3\,\text{mS}\)</span>, <span class="math inline">\(V_\text{Na} = 55\,\text{mV}\)</span>, <span class="math inline">\(V_\text{K} = -77\,\text{mV}\)</span>, <span class="math inline">\(V_\text{leak} = -54.4\,\text{mV}\)</span>.</p>
+<p>Concerning the transition rates, we have the following for <span class="math inline">\(\tau_{\{m,h,n\}}(V_m)\)</span> and <span class="math inline">\({\{m,h,n\}}_\infty\)</span>:</p>
+<div id="f8b70eac" class="cell" data-execution_count="1">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>sns.set_theme(<span class="st">"notebook"</span>, style<span class="op">=</span><span class="st">"whitegrid"</span>)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> x_over_expm1(x):</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.piecewise(x,</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>        np.<span class="bu">abs</span>(x)<span class="op">&lt;</span><span class="fl">1e-10</span>,</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>        [<span class="kw">lambda</span> x: <span class="dv">1</span><span class="op">-</span><span class="fl">0.5</span><span class="op">*</span>x, <span class="kw">lambda</span> x:x<span class="op">/</span>(np.exp(x)<span class="op">-</span><span class="dv">1</span>)])</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>alpha_m <span class="op">=</span> <span class="kw">lambda</span> V: x_over_expm1(<span class="op">-</span>(<span class="dv">40</span><span class="op">+</span>V)<span class="op">/</span><span class="dv">10</span>)</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>beta_m  <span class="op">=</span> <span class="kw">lambda</span> V: <span class="dv">4</span> <span class="op">*</span> np.exp(<span class="op">-</span>(V <span class="op">+</span> <span class="dv">65</span>) <span class="op">/</span> <span class="dv">18</span>)</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>alpha_h <span class="op">=</span> <span class="kw">lambda</span> V: <span class="fl">0.07</span> <span class="op">*</span> np.exp(<span class="op">-</span>(V <span class="op">+</span> <span class="dv">65</span>) <span class="op">/</span> <span class="dv">20</span>)</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>beta_h  <span class="op">=</span> <span class="kw">lambda</span> V: <span class="dv">1</span> <span class="op">/</span> (np.exp(<span class="op">-</span>(<span class="dv">35</span> <span class="op">+</span> V) <span class="op">/</span> <span class="dv">10</span>) <span class="op">+</span> <span class="dv">1</span>)</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>alpha_n <span class="op">=</span> <span class="kw">lambda</span> V: <span class="fl">0.1</span> <span class="op">*</span> x_over_expm1(<span class="op">-</span>(<span class="dv">55</span> <span class="op">+</span> V)<span class="op">/</span><span class="dv">10</span>)</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>beta_n  <span class="op">=</span> <span class="kw">lambda</span> V: <span class="fl">0.125</span> <span class="op">*</span> np.exp(<span class="op">-</span>(V <span class="op">+</span> <span class="dv">65</span>) <span class="op">/</span> <span class="dv">80</span>)</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>V <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">100</span>,<span class="dv">50</span>,<span class="dv">1000</span>)</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="co"># rates</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>tau_m <span class="op">=</span> <span class="dv">1</span><span class="op">/</span>(alpha_m(V)<span class="op">+</span>beta_m(V))</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>tau_h <span class="op">=</span> <span class="dv">1</span><span class="op">/</span>(alpha_h(V)<span class="op">+</span>beta_h(V))</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>tau_n <span class="op">=</span> <span class="dv">1</span><span class="op">/</span>(alpha_n(V)<span class="op">+</span>beta_n(V))</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>m_inf <span class="op">=</span> alpha_m(V)<span class="op">*</span>tau_m</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>h_inf <span class="op">=</span> alpha_h(V)<span class="op">*</span>tau_h</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>n_inf <span class="op">=</span> alpha_n(V)<span class="op">*</span>tau_n</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>fig,(ax1,ax2) <span class="op">=</span> plt.subplots(<span class="dv">1</span>,<span class="dv">2</span>,figsize<span class="op">=</span>(<span class="fl">7.5</span>,<span class="dv">3</span>))</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>ax1.plot(V,tau_m,V,tau_h,V,tau_n)</span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>ax1.set_xlabel(<span class="st">'$V_m$ [mV]'</span>)</span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>ax1.set_ylabel(<span class="st">'$</span><span class="ch">\\</span><span class="st">tau$ [ms]'</span>)</span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>ax2.plot(V,m_inf,V,h_inf,V,n_inf)</span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>ax2.set_xlabel(<span class="st">'$V_m$ [mV]'</span>)</span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>ax2.set_ylabel(<span class="st">'Equilibrium'</span>)</span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>fig.legend([<span class="st">'m'</span>,<span class="st">'h'</span>,<span class="st">'n'</span>],loc<span class="op">=</span><span class="st">"outside lower center"</span>, bbox_to_anchor<span class="op">=</span>(<span class="fl">0.5</span>,<span class="op">-</span><span class="fl">0.1</span>), ncol<span class="op">=</span><span class="dv">3</span>)</span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>fig.tight_layout()</span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="13_HodgkinHuxley_files/figure-html/cell-2-output-1.png" width="702" height="311" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>If we apply a square stimulus, we obtain the following solution:</p>
+<div id="c6898e0c" class="cell" data-execution_count="2">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> hhmodel <span class="im">import</span> hhmodel</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.integrate <span class="im">import</span> solve_ivp</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>sns.set_theme(<span class="st">"notebook"</span>, style<span class="op">=</span><span class="st">"whitegrid"</span>)</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>t0,tdur,Imax <span class="op">=</span> <span class="dv">1</span>, <span class="fl">0.5</span>, <span class="dv">80</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>I_square <span class="op">=</span> <span class="kw">lambda</span> t: Imax<span class="op">*</span>(t<span class="op">-</span>t0<span class="op">&gt;</span><span class="dv">0</span>)<span class="op">*</span>(t<span class="op">-</span>t0<span class="op">&lt;</span>tdur)</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>y0 <span class="op">=</span> [<span class="op">-</span><span class="fl">65.0</span>,<span class="fl">0.05</span>,<span class="fl">0.59</span>,<span class="fl">0.32</span>]</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>fun <span class="op">=</span> <span class="kw">lambda</span> t,y: hhmodel(t,y,Istim<span class="op">=</span>I_square)</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>sol <span class="op">=</span> solve_ivp(fun, [<span class="dv">0</span>,<span class="fl">20.0</span>], y0, max_step<span class="op">=</span><span class="fl">1e-1</span>)</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>I_square2 <span class="op">=</span> <span class="kw">lambda</span> t: <span class="dv">10</span><span class="op">*</span>(t<span class="op">-</span>t0<span class="op">&gt;</span><span class="dv">0</span>)<span class="op">*</span>(t<span class="op">-</span>t0<span class="op">&lt;</span>tdur)</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>fun2 <span class="op">=</span> <span class="kw">lambda</span> t,y: hhmodel(t,y,Istim<span class="op">=</span>I_square2)</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>sol2 <span class="op">=</span> solve_ivp(fun2, [<span class="dv">0</span>,<span class="fl">20.0</span>], y0, max_step<span class="op">=</span><span class="fl">1e-1</span>)</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>fig,(ax1,ax2,ax3) <span class="op">=</span> plt.subplots(<span class="dv">3</span>,<span class="dv">1</span>,sharex<span class="op">=</span><span class="va">True</span>,figsize<span class="op">=</span>(<span class="dv">7</span>,<span class="dv">10</span>))</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>ax1.step(sol.t,I_square(sol.t),<span class="st">'k'</span>,label<span class="op">=</span><span class="st">'Stimulus [$</span><span class="ch">\\</span><span class="st">mu A$]'</span>)</span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>ax1.step(sol2.t,I_square2(sol2.t),<span class="st">'r'</span>,label<span class="op">=</span><span class="st">'Stimulus [$</span><span class="ch">\\</span><span class="st">mu A$]'</span>)</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>ax1.legend()</span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>ax2.plot(sol.t,sol.y[<span class="dv">0</span>,:],<span class="st">'k'</span>,label<span class="op">=</span><span class="st">'$V_m$ [mV]'</span>)</span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>ax2.plot(sol2.t,sol2.y[<span class="dv">0</span>,:],<span class="st">'r'</span>,label<span class="op">=</span><span class="st">'$V_m$ [mV] (no AP)'</span>)</span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>ax2.legend()</span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>ax3.plot(sol.t,sol.y[<span class="dv">1</span>:,:].T)</span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>ax3.legend([<span class="st">'m'</span>,<span class="st">'h'</span>,<span class="st">'n'</span>])</span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>ax3.set_xlabel(<span class="st">'Time [ms]'</span>)</span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>fig.tight_layout()</span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="13_HodgkinHuxley_files/figure-html/cell-3-output-1.png" width="657" height="944" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Notice that we can trigger an action potential only for a sufficiently large stimulus. This is a manifestation of <em>excitability</em>: when the stimulus is large enough, the potential will raise automatically to an excited value, and recover afterwards. Otherwise, when the stimulus is small (or too short), we essentially have a passive behavior, similar to an RC circuit.</p>
+</section>
+<section id="fast-fast-analysis" class="level2" data-number="13.2">
+<h2 data-number="13.2" class="anchored" data-anchor-id="fast-fast-analysis"><span class="header-section-number">13.2</span> Fast-fast analysis</h2>
+<p>The model is too complex for an explicit computation, but we can get some insights into excitability with the fast-slow analysis.</p>
+<p>In the 1960s, FitzHugh observed that the model has a fast-slow structure, were:</p>
+<ul>
+<li><span class="math inline">\(m(t)\)</span> and <span class="math inline">\(V_m(t)\)</span> are fast,</li>
+<li><span class="math inline">\(n(t)\)</span> and <span class="math inline">\(h(t)\)</span> are slow.</li>
+</ul>
+<p>In fact, <span class="math inline">\(\tau_m \ll \tau_n, \tau_h\)</span>. The same we observe for <span class="math inline">\(V_m\)</span> due to the large conductivity of the sodium. Therefore, we can study the fast dynamics by fixing <span class="math inline">\(n(t)=n_0\)</span> and <span class="math inline">\(h(t)=h_0\)</span>: <span class="math display">\[
+\left\{ \begin{aligned}
+- C_\mathrm{m} \frac{\mathrm{d}V_\mathrm{m}}{\mathrm{d}t} &amp;= \bar{g}_\text{Na} m^3 h_0 (V - V_\text{Na}) + \bar{g}_\text{K} n_0^4 (V - V_\text{K})+ \bar{g}_\text{leak} (V - V_\text{leak}), \\
+\tau_m(V) \frac{\mathrm{d}m}{\mathrm{d}t} &amp;= m_\infty(V) - m.
+\end{aligned}\right.
+\]</span></p>
+<p>In the <span class="math inline">\((V_m, m)\)</span> phase space, we have:</p>
+<div id="6ff40dc4" class="cell" data-execution_count="3">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>sns.set_theme(<span class="st">"notebook"</span>, style<span class="op">=</span><span class="st">"whitegrid"</span>)</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> x_over_expm1(x):</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.piecewise(x,</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>        np.<span class="bu">abs</span>(x)<span class="op">&lt;</span><span class="fl">1e-10</span>,</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>        [<span class="kw">lambda</span> x: <span class="dv">1</span><span class="op">-</span><span class="fl">0.5</span><span class="op">*</span>x, <span class="kw">lambda</span> x:x<span class="op">/</span>(np.exp(x)<span class="op">-</span><span class="dv">1</span>)])</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>alpha_m <span class="op">=</span> <span class="kw">lambda</span> V: x_over_expm1(<span class="op">-</span>(<span class="dv">40</span><span class="op">+</span>V)<span class="op">/</span><span class="dv">10</span>)</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>beta_m  <span class="op">=</span> <span class="kw">lambda</span> V: <span class="dv">4</span> <span class="op">*</span> np.exp(<span class="op">-</span>(V <span class="op">+</span> <span class="dv">65</span>) <span class="op">/</span> <span class="dv">18</span>)</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>h0,n0 <span class="op">=</span> <span class="fl">0.596</span>,<span class="fl">0.3176</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>g_Na<span class="op">=</span><span class="dv">120</span><span class="op">;</span> g_K<span class="op">=</span><span class="dv">36</span><span class="op">;</span> g_l<span class="op">=</span><span class="fl">0.3</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>V_K<span class="op">=-</span><span class="dv">77</span><span class="op">;</span> V_Na<span class="op">=</span><span class="dv">55</span><span class="op">;</span> V_l<span class="op">=-</span><span class="fl">54.4</span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>C_m <span class="op">=</span> <span class="fl">1.0</span></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>V <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">70</span>,<span class="dv">60</span>,<span class="dv">1000</span>)</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>m <span class="op">=</span> np.linspace(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">1000</span>)</span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>tau_m <span class="op">=</span> <span class="kw">lambda</span> V: <span class="dv">1</span><span class="op">/</span>(alpha_m(V)<span class="op">+</span>beta_m(V))</span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>m_inf <span class="op">=</span> <span class="kw">lambda</span> V: alpha_m(V)<span class="op">/</span>(alpha_m(V)<span class="op">+</span>beta_m(V))</span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a><span class="co"># solve wrt to V</span></span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>V_m   <span class="op">=</span> <span class="kw">lambda</span> m: (g_Na<span class="op">*</span>h0<span class="op">*</span>m<span class="op">**</span><span class="dv">3</span><span class="op">*</span>V_Na<span class="op">+</span>g_K<span class="op">*</span>n0<span class="op">**</span><span class="dv">4</span><span class="op">*</span>V_K<span class="op">+</span>g_l<span class="op">*</span>V_l)<span class="op">/</span>(g_Na<span class="op">*</span>h0<span class="op">*</span>m<span class="op">**</span><span class="dv">3</span><span class="op">+</span>g_K<span class="op">*</span>n0<span class="op">**</span><span class="dv">4</span><span class="op">+</span>g_l)</span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a><span class="co"># find equilibria via nonlinear problem</span></span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.optimize <span class="im">import</span> root_scalar</span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>feq <span class="op">=</span> <span class="kw">lambda</span> V0:V_m(m_inf(V0))<span class="op">-</span>V0</span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>V0 <span class="op">=</span> root_scalar(feq,x0<span class="op">=-</span><span class="dv">65</span>).root</span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a>V1 <span class="op">=</span> root_scalar(feq,x0<span class="op">=-</span><span class="dv">60</span>).root</span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a>V2 <span class="op">=</span> root_scalar(feq,x0<span class="op">=+</span><span class="dv">60</span>).root</span>
+<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a><span class="co">#print(V0,V1,V2)</span></span>
+<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a>fig, ax_out <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">5</span>,<span class="dv">4</span>))</span>
+<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a><span class="co"># stable manifold of V^t</span></span>
+<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.integrate <span class="im">import</span> solve_ivp</span>
+<span id="cb3-40"><a href="#cb3-40" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> fastsys(t,y):</span>
+<span id="cb3-41"><a href="#cb3-41" aria-hidden="true" tabindex="-1"></a>    V, m <span class="op">=</span> y</span>
+<span id="cb3-42"><a href="#cb3-42" aria-hidden="true" tabindex="-1"></a>    dV <span class="op">=</span> <span class="op">-</span><span class="dv">1</span><span class="op">/</span>C_m<span class="op">*</span>(g_Na<span class="op">*</span>(m<span class="op">**</span><span class="dv">3</span>)<span class="op">*</span>h0<span class="op">*</span>(V<span class="op">-</span>V_Na)<span class="op">+</span>g_K<span class="op">*</span>n0<span class="op">**</span><span class="dv">4</span><span class="op">*</span>(V<span class="op">-</span>V_K)<span class="op">+</span>g_l<span class="op">*</span>(V<span class="op">-</span>V_l))</span>
+<span id="cb3-43"><a href="#cb3-43" aria-hidden="true" tabindex="-1"></a>    dm <span class="op">=</span> <span class="dv">1</span><span class="op">/</span>tau_m(V)<span class="op">*</span>(m_inf(V)<span class="op">-</span>m)</span>
+<span id="cb3-44"><a href="#cb3-44" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.array([dV,dm])</span>
+<span id="cb3-45"><a href="#cb3-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-46"><a href="#cb3-46" aria-hidden="true" tabindex="-1"></a><span class="co"># estimate Jacobian</span></span>
+<span id="cb3-47"><a href="#cb3-47" aria-hidden="true" tabindex="-1"></a>m1 <span class="op">=</span> m_inf(V1)</span>
+<span id="cb3-48"><a href="#cb3-48" aria-hidden="true" tabindex="-1"></a>eps <span class="op">=</span> <span class="fl">1e-8</span></span>
+<span id="cb3-49"><a href="#cb3-49" aria-hidden="true" tabindex="-1"></a>ref <span class="op">=</span> fastsys(<span class="dv">0</span>,[V1,m1])</span>
+<span id="cb3-50"><a href="#cb3-50" aria-hidden="true" tabindex="-1"></a>J <span class="op">=</span> np.vstack([fastsys(<span class="dv">0</span>,[V1<span class="op">+</span>eps,m1]),</span>
+<span id="cb3-51"><a href="#cb3-51" aria-hidden="true" tabindex="-1"></a>            fastsys(<span class="dv">0</span>,[V1,m1<span class="op">+</span>eps])]).T<span class="op">/</span>eps</span>
+<span id="cb3-52"><a href="#cb3-52" aria-hidden="true" tabindex="-1"></a>e,ev <span class="op">=</span> np.linalg.eig(J)</span>
+<span id="cb3-53"><a href="#cb3-53" aria-hidden="true" tabindex="-1"></a>vustab <span class="op">=</span> ev[:,<span class="dv">1</span>]</span>
+<span id="cb3-54"><a href="#cb3-54" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> outsideL(t,y): <span class="cf">return</span> y[<span class="dv">0</span>]<span class="op">+</span><span class="dv">75</span></span>
+<span id="cb3-55"><a href="#cb3-55" aria-hidden="true" tabindex="-1"></a>outsideL.terminal <span class="op">=</span> <span class="va">True</span></span>
+<span id="cb3-56"><a href="#cb3-56" aria-hidden="true" tabindex="-1"></a>outsideL.direction <span class="op">=</span> <span class="op">-</span><span class="dv">1</span></span>
+<span id="cb3-57"><a href="#cb3-57" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> outsideB(t,y): <span class="cf">return</span> y[<span class="dv">1</span>]</span>
+<span id="cb3-58"><a href="#cb3-58" aria-hidden="true" tabindex="-1"></a>outsideB.terminal <span class="op">=</span> <span class="va">True</span></span>
+<span id="cb3-59"><a href="#cb3-59" aria-hidden="true" tabindex="-1"></a>outsideB.direction <span class="op">=</span> <span class="op">-</span><span class="dv">1</span></span>
+<span id="cb3-60"><a href="#cb3-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-61"><a href="#cb3-61" aria-hidden="true" tabindex="-1"></a>sol1 <span class="op">=</span> solve_ivp(<span class="kw">lambda</span> t,y: <span class="op">-</span>fastsys(t,y),[<span class="dv">0</span>,<span class="fl">3.5</span>],</span>
+<span id="cb3-62"><a href="#cb3-62" aria-hidden="true" tabindex="-1"></a>                 [V1,m1] <span class="op">+</span> <span class="fl">1e-6</span><span class="op">*</span>vustab,</span>
+<span id="cb3-63"><a href="#cb3-63" aria-hidden="true" tabindex="-1"></a>                 events<span class="op">=</span>(outsideL,outsideB))</span>
+<span id="cb3-64"><a href="#cb3-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-65"><a href="#cb3-65" aria-hidden="true" tabindex="-1"></a>sol2 <span class="op">=</span> solve_ivp(<span class="kw">lambda</span> t,y: <span class="op">-</span>fastsys(t,y),[<span class="dv">0</span>,<span class="fl">3.5</span>],</span>
+<span id="cb3-66"><a href="#cb3-66" aria-hidden="true" tabindex="-1"></a>                [V1,m1] <span class="op">-</span> <span class="fl">1e-6</span><span class="op">*</span>vustab,</span>
+<span id="cb3-67"><a href="#cb3-67" aria-hidden="true" tabindex="-1"></a>                events<span class="op">=</span>(outsideL,outsideB))</span>
+<span id="cb3-68"><a href="#cb3-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-69"><a href="#cb3-69" aria-hidden="true" tabindex="-1"></a>ax_in <span class="op">=</span> ax_out.inset_axes(</span>
+<span id="cb3-70"><a href="#cb3-70" aria-hidden="true" tabindex="-1"></a>    [<span class="op">-</span><span class="fl">0.7</span>, <span class="fl">0.5</span>, <span class="fl">0.47</span>, <span class="fl">0.47</span>],</span>
+<span id="cb3-71"><a href="#cb3-71" aria-hidden="true" tabindex="-1"></a>    xlim<span class="op">=</span>(<span class="op">-</span><span class="dv">66</span>, <span class="op">-</span><span class="dv">62</span>), ylim<span class="op">=</span>(<span class="fl">0.04</span>, <span class="fl">0.08</span>),</span>
+<span id="cb3-72"><a href="#cb3-72" aria-hidden="true" tabindex="-1"></a>    xticklabels<span class="op">=</span>[], yticklabels<span class="op">=</span>[])</span>
+<span id="cb3-73"><a href="#cb3-73" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-74"><a href="#cb3-74" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> ax <span class="kw">in</span> [ax_out,ax_in]:</span>
+<span id="cb3-75"><a href="#cb3-75" aria-hidden="true" tabindex="-1"></a>    ax.plot(V, m_inf(V), <span class="st">'b'</span>, label<span class="op">=</span><span class="st">'$m</span><span class="ch">\'</span><span class="st">=0$'</span>)</span>
+<span id="cb3-76"><a href="#cb3-76" aria-hidden="true" tabindex="-1"></a>    ax.plot(V_m(m), m, <span class="st">'r'</span>, label<span class="op">=</span><span class="st">'$V_m</span><span class="ch">\'</span><span class="st">=0$'</span>)</span>
+<span id="cb3-77"><a href="#cb3-77" aria-hidden="true" tabindex="-1"></a>    ax.plot(V0,m_inf(V0),<span class="st">'k.'</span>,markersize<span class="op">=</span><span class="dv">4</span>)</span>
+<span id="cb3-78"><a href="#cb3-78" aria-hidden="true" tabindex="-1"></a>    ax.plot(V1,m_inf(V1),<span class="st">'k.'</span>,markersize<span class="op">=</span><span class="dv">4</span>)</span>
+<span id="cb3-79"><a href="#cb3-79" aria-hidden="true" tabindex="-1"></a>    ax.plot(V2,m_inf(V2),<span class="st">'k.'</span>,markersize<span class="op">=</span><span class="dv">4</span>)</span>
+<span id="cb3-80"><a href="#cb3-80" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-81"><a href="#cb3-81" aria-hidden="true" tabindex="-1"></a>    ax.plot(sol1.y[<span class="dv">0</span>,:],sol1.y[<span class="dv">1</span>,:],<span class="st">'k--'</span>,linewidth<span class="op">=</span><span class="fl">1.0</span>)</span>
+<span id="cb3-82"><a href="#cb3-82" aria-hidden="true" tabindex="-1"></a>    ax.plot(sol2.y[<span class="dv">0</span>,:],sol2.y[<span class="dv">1</span>,:],<span class="st">'k--'</span>,linewidth<span class="op">=</span><span class="fl">1.0</span>)</span>
+<span id="cb3-83"><a href="#cb3-83" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-84"><a href="#cb3-84" aria-hidden="true" tabindex="-1"></a>    <span class="co"># some trajectories</span></span>
+<span id="cb3-85"><a href="#cb3-85" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> y0 <span class="kw">in</span> [[<span class="op">-</span><span class="dv">60</span>,<span class="fl">0.2</span>],[<span class="op">-</span><span class="dv">65</span>,<span class="fl">0.1</span>],[<span class="op">-</span><span class="dv">41</span>,<span class="fl">0.6</span>]]:</span>
+<span id="cb3-86"><a href="#cb3-86" aria-hidden="true" tabindex="-1"></a>        traj <span class="op">=</span> solve_ivp(fastsys,[<span class="dv">0</span>,<span class="dv">10</span>],y0,max_step<span class="op">=</span><span class="fl">1e-2</span>)</span>
+<span id="cb3-87"><a href="#cb3-87" aria-hidden="true" tabindex="-1"></a>        ax.plot(traj.y[<span class="dv">0</span>,:],traj.y[<span class="dv">1</span>,:],color<span class="op">=</span><span class="st">'gray'</span>,linewidth<span class="op">=</span><span class="fl">1.0</span>)</span>
+<span id="cb3-88"><a href="#cb3-88" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-89"><a href="#cb3-89" aria-hidden="true" tabindex="-1"></a>    <span class="co"># arrows</span></span>
+<span id="cb3-90"><a href="#cb3-90" aria-hidden="true" tabindex="-1"></a>    Va <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">50</span>,<span class="dv">50</span>,<span class="dv">10</span>)</span>
+<span id="cb3-91"><a href="#cb3-91" aria-hidden="true" tabindex="-1"></a>    ax.quiver(Va, m_inf(Va),</span>
+<span id="cb3-92"><a href="#cb3-92" aria-hidden="true" tabindex="-1"></a>    np.ones_like(Va), np.zeros_like(Va),linewidth<span class="op">=</span><span class="fl">0.5</span>,color<span class="op">=</span><span class="st">'b'</span>)</span>
+<span id="cb3-93"><a href="#cb3-93" aria-hidden="true" tabindex="-1"></a>    ma <span class="op">=</span> np.linspace(<span class="fl">0.1</span>,<span class="fl">1.0</span>,<span class="dv">10</span>)</span>
+<span id="cb3-94"><a href="#cb3-94" aria-hidden="true" tabindex="-1"></a>    ax.quiver(V_m(ma), ma,</span>
+<span id="cb3-95"><a href="#cb3-95" aria-hidden="true" tabindex="-1"></a>    np.zeros_like(ma), np.ones_like(ma),linewidth<span class="op">=</span><span class="fl">0.5</span>,color<span class="op">=</span><span class="st">'r'</span>)</span>
+<span id="cb3-96"><a href="#cb3-96" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-97"><a href="#cb3-97" aria-hidden="true" tabindex="-1"></a>ax_out.set_xlim([<span class="op">-</span><span class="dv">70</span>,<span class="va">None</span>])</span>
+<span id="cb3-98"><a href="#cb3-98" aria-hidden="true" tabindex="-1"></a>ax_out.set_ylim([<span class="dv">0</span>,<span class="va">None</span>])</span>
+<span id="cb3-99"><a href="#cb3-99" aria-hidden="true" tabindex="-1"></a>ax_out.set_xlabel(<span class="st">'$V_m$ [mV]'</span>)</span>
+<span id="cb3-100"><a href="#cb3-100" aria-hidden="true" tabindex="-1"></a>ax_out.set_ylabel(<span class="st">'m'</span>)</span>
+<span id="cb3-101"><a href="#cb3-101" aria-hidden="true" tabindex="-1"></a>ax_out.legend()</span>
+<span id="cb3-102"><a href="#cb3-102" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-103"><a href="#cb3-103" aria-hidden="true" tabindex="-1"></a>ax_in.annotate(<span class="st">'$V_</span><span class="ch">\\</span><span class="st">text</span><span class="sc">{rest}</span><span class="st">$'</span>,xy<span class="op">=</span>(V0,m_inf(V0)),xytext<span class="op">=</span>(V0<span class="op">-</span><span class="dv">1</span>,m_inf(V0)<span class="op">+</span><span class="fl">0.015</span>),arrowprops<span class="op">=</span><span class="bu">dict</span>(arrowstyle<span class="op">=</span><span class="st">"-&gt;"</span>,color<span class="op">=</span><span class="st">'black'</span>))</span>
+<span id="cb3-104"><a href="#cb3-104" aria-hidden="true" tabindex="-1"></a>ax_in.annotate(<span class="st">'$V_</span><span class="ch">\\</span><span class="st">text</span><span class="sc">{thres}</span><span class="st">$'</span>,xy<span class="op">=</span>(V1,m_inf(V1)),xytext<span class="op">=</span>(V1<span class="op">-</span><span class="fl">0.5</span>,m_inf(V1)<span class="op">-</span><span class="fl">0.02</span>),arrowprops<span class="op">=</span><span class="bu">dict</span>(arrowstyle<span class="op">=</span><span class="st">"-&gt;"</span>,color<span class="op">=</span><span class="st">'black'</span>))</span>
+<span id="cb3-105"><a href="#cb3-105" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-106"><a href="#cb3-106" aria-hidden="true" tabindex="-1"></a>ax_out.annotate(<span class="st">'$V_</span><span class="ch">\\</span><span class="st">text</span><span class="sc">{e}</span><span class="st">$'</span>,xy<span class="op">=</span>(V2,m_inf(V2)),xytext<span class="op">=</span>(V2,m_inf(V2)<span class="op">+</span><span class="fl">0.15</span>),arrowprops<span class="op">=</span><span class="bu">dict</span>(arrowstyle<span class="op">=</span><span class="st">"-&gt;"</span>,color<span class="op">=</span><span class="st">'black'</span>))</span>
+<span id="cb3-107"><a href="#cb3-107" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-108"><a href="#cb3-108" aria-hidden="true" tabindex="-1"></a>ax_out.annotate(<span class="st">'Stable manifold'</span>,xy<span class="op">=</span>(<span class="op">-</span><span class="dv">62</span>,<span class="fl">0.02</span>),xytext<span class="op">=</span>(V1<span class="op">+</span><span class="dv">20</span>,m_inf(V1)<span class="op">-</span><span class="fl">0.02</span>),arrowprops<span class="op">=</span><span class="bu">dict</span>(arrowstyle<span class="op">=</span><span class="st">"-&gt;"</span>,color<span class="op">=</span><span class="st">'black'</span>))</span>
+<span id="cb3-109"><a href="#cb3-109" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-110"><a href="#cb3-110" aria-hidden="true" tabindex="-1"></a>ax_out.indicate_inset_zoom(ax_in, edgecolor<span class="op">=</span><span class="st">"black"</span>,linewidth<span class="op">=</span><span class="fl">1.0</span>)</span>
+<span id="cb3-111"><a href="#cb3-111" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="13_HodgkinHuxley_files/figure-html/cell-4-output-1.png" width="652" height="404" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>We have 3 equilibria:</p>
+<ol type="1">
+<li><span class="math inline">\(V_m = V_\text{rest} \approx -64.72\,\text{mV}\)</span>, which is stable,</li>
+<li><span class="math inline">\(V_m = V_\text{thres} \approx -62.85\,\text{mV}\)</span>, a saddle,</li>
+<li><span class="math inline">\(V_m = V_\text{e} \approx 53.87\,\text{mV}\)</span>, stable.</li>
+</ol>
+<p>The saddle has a stable manifold, indicated in the above figure, that separates the phase space in two parts: if we start from the right of it, we converge towards the resting equilibrium, otherwise we go towards the excited state. The bistable behavior explains the excitability of the system: starting from the resting membrane potential, if we apply a sufficiently large current we can move the state to the right of the manifold, and obtain an action potential.</p>
+<p>Therefore, the fast dynamics brings the system to the excited state (the upstroke phase of the action potential). Once we reach the equilibrium, the slow dynamics enters, moving <span class="math inline">\(n\)</span> and <span class="math inline">\(h\)</span> away from their resting value. In particular, <span class="math inline">\(n\)</span> will increase while <span class="math inline">\(h\)</span> will decrease. As we do so, the nullcline for <span class="math inline">\(V_m\)</span>, in the fast system, will shift:</p>
+<div id="aa97d563" class="cell" data-execution_count="4">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> hhmodel <span class="im">import</span> x_over_expm1</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>sns.set_theme(<span class="st">"notebook"</span>, style<span class="op">=</span><span class="st">"whitegrid"</span>)</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>alpha_m <span class="op">=</span> <span class="kw">lambda</span> V: x_over_expm1(<span class="op">-</span>(<span class="dv">40</span><span class="op">+</span>V)<span class="op">/</span><span class="dv">10</span>)</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>beta_m  <span class="op">=</span> <span class="kw">lambda</span> V: <span class="dv">4</span> <span class="op">*</span> np.exp(<span class="op">-</span>(V <span class="op">+</span> <span class="dv">65</span>) <span class="op">/</span> <span class="dv">18</span>)</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>g_Na<span class="op">=</span><span class="dv">120</span><span class="op">;</span> g_K<span class="op">=</span><span class="dv">36</span><span class="op">;</span> g_l<span class="op">=</span><span class="fl">0.3</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>V_K<span class="op">=-</span><span class="dv">77</span><span class="op">;</span> V_Na<span class="op">=</span><span class="dv">55</span><span class="op">;</span> V_l<span class="op">=-</span><span class="fl">54.4</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>C_m <span class="op">=</span> <span class="fl">1.0</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>V <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">80</span>,<span class="dv">60</span>,<span class="dv">1000</span>)</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>m <span class="op">=</span> np.linspace(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">1000</span>)</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>tau_m <span class="op">=</span> <span class="kw">lambda</span> V: <span class="dv">1</span><span class="op">/</span>(alpha_m(V)<span class="op">+</span>beta_m(V))</span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>m_inf <span class="op">=</span> <span class="kw">lambda</span> V: alpha_m(V)<span class="op">/</span>(alpha_m(V)<span class="op">+</span>beta_m(V))</span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a><span class="co"># solve wrt to V</span></span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>V_m   <span class="op">=</span> <span class="kw">lambda</span> m,h0,n0: (g_Na<span class="op">*</span>h0<span class="op">*</span>m<span class="op">**</span><span class="dv">3</span><span class="op">*</span>V_Na<span class="op">+</span>g_K<span class="op">*</span>n0<span class="op">**</span><span class="dv">4</span><span class="op">*</span>V_K<span class="op">+</span>g_l<span class="op">*</span>V_l)<span class="op">/</span>(g_Na<span class="op">*</span>h0<span class="op">*</span>m<span class="op">**</span><span class="dv">3</span><span class="op">+</span>g_K<span class="op">*</span>n0<span class="op">**</span><span class="dv">4</span><span class="op">+</span>g_l)</span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>fig, ax_out <span class="op">=</span> plt.subplots()</span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> ax <span class="kw">in</span> [ax_out,ax_in]:</span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>    ax.plot(V, m_inf(V), <span class="st">'b'</span>, label<span class="op">=</span><span class="st">'$m</span><span class="ch">\'</span><span class="st">=0$'</span>)</span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>    h0,n0 <span class="op">=</span> <span class="fl">0.596</span>,<span class="fl">0.3176</span></span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>    ax.plot(V_m(m,h0,n0), m, <span class="st">'r'</span>, label<span class="op">=</span><span class="st">'$V_m</span><span class="ch">\'</span><span class="st">=0$'</span>)</span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>    ax.plot(V_m(m,<span class="fl">0.4</span>,<span class="fl">0.4</span>), m, <span class="st">'r'</span>, linewidth<span class="op">=</span><span class="fl">0.5</span>)</span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>    ax.plot(V_m(m,<span class="fl">0.3</span>,<span class="fl">0.5</span>), m, <span class="st">'r'</span>, linewidth<span class="op">=</span><span class="fl">0.5</span>)</span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a>    ax.plot(V_m(m,<span class="fl">0.2</span>,<span class="fl">0.6</span>), m, <span class="st">'r'</span>, linewidth<span class="op">=</span><span class="fl">0.5</span>)</span>
+<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a>    ax.plot(V_m(m,<span class="fl">0.1</span>,<span class="fl">0.7</span>), m, <span class="st">'r'</span>, linewidth<span class="op">=</span><span class="fl">0.5</span>)</span>
+<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a>    ax.plot(V_m(m,<span class="fl">0.1</span>,<span class="fl">0.8</span>), m, <span class="st">'r'</span>, linewidth<span class="op">=</span><span class="fl">0.5</span>)</span>
+<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a>ax_out.set_xlabel(<span class="st">'$V_m$ [mV]'</span>)</span>
+<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a>ax_out.set_ylabel(<span class="st">'m'</span>)</span>
+<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a>ax_out.legend()</span>
+<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="13_HodgkinHuxley_files/figure-html/cell-5-output-1.png" width="593" height="437" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>We notice that equilibria shift as the nullcline changes. Let us summarize the dynamics:</p>
+<ol type="1">
+<li>(Fast) Fixed <span class="math inline">\(n=n_0\)</span>, <span class="math inline">\(h=h_0\)</span>, a stimulus excite the system from the resting state <span class="math inline">\((V_\text{rest},m_\infty(V_\text{rest}))\)</span> to the excited <span class="math inline">\((V_e,m_\infty(V^e))\)</span>;</li>
+<li>(Slow) The fast system is now at equilibrium. We can track <span class="math inline">\(V_m\)</span> and <span class="math inline">\(m\)</span> with respect to <span class="math inline">\(n\)</span> and <span class="math inline">\(h\)</span> the surface of equilibria defined by <span class="math inline">\(V_e(h,h)\)</span> and <span class="math inline">\(m(h,n)=m_\infty(V^e(h,n))\)</span>. On this surface, we have the slow dynamics given by <span class="math inline">\(n'=\ldots\)</span> and <span class="math inline">\(h'=\ldots\)</span>. Since <span class="math inline">\(V_m\)</span> is large, and <span class="math inline">\(n_0 &gt; n_\infty\)</span>, <span class="math inline">\(n\)</span> will start to increase while <span class="math inline">\(h\)</span> will do the opposite. As these values changes, the nullcline for <span class="math inline">\(V_m\)</span> in the fast system will also shift, as in the figure.</li>
+<li>(Tipping point) The process will continue until the excited equilibrium and the saddle collide in a tangent bifurcation. This is a tipping point.</li>
+<li>(Fast) Since the encountered a tipping point, we cannot continue the slow dynamics and we need to integrate the fast system. After the bifurcation, there is only one equilibrium left, the resting state, so the system will converge there (quickly).</li>
+<li>(Slow) Once back at the resting state, the slow system will continue on the lower branch of equilibria, defined by <span class="math inline">\(V_\text{rest}(h,h)\)</span> and <span class="math inline">\(m(h,n)=m_\infty(V_\text{rest}(h,n))\)</span>. Here, <span class="math inline">\(n\)</span> will decrease and <span class="math inline">\(h\)</span> will increase, moving back the system to the original equilibrium.</li>
+</ol>
+<div id="65cc14d4" class="cell" data-execution_count="5">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> hhmodel <span class="im">import</span> hhmodel</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.integrate <span class="im">import</span> solve_ivp</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>sns.set_theme(<span class="st">"notebook"</span>, style<span class="op">=</span><span class="st">"whitegrid"</span>)</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>t0,tdur,Imax <span class="op">=</span> <span class="dv">1</span>, <span class="fl">0.4</span>, <span class="dv">50</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>I_square <span class="op">=</span> <span class="kw">lambda</span> t: Imax<span class="op">*</span>(t<span class="op">-</span>t0<span class="op">&gt;</span><span class="dv">0</span>)<span class="op">*</span>(t<span class="op">-</span>t0<span class="op">&lt;</span>tdur)</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>y0 <span class="op">=</span> [<span class="op">-</span><span class="fl">65.0</span>,<span class="fl">0.05</span>,<span class="fl">0.59</span>,<span class="fl">0.32</span>]</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>fun <span class="op">=</span> <span class="kw">lambda</span> t,y: hhmodel(t,y,Istim<span class="op">=</span>I_square)</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>sol <span class="op">=</span> solve_ivp(fun, [<span class="dv">0</span>,<span class="fl">10.0</span>], y0, max_step<span class="op">=</span><span class="fl">1e-1</span>)</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>fig,(ax1,ax2) <span class="op">=</span> plt.subplots(<span class="dv">2</span>,<span class="dv">1</span>,sharex<span class="op">=</span><span class="va">True</span>,figsize<span class="op">=</span>(<span class="dv">7</span>,<span class="dv">5</span>))</span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>ax1.plot(sol.t,sol.y[<span class="dv">0</span>,:],<span class="st">'k'</span>)</span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>ax2.plot(sol.t,sol.y[<span class="dv">1</span>:,:].T)</span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>ax2.legend([<span class="st">'m'</span>,<span class="st">'h'</span>,<span class="st">'n'</span>])</span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>m1,M1 <span class="op">=</span> ax1.get_ylim()</span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>m2,M2 <span class="op">=</span> ax2.get_ylim()</span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>times <span class="op">=</span> np.array([<span class="fl">1.0</span>,<span class="fl">1.4</span>,<span class="fl">2.2</span>,<span class="fl">3.5</span>,<span class="fl">4.8</span>,<span class="fl">10.0</span>])</span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> xx <span class="kw">in</span> times:</span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>    ax1.axvline(x<span class="op">=</span>xx,color<span class="op">=</span><span class="st">'k'</span>,linewidth<span class="op">=</span><span class="fl">0.5</span>)</span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a>    ax2.axvline(x<span class="op">=</span>xx,color<span class="op">=</span><span class="st">'k'</span>,linewidth<span class="op">=</span><span class="fl">0.5</span>)</span>
+<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> k <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(times)<span class="op">-</span><span class="dv">1</span>):</span>
+<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a>    ax1.fill_between([times[k],times[k<span class="op">+</span><span class="dv">1</span>]],m1,M1,alpha<span class="op">=</span><span class="fl">.2</span>)</span>
+<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a>    ax2.fill_between([times[k],times[k<span class="op">+</span><span class="dv">1</span>]],m2,M2,alpha<span class="op">=</span><span class="fl">.2</span>)</span>
+<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a>ax1.set_ylim([m1,M1])</span>
+<span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a>ax2.set_ylim([m2,M2])</span>
+<span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-35"><a href="#cb5-35" aria-hidden="true" tabindex="-1"></a>ax2.set_xticks( (times[<span class="dv">1</span>:]<span class="op">+</span>times[:<span class="op">-</span><span class="dv">1</span>])<span class="op">/</span><span class="fl">2.0</span> )</span>
+<span id="cb5-36"><a href="#cb5-36" aria-hidden="true" tabindex="-1"></a>ax2.set_xticklabels([<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>],fontweight<span class="op">=</span><span class="st">'bold'</span>)</span>
+<span id="cb5-37"><a href="#cb5-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-38"><a href="#cb5-38" aria-hidden="true" tabindex="-1"></a>fig.tight_layout()</span>
+<span id="cb5-39"><a href="#cb5-39" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="13_HodgkinHuxley_files/figure-html/cell-6-output-1.png" width="653" height="464" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="fast-slow-analysis" class="level2" data-number="13.3">
+<h2 data-number="13.3" class="anchored" data-anchor-id="fast-slow-analysis"><span class="header-section-number">13.3</span> Fast-slow analysis</h2>
+<p>In the 1960s, FitzHugh observed that <span class="math inline">\(m(t)\)</span> is actually <em>very fast</em> compared to other variables, so we could always assume <span class="math inline">\(m = m_\infty(V)\)</span>. A second observation is that <span class="math inline">\(n+h \approx 0.8\)</span>, so we could take <span class="math inline">\(h \approx 0.8 - n\)</span>. In this way, we end up with a system of 2 equations: <span class="math display">\[
+\left\{ \begin{aligned}
+- C_\mathrm{m} \frac{\mathrm{d}V_\mathrm{m}}{\mathrm{d}t} &amp;= \bar{g}_\text{Na} m_\infty(V_m)^3 (0.8-n) (V - V_\text{Na}) \\
+&amp;+ \bar{g}_\text{K} n^4 (V - V_\text{K})+ \bar{g}_\text{leak} (V - V_\text{leak}), \\
+\frac{\mathrm{d}n}{\mathrm{d}t} &amp;= \alpha_n(V_\mathrm{m}) (1-n) - \beta_n(V_\mathrm{m}) n.
+\end{aligned}\right.
+\]</span></p>
+<p>In the phase plane, nullclines are <span class="math inline">\(n = n_\infty(V_m)\)</span> and another function that looks like a cubic function:</p>
+<div id="4f94c36a" class="cell" data-execution_count="6">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> hhmodel <span class="im">import</span> <span class="op">*</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>sns.set_theme(<span class="st">"notebook"</span>, style<span class="op">=</span><span class="st">"whitegrid"</span>)</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>g_Na<span class="op">=</span><span class="dv">120</span><span class="op">;</span> g_K<span class="op">=</span><span class="dv">36</span><span class="op">;</span> g_l<span class="op">=</span><span class="fl">0.3</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>V_K<span class="op">=-</span><span class="dv">77</span><span class="op">;</span> V_Na<span class="op">=</span><span class="dv">55</span><span class="op">;</span> V_l<span class="op">=-</span><span class="fl">54.4</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>C_m <span class="op">=</span> <span class="fl">1.0</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>V <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">80</span>,<span class="dv">60</span>,<span class="dv">100</span>)</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> np.linspace(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">100</span>)</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>n_inf <span class="op">=</span> <span class="kw">lambda</span> V: alpha_n(V)<span class="op">/</span>(alpha_n(V)<span class="op">+</span>beta_n(V))</span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>m_inf <span class="op">=</span> <span class="kw">lambda</span> V: alpha_m(V)<span class="op">/</span>(alpha_m(V)<span class="op">+</span>beta_m(V))</span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a><span class="co"># solve wrt to V</span></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>V_m <span class="op">=</span> <span class="kw">lambda</span> V,n: g_Na<span class="op">*</span>(<span class="fl">0.8</span><span class="op">-</span>n)<span class="op">*</span>m_inf(V)<span class="op">**</span><span class="dv">3</span><span class="op">*</span>(V<span class="op">-</span>V_Na)<span class="op">+</span>g_K<span class="op">*</span>n<span class="op">**</span><span class="dv">4</span><span class="op">*</span>(V<span class="op">-</span>V_K)<span class="op">+</span>g_l<span class="op">*</span>(V<span class="op">-</span>V_l)</span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>[VV,NN] <span class="op">=</span> np.meshgrid(V,n)</span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>ax.plot(V, n_inf(V), <span class="st">'r'</span>, linewidth<span class="op">=</span><span class="fl">1.0</span>)</span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>ax.plot(V, n_inf(V), <span class="st">'b'</span>)</span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>ax.axhline(y<span class="op">=</span><span class="fl">0.32</span>,linewidth<span class="op">=</span><span class="fl">1.0</span>,color<span class="op">=</span><span class="st">'gray'</span>)</span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>ax.contour(VV,NN, np.vectorize(V_m)(VV,NN),[<span class="dv">0</span>],colors<span class="op">=</span>[<span class="st">'r'</span>])</span>
+<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">'$V_m$ [mV]'</span>)</span>
+<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">'n'</span>)</span>
+<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a>ax.legend([<span class="st">'$V_m</span><span class="ch">\'</span><span class="st">=0$'</span>,<span class="st">'$n</span><span class="ch">\'</span><span class="st">=0$'</span>])</span>
+<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="13_HodgkinHuxley_files/figure-html/cell-7-output-1.png" width="601" height="443" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>In the above plot, we have one equilibrium. Furthermore, the variable <span class="math inline">\(V_m\)</span> is fast compared to <span class="math inline">\(n\)</span>, so we can again use the fast-slow analysis:</p>
+<ul>
+<li><p>The fast system has up to 3 equilibria, depending on the value of <span class="math inline">\(n\)</span>. Initially, for <span class="math inline">\(n=n_0\)</span>, we have 3 equilibria: 2 stable and one unstable (in the middle).</p></li>
+<li><p>The slow system proceeds on the branches of solutions <span class="math inline">\(V_-(n)\)</span> or <span class="math inline">\(V_+(n)\)</span>, both stable. The branch in the middle, <span class="math inline">\(V_0(n)\)</span>, is unstable and acts as a threshold.</p></li>
+</ul>
+<p>After applying a stimulus, the potential quickly goes beyond <span class="math inline">\(V_0(n_0)\)</span>, and the fast dynamics continues until <span class="math inline">\(V_m\to V_+(n_0)\)</span>. Here, the slow dynamics starts, where <span class="math inline">\(n\)</span> increase along the branch <span class="math inline">\(V_+(n)\)</span>, up to the tipping point. After that, there is a fast dynamics up to the other branch, <span class="math inline">\(V_-(n)\)</span>, until the system goes back to equilibrium.</p>
+</section>
+<section id="the-fitzhugh-nagumo-model" class="level2" data-number="13.4">
+<h2 data-number="13.4" class="anchored" data-anchor-id="the-fitzhugh-nagumo-model"><span class="header-section-number">13.4</span> The FitzHugh-Nagumo model</h2>
+<p>A further simplification of the above model is to assume <span class="math inline">\(n_\infty(V)\)</span> linear and the cubic-like function a cubic with three zeros (and shift-scale everything): <span class="math display">\[
+\left\{ \begin{aligned}
+\varepsilon \frac{\mathrm{d}V}{\mathrm{d}t} &amp;= f(V) - w + I(t), \\
+\frac{\mathrm{d}w}{\mathrm{d}t} &amp;= V - \gamma w,
+\end{aligned}\right.
+\]</span></p>
+<p>where <span class="math inline">\(w\)</span> is the <em>recovery variable</em> (formely <span class="math inline">\(n\)</span>), <span class="math inline">\(f(V)=V(1-V)(V-\alpha)\)</span> and <span class="math inline">\(\varepsilon\ll 1\)</span>. Typical values are <span class="math inline">\(\varepsilon=0.01\)</span>, <span class="math inline">\(\gamma = 0.5\)</span>, <span class="math inline">\(\alpha=0.1\)</span>.</p>
+<p>This model is sufficiently simple to be studied in the phase plane. Suppose <span class="math inline">\(I(t)=0\)</span>. Since <span class="math inline">\(\varepsilon\ll 1\)</span>, <span class="math inline">\(V\)</span> is fast and <span class="math inline">\(w\)</span> is slow.</p>
+<section id="fast-dynamics" class="level3" data-number="13.4.1">
+<h3 data-number="13.4.1" class="anchored" data-anchor-id="fast-dynamics"><span class="header-section-number">13.4.1</span> Fast dynamics</h3>
+<p>We set <span class="math inline">\(\eta = \frac{t}{\varepsilon}\)</span> and <span class="math display">\[
+\left\{ \begin{aligned}
+\dot{V} &amp;= f(V) - w, \\
+\dot{w} &amp;= \varepsilon( V - \gamma w ),
+\end{aligned}\right.
+\]</span></p>
+<p>so for <span class="math inline">\(\varepsilon=0\)</span> we have <span class="math inline">\(w=w_0\)</span> and <span class="math display">\[
+\dot{V} = f(V) - w_0.
+\]</span></p>
+<p>Depending on <span class="math inline">\(w_0\)</span>, we can have a different number of equilibria:</p>
+<div id="bdf42d1a" class="cell" data-execution_count="7">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>sns.set_theme(<span class="st">"notebook"</span>, style<span class="op">=</span><span class="st">"whitegrid"</span>)</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>gamma,alpha <span class="op">=</span> <span class="fl">0.5</span>,<span class="fl">0.2</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> <span class="kw">lambda</span> V: V<span class="op">*</span>(<span class="dv">1</span><span class="op">-</span>V)<span class="op">*</span>(V<span class="op">-</span>alpha)</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>V <span class="op">=</span> np.linspace(<span class="op">-</span><span class="fl">0.1</span>,<span class="fl">1.05</span>,<span class="dv">100</span>)</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> np.linspace(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">100</span>)</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>V1 <span class="op">=</span> <span class="dv">1</span><span class="op">/</span><span class="fl">3.0</span><span class="op">*</span>(<span class="dv">1</span> <span class="op">+</span> alpha <span class="op">-</span> np.sqrt(<span class="dv">1</span><span class="op">+</span>(alpha<span class="op">-</span><span class="dv">1</span>)<span class="op">*</span>alpha))</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>V2 <span class="op">=</span> <span class="dv">1</span><span class="op">/</span><span class="fl">3.0</span><span class="op">*</span>(<span class="dv">1</span> <span class="op">+</span> alpha <span class="op">+</span> np.sqrt(<span class="dv">1</span><span class="op">+</span>(alpha<span class="op">-</span><span class="dv">1</span>)<span class="op">*</span>alpha))</span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>ax.plot(V, f(V), <span class="st">'b'</span>)</span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> w0 <span class="kw">in</span> [<span class="op">-</span><span class="fl">0.02</span>,<span class="fl">0.0</span>,<span class="fl">0.02</span>,<span class="fl">0.06</span>,<span class="fl">0.09</span>]:</span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>    ax.axhline(y<span class="op">=</span>w0,linewidth<span class="op">=</span><span class="fl">1.0</span>,color<span class="op">=</span><span class="st">'r'</span>)</span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>ax.axhline(y<span class="op">=</span>f(V1),linewidth<span class="op">=</span><span class="fl">1.0</span>,color<span class="op">=</span><span class="st">'k'</span>)</span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>ax.axhline(y<span class="op">=</span>f(V2),linewidth<span class="op">=</span><span class="fl">1.0</span>,color<span class="op">=</span><span class="st">'k'</span>)</span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>ax.plot(V1,f(V1),<span class="st">'ko'</span>)</span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>ax.plot(V2,f(V2),<span class="st">'ko'</span>)</span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">'V'</span>)</span>
+<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">'w'</span>)</span>
+<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="13_HodgkinHuxley_files/figure-html/cell-8-output-1.png" width="610" height="435" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Given <span class="math inline">\(w_*\)</span> and <span class="math inline">\(w^*\)</span> respectively the minimum and the maximum of the cubic, we have three equilibria <span class="math display">\[
+V_-(w) \le V_0(w) \le V_+(w)
+\]</span></p>
+<p>that exists for <span class="math inline">\(w_* &lt; w &lt; w^*\)</span>. Otherwise, we only have either <span class="math inline">\(V_-(w)\)</span> or <span class="math inline">\(V_+(w)\)</span>. The equilibria <span class="math inline">\(V_\pm(w)\)</span> are always stable, while <span class="math inline">\(V_0(w)\)</span> is unstable (the threshold).</p>
+</section>
+<section id="slow-dynamics" class="level3" data-number="13.4.2">
+<h3 data-number="13.4.2" class="anchored" data-anchor-id="slow-dynamics"><span class="header-section-number">13.4.2</span> Slow dynamics</h3>
+<p>In the original system, we set <span class="math inline">\(\varepsilon=0\)</span> to obtain: <span class="math display">\[
+\left\{ \begin{aligned}
+0 &amp;= f(V) - w, \\
+\frac{\mathrm{d}w}{\mathrm{d}t} &amp;= V - \gamma w,
+\end{aligned}\right.
+\]</span></p>
+<p>The first equation can be replaced by one branch of solution <span class="math inline">\(V_\pm(w)\)</span>. Thus we are left with <span class="math display">\[
+\frac{\mathrm{d}w}{\mathrm{d}t} = V_\pm(w) - \gamma w = G_\pm(w),
+\]</span></p>
+<p>which dictated the slow dynamics.</p>
+<div id="7aacca58" class="cell" data-execution_count="8">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>sns.set_theme(<span class="st">"notebook"</span>, style<span class="op">=</span><span class="st">"whitegrid"</span>)</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>gamma,alpha,eps <span class="op">=</span> <span class="fl">0.5</span>,<span class="fl">0.1</span>,<span class="fl">0.0001</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> <span class="kw">lambda</span> V: V<span class="op">*</span>(<span class="dv">1</span><span class="op">-</span>V)<span class="op">*</span>(V<span class="op">-</span>alpha)</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> fhn(t,y):</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>    V,w <span class="op">=</span> y</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>    dV <span class="op">=</span> (f(V)<span class="op">-</span>w)<span class="op">/</span>eps</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>    dw <span class="op">=</span> V <span class="op">-</span> gamma<span class="op">*</span>w</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> [dV,dw]</span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.integrate <span class="im">import</span> solve_ivp</span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>sol <span class="op">=</span> solve_ivp(fhn,[<span class="dv">0</span>,<span class="dv">2</span>],[<span class="fl">0.15</span>,<span class="dv">0</span>],max_step<span class="op">=</span><span class="fl">1e-3</span>)</span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>V <span class="op">=</span> np.linspace(<span class="op">-</span><span class="fl">0.3</span>,<span class="fl">1.05</span>,<span class="dv">100</span>)</span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> np.linspace(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">100</span>)</span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>ax.grid(<span class="va">False</span>)</span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a>ax.plot(V, f(V), <span class="st">'k'</span>,linewidth<span class="op">=</span><span class="fl">1.0</span>)</span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a>ax.plot(V, V<span class="op">/</span>gamma, <span class="st">'k'</span>,linewidth<span class="op">=</span><span class="fl">1.0</span>)</span>
+<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a>ax.plot(<span class="dv">0</span>,<span class="dv">0</span>,<span class="st">'ko'</span>)</span>
+<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a>t1 <span class="op">=</span> np.argmin(np.<span class="bu">abs</span>(sol.t<span class="op">-</span><span class="fl">0.002</span>))</span>
+<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a>t2 <span class="op">=</span> np.argmin(np.<span class="bu">abs</span>(sol.t<span class="op">-</span><span class="fl">0.15</span>))</span>
+<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a>t3 <span class="op">=</span> np.argmin(np.<span class="bu">abs</span>(sol.t<span class="op">-</span><span class="fl">0.15</span><span class="op">-</span><span class="fl">0.01</span>))</span>
+<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a>ax.plot(sol.y[<span class="dv">0</span>,<span class="dv">0</span>:t1],sol.y[<span class="dv">1</span>,<span class="dv">0</span>:t1],<span class="st">'r'</span>,linewidth<span class="op">=</span><span class="fl">2.0</span>)</span>
+<span id="cb8-33"><a href="#cb8-33" aria-hidden="true" tabindex="-1"></a>ax.plot(sol.y[<span class="dv">0</span>,t1:t2],sol.y[<span class="dv">1</span>,t1:t2],<span class="st">'b'</span>,linewidth<span class="op">=</span><span class="fl">2.0</span>)</span>
+<span id="cb8-34"><a href="#cb8-34" aria-hidden="true" tabindex="-1"></a>ax.plot(sol.y[<span class="dv">0</span>,t2:t3],sol.y[<span class="dv">1</span>,t2:t3],<span class="st">'r'</span>,linewidth<span class="op">=</span><span class="fl">2.0</span>)</span>
+<span id="cb8-35"><a href="#cb8-35" aria-hidden="true" tabindex="-1"></a>ax.plot(sol.y[<span class="dv">0</span>,t3:],sol.y[<span class="dv">1</span>,t3:],<span class="st">'b'</span>,linewidth<span class="op">=</span><span class="fl">2.0</span>)</span>
+<span id="cb8-36"><a href="#cb8-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-37"><a href="#cb8-37" aria-hidden="true" tabindex="-1"></a>ax.set_ylim([<span class="op">-</span><span class="fl">0.05</span>,<span class="fl">0.15</span>])</span>
+<span id="cb8-38"><a href="#cb8-38" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">'V'</span>)</span>
+<span id="cb8-39"><a href="#cb8-39" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">'w'</span>)</span>
+<span id="cb8-40"><a href="#cb8-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-41"><a href="#cb8-41" aria-hidden="true" tabindex="-1"></a>ax.annotate(<span class="st">'$V_+(w)$'</span>,xy<span class="op">=</span>(<span class="fl">0.92</span>,<span class="fl">0.073</span>))</span>
+<span id="cb8-42"><a href="#cb8-42" aria-hidden="true" tabindex="-1"></a>ax.annotate(<span class="st">'$V_-(w)$'</span>,xy<span class="op">=</span>(<span class="op">-</span><span class="fl">0.3</span>,<span class="fl">0.025</span>))</span>
+<span id="cb8-43"><a href="#cb8-43" aria-hidden="true" tabindex="-1"></a>ax.annotate(<span class="st">'$V_0(w)$'</span>,xy<span class="op">=</span>(<span class="fl">0.4</span>,<span class="fl">0.06</span>))</span>
+<span id="cb8-44"><a href="#cb8-44" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="13_HodgkinHuxley_files/figure-html/cell-9-output-1.png" width="618" height="441" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>From the Figure, we can follow the fast-slow dynamics (red is fast, blue is slow). Notice that we have one tipping point.</p>
+<p>We can also compute the “excited” time <span class="math inline">\(T_e\)</span>, that is the time the system is on the excited state: <span class="math display">\[
+\dot{w} = V_+(w)-\gamma w, \quad\Rightarrow\quad
+T_e = \int_{w_0}^{w^*} \frac{\mathrm{d}w}{V_+(w)-\gamma w}.
+\]</span></p>
+<p>During the excited interval, the system cannot be further excited (it is <em>refractory</em>). The recovery period, on the other hand, is <span class="math display">\[
+T_r = \int_{w^*}^{0} \frac{\mathrm{d}w}{V_-(w)-\gamma w},
+\]</span></p>
+<p>and during this period the system is excitable.</p>
+</section>
+<section id="oscillations" class="level3" data-number="13.4.3">
+<h3 data-number="13.4.3" class="anchored" data-anchor-id="oscillations"><span class="header-section-number">13.4.3</span> Oscillations</h3>
+<p>Suppose now that we apply a constant current <span class="math inline">\(I&gt;0\)</span>. The analysis is as before with a minor difference: the cubic is shifted vertically. The equilibrium is also non-zero now.</p>
+<p>Suppose we start for the origin at time <span class="math inline">\(t=0\)</span>, and then we apply a current <span class="math inline">\(I&gt;0\)</span>. The cubic will shift upwards, and the state is not at equilibrium anymore. The fast-slow dynamics is the same as before.</p>
+<div id="1cfdc0dc" class="cell" data-execution_count="9">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>sns.set_theme(<span class="st">"notebook"</span>, style<span class="op">=</span><span class="st">"whitegrid"</span>)</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>gamma,alpha,eps <span class="op">=</span> <span class="fl">0.5</span>,<span class="fl">0.1</span>,<span class="fl">0.0001</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>I <span class="op">=</span> <span class="fl">0.01</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> <span class="kw">lambda</span> V: V<span class="op">*</span>(<span class="dv">1</span><span class="op">-</span>V)<span class="op">*</span>(V<span class="op">-</span>alpha)</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> fhn(t,y):</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>    V,w <span class="op">=</span> y</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>    dV <span class="op">=</span> (f(V)<span class="op">-</span>w<span class="op">+</span>I)<span class="op">/</span>eps</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>    dw <span class="op">=</span> V <span class="op">-</span> gamma<span class="op">*</span>w</span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> [dV,dw]</span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.integrate <span class="im">import</span> solve_ivp</span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>sol <span class="op">=</span> solve_ivp(fhn,[<span class="dv">0</span>,<span class="dv">10</span>],[<span class="dv">0</span>,<span class="dv">0</span>],max_step<span class="op">=</span><span class="fl">1e-3</span>)</span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>V <span class="op">=</span> np.linspace(<span class="op">-</span><span class="fl">0.3</span>,<span class="fl">1.05</span>,<span class="dv">100</span>)</span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>ax.grid(<span class="va">True</span>)</span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a>ax.plot(V, f(V)<span class="op">+</span>I,<span class="st">'k--'</span>,linewidth<span class="op">=</span><span class="fl">1.0</span>)</span>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a>ax.plot(V, V<span class="op">/</span>gamma,<span class="st">'k--'</span>,linewidth<span class="op">=</span><span class="fl">1.0</span>)</span>
+<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a>t1 <span class="op">=</span> np.argmin(np.<span class="bu">abs</span>(sol.t<span class="op">-</span><span class="fl">0.002</span>))</span>
+<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a>t2 <span class="op">=</span> np.argmin(np.<span class="bu">abs</span>(sol.t<span class="op">-</span><span class="fl">0.15</span>))</span>
+<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a>t3 <span class="op">=</span> np.argmin(np.<span class="bu">abs</span>(sol.t<span class="op">-</span><span class="fl">0.15</span><span class="op">-</span><span class="fl">0.01</span>))</span>
+<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a>ax.plot(sol.y[<span class="dv">0</span>,:],sol.y[<span class="dv">1</span>,:],<span class="st">'k'</span>,linewidth<span class="op">=</span><span class="fl">2.0</span>)</span>
+<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a>ax.set_ylim([<span class="op">-</span><span class="fl">0.05</span>,<span class="fl">0.15</span>])</span>
+<span id="cb9-34"><a href="#cb9-34" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">'V'</span>)</span>
+<span id="cb9-35"><a href="#cb9-35" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">'w'</span>)</span>
+<span id="cb9-36"><a href="#cb9-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-37"><a href="#cb9-37" aria-hidden="true" tabindex="-1"></a>ax.annotate(<span class="st">'$V_+(w)$'</span>,xy<span class="op">=</span>(<span class="fl">0.92</span>,<span class="fl">0.073</span>))</span>
+<span id="cb9-38"><a href="#cb9-38" aria-hidden="true" tabindex="-1"></a>ax.annotate(<span class="st">'$V_-(w)$'</span>,xy<span class="op">=</span>(<span class="op">-</span><span class="fl">0.3</span>,<span class="fl">0.025</span>))</span>
+<span id="cb9-39"><a href="#cb9-39" aria-hidden="true" tabindex="-1"></a>ax.annotate(<span class="st">'$V_0(w)$'</span>,xy<span class="op">=</span>(<span class="fl">0.4</span>,<span class="fl">0.06</span>))</span>
+<span id="cb9-40"><a href="#cb9-40" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="13_HodgkinHuxley_files/figure-html/cell-10-output-1.png" width="618" height="441" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>However, if we increase <span class="math inline">\(I\)</span>, we end up in the following situation:</p>
+<div id="bc0aa547" class="cell" data-execution_count="10">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>sns.set_theme(<span class="st">"notebook"</span>, style<span class="op">=</span><span class="st">"whitegrid"</span>)</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>gamma,alpha,eps <span class="op">=</span> <span class="fl">0.5</span>,<span class="fl">0.1</span>,<span class="fl">0.001</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>I <span class="op">=</span> <span class="fl">0.14</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> <span class="kw">lambda</span> V: V<span class="op">*</span>(<span class="dv">1</span><span class="op">-</span>V)<span class="op">*</span>(V<span class="op">-</span>alpha)</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> fhn(t,y):</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>    V,w <span class="op">=</span> y</span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>    dV <span class="op">=</span> (f(V)<span class="op">-</span>w<span class="op">+</span>I)<span class="op">/</span>eps</span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>    dw <span class="op">=</span> V <span class="op">-</span> gamma<span class="op">*</span>w</span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> [dV,dw]</span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.integrate <span class="im">import</span> solve_ivp</span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>sol <span class="op">=</span> solve_ivp(fhn,[<span class="dv">0</span>,<span class="dv">5</span>],[<span class="dv">0</span>,<span class="dv">0</span>],max_step<span class="op">=</span><span class="fl">1e-3</span>)</span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>V <span class="op">=</span> np.linspace(<span class="op">-</span><span class="fl">0.3</span>,<span class="fl">1.05</span>,<span class="dv">100</span>)</span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a>ax.grid(<span class="va">True</span>)</span>
+<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a>ax.plot(V, f(V)<span class="op">+</span>I,<span class="st">'k--'</span>,linewidth<span class="op">=</span><span class="fl">1.0</span>)</span>
+<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a>ax.plot(V, V<span class="op">/</span>gamma,<span class="st">'k--'</span>,linewidth<span class="op">=</span><span class="fl">1.0</span>)</span>
+<span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a>t1 <span class="op">=</span> np.argmin(np.<span class="bu">abs</span>(sol.t<span class="op">-</span><span class="fl">0.002</span>))</span>
+<span id="cb10-29"><a href="#cb10-29" aria-hidden="true" tabindex="-1"></a>t2 <span class="op">=</span> np.argmin(np.<span class="bu">abs</span>(sol.t<span class="op">-</span><span class="fl">0.15</span>))</span>
+<span id="cb10-30"><a href="#cb10-30" aria-hidden="true" tabindex="-1"></a>t3 <span class="op">=</span> np.argmin(np.<span class="bu">abs</span>(sol.t<span class="op">-</span><span class="fl">0.15</span><span class="op">-</span><span class="fl">0.01</span>))</span>
+<span id="cb10-31"><a href="#cb10-31" aria-hidden="true" tabindex="-1"></a>ax.plot(sol.y[<span class="dv">0</span>,:],sol.y[<span class="dv">1</span>,:],<span class="st">'k'</span>,linewidth<span class="op">=</span><span class="fl">2.0</span>)</span>
+<span id="cb10-32"><a href="#cb10-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-33"><a href="#cb10-33" aria-hidden="true" tabindex="-1"></a>ax.set_ylim([<span class="op">-</span><span class="fl">0.05</span>,<span class="fl">0.15</span><span class="op">+</span>I])</span>
+<span id="cb10-34"><a href="#cb10-34" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">'V'</span>)</span>
+<span id="cb10-35"><a href="#cb10-35" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">'w'</span>)</span>
+<span id="cb10-36"><a href="#cb10-36" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="13_HodgkinHuxley_files/figure-html/cell-11-output-1.png" width="610" height="435" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>We have stable oscillations in a limit cycle. In fact, for <span class="math inline">\(I\)</span> sufficiently large, there is a second tipping point at <span class="math inline">\(w=w_*\)</span>: if the equilibrium is on the right of the tipping point, the solution will jump from <span class="math inline">\(V_-(w)\)</span> to <span class="math inline">\(V_+(w)\)</span>, and continue indefinitely.</p>
+<p>We can also approximate the period of the limit cycle: <span class="math display">\[
+T \approx T_e + T_r = \int_{w_*}^{w^*} \left( \frac{1}{V_+(w)-\gamma w} - \frac{1}{V_-(w)-\gamma w} \right) \mathrm{d}w.
+\]</span></p>
+
+
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="ref-ks08_vol1" class="csl-entry" role="listitem">
+Keener, James, and James Sneyd. 2009. <em>Mathematical Physiology: I: Cellular Physiology</em>. Second. Vol. 8/I. Springer. <a href="https://strutture-provincia.primo.exlibrisgroup.com/permalink/39SBT_INST/ghkipk/alma991012367489706186">https://strutture-provincia.primo.exlibrisgroup.com/permalink/39SBT_INST/ghkipk/alma991012367489706186</a>.
+</div>
+</div>
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./12_Bioelectricity.html" class="pagination-link" aria-label="Bioelectricity">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Bioelectricity</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./references.html" class="pagination-link" aria-label="References">
+        <span class="nav-page-text">References</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
