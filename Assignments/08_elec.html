@@ -6,9 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="dcterms.date" content="2024-10-22">
+<meta name="dcterms.date" content="2024-11-04">
 
-<title>10&nbsp; Inhibition – Mathematical Biology</title>
+<title>Electrophysiology – Mathematical Biology</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -21,47 +21,27 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for citations */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-  margin-bottom: 0em;
-}
-.hanging-indent div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}</style>
+</style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<link href="./11_FeedbackLoops.html" rel="next">
-<link href="./09_FastSlow.html" rel="prev">
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../Assignments/09_epi.html" rel="next">
+<link href="../Assignments/07_feedbacks.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -130,7 +110,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./01_Bathtub.html">Lectures</a></li><li class="breadcrumb-item"><a href="./10_Inhibition.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Inhibition</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../Assignments/01_recap_ODEs.html">Assignments</a></li><li class="breadcrumb-item"><a href="../Assignments/08_elec.html">Electrophysiology</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -145,9 +125,9 @@ window.Quarto = {
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="./">Mathematical Biology</a> 
+      <a href="../">Mathematical Biology</a> 
         <div class="sidebar-tools-main">
-    <a href="./Mathematical-Biology.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
+    <a href="../Mathematical-Biology.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
 </div>
     </div>
       </div>
@@ -160,7 +140,7 @@ window.Quarto = {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link">
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Welcome</span></a>
   </div>
 </li>
@@ -175,85 +155,85 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./01_Bathtub.html" class="sidebar-item-text sidebar-link">
+  <a href="../01_Bathtub.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Bathtub model</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./02_Population.html" class="sidebar-item-text sidebar-link">
+  <a href="../02_Population.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Population dynamics</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./03_Logistic.html" class="sidebar-item-text sidebar-link">
+  <a href="../03_Logistic.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Logistic model</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./04_Predation.html" class="sidebar-item-text sidebar-link">
+  <a href="../04_Predation.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Predation models</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./05_LotkaVolterra.html" class="sidebar-item-text sidebar-link">
+  <a href="../05_LotkaVolterra.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Lotka-Volterra model</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./06_Gause.html" class="sidebar-item-text sidebar-link">
+  <a href="../06_Gause.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Gause type models</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./07_RM.html" class="sidebar-item-text sidebar-link">
+  <a href="../07_RM.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Rosenzweig-MacArthur model</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./08_MichaelinMenten.html" class="sidebar-item-text sidebar-link">
+  <a href="../08_MichaelinMenten.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Michaelin-Menten law</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./09_FastSlow.html" class="sidebar-item-text sidebar-link">
+  <a href="../09_FastSlow.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Fast-Slow systems</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./10_Inhibition.html" class="sidebar-item-text sidebar-link active">
+  <a href="../10_Inhibition.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Inhibition</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./11_FeedbackLoops.html" class="sidebar-item-text sidebar-link">
+  <a href="../11_FeedbackLoops.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Feedback loops</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./12_Bioelectricity.html" class="sidebar-item-text sidebar-link">
+  <a href="../12_Bioelectricity.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Bioelectricity</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./13_HodgkinHuxley.html" class="sidebar-item-text sidebar-link">
+  <a href="../13_HodgkinHuxley.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Hodgkin-Huxley model</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./references.html" class="sidebar-item-text sidebar-link">
+  <a href="../references.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">References</span></a>
   </div>
 </li>
@@ -261,7 +241,7 @@ window.Quarto = {
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./projects2024.html" class="sidebar-item-text sidebar-link">
+  <a href="../projects2024.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Projects</span></a>
   </div>
 </li>
@@ -276,49 +256,55 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Assignments/01_recap_ODEs.html" class="sidebar-item-text sidebar-link">
+  <a href="../Assignments/01_recap_ODEs.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Solving ODEs</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Assignments/02_population.html" class="sidebar-item-text sidebar-link">
+  <a href="../Assignments/02_population.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Population dynamics</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Assignments/03_spruce.html" class="sidebar-item-text sidebar-link">
+  <a href="../Assignments/03_spruce.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Predation</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Assignments/04_systems.html" class="sidebar-item-text sidebar-link">
+  <a href="../Assignments/04_systems.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">System of ODEs</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Assignments/05_predators.html" class="sidebar-item-text sidebar-link">
+  <a href="../Assignments/05_predators.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Prey-predator systems</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Assignments/06_reactions.html" class="sidebar-item-text sidebar-link">
+  <a href="../Assignments/06_reactions.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Reactions</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Assignments/07_feedbacks.html" class="sidebar-item-text sidebar-link">
+  <a href="../Assignments/07_feedbacks.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Feedbacks</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Assignments/09_epi.html" class="sidebar-item-text sidebar-link">
+  <a href="../Assignments/08_elec.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Electrophysiology</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Assignments/09_epi.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Epidemiology</span></a>
   </div>
 </li>
@@ -335,43 +321,43 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Laboratories/01_ODE_Integration/lab_ODEinteg.html" class="sidebar-item-text sidebar-link">
+  <a href="../Laboratories/01_ODE_Integration/lab_ODEinteg.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Lab 01: Numerical integration</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Laboratories/02_Predation/lab_Predation.html" class="sidebar-item-text sidebar-link">
+  <a href="../Laboratories/02_Predation/lab_Predation.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Lab 02: Predation</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Laboratories/03_Bifurcations/lab_Bifurcations.html" class="sidebar-item-text sidebar-link">
+  <a href="../Laboratories/03_Bifurcations/lab_Bifurcations.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Lab 03: Bifurcations</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Laboratories/04_Chaos/lab_chaos.html" class="sidebar-item-text sidebar-link">
+  <a href="../Laboratories/04_Chaos/lab_chaos.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Lab 04: Chaos</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Laboratories/05_Feedbacks/lab_feedback.html" class="sidebar-item-text sidebar-link">
+  <a href="../Laboratories/05_Feedbacks/lab_feedback.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Lab 05: Feedback loops</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Laboratories/06_Electrophysiology/lab_ep.html" class="sidebar-item-text sidebar-link">
+  <a href="../Laboratories/06_Electrophysiology/lab_ep.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Lab 06: Electrophysiology</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Laboratories/07_Param/lab_param.html" class="sidebar-item-text sidebar-link">
+  <a href="../Laboratories/07_Param/lab_param.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Lab 07: Parameter fitting</span></a>
   </div>
 </li>
@@ -388,19 +374,19 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./IntroODE.html" class="sidebar-item-text sidebar-link">
+  <a href="../IntroODE.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Introduction to ODEs</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./bifurcations.html" class="sidebar-item-text sidebar-link">
+  <a href="../bifurcations.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Introduction to bifurcations</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Laboratories/00_Intro_Matlab/introMATLAB.html" class="sidebar-item-text sidebar-link">
+  <a href="../Laboratories/00_Intro_Matlab/introMATLAB.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Introduction to MATLAB</span></span></a>
   </div>
 </li>
@@ -416,25 +402,18 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#competitive-inhibition" id="toc-competitive-inhibition" class="nav-link active" data-scroll-target="#competitive-inhibition"><span class="header-section-number">10.1</span> Competitive inhibition</a>
-  <ul class="collapse">
-  <li><a href="#example-ttx" id="toc-example-ttx" class="nav-link" data-scroll-target="#example-ttx"><span class="header-section-number">10.1.1</span> Example: TTX</a></li>
-  </ul></li>
-  <li><a href="#allosteric-inhibition" id="toc-allosteric-inhibition" class="nav-link" data-scroll-target="#allosteric-inhibition"><span class="header-section-number">10.2</span> Allosteric inhibition</a></li>
-  <li><a href="#cooperation" id="toc-cooperation" class="nav-link" data-scroll-target="#cooperation"><span class="header-section-number">10.3</span> Cooperation</a>
-  <ul class="collapse">
-  <li><a href="#example-hemoglobin" id="toc-example-hemoglobin" class="nav-link" data-scroll-target="#example-hemoglobin"><span class="header-section-number">10.3.1</span> Example: hemoglobin</a></li>
-  </ul></li>
+  <li><a href="#hodgkin-huxley-model" id="toc-hodgkin-huxley-model" class="nav-link active" data-scroll-target="#hodgkin-huxley-model">Hodgkin-Huxley model</a></li>
+  <li><a href="#fitzhugh-nagumo-model" id="toc-fitzhugh-nagumo-model" class="nav-link" data-scroll-target="#fitzhugh-nagumo-model">FitzHugh-Nagumo model</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./01_Bathtub.html">Lectures</a></li><li class="breadcrumb-item"><a href="./10_Inhibition.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Inhibition</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../Assignments/01_recap_ODEs.html">Assignments</a></li><li class="breadcrumb-item"><a href="../Assignments/08_elec.html">Electrophysiology</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Inhibition</span></h1>
-<p class="subtitle lead">This lecture is based on <span class="citation" data-cites="ks08_vol1">(<a href="references.html#ref-ks08_vol1" role="doc-biblioref">Keener and Sneyd 2009, vol. 8/I, secs. 1.4.3–4</a>)</span></p>
+<h1 class="title">Electrophysiology</h1>
+<p class="subtitle lead">Assignment 8</p>
 </div>
 
 
@@ -445,14 +424,14 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">October 22, 2024</p>
+      <p class="date">November 4, 2024</p>
     </div>
   </div>
   
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">October 21, 2024</p>
+      <p class="date-modified">November 13, 2024</p>
     </div>
   </div>
     
@@ -463,259 +442,157 @@ window.Quarto = {
 </header>
 
 
-<section id="competitive-inhibition" class="level2" data-number="10.1">
-<h2 data-number="10.1" class="anchored" data-anchor-id="competitive-inhibition"><span class="header-section-number">10.1</span> Competitive inhibition</h2>
-<p>We have seen that a basic reaction involving enzymes proceeds according to the Michaelis-Menten law: <span class="math display">\[
-V = \frac{V_\mathrm{max}[\ce{S}]}{K_m + [\ce{S}]}.
+<section id="hodgkin-huxley-model" class="level2">
+<h2 class="anchored" data-anchor-id="hodgkin-huxley-model">Hodgkin-Huxley model</h2>
+<p>When using the voltage-clamp technique, the total transmembrane current can be accurately measured. However, Hodgkin and Huxley were interested in the <em>individual</em> sodium <span class="math inline">\(I_\ce{Na}\)</span> and potassium <span class="math inline">\(I_{K}\)</span> currents. How can we estimate them from <span class="math inline">\(I_\text{tot} = I_\ce{Na} + I_\ce{K}\)</span>? This exercise addresses the question.</p>
+<ol type="1">
+<li>Are there potential levels (fixed by clamping) at which we can measure a pure $ I_$ or <span class="math inline">\(I_\ce{K}\)</span> current?</li>
+</ol>
+<div class="callout callout-style-default callout-tip callout-titled" title="Solution">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Yes, at the Nernst potentials. When <span class="math inline">\(V=V_\ce{Na}\)</span>, <span class="math inline">\(I_\ce{Na} = 0\)</span> so <span class="math inline">\(I_\text{tot} = I_\ce{K}\)</span>, and when <span class="math inline">\(V=V_\ce{K}\)</span>, <span class="math inline">\(I_\ce{K}=0\)</span> so <span class="math inline">\(I_\text{tot} = I_\ce{Na}\)</span>. Of course, in this case we only get the current for a specific value of <span class="math inline">\(V\)</span>, and not for all values, so we cannot use it to determine the gating dynamics.</p>
+</div>
+</div>
+</div>
+<ol start="2" type="1">
+<li>Suppose 90% of the <span class="math inline">\(\ce{Na+}\)</span> in the bath of a squid axon is replaced by inert choline, preserving electroneutrality. What happens to the equilibrium potentials?</li>
+</ol>
+<div class="callout callout-style-default callout-tip callout-titled" title="Solution">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Only <span class="math inline">\(V_\ce{Na}\)</span> is affected. From the Nernst equation: <span class="math display">\[
+V^1_\ce{Na} = \frac{RT}{zF}\ln\frac{\ce{[Na+]^1_e}}{\ce{[Na+]^1_i}}
 \]</span></p>
-<p>where <span class="math inline">\(V\)</span> is the velocity of production.</p>
-<p>A very important aspect in the regulation of molecular networks comes from the fact that the presence of an inhibitory molecule may decrease the rate at which an enzymatic reaction occurs. Very schematically, we can think of two main mechanism: competitive inhibition, or allosteric inhibition. In the first case the inhibiting molecule binds to the enzyme in the same site where it binds to the substrate, thus preventing the formation of <span class="math inline">\(\ce{SE}\)</span> complexes; in the latter case, the inhibiting molecule binds to the enzyme in a different site, but this changes the conformation of the enzyme reducing its affinity to the substrate.</p>
-<p>We present now a very simple models of the first case. Letting <span class="math inline">\(\ce{I}\)</span> represent the inhibitory molecule, can be drawn as <span class="math display">\[
+<p>where we use “1” to reference quantities (no choline).</p>
+<p>If w replace 90% of the extracellular sodium, then <span class="math inline">\(\ce{[Na+]^2_e} = 0.1\ce{[Na+]^1_e}\)</span> and <span class="math inline">\(\ce{[Na+]^1_i}=\ce{[Na+]^2_i}\)</span> so we have: <span class="math display">\[
+\begin{split}
+V^2_\ce{Na} &amp;= \frac{RT}{zF}\ln\frac{\ce{[Na+]^2_e}}{\ce{[Na+]^2_i}} \\
+&amp;= \frac{RT}{zF}\ln\frac{0.1\ce{[Na+]^1_e}}{\ce{[Na+]^1_i}} \\
+&amp;= V^1_\ce{Na} - \frac{RT}{zF}\ln 10
+\end{split}
+\]</span></p>
+<p>With the actual numbers (see the <a href="../12_Bioelectricity.html#tbl-nernst" class="quarto-xref">Table&nbsp;<span>12.1</span></a>), <span class="math inline">\(V^2_\ce{Na} \approx -3.48\,\text{mV}\)</span>.</p>
+</div>
+</div>
+</div>
+<ol start="3" type="1">
+<li>Explain why replacing the extracellular <span class="math inline">\(\ce{Na+}\)</span> with choline has little effect on the resting potential of an axon. Calculate the new resting potential with 90% of the extracellular <span class="math inline">\(\ce{Na+}\)</span> removed. Why is the same not true if <span class="math inline">\(\ce{K+}\)</span> is replaced? Assume <span class="math inline">\(m = 0.0532\)</span>, <span class="math inline">\(n = 0.3184\)</span>, <span class="math inline">\(h=0.5945\)</span> (constants), <span class="math inline">\(\bar{g}_\ce{Na} = 120\,\text{mS}\)</span>, <span class="math inline">\(\bar{g}_\ce{K} = 36\,\text{mS}\)</span>, <span class="math inline">\(\bar{g}_\text{leak} =0.3\,\text{mS}\)</span>, <span class="math inline">\(V_\text{leak} = -54.4\,\text{mV}\)</span> and <span class="math inline">\(V_\ce{K} = -77.3\,\text{mV}\)</span>.</li>
+</ol>
+<div class="callout callout-style-default callout-tip callout-titled" title="Solution">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Using the formula: <span class="math display">\[
+V_\text{eq} = \frac{g_\ce{Na}V_\ce{Na}+g_\ce{K}V_\ce{K}+g_l V_l}{g_\ce{Na}+g_\ce{K}+g_l}
+\]</span></p>
+<p>with <span class="math inline">\(g_\ce{Na} = \bar{g}_\ce{Na} m^3 h\)</span>, <span class="math inline">\(g_\ce{K} = \bar{g}_\ce{K} n^4\)</span>. With <span class="math inline">\(V_\ce{Na} = V_\ce{Na}^1\)</span> we obtain <span class="math inline">\(V^1_\text{eq} \approx -65\,\text{mV}\)</span>, with <span class="math inline">\(V_\ce{Na}^2\)</span> we have <span class="math inline">\(V^2_\text{eq} \approx -66\,\text{mV}\)</span>.</p>
+<p>The reason is that while <span class="math inline">\(V_\ce{Na}\)</span> changes significantly, most of the channels are closed because <span class="math inline">\(m\approx 0\)</span>, so they contribute little to the resting membrane potential.</p>
+<p>If we change the extracellular <span class="math inline">\(\ce{K+}\)</span>, then <span class="math inline">\(V^2_\ce{K} \approx -136\,\text{mV}\)</span> and the new resting membrane potential would be <span class="math inline">\(V^2_\text{rest}\approx -136\,\text{mV}\)</span>. In fact, <span class="math inline">\(n\neq 0\)</span>, so potassium channels contribute the most to the resting membrane potential.</p>
+</div>
+</div>
+</div>
+<ol start="4" type="1">
+<li>Suppose we know <span class="math inline">\(K = I^1_\ce{Na}/I^2_\ce{Na}\)</span>, where <span class="math inline">\(I^1_\ce{Na}\)</span> is the normal sodium current and <span class="math inline">\(I^2_\ce{Na}\)</span> is the one obtained with 90% of extracellular sodium replaced by choline. Suppose also that <span class="math inline">\(K\)</span> does not change over time and <span class="math inline">\(I^1_\ce{K}=I^2_\ce{K}\)</span>. Find <span class="math inline">\(I^1_\ce{Na}\)</span> and <span class="math inline">\(I^2_\ce{Na}\)</span> from <span class="math inline">\(I^1_\text{tot}\)</span> and <span class="math inline">\(I^2_\text{tot}\)</span>. (A possible way to measure <span class="math inline">\(K\)</span> is to look at <span class="math inline">\(I_\ce{tot}\)</span> immediately after the voltage clamp, because most of the initial current is carried by sodium.)</li>
+</ol>
+<div class="callout callout-style-default callout-tip callout-titled" title="Solution">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Since <span class="math inline">\(I^1_\text{tot} = I^1_\ce{Na} + I^1\ce{K}\)</span> and <span class="math inline">\(I^2_\text{tot} = I^2_\ce{Na} + I^2\ce{K}\)</span>, we solve the system: <span class="math display">\[
 \begin{aligned}
-\ce{S + E &amp;&lt;=&gt;[$k_1$][$k_{-1}$] SE -&gt;[$k_2$] P + E}, \\
-\ce{I + E &amp;&lt;=&gt;[$k_3$][$k_{-3}$] IE}.
+I^1_\text{tot} &amp;= I^1_\ce{Na} + I^1\ce{K}, \\
+I^2_\text{tot} &amp;= 1/K I^1_\ce{Na} + I^1\ce{K}.
 \end{aligned}
 \]</span></p>
-<p>where <span class="math inline">\(\ce{SE}\)</span> is the first complex, and <span class="math inline">\(\ce{IE}\)</span> is a new complex combining the inhibitor and the enzyme.</p>
-<p>Let us define <span class="math inline">\(s = [\ce{S}]\)</span>, <span class="math inline">\(e = [\ce{E}]\)</span>, <span class="math inline">\(i = [\ce{I}]\)</span>, <span class="math inline">\(c_1 = [\ce{SE}]\)</span>, <span class="math inline">\(c_2 = [\ce{IE}]\)</span>, and <span class="math inline">\(p = [\ce{P}]\)</span>. The corresponding system is: <span class="math display">\[
-\left\{\begin{aligned}
-s'   &amp;= - k_1 se + k_{-1}c_1, \\
-e'   &amp;= - k_1 s e + (k_{-1}+k_2) c_1 - k_3 ie + k_{-3} c_2, \\
-c_1' &amp;= k_1 se - (k_{-1}+k_2)c_1, \\
-i'   &amp;= - k_3 ie + k_{-3}c_2, \\
-c_2' &amp;= k_3 ie - k_{-3} c_2, \\
-p'   &amp;= k_2 c_1.
-\end{aligned}\right.
-\]</span></p>
-<p>We can simply the system by noting that: <span class="math display">\[
-i' + c_2' = 0, \quad\text{and}\quad e' + c'_1 + c'_2 = 0.
-\]</span></p>
-<p>Since at the beginning <span class="math inline">\(c_1(0)=c_2(0)=0\)</span>, we have <span class="math inline">\(e = e_0 - c_1 - c_2\)</span> and <span class="math inline">\(i = i_0 - c_2\)</span>. We obtain: <span class="math display">\[
-\left\{\begin{aligned}
-s'   &amp;= - k_1 s(e_0 - c_1 - c_2) + k_{-1}c_1, \\
-c_1' &amp;= k_1 s(e_0 - c_1 - c_2) - (k_{-1}+k_2)c_1, \\
-c_2' &amp;= k_3 (i_0 - c_2)(e_0 - c_1 - c_2) - k_{-3} c_2.
-\end{aligned}\right.
-\]</span></p>
-<p>Now we proceed with a rescaling. Here we use: <span class="math display">\[
-x = \frac{s}{s_0}, \quad
-y_1 = \frac{c_1}{e_0}, \quad
-y_2 = \frac{c_2}{e_0}, \quad
-\tau = k_1 e_0 t.
-\]</span></p>
-<p>The system in the new variables is: <span class="math display">\[
-\left\{\begin{aligned}
-\dot{x}   &amp;= - x(1-y_1-y_2) + \frac{k_{-1}}{k_1 s_0} y_1, \\
-\frac{e_0}{s_0} \dot{y}_1 &amp;= x(1 - y_1 - y_2) - \frac{(k_{-1}+k_2)}{k_1 s_0}y_1, \\
-\frac{e_0}{s_0} \dot{y}_2 &amp;= \frac{k_3}{k_1 s_0}\Bigl(\frac{i_0}{s_0} - \frac{e_0}{s_0} y_2\Bigr)(1 - y_1 - y_2) - \frac{k_{-3}}{k_1 s_0} y_2.
-\end{aligned}\right.
-\]</span></p>
-<p>We define several constants: <span class="math display">\[
-\alpha_1 = \frac{k_{-1}}{k_1 s_0}, \quad
-\alpha_2 = \frac{(k_{-1}+k_2)}{k_1 s_0}, \quad
-\alpha_3 = \frac{k_{-3}}{k_1 s_0}, \quad
-\varepsilon = \frac{e_0}{s_0}, \quad
-\]</span></p>
-<p>so the system reduces to: <span class="math display">\[
-\left\{\begin{aligned}
-\dot{x}   &amp;= - x(1-y_1-y_2) + \alpha_1 y_1, \\
-\varepsilon \dot{y}_1 &amp;= x(1 - y_1 - y_2) - \alpha_2 y_1, \\
-\varepsilon \dot{y}_2 &amp;= \frac{k_3}{k_1}\Bigl(\frac{i_0}{s_0} - \varepsilon y_2\Bigr)(1 - y_1 - y_2) - \alpha_3 y_2.
-\end{aligned}\right.
-\]</span></p>
-<p>We assume that <span class="math inline">\(\varepsilon \ll 1\)</span>, so <span class="math inline">\(y_1\)</span> and <span class="math inline">\(y_2\)</span> are <em>fast</em>. Thus, with the quasi-steady-state approximation we get: <span class="math display">\[
-\left\{\begin{aligned}
-0 &amp;= x(1 - y_1 - y_2) - \alpha_2 y_1, \\
-0 &amp;= \beta (1 - y_1 - y_2) - \alpha_3 y_2,
-\end{aligned}\right.
-\]</span></p>
-<p>where <span class="math inline">\(\beta = \frac{k_3}{k_1}\frac{i_0}{s_0}\)</span>. We can solve with respect to <span class="math inline">\(c_1\)</span> and <span class="math inline">\(c_2\)</span>: <span class="math display">\[
-\left\{\begin{aligned}
-y_1 &amp;= \frac{x}{x + \alpha_2 + \frac{\alpha_2}{\alpha_3}\beta}, \\
-y_2 &amp;= \frac{\alpha_2}{\frac{\alpha_3}{\alpha_2} x + \alpha_3 + \beta}.
-\end{aligned}\right.
-\]</span></p>
-<p>This equilibrium for the fast system is also asymptotically stable, because the Jacobian: <span class="math display">\[
-J = \begin{pmatrix} -x-\alpha_2 &amp; -x \\ -\beta &amp; -\alpha_3 - \beta \end{pmatrix}
-\]</span></p>
-<p>has negative trace and positive determinant. Thus, according to <a href="09_FastSlow.html#thm-tichonov" class="quarto-xref">Tichonov theorem&nbsp;<span>9.1</span></a>, the system quickly converges to the stable equilibrium, and then the slow dynamics kicks in, and its given by the equation for <span class="math inline">\(x\)</span>.</p>
-<p>Since the second complex has no product, we are only interested in <span class="math inline">\(y_1\)</span>. Thus: <span class="math display">\[
-V = [\ce{P}]' = k_2 c_1 = k_2 e_0 y_1 = \frac{k_2 e_0 x}{x + \alpha_2 + \frac{\alpha_2}{\alpha_3}\beta}.
-\]</span></p>
-<p>Replacing the constants we have: <span class="math display">\[
-V = \frac{k_2 e_0 \ce{[S]}}{\ce{[S]} + K_m(1 + K_m \frac{i_0}{K_3})}
-\]</span></p>
-<p>Going back to the production, we have that <span class="math display">\[
-V = k_2 e_0 y_1 = \frac{V_\mathrm{max} s}{s + K_m (1 + i_0/K_3)},
-\]</span></p>
-<p>where <span class="math inline">\(K_m = \frac{k_{-1}+k_2}{k_1}\)</span> is the half-saturation rate. The effect of the competitive inhibition is to <em>increase</em> the half-saturation rate by a factor <span class="math inline">\((1+i_0/K_3) &gt; 1\)</span>. The Michaelis-Menten curves shifts to the right.</p>
-<p>Note that <span class="math inline">\(i_0 = i + c_2 = i + e_0 y_2\)</span>, so <span class="math inline">\(i_0/s_0 = i/s_0 + \varepsilon y_2\)</span> and hence <span class="math inline">\(i_0 \approx i\)</span>. The variable <span class="math inline">\(i\)</span> is also <em>slow</em>, like <span class="math inline">\(s\)</span>, we could therefore replace <span class="math inline">\(i_0\)</span> with <span class="math inline">\(i = [\ce{I}]\)</span> in the equation: <span class="math display">\[
-V = \frac{V_\mathrm{max} [\ce{S}]}{[\ce{S}] + K_m (1 + [\ce{I}]/K_3)}.
-\]</span></p>
-<p>An alternative derivation is to keep the equation for <span class="math inline">\(i\)</span>, rescale it with respect to <span class="math inline">\(i_0\)</span> and then observe that <span class="math inline">\(e_0/i_0 \ll 1\)</span>. In this case, the system has 2 slow variables, <span class="math inline">\(i\)</span> and <span class="math inline">\(s\)</span>, and two fast variables, <span class="math inline">\(y_1\)</span> and <span class="math inline">\(y_2\)</span>.</p>
-<section id="example-ttx" class="level3" data-number="10.1.1">
-<h3 data-number="10.1.1" class="anchored" data-anchor-id="example-ttx"><span class="header-section-number">10.1.1</span> Example: TTX</h3>
-<p>Tetrodotoxin (TTX) is a powerful toxin that can quickly kill an adult even at very small dosage. It is a blocker of <span class="math inline">\(\ce{Na+}\)</span> channels, which are fundamental for impulse transmission in nerves and muscles. The effect of the drug is quite simple: suppose that <span class="math inline">\([\ce{P}]\)</span> is the number of available channels for correct conduction, <span class="math inline">\([\ce{B}]\)</span> is the number of blocked channels (thus not transmitting the signal), and <span class="math inline">\([\ce{D}]\)</span> is the concentration of the drug. Then: <span class="math display">\[
-\ce{P + D &lt;=&gt;[$k_1$][$k_{-1}$] B}.
-\]</span></p>
-<p>At equilibrium we have: <span class="math display">\[
-[\ce{P}][\ce{D}] = K_1 [\ce{B}],
-\]</span></p>
-<p>and, since <span class="math inline">\([\ce{P}]+[\ce{B}] = P_0\)</span>, the total number of channels, we have: <span class="math display">\[
-[\ce{P}] = \frac{P_0}{[\ce{D}]/K_1 + 1},
-\]</span></p>
-<p>so the presence of the drug reduces by a factor <span class="math inline">\(([\ce{D}]/K_1 + 1)\)</span> the number of available channels. For TTX, <span class="math inline">\(K_1\approx \text{1-5 nM}\)</span>, so a very small quantity can block most of the channels.</p>
-</section>
-</section>
-<section id="allosteric-inhibition" class="level2" data-number="10.2">
-<h2 data-number="10.2" class="anchored" data-anchor-id="allosteric-inhibition"><span class="header-section-number">10.2</span> Allosteric inhibition</h2>
-<p>Allosteric inhibition is when the inhibitor binds in another site, but can still inhibit the production. The picture is the following</p>
-<p><img src="img/allosteric.png" class="img-fluid"></p>
-<p>We have several equations to write, and the analysis with QSS approximation can be tedious. We opt here for the quasi-equilibrium approximation. The reactions involved are <span class="math display">\[
+<p>The solution is: <span class="math display">\[
 \begin{aligned}
-\ce{S + E &amp;&lt;=&gt;[$k_1$][$k_{-1}$] SE -&gt;[$k_2$] P + E}, \\
-\ce{I + E &amp;&lt;=&gt;[$k_3$][$k_{-3}$] IE}, \\
-\ce{S + IE &amp;&lt;=&gt;[$k_1$][$k_{-1}$] IES}, \\
-\ce{I + SE &amp;&lt;=&gt;[$k_3$][$k_{-3}$] IES}. \\
+I^1_\ce{Na} &amp;= \frac{K}{1-K}(I^2_\text{tot} - I^1_\text{tot}), \\
+I^1_\ce{K}  &amp;= \frac{KI^2_\text{tot}- I^1_\text{tot}}{1-K}.
 \end{aligned}
 \]</span></p>
-<p>Assuming all at equilibrium, and taking <span class="math inline">\(s = [\ce{S}]\)</span>, <span class="math inline">\(e = [\ce{E}]\)</span>, <span class="math inline">\(i = [\ce{I}]\)</span>, <span class="math inline">\(c_1 = [\ce{SE}]\)</span>, <span class="math inline">\(c_2 = [\ce{IE}]\)</span>, and <span class="math inline">\(c_3 = [\ce{IES}]\)</span> we have: <span class="math display">\[
-\left\{\begin{aligned}
-k_1 s e &amp;= k_{-1} c_1, \\
-k_3 i e &amp;= k_{-3} c_2, \\
-k_1 s c_2 &amp;= k_{-1} c_3, \\
-k_3 i c_1 &amp;= k_{-3} c_3.
-\end{aligned}\right.
+</div>
+</div>
+</div>
+<ol start="5" type="1">
+<li><p>Nowadays a simpler way to block channels is with drugs. Tetrodotoxin (TTX) is a powerful neurotoxin, famous for the puffer fish. TTX acts by blocking the sodium channels, hence making them unavailable for action potential formation.</p>
+<p>Here is how we can model it. If <span class="math inline">\(P_0\)</span> represents the total number of <span class="math inline">\(\ce{Na+}\)</span> channels, and we denote by <span class="math inline">\(\ce{P}\)</span> and <span class="math inline">\(\ce{B}\)</span> respectively the number of non-blocked and blocked channels, then the reaction is <span class="math display">\[
+\ce{P + TTX &lt;=&gt;[k_{-1}][k_1] B}.
 \]</span></p>
-<p>Note that <span class="math inline">\(K_1 = \frac{k_{-1}}{k_1}\)</span>, <span class="math inline">\(K_3 = \frac{k_{-3}}{k_3}\)</span>, and <span class="math inline">\(e = e_0 - c_1 - c_2 - c_3\)</span>. The system becomes: <span class="math display">\[
-\left\{\begin{aligned}
-s (e_0 - c_1 - c_2 - c_3) - K_1 c_1 &amp;= 0, \\
-i (e_0 - c_1 - c_2 - c_3) - K_3 c_2 &amp;= 0, \\
-s c_2 - K_1 c_3 &amp;= 0, \\
-i c_1 - K_3 c_3 &amp;= 0.
-\end{aligned}\right.
+<p>Modify the sodium conductance to account for the presence of .</p></li>
+</ol>
+<div class="callout callout-style-default callout-tip callout-titled" title="Solution">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>With the quasi-equilibrium approximation, knowing that <span class="math inline">\(\ce{[P]}+\ce{[B]}=\ce{[P]_0}\)</span>, we have: <span class="math display">\[
+\frac{P}{P_0} = \frac{1}{1 + \ce{TTX}/K_1}.
 \]</span></p>
-<p>Remember that<span class="math inline">\(s\)</span> and <span class="math inline">\(i\)</span> are fixed, and the unknowns are <span class="math inline">\(c_1\)</span>, <span class="math inline">\(c_2\)</span>, and <span class="math inline">\(c_3\)</span>. The system is <em>linear</em>: <span class="math display">\[
-\begin{pmatrix}
-1 + K_1/s &amp; 1 &amp; 1 \\
-1 &amp; 1 + K_3/i &amp; 1 \\
-0 &amp; 1 &amp; -K_1/s \\
-1 &amp; 0 &amp; -K_3/i
-\end{pmatrix}
-\begin{pmatrix} c_1 \\ c_2 \\ c_3 \end{pmatrix} =
-\begin{pmatrix} e_0 \\ e_0 \\ 0 \\ 0 \end{pmatrix}
+<p>where <span class="math inline">\(K_1 = \frac{k_{-1}}{k_1}\)</span>.</p>
+<p>The maximum sodium conductance is proportional to the number of available channels. Hence, <span class="math display">\[
+\bar{g}_\ce{Na}(\ce{TTX}) = \frac{\bar{g}^\text{max}_\ce{Na}}{1 + \ce{TTX}/K_1}.
 \]</span></p>
-<p>and of rank 3, although it is not immediate to see. So we have a unique solution. Note that we are only interested in <span class="math inline">\(c_1\)</span>, and this is easy to find since from the last two equations: <span class="math display">\[
-c_2 = \frac{K_1}{s} c_3, \quad c_3 = \frac{i}{K_3} c_1,
-\]</span></p>
-<p>which can be substituted into the first equation to get: <span class="math display">\[
-(s+K_1)(1 + i/K_3) c_1 = e_0 s,
-\]</span></p>
-<p>or, in terms of production rate: In this case we obtain: <span class="math display">\[
-V = k_2 c_1 = \frac{V_\mathrm{max}}{1+[\ce{I}]/K_3}\frac{[\ce{S}]}{K_1 + [\ce{S}]},
-\]</span></p>
-<p>which <span class="math inline">\(V_\mathrm{max} = k_2 e_0\)</span>. Again, we find the Michaelis-Menten law, but this time we have a reduction in <span class="math inline">\(V_\mathrm{max}\)</span> by a factor of <span class="math inline">\((1+[\ce{I}]/K_3) &gt; 1\)</span>.</p>
-</section>
-<section id="cooperation" class="level2" data-number="10.3">
-<h2 data-number="10.3" class="anchored" data-anchor-id="cooperation"><span class="header-section-number">10.3</span> Cooperation</h2>
-<p>Consider the following reaction: <span class="math display">\[
-\begin{aligned}
-\ce{S + E &amp;&lt;=&gt;[$k_1$][$k_{-1}$] SE -&gt;[$k_2$] P + E}, \\
-\ce{S + SE &amp;&lt;=&gt;[$k_3$][$k_{-3}$] S_2E -&gt;[$k_4$] P + SE}.
-\end{aligned}
-\]</span></p>
-<p>The enzyme has 2 (different) sites for binding. When the first complex is formed, there is still room for another substrate, but the rate is different (could be higher, for instance.)</p>
-<p>Let us define <span class="math inline">\(s = [\ce{S}]\)</span>, <span class="math inline">\(e = [\ce{E}]\)</span>, <span class="math inline">\(c_1 = [\ce{SE}]\)</span>, <span class="math inline">\(c_2 = [\ce{S2E}]\)</span>, and <span class="math inline">\(p = [\ce{P}]\)</span>. The system is: <span class="math display">\[
-\left\{\begin{aligned}
-s'   &amp;= - k_1 se + k_{-1}c_1 - k_3 sc_1 + k_{-3}c_2, \\
-c_1' &amp;= k_1 se - (k_{-1}+k_2)c_1 - k_3sc_1 + (k_4+k_{-3})c_2, \\
-c_2' &amp;= k_3 sc_1 - (k_4+k_{-3}) c_2, \\
-p'   &amp;= k_2 c_1 + k_4 c_2.
-\end{aligned}\right.
-\]</span></p>
-<p>As usual, we have <span class="math inline">\(e+c_1+c_2=e_0\)</span>, so we ignore the equation for <span class="math inline">\(e\)</span>. Note that the equation for <span class="math inline">\(p\)</span> is different from what we are used to, but still independent from the rest of the system. We have 3 ODEs: <span class="math display">\[
-\left\{\begin{aligned}
-s'   &amp;= - k_1 s(e_0-c_1-c_2) + k_{-1}c_1 - k_3 sc_1 + k_{-3}c_2, \\
-c_1' &amp;= k_1 s(e_0-c_1-c_2) - (k_{-1}+k_2)c_1 - k_3sc_1 + (k_4+k_{-3})c_2, \\
-c_2' &amp;= k_3 sc_1 - (k_4+k_{-3}) c_2.
-\end{aligned}\right.
-\]</span></p>
-<p>We consider the usual non-dimensionalization: <span class="math display">\[
-x = \frac{s}{s_0}, \quad
-y_1 = \frac{c_1}{e_0}, \quad
-y_2 = \frac{c_2}{e_0}, \quad
-\tau = k_1 e_0 t,
-\]</span></p>
-<p>and obtain the following system: <span class="math display">\[
-\left\{\begin{aligned}
-\dot{x} &amp;= - x(1-y_1-y_2) + \frac{k_{-1}}{k_1 s_0} y_1 - \frac{k_3}{k_1} x y_1 + \frac{k_{-3}}{k_1 s_0} y_2, \\
-\frac{e_0}{s_0} \dot{y}_1 &amp;= x(1-y_1-y_2) - \frac{k_{-1}+k_2}{k_1 s_0} y_1 - \frac{k_3}{k_1} x y_1 + \frac{k_4+k_{-3}}{k_1 s_0} y_2, \\
-\frac{e_0}{s_0} \dot{y}_2 &amp;= \frac{k_3}{k_1} x y_1 - \frac{k_4+k_{-3}}{k_1 s_0} y_2.
-\end{aligned}\right.
-\]</span></p>
-<p>Defining as usual <span class="math inline">\(\varepsilon = \frac{e_0}{s_0} \ll 1\)</span>, we recognise the fast dynamic in <span class="math inline">\((y_1,y_2)\)</span> and the slow dynamic in <span class="math inline">\(x\)</span>. The fast system on the <span class="math inline">\(\eta = \tau/\varepsilon\)</span> time scale reads: <span class="math display">\[
-\left\{\begin{aligned}
-\frac{\mathrm{d}y_1}{\mathrm{d}\eta} &amp;= x(1-y_1-y_2) - \alpha_1 y_1 - \beta x y_1 + \alpha_2 y_2, \\
-\frac{\mathrm{d}y_2}{\mathrm{d}\eta} &amp;= \beta x y_1 - \alpha_2 y_2.
-\end{aligned}\right.
-\]</span></p>
-<p>where we introduces some constants, <span class="math inline">\(\alpha_1 = \frac{k_{-1}+k_2}{k_1 s_0}\)</span>, <span class="math inline">\(\alpha_2 = \frac{k_{-3}+k_2}{k_1 s_0}\)</span>, and <span class="math inline">\(\beta = \frac{k_3}{k_1}\)</span>. The equilibrium is: <span class="math display">\[
-\left\{\begin{aligned}
-y_1 &amp;= \frac{\alpha_2 x}{\beta x^2 + \alpha_1\alpha_2 + x \alpha_2}, \\
-y_2 &amp;= \frac{\beta x^2}{\beta x^2 + \alpha_1\alpha_2 + x \alpha_2}. \\
-\end{aligned}\right.
-\]</span></p>
-<p>Going back to the original variables, we have: <span class="math display">\[
-\left\{\begin{aligned}
-c_1 &amp;= \frac{K_{m_2} e_0 s}{K_{m_1} K_{m_2} + K_{m_2} s + s^2}, \\
-c_2 &amp;= \frac{e_0 s^2}{K_{m_1} K_{m_2} + K_{m_2} s + s^2},
-\end{aligned}\right.
-\]</span></p>
-<p>where <span class="math inline">\(K_{m_1} = \frac{k_{-1}+k_2}{k_1}\)</span> and <span class="math inline">\(K_{m_2} = \frac{k_{-3}+k_4}{k_3}\)</span>. The equilibrium is also asymptotically stable in the fast dynamic, since: <span class="math display">\[
-J = \begin{pmatrix} -(1+\beta)x - \alpha_1 &amp; -x -\alpha_2 \\ \beta x &amp; - \alpha_2 \end{pmatrix}.
-\]</span></p>
-<p>The Jacobian has negative trace, and the determinant is positive. We can apply Tichonov theorem, so the QSS approximation is valid. The total production rate is: <span class="math display">\[
-V = k_2 c_1 + k_2 c_2 = \frac{(k_2 K_{m_2} + k_4 s)e_0 s^2}{K_{m_1} K_{m_2} + K_{m_2} s + s^2}.
-\]</span></p>
-<p>We can have different cases:</p>
-<ul>
-<li><p><strong>Case 1:</strong> Identical, independent sites, so <span class="math inline">\(k_1 = 2k_3\)</span>, <span class="math inline">\(k_{-3} = 2k_{-1}\)</span>, and <span class="math inline">\(k_4 = 2k_2\)</span> so: <span class="math display">\[
-V = 2 \frac{k_2 e_0 s}{K_{m_1} + s}.
-\]</span></p>
-<p>This is expected: the sites are independent, so they can work in parallel. The maximum rate is just twice. For <span class="math inline">\(n\)</span> independent sites, we have the same formula with <span class="math inline">\(V_\mathrm{max} = n\cdot k_2 e_0\)</span>.</p></li>
-<li><p><strong>Case 2:</strong> We assume that the first reaction is very slow, but the second is fast. So, <span class="math inline">\(k_1\to 0\)</span>, <span class="math inline">\(k_3\to\infty\)</span> with <span class="math inline">\(k_1k_3\)</span> bounded. Therefore, <span class="math inline">\(K_{m_1}\to \infty\)</span>, <span class="math inline">\(K_{m_2}\to 0\)</span>, and <span class="math inline">\(K_{m_1}K_{m_2}\)</span> bounded. The production rate is: <span class="math display">\[
-V = \frac{k_4 e_0 s^2}{K_{m_1} K_{m_2} + s^2} = \frac{V_\mathrm{max}s^2}{K_m^2 + s^2},
-\]</span></p>
-<p>where <span class="math inline">\(K_m^2 = K_{m_1} K_{m_2}\)</span>. This function is <em>sigmoidal</em>, very much like Holling type III.</p>
-<p>For <span class="math inline">\(n\)</span> sites we can prove that: <span class="math display">\[
-  V = \frac{V_\mathrm{max} s^n}{K^n_m + s^n}.
-  \]</span></p>
-<p>where <span class="math inline">\(K_m = \prod_{i=1}^n K_{m_i}\)</span>. This is an example of a switch-like behavior: at low concentration of <span class="math inline">\(s\)</span>, say <span class="math inline">\(s\ll K_m\)</span>, the production rate is low, otherwise is very high.</p></li>
-</ul>
-<section id="example-hemoglobin" class="level3" data-number="10.3.1">
-<h3 data-number="10.3.1" class="anchored" data-anchor-id="example-hemoglobin"><span class="header-section-number">10.3.1</span> Example: hemoglobin</h3>
-<p>An example is the hemoglobin, which binds oxygen within the blood. The reaction is: <span class="math display">\[
-\ce{4 O2 + Hb &lt;=&gt; Hb(O2)4}
-\]</span></p>
-<p>Hemoglobin has 4 sites, but they are not identical, in these sense that after the first oxygen molecule is binded, the second one binds easier, and so more the third and fourth ones.</p>
-<p>We can rewrite the reaction as: <span class="math display">\[
-\ce{O2 + Hb(O2)_{j-1} &lt;=&gt;[$k_j$][$k_{-j}$] Hb(O2)_j}
-\]</span></p>
-<p>where <span class="math inline">\(\ce{Hb(O2)_{j}}\)</span> is hemoglobin with <span class="math inline">\(j\)</span> oxygen molecules attached. Hence, at equilibrium we have: <span class="math display">\[
-[\ce{Hb(O2)_j}] = \frac{[\ce{Hb(O2)_{j-1}}][\ce{O2}]}{K_j} = \ldots = \frac{[\ce{Hb}][\ce{O2}]^j}{K_1 \cdots K_j}
-\]</span></p>
-<p>The saturation curve <span class="math inline">\(Y\)</span> is the amount of hemoglobin bounded to oxygen over the total available one, and it reads: <span class="math display">\[
-Y = \frac{\sum_{j=0}^4 j [\ce{Hb(O2)_j}]}{4 \sum_{j=0}^4 [\ce{Hb(O2)_j}]}.
-\]</span></p>
-<p>It is possible to fit <span class="math inline">\(K_j\)</span> for <span class="math inline">\(j=1,\ldots,4\)</span> so to match real data, and it is observed that <span class="math inline">\(K_j\)</span> increases with <span class="math inline">\(j\)</span>.</p>
-
-
-<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
-<div id="ref-ks08_vol1" class="csl-entry" role="listitem">
-Keener, James, and James Sneyd. 2009. <em>Mathematical Physiology: I: Cellular Physiology</em>. Second. Vol. 8/I. Springer. <a href="https://strutture-provincia.primo.exlibrisgroup.com/permalink/39SBT_INST/ghkipk/alma991012367489706186">https://strutture-provincia.primo.exlibrisgroup.com/permalink/39SBT_INST/ghkipk/alma991012367489706186</a>.
+</div>
 </div>
 </div>
 </section>
+<section id="fitzhugh-nagumo-model" class="level2">
+<h2 class="anchored" data-anchor-id="fitzhugh-nagumo-model">FitzHugh-Nagumo model</h2>
+<p>Consider the FHN system: <span class="math display">\[
+\left\{\begin{aligned}
+\varepsilon v' &amp;= f(v) - w + I_\text{app}, \\
+w' &amp;= v - \gamma w,
+\end{aligned}\right.
+\]</span></p>
+<p>with <span class="math inline">\(f(v) = v(1-v)(v-\alpha)\)</span> and <span class="math inline">\(I_\text{app} \in \mathbb{R}\)</span>. We assume that <span class="math inline">\(\varepsilon \ll 1\)</span>, so that we can always apply the singular perturbation analysis.</p>
+<p><strong>Q1.1.</strong> Show that for <span class="math inline">\(I_\text{app}\)</span> sufficiently large (but not too large), the system has a (singular) limit cycle.</p>
+<p><strong>Q1.2.</strong> Estimate the period and the bifurcation diagram with respect to <span class="math inline">\(I_\text{app}\)</span>.</p>
+<p><strong>Q1.3.</strong> Check the results with MatCont and describe the bifurcations.</p>
+<p>Determine the effect of temperature (through the Nernst equation) on cell volume and membrane potential.</p>
+
+
 </section>
 
 </main> <!-- /main -->
@@ -1141,13 +1018,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./09_FastSlow.html" class="pagination-link" aria-label="Fast-Slow systems">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Fast-Slow systems</span></span>
+      <a href="../Assignments/07_feedbacks.html" class="pagination-link" aria-label="Feedbacks">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Feedbacks</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./11_FeedbackLoops.html" class="pagination-link" aria-label="Feedback loops">
-        <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Feedback loops</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../Assignments/09_epi.html" class="pagination-link" aria-label="Epidemiology">
+        <span class="nav-page-text">Epidemiology</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

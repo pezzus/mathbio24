@@ -31,7 +31,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../Laboratories/01_ODE_Integration/lab_ODEinteg.html" rel="next">
+<link href="../Assignments/09_epi.html" rel="next">
 <link href="../Assignments/06_reactions.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
@@ -296,6 +296,12 @@ window.Quarto = {
  <span class="menu-text">Feedbacks</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Assignments/09_epi.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Epidemiology</span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -341,6 +347,12 @@ window.Quarto = {
   <div class="sidebar-item-container"> 
   <a href="../Laboratories/06_Electrophysiology/lab_ep.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Lab 06: Electrophysiology</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Laboratories/07_Param/lab_param.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab 07: Parameter fitting</span></a>
   </div>
 </li>
       </ul>
@@ -415,7 +427,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">November 4, 2024</p>
+      <p class="date-modified">November 12, 2024</p>
     </div>
   </div>
     
@@ -433,9 +445,53 @@ window.Quarto = {
 <ol type="1">
 <li>Write down a system of differential equations describing the scheme.</li>
 </ol>
+<div class="callout callout-style-default callout-tip callout-titled" title="Solution">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>We have two variables: <span class="math inline">\([X]\)</span> and <span class="math inline">\([Y]\)</span>. The arrows provide the balance of reaction: <span class="math display">\[
+\left\{\begin{aligned}{}
+[X]' &amp;= k_0[S] - k_1[Y][X], \\ [Y]' &amp;= k_2[S] - k_3 [Y].\end{aligned}
+\right.
+\]</span></p>
+</div>
+</div>
+</div>
 <ol start="2" type="1">
 <li>Show that the equilibrium value of <span class="math inline">\([X]\)</span> is independent of <span class="math inline">\([S]\)</span>, and that the equilibrium is globally attractive.</li>
 </ol>
+<div class="callout callout-style-default callout-tip callout-titled" title="Solution">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The equilibria follow from the nullclines: <span class="math display">\[
+\left\{ \begin{aligned} X^* &amp;= \frac{k_0 k_3}{k_1k_2}, \\ Y^* &amp;= \frac{k_2[S]}{k_3}. \end{aligned} \right.
+\]</span></p>
+<p>We see that <span class="math inline">\([X]\)</span> only depends on the constants. It is the only equilibrium of the system.</p>
+<p>To show that is globally attractive, we have various ways. The simplest is observing that, for a generic initial condition <span class="math inline">\([X](0)=X_0\)</span> and <span class="math inline">\([Y](0)=Y_0\)</span>, <span class="math inline">\([Y](t)\to Y^*\)</span> independently of <span class="math inline">\([X](t)\)</span>. Moreover, it converges monotonically from the right (resp. from the left) whenever <span class="math inline">\(Y_0 &gt; Y^*\)</span> (resp. <span class="math inline">\(Y_0 &lt; Y^*\)</span>). Assume <span class="math inline">\(Y_0 &gt; Y^*\)</span>. Then <span class="math inline">\([Y](t) &gt; Y^*\)</span> for all <span class="math inline">\(t\)</span> and hence <span class="math display">\[
+[X]'(t) = k_0[S] - k_1[Y][X] &lt; k_0[S] - k_1 Y^* [X] = \frac{k_1 k_2 [S]}{k_3} (X^*  - [X]),
+\]</span></p>
+<p>so also <span class="math inline">\([X]\to X^*\)</span> monotonically.</p>
+<p>Another way is noticing that trajectories are bounded and that there are no limit cycles in <span class="math inline">\(\mathbb{R}^2_+\)</span> because the divergence is always negative (condition of non-existence of limit cycles.)</p>
+</div>
+</div>
+</div>
 </section>
 <section id="a-loop" class="level2">
 <h2 class="anchored" data-anchor-id="a-loop">A loop</h2>
@@ -446,15 +502,104 @@ window.Quarto = {
 <ol type="1">
 <li>Is there positive or negative feedback on X synthesis?</li>
 </ol>
+<div class="callout callout-style-default callout-tip callout-titled" title="Solution">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Negative. <span class="math inline">\(X\)</span> favors the deactivation of <span class="math inline">\(E\)</span>, which in turn reduces the production of <span class="math inline">\(X\)</span>.</p>
+</div>
+</div>
+</div>
 <ol start="2" type="1">
 <li>Write down a system of differential equations corresponding to the assumptions.</li>
 </ol>
+<div class="callout callout-style-default callout-tip callout-titled" title="Solution">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>We have the following system: <span class="math display">\[
+\left\{ \begin{aligned}{} [E_a]' &amp;= k_1[E_b] - k_{-1}[X][E_a], \\ [X]' &amp;= -k_2[X] + k_3 \frac{[E_a][S]}{K_m+[S]}, \\ [S]' &amp;= k_0 - k_3 \frac{[E_a][S]}{K_m+[S]}. \end{aligned} \right.
+\]</span></p>
+<p>Note that <span class="math inline">\([E_a] + [E_b] = E_\mathrm{tot}\)</span>, since the equation for <span class="math inline">\([E_b]\)</span> is specular to the one for <span class="math inline">\([E_a]\)</span>.</p>
+</div>
+</div>
+</div>
 <ol start="3" type="1">
 <li>Compute the (unique) equilibrium of the system, finding conditions for its feasibility. <em>Hint: consider the equation for the sum <span class="math inline">\([S] + [X]\)</span>.</em></li>
 </ol>
+<div class="callout callout-style-default callout-tip callout-titled" title="Solution">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Note that <span class="math display">\[
+[X]' + [S]' = k_0 - k_2 [X],
+\]</span></p>
+<p>so at equilibrium we must have: <span class="math display">\[
+[X] = X^* = \frac{k_0}{k_2}.
+\]</span></p>
+<p>From <span class="math inline">\([E_a]'=0\)</span> we obtain the equilibrium value of <span class="math inline">\([E_a]\)</span>, that is <span class="math display">\[
+E_a^*= \frac{E_\mathrm{tot}}{1 + \frac{k_{-1}k_0}{k_1 k_2}} = \frac{E_\mathrm{tot}}{1 + K_1 X^*}.
+\]</span></p>
+<p>We can use this value to compute the equilibrium value of <span class="math inline">\([S]\)</span>, denoted by <span class="math inline">\(S^*\)</span>, from the equation <span class="math inline">\([S]'=0\)</span>. We have <span class="math display">\[
+\frac{S^*}{K_m + S^*} = \frac{k_0}{k_3 E_a^*} = \frac{k_0(1+K_1 X^*)}{k_3 E_\mathrm{tot}}.
+\]</span></p>
+<p>Note that the equation might have no solutions, because the left hand side has a horizontal asymptote for <span class="math inline">\([S]\to\infty\)</span>. So we end up with the condition: <span class="math display">\[
+\frac{k_0(1+K_1 X^*)}{k_3 E_\mathrm{tot}} &lt; 1.
+\]</span></p>
+<p>If the condition is satisfied, then there exists a unique equilibrium.</p>
+</div>
+</div>
+</div>
 <ol start="4" type="1">
 <li>Suggest what might be the behavior of the system, when the conditions for the feasibility of the equilibrium are not satisfied.</li>
 </ol>
+<div class="callout callout-style-default callout-tip callout-titled" title="Solution">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>If there is no equilibrium, then <span class="math inline">\([S]'\)</span> never cancels, and in particular is always positive: <span class="math inline">\([S]' &gt; 0\)</span> for all <span class="math inline">\(t\)</span>. Therefore, <span class="math inline">\([S]\to\infty\)</span> as <span class="math inline">\(t\to\infty\)</span>. This is reasonable: the substrate is consumed too slowly by the reaction, and since the inflow is fixed, it will keep accumulating.</p>
+<p>Nonetheless, we can take <span class="math inline">\([S]\to\infty\)</span> in the equation for <span class="math inline">\([X]\)</span>. In fact we have that <span class="math display">\[
+\frac{k_3 [E_a] [S]}{K_m + [S]} \to k_3 E_a,
+\]</span></p>
+<p>as <span class="math inline">\(t\to\infty\)</span>. Therefore, for <span class="math inline">\(t\)</span> very large, and hence <span class="math inline">\([S]\)</span> very large, we have the reduced system: <span class="math display">\[
+\left\{ \begin{aligned}{} [E_a]' &amp;= k_1(E_\mathrm{tot}-[E_a]) - k_{-1}[X][E_a], \\ [X]' &amp;= -k_2[X] + k_3 [E_a]. \end{aligned} \right.
+\]</span></p>
+<p>Here, there always exists a unique equilibrium. The equilibrium is also asymptotically stable, because the Jacobian (easy to compute) has negative trace and positive determinant.</p>
+</div>
+</div>
+</div>
 </section>
 <section id="inhibition" class="level2">
 <h2 class="anchored" data-anchor-id="inhibition">Inhibition</h2>
@@ -470,12 +615,77 @@ k' = \frac{k_1}{k_2^n + \ce{[E_p]}^n},
 <ol type="1">
 <li>Does the scheme model a negative or positive feedback loop?</li>
 </ol>
+<div class="callout callout-style-default callout-tip callout-titled" title="Solution">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Negative. With no need to write down the equations, we see that an increase of <span class="math inline">\([X]\)</span> also increases <span class="math inline">\([E_p]\)</span>, which in turn inhibits the production of <span class="math inline">\([X]\)</span>.</p>
+</div>
+</div>
+</div>
 <ol start="2" type="1">
 <li>Write down a system of equations representing the scheme.</li>
 </ol>
+<div class="callout callout-style-default callout-tip callout-titled" title="Solution">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>We have the following equation for <span class="math inline">\([X]\)</span>: <span class="math display">\[
+[X]' = \frac{k_1}{k_2 + [E_p]} - k_3 [X].
+\]</span></p>
+<p>The other equation, say for <span class="math inline">\([E_p]\)</span>, is more standard. We have: <span class="math display">\[
+[E_p]' = -\frac{V_1 [E_p]}{K_1 + [E_p]} + \frac{V_2 [X] (E_\mathrm{tot}-[E_p])}{K_2 + (E_\mathrm{tot}-[E_p])},
+\]</span></p>
+<p>where we exploited the fact that <span class="math inline">\([E] + [E_p] = E_\mathrm{tot}\)</span>.</p>
+</div>
+</div>
+</div>
 <ol start="3" type="1">
 <li>Find the equilibria, and study their stability.</li>
 </ol>
+<div class="callout callout-style-default callout-tip callout-titled" title="Solution">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-9" class="callout-9-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>From the nullclines, we obtain that the equilibrium is found at the intersection of the curves: <span class="math display">\[
+\begin{aligned}{} [X']&amp;=0 &amp;\Rightarrow&amp;&amp; [X] &amp;= \frac{k_1}{k_3(k_2 + E_\mathrm{tot}y)} = f(y), \\ [E_p']&amp;=0 &amp;\Rightarrow&amp;&amp; [X] &amp;= \frac{V_1 y(\tilde{K}_2+1-y)}{V_2(1-y)(\tilde{K}_1+y)} = g(y). \end{aligned}
+\]</span></p>
+<p>where for convenience we set <span class="math inline">\(y = [E_p]/E_\mathrm{tot}\)</span>, <span class="math inline">\(y\in[0,1]\)</span>. Graphically, we see there is a unique intersection.</p>
+<p><img src="InhiExer.png" class="img-fluid"></p>
+<p>For the local stability, we check the Jacobian: <span class="math display">\[
+J([X],y) = \begin{pmatrix} -k_3 &amp; - \frac{E_\mathrm{tot} k_1}{(k_2+E_\mathrm{tot} y)^2} \\ \frac{V_2(1-y)}{\tilde{K}_2 + 1 - y} &amp; - \frac{\tilde{K}_2 V_2 [X]}{(\tilde{K}_2+1-y)^2} - \frac{\tilde{K}_1 V_1}{(\tilde{K}_1+y)^2}\end{pmatrix}.
+\]</span></p>
+<p>Without the need of substituting the equilibrium, we easily from the analysis of the signs that the trace is <em>negative</em>, whereas the determinant is always <em>positive</em>: <span class="math display">\[
+J([X],y) = \begin{pmatrix} - &amp; - \\ + &amp; - \end{pmatrix}.
+\]</span></p>
+<p>The equilibrium is asymptotically stable.</p>
+</div>
+</div>
+</div>
 </section>
 <section id="allosteric-inhibition" class="level2">
 <h2 class="anchored" data-anchor-id="allosteric-inhibition">Allosteric inhibition</h2>
@@ -494,18 +704,178 @@ k' = \frac{k_1}{k_2^n + \ce{[E_p]}^n},
 <ol type="1">
 <li>Write down the equations corresponding to this scheme.</li>
 </ol>
+<div class="callout callout-style-default callout-tip callout-titled" title="Solution">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-10" class="callout-10-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>We define <span class="math inline">\(C_1 = SE\)</span>, <span class="math inline">\(C_2 = IE\)</span>, and <span class="math inline">\(C_3 = IES\)</span>. The equations are: <span class="math display">\[
+\left\{\begin{aligned}{}
+[S]'   &amp;= -k_1[S]([E] + [C_2]) + k_{-1}([C_1] + [C_3]), \\
+[E]'   &amp;= -k_1[S][E] + (k_{-1}+k_2)[C_1] - k_3[I][E] + k_{-3}[C_2], \\
+[I]'   &amp;= -k_3[I]([E] + [C_1]) + k_{-3}([C_2] + [C_3]), \\
+[C_1]' &amp;= k_1[S][E] - (k_{-1}+k_2)[C_1] - k_3[I][C_1] + k_{-3} [C_3],  \\
+[C_2]' &amp;= k_3[I][E] - k_{-3}[C_2] - k_1[S][C_2] + k_{-1} [C_3], \\
+[C_3]' &amp;= k_3[I][C_1] + k_1[S][C_2] - (k_{-1}+k_{-3})[C_3], \\
+[P]'   &amp;= k_2[C_1].
+\end{aligned}\right.
+\]</span></p>
+<p>Note that we have the following relationship: <span class="math display">\[
+[E]' + [C_1]' + [C_2]' + [C_3]' = 0.
+\]</span></p>
+<p>Since the initial concentration of the complexes is zero, we have: <span class="math display">\[
+[E] = e_0 - [C_1] - [C_2] - [C_3].
+\]</span></p>
+</div>
+</div>
+</div>
 <ol start="2" type="1">
 <li>Assume that each of the reversible reactions in the scheme is at equilibrium (i.e., the rates in both directions are equal) and find the values of <span class="math inline">\([SE]\)</span>, <span class="math inline">\([IE]\)</span> and <span class="math inline">\([IES]\)</span> as a function of the concentrations of <span class="math inline">\([S]\)</span> and <span class="math inline">\([I]\)</span>.</li>
 </ol>
+<div class="callout callout-style-default callout-tip callout-titled" title="Solution">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-11" class="callout-11-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>For a generic reversible chemical reaction, <span class="math display">\[
+\ce{A + B &lt;=&gt;[k_{-1}][k_1] C}
+\]</span></p>
+<p>the equilibrium is reached for <span class="math display">\[
+[C]' = k_1[A][B] - k_{-1}[C] = 0,
+\]</span></p>
+<p>in other words, <span class="math display">\[
+[A]_\mathrm{eq}[B]_\mathrm{eq} - \frac{k_{-1}}{k_1} [C]_\mathrm{eq} = [A]_\mathrm{eq}[B]_\mathrm{eq} - K_1 [C]_\mathrm{eq} = 0.
+\]</span></p>
+<p>Since we have 4 reversible reactions, we have the following 4 equations: <span class="math display">\[
+\left\{\begin{aligned}{}
+[S][E] - K_1[C_1] = 0, \\
+[I][E] - K_3[C_2] = 0, \\
+[S][C_2] - K_1[C_3] = 0, \\
+[I][C_1] - K_3[C_3] = 0.
+\end{aligned}\right.
+\]</span></p>
+<p>If we use <span class="math inline">\([E] = e_0 - [C_1] - [C_2] - [C_3]\)</span> we have a system of 4 equations in 3 unknowns, namely <span class="math inline">\([C_1]\)</span>, <span class="math inline">\([C_2]\)</span>, and <span class="math inline">\([C_3]\)</span>, given <span class="math inline">\([S]\)</span> and <span class="math inline">\([I]\)</span>. Specifically: <span class="math display">\[
+\left\{\begin{aligned}{}
+[S](e_0 - [C_1] - [C_2] - [C_3]) - K_1[C_1] = 0, \\
+[I](e_0 - [C_1] - [C_2] - [C_3]) - K_3[C_2] = 0, \\
+[S][C_2] - K_1[C_3] = 0, \\
+[I][C_1] - K_3[C_3] = 0.
+\end{aligned}\right.
+\]</span></p>
+<p>The system is linear in the unknowns, and rank-deficient (one equation is a linear combination of the others.)</p>
+<p>From the first 2 equations we have: <span class="math display">\[[C_2][S] = \frac{K_1}{K_3}[C_1][I].\]</span></p>
+<p>In the first equation <span class="math display">\[[S]e_0 - [S][C_1] - [S][C_2] - [S][C_3] - K_1[C_1] = 0\]</span></p>
+<p>we replace <span class="math inline">\([S][C_2]\)</span> as above and <span class="math inline">\([C_3]\)</span> from the last equation: <span class="math display">\[[S]e_0 - [S][C_1] - \frac{K_1}{K_3}[C_1][I] - \frac{1}{K_3}[I][S][C_1] - K_1[C_1] = 0\]</span></p>
+<p>We can solve for <span class="math inline">\([C_1]\)</span> and find: <span class="math display">\[[C_1] = \frac{K_3e_0 [S]}{K_3 [S] + K_1[I] + [I][S] + K_1K_3}.\]</span></p>
+<p>The equations for <span class="math inline">\([C_2]\)</span> and <span class="math inline">\([C_3]\)</span> are found in the same manner: <span class="math display">\[\begin{aligned}{}
+[C_2] &amp;= \frac{K_1 e_0 [I]}{K_3 [S] + K_1[I] + [I][S] + K_1K_3}, \\
+[C_3] &amp;= \frac{e_0 [I][S]}{K_3 [S] + K_1[I] + [I][S] + K_1K_3}.
+\end{aligned}\]</span></p>
+<p>Note that this is equivalent to the quasi-steady-state approximation (remember the Michaelis-Menten law, we derived it with 2 different approximations.)</p>
+</div>
+</div>
+</div>
 <ol start="3" type="1">
 <li>Find out the rate of product production as a function of <span class="math inline">\([S]\)</span> and <span class="math inline">\([I]\)</span> using the relations found at the previous point. Interpret the result as a modified Michaelis-Menten equation.</li>
 </ol>
+<div class="callout callout-style-default callout-tip callout-titled" title="Solution">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-12" class="callout-12-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Since we are interested in the rate of production, we have: <span class="math display">\[[P]' = k_2[C_1] = \frac{k_2 K_3 e_0 [S]}{K_3 [S] + K_1[I] + [I][S] + K_1K_3}.\]</span></p>
+<p>Note that this is a function of <span class="math inline">\([S]\)</span> and <span class="math inline">\([I]\)</span>. We can reformulate it as a Michaelis-Menten law as follows: <span class="math display">\[V =\frac{k_2 e_0 K_3}{K_3 + [I]} \frac{[S]}{K_1 + [S]} = \frac{V_\mathrm{max}[S]}{K_1 + [S]}.\]</span></p>
+<p>Therefore, the effect of allosteric inhibition is to modify <span class="math inline">\(V_\mathrm{max}\)</span>.</p>
+</div>
+</div>
+</div>
 <ol start="4" type="1">
 <li>Show the steps leading instead to the quasi-equilibrium approximation, assuming that the concentration of enzyme is much lower than that of the substrate and that the concentration of the allosteric inhibitor is constant. Identify the fast and the slow variables in the system. <em>Hint: It is enough to arrive at a system of equations representing the quasi-steady-state approximation without solving these.</em></li>
 </ol>
+<div class="callout callout-style-default callout-tip callout-titled" title="Solution">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-13" class="callout-13-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>We now consider the original system. Since <span class="math inline">\([I]\)</span> is assumed constant, we consider it as a parameter and remove the corresponding equation.</p>
+<p>Together with <span class="math inline">\([E] = e_0 - [C_1] - [C_2] - [C_3]\)</span> we have the reduced system: <span class="math display">\[\left\{\begin{aligned}{}
+[S]'   &amp;= -k_1[S](e_0 - [C_1] - [C_3]) + k_{-1}([C_1] + [C_3]), \\
+[C_1]' &amp;= k_1[S](e_0 - [C_1] - [C_2] - [C_3]) - (k_{-1}+k_2)[C_1] - k_3[I][C_1] + k_{-3} [C_3],  \\
+[C_2]' &amp;= k_3[I](e_0 - [C_1] - [C_2] - [C_3]) - k_{-3}[C_2] - k_1[S][C_2] + k_{-1} [C_3], \\
+[C_3]' &amp;= k_3[I][C_1] + k_1[S][C_2] - (k_{-1}+k_{-3})[C_3].
+\end{aligned}\right.\]</span></p>
+<p>Now we rescale everything: <span class="math display">\[s = \frac{[S]}{s_0},\quad c_1 = \frac{[C_1]}{e_0},\quad c_2 = \frac{[C_2]}{e_0},\quad c_3 = \frac{[C_3]}{e_0},\quad \tau = k_1 e_0 t.\]</span></p>
+<p>We arrive at the system: <span class="math display">\[\left\{\begin{aligned}
+s'  &amp;= - s(1-c_1-c_3) + \frac{K_1}{s_0}(c_1 + c_3), \\
+\varepsilon c_1' &amp;= s (1 - c_1 - c_2 - c_3) - \frac{k_{-1}+k_2}{k_1 s_0} c_1 - \frac{k_3 [I]}{k_1 s_0} c_1 + \frac{k_{-3}}{k_1 s_0} c_3,  \\
+\varepsilon c_3' &amp;= \frac{k_3[I]}{k_1 s_0} (1 - c_1 - c_2 - c_3) -  \frac{k_{-3}}{k_1 s_0} c_2 - c_2 + \frac{K_1}{s_0} c_3, \\
+\varepsilon c_3' &amp;= - \frac{k_3[I]}{k_1 s_0} c_1 + c_2 - \frac{k_{-1}+k_{-3}}{k_1 s_0} c_3.
+\end{aligned}\right.\]</span></p>
+<p>The system has a fast-slow structure, being <span class="math inline">\(s\)</span> the <em>slow</em> variable and <span class="math inline">\(c_1\)</span>, <span class="math inline">\(c_2\)</span>, and <span class="math inline">\(c_3\)</span> being the <em>fast</em> variables.</p>
+<p>Formally assuming <span class="math inline">\(\varepsilon=0\)</span> we arrive at the following system for the complexes: <span class="math display">\[\left\{\begin{aligned}
+s &amp;= \Bigl(\frac{k_{-1}+k_2}{k_1 s_0} + \frac{k_3 [I]}{k_1 s_0} + s\Bigr) c_1 + sc_2 + \Bigl(s - \frac{k_{-3}}{k_1 s_0} \Bigr) c_3,  \\
+\frac{k_3[I]}{k_1 s_0} &amp;= \Bigl(\frac{k_{-3}}{k_1 s_0} + \frac{k_3[I]}{k_1 s_0} + 1\Bigr) c_2 + \Bigl( \frac{k_3[I]}{k_1 s_0} - \frac{K_1}{s_0}\Bigr) c_3, \\
+0 &amp;= - \frac{k_3[I]}{k_1 s_0} c_1 + c_2 - \frac{k_{-1}+k_{-3}}{k_1 s_0} c_3.
+\end{aligned}\right.\]</span></p>
+<p>We can simplify it, going back to the original variables:</p>
+<p><span class="math display">\[\left\{\begin{aligned}
+k_1 [S] &amp;= (k_{-1}+k_2 + k_3 [I] + k_1 [S]) c_1 + k_1 [S] c_2 + (k_1 [S] - k_{-3}) c_3,  \\
+k_3[I] &amp;= (k_{-3} + k_3[I] + k_1 s_0 ) c_2 + (k_3[I] - K_1 k_1) c_3, \\
+0 &amp;= - k_3[I] c_1 + k_1 s_0 c_2 - (k_{-1}+k_{-3}) c_3.
+\end{aligned}\right.\]</span></p>
+</div>
+</div>
+</div>
 <ol start="5" type="1">
 <li>In the reaction scheme it has been assumed, for the sake of simplicity, that the rates at which the regulator binds and detach are the same, whether the substrate is bound or not to the enzyme, and similarly for the rate at which the substrate binds. How would you change that if it assumed that the inactive conformation of the enzyme makes it more difficult for the substrate to bind to the enzyme?</li>
 </ol>
+<div class="callout callout-style-default callout-tip callout-titled" title="Solution">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-14" class="callout-14-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The inactive conformation of the enzyme is <span class="math inline">\(IE\)</span>. To answer the question, we simply modify the last reaction: <span class="math display">\[
+\ce{S + IE  &lt;=&gt;[k_{-1}][k'_1] IES}
+\]</span></p>
+<p>with a new rate <span class="math inline">\(k'_1 \ll k_1\)</span>.</p>
+</div>
+</div>
+</div>
 
 
 </section>
@@ -938,8 +1308,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../Laboratories/01_ODE_Integration/lab_ODEinteg.html" class="pagination-link" aria-label="Lab 01: Numerical integration">
-        <span class="nav-page-text">Lab 01: Numerical integration</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../Assignments/09_epi.html" class="pagination-link" aria-label="Epidemiology">
+        <span class="nav-page-text">Epidemiology</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

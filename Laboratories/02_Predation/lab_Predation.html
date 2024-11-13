@@ -350,6 +350,12 @@ window.Quarto = {
  <span class="menu-text">Feedbacks</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Assignments/09_epi.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Epidemiology</span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -395,6 +401,12 @@ window.Quarto = {
   <div class="sidebar-item-container"> 
   <a href="../../Laboratories/06_Electrophysiology/lab_ep.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Lab 06: Electrophysiology</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Laboratories/07_Param/lab_param.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab 07: Parameter fitting</span></a>
   </div>
 </li>
       </ul>
@@ -471,7 +483,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">October 2, 2024</p>
+      <p class="date-modified">November 12, 2024</p>
     </div>
   </div>
     
@@ -581,7 +593,7 @@ C = a N T_s = a N (T - C T_h),
 <section id="option-1-linear-fit-via-lineweaverburk-plot" class="level4">
 <h4 class="anchored" data-anchor-id="option-1-linear-fit-via-lineweaverburk-plot">Option 1: Linear fit via Lineweaver–Burk plot</h4>
 <p>The <a href="https://en.wikipedia.org/wiki/Lineweaver–Burk_plot">Lineweaver–Burk plot</a> uses a simple transformation to make the above equation linear. In fact: <span class="math display">\[
-y = \frac{T}{C} = \frac{1}{a} \frac{1}{N} + \frac{1}{T_h} = \alpha x + \beta.
+y = \frac{T}{C} = \frac{1}{a} \frac{1}{N} + T_h = \alpha x + \beta.
 \]</span></p>
 <p>So, the Holling type II relationship is <em>linear</em> with respect to the reciprocal. We can perform a linear regression to find the coefficients (use <code>polyfit</code>).</p>
 </section>

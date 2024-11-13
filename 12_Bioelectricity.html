@@ -316,6 +316,12 @@ window.Quarto = {
  <span class="menu-text">Feedbacks</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Assignments/09_epi.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Epidemiology</span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -361,6 +367,12 @@ window.Quarto = {
   <div class="sidebar-item-container"> 
   <a href="./Laboratories/06_Electrophysiology/lab_ep.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Lab 06: Electrophysiology</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Laboratories/07_Param/lab_param.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab 07: Parameter fitting</span></a>
   </div>
 </li>
       </ul>
@@ -449,7 +461,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">November 11, 2024</p>
+      <p class="date-modified">November 12, 2024</p>
     </div>
   </div>
     
@@ -560,7 +572,7 @@ J_\text{diff} + J_\text{E} = - D \frac{\mathrm{d}c}{\mathrm{d}x} - c \operatorna
 J_E = - c \operatorname{sign}(z) u \frac{\mathrm{d}\phi}{\mathrm{d}x}  = - D c \operatorname{sign}(z) \frac{|z| q_E}{k_B T} \frac{\mathrm{d}\phi}{\mathrm{d}x}
 = - D c \frac{Fz}{RT} \frac{\mathrm{d}\phi}{\mathrm{d}x},
 \]</span></p>
-<p>where we introduced the constant of gases <span class="math inline">\(R = N_A k_B\)</span> and the Farad constant <span class="math inline">\(F = N_A q_E\)</span>. Now the equation reads: <span class="math display">\[
+<p>where we introduced the constant of gases <span class="math inline">\(R = N_A k_B \approx 8.314\,\text{J}\text{K}^{-1}\text{mol}^{-1}\)</span> and the Farad constant <span class="math inline">\(F = N_A q_E\)</span>. Now the equation reads: <span class="math display">\[
 J_\text{diff} + J_\text{E} = - D \Bigl( \frac{\mathrm{d}c}{\mathrm{d}x} + c \frac{Fz}{RT} \frac{\mathrm{d}\phi}{\mathrm{d}x} \Bigr) = 0.
 \]</span></p>
 <p>We can now solve the equation. We have that: <span class="math display">\[
@@ -584,14 +596,14 @@ V_\text{eq} = \frac{RT}{Fz} \ln \frac{c_e}{c_i}.
 <p>Wrapping up, given a concentration difference, the Nernst equilibrium tells up the potential difference that we need to maintain so that there is no flux (and so no current) through the channel. This potential is clearly zero when <span class="math inline">\(c_i = c_e\)</span>. For example, the Nernst potential <span class="math inline">\(V_\text{K}\)</span> of potassium is: <span class="math display">\[
 V_\text{K} = \frac{RT}{zF} \ln \frac{\ce{[K+]_e}}{\ce{[K+]_i}}.
 \]</span></p>
-<p>With <span class="math inline">\(\ce{[K+]_e} = 4\,\text{mM}\)</span> and <span class="math inline">\(\ce{[K+]_i} = 155\,\text{mM}\)</span> we obtain <span class="math inline">\(V_\text{K} \approx -98\,\text{mV}\)</span>. In <a href="#tbl-nernst" class="quarto-xref">Table&nbsp;<span>12.1</span></a> we report the Nernst potential for some ions in the axon.</p>
+<p>With <span class="math inline">\(\ce{[K+]_e} = 4\,\text{mM}\)</span>, <span class="math inline">\(\ce{[K+]_i} = 155\,\text{mM}\)</span>, <span class="math inline">\(R = 8.314\,\text{J}\text{K}^{-1}\text{M}^{-1}\)</span>, <span class="math inline">\(z=1\)</span>, <span class="math inline">\(F = 9.65\cdot 10^4\,\text{C}\,\text{mol}^{-1}\)</span> we obtain <span class="math inline">\(V_\text{K} \approx -98\,\text{mV}\)</span>. In <a href="#tbl-nernst" class="quarto-xref">Table&nbsp;<span>12.1</span></a> we report the Nernst potential for some ions in the axon.</p>
 <div id="tbl-nernst" class="striped quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
-<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl quarto-uncaptioned" id="tbl-nernst-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;12.1
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-nernst-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;12.1: Nernst potentials for the squid giant axon at <span class="math inline">\(27^{\circ}\text{C}\)</span>.
 </figcaption>
 <div aria-describedby="tbl-nernst-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<table class="caption-top table">
+<table class="table-striped caption-top table">
 <thead>
 <tr class="header">
 <th>Ion</th>
@@ -603,27 +615,21 @@ Table&nbsp;12.1
 <tbody>
 <tr class="odd">
 <td><span class="math inline">\(\ce{Na+}\)</span></td>
-<td>145 mM</td>
-<td>12 mM</td>
-<td><span class="math inline">\(67\,\text{mV}\)</span></td>
+<td>437 mM</td>
+<td>50 mM</td>
+<td><span class="math inline">\(56.1\,\text{mV}\)</span></td>
 </tr>
 <tr class="even">
 <td><span class="math inline">\(\ce{K+}\)</span></td>
-<td>4 mM</td>
-<td>155 mM</td>
-<td><span class="math inline">\(-98\,\text{mV}\)</span></td>
+<td>20 mM</td>
+<td>397 mM</td>
+<td><span class="math inline">\(-77.7\,\text{mV}\)</span></td>
 </tr>
 <tr class="odd">
-<td><span class="math inline">\(\ce{Ca^2+}\)</span></td>
-<td><span class="math inline">\(1.5\)</span> mM</td>
-<td>100 nM</td>
-<td><span class="math inline">\(129\,\text{mV}\)</span></td>
-</tr>
-<tr class="even">
 <td><span class="math inline">\(\ce{Cl-}\)</span></td>
-<td>123 mM</td>
-<td>4.2 mM</td>
-<td><span class="math inline">\(4.2\,\text{mV}\)</span></td>
+<td>556 mM</td>
+<td>40 mM</td>
+<td><span class="math inline">\(68.1\,\text{mV}\)</span></td>
 </tr>
 </tbody>
 </table>
