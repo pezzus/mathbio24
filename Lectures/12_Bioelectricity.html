@@ -1,0 +1,1357 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.57">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2024-11-04">
+
+<title>12&nbsp; Bioelectricity – Mathematical Biology</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../Lectures/13_HodgkinHuxley.html" rel="next">
+<link href="../Lectures/11_FeedbackLoops.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../Lectures/01_Bathtub.html">Lectures</a></li><li class="breadcrumb-item"><a href="../Lectures/12_Bioelectricity.html"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Bioelectricity</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">Mathematical Biology</a> 
+        <div class="sidebar-tools-main">
+    <a href="../Mathematical-Biology.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Welcome</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../projects2024.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Projects</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Lectures</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Lectures/01_Bathtub.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Bathtub model</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Lectures/02_Population.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Population dynamics</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Lectures/03_Logistic.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Logistic model</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Lectures/04_Predation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Predation models</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Lectures/05_LotkaVolterra.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Lotka-Volterra model</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Lectures/06_Gause.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Gause type models</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Lectures/07_RM.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Rosenzweig-MacArthur model</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Lectures/08_MichaelisMenten.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Michaelis-Menten law</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Lectures/09_FastSlow.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Fast-Slow systems</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Lectures/10_Inhibition.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Inhibition</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Lectures/11_FeedbackLoops.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Feedback loops</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Lectures/12_Bioelectricity.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Bioelectricity</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Lectures/13_HodgkinHuxley.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Hodgkin-Huxley model</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Lectures/14_CableEquation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">The cable equation</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Lectures/15_Epidemiology.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Mathematical epidemiology</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Lectures/references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Labs</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Laboratories/01_ODE_Integration/lab_ODEinteg.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab 01: Numerical integration</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Laboratories/02_Predation/lab_Predation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab 02: Predation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Laboratories/03_Bifurcations/lab_Bifurcations.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab 03: Bifurcations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Laboratories/04_Chaos/lab_chaos.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab 04: Chaos</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Laboratories/05_Feedbacks/lab_feedback.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab 05: Feedback loops</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Laboratories/06_Electrophysiology/lab_ep.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab 06: Electrophysiology</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Laboratories/07_Param/lab_param.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab 07: Parameter fitting</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Assignments</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Assignments/01_recap_ODEs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Solving ODEs</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Assignments/02_population.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Population dynamics</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Assignments/03_spruce.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Predation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Assignments/04_systems.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">System of ODEs</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Assignments/05_predators.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Prey-predator systems</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Assignments/06_reactions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Reactions</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Assignments/07_feedbacks.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Feedbacks</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Assignments/09_epi.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Epidemiology</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">Appendices</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Lectures/IntroODE.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Introduction to ODEs</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Lectures/bifurcations.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Introduction to bifurcations</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Laboratories/00_Intro_Matlab/introMATLAB.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Introduction to MATLAB</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#the-membrane-as-a-leaky-capacitor" id="toc-the-membrane-as-a-leaky-capacitor" class="nav-link active" data-scroll-target="#the-membrane-as-a-leaky-capacitor"><span class="header-section-number">12.1</span> The membrane as a leaky capacitor</a></li>
+  <li><a href="#membrane-response-to-current-stimulus" id="toc-membrane-response-to-current-stimulus" class="nav-link" data-scroll-target="#membrane-response-to-current-stimulus"><span class="header-section-number">12.2</span> Membrane response to current stimulus</a></li>
+  <li><a href="#ion-channels" id="toc-ion-channels" class="nav-link" data-scroll-target="#ion-channels"><span class="header-section-number">12.3</span> Ion channels</a>
+  <ul class="collapse">
+  <li><a href="#nernst-potential" id="toc-nernst-potential" class="nav-link" data-scroll-target="#nernst-potential"><span class="header-section-number">12.3.1</span> Nernst potential</a></li>
+  <li><a href="#current-voltage-relations" id="toc-current-voltage-relations" class="nav-link" data-scroll-target="#current-voltage-relations"><span class="header-section-number">12.3.2</span> Current-voltage relations</a></li>
+  <li><a href="#reversal-potential" id="toc-reversal-potential" class="nav-link" data-scroll-target="#reversal-potential"><span class="header-section-number">12.3.3</span> Reversal potential</a></li>
+  <li><a href="#gating-mechanism" id="toc-gating-mechanism" class="nav-link" data-scroll-target="#gating-mechanism"><span class="header-section-number">12.3.4</span> Gating mechanism</a></li>
+  </ul></li>
+  <li><a href="#the-hodgkin-huxley-model" id="toc-the-hodgkin-huxley-model" class="nav-link" data-scroll-target="#the-hodgkin-huxley-model"><span class="header-section-number">12.4</span> The Hodgkin-Huxley model</a></li>
+  <li><a href="#appendix-electrochemistry" id="toc-appendix-electrochemistry" class="nav-link" data-scroll-target="#appendix-electrochemistry"><span class="header-section-number">12.5</span> Appendix: Electrochemistry</a>
+  <ul class="collapse">
+  <li><a href="#conductivity" id="toc-conductivity" class="nav-link" data-scroll-target="#conductivity"><span class="header-section-number">12.5.1</span> Conductivity</a></li>
+  <li><a href="#molar-conductivity" id="toc-molar-conductivity" class="nav-link" data-scroll-target="#molar-conductivity"><span class="header-section-number">12.5.2</span> Molar conductivity</a></li>
+  <li><a href="#mobility-of-ions" id="toc-mobility-of-ions" class="nav-link" data-scroll-target="#mobility-of-ions"><span class="header-section-number">12.5.3</span> Mobility of ions</a></li>
+  <li><a href="#sec-mobility" id="toc-sec-mobility" class="nav-link" data-scroll-target="#sec-mobility"><span class="header-section-number">12.5.4</span> Mobility and conductivity</a></li>
+  <li><a href="#sec-einstein" id="toc-sec-einstein" class="nav-link" data-scroll-target="#sec-einstein"><span class="header-section-number">12.5.5</span> Einstein-Smoluchowski equation</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../Lectures/01_Bathtub.html">Lectures</a></li><li class="breadcrumb-item"><a href="../Lectures/12_Bioelectricity.html"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Bioelectricity</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Bioelectricity</span></h1>
+<p class="subtitle lead">This lecture is based on <span class="citation" data-cites="ks08_vol1">(<a href="references.html#ref-ks08_vol1" role="doc-biblioref">Keener and Sneyd 2009, vol. 8/I, chap. 4</a>)</span></p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">November 4, 2024</p>
+    </div>
+  </div>
+  
+    <div>
+    <div class="quarto-title-meta-heading">Modified</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date-modified">November 12, 2024</p>
+    </div>
+  </div>
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>Bioelectricity explores electrical phenomena within biological systems, primarily focusing on how cells and organs generate, transmit, and utilize electrical signals. Key examples of bioelectric organs include the brain, heart, and muscles, all of which rely on electrical activity to function effectively. This electrical signaling governs processes as varied as neural communication, heartbeat regulation, and muscle contraction.</p>
+<p>In biological systems, electricity arises from the movement of ions, charged atoms or molecules such as sodium <span class="math inline">\(\ce{Na+}\)</span>, potassium <span class="math inline">\(\ce{K+}\)</span>, and calcium <span class="math inline">\(\ce{Ca^2+}\)</span>, across cell membranes. Each cell is structured with distinct intracellular (inside) and extracellular (outside) spaces, divided by a cell membrane. This membrane selectively controls ion flow, establishing a difference in ion concentration between the interior and exterior of the cell. This ionic imbalance creates an electric potential across the membrane, known as the transmembrane potential, defined as: <span class="math display">\[
+V_m := \phi_i - \phi_e,
+\]</span></p>
+<p>where <span class="math inline">\(\phi_i\)</span> represents the intracellular potential and <span class="math inline">\(\phi_e\)</span> the extracellular potential.</p>
+<p>A subset of cells, known as excitable cells, including neurons, cardiac cells, and muscle cells, can rapidly alter their transmembrane potential in response to stimuli. This shift, called an action potential, enables fast communication within and between cells and is fundamental to processes like nerve impulses and heartbeats.</p>
+<p>The groundbreaking model of cellular excitability was developed by Hodgkin and Huxley in the 1950s, providing a mathematical framework to describe the ionic mechanisms underlying action potentials in neurons and inspiring later advances in bioelectrical research.</p>
+<p>Hodgkin and Huxley conducted a series of seminal experiments on the giant axon of the squid (distinct from the axon of the giant squid!). This giant axon, unusually large in diameter, allowed for precise experimental manipulation and measurement, making it an ideal model for studying the mechanisms of action potential generation. In their experiments, Hodgkin and Huxley modeled the axon as a long, cylindrical structure through which ions flow, enabling them to develop a quantitative model of how nerve impulses propagate. By systematically analyzing ionic currents across the axonal membrane, they identified key variables influencing excitability, including the roles of sodium and potassium ions and the voltage-gated ion channels that control their movement. Their work ultimately led to the formulation of the Hodgkin-Huxley model, a mathematical framework that describes the dynamics of action potentials and remains foundational in neurobiology.</p>
+<section id="the-membrane-as-a-leaky-capacitor" class="level2" data-number="12.1">
+<h2 data-number="12.1" class="anchored" data-anchor-id="the-membrane-as-a-leaky-capacitor"><span class="header-section-number">12.1</span> The membrane as a leaky capacitor</h2>
+<p>In cellular bioelectricity, the cell membrane can be understood as a <em>leaky capacitor</em>. A capacitor typically stores electrical charge, and in a similar way, the cell membrane can maintain a separation of charges between the intracellular and extracellular environments. However, unlike an ideal capacitor, the cell membrane isn’t completely insulating-it allows certain ions to “leak” across through ion channels. This controlled leakage plays a crucial role in setting the cell’s resting membrane potential and modulating electrical signals.</p>
+<p>The <em>capacitance</em> is the measure of how much charge <span class="math inline">\(Q\)</span> we need to move from one side to another of a conductor in order to have a potential differene <span class="math inline">\(V_m\)</span>: <span class="math display">\[
+C := \frac{Q}{V_m}.
+\]</span></p>
+<p>The unit of measure is the Farad (symbol [F]). In other words, the membrane stores a potential energy in a fully reversible manner. The capacitance is essentially a geometrical measure. For a membrane, we can use the formula: <span class="math display">\[
+C = \frac{\varepsilon\varepsilon_0 A}{d},
+\]</span></p>
+<p>where <span class="math inline">\(d\approx 2.3\,\text{nm}\)</span> is the thickness of the membrane, <span class="math inline">\(\varepsilon_0 \approx 8.85\cdot 10^{-12}\,\text{F}\text{m}^{-1}\)</span> is the vacuum permittivity, <span class="math inline">\(\varepsilon \approx 2.1\)</span> is the dielectric constant of a lipidic chain, and <span class="math inline">\(A\)</span> is the area. For a cell, the area may vary significantly, so it is more convenient to work per unit area. The specific membrane capacitance is <span class="math display">\[
+C_m = \frac{C}{A}.
+\]</span></p>
+<p>For a typical cell, <span class="math inline">\(C_m \approx 1\,\text{$\mu$F}/\text{cm}^2\)</span>.</p>
+<p>The membrane has also ion channels, allowing for current flows. Therefore, the membrane has a specific resistance <span class="math inline">\(R_m\)</span> (resistance per unit area), whose value highly depends on the density of channels and their state (open or close).</p>
+<p>Overall, the membrane can be approximated with an <span class="math inline">\(RC\)</span> circuit, where the total transmembrane current is the sum of the current through the channels <span class="math inline">\(I_R\)</span> and the capacitor <span class="math inline">\(I_C\)</span>: <span class="math display">\[
+I_\text{tot} = I_C + I_R.
+\]</span></p>
+<p>For the capacitor, as we move charges, we have that: <span class="math display">\[
+\frac{\mathrm{d}V_m}{\mathrm{d}t} = \frac{I_C}{C_m},
+\]</span></p>
+<p>while for the resistance, we can use Ohm’s law: <span class="math display">\[
+I_R = \frac{V_m}{R_m}.
+\]</span></p>
+<p>Assuming an isolated membrane, we have <span class="math inline">\(I_\text{tot}=0\)</span> so: <span class="math display">\[
+C_m \frac{\mathrm{d}V_m}{\mathrm{d}t} + \frac{V_m}{R_m} = 0.
+\]</span></p>
+<p>The equilibrium of the ODE is <span class="math inline">\(V_m = 0\)</span> that is, no potential difference between the ends of the membrane. With an initial potential of <span class="math inline">\(V_m(0)=V_0\)</span>, the initial value problem reads: <span class="math display">\[
+\left\{\begin{aligned}
+\frac{\mathrm{d}V_m}{\mathrm{d}t} + \frac{V_m}{R_m C_m} = 0, \\
+V_m(0) = V_0,
+\end{aligned}\right.
+\]</span></p>
+<p>where the solution is: <span id="eq-charge"><span class="math display">\[
+V_m(t) = V_0 e^{-t/\tau},
+\tag{12.1}\]</span></span></p>
+<p>where <span class="math inline">\(\tau = R_m C_m\)</span> is the membrane time constant. The constant <span class="math inline">\(\tau\)</span> measures how quickly the membrane charges up (or discharges): when <span class="math inline">\(t=\tau\)</span>, <span class="math inline">\(V(\tau) = V_0 e^{-1} \approx 0.37 V_0\)</span>. There is a lot of variability from cell to cell: usually from <span class="math inline">\(1\,\text{$\mu$s}\)</span> to <span class="math inline">\(1\,\text{s}\)</span>. Since <span class="math inline">\(C_m\)</span> is mostly constant across cells (it is always the same material), it is <span class="math inline">\(R_m\)</span> to vary a lot. Therefore, ion channels density and their state is highly variable.</p>
+</section>
+<section id="membrane-response-to-current-stimulus" class="level2" data-number="12.2">
+<h2 data-number="12.2" class="anchored" data-anchor-id="membrane-response-to-current-stimulus"><span class="header-section-number">12.2</span> Membrane response to current stimulus</h2>
+<p>When injecting a transmembrane current, we have the following model: <span class="math display">\[
+C_m \frac{\mathrm{d}V_m}{\mathrm{d}t} + \frac{V_m}{R_m} = I_s(t),
+\]</span></p>
+<p>where <span class="math inline">\(I_s(t)\)</span> is a stimulation current. The general solution is: <span class="math display">\[
+V_m(t) = V_0 e^{-t/\tau} + \frac{1}{C_m} \int_0^t e^{(-t-s)/\tau} I(s)\,\mathrm{d}s.
+\]</span></p>
+<p>Suppose that <span class="math inline">\(I_s(t)\)</span> is zero for <span class="math inline">\(t\le 0\)</span>, and equal to <span class="math inline">\(I\)</span> for <span class="math inline">\(t&gt;0\)</span>. Assuming <span class="math inline">\(V_m(0)=0\)</span>, the solution is: <span class="math display">\[
+V_m(t) = \left\{ \begin{aligned}
+&amp; 0, &amp;&amp; t \le 0, \\
+&amp; R_m I (1 - e^{-t/\tau}), &amp;&amp; t &gt; 0.
+\end{aligned}\right.
+\]</span></p>
+<p>Therefore, the system tends to the equilibrium <span class="math inline">\(R_m I\)</span>.</p>
+<p>An important example is when we have a square pulse, that is we switch off the current after some time <span class="math inline">\(T\)</span>. When we switch off the current, the solution is just <a href="#eq-charge" class="quarto-xref">Equation&nbsp;<span>12.1</span></a>. Therefore we have: <span class="math display">\[
+V_m(t) = \left\{ \begin{aligned}
+&amp; 0, &amp;&amp; t \le 0, \\
+&amp; R_m I (1 - e^{-t/\tau}), &amp;&amp; 0 &lt; t \le T, \\
+&amp; R_m I (e^{-T/\tau} - 1)e^{-t/\tau}, &amp;&amp; t &gt; T.
+\end{aligned}\right.
+\]</span></p>
+<p>The peak value is <span class="math inline">\(R_m I (1 - e^{-T/\tau})\)</span>. Notice that this type of cell cannot be excitable, because the peak value is fully determined by the current. There must be another mechanism for triggering the action potential.</p>
+</section>
+<section id="ion-channels" class="level2" data-number="12.3">
+<h2 data-number="12.3" class="anchored" data-anchor-id="ion-channels"><span class="header-section-number">12.3</span> Ion channels</h2>
+<p>The main mechanism is based on the gating dynamics of ion channels. We have the following observations:</p>
+<ol type="1">
+<li><p>Ion channels are very specific, in the sense that they allow the passage of a specific ion: there are sodium channels, potassium channels, and so on.</p></li>
+<li><p>The current through a channel cannot directly follow the Ohm’s law, because even in absence of an electric field across the membrane, we can have a flow of ions (and thus, a current), simply because of difference of concentration. In fact, Hodgkin and Huxley observed that sodium concentration is higher outside while potassium concentration is higher inside (see <a href="#tbl-nernst" class="quarto-xref">Table&nbsp;<span>12.1</span></a>).</p></li>
+<li><p>Ion channels can change their condunctance over time, in response to voltage (voltage-gated ion channels). Since the cell can have several channels per unit area, the overall current for a specific ion varies because some channels are closed and other are open.</p></li>
+</ol>
+<p>For point 1., we deduce the following model: <span id="eq-basecur"><span class="math display">\[
+C_m \frac{\mathrm{d}V_m}{\mathrm{d}t} + I_\text{Na}(V_m,t) + I_\text{K}(V_m,t) + I_\text{leak}(V_m,t) = I_s(t),
+\tag{12.2}\]</span></span></p>
+<p>where the currents <span class="math inline">\(I_\text{Na}\)</span>, <span class="math inline">\(I_\text{K}\)</span>, and <span class="math inline">\(I_\text{leak}\)</span> are respectively for sodium ions <span class="math inline">\(\ce{Na+}\)</span>, potassium <span class="math inline">\(\ce{K+}\)</span>, and minor ions like chloride <span class="math inline">\(\ce{Cl}^-\)</span>. Now we need to characterize the form of each current.</p>
+<section id="nernst-potential" class="level3" data-number="12.3.1">
+<h3 data-number="12.3.1" class="anchored" data-anchor-id="nernst-potential"><span class="header-section-number">12.3.1</span> Nernst potential</h3>
+<p>The functional form of each ion results from the Nernst equation. In fact, in view of point 2., the flow of ions through a channel is determined by a balance of diffusion and electric field. At equilibrium, the total flow is zero, hence: <span class="math display">\[
+0 = J_\text{el} + J_\text{diff}.
+\]</span></p>
+<p>Assuming a 1-D channel of length <span class="math inline">\(L\)</span>, with <span class="math inline">\(x\)</span> in the longitudinal direction (<span class="math inline">\(x=0\)</span> is the intracellular side of the membrane, <span class="math inline">\(x=L\)</span> is the extracellular one), we model the concentration of an ion along the channel with <span class="math inline">\(c(x)\)</span>, and the electric potential with <span class="math inline">\(\phi(x)\)</span>. For the diffusion flux we have the Fick’s law: <span class="math display">\[
+J_\text{diff} = - D \frac{\mathrm{d}c}{\mathrm{d}x},
+\]</span></p>
+<p>where <span class="math inline">\(D&gt;0\)</span> is the diffusion coefficient, whereas for the electric flux we have (see <a href="#sec-mobility" class="quarto-xref"><span>Section 12.5.4</span></a>): <span class="math display">\[
+J_\text{E} = c \operatorname{sign}(z) u E,
+\]</span></p>
+<p>where <span class="math inline">\(z\)</span> is the valence of the ion (<span class="math inline">\(z=+1\)</span> for sodium and potassium, <span class="math inline">\(z=+2\)</span> for calcium, <span class="math inline">\(z=-1\)</span> for chloride), <span class="math inline">\(u\)</span> is the electrical mobility, and <span class="math inline">\(E=E(x)\)</span> is the electric field. At equilibrium, the sum of the two fluxes should be zero: <span class="math display">\[
+J_\text{diff} + J_\text{E} = - D \frac{\mathrm{d}c}{\mathrm{d}x} - c \operatorname{sign}(z) u \frac{\mathrm{d}\phi}{\mathrm{d}x} = 0.
+\]</span></p>
+<p>where we introduced the electric potential <span class="math inline">\(\phi(x)\)</span>, so that <span class="math inline">\(E = - \phi'\)</span>.</p>
+<p>Using the Einstein-Smoluchowski relationship <a href="#sec-einstein" class="quarto-xref"><span>Section 12.5.5</span></a>, that is <span class="math inline">\(u = \frac{|z| q_E}{k_B T} D\)</span>, we have that: <span class="math display">\[
+J_E = - c \operatorname{sign}(z) u \frac{\mathrm{d}\phi}{\mathrm{d}x}  = - D c \operatorname{sign}(z) \frac{|z| q_E}{k_B T} \frac{\mathrm{d}\phi}{\mathrm{d}x}
+= - D c \frac{Fz}{RT} \frac{\mathrm{d}\phi}{\mathrm{d}x},
+\]</span></p>
+<p>where we introduced the constant of gases <span class="math inline">\(R = N_A k_B \approx 8.314\,\text{J}\text{K}^{-1}\text{mol}^{-1}\)</span> and the Farad constant <span class="math inline">\(F = N_A q_E\)</span>. Now the equation reads: <span class="math display">\[
+J_\text{diff} + J_\text{E} = - D \Bigl( \frac{\mathrm{d}c}{\mathrm{d}x} + c \frac{Fz}{RT} \frac{\mathrm{d}\phi}{\mathrm{d}x} \Bigr) = 0.
+\]</span></p>
+<p>We can now solve the equation. We have that: <span class="math display">\[
+\frac{\mathrm{d}c}{c} = -\frac{Fz}{RT} \mathrm{d}\phi
+\]</span></p>
+<p>We want to improve the following boundary conditions: <span class="math display">\[
+\begin{aligned}
+\phi(0)&amp;=\phi_i, &amp; c(0)&amp;=c_i, \\
+\phi(L)&amp;=\phi_e, &amp; c(L)&amp;=c_e.
+\end{aligned}
+\]</span></p>
+<p>Therefore we have: <span class="math display">\[
+\int_{c_i}^{c_e} \frac{\mathrm{d}c}{c} = -\frac{Fz}{RT} \int_{\phi_i}^{\phi_e} \mathrm{d}\phi.
+\]</span></p>
+<p>After integration, we get <span class="math display">\[
+\ln \frac{c_e}{c_i} = -\frac{Fz}{RT} (\phi_e - \phi_i).
+\]</span></p>
+<p>Solving for <em>Nernst equilibrium</em> <span class="math inline">\(V_\text{eq} = \phi_i - \phi_e\)</span>, we have: <span class="math display">\[
+V_\text{eq} = \frac{RT}{Fz} \ln \frac{c_e}{c_i}.
+\]</span></p>
+<p>Wrapping up, given a concentration difference, the Nernst equilibrium tells up the potential difference that we need to maintain so that there is no flux (and so no current) through the channel. This potential is clearly zero when <span class="math inline">\(c_i = c_e\)</span>. For example, the Nernst potential <span class="math inline">\(V_\text{K}\)</span> of potassium is: <span class="math display">\[
+V_\text{K} = \frac{RT}{zF} \ln \frac{\ce{[K+]_e}}{\ce{[K+]_i}}.
+\]</span></p>
+<p>With <span class="math inline">\(\ce{[K+]_e} = 4\,\text{mM}\)</span>, <span class="math inline">\(\ce{[K+]_i} = 155\,\text{mM}\)</span>, <span class="math inline">\(R = 8.314\,\text{J}\text{K}^{-1}\text{M}^{-1}\)</span>, <span class="math inline">\(z=1\)</span>, <span class="math inline">\(F = 9.65\cdot 10^4\,\text{C}\,\text{mol}^{-1}\)</span> we obtain <span class="math inline">\(V_\text{K} \approx -98\,\text{mV}\)</span>. In <a href="#tbl-nernst" class="quarto-xref">Table&nbsp;<span>12.1</span></a> we report the Nernst potential for some ions in the axon.</p>
+<div id="tbl-nernst" class="striped quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-nernst-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;12.1: Nernst potentials for the squid giant axon at <span class="math inline">\(27^{\circ}\text{C}\)</span>.
+</figcaption>
+<div aria-describedby="tbl-nernst-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="table-striped caption-top table">
+<thead>
+<tr class="header">
+<th>Ion</th>
+<th>Extracellular</th>
+<th>Intracellular</th>
+<th>Nernst potential</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(\ce{Na+}\)</span></td>
+<td>437 mM</td>
+<td>50 mM</td>
+<td><span class="math inline">\(56.1\,\text{mV}\)</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\ce{K+}\)</span></td>
+<td>20 mM</td>
+<td>397 mM</td>
+<td><span class="math inline">\(-77.7\,\text{mV}\)</span></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(\ce{Cl-}\)</span></td>
+<td>556 mM</td>
+<td>40 mM</td>
+<td><span class="math inline">\(68.1\,\text{mV}\)</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+</section>
+<section id="current-voltage-relations" class="level3" data-number="12.3.2">
+<h3 data-number="12.3.2" class="anchored" data-anchor-id="current-voltage-relations"><span class="header-section-number">12.3.2</span> Current-voltage relations</h3>
+<p>Deviations in potential from the Nernst equilibrium yield a current. The simplest form is a linear one. For an ion <span class="math inline">\(S\)</span>, we have: <span class="math display">\[
+I_S = g_S (V - V_S),
+\]</span></p>
+<p>where <span class="math inline">\(g_S\)</span> is the conductance. This relatiohship was introduced by Hodgkin and Huxley as a generalization of the Ohm’s law. Note that the current is zero for <span class="math inline">\(V = V_S\)</span>, as expected by the Nernst potential.</p>
+<p>A more general current-voltage relation is given by the Goldman-Hodgkin-Katz (GHK) formula: <span class="math display">\[
+I_S = P_S \frac{z^2 F^2}{RT} V \frac{\ce{[S]_i}-\ce{[S]_e}e^{-\frac{VFz}{RT}}}{1 - e^{-\frac{VFz}{RT}}}.
+\]</span></p>
+<p>The GHK current-voltage curve is non-linear, and corresponds to the generalized Ohm’s law only for <span class="math inline">\(V=V_S\)</span>, where they are both zero. The parameter <span class="math inline">\(P_S\)</span> can be selected so that <span class="math inline">\(I_S\)</span> for <span class="math inline">\(V=0\)</span> is exactly <span class="math inline">\(-g_S V_S\)</span>, as predicted by the Ohm’s law.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Derivation of the GHK formula">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Derivation of the GHK formula
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The GHK formula is based again on the balance of fluxes, but away from equilibrium: <span class="math display">\[
+J_\text{diff} + J_\text{E} = - D \Bigl( \frac{\mathrm{d}c}{\mathrm{d}x} + c \frac{Fz}{RT} \frac{\mathrm{d}\phi}{\mathrm{d}x} \Bigr) = J_\text{tot} \neq 0,
+\]</span></p>
+<p>where <span class="math inline">\(J_\text{tot}\)</span> is a constant. We also assume, consistently with boundary conditions, that <span class="math inline">\(\phi(x) = \phi_i + (\phi_e - \phi_i)x/L\)</span>, so <span class="math inline">\(\phi' = (\phi_e - \phi_i)/L = -V/L\)</span>. We have the differential equation for <span class="math inline">\(c(x)\)</span>: <span class="math display">\[
+- D \Bigl( \frac{\mathrm{d}c}{\mathrm{d}x} - c \frac{FzV}{RTL} \Bigr) =  J_\text{tot},
+\]</span></p>
+<p>for <span class="math inline">\(x\in(0,L)\)</span> and with boundary conditions <span class="math inline">\(c(0)=c_i\)</span>, <span class="math inline">\(c(L)=c_e\)</span>. We can rewrite the equation as: <span class="math display">\[
+\frac{\mathrm{d}c}{\mathrm{d}x} = \frac{FzV}{RTL} \Bigl( c - \frac{J_\text{tot}RTL}{DFzV} \Bigr) = 0.
+\]</span></p>
+<p>The ODE is linear and easy to integrate: <span class="math display">\[
+c(x) = c_i e^{\frac{VFz}{RTL}x} + \frac{J_\text{tot}RTL}{DFzV} \bigl(1 - e^{\frac{VFz}{RTL}x} \bigr).
+\]</span></p>
+<p>Now, we know that <span class="math inline">\(c(L)=c_e\)</span>. So, we can impose the condition and solve for <span class="math inline">\(J_\text{tot}\)</span>: <span class="math display">\[
+J_\text{tot} = \frac{DFz}{LRT}V\frac{c_i - c_e e^{-\frac{VFz}{RT}}}{1-e^{-\frac{VFz}{RT}}}
+\]</span></p>
+<p>Remember that <span class="math inline">\(J_\text{tot}\)</span> is the flux of molecules, not charge. To get the current density <span class="math inline">\(I_S\)</span> (current per unit area), we multiply by <span class="math inline">\(z F\)</span>, the total charge per mole of ions, to obtain <span class="math display">\[
+I_S = zF J_\text{tot} = \frac{D}{L} \frac{F^2 z^2}{RT}V\frac{c_i - c_e e^{-\frac{VFz}{RT}}}{1-e^{-\frac{VFz}{RT}}},
+\]</span></p>
+<p>which corresponds to the above relation with <span class="math inline">\(P_S = D/L\)</span>.</p>
+</div>
+</div>
+</section>
+<section id="reversal-potential" class="level3" data-number="12.3.3">
+<h3 data-number="12.3.3" class="anchored" data-anchor-id="reversal-potential"><span class="header-section-number">12.3.3</span> Reversal potential</h3>
+<p>Using the generalized Ohm’s law in <a href="#eq-basecur" class="quarto-xref">Equation&nbsp;<span>12.2</span></a> we have: <span class="math display">\[
+C_m \frac{\mathrm{d}V_m}{\mathrm{d}t} + g_\text{Na}(V-V_\text{Na}) + g_\text{K}(V-V_\text{K}) + g_\text{leak}(V-V_\text{leak}) = 0.
+\]</span></p>
+<p>The <em>reversal potential</em> is the potential <span class="math inline">\(V\)</span> such that the total ionic current is zero. In other words, it is the equilibrium value for the ODE. In this case we have that: <span class="math display">\[
+C_m \frac{\mathrm{d}V_m}{\mathrm{d}t} = (g_\text{Na}+g_\text{K}+g_\text{leak})\Bigl( V- \frac{g_\text{Na}V_\text{Na}+g_\text{K}V_\text{K}+g_\text{leak}V_\text{leak}}{g_\text{Na}+g_\text{K}+g_\text{leak}} \Bigr)
+\]</span></p>
+<p>so the reversal potential is: <span class="math display">\[
+V_r = \frac{g_\text{Na}V_\text{Na}+g_\text{K}V_\text{K}+g_\text{leak}V_\text{leak}}{g_\text{Na}+g_\text{K}+g_\text{leak}},
+\]</span></p>
+<p>and the membrane time constant is: <span class="math display">\[
+\tau = \frac{C_m}{g_\text{Na}+g_\text{K}+g_\text{leak}}.
+\]</span></p>
+</section>
+<section id="gating-mechanism" class="level3" data-number="12.3.4">
+<h3 data-number="12.3.4" class="anchored" data-anchor-id="gating-mechanism"><span class="header-section-number">12.3.4</span> Gating mechanism</h3>
+<p>The last point to address concerns the fact that the conductances of the channels may change over time: <span class="math display">\[
+I_S = g_S(t)(V - V_S).
+\]</span></p>
+<p>Hodgkin and Huxley deduced the time course of <span class="math inline">\(g_S(t)\)</span> for sodium and potassium thanks to a couple of techniques:</p>
+<ol type="1">
+<li><p>voltage clamping, a method they invented to hold the potential <span class="math inline">\(V\)</span> to a given value. In this way, they could measure the total ionic current over time;</p></li>
+<li><p>by rendering inactive the sodium channels in a separate set of measures, so that they could deduce from the total current the individual potassium and sodium currents.</p></li>
+</ol>
+<p>From the currents, they obtained the variation over time of the conductances <span class="math inline">\(g_\text{Na}\)</span> and <span class="math inline">\(g_\text{K}\)</span> for different values of <span class="math inline">\(V\)</span>.</p>
+<p><img src="img/gatingHH.png" class="img-fluid"></p>
+<p>In the Figure, we see the conductance curves fitted to experimental data, at various levels of potential (with respect to the resting value). We see that the potassium current always increases, with a sigmoidal shape, and with a limit value for large times that increases as well with the potential. For the sodium, the conductance has a peak value and then goes to some lower limit value.</p>
+<p>Hodgkin and Huxley speculated that ion channels could be in at least two states: open and close; the observed conductance is the sum of all open channels: <span class="math display">\[
+g_S(t) = \bar{g}_S \cdot p(t),
+\]</span></p>
+<p>where <span class="math inline">\(\bar{g}_S\)</span> is the maximum conductance per unit area of all <span class="math inline">\(S\)</span>-channels, and <span class="math inline">\(p(t)\)</span> is the probability that any <span class="math inline">\(S\)</span>-channel is open.</p>
+<p>The simplest model for <span class="math inline">\(p(t)\)</span> is a 2-state Markov model. Suppose that <span class="math inline">\(Q(t)\in\{\mathcal{C},\mathcal{O}\}\)</span> is the state of the channel at time <span class="math inline">\(t\)</span>, then: <span class="math display">\[
+p(t) = \mathbb{P}[Q(t) = \mathcal{O}].
+\]</span></p>
+<p>The Markov model is as follows: <span class="math display">\[
+\ce{$\mathcal{C}$ &lt;=&gt;[$\alpha$][$\beta$] $\mathcal{O}$},
+\]</span></p>
+<p>where <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span> are the transition rates. The corresponding equation for <span class="math inline">\(p(t)\)</span> is: <span id="eq-gating"><span class="math display">\[
+\frac{\mathrm{d}p}{\mathrm{d}t} = \alpha (1-p) - \beta p.
+\tag{12.3}\]</span></span></p>
+<p>Note that we can interpret <span class="math inline">\(p(t)\)</span> as the “concentration” of open channels, thus we can formally apply the laws of chemical reactions.</p>
+<p>The ODE in <a href="#eq-gating" class="quarto-xref">Equation&nbsp;<span>12.3</span></a> is linear and can be rewritten as: <span class="math display">\[
+p' = -(\alpha+\beta)\Bigl( p - \frac{\alpha}{\alpha+\beta} \Bigr)
+   = -\frac{1}{\tau_p}( p - p_\infty ),
+\]</span></p>
+<p>where we introduced the characteristic time <span class="math inline">\(\tau_p\)</span> and and the limit value <span class="math inline">\(p_\infty\)</span>, that is <span class="math inline">\(p\to p_\infty\)</span> for <span class="math inline">\(t\to\infty\)</span>. The general solution is: <span class="math display">\[
+p(t) = p_\infty - e^{-t/\tau_p}(p_\infty - p(0)).
+\]</span></p>
+<p>This function captures the time transient of the conductance, but without the correct shape. For instnace, in order to have a sigmoidal shape for the potassium current we need to allow for multiple states: for the potassium, the model is as follows:</p>
+<div>
+
+</div>
+<div class="quarto-layout-panel" data-layout-ncol="1">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 100.0%;justify-content: flex-start;">
+<img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0nMS4wJyBlbmNvZGluZz0nVVRGLTgnPz4KPCEtLSBUaGlzIGZpbGUgd2FzIGdlbmVyYXRlZCBieSBkdmlzdmdtIDMuMi4yIC0tPgo8c3ZnIHZlcnNpb249JzEuMScgeG1sbnM9J2h0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnJyB4bWxuczp4bGluaz0naHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluaycgd2lkdGg9JzY1MC4xMTc3MTRwdCcgaGVpZ2h0PSc2Mi44NjkyOHB0JyB2aWV3Qm94PSctNzIuMDAwMDA0IC03Mi4wMDAwMDMgNjUwLjExNzcxNCA2Mi44NjkyOCc+CjxkZWZzPgo8cGF0aCBpZD0nZzItNDgnIGQ9J00zLjU5ODUwNi0yLjIyNDY1OEMzLjU5ODUwNi0yLjk5MTc4MSAzLjUwNzg0Ni0zLjU0MjcxNSAzLjE4NzA0OS00LjAzMDg4NEMyLjk3MDg1OS00LjM1MTY4MSAyLjUzODQ4MS00LjYzMDYzNSAxLjk4MDU3My00LjYzMDYzNUMuMzYyNjQtNC42MzA2MzUgLjM2MjY0LTIuNzI2Nzc1IC4zNjI2NC0yLjIyNDY1OFMuMzYyNjQgLjEzOTQ3NyAxLjk4MDU3MyAuMTM5NDc3UzMuNTk4NTA2LTEuNzIyNTQgMy41OTg1MDYtMi4yMjQ2NThaTTEuOTgwNTczLS4wNTU3OTFDMS42NTk3NzYtLjA1NTc5MSAxLjIzNDM3MS0uMjQ0MDg1IDEuMDk0ODk0LS44MTU5NEMuOTk3MjYtMS4yMjczOTcgLjk5NzI2LTEuNzk5MjUzIC45OTcyNi0yLjMxNTMxOEMuOTk3MjYtMi44MjQ0MDggLjk5NzI2LTMuMzU0NDIxIDEuMTAxODY4LTMuNzM3OTgzQzEuMjQ4MzE5LTQuMjg4OTE3IDEuNjk0NjQ1LTQuNDM1MzY3IDEuOTgwNTczLTQuNDM1MzY3QzIuMzU3MTYxLTQuNDM1MzY3IDIuNzE5ODAxLTQuMjA1MjMgMi44NDUzMy0zLjgwMDc0N0MyLjk1NjkxMi0zLjQyNDE1OSAyLjk2Mzg4NS0yLjkyMjA0MiAyLjk2Mzg4NS0yLjMxNTMxOEMyLjk2Mzg4NS0xLjc5OTI1MyAyLjk2Mzg4NS0xLjI4MzE4OCAyLjg3MzIyNS0uODQzODM2QzIuNzMzNzQ4LS4yMDkyMTUgMi4yNTk1MjctLjA1NTc5MSAxLjk4MDU3My0uMDU1NzkxWicvPgo8cGF0aCBpZD0nZzItNDknIGQ9J00yLjMzNjIzOS00LjQzNTM2N0MyLjMzNjIzOS00LjYyMzY2MSAyLjMyMjI5MS00LjYzMDYzNSAyLjEyNzAyNC00LjYzMDYzNUMxLjY4MDY5Ny00LjE5MTI4MyAxLjA0NjA3Ny00LjE4NDMwOSAuNzYwMTQ5LTQuMTg0MzA5Vi0zLjkzMzI1Qy45Mjc1MjItMy45MzMyNSAxLjM4Nzc5Ni0zLjkzMzI1IDEuNzcxMzU3LTQuMTI4NTE4Vi0uNTcxODU2QzEuNzcxMzU3LS4zNDE3MTkgMS43NzEzNTctLjI1MTA1OSAxLjA3Mzk3My0uMjUxMDU5SC44MDg5NjZWMEMuOTM0NDk2LS4wMDY5NzQgMS43OTIyNzktLjAyNzg5NSAyLjA1MDMxMS0uMDI3ODk1QzIuMjY2NTAxLS4wMjc4OTUgMy4xNDUyMDUtLjAwNjk3NCAzLjI5ODYzIDBWLS4yNTEwNTlIMy4wMzM2MjRDMi4zMzYyMzktLjI1MTA1OSAyLjMzNjIzOS0uMzQxNzE5IDIuMzM2MjM5LS41NzE4NTZWLTQuNDM1MzY3WicvPgo8cGF0aCBpZD0nZzItNTAnIGQ9J00zLjUyMTc5My0xLjI2OTI0SDMuMjg0NjgyQzMuMjYzNzYxLTEuMTE1ODE2IDMuMTk0MDIyLS43MDQzNTkgMy4xMDMzNjItLjYzNDYyQzMuMDQ3NTcyLS41OTI3NzcgMi41MTA1ODUtLjU5Mjc3NyAyLjQxMjk1MS0uNTkyNzc3SDEuMTI5NzYzQzEuODYyMDE3LTEuMjQxMzQ1IDIuMTA2MTAyLTEuNDM2NjEzIDIuNTI0NTMzLTEuNzY0Mzg0QzMuMDQwNTk4LTIuMTc1ODQxIDMuNTIxNzkzLTIuNjA4MjE5IDMuNTIxNzkzLTMuMjcwNzM1QzMuNTIxNzkzLTQuMTE0NTcgMi43ODI1NjUtNC42MzA2MzUgMS44ODk5MTMtNC42MzA2MzVDMS4wMjUxNTYtNC42MzA2MzUgLjQzOTM1Mi00LjAyMzkxIC40MzkzNTItMy4zODIzMTZDLjQzOTM1Mi0zLjAyNjY1IC43MzkyMjgtMi45OTE3ODEgLjgwODk2Ni0yLjk5MTc4MUMuOTc2MzM5LTIuOTkxNzgxIDEuMTc4NTgtMy4xMTAzMzYgMS4xNzg1OC0zLjM2MTM5NUMxLjE3ODU4LTMuNDg2OTI0IDEuMTI5NzYzLTMuNzMxMDA5IC43NjcxMjMtMy43MzEwMDlDLjk4MzMxMy00LjIyNjE1MiAxLjQ1NzUzNC00LjM3OTU3NyAxLjc4NTMwNS00LjM3OTU3N0MyLjQ4MjY5LTQuMzc5NTc3IDIuODQ1MzMtMy44MzU2MTYgMi44NDUzMy0zLjI3MDczNUMyLjg0NTMzLTIuNjY0MDEgMi40MTI5NTEtMi4xODI4MTQgMi4xODk3ODgtMS45MzE3NTZMLjUwOTA5MS0uMjcxOThDLjQzOTM1Mi0uMjA5MjE1IC40MzkzNTItLjE5NTI2OCAuNDM5MzUyIDBIMy4zMTI1NzhMMy41MjE3OTMtMS4yNjkyNFonLz4KPHBhdGggaWQ9J2cyLTUxJyBkPSdNMS45MDM4NjEtMi4zMjkyNjVDMi40NDc4MjEtMi4zMjkyNjUgMi44MzgzNTYtMS45NTI2NzcgMi44MzgzNTYtMS4yMDY0NzZDMi44MzgzNTYtLjM0MTcxOSAyLjMzNjIzOS0uMDgzNjg2IDEuOTMxNzU2LS4wODM2ODZDMS42NTI4MDItLjA4MzY4NiAxLjAzOTEwMy0uMTYwMzk5IC43NDYyMDItLjU3MTg1NkMxLjA3Mzk3My0uNTg1ODAzIDEuMTUwNjg1LS44MTU5NCAxLjE1MDY4NS0uOTYyMzkxQzEuMTUwNjg1LTEuMTg1NTU0IC45ODMzMTMtMS4zNDU5NTMgLjc2NzEyMy0xLjM0NTk1M0MuNTcxODU2LTEuMzQ1OTUzIC4zNzY1ODgtMS4yMjczOTcgLjM3NjU4OC0uOTQxNDY5Qy4zNzY1ODgtLjI4NTkyOCAxLjEwMTg2OCAuMTM5NDc3IDEuOTQ1NzA0IC4xMzk0NzdDMi45MTUwNjggLjEzOTQ3NyAzLjU4NDU1OC0uNTA5MDkxIDMuNTg0NTU4LTEuMjA2NDc2QzMuNTg0NTU4LTEuNzUwNDM2IDMuMTM4MjMyLTIuMjk0Mzk2IDIuMzcxMTA4LTIuNDU0Nzk1QzMuMTAzMzYyLTIuNzE5ODAxIDMuMzY4MzY5LTMuMjQyODM5IDMuMzY4MzY5LTMuNjY4MjQ0QzMuMzY4MzY5LTQuMjE5MTc4IDIuNzMzNzQ4LTQuNjMwNjM1IDEuOTU5NjUxLTQuNjMwNjM1Uy41OTI3NzctNC4yNTQwNDcgLjU5Mjc3Ny0zLjY5NjEzOUMuNTkyNzc3LTMuNDU5MDI5IC43NDYyMDItMy4zMjY1MjYgLjk1NTQxNy0zLjMyNjUyNkMxLjE3MTYwNi0zLjMyNjUyNiAxLjMxMTA4My0zLjQ4NjkyNCAxLjMxMTA4My0zLjY4MjE5MkMxLjMxMTA4My0zLjg4NDQzMyAxLjE3MTYwNi00LjAzMDg4NCAuOTU1NDE3LTQuMDQ0ODMyQzEuMTk5NTAyLTQuMzUxNjgxIDEuNjgwNjk3LTQuNDI4Mzk0IDEuOTM4NzMtNC40MjgzOTRDMi4yNTI1NTMtNC40MjgzOTQgMi42OTE5MDUtNC4yNzQ5NjkgMi42OTE5MDUtMy42NjgyNDRDMi42OTE5MDUtMy4zNzUzNDIgMi41OTQyNzEtMy4wNTQ1NDUgMi40MTI5NTEtMi44MzgzNTZDMi4xODI4MTQtMi41NzMzNSAxLjk4NzU0Ny0yLjU1OTQwMiAxLjYzODg1NC0yLjUzODQ4MUMxLjQ2NDUwOC0yLjUyNDUzMyAxLjQ1MDU2LTIuNTI0NTMzIDEuNDE1NjkxLTIuNTE3NTU5QzEuNDAxNzQzLTIuNTE3NTU5IDEuMzQ1OTUzLTIuNTAzNjExIDEuMzQ1OTUzLTIuNDI2ODk5QzEuMzQ1OTUzLTIuMzI5MjY1IDEuNDA4NzE3LTIuMzI5MjY1IDEuNTI3MjczLTIuMzI5MjY1SDEuOTAzODYxWicvPgo8cGF0aCBpZD0nZzItNTInIGQ9J00zLjY4OTE2Ni0xLjE0MzcxMVYtMS4zOTQ3N0gyLjkxNTA2OFYtNC41MDUxMDZDMi45MTUwNjgtNC42NTE1NTcgMi45MTUwNjgtNC43MDAzNzQgMi43NjE2NDQtNC43MDAzNzRDMi42Nzc5NTgtNC43MDAzNzQgMi42NTAwNjItNC43MDAzNzQgMi41ODAzMjQtNC42MDI3NEwuMjcxOTgtMS4zOTQ3N1YtMS4xNDM3MTFIMi4zMjIyOTFWLS41NzE4NTZDMi4zMjIyOTEtLjMzNDc0NSAyLjMyMjI5MS0uMjUxMDU5IDEuNzU3NDEtLjI1MTA1OUgxLjU2OTExNlYwQzEuOTE3ODA4LS4wMTM5NDggMi4zNjQxMzQtLjAyNzg5NSAyLjYxNTE5My0uMDI3ODk1QzIuODczMjI1LS4wMjc4OTUgMy4zMTk1NTItLjAxMzk0OCAzLjY2ODI0NCAwVi0uMjUxMDU5SDMuNDc5OTVDMi45MTUwNjgtLjI1MTA1OSAyLjkxNTA2OC0uMzM0NzQ1IDIuOTE1MDY4LS41NzE4NTZWLTEuMTQzNzExSDMuNjg5MTY2Wk0yLjM3MTEwOC0zLjk0NzE5OFYtMS4zOTQ3N0guNTMwMDEyTDIuMzcxMTA4LTMuOTQ3MTk4WicvPgo8cGF0aCBpZD0nZzEtMTEnIGQ9J00zLjgxNDY5NS0uOTgzMzEzQzQuNDU2Mjg5LTEuNjQ1ODI4IDQuNzE0MzIxLTIuNTczMzUgNC43MTQzMjEtMi42NTAwNjJDNC43MTQzMjEtMi43NDA3MjIgNC42MzA2MzUtMi43NDA3MjIgNC41OTU3NjYtMi43NDA3MjJDNC40OTgxMzItMi43NDA3MjIgNC40OTgxMzItMi43MTk4MDEgNC40NDkzMTUtMi41NjYzNzZDNC4zMjM3ODYtMi4xMDYxMDIgNC4wOTM2NDktMS42ODA2OTcgMy44MDA3NDctMS4zMDQxMUMzLjc5Mzc3My0xLjQwODcxNyAzLjc3OTgyNi0xLjg3NTk2NSAzLjc2NTg3OC0xLjkzODczQzMuNjYxMjctMi42MjkxNDEgMy4xMzgyMzItMy4wNzU0NjcgMi40NDA4NDctMy4wNzU0NjdDMS40MTU2OTEtMy4wNzU0NjcgLjQzMjM3OS0yLjEyMDA1IC40MzIzNzktMS4xNDM3MTFDLjQzMjM3OS0uNTAyMTE3IC44OTk2MjYgLjA2OTczOCAxLjcwODU5MyAuMDY5NzM4QzIuMzUwMTg3IC4wNjk3MzggMi45MjkwMTYtLjIyMzE2MyAzLjMxOTU1Mi0uNTIzMDM5QzMuNDc5OTUtLjAxMzk0OCAzLjgzNTYxNiAuMDY5NzM4IDQuMDQ0ODMyIC4wNjk3MzhDNC40NDkzMTUgLjA2OTczOCA0LjcwMDM3NC0uMjcxOTggNC43MDAzNzQtLjQxODQzMUM0LjcwMDM3NC0uNTAyMTE3IDQuNjE2Njg3LS41MDIxMTcgNC41ODE4MTgtLjUwMjExN0M0LjQ5MTE1OC0uNTAyMTE3IDQuNDc3MjEtLjQ3NDIyMiA0LjQ2MzI2My0uNDMyMzc5QzQuMzY1NjI5LS4xNjczNzIgNC4xNDk0NC0uMTI1NTI5IDQuMDY1NzUzLS4xMjU1MjlDMy45NjgxMi0uMTI1NTI5IDMuODQ5NTY0LS4xMjU1MjkgMy44MTQ2OTUtLjk4MzMxM1pNMy4yNzA3MzUtLjc0NjIwMkMyLjU4NzI5OC0uMTg4Mjk0IDEuOTk0NTIxLS4xMjU1MjkgMS43Mjk1MTQtLjEyNTUyOUMxLjI2OTI0LS4xMjU1MjkgMS4wMTEyMDgtLjQzMjM3OSAxLjAxMTIwOC0uODk5NjI2QzEuMDExMjA4LTEuMTAxODY4IDEuMTA4ODQyLTEuODYyMDE3IDEuNDcxNDgyLTIuMzQzMjEzQzEuNzkyMjc5LTIuNzYxNjQ0IDIuMTg5Nzg4LTIuODgwMTk5IDIuNDMzODczLTIuODgwMTk5QzIuOTkxNzgxLTIuODgwMTk5IDMuMTUyMTc5LTIuMzQzMjEzIDMuMjA3OTctMS45MTA4MzRDMy4yNDk4MTMtMS42MTA5NTkgMy4yMzU4NjYtMS4xMTU4MTYgMy4yNzA3MzUtLjc0NjIwMlonLz4KPHBhdGggaWQ9J2cxLTEyJyBkPSdNNC40MTQ0NDYtMy45NDcxOThDNC40MTQ0NDYtNC41NjA4OTcgMy44ODQ0MzMtNC45MTY1NjMgMy4yNzA3MzUtNC45MTY1NjNDMi4zMTUzMTgtNC45MTY1NjMgMS42MTA5NTktMy44Mjg2NDMgMS40MzY2MTMtMy4xMjQyODRMLjM0MTcxOSAxLjI2OTI0Qy4zMjc3NzEgMS4zMTgwNTcgLjM5NzUwOSAxLjM1MjkyNyAuNDM5MzUyIDEuMzUyOTI3Qy41MDIxMTcgMS4zNTI5MjcgLjU1NzkwOCAxLjM0NTk1MyAuNTcxODU2IDEuMzA0MTFMMS4wMzkxMDMtLjU1NzkwOEMxLjE4NTU1NC0uMjM3MTExIDEuNTIwMjk5IC4wNjI3NjUgMi4wODUxODEgLjA2Mjc2NUMzLjA2MTUxOSAuMDYyNzY1IDQuMTYzMzg3LS42NDE1OTQgNC4xNjMzODctMS43MDg1OTNDNC4xNjMzODctMi4xMjAwNSAzLjk3NTA5My0yLjUzODQ4MSAzLjYxOTQyNy0yLjc2ODYxOEMzLjk2MTE0Ni0yLjk4NDgwNyA0LjQxNDQ0Ni0zLjM4MjMxNiA0LjQxNDQ0Ni0zLjk0NzE5OFpNMy4wMzM2MjQtMi43NzU1OTJDMi45MjkwMTYtMi43NTQ2NyAyLjg4MDE5OS0yLjcyNjc3NSAyLjY3Nzk1OC0yLjcyNjc3NUMyLjU2NjM3Ni0yLjcyNjc3NSAyLjM5OTAwNC0yLjczMzc0OCAyLjM1MDE4Ny0yLjc2MTY0NEMyLjQxOTkyNS0yLjgwMzQ4NyAyLjYxNTE5My0yLjgxMDQ2MSAyLjY3Nzk1OC0yLjgxMDQ2MUMyLjc4MjU2NS0yLjgxMDQ2MSAyLjkzNTk5LTIuODAzNDg3IDMuMDMzNjI0LTIuNzc1NTkyWk0zLjk1NDE3Mi00LjA3MjcyN0MzLjk1NDE3Mi0zLjcwMzExMyAzLjc3Mjg1Mi0zLjE1OTE1MyAzLjM0MDQ3My0yLjkxNTA2OEMzLjIwNzk3LTIuOTU2OTEyIDMuMDc1NDY3LTMuMDA1NzI5IDIuNjg0OTMyLTMuMDA1NzI5QzIuNDQwODQ3LTMuMDA1NzI5IDIuMDkyMTU0LTIuOTkxNzgxIDIuMDkyMTU0LTIuNzQwNzIyQzIuMDkyMTU0LTIuNTY2Mzc2IDIuMzA4MzQ0LTIuNTM4NDgxIDIuNjY0MDEtMi41Mzg0ODFDMi45MDExMjEtMi41Mzg0ODEgMy4xMTAzMzYtMi41NzMzNSAzLjMyNjUyNi0yLjYzNjExNUMzLjUzNTc0MS0yLjQ4OTY2NCAzLjY0NzMyMy0yLjIwMzczNiAzLjY0NzMyMy0xLjg5Njg4N0MzLjY0NzMyMy0uODg1Njc5IDIuOTU2OTEyLS4xMzI1MDMgMi4xMDYxMDItLjEzMjUwM0MxLjU2OTExNi0uMTMyNTAzIDEuMTg1NTU0LS40NjAyNzQgMS4xODU1NTQtMS4wMTEyMDhDMS4xODU1NTQtMS4wODA5NDYgMS4xOTI1MjgtMS4xNTA2ODUgMS4yMDY0NzYtMS4yMTM0NUwxLjY2Njc1LTMuMDY4NDkzQzEuODM0MTIyLTMuNzMxMDA5IDIuNDQ3ODIxLTQuNzIxMjk1IDMuMjU2Nzg3LTQuNzIxMjk1QzMuNjY4MjQ0LTQuNzIxMjk1IDMuOTU0MTcyLTQuNDk4MTMyIDMuOTU0MTcyLTQuMDcyNzI3WicvPgo8cGF0aCBpZD0nZzAtNzMnIGQ9J00zLjcyNjAyNy02LjAzNzM2QzMuODE1NjkxLTYuMzk2MDE1IDMuODQ1NTc5LTYuNDk1NjQxIDQuNjMyNjI4LTYuNDk1NjQxQzQuODcxNzMxLTYuNDk1NjQxIDQuOTUxNDMyLTYuNDk1NjQxIDQuOTUxNDMyLTYuNjg0OTMyQzQuOTUxNDMyLTYuODA0NDgzIDQuODQxODQzLTYuODA0NDgzIDQuODAxOTkzLTYuODA0NDgzQzQuNTEzMDc2LTYuODA0NDgzIDMuNzc1ODQxLTYuNzc0NTk1IDMuNDg2OTI0LTYuNzc0NTk1QzMuMTg4MDQ1LTYuNzc0NTk1IDIuNDYwNzcyLTYuODA0NDgzIDIuMTYxODkzLTYuODA0NDgzQzIuMDkyMTU0LTYuODA0NDgzIDEuOTYyNjQtNi44MDQ0ODMgMS45NjI2NC02LjYwNTIzQzEuOTYyNjQtNi40OTU2NDEgMi4wNTIzMDQtNi40OTU2NDEgMi4yNDE1OTQtNi40OTU2NDFDMi42NjAwMjUtNi40OTU2NDEgMi45MjkwMTYtNi40OTU2NDEgMi45MjkwMTYtNi4zMDYzNTFDMi45MjkwMTYtNi4yNTY1MzggMi45MjkwMTYtNi4yMzY2MTMgMi45MDkwOTEtNi4xNDY5NDlMMS41NjQxMzQtLjc3NzA4NkMxLjQ3NDQ3MS0uNDA4NDY4IDEuNDQ0NTgzLS4zMDg4NDIgLjY1NzUzNC0uMzA4ODQyQy40MjgzOTQtLjMwODg0MiAuMzM4NzMtLjMwODg0MiAuMzM4NzMtLjEwOTU4OUMuMzM4NzMgMCAuNDU4MjgxIDAgLjQ4ODE2OSAwQy43NzcwODYgMCAxLjUwNDM1OS0uMDI5ODg4IDEuNzkzMjc1LS4wMjk4ODhDMi4wOTIxNTQtLjAyOTg4OCAyLjgyOTM5IDAgMy4xMjgyNjkgMEMzLjIwNzk3IDAgMy4zMjc1MjIgMCAzLjMyNzUyMi0uMTg5MjlDMy4zMjc1MjItLjMwODg0MiAzLjI0NzgyMS0uMzA4ODQyIDMuMDI4NjQzLS4zMDg4NDJDMi44NDkzMTUtLjMwODg0MiAyLjc5OTUwMi0uMzA4ODQyIDIuNjAwMjQ5LS4zMjg3NjdDMi4zOTEwMzQtLjM0ODY5MiAyLjM1MTE4My0uMzg4NTQzIDIuMzUxMTgzLS40OTgxMzJDMi4zNTExODMtLjU3NzgzMyAyLjM3MTEwOC0uNjU3NTM0IDIuMzkxMDM0LS43MjcyNzNMMy43MjYwMjctNi4wMzczNlonLz4KPC9kZWZzPgo8ZyBpZD0ncGFnZTEnPgo8ZyBzdHJva2UtbWl0ZXJsaW1pdD0nMTAnIHRyYW5zZm9ybT0ndHJhbnNsYXRlKDE5Mi4yNTY2ODMsLTQwLjU2NTM2MylzY2FsZSgwLjk5NjI2NCwtMC45OTYyNjQpJz4KPGcgZmlsbD0nIzAwMCcgc3Ryb2tlPScjMDAwJz4KPGcgc3Ryb2tlLXdpZHRoPScwLjQnPgo8ZyB0cmFuc2Zvcm09J21hdHJpeCgyLjAsMC4wLDAuMCwyLjAsLTI1OC41ODE3LC0zLjYwODk1KSc+CjxnIHN0cm9rZT0nbm9uZScgdHJhbnNmb3JtPSdzY2FsZSgtMS4wMDM3NSwxLjAwMzc1KXRyYW5zbGF0ZSgxOTIuMjU2NjgzLC00MC41NjUzNjMpc2NhbGUoLTEsLTEpJz4KPGcgZmlsbD0nIzAwMCc+CjxnIHN0cm9rZT0nbm9uZSc+CjxnIHN0cm9rZT0nIzAwMCcgc3Ryb2tlLW1pdGVybGltaXQ9JzEwJyB0cmFuc2Zvcm09J3RyYW5zbGF0ZSgzMjEuMDY0NTAyLC00My4yMjIwNzMpc2NhbGUoMC45OTYyNjQsLTAuOTk2MjY0KSc+CjxnIGZpbGw9JyMwMDAnIHN0cm9rZT0nIzAwMCc+CjxnIHN0cm9rZS13aWR0aD0nMC40Jz4KPGcgdHJhbnNmb3JtPSd0cmFuc2xhdGUoLTEyOS4yOTA4NSwtMi42NjY2NyknPgo8ZyBzdHJva2U9J25vbmUnIHRyYW5zZm9ybT0nc2NhbGUoLTEuMDAzNzUsMS4wMDM3NSl0cmFuc2xhdGUoMzIxLjA2NDUwMiwtNDMuMjIyMDczKXNjYWxlKC0xLC0xKSc+CjxnIHN0cm9rZT0nIzAwMCcgc3Ryb2tlLW1pdGVybGltaXQ9JzEwJyB0cmFuc2Zvcm09J3RyYW5zbGF0ZSgzMjkuNzc4MzQ2LC00My4yMjIwNzMpc2NhbGUoMC45OTYyNjQsLTAuOTk2MjY0KSc+CjxnIHRyYW5zZm9ybT0ndHJhbnNsYXRlKC00LjQ0MDk4LDAuMCknPgo8ZyBzdHJva2U9J25vbmUnIHRyYW5zZm9ybT0nc2NhbGUoLTEuMDAzNzUsMS4wMDM3NSl0cmFuc2xhdGUoMzI5Ljc3ODM0NiwtNDMuMjIyMDczKXNjYWxlKC0xLC0xKSc+CjxnIGZpbGw9JyMwMDAnPgo8ZyBzdHJva2U9J25vbmUnPgo8dXNlIHg9JzMyOS43NzgzNDYnIHk9Jy00My4yMjIwNzMnIHhsaW5rOmhyZWY9JyNnMC03MycvPgo8dXNlIHg9JzMzNC4xNTc3NycgeT0nLTQxLjcyNzY5MicgeGxpbms6aHJlZj0nI2cyLTQ4Jy8+CjwvZz4KPC9nPgo8L2c+CjwvZz4KPC9nPgo8ZyBzdHJva2U9JyMwMDAnIHN0cm9rZS1taXRlcmxpbWl0PScxMCcgdHJhbnNmb3JtPSd0cmFuc2xhdGUoMzg5LjcyNTcwOCwtNDMuMjIyMDczKXNjYWxlKDAuOTk2MjY0LC0wLjk5NjI2NCknPgo8ZyB0cmFuc2Zvcm09J3RyYW5zbGF0ZSgtNC40NDA5OCwwLjApJz4KPGcgc3Ryb2tlPSdub25lJyB0cmFuc2Zvcm09J3NjYWxlKC0xLjAwMzc1LDEuMDAzNzUpdHJhbnNsYXRlKDM4OS43MjU3MDgsLTQzLjIyMjA3MylzY2FsZSgtMSwtMSknPgo8ZyBmaWxsPScjMDAwJz4KPGcgc3Ryb2tlPSdub25lJz4KPHVzZSB4PSczODkuNzI1NzA4JyB5PSctNDMuMjIyMDczJyB4bGluazpocmVmPScjZzAtNzMnLz4KPHVzZSB4PSczOTQuMTA1MTMzJyB5PSctNDEuNzI3NjkyJyB4bGluazpocmVmPScjZzItNDknLz4KPC9nPgo8L2c+CjwvZz4KPC9nPgo8L2c+CjxnIHN0cm9rZT0nIzAwMCcgc3Ryb2tlLW1pdGVybGltaXQ9JzEwJyB0cmFuc2Zvcm09J3RyYW5zbGF0ZSg0NDkuNjczMDcsLTQzLjIyMjA3MylzY2FsZSgwLjk5NjI2NCwtMC45OTYyNjQpJz4KPGcgdHJhbnNmb3JtPSd0cmFuc2xhdGUoLTQuNDQwOTgsMC4wKSc+CjxnIHN0cm9rZT0nbm9uZScgdHJhbnNmb3JtPSdzY2FsZSgtMS4wMDM3NSwxLjAwMzc1KXRyYW5zbGF0ZSg0NDkuNjczMDcsLTQzLjIyMjA3MylzY2FsZSgtMSwtMSknPgo8ZyBmaWxsPScjMDAwJz4KPGcgc3Ryb2tlPSdub25lJz4KPHVzZSB4PSc0NDkuNjczMDcnIHk9Jy00My4yMjIwNzMnIHhsaW5rOmhyZWY9JyNnMC03MycvPgo8dXNlIHg9JzQ1NC4wNTI0OTUnIHk9Jy00MS43Mjc2OTInIHhsaW5rOmhyZWY9JyNnMi01MCcvPgo8L2c+CjwvZz4KPC9nPgo8L2c+CjwvZz4KPGcgc3Ryb2tlPScjMDAwJyBzdHJva2UtbWl0ZXJsaW1pdD0nMTAnIHRyYW5zZm9ybT0ndHJhbnNsYXRlKDUwOS42MjA0MzMsLTQzLjIyMjA3MylzY2FsZSgwLjk5NjI2NCwtMC45OTYyNjQpJz4KPGcgdHJhbnNmb3JtPSd0cmFuc2xhdGUoLTQuNDQwOTgsMC4wKSc+CjxnIHN0cm9rZT0nbm9uZScgdHJhbnNmb3JtPSdzY2FsZSgtMS4wMDM3NSwxLjAwMzc1KXRyYW5zbGF0ZSg1MDkuNjIwNDMzLC00My4yMjIwNzMpc2NhbGUoLTEsLTEpJz4KPGcgZmlsbD0nIzAwMCc+CjxnIHN0cm9rZT0nbm9uZSc+Cjx1c2UgeD0nNTA5LjYyMDQzMycgeT0nLTQzLjIyMjA3MycgeGxpbms6aHJlZj0nI2cwLTczJy8+Cjx1c2UgeD0nNTEzLjk5OTg1NycgeT0nLTQxLjcyNzY5MicgeGxpbms6aHJlZj0nI2cyLTUxJy8+CjwvZz4KPC9nPgo8L2c+CjwvZz4KPC9nPgo8ZyBzdHJva2U9JyMwMDAnIHN0cm9rZS1taXRlcmxpbWl0PScxMCcgdHJhbnNmb3JtPSd0cmFuc2xhdGUoNTY5Ljc2NzA0NSwtNDMuMjIyMDczKXNjYWxlKDAuOTk2MjY0LC0wLjk5NjI2NCknPgo8cGF0aCBkPSdNLTguNzQ2NTItOC43MTQ0Mkg4Ljc0NjUyVjE0LjA0Nzc2SC04Ljc0NjUyWicgZmlsbD0nbm9uZScvPgo8ZyB0cmFuc2Zvcm09J3RyYW5zbGF0ZSgtNC40NDA5OCwwLjApJz4KPGcgc3Ryb2tlPSdub25lJyB0cmFuc2Zvcm09J3NjYWxlKC0xLjAwMzc1LDEuMDAzNzUpdHJhbnNsYXRlKDU2OS43NjcwNDUsLTQzLjIyMjA3MylzY2FsZSgtMSwtMSknPgo8ZyBmaWxsPScjMDAwJz4KPGcgc3Ryb2tlPSdub25lJz4KPHVzZSB4PSc1NjkuNzY3MDQ1JyB5PSctNDMuMjIyMDczJyB4bGluazpocmVmPScjZzAtNzMnLz4KPHVzZSB4PSc1NzQuMTQ2NDY5JyB5PSctNDEuNzI3NjkyJyB4bGluazpocmVmPScjZzItNTInLz4KPC9nPgo8L2c+CjwvZz4KPC9nPgo8L2c+CjwvZz4KPC9nPgo8ZyBzdHJva2Utd2lkdGg9JzAuMzk5OTgnPgo8cGF0aCBkPSdNLTEwNi4xMDcyNyAyLjI0NDQySC03NS4yMDkxOCcgZmlsbD0nbm9uZScvPgo8ZyB0cmFuc2Zvcm09J3RyYW5zbGF0ZSgtNzUuMDA5MiwyLjI0NDQyKSc+CjxnIHN0cm9rZS1kYXNoYXJyYXk9J25vbmUnIHN0cm9rZS1kYXNob2Zmc2V0PScwLjAnPgogPGcgc3Ryb2tlLWxpbmVjYXA9J3JvdW5kJz4KIDxnIHN0cm9rZS1saW5lam9pbj0ncm91bmQnPgogPHBhdGggZD0nTS0yLjA3OTg4IDIuMzk5ODZDLTEuNjk5ODkgLjk1OTkyLS44NTMxMyAuMjc5OTggMCAwSC0uMzk5OTgnIGZpbGw9J25vbmUnLz4KIDwvZz4KIDwvZz4KIDwvZz4KPC9nPgo8ZyB0cmFuc2Zvcm09J3RyYW5zbGF0ZSgtOTUuMDUwNjksNC41OTcxNyknPgo8ZyBzdHJva2U9J25vbmUnIHRyYW5zZm9ybT0nc2NhbGUoLTEuMDAzNzUsMS4wMDM3NSl0cmFuc2xhdGUoMzIxLjA2NDUwMiwtNDMuMjIyMDczKXNjYWxlKC0xLC0xKSc+CjxnIGZpbGw9JyMwMDAnPgo8ZyBzdHJva2U9J25vbmUnPgo8dXNlIHg9JzMyMS4wNjQ1MDInIHk9Jy00My4yMjIwNzMnIHhsaW5rOmhyZWY9JyNnMi01MicvPgo8dXNlIHg9JzMyNS4wMzU3NDInIHk9Jy00My4yMjIwNzMnIHhsaW5rOmhyZWY9JyNnMS0xMScvPgo8L2c+CjwvZz4KPC9nPgo8L2c+CjwvZz4KPGcgc3Ryb2tlLXdpZHRoPScwLjM5OTk4Jz4KPHBhdGggZD0nTS03NC44MDkyMi0yLjU3Nzc2SC0xMDUuNzA3MycgZmlsbD0nbm9uZScvPgo8ZyB0cmFuc2Zvcm09J21hdHJpeCgtMS4wLDAuMCwwLjAsLTEuMCwtMTA1LjkwNzI5LC0yLjU3Nzc2KSc+CjxnIHN0cm9rZS1kYXNoYXJyYXk9J25vbmUnIHN0cm9rZS1kYXNob2Zmc2V0PScwLjAnPgogPGcgc3Ryb2tlLWxpbmVjYXA9J3JvdW5kJz4KIDxnIHN0cm9rZS1saW5lam9pbj0ncm91bmQnPgogPHBhdGggZD0nTS0yLjA3OTg4IDIuMzk5ODZDLTEuNjk5ODkgLjk1OTkyLS44NTMxMyAuMjc5OTggMCAwSC0uMzk5OTgnIGZpbGw9J25vbmUnLz4KIDwvZz4KIDwvZz4KIDwvZz4KPC9nPgo8ZyB0cmFuc2Zvcm09J3RyYW5zbGF0ZSgtOTIuOTA1MywtOS43OTE2MSknPgo8ZyBzdHJva2U9J25vbmUnIHRyYW5zZm9ybT0nc2NhbGUoLTEuMDAzNzUsMS4wMDM3NSl0cmFuc2xhdGUoMzIxLjA2NDUwMiwtNDMuMjIyMDczKXNjYWxlKC0xLC0xKSc+CjxnIGZpbGw9JyMwMDAnPgo8ZyBzdHJva2U9J25vbmUnPgo8dXNlIHg9JzMyMS4wNjQ1MDInIHk9Jy00My4yMjIwNzMnIHhsaW5rOmhyZWY9JyNnMS0xMicvPgo8L2c+CjwvZz4KPC9nPgo8L2c+CjwvZz4KPGcgc3Ryb2tlLXdpZHRoPScwLjM5OTk4Jz4KPHBhdGggZD0nTS00NS45MzUxIDIuMjQ0NDJILTE1LjAzNzAyJyBmaWxsPSdub25lJy8+CjxnIHRyYW5zZm9ybT0ndHJhbnNsYXRlKC0xNC44MzcwNCwyLjI0NDQyKSc+CjxnIHN0cm9rZS1kYXNoYXJyYXk9J25vbmUnIHN0cm9rZS1kYXNob2Zmc2V0PScwLjAnPgogPGcgc3Ryb2tlLWxpbmVjYXA9J3JvdW5kJz4KIDxnIHN0cm9rZS1saW5lam9pbj0ncm91bmQnPgogPHBhdGggZD0nTS0yLjA3OTg4IDIuMzk5ODZDLTEuNjk5ODkgLjk1OTkyLS44NTMxMyAuMjc5OTggMCAwSC0uMzk5OTgnIGZpbGw9J25vbmUnLz4KIDwvZz4KIDwvZz4KIDwvZz4KPC9nPgo8ZyB0cmFuc2Zvcm09J3RyYW5zbGF0ZSgtMzQuODc4NTIsNC41OTcxNyknPgo8ZyBzdHJva2U9J25vbmUnIHRyYW5zZm9ybT0nc2NhbGUoLTEuMDAzNzUsMS4wMDM3NSl0cmFuc2xhdGUoMzIxLjA2NDUwMiwtNDMuMjIyMDczKXNjYWxlKC0xLC0xKSc+CjxnIGZpbGw9JyMwMDAnPgo8ZyBzdHJva2U9J25vbmUnPgo8dXNlIHg9JzMyMS4wNjQ1MDInIHk9Jy00My4yMjIwNzMnIHhsaW5rOmhyZWY9JyNnMi01MScvPgo8dXNlIHg9JzMyNS4wMzU3NDInIHk9Jy00My4yMjIwNzMnIHhsaW5rOmhyZWY9JyNnMS0xMScvPgo8L2c+CjwvZz4KPC9nPgo8L2c+CjwvZz4KPGcgc3Ryb2tlLXdpZHRoPScwLjM5OTk4Jz4KPHBhdGggZD0nTS0xNC42MzcwNS0yLjU3Nzc2SC00NS41MzUxNCcgZmlsbD0nbm9uZScvPgo8ZyB0cmFuc2Zvcm09J21hdHJpeCgtMS4wLDAuMCwwLjAsLTEuMCwtNDUuNzM1MTIsLTIuNTc3NzYpJz4KPGcgc3Ryb2tlLWRhc2hhcnJheT0nbm9uZScgc3Ryb2tlLWRhc2hvZmZzZXQ9JzAuMCc+CiA8ZyBzdHJva2UtbGluZWNhcD0ncm91bmQnPgogPGcgc3Ryb2tlLWxpbmVqb2luPSdyb3VuZCc+CiA8cGF0aCBkPSdNLTIuMDc5ODggMi4zOTk4NkMtMS42OTk4OSAuOTU5OTItLjg1MzEzIC4yNzk5OCAwIDBILS4zOTk5OCcgZmlsbD0nbm9uZScvPgogPC9nPgogPC9nPgogPC9nPgo8L2c+CjxnIHRyYW5zZm9ybT0ndHJhbnNsYXRlKC0zNC43MjYyLC05Ljc5MTYxKSc+CjxnIHN0cm9rZT0nbm9uZScgdHJhbnNmb3JtPSdzY2FsZSgtMS4wMDM3NSwxLjAwMzc1KXRyYW5zbGF0ZSgzMjEuMDY0NTAyLC00My4yMjIwNzMpc2NhbGUoLTEsLTEpJz4KPGcgZmlsbD0nIzAwMCc+CjxnIHN0cm9rZT0nbm9uZSc+Cjx1c2UgeD0nMzIxLjA2NDUwMicgeT0nLTQzLjIyMjA3MycgeGxpbms6aHJlZj0nI2cyLTUwJy8+Cjx1c2UgeD0nMzI1LjAzNTc0MicgeT0nLTQzLjIyMjA3MycgeGxpbms6aHJlZj0nI2cxLTEyJy8+CjwvZz4KPC9nPgo8L2c+CjwvZz4KPC9nPgo8ZyBzdHJva2Utd2lkdGg9JzAuMzk5OTgnPgo8cGF0aCBkPSdNMTQuMjM3MDYgMi4yNDQ0Mkg0NS4xMzUxNScgZmlsbD0nbm9uZScvPgo8ZyB0cmFuc2Zvcm09J3RyYW5zbGF0ZSg0NS4zMzUxMywyLjI0NDQyKSc+CjxnIHN0cm9rZS1kYXNoYXJyYXk9J25vbmUnIHN0cm9rZS1kYXNob2Zmc2V0PScwLjAnPgogPGcgc3Ryb2tlLWxpbmVjYXA9J3JvdW5kJz4KIDxnIHN0cm9rZS1saW5lam9pbj0ncm91bmQnPgogPHBhdGggZD0nTS0yLjA3OTg4IDIuMzk5ODZDLTEuNjk5ODkgLjk1OTkyLS44NTMxMyAuMjc5OTggMCAwSC0uMzk5OTgnIGZpbGw9J25vbmUnLz4KIDwvZz4KIDwvZz4KIDwvZz4KPC9nPgo8ZyB0cmFuc2Zvcm09J3RyYW5zbGF0ZSgyNS4yOTM2NCw0LjU5NzE3KSc+CjxnIHN0cm9rZT0nbm9uZScgdHJhbnNmb3JtPSdzY2FsZSgtMS4wMDM3NSwxLjAwMzc1KXRyYW5zbGF0ZSgzMjEuMDY0NTAyLC00My4yMjIwNzMpc2NhbGUoLTEsLTEpJz4KPGcgZmlsbD0nIzAwMCc+CjxnIHN0cm9rZT0nbm9uZSc+Cjx1c2UgeD0nMzIxLjA2NDUwMicgeT0nLTQzLjIyMjA3MycgeGxpbms6aHJlZj0nI2cyLTUwJy8+Cjx1c2UgeD0nMzI1LjAzNTc0MicgeT0nLTQzLjIyMjA3MycgeGxpbms6aHJlZj0nI2cxLTExJy8+CjwvZz4KPC9nPgo8L2c+CjwvZz4KPC9nPgo8ZyBzdHJva2Utd2lkdGg9JzAuMzk5OTgnPgo8cGF0aCBkPSdNNDUuNTM1MTEtMi41Nzc3NkgxNC42MzcwMicgZmlsbD0nbm9uZScvPgo8ZyB0cmFuc2Zvcm09J21hdHJpeCgtMS4wLDAuMCwwLjAsLTEuMCwxNC40MzcwNCwtMi41Nzc3NiknPgo8ZyBzdHJva2UtZGFzaGFycmF5PSdub25lJyBzdHJva2UtZGFzaG9mZnNldD0nMC4wJz4KIDxnIHN0cm9rZS1saW5lY2FwPSdyb3VuZCc+CiA8ZyBzdHJva2UtbGluZWpvaW49J3JvdW5kJz4KIDxwYXRoIGQ9J00tMi4wNzk4OCAyLjM5OTg2Qy0xLjY5OTg5IC45NTk5Mi0uODUzMTMgLjI3OTk4IDAgMEgtLjM5OTk4JyBmaWxsPSdub25lJy8+CiA8L2c+CiA8L2c+CiA8L2c+CjwvZz4KPGcgdHJhbnNmb3JtPSd0cmFuc2xhdGUoMjUuNDQ1OTcsLTkuNzkxNjEpJz4KPGcgc3Ryb2tlPSdub25lJyB0cmFuc2Zvcm09J3NjYWxlKC0xLjAwMzc1LDEuMDAzNzUpdHJhbnNsYXRlKDMyMS4wNjQ1MDIsLTQzLjIyMjA3MylzY2FsZSgtMSwtMSknPgo8ZyBmaWxsPScjMDAwJz4KPGcgc3Ryb2tlPSdub25lJz4KPHVzZSB4PSczMjEuMDY0NTAyJyB5PSctNDMuMjIyMDczJyB4bGluazpocmVmPScjZzItNTEnLz4KPHVzZSB4PSczMjUuMDM1NzQyJyB5PSctNDMuMjIyMDczJyB4bGluazpocmVmPScjZzEtMTInLz4KPC9nPgo8L2c+CjwvZz4KPC9nPgo8L2c+CjxnIHN0cm9rZS13aWR0aD0nMC4zOTk5OCc+CjxwYXRoIGQ9J003NC40MDkyMyAyLjI0NDQySDEwNS41MDczMScgZmlsbD0nbm9uZScvPgo8ZyB0cmFuc2Zvcm09J3RyYW5zbGF0ZSgxMDUuNzA3MjksMi4yNDQ0MiknPgo8ZyBzdHJva2UtZGFzaGFycmF5PSdub25lJyBzdHJva2UtZGFzaG9mZnNldD0nMC4wJz4KIDxnIHN0cm9rZS1saW5lY2FwPSdyb3VuZCc+CiA8ZyBzdHJva2UtbGluZWpvaW49J3JvdW5kJz4KIDxwYXRoIGQ9J00tMi4wNzk4OCAyLjM5OTg2Qy0xLjY5OTg5IC45NTk5Mi0uODUzMTMgLjI3OTk4IDAgMEgtLjM5OTk4JyBmaWxsPSdub25lJy8+CiA8L2c+CiA8L2c+CiA8L2c+CjwvZz4KPGcgdHJhbnNmb3JtPSd0cmFuc2xhdGUoODcuNTU4ODcsNC41OTcxNyknPgo8ZyBzdHJva2U9J25vbmUnIHRyYW5zZm9ybT0nc2NhbGUoLTEuMDAzNzUsMS4wMDM3NSl0cmFuc2xhdGUoMzIxLjA2NDUwMiwtNDMuMjIyMDczKXNjYWxlKC0xLC0xKSc+CjxnIGZpbGw9JyMwMDAnPgo8ZyBzdHJva2U9J25vbmUnPgo8dXNlIHg9JzMyMS4wNjQ1MDInIHk9Jy00My4yMjIwNzMnIHhsaW5rOmhyZWY9JyNnMS0xMScvPgo8L2c+CjwvZz4KPC9nPgo8L2c+CjwvZz4KPGcgc3Ryb2tlLXdpZHRoPScwLjM5OTk4Jz4KPHBhdGggZD0nTTEwNS45MDcyNy0yLjU3Nzc2SDc0LjgwOTE5JyBmaWxsPSdub25lJy8+CjxnIHRyYW5zZm9ybT0nbWF0cml4KC0xLjAsMC4wLDAuMCwtMS4wLDc0LjYwOTIsLTIuNTc3NzYpJz4KPGcgc3Ryb2tlLWRhc2hhcnJheT0nbm9uZScgc3Ryb2tlLWRhc2hvZmZzZXQ9JzAuMCc+CiA8ZyBzdHJva2UtbGluZWNhcD0ncm91bmQnPgogPGcgc3Ryb2tlLWxpbmVqb2luPSdyb3VuZCc+CiA8cGF0aCBkPSdNLTIuMDc5ODggMi4zOTk4NkMtMS42OTk4OSAuOTU5OTItLjg1MzEzIC4yNzk5OCAwIDBILS4zOTk5OCcgZmlsbD0nbm9uZScvPgogPC9nPgogPC9nPgogPC9nPgo8L2c+CjxnIHRyYW5zZm9ybT0ndHJhbnNsYXRlKDg1LjcxODEyLC05Ljc5MTYxKSc+CjxnIHN0cm9rZT0nbm9uZScgdHJhbnNmb3JtPSdzY2FsZSgtMS4wMDM3NSwxLjAwMzc1KXRyYW5zbGF0ZSgzMjEuMDY0NTAyLC00My4yMjIwNzMpc2NhbGUoLTEsLTEpJz4KPGcgZmlsbD0nIzAwMCc+CjxnIHN0cm9rZT0nbm9uZSc+Cjx1c2UgeD0nMzIxLjA2NDUwMicgeT0nLTQzLjIyMjA3MycgeGxpbms6aHJlZj0nI2cyLTUyJy8+Cjx1c2UgeD0nMzI1LjAzNTc0MicgeT0nLTQzLjIyMjA3MycgeGxpbms6aHJlZj0nI2cxLTEyJy8+CjwvZz4KPC9nPgo8L2c+CjwvZz4KPC9nPgo8L2c+CjwvZz4KPC9nPgo8L2c+CjwvZz4KPC9nPgo8L2c+CjwvZz4KPC9nPgo8L2c+CjwvZz4KPC9zdmc+" class="img-fluid">
+</div>
+</div>
+</div>
+<p>where the state <span class="math inline">\(\ce{I_4}\)</span> is open, that is <span class="math inline">\(p(t) = \mathbb{P}[Q(t)=\ce{I_4}]\)</span>. We can imagine the potassium channel as made of 4 identical units, each possibly being in either open or closed state. The channel is open when <em>all</em> the 4 units are open. Then, <span class="math inline">\(\ce{I}_k\)</span> represents the state with <span class="math inline">\(k\)</span> open units. The rates of transition are the same for all units: if the rate of single unit from closed to open is <span class="math inline">\(\alpha\)</span>, then the rate from <span class="math inline">\(\ce{I_0}\)</span> to <span class="math inline">\(\ce{I_1}\)</span> is exactly <span class="math inline">\(4\alpha\)</span>, because we have 4 closed units that could become open. A similar argument applies to the other rates.</p>
+<p>It is possible to derive a full set of ODEs for this Markov model, but we can anticipate that, if <span class="math inline">\(n(t)\)</span> is the probability that a single unit is open, then <span class="math inline">\(p(t) = n^4(t)\)</span>. The equation for <span class="math inline">\(n(t)\)</span> is just <span class="math display">\[
+\frac{\mathrm{d}n}{\mathrm{d}t} = \alpha_n (1-n) - \beta_n n.
+\]</span></p>
+<p>For the sodium channel, the mechanism is a bit more complicated:</p>
+<div>
+
+</div>
+<div class="quarto-layout-panel" data-layout-ncol="1">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 100.0%;justify-content: flex-start;">
+<img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0nMS4wJyBlbmNvZGluZz0nVVRGLTgnPz4KPCEtLSBUaGlzIGZpbGUgd2FzIGdlbmVyYXRlZCBieSBkdmlzdmdtIDMuMi4yIC0tPgo8c3ZnIHZlcnNpb249JzEuMScgeG1sbnM9J2h0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnJyB4bWxuczp4bGluaz0naHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluaycgd2lkdGg9JzU3OS42OTI4NzVwdCcgaGVpZ2h0PScxOTUuMDE2MjQ5cHQnIHZpZXdCb3g9Jy03Mi4wMDAwMDQgLTcyLjAwMDAwNiA1NzkuNjkyODc1IDE5NS4wMTYyNDknPgo8ZGVmcz4KPHBhdGggaWQ9J2cyLTEwNCcgZD0nTTEuODMzMTI2LTMuMjY3NzQ2QzEuODUzMDUxLTMuMzM3NDg0IDEuODUzMDUxLTMuMzQ3NDQ3IDEuODUzMDUxLTMuMzcyMzU0QzEuODUzMDUxLTMuNDU3MDM2IDEuNzc4MzMxLTMuNDU3MDM2IDEuNjk4NjMtMy40NTIwNTVMMS4wODU5MjgtMy40MDcyMjNDMS4wMDEyNDUtMy40MDIyNDIgLjk5MTI4My0zLjM5NzI2IC45NjYzNzYtMy4zNzczMzVDLjk0NjQ1MS0zLjM1MjQyOCAuOTMxNTA3LTMuMjkyNjUzIC45MzE1MDctMy4yNjI3NjVDLjkzMTUwNy0zLjE3ODA4MiAxLjAxMTIwOC0zLjE3ODA4MiAxLjA4MDk0Ni0zLjE3ODA4MkMxLjA4NTkyOC0zLjE3ODA4MiAxLjE3NTU5Mi0zLjE3ODA4MiAxLjI1MDMxMS0zLjE2ODEyQzEuMzQ0OTU2LTMuMTU4MTU3IDEuMzQ5OTM4LTMuMTQzMjEzIDEuMzQ5OTM4LTMuMTAzMzYyQzEuMzQ5OTM4LTMuMDg4NDE4IDEuMzQ5OTM4LTMuMDc4NDU2IDEuMzI1MDMxLTIuOTg4NzkyTC42Mzc2MDktLjIzOTEwM0MuNjE3Njg0LS4xNjQzODQgLjYxNzY4NC0uMTU0NDIxIC42MTc2ODQtLjEyNDUzM0MuNjE3Njg0LS4wMDk5NjMgLjcwNzM0NyAuMDU0Nzk1IC44MDY5NzQgLjA1NDc5NVMxLjAxNjE4OS0uMDE5OTI1IDEuMDQ2MDc3LS4xMzk0NzdDMS4wNjEwMjEtLjE4OTI5IDEuMDgwOTQ2LS4yNTkwMjkgMS4xNTU2NjYtLjU3NzgzM0wxLjI0NTMzLS45MjE1NDRDMS4zMjAwNS0xLjIyMDQyMyAxLjMyMDA1LTEuMjMwMzg2IDEuNDU5NTI3LTEuNDQ0NTgzQzEuNjYzNzYxLTEuNzUzNDI1IDEuOTU3NjU5LTIuMDMyMzc5IDIuMzUxMTgzLTIuMDMyMzc5QzIuNjA1MjMtMi4wMzIzNzkgMi42OTk4NzUtMS44ODc5MiAyLjY5OTg3NS0xLjY3MzcyNEMyLjY5OTg3NS0xLjM5NDc3IDIuNDg1Njc5LS44NjE3NjggMi40MTU5NC0uNjg3NDIyQzIuMzQxMjItLjUwODA5NSAyLjMyNjI3Ni0uNDY4MjQ0IDIuMzI2Mjc2LS4zODM1NjJDMi4zMjYyNzYtLjEyNDUzMyAyLjU3NTM0MiAuMDU0Nzk1IDIuODY5MjQgLjA1NDc5NUMzLjM5NzI2IC4wNTQ3OTUgMy42NzEyMzMtLjU5Mjc3NyAzLjY3MTIzMy0uNzE3MzFDMy42NzEyMzMtLjc4NzA0OSAzLjU4NjU1LS43ODcwNDkgMy41NjY2MjUtLjc4NzA0OUMzLjQ4MTk0My0uNzg3MDQ5IDMuNDc2OTYxLS43NjcxMjMgMy40NDcwNzMtLjY3MjQ3OEMzLjM2MjM5MS0uMzk4NTA2IDMuMTM4MjMyLS4xMTQ1NyAyLjg4OTE2Ni0uMTE0NTdDMi43NzQ1OTUtLjExNDU3IDIuNzM5NzI2LS4xOTQyNzEgMi43Mzk3MjYtLjMwMzg2MUMyLjczOTcyNi0uNDAzNDg3IDIuNzk5NTAyLS41NDc5NDUgMi44NDQzMzQtLjY2NzQ5N0MyLjg5OTEyOC0uODAxOTkzIDMuMTE4MzA2LTEuMzQ0OTU2IDMuMTE4MzA2LTEuNjA4OTY2QzMuMTE4MzA2LTEuOTUyNjc3IDIuODg0MTg0LTIuMjAxNzQzIDIuMzc2MDktMi4yMDE3NDNDMS44ODI5MzktMi4yMDE3NDMgMS41OTQwMjItMS44ODc5MiAxLjQ0NDU4My0xLjcyMzUzN0wxLjgzMzEyNi0zLjI2Nzc0NlonLz4KPHBhdGggaWQ9J2cyLTEwOScgZD0nTTIuNjg0OTMyLS40MzMzNzVDMi42NjAwMjUtLjMyODc2NyAyLjYxNTE5My0uMTU0NDIxIDIuNjE1MTkzLS4xMTk1NTJDMi42MTUxOTMtLjAwOTk2MyAyLjcwNDg1NyAuMDU0Nzk1IDIuNzk5NTAyIC4wNTQ3OTVDMi44NzQyMjIgLjA1NDc5NSAyLjk4MzgxMSAuMDE0OTQ0IDMuMDM4NjA1LS4xMDk1ODlDMy4wNDM1ODctLjEzNDQ5NiAzLjEwMzM2Mi0uMzY4NjE4IDMuMTMzMjUtLjQ5ODEzMkMzLjMwMjYxNS0xLjE3MDYxIDMuMzAyNjE1LTEuMTgwNTczIDMuMzEyNTc4LTEuMjAwNDk4QzMuMzc3MzM1LTEuMzM0OTk0IDMuNzM1OTktMi4wMzIzNzkgNC4zNDM3MTEtMi4wMzIzNzlDNC41ODc3OTYtMi4wMzIzNzkgNC42OTI0MDMtMS44OTc4ODMgNC42OTI0MDMtMS42NzM3MjRDNC42OTI0MDMtMS4zODk3ODggNC40ODMxODgtLjg3NjcxMiA0LjM2ODYxOC0uNTkyNzc3QzQuMzQzNzExLS41MzMwMDEgNC4zMTg4MDQtLjQ2ODI0NCA0LjMxODgwNC0uMzgzNTYyQzQuMzE4ODA0LS4xMjQ1MzMgNC41Njc4NyAuMDU0Nzk1IDQuODYxNzY4IC4wNTQ3OTVDNS4zOTQ3NyAuMDU0Nzk1IDUuNjY4NzQyLS41OTI3NzcgNS42Njg3NDItLjcxNzMxQzUuNjY4NzQyLS43ODcwNDkgNS41ODQwNi0uNzg3MDQ5IDUuNTY0MTM0LS43ODcwNDlDNS40Nzk0NTItLjc4NzA0OSA1LjQ3NDQ3MS0uNzY3MTIzIDUuNDQ0NTgzLS42NzI0NzhDNS4zNDk5MzgtLjM3MzU5OSA1LjEyMDc5Ny0uMTE0NTcgNC44ODE2OTQtLjExNDU3QzQuNzY3MTIzLS4xMTQ1NyA0LjczMjI1NC0uMTk0MjcxIDQuNzMyMjU0LS4zMDM4NjFDNC43MzIyNTQtLjQwODQ2OCA0Ljc1MjE3OS0uNDU4MjgxIDQuNzk3MDExLS41Njc4N0M0Ljg4MTY5NC0uNzY3MTIzIDUuMTEwODM0LTEuMzM0OTk0IDUuMTEwODM0LTEuNjA4OTY2QzUuMTEwODM0LTEuOTc3NTg0IDQuODQ2ODI0LTIuMjAxNzQzIDQuMzczNTk5LTIuMjAxNzQzQzMuOTEwMzM2LTIuMjAxNzQzIDMuNTg2NTUtMS45MTc4MDggMy4zODcyOTgtMS42NTM3OThDMy4zNDI0NjYtMi4xNjE4OTMgMi44NDkzMTUtMi4yMDE3NDMgMi42NDUwODEtMi4yMDE3NDNDMi4xNTY5MTItMi4yMDE3NDMgMS44Nzc5NTgtMS44OTc4ODMgMS42OTg2My0xLjcwODU5M0MxLjY3ODcwNS0yLjE0Njk0OSAxLjIyMDQyMy0yLjIwMTc0MyAxLjA5NTg5LTIuMjAxNzQzQy41OTc3NTgtMi4yMDE3NDMgLjQ1MzMtMS40Mzk2MDEgLjQ1MzMtMS40Mjk2MzlDLjQ1MzMtMS4zNTk5IC41MzMwMDEtMS4zNTk5IC41NTc5MDgtMS4zNTk5Qy42NDI1OS0xLjM1OTkgLjY1MjU1My0xLjM4OTc4OCAuNjcyNDc4LTEuNDU0NTQ1Qy43NDcxOTgtMS43NDM0NjIgLjg2MTc2OC0yLjAzMjM3OSAxLjA3MDk4NC0yLjAzMjM3OUMxLjI0MDM0OS0yLjAzMjM3OSAxLjI3NTIxOC0xLjg3Mjk3NiAxLjI3NTIxOC0xLjc2ODM2OUMxLjI3NTIxOC0xLjY5ODYzIDEuMjI1NDA1LTEuNTA5MzQgMS4xOTU1MTctMS4zNzk4MjZDMS4xNjA2NDgtMS4yNDUzMyAxLjExMDgzNC0xLjA0MTA5NiAxLjA4NTkyOC0uOTMxNTA3TC45NzEzNTctLjQ4ODE2OUMuOTQxNDY5LS4zNjM2MzYgLjg4NjY3NS0uMTQ0NDU4IC44ODY2NzUtLjExOTU1MkMuODg2Njc1LS4wMDk5NjMgLjk3NjMzOSAuMDU0Nzk1IDEuMDcwOTg0IC4wNTQ3OTVDMS4xNDU3MDQgLjA1NDc5NSAxLjI1NTI5MyAuMDE0OTQ0IDEuMzEwMDg3LS4xMDk1ODlDMS4zMTUwNjgtLjEzNDQ5NiAxLjM3NDg0NC0uMzY4NjE4IDEuNDA0NzMyLS40OTgxMzJDMS40MjQ2NTgtLjU3NzgzMyAxLjQ3OTQ1Mi0uNzkyMDMgMS40OTQzOTYtLjg0MTg0M0MxLjUxOTMwMy0uOTUxNDMyIDEuNTQ5MTkxLTEuMDYxMDIxIDEuNTc0MDk3LTEuMTc1NTkyQzEuNTg0MDYtMS4xOTU1MTcgMS43NjMzODctMS41NTkxNTMgMi4wMDc0NzItMS43NzMzNUMyLjA4NzE3My0xLjg0MzA4OCAyLjI5NjM4OS0yLjAzMjM3OSAyLjYyMDE3NC0yLjAzMjM3OUMyLjg3NDIyMi0yLjAzMjM3OSAyLjk2ODg2Ny0xLjg4NzkyIDIuOTY4ODY3LTEuNjczNzI0QzIuOTY4ODY3LTEuNTY0MTM0IDIuOTE5MDU0LTEuMzY0ODgyIDIuODc5MjAzLTEuMjEwNDYxTDIuNjg0OTMyLS40MzMzNzVaJy8+CjxwYXRoIGlkPSdnMy00OCcgZD0nTTMuNTk4NTA2LTIuMjI0NjU4QzMuNTk4NTA2LTIuOTkxNzgxIDMuNTA3ODQ2LTMuNTQyNzE1IDMuMTg3MDQ5LTQuMDMwODg0QzIuOTcwODU5LTQuMzUxNjgxIDIuNTM4NDgxLTQuNjMwNjM1IDEuOTgwNTczLTQuNjMwNjM1Qy4zNjI2NC00LjYzMDYzNSAuMzYyNjQtMi43MjY3NzUgLjM2MjY0LTIuMjI0NjU4Uy4zNjI2NCAuMTM5NDc3IDEuOTgwNTczIC4xMzk0NzdTMy41OTg1MDYtMS43MjI1NCAzLjU5ODUwNi0yLjIyNDY1OFpNMS45ODA1NzMtLjA1NTc5MUMxLjY1OTc3Ni0uMDU1NzkxIDEuMjM0MzcxLS4yNDQwODUgMS4wOTQ4OTQtLjgxNTk0Qy45OTcyNi0xLjIyNzM5NyAuOTk3MjYtMS43OTkyNTMgLjk5NzI2LTIuMzE1MzE4Qy45OTcyNi0yLjgyNDQwOCAuOTk3MjYtMy4zNTQ0MjEgMS4xMDE4NjgtMy43Mzc5ODNDMS4yNDgzMTktNC4yODg5MTcgMS42OTQ2NDUtNC40MzUzNjcgMS45ODA1NzMtNC40MzUzNjdDMi4zNTcxNjEtNC40MzUzNjcgMi43MTk4MDEtNC4yMDUyMyAyLjg0NTMzLTMuODAwNzQ3QzIuOTU2OTEyLTMuNDI0MTU5IDIuOTYzODg1LTIuOTIyMDQyIDIuOTYzODg1LTIuMzE1MzE4QzIuOTYzODg1LTEuNzk5MjUzIDIuOTYzODg1LTEuMjgzMTg4IDIuODczMjI1LS44NDM4MzZDMi43MzM3NDgtLjIwOTIxNSAyLjI1OTUyNy0uMDU1NzkxIDEuOTgwNTczLS4wNTU3OTFaJy8+CjxwYXRoIGlkPSdnMy00OScgZD0nTTIuMzM2MjM5LTQuNDM1MzY3QzIuMzM2MjM5LTQuNjIzNjYxIDIuMzIyMjkxLTQuNjMwNjM1IDIuMTI3MDI0LTQuNjMwNjM1QzEuNjgwNjk3LTQuMTkxMjgzIDEuMDQ2MDc3LTQuMTg0MzA5IC43NjAxNDktNC4xODQzMDlWLTMuOTMzMjVDLjkyNzUyMi0zLjkzMzI1IDEuMzg3Nzk2LTMuOTMzMjUgMS43NzEzNTctNC4xMjg1MThWLS41NzE4NTZDMS43NzEzNTctLjM0MTcxOSAxLjc3MTM1Ny0uMjUxMDU5IDEuMDczOTczLS4yNTEwNTlILjgwODk2NlYwQy45MzQ0OTYtLjAwNjk3NCAxLjc5MjI3OS0uMDI3ODk1IDIuMDUwMzExLS4wMjc4OTVDMi4yNjY1MDEtLjAyNzg5NSAzLjE0NTIwNS0uMDA2OTc0IDMuMjk4NjMgMFYtLjI1MTA1OUgzLjAzMzYyNEMyLjMzNjIzOS0uMjUxMDU5IDIuMzM2MjM5LS4zNDE3MTkgMi4zMzYyMzktLjU3MTg1NlYtNC40MzUzNjdaJy8+CjxwYXRoIGlkPSdnMy01MCcgZD0nTTMuNTIxNzkzLTEuMjY5MjRIMy4yODQ2ODJDMy4yNjM3NjEtMS4xMTU4MTYgMy4xOTQwMjItLjcwNDM1OSAzLjEwMzM2Mi0uNjM0NjJDMy4wNDc1NzItLjU5Mjc3NyAyLjUxMDU4NS0uNTkyNzc3IDIuNDEyOTUxLS41OTI3NzdIMS4xMjk3NjNDMS44NjIwMTctMS4yNDEzNDUgMi4xMDYxMDItMS40MzY2MTMgMi41MjQ1MzMtMS43NjQzODRDMy4wNDA1OTgtMi4xNzU4NDEgMy41MjE3OTMtMi42MDgyMTkgMy41MjE3OTMtMy4yNzA3MzVDMy41MjE3OTMtNC4xMTQ1NyAyLjc4MjU2NS00LjYzMDYzNSAxLjg4OTkxMy00LjYzMDYzNUMxLjAyNTE1Ni00LjYzMDYzNSAuNDM5MzUyLTQuMDIzOTEgLjQzOTM1Mi0zLjM4MjMxNkMuNDM5MzUyLTMuMDI2NjUgLjczOTIyOC0yLjk5MTc4MSAuODA4OTY2LTIuOTkxNzgxQy45NzYzMzktMi45OTE3ODEgMS4xNzg1OC0zLjExMDMzNiAxLjE3ODU4LTMuMzYxMzk1QzEuMTc4NTgtMy40ODY5MjQgMS4xMjk3NjMtMy43MzEwMDkgLjc2NzEyMy0zLjczMTAwOUMuOTgzMzEzLTQuMjI2MTUyIDEuNDU3NTM0LTQuMzc5NTc3IDEuNzg1MzA1LTQuMzc5NTc3QzIuNDgyNjktNC4zNzk1NzcgMi44NDUzMy0zLjgzNTYxNiAyLjg0NTMzLTMuMjcwNzM1QzIuODQ1MzMtMi42NjQwMSAyLjQxMjk1MS0yLjE4MjgxNCAyLjE4OTc4OC0xLjkzMTc1NkwuNTA5MDkxLS4yNzE5OEMuNDM5MzUyLS4yMDkyMTUgLjQzOTM1Mi0uMTk1MjY4IC40MzkzNTIgMEgzLjMxMjU3OEwzLjUyMTc5My0xLjI2OTI0WicvPgo8cGF0aCBpZD0nZzMtNTEnIGQ9J00xLjkwMzg2MS0yLjMyOTI2NUMyLjQ0NzgyMS0yLjMyOTI2NSAyLjgzODM1Ni0xLjk1MjY3NyAyLjgzODM1Ni0xLjIwNjQ3NkMyLjgzODM1Ni0uMzQxNzE5IDIuMzM2MjM5LS4wODM2ODYgMS45MzE3NTYtLjA4MzY4NkMxLjY1MjgwMi0uMDgzNjg2IDEuMDM5MTAzLS4xNjAzOTkgLjc0NjIwMi0uNTcxODU2QzEuMDczOTczLS41ODU4MDMgMS4xNTA2ODUtLjgxNTk0IDEuMTUwNjg1LS45NjIzOTFDMS4xNTA2ODUtMS4xODU1NTQgLjk4MzMxMy0xLjM0NTk1MyAuNzY3MTIzLTEuMzQ1OTUzQy41NzE4NTYtMS4zNDU5NTMgLjM3NjU4OC0xLjIyNzM5NyAuMzc2NTg4LS45NDE0NjlDLjM3NjU4OC0uMjg1OTI4IDEuMTAxODY4IC4xMzk0NzcgMS45NDU3MDQgLjEzOTQ3N0MyLjkxNTA2OCAuMTM5NDc3IDMuNTg0NTU4LS41MDkwOTEgMy41ODQ1NTgtMS4yMDY0NzZDMy41ODQ1NTgtMS43NTA0MzYgMy4xMzgyMzItMi4yOTQzOTYgMi4zNzExMDgtMi40NTQ3OTVDMy4xMDMzNjItMi43MTk4MDEgMy4zNjgzNjktMy4yNDI4MzkgMy4zNjgzNjktMy42NjgyNDRDMy4zNjgzNjktNC4yMTkxNzggMi43MzM3NDgtNC42MzA2MzUgMS45NTk2NTEtNC42MzA2MzVTLjU5Mjc3Ny00LjI1NDA0NyAuNTkyNzc3LTMuNjk2MTM5Qy41OTI3NzctMy40NTkwMjkgLjc0NjIwMi0zLjMyNjUyNiAuOTU1NDE3LTMuMzI2NTI2QzEuMTcxNjA2LTMuMzI2NTI2IDEuMzExMDgzLTMuNDg2OTI0IDEuMzExMDgzLTMuNjgyMTkyQzEuMzExMDgzLTMuODg0NDMzIDEuMTcxNjA2LTQuMDMwODg0IC45NTU0MTctNC4wNDQ4MzJDMS4xOTk1MDItNC4zNTE2ODEgMS42ODA2OTctNC40MjgzOTQgMS45Mzg3My00LjQyODM5NEMyLjI1MjU1My00LjQyODM5NCAyLjY5MTkwNS00LjI3NDk2OSAyLjY5MTkwNS0zLjY2ODI0NEMyLjY5MTkwNS0zLjM3NTM0MiAyLjU5NDI3MS0zLjA1NDU0NSAyLjQxMjk1MS0yLjgzODM1NkMyLjE4MjgxNC0yLjU3MzM1IDEuOTg3NTQ3LTIuNTU5NDAyIDEuNjM4ODU0LTIuNTM4NDgxQzEuNDY0NTA4LTIuNTI0NTMzIDEuNDUwNTYtMi41MjQ1MzMgMS40MTU2OTEtMi41MTc1NTlDMS40MDE3NDMtMi41MTc1NTkgMS4zNDU5NTMtMi41MDM2MTEgMS4zNDU5NTMtMi40MjY4OTlDMS4zNDU5NTMtMi4zMjkyNjUgMS40MDg3MTctMi4zMjkyNjUgMS41MjcyNzMtMi4zMjkyNjVIMS45MDM4NjFaJy8+CjxwYXRoIGlkPSdnMS0xMScgZD0nTTMuODE0Njk1LS45ODMzMTNDNC40NTYyODktMS42NDU4MjggNC43MTQzMjEtMi41NzMzNSA0LjcxNDMyMS0yLjY1MDA2MkM0LjcxNDMyMS0yLjc0MDcyMiA0LjYzMDYzNS0yLjc0MDcyMiA0LjU5NTc2Ni0yLjc0MDcyMkM0LjQ5ODEzMi0yLjc0MDcyMiA0LjQ5ODEzMi0yLjcxOTgwMSA0LjQ0OTMxNS0yLjU2NjM3NkM0LjMyMzc4Ni0yLjEwNjEwMiA0LjA5MzY0OS0xLjY4MDY5NyAzLjgwMDc0Ny0xLjMwNDExQzMuNzkzNzczLTEuNDA4NzE3IDMuNzc5ODI2LTEuODc1OTY1IDMuNzY1ODc4LTEuOTM4NzNDMy42NjEyNy0yLjYyOTE0MSAzLjEzODIzMi0zLjA3NTQ2NyAyLjQ0MDg0Ny0zLjA3NTQ2N0MxLjQxNTY5MS0zLjA3NTQ2NyAuNDMyMzc5LTIuMTIwMDUgLjQzMjM3OS0xLjE0MzcxMUMuNDMyMzc5LS41MDIxMTcgLjg5OTYyNiAuMDY5NzM4IDEuNzA4NTkzIC4wNjk3MzhDMi4zNTAxODcgLjA2OTczOCAyLjkyOTAxNi0uMjIzMTYzIDMuMzE5NTUyLS41MjMwMzlDMy40Nzk5NS0uMDEzOTQ4IDMuODM1NjE2IC4wNjk3MzggNC4wNDQ4MzIgLjA2OTczOEM0LjQ0OTMxNSAuMDY5NzM4IDQuNzAwMzc0LS4yNzE5OCA0LjcwMDM3NC0uNDE4NDMxQzQuNzAwMzc0LS41MDIxMTcgNC42MTY2ODctLjUwMjExNyA0LjU4MTgxOC0uNTAyMTE3QzQuNDkxMTU4LS41MDIxMTcgNC40NzcyMS0uNDc0MjIyIDQuNDYzMjYzLS40MzIzNzlDNC4zNjU2MjktLjE2NzM3MiA0LjE0OTQ0LS4xMjU1MjkgNC4wNjU3NTMtLjEyNTUyOUMzLjk2ODEyLS4xMjU1MjkgMy44NDk1NjQtLjEyNTUyOSAzLjgxNDY5NS0uOTgzMzEzWk0zLjI3MDczNS0uNzQ2MjAyQzIuNTg3Mjk4LS4xODgyOTQgMS45OTQ1MjEtLjEyNTUyOSAxLjcyOTUxNC0uMTI1NTI5QzEuMjY5MjQtLjEyNTUyOSAxLjAxMTIwOC0uNDMyMzc5IDEuMDExMjA4LS44OTk2MjZDMS4wMTEyMDgtMS4xMDE4NjggMS4xMDg4NDItMS44NjIwMTcgMS40NzE0ODItMi4zNDMyMTNDMS43OTIyNzktMi43NjE2NDQgMi4xODk3ODgtMi44ODAxOTkgMi40MzM4NzMtMi44ODAxOTlDMi45OTE3ODEtMi44ODAxOTkgMy4xNTIxNzktMi4zNDMyMTMgMy4yMDc5Ny0xLjkxMDgzNEMzLjI0OTgxMy0xLjYxMDk1OSAzLjIzNTg2Ni0xLjExNTgxNiAzLjI3MDczNS0uNzQ2MjAyWicvPgo8cGF0aCBpZD0nZzEtMTInIGQ9J000LjQxNDQ0Ni0zLjk0NzE5OEM0LjQxNDQ0Ni00LjU2MDg5NyAzLjg4NDQzMy00LjkxNjU2MyAzLjI3MDczNS00LjkxNjU2M0MyLjMxNTMxOC00LjkxNjU2MyAxLjYxMDk1OS0zLjgyODY0MyAxLjQzNjYxMy0zLjEyNDI4NEwuMzQxNzE5IDEuMjY5MjRDLjMyNzc3MSAxLjMxODA1NyAuMzk3NTA5IDEuMzUyOTI3IC40MzkzNTIgMS4zNTI5MjdDLjUwMjExNyAxLjM1MjkyNyAuNTU3OTA4IDEuMzQ1OTUzIC41NzE4NTYgMS4zMDQxMUwxLjAzOTEwMy0uNTU3OTA4QzEuMTg1NTU0LS4yMzcxMTEgMS41MjAyOTkgLjA2Mjc2NSAyLjA4NTE4MSAuMDYyNzY1QzMuMDYxNTE5IC4wNjI3NjUgNC4xNjMzODctLjY0MTU5NCA0LjE2MzM4Ny0xLjcwODU5M0M0LjE2MzM4Ny0yLjEyMDA1IDMuOTc1MDkzLTIuNTM4NDgxIDMuNjE5NDI3LTIuNzY4NjE4QzMuOTYxMTQ2LTIuOTg0ODA3IDQuNDE0NDQ2LTMuMzgyMzE2IDQuNDE0NDQ2LTMuOTQ3MTk4Wk0zLjAzMzYyNC0yLjc3NTU5MkMyLjkyOTAxNi0yLjc1NDY3IDIuODgwMTk5LTIuNzI2Nzc1IDIuNjc3OTU4LTIuNzI2Nzc1QzIuNTY2Mzc2LTIuNzI2Nzc1IDIuMzk5MDA0LTIuNzMzNzQ4IDIuMzUwMTg3LTIuNzYxNjQ0QzIuNDE5OTI1LTIuODAzNDg3IDIuNjE1MTkzLTIuODEwNDYxIDIuNjc3OTU4LTIuODEwNDYxQzIuNzgyNTY1LTIuODEwNDYxIDIuOTM1OTktMi44MDM0ODcgMy4wMzM2MjQtMi43NzU1OTJaTTMuOTU0MTcyLTQuMDcyNzI3QzMuOTU0MTcyLTMuNzAzMTEzIDMuNzcyODUyLTMuMTU5MTUzIDMuMzQwNDczLTIuOTE1MDY4QzMuMjA3OTctMi45NTY5MTIgMy4wNzU0NjctMy4wMDU3MjkgMi42ODQ5MzItMy4wMDU3MjlDMi40NDA4NDctMy4wMDU3MjkgMi4wOTIxNTQtMi45OTE3ODEgMi4wOTIxNTQtMi43NDA3MjJDMi4wOTIxNTQtMi41NjYzNzYgMi4zMDgzNDQtMi41Mzg0ODEgMi42NjQwMS0yLjUzODQ4MUMyLjkwMTEyMS0yLjUzODQ4MSAzLjExMDMzNi0yLjU3MzM1IDMuMzI2NTI2LTIuNjM2MTE1QzMuNTM1NzQxLTIuNDg5NjY0IDMuNjQ3MzIzLTIuMjAzNzM2IDMuNjQ3MzIzLTEuODk2ODg3QzMuNjQ3MzIzLS44ODU2NzkgMi45NTY5MTItLjEzMjUwMyAyLjEwNjEwMi0uMTMyNTAzQzEuNTY5MTE2LS4xMzI1MDMgMS4xODU1NTQtLjQ2MDI3NCAxLjE4NTU1NC0xLjAxMTIwOEMxLjE4NTU1NC0xLjA4MDk0NiAxLjE5MjUyOC0xLjE1MDY4NSAxLjIwNjQ3Ni0xLjIxMzQ1TDEuNjY2NzUtMy4wNjg0OTNDMS44MzQxMjItMy43MzEwMDkgMi40NDc4MjEtNC43MjEyOTUgMy4yNTY3ODctNC43MjEyOTVDMy42NjgyNDQtNC43MjEyOTUgMy45NTQxNzItNC40OTgxMzIgMy45NTQxNzItNC4wNzI3MjdaJy8+CjxwYXRoIGlkPSdnMS01OScgZD0nTTEuNDcxNDgyLS4xMTE1ODJDMS40NzE0ODIgLjI3MTk4IDEuNDAxNzQzIC43MTgzMDYgLjkyNzUyMiAxLjE2NDYzM0MuODk5NjI2IDEuMTkyNTI4IC44Nzg3MDUgMS4yMTM0NSAuODc4NzA1IDEuMjQ4MzE5Qy44Nzg3MDUgMS4yOTcxMzYgLjkzNDQ5NiAxLjM0NTk1MyAuOTc2MzM5IDEuMzQ1OTUzQzEuMDczOTczIDEuMzQ1OTUzIDEuNjY2NzUgLjc4ODA0NSAxLjY2Njc1LS4wNDE4NDNDMS42NjY3NS0uNDc0MjIyIDEuNDk5Mzc3LS44MDE5OTMgMS4xNzg1OC0uODAxOTkzQy45NDg0NDMtLjgwMTk5MyAuNzgxMDcxLS42MjA2NzIgLjc4MTA3MS0uNDA0NDgzQy43ODEwNzEtLjE4MTMyIC45NDE0NjkgMCAxLjE4NTU1NCAwQzEuMzUyOTI3IDAgMS40NjQ1MDgtLjExMTU4MiAxLjQ3MTQ4Mi0uMTExNTgyWicvPgo8cGF0aCBpZD0nZzAtNzMnIGQ9J00zLjcyNjAyNy02LjAzNzM2QzMuODE1NjkxLTYuMzk2MDE1IDMuODQ1NTc5LTYuNDk1NjQxIDQuNjMyNjI4LTYuNDk1NjQxQzQuODcxNzMxLTYuNDk1NjQxIDQuOTUxNDMyLTYuNDk1NjQxIDQuOTUxNDMyLTYuNjg0OTMyQzQuOTUxNDMyLTYuODA0NDgzIDQuODQxODQzLTYuODA0NDgzIDQuODAxOTkzLTYuODA0NDgzQzQuNTEzMDc2LTYuODA0NDgzIDMuNzc1ODQxLTYuNzc0NTk1IDMuNDg2OTI0LTYuNzc0NTk1QzMuMTg4MDQ1LTYuNzc0NTk1IDIuNDYwNzcyLTYuODA0NDgzIDIuMTYxODkzLTYuODA0NDgzQzIuMDkyMTU0LTYuODA0NDgzIDEuOTYyNjQtNi44MDQ0ODMgMS45NjI2NC02LjYwNTIzQzEuOTYyNjQtNi40OTU2NDEgMi4wNTIzMDQtNi40OTU2NDEgMi4yNDE1OTQtNi40OTU2NDFDMi42NjAwMjUtNi40OTU2NDEgMi45MjkwMTYtNi40OTU2NDEgMi45MjkwMTYtNi4zMDYzNTFDMi45MjkwMTYtNi4yNTY1MzggMi45MjkwMTYtNi4yMzY2MTMgMi45MDkwOTEtNi4xNDY5NDlMMS41NjQxMzQtLjc3NzA4NkMxLjQ3NDQ3MS0uNDA4NDY4IDEuNDQ0NTgzLS4zMDg4NDIgLjY1NzUzNC0uMzA4ODQyQy40MjgzOTQtLjMwODg0MiAuMzM4NzMtLjMwODg0MiAuMzM4NzMtLjEwOTU4OUMuMzM4NzMgMCAuNDU4MjgxIDAgLjQ4ODE2OSAwQy43NzcwODYgMCAxLjUwNDM1OS0uMDI5ODg4IDEuNzkzMjc1LS4wMjk4ODhDMi4wOTIxNTQtLjAyOTg4OCAyLjgyOTM5IDAgMy4xMjgyNjkgMEMzLjIwNzk3IDAgMy4zMjc1MjIgMCAzLjMyNzUyMi0uMTg5MjlDMy4zMjc1MjItLjMwODg0MiAzLjI0NzgyMS0uMzA4ODQyIDMuMDI4NjQzLS4zMDg4NDJDMi44NDkzMTUtLjMwODg0MiAyLjc5OTUwMi0uMzA4ODQyIDIuNjAwMjQ5LS4zMjg3NjdDMi4zOTEwMzQtLjM0ODY5MiAyLjM1MTE4My0uMzg4NTQzIDIuMzUxMTgzLS40OTgxMzJDMi4zNTExODMtLjU3NzgzMyAyLjM3MTEwOC0uNjU3NTM0IDIuMzkxMDM0LS43MjcyNzNMMy43MjYwMjctNi4wMzczNlonLz4KPC9kZWZzPgo8ZyBpZD0ncGFnZTEnPgo8ZyBzdHJva2UtbWl0ZXJsaW1pdD0nMTAnIHRyYW5zZm9ybT0ndHJhbnNsYXRlKDE2Ni40MTM3NzUsMjUuNTA4MTIpc2NhbGUoMC45OTYyNjQsLTAuOTk2MjY0KSc+CjxnIGZpbGw9JyMwMDAnIHN0cm9rZT0nIzAwMCc+CjxnIHN0cm9rZS13aWR0aD0nMC40Jz4KPGcgdHJhbnNmb3JtPSdtYXRyaXgoMi4wLDAuMCwwLjAsMi4wLC0yMzIuNjQxODgsLTAuNTE2NyknPgo8ZyBzdHJva2U9J25vbmUnIHRyYW5zZm9ybT0nc2NhbGUoLTEuMDAzNzUsMS4wMDM3NSl0cmFuc2xhdGUoMTY2LjQxMzc3NSwyNS41MDgxMilzY2FsZSgtMSwtMSknPgo8ZyBmaWxsPScjMDAwJz4KPGcgc3Ryb2tlPSdub25lJz4KPGcgc3Ryb2tlPScjMDAwJyBzdHJva2UtbWl0ZXJsaW1pdD0nMTAnIHRyYW5zZm9ybT0ndHJhbnNsYXRlKDI4Mi4wNjg4MTQsMjUuNTA4MTIpc2NhbGUoMC45OTYyNjQsLTAuOTk2MjY0KSc+CjxnIGZpbGw9JyMwMDAnIHN0cm9rZT0nIzAwMCc+CjxnIHN0cm9rZS13aWR0aD0nMC40Jz4KPGcgdHJhbnNmb3JtPSd0cmFuc2xhdGUoLTExMS45MjcwNSwtMzQuNzA2NzYpJz4KPGcgc3Ryb2tlPSdub25lJyB0cmFuc2Zvcm09J3NjYWxlKC0xLjAwMzc1LDEuMDAzNzUpdHJhbnNsYXRlKDI4Mi4wNjg4MTQsMjUuNTA4MTIpc2NhbGUoLTEsLTEpJz4KPGcgc3Ryb2tlPScjMDAwJyBzdHJva2UtbWl0ZXJsaW1pdD0nMTAnIHRyYW5zZm9ybT0ndHJhbnNsYXRlKDI5My45NTEzNDgsLTM5Ljg4Nzk0MilzY2FsZSgwLjk5NjI2NCwtMC45OTYyNjQpJz4KPGcgdHJhbnNmb3JtPSd0cmFuc2xhdGUoLTcuNjIxNTUsMC4wKSc+CjxnIHN0cm9rZT0nbm9uZScgdHJhbnNmb3JtPSdzY2FsZSgtMS4wMDM3NSwxLjAwMzc1KXRyYW5zbGF0ZSgyOTMuOTUxMzQ4LC0zOS44ODc5NDIpc2NhbGUoLTEsLTEpJz4KPGcgZmlsbD0nIzAwMCc+CjxnIHN0cm9rZT0nbm9uZSc+Cjx1c2UgeD0nMjkzLjk1MTM0OCcgeT0nLTM5Ljg4Nzk0MicgeGxpbms6aHJlZj0nI2cwLTczJy8+Cjx1c2UgeD0nMjk4LjMzMDc3MicgeT0nLTM4LjM5MzU2MScgeGxpbms6aHJlZj0nI2czLTQ4Jy8+Cjx1c2UgeD0nMzAyLjMwMjAxMycgeT0nLTM4LjM5MzU2MScgeGxpbms6aHJlZj0nI2cxLTU5Jy8+Cjx1c2UgeD0nMzA0LjY2ODE1NCcgeT0nLTM4LjM5MzU2MScgeGxpbms6aHJlZj0nI2czLTQ4Jy8+CjwvZz4KPC9nPgo8L2c+CjwvZz4KPC9nPgo8ZyBzdHJva2U9JyMwMDAnIHN0cm9rZS1taXRlcmxpbWl0PScxMCcgdHJhbnNmb3JtPSd0cmFuc2xhdGUoMzYwLjIzNjA5LC0zOS44ODc5NDIpc2NhbGUoMC45OTYyNjQsLTAuOTk2MjY0KSc+CjxnIHRyYW5zZm9ybT0ndHJhbnNsYXRlKC03LjYyMTU1LDAuMCknPgo8ZyBzdHJva2U9J25vbmUnIHRyYW5zZm9ybT0nc2NhbGUoLTEuMDAzNzUsMS4wMDM3NSl0cmFuc2xhdGUoMzYwLjIzNjA5LC0zOS44ODc5NDIpc2NhbGUoLTEsLTEpJz4KPGcgZmlsbD0nIzAwMCc+CjxnIHN0cm9rZT0nbm9uZSc+Cjx1c2UgeD0nMzYwLjIzNjA5JyB5PSctMzkuODg3OTQyJyB4bGluazpocmVmPScjZzAtNzMnLz4KPHVzZSB4PSczNjQuNjE1NTE0JyB5PSctMzguMzkzNTYxJyB4bGluazpocmVmPScjZzMtNDgnLz4KPHVzZSB4PSczNjguNTg2NzU1JyB5PSctMzguMzkzNTYxJyB4bGluazpocmVmPScjZzEtNTknLz4KPHVzZSB4PSczNzAuOTUyODk2JyB5PSctMzguMzkzNTYxJyB4bGluazpocmVmPScjZzMtNDknLz4KPC9nPgo8L2c+CjwvZz4KPC9nPgo8L2c+CjxnIHN0cm9rZT0nIzAwMCcgc3Ryb2tlLW1pdGVybGltaXQ9JzEwJyB0cmFuc2Zvcm09J3RyYW5zbGF0ZSg0MjYuNTIwODMyLC0zOS44ODc5NDIpc2NhbGUoMC45OTYyNjQsLTAuOTk2MjY0KSc+CjxnIHRyYW5zZm9ybT0ndHJhbnNsYXRlKC03LjYyMTU1LDAuMCknPgo8ZyBzdHJva2U9J25vbmUnIHRyYW5zZm9ybT0nc2NhbGUoLTEuMDAzNzUsMS4wMDM3NSl0cmFuc2xhdGUoNDI2LjUyMDgzMiwtMzkuODg3OTQyKXNjYWxlKC0xLC0xKSc+CjxnIGZpbGw9JyMwMDAnPgo8ZyBzdHJva2U9J25vbmUnPgo8dXNlIHg9JzQyNi41MjA4MzInIHk9Jy0zOS44ODc5NDInIHhsaW5rOmhyZWY9JyNnMC03MycvPgo8dXNlIHg9JzQzMC45MDAyNTYnIHk9Jy0zOC4zOTM1NjEnIHhsaW5rOmhyZWY9JyNnMy00OCcvPgo8dXNlIHg9JzQzNC44NzE0OTcnIHk9Jy0zOC4zOTM1NjEnIHhsaW5rOmhyZWY9JyNnMS01OScvPgo8dXNlIHg9JzQzNy4yMzc2MzgnIHk9Jy0zOC4zOTM1NjEnIHhsaW5rOmhyZWY9JyNnMy01MCcvPgo8L2c+CjwvZz4KPC9nPgo8L2c+CjwvZz4KPGcgc3Ryb2tlPScjMDAwJyBzdHJva2UtbWl0ZXJsaW1pdD0nMTAnIHRyYW5zZm9ybT0ndHJhbnNsYXRlKDQ5My4wMDQ4MjQsLTM5Ljg4Nzk0MilzY2FsZSgwLjk5NjI2NCwtMC45OTYyNjQpJz4KPGcgdHJhbnNmb3JtPSd0cmFuc2xhdGUoLTcuNjIxNTUsMC4wKSc+CjxnIHN0cm9rZT0nbm9uZScgdHJhbnNmb3JtPSdzY2FsZSgtMS4wMDM3NSwxLjAwMzc1KXRyYW5zbGF0ZSg0OTMuMDA0ODI0LC0zOS44ODc5NDIpc2NhbGUoLTEsLTEpJz4KPGcgZmlsbD0nIzAwMCc+CjxnIHN0cm9rZT0nbm9uZSc+Cjx1c2UgeD0nNDkzLjAwNDgyNCcgeT0nLTM5Ljg4Nzk0MicgeGxpbms6aHJlZj0nI2cwLTczJy8+Cjx1c2UgeD0nNDk3LjM4NDI0OCcgeT0nLTM4LjM5MzU2MScgeGxpbms6aHJlZj0nI2czLTQ4Jy8+Cjx1c2UgeD0nNTAxLjM1NTQ4OScgeT0nLTM4LjM5MzU2MScgeGxpbms6aHJlZj0nI2cxLTU5Jy8+Cjx1c2UgeD0nNTAzLjcyMTYzJyB5PSctMzguMzkzNTYxJyB4bGluazpocmVmPScjZzMtNTEnLz4KPC9nPgo8L2c+CjwvZz4KPC9nPgo8L2c+CjxnIHN0cm9rZT0nIzAwMCcgc3Ryb2tlLW1pdGVybGltaXQ9JzEwJyB0cmFuc2Zvcm09J3RyYW5zbGF0ZSgyOTMuOTUxMzQ4LDI1LjUwODEyKXNjYWxlKDAuOTk2MjY0LC0wLjk5NjI2NCknPgo8ZyB0cmFuc2Zvcm09J3RyYW5zbGF0ZSgtNy42MjE1NSwwLjApJz4KPGcgc3Ryb2tlPSdub25lJyB0cmFuc2Zvcm09J3NjYWxlKC0xLjAwMzc1LDEuMDAzNzUpdHJhbnNsYXRlKDI5My45NTEzNDgsMjUuNTA4MTIpc2NhbGUoLTEsLTEpJz4KPGcgZmlsbD0nIzAwMCc+CjxnIHN0cm9rZT0nbm9uZSc+Cjx1c2UgeD0nMjkzLjk1MTM0OCcgeT0nMjUuNTA4MTInIHhsaW5rOmhyZWY9JyNnMC03MycvPgo8dXNlIHg9JzI5OC4zMzA3NzInIHk9JzI3LjAwMjUnIHhsaW5rOmhyZWY9JyNnMy00OScvPgo8dXNlIHg9JzMwMi4zMDIwMTMnIHk9JzI3LjAwMjUnIHhsaW5rOmhyZWY9JyNnMS01OScvPgo8dXNlIHg9JzMwNC42NjgxNTQnIHk9JzI3LjAwMjUnIHhsaW5rOmhyZWY9JyNnMy00OCcvPgo8L2c+CjwvZz4KPC9nPgo8L2c+CjwvZz4KPGcgc3Ryb2tlPScjMDAwJyBzdHJva2UtbWl0ZXJsaW1pdD0nMTAnIHRyYW5zZm9ybT0ndHJhbnNsYXRlKDM2MC4yMzYwOSwyNS41MDgxMilzY2FsZSgwLjk5NjI2NCwtMC45OTYyNjQpJz4KPGcgdHJhbnNmb3JtPSd0cmFuc2xhdGUoLTcuNjIxNTUsMC4wKSc+CjxnIHN0cm9rZT0nbm9uZScgdHJhbnNmb3JtPSdzY2FsZSgtMS4wMDM3NSwxLjAwMzc1KXRyYW5zbGF0ZSgzNjAuMjM2MDksMjUuNTA4MTIpc2NhbGUoLTEsLTEpJz4KPGcgZmlsbD0nIzAwMCc+CjxnIHN0cm9rZT0nbm9uZSc+Cjx1c2UgeD0nMzYwLjIzNjA5JyB5PScyNS41MDgxMicgeGxpbms6aHJlZj0nI2cwLTczJy8+Cjx1c2UgeD0nMzY0LjYxNTUxNCcgeT0nMjcuMDAyNScgeGxpbms6aHJlZj0nI2czLTQ5Jy8+Cjx1c2UgeD0nMzY4LjU4Njc1NScgeT0nMjcuMDAyNScgeGxpbms6aHJlZj0nI2cxLTU5Jy8+Cjx1c2UgeD0nMzcwLjk1Mjg5NicgeT0nMjcuMDAyNScgeGxpbms6aHJlZj0nI2czLTQ5Jy8+CjwvZz4KPC9nPgo8L2c+CjwvZz4KPC9nPgo8ZyBzdHJva2U9JyMwMDAnIHN0cm9rZS1taXRlcmxpbWl0PScxMCcgdHJhbnNmb3JtPSd0cmFuc2xhdGUoNDI2LjUyMDgzMiwyNS41MDgxMilzY2FsZSgwLjk5NjI2NCwtMC45OTYyNjQpJz4KPGcgdHJhbnNmb3JtPSd0cmFuc2xhdGUoLTcuNjIxNTUsMC4wKSc+CjxnIHN0cm9rZT0nbm9uZScgdHJhbnNmb3JtPSdzY2FsZSgtMS4wMDM3NSwxLjAwMzc1KXRyYW5zbGF0ZSg0MjYuNTIwODMyLDI1LjUwODEyKXNjYWxlKC0xLC0xKSc+CjxnIGZpbGw9JyMwMDAnPgo8ZyBzdHJva2U9J25vbmUnPgo8dXNlIHg9JzQyNi41MjA4MzInIHk9JzI1LjUwODEyJyB4bGluazpocmVmPScjZzAtNzMnLz4KPHVzZSB4PSc0MzAuOTAwMjU2JyB5PScyNy4wMDI1JyB4bGluazpocmVmPScjZzMtNDknLz4KPHVzZSB4PSc0MzQuODcxNDk3JyB5PScyNy4wMDI1JyB4bGluazpocmVmPScjZzEtNTknLz4KPHVzZSB4PSc0MzcuMjM3NjM4JyB5PScyNy4wMDI1JyB4bGluazpocmVmPScjZzMtNTAnLz4KPC9nPgo8L2c+CjwvZz4KPC9nPgo8L2c+CjxnIHN0cm9rZT0nIzAwMCcgc3Ryb2tlLW1pdGVybGltaXQ9JzEwJyB0cmFuc2Zvcm09J3RyYW5zbGF0ZSg0OTMuMDA0ODI0LDI1LjUwODEyKXNjYWxlKDAuOTk2MjY0LC0wLjk5NjI2NCknPgo8cGF0aCBkPSdNLTExLjkyNzEtOS4zOTQ5N0gxMS45MjcwOVYxMy4zNjcyMUgtMTEuOTI3MVonIGZpbGw9J25vbmUnLz4KPGcgdHJhbnNmb3JtPSd0cmFuc2xhdGUoLTcuNjIxNTUsMC4wKSc+CjxnIHN0cm9rZT0nbm9uZScgdHJhbnNmb3JtPSdzY2FsZSgtMS4wMDM3NSwxLjAwMzc1KXRyYW5zbGF0ZSg0OTMuMDA0ODI0LDI1LjUwODEyKXNjYWxlKC0xLC0xKSc+CjxnIGZpbGw9JyMwMDAnPgo8ZyBzdHJva2U9J25vbmUnPgo8dXNlIHg9JzQ5My4wMDQ4MjQnIHk9JzI1LjUwODEyJyB4bGluazpocmVmPScjZzAtNzMnLz4KPHVzZSB4PSc0OTcuMzg0MjQ4JyB5PScyNy4wMDI1JyB4bGluazpocmVmPScjZzMtNDknLz4KPHVzZSB4PSc1MDEuMzU1NDg5JyB5PScyNy4wMDI1JyB4bGluazpocmVmPScjZzEtNTknLz4KPHVzZSB4PSc1MDMuNzIxNjMnIHk9JzI3LjAwMjUnIHhsaW5rOmhyZWY9JyNnMy01MScvPgo8L2c+CjwvZz4KPC9nPgo8L2c+CjwvZz4KPC9nPgo8L2c+CjxnIHN0cm9rZS13aWR0aD0nMC4zOTk5OCc+CjxwYXRoIGQ9J00tODIuMzgyMzIgMzUuODQ1NjNILTUxLjQ4NDI0JyBmaWxsPSdub25lJy8+CjxnIHRyYW5zZm9ybT0ndHJhbnNsYXRlKC01MS4yODQyNiwzNS44NDU2MyknPgo8ZyBzdHJva2UtZGFzaGFycmF5PSdub25lJyBzdHJva2UtZGFzaG9mZnNldD0nMC4wJz4KIDxnIHN0cm9rZS1saW5lY2FwPSdyb3VuZCc+CiA8ZyBzdHJva2UtbGluZWpvaW49J3JvdW5kJz4KIDxwYXRoIGQ9J00tMi4wNzk4OCAyLjM5OTg2Qy0xLjY5OTg5IC45NTk5Mi0uODUzMTMgLjI3OTk4IDAgMEgtLjM5OTk4JyBmaWxsPSdub25lJy8+CiA8L2c+CiA8L2c+CiA8L2c+CjwvZz4KPGcgdHJhbnNmb3JtPSd0cmFuc2xhdGUoLTc0LjY0NTgxLDM5LjE5ODM4KSc+CjxnIHN0cm9rZT0nbm9uZScgdHJhbnNmb3JtPSdzY2FsZSgtMS4wMDM3NSwxLjAwMzc1KXRyYW5zbGF0ZSgyODIuMDY4ODE0LDI1LjUwODEyKXNjYWxlKC0xLC0xKSc+CjxnIGZpbGw9JyMwMDAnPgo8ZyBzdHJva2U9J25vbmUnPgo8dXNlIHg9JzI4Mi4wNjg4MTQnIHk9JzI1LjUwODEyJyB4bGluazpocmVmPScjZzMtNTEnLz4KPHVzZSB4PScyODYuMDQwMDU0JyB5PScyNS41MDgxMicgeGxpbms6aHJlZj0nI2cxLTExJy8+Cjx1c2UgeD0nMjkxLjIxOTM5NScgeT0nMjYuNTA0Mzg0JyB4bGluazpocmVmPScjZzItMTA5Jy8+CjwvZz4KPC9nPgo8L2c+CjwvZz4KPC9nPgo8ZyBzdHJva2Utd2lkdGg9JzAuMzk5OTgnPgo8cGF0aCBkPSdNLTk3LjU4ODg3IDE1Ljg0OTAzVi0xNS4yNDkwNScgZmlsbD0nbm9uZScvPgo8ZyB0cmFuc2Zvcm09J21hdHJpeCgwLjAsLTEuMCwxLjAsMC4wLC05Ny41ODg4NywtMTUuNDQ5MDQpJz4KPGcgc3Ryb2tlLWRhc2hhcnJheT0nbm9uZScgc3Ryb2tlLWRhc2hvZmZzZXQ9JzAuMCc+CiA8ZyBzdHJva2UtbGluZWNhcD0ncm91bmQnPgogPGcgc3Ryb2tlLWxpbmVqb2luPSdyb3VuZCc+CiA8cGF0aCBkPSdNLTIuMDc5ODggMi4zOTk4NkMtMS42OTk4OSAuOTU5OTItLjg1MzEzIC4yNzk5OCAwIDBILS4zOTk5OCcgZmlsbD0nbm9uZScvPgogPC9nPgogPC9nPgogPC9nPgo8L2c+CjxnIHRyYW5zZm9ybT0ndHJhbnNsYXRlKC05NS4yMzYxMSwtMC44NzYzOSknPgo8ZyBzdHJva2U9J25vbmUnIHRyYW5zZm9ybT0nc2NhbGUoLTEuMDAzNzUsMS4wMDM3NSl0cmFuc2xhdGUoMjgyLjA2ODgxNCwyNS41MDgxMilzY2FsZSgtMSwtMSknPgo8ZyBmaWxsPScjMDAwJz4KPGcgc3Ryb2tlPSdub25lJz4KPHVzZSB4PScyODIuMDY4ODE0JyB5PScyNS41MDgxMicgeGxpbms6aHJlZj0nI2cxLTExJy8+Cjx1c2UgeD0nMjg3LjI0ODE1NScgeT0nMjYuNTY1MjY3JyB4bGluazpocmVmPScjZzItMTA0Jy8+CjwvZz4KPC9nPgo8L2c+CjwvZz4KPC9nPgo8ZyBzdHJva2Utd2lkdGg9JzAuMzk5OTgnPgo8cGF0aCBkPSdNLTUxLjA4NDI3IDMxLjAyMzQ1SC04MS45ODIzNicgZmlsbD0nbm9uZScvPgo8ZyB0cmFuc2Zvcm09J21hdHJpeCgtMS4wLDAuMCwwLjAsLTEuMCwtODIuMTgyMzQsMzEuMDIzNDUpJz4KPGcgc3Ryb2tlLWRhc2hhcnJheT0nbm9uZScgc3Ryb2tlLWRhc2hvZmZzZXQ9JzAuMCc+CiA8ZyBzdHJva2UtbGluZWNhcD0ncm91bmQnPgogPGcgc3Ryb2tlLWxpbmVqb2luPSdyb3VuZCc+CiA8cGF0aCBkPSdNLTIuMDc5ODggMi4zOTk4NkMtMS42OTk4OSAuOTU5OTItLjg1MzEzIC4yNzk5OCAwIDBILS4zOTk5OCcgZmlsbD0nbm9uZScvPgogPC9nPgogPC9nPgogPC9nPgo8L2c+CjxnIHRyYW5zZm9ybT0ndHJhbnNsYXRlKC03Mi4zMjA1NiwyMy44MDk2KSc+CjxnIHN0cm9rZT0nbm9uZScgdHJhbnNmb3JtPSdzY2FsZSgtMS4wMDM3NSwxLjAwMzc1KXRyYW5zbGF0ZSgyODIuMDY4ODE0LDI1LjUwODEyKXNjYWxlKC0xLC0xKSc+CjxnIGZpbGw9JyMwMDAnPgo8ZyBzdHJva2U9J25vbmUnPgo8dXNlIHg9JzI4Mi4wNjg4MTQnIHk9JzI1LjUwODEyJyB4bGluazpocmVmPScjZzEtMTInLz4KPHVzZSB4PScyODYuNTg2MjgzJyB5PScyNi41MDQzODQnIHhsaW5rOmhyZWY9JyNnMi0xMDknLz4KPC9nPgo8L2c+CjwvZz4KPC9nPgo8L2c+CjxnIHN0cm9rZS13aWR0aD0nMC4zOTk5OCc+CjxwYXRoIGQ9J00tMTUuODQ5MDEgMzUuODQ1NjNIMTUuMDQ5MDcnIGZpbGw9J25vbmUnLz4KPGcgdHJhbnNmb3JtPSd0cmFuc2xhdGUoMTUuMjQ5MDUsMzUuODQ1NjMpJz4KPGcgc3Ryb2tlLWRhc2hhcnJheT0nbm9uZScgc3Ryb2tlLWRhc2hvZmZzZXQ9JzAuMCc+CiA8ZyBzdHJva2UtbGluZWNhcD0ncm91bmQnPgogPGcgc3Ryb2tlLWxpbmVqb2luPSdyb3VuZCc+CiA8cGF0aCBkPSdNLTIuMDc5ODggMi4zOTk4NkMtMS42OTk4OSAuOTU5OTItLjg1MzEzIC4yNzk5OCAwIDBILS4zOTk5OCcgZmlsbD0nbm9uZScvPgogPC9nPgogPC9nPgogPC9nPgo8L2c+CjxnIHRyYW5zZm9ybT0ndHJhbnNsYXRlKC04LjExMjUsMzkuMTk4MzgpJz4KPGcgc3Ryb2tlPSdub25lJyB0cmFuc2Zvcm09J3NjYWxlKC0xLjAwMzc1LDEuMDAzNzUpdHJhbnNsYXRlKDI4Mi4wNjg4MTQsMjUuNTA4MTIpc2NhbGUoLTEsLTEpJz4KPGcgZmlsbD0nIzAwMCc+CjxnIHN0cm9rZT0nbm9uZSc+Cjx1c2UgeD0nMjgyLjA2ODgxNCcgeT0nMjUuNTA4MTInIHhsaW5rOmhyZWY9JyNnMy01MCcvPgo8dXNlIHg9JzI4Ni4wNDAwNTQnIHk9JzI1LjUwODEyJyB4bGluazpocmVmPScjZzEtMTEnLz4KPHVzZSB4PScyOTEuMjE5Mzk1JyB5PScyNi41MDQzODQnIHhsaW5rOmhyZWY9JyNnMi0xMDknLz4KPC9nPgo8L2c+CjwvZz4KPC9nPgo8L2c+CjxnIHN0cm9rZS13aWR0aD0nMC4zOTk5OCc+CjxwYXRoIGQ9J00tMzEuMDU1NTYgMTUuODQ5MDNWLTE1LjI0OTA1JyBmaWxsPSdub25lJy8+CjxnIHRyYW5zZm9ybT0nbWF0cml4KDAuMCwtMS4wLDEuMCwwLjAsLTMxLjA1NTU2LC0xNS40NDkwNCknPgo8ZyBzdHJva2UtZGFzaGFycmF5PSdub25lJyBzdHJva2UtZGFzaG9mZnNldD0nMC4wJz4KIDxnIHN0cm9rZS1saW5lY2FwPSdyb3VuZCc+CiA8ZyBzdHJva2UtbGluZWpvaW49J3JvdW5kJz4KIDxwYXRoIGQ9J00tMi4wNzk4OCAyLjM5OTg2Qy0xLjY5OTg5IC45NTk5Mi0uODUzMTMgLjI3OTk4IDAgMEgtLjM5OTk4JyBmaWxsPSdub25lJy8+CiA8L2c+CiA8L2c+CiA8L2c+CjwvZz4KPGcgdHJhbnNmb3JtPSd0cmFuc2xhdGUoLTI4LjcwMjgsLTAuODc2MzkpJz4KPGcgc3Ryb2tlPSdub25lJyB0cmFuc2Zvcm09J3NjYWxlKC0xLjAwMzc1LDEuMDAzNzUpdHJhbnNsYXRlKDI4Mi4wNjg4MTQsMjUuNTA4MTIpc2NhbGUoLTEsLTEpJz4KPGcgZmlsbD0nIzAwMCc+CjxnIHN0cm9rZT0nbm9uZSc+Cjx1c2UgeD0nMjgyLjA2ODgxNCcgeT0nMjUuNTA4MTInIHhsaW5rOmhyZWY9JyNnMS0xMScvPgo8dXNlIHg9JzI4Ny4yNDgxNTUnIHk9JzI2LjU2NTI2NycgeGxpbms6aHJlZj0nI2cyLTEwNCcvPgo8L2c+CjwvZz4KPC9nPgo8L2c+CjwvZz4KPGcgc3Ryb2tlLXdpZHRoPScwLjM5OTk4Jz4KPHBhdGggZD0nTTE1LjQ0OTA0IDMxLjAyMzQ1SC0xNS40NDkwNScgZmlsbD0nbm9uZScvPgo8ZyB0cmFuc2Zvcm09J21hdHJpeCgtMS4wLDAuMCwwLjAsLTEuMCwtMTUuNjQ5MDMsMzEuMDIzNDUpJz4KPGcgc3Ryb2tlLWRhc2hhcnJheT0nbm9uZScgc3Ryb2tlLWRhc2hvZmZzZXQ9JzAuMCc+CiA8ZyBzdHJva2UtbGluZWNhcD0ncm91bmQnPgogPGcgc3Ryb2tlLWxpbmVqb2luPSdyb3VuZCc+CiA8cGF0aCBkPSdNLTIuMDc5ODggMi4zOTk4NkMtMS42OTk4OSAuOTU5OTItLjg1MzEzIC4yNzk5OCAwIDBILS4zOTk5OCcgZmlsbD0nbm9uZScvPgogPC9nPgogPC9nPgogPC9nPgo8L2c+CjxnIHRyYW5zZm9ybT0ndHJhbnNsYXRlKC03Ljc4MDMyLDIzLjgwOTYpJz4KPGcgc3Ryb2tlPSdub25lJyB0cmFuc2Zvcm09J3NjYWxlKC0xLjAwMzc1LDEuMDAzNzUpdHJhbnNsYXRlKDI4Mi4wNjg4MTQsMjUuNTA4MTIpc2NhbGUoLTEsLTEpJz4KPGcgZmlsbD0nIzAwMCc+CjxnIHN0cm9rZT0nbm9uZSc+Cjx1c2UgeD0nMjgyLjA2ODgxNCcgeT0nMjUuNTA4MTInIHhsaW5rOmhyZWY9JyNnMy01MCcvPgo8dXNlIHg9JzI4Ni4wNDAwNTQnIHk9JzI1LjUwODEyJyB4bGluazpocmVmPScjZzEtMTInLz4KPHVzZSB4PScyOTAuNTU3NTIzJyB5PScyNi41MDQzODQnIHhsaW5rOmhyZWY9JyNnMi0xMDknLz4KPC9nPgo8L2c+CjwvZz4KPC9nPgo8L2c+CjxnIHN0cm9rZS13aWR0aD0nMC4zOTk5OCc+CjxwYXRoIGQ9J001MC42ODQzIDM1Ljg0NTYzSDgxLjc4MjM4JyBmaWxsPSdub25lJy8+CjxnIHRyYW5zZm9ybT0ndHJhbnNsYXRlKDgxLjk4MjM2LDM1Ljg0NTYzKSc+CjxnIHN0cm9rZS1kYXNoYXJyYXk9J25vbmUnIHN0cm9rZS1kYXNob2Zmc2V0PScwLjAnPgogPGcgc3Ryb2tlLWxpbmVjYXA9J3JvdW5kJz4KIDxnIHN0cm9rZS1saW5lam9pbj0ncm91bmQnPgogPHBhdGggZD0nTS0yLjA3OTg4IDIuMzk5ODZDLTEuNjk5ODkgLjk1OTkyLS44NTMxMyAuMjc5OTggMCAwSC0uMzk5OTgnIGZpbGw9J25vbmUnLz4KIDwvZz4KIDwvZz4KIDwvZz4KPC9nPgo8ZyB0cmFuc2Zvcm09J3RyYW5zbGF0ZSg2MC41MTM4NywzOS4xOTgzOCknPgo8ZyBzdHJva2U9J25vbmUnIHRyYW5zZm9ybT0nc2NhbGUoLTEuMDAzNzUsMS4wMDM3NSl0cmFuc2xhdGUoMjgyLjA2ODgxNCwyNS41MDgxMilzY2FsZSgtMSwtMSknPgo8ZyBmaWxsPScjMDAwJz4KPGcgc3Ryb2tlPSdub25lJz4KPHVzZSB4PScyODIuMDY4ODE0JyB5PScyNS41MDgxMicgeGxpbms6aHJlZj0nI2cxLTExJy8+Cjx1c2UgeD0nMjg3LjI0ODE1NScgeT0nMjYuNTA0Mzg0JyB4bGluazpocmVmPScjZzItMTA5Jy8+CjwvZz4KPC9nPgo8L2c+CjwvZz4KPC9nPgo8ZyBzdHJva2Utd2lkdGg9JzAuMzk5OTgnPgo8cGF0aCBkPSdNMzUuNDc3NzUgMTUuODQ5MDNWLTE1LjI0OTA1JyBmaWxsPSdub25lJy8+CjxnIHRyYW5zZm9ybT0nbWF0cml4KDAuMCwtMS4wLDEuMCwwLjAsMzUuNDc3NzUsLTE1LjQ0OTA0KSc+CjxnIHN0cm9rZS1kYXNoYXJyYXk9J25vbmUnIHN0cm9rZS1kYXNob2Zmc2V0PScwLjAnPgogPGcgc3Ryb2tlLWxpbmVjYXA9J3JvdW5kJz4KIDxnIHN0cm9rZS1saW5lam9pbj0ncm91bmQnPgogPHBhdGggZD0nTS0yLjA3OTg4IDIuMzk5ODZDLTEuNjk5ODkgLjk1OTkyLS44NTMxMyAuMjc5OTggMCAwSC0uMzk5OTgnIGZpbGw9J25vbmUnLz4KIDwvZz4KIDwvZz4KIDwvZz4KPC9nPgo8ZyB0cmFuc2Zvcm09J3RyYW5zbGF0ZSgzNy44MzA1LC0wLjg3NjM5KSc+CjxnIHN0cm9rZT0nbm9uZScgdHJhbnNmb3JtPSdzY2FsZSgtMS4wMDM3NSwxLjAwMzc1KXRyYW5zbGF0ZSgyODIuMDY4ODE0LDI1LjUwODEyKXNjYWxlKC0xLC0xKSc+CjxnIGZpbGw9JyMwMDAnPgo8ZyBzdHJva2U9J25vbmUnPgo8dXNlIHg9JzI4Mi4wNjg4MTQnIHk9JzI1LjUwODEyJyB4bGluazpocmVmPScjZzEtMTEnLz4KPHVzZSB4PScyODcuMjQ4MTU1JyB5PScyNi41NjUyNjcnIHhsaW5rOmhyZWY9JyNnMi0xMDQnLz4KPC9nPgo8L2c+CjwvZz4KPC9nPgo8L2c+CjxnIHN0cm9rZS13aWR0aD0nMC4zOTk5OCc+CjxwYXRoIGQ9J004Mi4xODIzNCAzMS4wMjM0NUg1MS4wODQyNicgZmlsbD0nbm9uZScvPgo8ZyB0cmFuc2Zvcm09J21hdHJpeCgtMS4wLDAuMCwwLjAsLTEuMCw1MC44ODQyOCwzMS4wMjM0NSknPgo8ZyBzdHJva2UtZGFzaGFycmF5PSdub25lJyBzdHJva2UtZGFzaG9mZnNldD0nMC4wJz4KIDxnIHN0cm9rZS1saW5lY2FwPSdyb3VuZCc+CiA8ZyBzdHJva2UtbGluZWpvaW49J3JvdW5kJz4KIDxwYXRoIGQ9J00tMi4wNzk4OCAyLjM5OTg2Qy0xLjY5OTg5IC45NTk5Mi0uODUzMTMgLjI3OTk4IDAgMEgtLjM5OTk4JyBmaWxsPSdub25lJy8+CiA8L2c+CiA8L2c+CiA8L2c+CjwvZz4KPGcgdHJhbnNmb3JtPSd0cmFuc2xhdGUoNTguODUyOTgsMjMuODA5NiknPgo8ZyBzdHJva2U9J25vbmUnIHRyYW5zZm9ybT0nc2NhbGUoLTEuMDAzNzUsMS4wMDM3NSl0cmFuc2xhdGUoMjgyLjA2ODgxNCwyNS41MDgxMilzY2FsZSgtMSwtMSknPgo8ZyBmaWxsPScjMDAwJz4KPGcgc3Ryb2tlPSdub25lJz4KPHVzZSB4PScyODIuMDY4ODE0JyB5PScyNS41MDgxMicgeGxpbms6aHJlZj0nI2czLTUxJy8+Cjx1c2UgeD0nMjg2LjA0MDA1NCcgeT0nMjUuNTA4MTInIHhsaW5rOmhyZWY9JyNnMS0xMicvPgo8dXNlIHg9JzI5MC41NTc1MjMnIHk9JzI2LjUwNDM4NCcgeGxpbms6aHJlZj0nI2cyLTEwOScvPgo8L2c+CjwvZz4KPC9nPgo8L2c+CjwvZz4KPGcgc3Ryb2tlLXdpZHRoPScwLjM5OTk4Jz4KPHBhdGggZD0nTTEwMi4yMTEwNiAxNS44NDkwM1YtMTUuMjQ5MDUnIGZpbGw9J25vbmUnLz4KPGcgdHJhbnNmb3JtPSdtYXRyaXgoMC4wLC0xLjAsMS4wLDAuMCwxMDIuMjExMDYsLTE1LjQ0OTA0KSc+CjxnIHN0cm9rZS1kYXNoYXJyYXk9J25vbmUnIHN0cm9rZS1kYXNob2Zmc2V0PScwLjAnPgogPGcgc3Ryb2tlLWxpbmVjYXA9J3JvdW5kJz4KIDxnIHN0cm9rZS1saW5lam9pbj0ncm91bmQnPgogPHBhdGggZD0nTS0yLjA3OTg4IDIuMzk5ODZDLTEuNjk5ODkgLjk1OTkyLS44NTMxMyAuMjc5OTggMCAwSC0uMzk5OTgnIGZpbGw9J25vbmUnLz4KIDwvZz4KIDwvZz4KIDwvZz4KPC9nPgo8ZyB0cmFuc2Zvcm09J3RyYW5zbGF0ZSgxMDQuNTYzODEsLTAuODc2MzkpJz4KPGcgc3Ryb2tlPSdub25lJyB0cmFuc2Zvcm09J3NjYWxlKC0xLjAwMzc1LDEuMDAzNzUpdHJhbnNsYXRlKDI4Mi4wNjg4MTQsMjUuNTA4MTIpc2NhbGUoLTEsLTEpJz4KPGcgZmlsbD0nIzAwMCc+CjxnIHN0cm9rZT0nbm9uZSc+Cjx1c2UgeD0nMjgyLjA2ODgxNCcgeT0nMjUuNTA4MTInIHhsaW5rOmhyZWY9JyNnMS0xMScvPgo8dXNlIHg9JzI4Ny4yNDgxNTUnIHk9JzI2LjU2NTI2NycgeGxpbms6aHJlZj0nI2cyLTEwNCcvPgo8L2c+CjwvZz4KPC9nPgo8L2c+CjwvZz4KPGcgc3Ryb2tlLXdpZHRoPScwLjM5OTk4Jz4KPHBhdGggZD0nTS04Mi4zODIzMi0yOS43OTU2N0gtNTEuNDg0MjQnIGZpbGw9J25vbmUnLz4KPGcgdHJhbnNmb3JtPSd0cmFuc2xhdGUoLTUxLjI4NDI2LC0yOS43OTU2NyknPgo8ZyBzdHJva2UtZGFzaGFycmF5PSdub25lJyBzdHJva2UtZGFzaG9mZnNldD0nMC4wJz4KIDxnIHN0cm9rZS1saW5lY2FwPSdyb3VuZCc+CiA8ZyBzdHJva2UtbGluZWpvaW49J3JvdW5kJz4KIDxwYXRoIGQ9J00tMi4wNzk4OCAyLjM5OTg2Qy0xLjY5OTg5IC45NTk5Mi0uODUzMTMgLjI3OTk4IDAgMEgtLjM5OTk4JyBmaWxsPSdub25lJy8+CiA8L2c+CiA8L2c+CiA8L2c+CjwvZz4KPGcgdHJhbnNmb3JtPSd0cmFuc2xhdGUoLTc0LjY0NTgxLC0yNi40NDI5MiknPgo8ZyBzdHJva2U9J25vbmUnIHRyYW5zZm9ybT0nc2NhbGUoLTEuMDAzNzUsMS4wMDM3NSl0cmFuc2xhdGUoMjgyLjA2ODgxNCwyNS41MDgxMilzY2FsZSgtMSwtMSknPgo8ZyBmaWxsPScjMDAwJz4KPGcgc3Ryb2tlPSdub25lJz4KPHVzZSB4PScyODIuMDY4ODE0JyB5PScyNS41MDgxMicgeGxpbms6aHJlZj0nI2czLTUxJy8+Cjx1c2UgeD0nMjg2LjA0MDA1NCcgeT0nMjUuNTA4MTInIHhsaW5rOmhyZWY9JyNnMS0xMScvPgo8dXNlIHg9JzI5MS4yMTkzOTUnIHk9JzI2LjUwNDM4NCcgeGxpbms6aHJlZj0nI2cyLTEwOScvPgo8L2c+CjwvZz4KPC9nPgo8L2c+CjwvZz4KPGcgc3Ryb2tlLXdpZHRoPScwLjM5OTk4Jz4KPHBhdGggZD0nTS0xMDIuNDExMDQtMTUuNjQ5MDJWMTUuNDQ5MDcnIGZpbGw9J25vbmUnLz4KPGcgdHJhbnNmb3JtPSdtYXRyaXgoMC4wLDEuMCwtMS4wLDAuMCwtMTAyLjQxMTA0LDE1LjY0OTA1KSc+CjxnIHN0cm9rZS1kYXNoYXJyYXk9J25vbmUnIHN0cm9rZS1kYXNob2Zmc2V0PScwLjAnPgogPGcgc3Ryb2tlLWxpbmVjYXA9J3JvdW5kJz4KIDxnIHN0cm9rZS1saW5lam9pbj0ncm91bmQnPgogPHBhdGggZD0nTS0yLjA3OTg4IDIuMzk5ODZDLTEuNjk5ODkgLjk1OTkyLS44NTMxMyAuMjc5OTggMCAwSC0uMzk5OTgnIGZpbGw9J25vbmUnLz4KIDwvZz4KIDwvZz4KIDwvZz4KPC9nPgo8ZyB0cmFuc2Zvcm09J3RyYW5zbGF0ZSgtMTEzLjkzNTk3LC0xLjY1KSc+CjxnIHN0cm9rZT0nbm9uZScgdHJhbnNmb3JtPSdzY2FsZSgtMS4wMDM3NSwxLjAwMzc1KXRyYW5zbGF0ZSgyODIuMDY4ODE0LDI1LjUwODEyKXNjYWxlKC0xLC0xKSc+CjxnIGZpbGw9JyMwMDAnPgo8ZyBzdHJva2U9J25vbmUnPgo8dXNlIHg9JzI4Mi4wNjg4MTQnIHk9JzI1LjUwODEyJyB4bGluazpocmVmPScjZzEtMTInLz4KPHVzZSB4PScyODYuNTg2MjgzJyB5PScyNi41NjUyNjcnIHhsaW5rOmhyZWY9JyNnMi0xMDQnLz4KPC9nPgo8L2c+CjwvZz4KPC9nPgo8L2c+CjxnIHN0cm9rZS13aWR0aD0nMC4zOTk5OCc+CjxwYXRoIGQ9J00tNTEuMDg0MjctMzQuNjE3ODRILTgxLjk4MjM2JyBmaWxsPSdub25lJy8+CjxnIHRyYW5zZm9ybT0nbWF0cml4KC0xLjAsMC4wLDAuMCwtMS4wLC04Mi4xODIzNCwtMzQuNjE3ODQpJz4KPGcgc3Ryb2tlLWRhc2hhcnJheT0nbm9uZScgc3Ryb2tlLWRhc2hvZmZzZXQ9JzAuMCc+CiA8ZyBzdHJva2UtbGluZWNhcD0ncm91bmQnPgogPGcgc3Ryb2tlLWxpbmVqb2luPSdyb3VuZCc+CiA8cGF0aCBkPSdNLTIuMDc5ODggMi4zOTk4NkMtMS42OTk4OSAuOTU5OTItLjg1MzEzIC4yNzk5OCAwIDBILS4zOTk5OCcgZmlsbD0nbm9uZScvPgogPC9nPgogPC9nPgogPC9nPgo8L2c+CjxnIHRyYW5zZm9ybT0ndHJhbnNsYXRlKC03Mi4zMjA1NiwtNDEuODMxNyknPgo8ZyBzdHJva2U9J25vbmUnIHRyYW5zZm9ybT0nc2NhbGUoLTEuMDAzNzUsMS4wMDM3NSl0cmFuc2xhdGUoMjgyLjA2ODgxNCwyNS41MDgxMilzY2FsZSgtMSwtMSknPgo8ZyBmaWxsPScjMDAwJz4KPGcgc3Ryb2tlPSdub25lJz4KPHVzZSB4PScyODIuMDY4ODE0JyB5PScyNS41MDgxMicgeGxpbms6aHJlZj0nI2cxLTEyJy8+Cjx1c2UgeD0nMjg2LjU4NjI4MycgeT0nMjYuNTA0Mzg0JyB4bGluazpocmVmPScjZzItMTA5Jy8+CjwvZz4KPC9nPgo8L2c+CjwvZz4KPC9nPgo8ZyBzdHJva2Utd2lkdGg9JzAuMzk5OTgnPgo8cGF0aCBkPSdNLTE1Ljg0OTAxLTI5Ljc5NTY3SDE1LjA0OTA3JyBmaWxsPSdub25lJy8+CjxnIHRyYW5zZm9ybT0ndHJhbnNsYXRlKDE1LjI0OTA1LC0yOS43OTU2NyknPgo8ZyBzdHJva2UtZGFzaGFycmF5PSdub25lJyBzdHJva2UtZGFzaG9mZnNldD0nMC4wJz4KIDxnIHN0cm9rZS1saW5lY2FwPSdyb3VuZCc+CiA8ZyBzdHJva2UtbGluZWpvaW49J3JvdW5kJz4KIDxwYXRoIGQ9J00tMi4wNzk4OCAyLjM5OTg2Qy0xLjY5OTg5IC45NTk5Mi0uODUzMTMgLjI3OTk4IDAgMEgtLjM5OTk4JyBmaWxsPSdub25lJy8+CiA8L2c+CiA8L2c+CiA8L2c+CjwvZz4KPGcgdHJhbnNmb3JtPSd0cmFuc2xhdGUoLTguMTEyNSwtMjYuNDQyOTIpJz4KPGcgc3Ryb2tlPSdub25lJyB0cmFuc2Zvcm09J3NjYWxlKC0xLjAwMzc1LDEuMDAzNzUpdHJhbnNsYXRlKDI4Mi4wNjg4MTQsMjUuNTA4MTIpc2NhbGUoLTEsLTEpJz4KPGcgZmlsbD0nIzAwMCc+CjxnIHN0cm9rZT0nbm9uZSc+Cjx1c2UgeD0nMjgyLjA2ODgxNCcgeT0nMjUuNTA4MTInIHhsaW5rOmhyZWY9JyNnMy01MCcvPgo8dXNlIHg9JzI4Ni4wNDAwNTQnIHk9JzI1LjUwODEyJyB4bGluazpocmVmPScjZzEtMTEnLz4KPHVzZSB4PScyOTEuMjE5Mzk1JyB5PScyNi41MDQzODQnIHhsaW5rOmhyZWY9JyNnMi0xMDknLz4KPC9nPgo8L2c+CjwvZz4KPC9nPgo8L2c+CjxnIHN0cm9rZS13aWR0aD0nMC4zOTk5OCc+CjxwYXRoIGQ9J00tMzUuODc3NzMtMTUuNjQ5MDJWMTUuNDQ5MDcnIGZpbGw9J25vbmUnLz4KPGcgdHJhbnNmb3JtPSdtYXRyaXgoMC4wLDEuMCwtMS4wLDAuMCwtMzUuODc3NzMsMTUuNjQ5MDUpJz4KPGcgc3Ryb2tlLWRhc2hhcnJheT0nbm9uZScgc3Ryb2tlLWRhc2hvZmZzZXQ9JzAuMCc+CiA8ZyBzdHJva2UtbGluZWNhcD0ncm91bmQnPgogPGcgc3Ryb2tlLWxpbmVqb2luPSdyb3VuZCc+CiA8cGF0aCBkPSdNLTIuMDc5ODggMi4zOTk4NkMtMS42OTk4OSAuOTU5OTItLjg1MzEzIC4yNzk5OCAwIDBILS4zOTk5OCcgZmlsbD0nbm9uZScvPgogPC9nPgogPC9nPgogPC9nPgo8L2c+CjxnIHRyYW5zZm9ybT0ndHJhbnNsYXRlKC00Ny40MDI2NiwtMS42NSknPgo8ZyBzdHJva2U9J25vbmUnIHRyYW5zZm9ybT0nc2NhbGUoLTEuMDAzNzUsMS4wMDM3NSl0cmFuc2xhdGUoMjgyLjA2ODgxNCwyNS41MDgxMilzY2FsZSgtMSwtMSknPgo8ZyBmaWxsPScjMDAwJz4KPGcgc3Ryb2tlPSdub25lJz4KPHVzZSB4PScyODIuMDY4ODE0JyB5PScyNS41MDgxMicgeGxpbms6aHJlZj0nI2cxLTEyJy8+Cjx1c2UgeD0nMjg2LjU4NjI4MycgeT0nMjYuNTY1MjY3JyB4bGluazpocmVmPScjZzItMTA0Jy8+CjwvZz4KPC9nPgo8L2c+CjwvZz4KPC9nPgo8ZyBzdHJva2Utd2lkdGg9JzAuMzk5OTgnPgo8cGF0aCBkPSdNMTUuNDQ5MDQtMzQuNjE3ODRILTE1LjQ0OTA1JyBmaWxsPSdub25lJy8+CjxnIHRyYW5zZm9ybT0nbWF0cml4KC0xLjAsMC4wLDAuMCwtMS4wLC0xNS42NDkwMywtMzQuNjE3ODQpJz4KPGcgc3Ryb2tlLWRhc2hhcnJheT0nbm9uZScgc3Ryb2tlLWRhc2hvZmZzZXQ9JzAuMCc+CiA8ZyBzdHJva2UtbGluZWNhcD0ncm91bmQnPgogPGcgc3Ryb2tlLWxpbmVqb2luPSdyb3VuZCc+CiA8cGF0aCBkPSdNLTIuMDc5ODggMi4zOTk4NkMtMS42OTk4OSAuOTU5OTItLjg1MzEzIC4yNzk5OCAwIDBILS4zOTk5OCcgZmlsbD0nbm9uZScvPgogPC9nPgogPC9nPgogPC9nPgo8L2c+CjxnIHRyYW5zZm9ybT0ndHJhbnNsYXRlKC03Ljc4MDMyLC00MS44MzE3KSc+CjxnIHN0cm9rZT0nbm9uZScgdHJhbnNmb3JtPSdzY2FsZSgtMS4wMDM3NSwxLjAwMzc1KXRyYW5zbGF0ZSgyODIuMDY4ODE0LDI1LjUwODEyKXNjYWxlKC0xLC0xKSc+CjxnIGZpbGw9JyMwMDAnPgo8ZyBzdHJva2U9J25vbmUnPgo8dXNlIHg9JzI4Mi4wNjg4MTQnIHk9JzI1LjUwODEyJyB4bGluazpocmVmPScjZzMtNTAnLz4KPHVzZSB4PScyODYuMDQwMDU0JyB5PScyNS41MDgxMicgeGxpbms6aHJlZj0nI2cxLTEyJy8+Cjx1c2UgeD0nMjkwLjU1NzUyMycgeT0nMjYuNTA0Mzg0JyB4bGluazpocmVmPScjZzItMTA5Jy8+CjwvZz4KPC9nPgo8L2c+CjwvZz4KPC9nPgo8ZyBzdHJva2Utd2lkdGg9JzAuMzk5OTgnPgo8cGF0aCBkPSdNNTAuNjg0My0yOS43OTU2N0g4MS43ODIzOCcgZmlsbD0nbm9uZScvPgo8ZyB0cmFuc2Zvcm09J3RyYW5zbGF0ZSg4MS45ODIzNiwtMjkuNzk1NjcpJz4KPGcgc3Ryb2tlLWRhc2hhcnJheT0nbm9uZScgc3Ryb2tlLWRhc2hvZmZzZXQ9JzAuMCc+CiA8ZyBzdHJva2UtbGluZWNhcD0ncm91bmQnPgogPGcgc3Ryb2tlLWxpbmVqb2luPSdyb3VuZCc+CiA8cGF0aCBkPSdNLTIuMDc5ODggMi4zOTk4NkMtMS42OTk4OSAuOTU5OTItLjg1MzEzIC4yNzk5OCAwIDBILS4zOTk5OCcgZmlsbD0nbm9uZScvPgogPC9nPgogPC9nPgogPC9nPgo8L2c+CjxnIHRyYW5zZm9ybT0ndHJhbnNsYXRlKDYwLjUxMzg3LC0yNi40NDI5MiknPgo8ZyBzdHJva2U9J25vbmUnIHRyYW5zZm9ybT0nc2NhbGUoLTEuMDAzNzUsMS4wMDM3NSl0cmFuc2xhdGUoMjgyLjA2ODgxNCwyNS41MDgxMilzY2FsZSgtMSwtMSknPgo8ZyBmaWxsPScjMDAwJz4KPGcgc3Ryb2tlPSdub25lJz4KPHVzZSB4PScyODIuMDY4ODE0JyB5PScyNS41MDgxMicgeGxpbms6aHJlZj0nI2cxLTExJy8+Cjx1c2UgeD0nMjg3LjI0ODE1NScgeT0nMjYuNTA0Mzg0JyB4bGluazpocmVmPScjZzItMTA5Jy8+CjwvZz4KPC9nPgo8L2c+CjwvZz4KPC9nPgo8ZyBzdHJva2Utd2lkdGg9JzAuMzk5OTgnPgo8cGF0aCBkPSdNMzAuNjU1NTgtMTUuNjQ5MDJWMTUuNDQ5MDcnIGZpbGw9J25vbmUnLz4KPGcgdHJhbnNmb3JtPSdtYXRyaXgoMC4wLDEuMCwtMS4wLDAuMCwzMC42NTU1OCwxNS42NDkwNSknPgo8ZyBzdHJva2UtZGFzaGFycmF5PSdub25lJyBzdHJva2UtZGFzaG9mZnNldD0nMC4wJz4KIDxnIHN0cm9rZS1saW5lY2FwPSdyb3VuZCc+CiA8ZyBzdHJva2UtbGluZWpvaW49J3JvdW5kJz4KIDxwYXRoIGQ9J00tMi4wNzk4OCAyLjM5OTg2Qy0xLjY5OTg5IC45NTk5Mi0uODUzMTMgLjI3OTk4IDAgMEgtLjM5OTk4JyBmaWxsPSdub25lJy8+CiA8L2c+CiA8L2c+CiA8L2c+CjwvZz4KPGcgdHJhbnNmb3JtPSd0cmFuc2xhdGUoMTkuMTMwNjUsLTEuNjUpJz4KPGcgc3Ryb2tlPSdub25lJyB0cmFuc2Zvcm09J3NjYWxlKC0xLjAwMzc1LDEuMDAzNzUpdHJhbnNsYXRlKDI4Mi4wNjg4MTQsMjUuNTA4MTIpc2NhbGUoLTEsLTEpJz4KPGcgZmlsbD0nIzAwMCc+CjxnIHN0cm9rZT0nbm9uZSc+Cjx1c2UgeD0nMjgyLjA2ODgxNCcgeT0nMjUuNTA4MTInIHhsaW5rOmhyZWY9JyNnMS0xMicvPgo8dXNlIHg9JzI4Ni41ODYyODMnIHk9JzI2LjU2NTI2NycgeGxpbms6aHJlZj0nI2cyLTEwNCcvPgo8L2c+CjwvZz4KPC9nPgo8L2c+CjwvZz4KPGcgc3Ryb2tlLXdpZHRoPScwLjM5OTk4Jz4KPHBhdGggZD0nTTgyLjE4MjM0LTM0LjYxNzg0SDUxLjA4NDI2JyBmaWxsPSdub25lJy8+CjxnIHRyYW5zZm9ybT0nbWF0cml4KC0xLjAsMC4wLDAuMCwtMS4wLDUwLjg4NDI4LC0zNC42MTc4NCknPgo8ZyBzdHJva2UtZGFzaGFycmF5PSdub25lJyBzdHJva2UtZGFzaG9mZnNldD0nMC4wJz4KIDxnIHN0cm9rZS1saW5lY2FwPSdyb3VuZCc+CiA8ZyBzdHJva2UtbGluZWpvaW49J3JvdW5kJz4KIDxwYXRoIGQ9J00tMi4wNzk4OCAyLjM5OTg2Qy0xLjY5OTg5IC45NTk5Mi0uODUzMTMgLjI3OTk4IDAgMEgtLjM5OTk4JyBmaWxsPSdub25lJy8+CiA8L2c+CiA8L2c+CiA8L2c+CjwvZz4KPGcgdHJhbnNmb3JtPSd0cmFuc2xhdGUoNTguODUyOTgsLTQxLjgzMTcpJz4KPGcgc3Ryb2tlPSdub25lJyB0cmFuc2Zvcm09J3NjYWxlKC0xLjAwMzc1LDEuMDAzNzUpdHJhbnNsYXRlKDI4Mi4wNjg4MTQsMjUuNTA4MTIpc2NhbGUoLTEsLTEpJz4KPGcgZmlsbD0nIzAwMCc+CjxnIHN0cm9rZT0nbm9uZSc+Cjx1c2UgeD0nMjgyLjA2ODgxNCcgeT0nMjUuNTA4MTInIHhsaW5rOmhyZWY9JyNnMy01MScvPgo8dXNlIHg9JzI4Ni4wNDAwNTQnIHk9JzI1LjUwODEyJyB4bGluazpocmVmPScjZzEtMTInLz4KPHVzZSB4PScyOTAuNTU3NTIzJyB5PScyNi41MDQzODQnIHhsaW5rOmhyZWY9JyNnMi0xMDknLz4KPC9nPgo8L2c+CjwvZz4KPC9nPgo8L2c+CjxnIHN0cm9rZS13aWR0aD0nMC4zOTk5OCc+CjxwYXRoIGQ9J005Ny4zODg4OS0xNS42NDkwMlYxNS40NDkwNycgZmlsbD0nbm9uZScvPgo8ZyB0cmFuc2Zvcm09J21hdHJpeCgwLjAsMS4wLC0xLjAsMC4wLDk3LjM4ODg5LDE1LjY0OTA1KSc+CjxnIHN0cm9rZS1kYXNoYXJyYXk9J25vbmUnIHN0cm9rZS1kYXNob2Zmc2V0PScwLjAnPgogPGcgc3Ryb2tlLWxpbmVjYXA9J3JvdW5kJz4KIDxnIHN0cm9rZS1saW5lam9pbj0ncm91bmQnPgogPHBhdGggZD0nTS0yLjA3OTg4IDIuMzk5ODZDLTEuNjk5ODkgLjk1OTkyLS44NTMxMyAuMjc5OTggMCAwSC0uMzk5OTgnIGZpbGw9J25vbmUnLz4KIDwvZz4KIDwvZz4KIDwvZz4KPC9nPgo8ZyB0cmFuc2Zvcm09J3RyYW5zbGF0ZSg4NS44NjM5NSwtMS42NSknPgo8ZyBzdHJva2U9J25vbmUnIHRyYW5zZm9ybT0nc2NhbGUoLTEuMDAzNzUsMS4wMDM3NSl0cmFuc2xhdGUoMjgyLjA2ODgxNCwyNS41MDgxMilzY2FsZSgtMSwtMSknPgo8ZyBmaWxsPScjMDAwJz4KPGcgc3Ryb2tlPSdub25lJz4KPHVzZSB4PScyODIuMDY4ODE0JyB5PScyNS41MDgxMicgeGxpbms6aHJlZj0nI2cxLTEyJy8+Cjx1c2UgeD0nMjg2LjU4NjI4MycgeT0nMjYuNTY1MjY3JyB4bGluazpocmVmPScjZzItMTA0Jy8+CjwvZz4KPC9nPgo8L2c+CjwvZz4KPC9nPgo8L2c+CjwvZz4KPC9nPgo8L2c+CjwvZz4KPC9nPgo8L2c+CjwvZz4KPC9nPgo8L2c+CjwvZz4KPC9zdmc+" class="img-fluid">
+</div>
+</div>
+</div>
+<p>Here we have a Markov model with 8 possible states, and we have <span class="math inline">\(p(t)=m^3(t)h(t)\)</span> where <span class="math inline">\(m(t)\)</span> and <span class="math inline">\(h(t)\)</span> satisfies: <span class="math display">\[
+\begin{aligned}
+\frac{\mathrm{d}m}{\mathrm{d}t} &amp;= \alpha_m (1-m) - \beta_m m, \\
+\frac{\mathrm{d}h}{\mathrm{d}t} &amp;= \alpha_h (1-h) - \beta_h h.
+\end{aligned}
+\]</span></p>
+<p>In this way, the time course of the conductances can be fully characterized.</p>
+<p>The very last ingredient is the voltage sensitivity of the conductances. Here, Hodgkin and Huxley assumed that all the rates for <span class="math inline">\(m\)</span>, <span class="math inline">\(h\)</span>, and <span class="math inline">\(n\)</span>, are explicit functions of <span class="math inline">\(V\)</span>, fitted to the data.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Alternative derivation of the gating equation">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Alternative derivation of the gating equation
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>First note that <span class="math display">\[
+\mathbb{P}[S(t) = \mathcal{C}] = 1 - \mathbb{P}[S(t) = \mathcal{C}] = 1-p(t).
+\]</span></p>
+<p>The probability <span class="math inline">\(p(t+\mathrm{d}t)\)</span> writes as follows: <span class="math display">\[
+\begin{split}
+p(t+\mathrm{d}t) &amp;= \mathbb{P}[S(t+\mathrm{d}t) = \mathcal{O}] \\
+&amp;= \mathbb{P}[S(t+\mathrm{d}t) = \mathcal{O} | S(t) = \mathcal{C}]
+\mathbb{P}[S(t) = \mathcal{C}] \\
+&amp;\quad{} + \mathbb{P}[S(t+\mathrm{d}t) = \mathcal{O} | S(t) = \mathcal{O}]
+\mathbb{P}[S(t) = \mathcal{O}] \\
+&amp;= \mathbb{P}[S(t+\mathrm{d}t) = \mathcal{O} | S(t) = \mathcal{C}])
+(1-p(t)) \\
+&amp;\quad{} + (1-\mathbb{P}[S(t+\mathrm{d}t) = \mathcal{C} | S(t) = \mathcal{O}]) p(t) \\
+&amp;= \alpha \mathrm{d}t (1-p(t)) + p(t) - \beta\mathrm{d}t p(t).
+\end{split}
+\]</span></p>
+<p>where we used the rates: <span class="math display">\[
+\begin{aligned}
+\mathbb{P}[S(t+\mathrm{d}t) = \mathcal{C} | S(t) = \mathcal{O}] &amp;= \alpha\mathrm{d}t \\
+\mathbb{P}[S(t+\mathrm{d}t) = \mathcal{O} | S(t) = \mathcal{C}] &amp;= \beta\mathrm{d}t
+\end{aligned}
+\]</span></p>
+<p>Rearranging the terms we have: <span class="math display">\[
+\frac{p(t+\mathrm{d}t)-p(t)}{\mathrm{d}t} = \alpha(1-p) - \beta p.
+\]</span></p>
+</div>
+</div>
+</section>
+</section>
+<section id="the-hodgkin-huxley-model" class="level2" data-number="12.4">
+<h2 data-number="12.4" class="anchored" data-anchor-id="the-hodgkin-huxley-model"><span class="header-section-number">12.4</span> The Hodgkin-Huxley model</h2>
+<p>Putting all the ingredients together, we arrive that the final form of the Hodgkin-Huxley model for the excitability of the axon: <span class="math display">\[
+\left\{ \begin{aligned}
+&amp; C_\mathrm{m} \frac{\mathrm{d}V_\mathrm{m}}{\mathrm{d}t} + \bar{g}_\text{Na} m^3 h (V - V_\text{Na}) + \bar{g}_\text{K} n^4 (V - V_\text{K})+ \bar{g}_\text{leak} (V - V_\text{leak}) = I_\mathrm{stim}(t), \\
+&amp; \frac{\mathrm{d}n}{\mathrm{d}t} = \alpha_n (1-n) - \beta_n n, \\
+&amp; \frac{\mathrm{d}m}{\mathrm{d}t} = \alpha_m (1-m) - \beta_m m, \\
+&amp; \frac{\mathrm{d}h}{\mathrm{d}t} = \alpha_h (1-h) - \beta_h h.
+\end{aligned}\right.
+\]</span></p>
+<p>The model, supplemented with initial conditions for the variables <span class="math inline">\(V_m(t)\)</span>, <span class="math inline">\(m(t)\)</span>, <span class="math inline">\(h(t)\)</span>, and <span class="math inline">\(n(t)\)</span>, can quantitatively reproduce the action potential of the squid axon.</p>
+</section>
+<section id="appendix-electrochemistry" class="level2" data-number="12.5">
+<h2 data-number="12.5" class="anchored" data-anchor-id="appendix-electrochemistry"><span class="header-section-number">12.5</span> Appendix: Electrochemistry</h2>
+<p>We review here some basic concepts of electrochemistry.</p>
+<section id="conductivity" class="level3" data-number="12.5.1">
+<h3 data-number="12.5.1" class="anchored" data-anchor-id="conductivity"><span class="header-section-number">12.5.1</span> Conductivity</h3>
+<p>Consider a volume (a cube, for instance) with some ions inside, for instance, a volume of water with salt inside, which dissociated into sodium <span class="math inline">\(\ce{Na+}\)</span> and chloride <span class="math inline">\(\ce{Cl-}\)</span>.</p>
+<p>If we apply a uniform electric field <span class="math inline">\(E\)</span> across two sides of the cube, with two electrodes of area <span class="math inline">\(A\)</span>, <em>cations</em> (positive ions) will move towards the <em>cathode</em> (negative electrode) and <em>anions</em> (negative ions) will move towards the <em>anode</em> (positive electrode.) This movement of ions will close the circuit and give rise to a current <span class="math inline">\(I\)</span>.</p>
+<p>The current is proportional to the area <span class="math inline">\(A\)</span> of the electrodes, so we define the <em>current density</em> <span class="math inline">\(J\)</span> as follows: <span class="math display">\[
+J = \frac{I}{A}.
+\]</span></p>
+<p>Experimentally, we observe that the current is proportional to the potential difference <span class="math inline">\(V\)</span> between the electrode: <span class="math display">\[
+I = g V,
+\]</span></p>
+<p>where <span class="math inline">\(g\)</span> is the conductance of the solution (unit: Siemens [S]), that is the inverse of the resistance. Overall, the conductance may depend on several factors:</p>
+<ul>
+<li>the concentration of ions (more ions, more current),</li>
+<li>the mobility of ions in the solution (faster ions, more current),</li>
+<li>the distance between the electrodes,</li>
+<li>the viscosity of the solution (similar to mobility),</li>
+<li>the temperature,</li>
+<li>…</li>
+</ul>
+<p>In first approximation, we can take <span class="math inline">\(E = \frac{V}{d}\)</span>, where <span class="math inline">\(d\)</span> is the distance between the electrodes. We end up with: <span class="math display">\[
+J = \frac{g d}{A} E = \sigma E,
+\]</span></p>
+<p>where <span class="math inline">\(\sigma\)</span> is the <em>conductivity</em>. The conductivity is an intrisic property of the solution. For instance, sea water has <span class="math inline">\(\sigma \approx 50 \text{mS}/\text{cm}\)</span>, and for the body is <span class="math inline">\(\sigma \approx 1.5 \text{mS}/\text{cm}\)</span>.</p>
+</section>
+<section id="molar-conductivity" class="level3" data-number="12.5.2">
+<h3 data-number="12.5.2" class="anchored" data-anchor-id="molar-conductivity"><span class="header-section-number">12.5.2</span> Molar conductivity</h3>
+<p>The conductivity <span class="math inline">\(\sigma\)</span>, in turn, depends on the concentration of ions. The conductivity per unit mole is the <em>molar conductivity</em> <span class="math inline">\(\Lambda_m = \frac{\sigma}{c}\)</span>. In first approximation, we assume that <span class="math inline">\(\Lambda_m\)</span> is independent of <span class="math inline">\(c\)</span>.</p>
+<p>The molar conductivity of a solution with multiple ions involved is given by the <a href="https://en.wikipedia.org/wiki/Molar_conductivity#Kohlrausch's_law_of_independent_migration_of_ions">Kohlrausch law of independent migration of ions</a>: <span class="math display">\[
+\Lambda_m = \sum |z_i| \lambda_m
+\]</span></p>
+<p>where <span class="math inline">\(z_i\)</span> is the valence of the <span class="math inline">\(i\)</span>-th ion and <span class="math inline">\(\lambda_i\)</span> its molar conductivity. For instance, <span class="math inline">\(\lambda_\text{Na} = 5\,\text{mS}\,\text{m}^2/\text{mol}\)</span> and <span class="math inline">\(\lambda_\text{Cl} = 7.6\,\text{mS}\,\text{m}^2/\text{mol}\)</span>. So, the molar conductivity of salt <span class="math inline">\(\ce{NaCl}\)</span> in water is <span class="math inline">\(\Lambda_{NaCl} = 12.6\,\text{mS}\,\text{m}^2/\text{mol}\)</span>.</p>
+</section>
+<section id="mobility-of-ions" class="level3" data-number="12.5.3">
+<h3 data-number="12.5.3" class="anchored" data-anchor-id="mobility-of-ions"><span class="header-section-number">12.5.3</span> Mobility of ions</h3>
+<p>In a solution, each ion will experience an electric force according to the Coulomb’s law: <span class="math display">\[
+f_E = q_E z E,
+\]</span></p>
+<p>where <span class="math inline">\(q_E \approx 1.602\cdot 10^{−19}\,\text{C}\)</span> is the elementary charge, <span class="math inline">\(z\)</span> is the valence, and <span class="math inline">\(E\)</span> the electric field. On the other hand, the ion will also experience a viscous friction, due to the molecules of the solution. The balance of forces gives the dynamics: <span class="math display">\[
+m \dot{v} = q_E z E - f v,
+\]</span></p>
+<p>where <span class="math inline">\(m\)</span> is the mass, <span class="math inline">\(v\)</span> is the velocity, and <span class="math inline">\(f\)</span> is the friction. At equilibrium, the limit velocity <span class="math inline">\(v_\infty\)</span> is <span class="math display">\[
+v_\infty = \frac{z q_E}{f} E = u E,
+\]</span></p>
+<p>where <span class="math inline">\(u = \frac{z q_E}{f}\)</span> is the electrical mobility. More generally, when <span class="math inline">\(z&lt;0\)</span> also the friction should be negative, so: <span class="math display">\[
+u = \frac{|z|e_E}{f}.
+\]</span></p>
+<p>Again, the mobility is an intrisic property of the solution. Specifically, we can consider the <a href="https://en.wikipedia.org/wiki/Stokes%27_law">Stokes law</a> for the friction, <span class="math inline">\(f=6\pi a \eta\)</span> where <span class="math inline">\(a\)</span> is the radius of the ion and <span class="math inline">\(\eta\)</span> is the viscosity of the solution. Therefore, <span class="math display">\[
+u = \frac{z q_E}{6\pi a \eta}.
+\]</span></p>
+<p>For instance, <span class="math inline">\(\ce{Na+}\)</span> mobility in water at <span class="math inline">\(25^{\circ}\text{C}\)</span> is <span class="math inline">\(5.19\cdot 10^{-8}\,\text{m}^2/(\text{s}\,\text{V})\)</span>. (Clearly, the viscosity depends on the temperature.)</p>
+</section>
+<section id="sec-mobility" class="level3" data-number="12.5.4">
+<h3 data-number="12.5.4" class="anchored" data-anchor-id="sec-mobility"><span class="header-section-number">12.5.4</span> Mobility and conductivity</h3>
+<p>There is a relationship between mobility and conductivity, because moving ions yields a current. Assuming <span class="math inline">\(v_\infty = uE\)</span> as the speed of ions, in the time <span class="math inline">\(\mathrm{d}t\)</span> the ions cover a distance of <span class="math inline">\(\mathrm{d}x = v_\infty \mathrm{d}t\)</span>. The total volume of ions that moves across an area <span class="math inline">\(A\)</span> is <span class="math display">\[
+A\cdot \mathrm{d}x\cdot c\cdot N_A = A u E c N_A \mathrm{d}t,
+\]</span></p>
+<p>where <span class="math inline">\(N_A \approx 6.022\cdot 10^{23}\,\text{mol}^{-1}\)</span> is the Avogadro constant. The total charge is the above quantity multiplied by <span class="math inline">\(|z| q_E\)</span>. Hence, the current density is: <span class="math display">\[
+J = \frac{|z| q_E A u E c N_A \mathrm{d}t}{A \mathrm{d}t}
+= F c u |z| \cdot E = \sigma E,
+\]</span></p>
+<p>with <span class="math inline">\(F = q_E N_A \approx 9.65\cdot 10^4\,\text{C}\,\text{mol}^{-1}\)</span> is the Farad constant. So we arrive at the expression: <span class="math display">\[
+\sigma = F c u |z|, \quad\Rightarrow\quad \Lambda_m = \frac{\sigma}{c} = F|z| u.
+\]</span></p>
+<p>Note that we take the absolute value <span class="math inline">\(|z|\)</span> because we should separate cations (+) and anions (-) in the analysis. Cations will follow the direction of <span class="math inline">\(E\)</span>, while anions go in the opposite direction. Since the latters carry an negative charge, the virtually move a positive charge in the direction of <span class="math inline">\(E\)</span>.</p>
+<p>Given the total current as <span class="math inline">\(J = F|z|uc E\)</span>, we can go back to the flux of ions <span class="math inline">\(J_E\)</span> (as a change of concentration) to obtain the Planck’s equation: <span class="math display">\[
+J_E = \frac{J}{Fz} = \frac{F|z|uc}{Fz} E
+= u c \operatorname{sign}(z) E.
+\]</span></p>
+</section>
+<section id="sec-einstein" class="level3" data-number="12.5.5">
+<h3 data-number="12.5.5" class="anchored" data-anchor-id="sec-einstein"><span class="header-section-number">12.5.5</span> Einstein-Smoluchowski equation</h3>
+<p>The connection between friction and diffusion has been provided by Einstein in 1905 and independently by others around the same period (Sutherland in 1904, Smoluchowski in 1906), in a seminal work on Brownian motion. Briefly, friction dissipates kinetic energy into heat, whereas Brownian motion-the rapid fluctuation of molecules at microscopic scale due to termal agitation-converts heats into kinetic energy. The duality between friction and Brownian motion translates into the general relationship <span class="math display">\[
+D = \frac{k_B T}{f}
+\]</span></p>
+<p>where <span class="math inline">\(k_B\)</span> is the Boltzmann constant, <span class="math inline">\(D\)</span> is the diffusion coefficient and <span class="math inline">\(T\)</span> is the absolute temperature. Given the definition of electrical mobility, we have that: <span class="math display">\[
+D = \frac{k_B T}{f} = \frac{k_B T}{|z| q_E} u,
+\]</span></p>
+<p>which provides a link between <span class="math inline">\(D\)</span> and <span class="math inline">\(u\)</span>.</p>
+
+
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="ref-ks08_vol1" class="csl-entry" role="listitem">
+Keener, James, and James Sneyd. 2009. <em>Mathematical Physiology: I: Cellular Physiology</em>. Second. Vol. 8/I. Springer. <a href="https://strutture-provincia.primo.exlibrisgroup.com/permalink/39SBT_INST/ghkipk/alma991012367489706186">https://strutture-provincia.primo.exlibrisgroup.com/permalink/39SBT_INST/ghkipk/alma991012367489706186</a>.
+</div>
+</div>
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../Lectures/11_FeedbackLoops.html" class="pagination-link" aria-label="Feedback loops">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Feedback loops</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../Lectures/13_HodgkinHuxley.html" class="pagination-link" aria-label="Hodgkin-Huxley model">
+        <span class="nav-page-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Hodgkin-Huxley model</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
