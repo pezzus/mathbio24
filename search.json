@@ -706,7 +706,7 @@
     "href": "Lectures/13_HodgkinHuxley.html",
     "title": "13  Hodgkin-Huxley model",
     "section": "",
-    "text": "13.1 The model\nThe complete form of the Hodgkin-Huxley model is the following: \\[\n\\left\\{ \\begin{aligned}\n- C_\\mathrm{m} \\frac{\\mathrm{d}V_\\mathrm{m}}{\\mathrm{d}t} &= \\bar{g}_\\text{Na} m^3 h (V - V_\\text{Na}) + \\bar{g}_\\text{K} n^4 (V - V_\\text{K})+ \\bar{g}_\\text{leak} (V - V_\\text{leak}) - I_\\mathrm{stim}(t), \\\\\n\\frac{\\mathrm{d}n}{\\mathrm{d}t} &= \\alpha_n(V_\\mathrm{m}) (1-n) - \\beta_n(V_\\mathrm{m}) n, \\\\\n\\frac{\\mathrm{d}m}{\\mathrm{d}t} &= \\alpha_m(V_\\mathrm{m}) (1-m) - \\beta_m(V_\\mathrm{m}) m, \\\\\n\\frac{\\mathrm{d}h}{\\mathrm{d}t} &= \\alpha_h(V_\\mathrm{m}) (1-h) - \\beta_h(V_\\mathrm{m}) h.\n\\end{aligned}\\right.\n\\]\nThe parameters of the model per \\(1\\,\\text{cm}^2\\) are as follows: \\(C_\\mathrm{m} = 1\\,\\text{$\\mu$F}\\), \\(g_\\text{Na} = 120\\,\\text{mS}\\), \\(g_\\text{K} = 36\\,\\text{mS}\\), \\(g_\\text{leak} = 0.3\\,\\text{mS}\\), \\(V_\\text{Na} = 55\\,\\text{mV}\\), \\(V_\\text{K} = -77\\,\\text{mV}\\), \\(V_\\text{leak} = -54.4\\,\\text{mV}\\).\nConcerning the transition rates, we have the following for \\(\\tau_{\\{m,h,n\\}}(V_m)\\) and \\({\\{m,h,n\\}}_\\infty\\):\nCode\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport numpy as np\n\nsns.set_theme(\"notebook\", style=\"whitegrid\")\n\ndef x_over_expm1(x):\n    return np.piecewise(x,\n        np.abs(x)&lt;1e-10,\n        [lambda x: 1-0.5*x, lambda x:x/(np.exp(x)-1)])\n\nalpha_m = lambda V: x_over_expm1(-(40+V)/10)\nbeta_m  = lambda V: 4 * np.exp(-(V + 65) / 18)\nalpha_h = lambda V: 0.07 * np.exp(-(V + 65) / 20)\nbeta_h  = lambda V: 1 / (np.exp(-(35 + V) / 10) + 1)\nalpha_n = lambda V: 0.1 * x_over_expm1(-(55 + V)/10)\nbeta_n  = lambda V: 0.125 * np.exp(-(V + 65) / 80)\n\nV = np.linspace(-100,50,1000)\n# rates\ntau_m = 1/(alpha_m(V)+beta_m(V))\ntau_h = 1/(alpha_h(V)+beta_h(V))\ntau_n = 1/(alpha_n(V)+beta_n(V))\n\nm_inf = alpha_m(V)*tau_m\nh_inf = alpha_h(V)*tau_h\nn_inf = alpha_n(V)*tau_n\n\nfig,(ax1,ax2) = plt.subplots(1,2,figsize=(7.5,3))\nax1.plot(V,tau_m,V,tau_h,V,tau_n)\nax1.set_xlabel('$V_m$ [mV]')\nax1.set_ylabel('$\\\\tau$ [ms]')\n\nax2.plot(V,m_inf,V,h_inf,V,n_inf)\nax2.set_xlabel('$V_m$ [mV]')\nax2.set_ylabel('Equilibrium')\n\nfig.legend(['m','h','n'],loc=\"outside lower center\", bbox_to_anchor=(0.5,-0.1), ncol=3)\n\nfig.tight_layout()\n\nplt.show()\nIf we apply a square stimulus, we obtain the following solution:\nCode\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport numpy as np\nfrom hhmodel import hhmodel\nfrom scipy.integrate import solve_ivp\n\nsns.set_theme(\"notebook\", style=\"whitegrid\")\nt0,tdur,Imax = 1, 0.5, 80\nI_square = lambda t: Imax*(t-t0&gt;0)*(t-t0&lt;tdur)\n\ny0 = [-65.0,0.05,0.59,0.32]\nfun = lambda t,y: hhmodel(t,y,Istim=I_square)\nsol = solve_ivp(fun, [0,20.0], y0, max_step=1e-1)\n\nI_square2 = lambda t: 10*(t-t0&gt;0)*(t-t0&lt;tdur)\nfun2 = lambda t,y: hhmodel(t,y,Istim=I_square2)\nsol2 = solve_ivp(fun2, [0,20.0], y0, max_step=1e-1)\n\nfig,(ax1,ax2,ax3) = plt.subplots(3,1,sharex=True,figsize=(7,10))\n\nax1.step(sol.t,I_square(sol.t),'k',label='Stimulus [$\\\\mu A$]')\nax1.step(sol2.t,I_square2(sol2.t),'r',label='Stimulus [$\\\\mu A$]')\nax1.legend()\n\nax2.plot(sol.t,sol.y[0,:],'k',label='$V_m$ [mV]')\nax2.plot(sol2.t,sol2.y[0,:],'r',label='$V_m$ [mV] (no AP)')\nax2.legend()\n\nax3.plot(sol.t,sol.y[1:,:].T)\nax3.legend(['m','h','n'])\nax3.set_xlabel('Time [ms]')\n\nfig.tight_layout()\nplt.show()\nNotice that we can trigger an action potential only for a sufficiently large stimulus. This is a manifestation of excitability: when the stimulus is large enough, the potential will raise automatically to an excited value, and recover afterwards. Otherwise, when the stimulus is small (or too short), we essentially have a passive behavior, similar to an RC circuit.",
+    "text": "13.1 The model\nThe complete form of the Hodgkin-Huxley model is the following: \\[\n\\left\\{ \\begin{aligned}\n- C_\\mathrm{m} \\frac{\\mathrm{d}V_\\mathrm{m}}{\\mathrm{d}t} &= \\bar{g}_\\text{Na} m^3 h (V - V_\\text{Na}) + \\bar{g}_\\text{K} n^4 (V - V_\\text{K})+ \\bar{g}_\\text{leak} (V - V_\\text{leak}) - I_\\mathrm{stim}(t), \\\\\n\\frac{\\mathrm{d}n}{\\mathrm{d}t} &= \\alpha_n(V_\\mathrm{m}) (1-n) - \\beta_n(V_\\mathrm{m}) n, \\\\\n\\frac{\\mathrm{d}m}{\\mathrm{d}t} &= \\alpha_m(V_\\mathrm{m}) (1-m) - \\beta_m(V_\\mathrm{m}) m, \\\\\n\\frac{\\mathrm{d}h}{\\mathrm{d}t} &= \\alpha_h(V_\\mathrm{m}) (1-h) - \\beta_h(V_\\mathrm{m}) h.\n\\end{aligned}\\right.\n\\tag{13.1}\\]\nThe parameters of the model per \\(1\\,\\text{cm}^2\\) are as follows: \\(C_\\mathrm{m} = 1\\,\\text{$\\mu$F}\\), \\(g_\\text{Na} = 120\\,\\text{mS}\\), \\(g_\\text{K} = 36\\,\\text{mS}\\), \\(g_\\text{leak} = 0.3\\,\\text{mS}\\), \\(V_\\text{Na} = 55\\,\\text{mV}\\), \\(V_\\text{K} = -77\\,\\text{mV}\\), \\(V_\\text{leak} = -54.4\\,\\text{mV}\\).\nConcerning the transition rates, we have the following for \\(\\tau_{\\{m,h,n\\}}(V_m)\\) and \\({\\{m,h,n\\}}_\\infty\\):\nCode\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport numpy as np\n\nsns.set_theme(\"notebook\", style=\"whitegrid\")\n\ndef x_over_expm1(x):\n    return np.piecewise(x,\n        np.abs(x)&lt;1e-10,\n        [lambda x: 1-0.5*x, lambda x:x/(np.exp(x)-1)])\n\nalpha_m = lambda V: x_over_expm1(-(40+V)/10)\nbeta_m  = lambda V: 4 * np.exp(-(V + 65) / 18)\nalpha_h = lambda V: 0.07 * np.exp(-(V + 65) / 20)\nbeta_h  = lambda V: 1 / (np.exp(-(35 + V) / 10) + 1)\nalpha_n = lambda V: 0.1 * x_over_expm1(-(55 + V)/10)\nbeta_n  = lambda V: 0.125 * np.exp(-(V + 65) / 80)\n\nV = np.linspace(-100,50,1000)\n# rates\ntau_m = 1/(alpha_m(V)+beta_m(V))\ntau_h = 1/(alpha_h(V)+beta_h(V))\ntau_n = 1/(alpha_n(V)+beta_n(V))\n\nm_inf = alpha_m(V)*tau_m\nh_inf = alpha_h(V)*tau_h\nn_inf = alpha_n(V)*tau_n\n\nfig,(ax1,ax2) = plt.subplots(1,2,figsize=(7.5,3))\nax1.plot(V,tau_m,V,tau_h,V,tau_n)\nax1.set_xlabel('$V_m$ [mV]')\nax1.set_ylabel('$\\\\tau$ [ms]')\n\nax2.plot(V,m_inf,V,h_inf,V,n_inf)\nax2.set_xlabel('$V_m$ [mV]')\nax2.set_ylabel('Equilibrium')\n\nfig.legend(['m','h','n'],loc=\"outside lower center\", bbox_to_anchor=(0.5,-0.1), ncol=3)\n\nfig.tight_layout()\n\nplt.show()\nIf we apply a square stimulus, we obtain the following solution:\nCode\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport numpy as np\nfrom hhmodel import hhmodel\nfrom scipy.integrate import solve_ivp\n\nsns.set_theme(\"notebook\", style=\"whitegrid\")\nt0,tdur,Imax = 1, 0.5, 80\nI_square = lambda t: Imax*(t-t0&gt;0)*(t-t0&lt;tdur)\n\ny0 = [-65.0,0.05,0.59,0.32]\nfun = lambda t,y: hhmodel(t,y,Istim=I_square)\nsol = solve_ivp(fun, [0,20.0], y0, max_step=1e-1)\n\nI_square2 = lambda t: 10*(t-t0&gt;0)*(t-t0&lt;tdur)\nfun2 = lambda t,y: hhmodel(t,y,Istim=I_square2)\nsol2 = solve_ivp(fun2, [0,20.0], y0, max_step=1e-1)\n\nfig,(ax1,ax2,ax3) = plt.subplots(3,1,sharex=True,figsize=(7,10))\n\nax1.step(sol.t,I_square(sol.t),'k',label='Stimulus [$\\\\mu A$]')\nax1.step(sol2.t,I_square2(sol2.t),'r',label='Stimulus [$\\\\mu A$]')\nax1.legend()\n\nax2.plot(sol.t,sol.y[0,:],'k',label='$V_m$ [mV]')\nax2.plot(sol2.t,sol2.y[0,:],'r',label='$V_m$ [mV] (no AP)')\nax2.legend()\n\nax3.plot(sol.t,sol.y[1:,:].T)\nax3.legend(['m','h','n'])\nax3.set_xlabel('Time [ms]')\n\nfig.tight_layout()\nplt.show()\nNotice that we can trigger an action potential only for a sufficiently large stimulus. This is a manifestation of excitability: when the stimulus is large enough, the potential will raise automatically to an excited value, and recover afterwards. Otherwise, when the stimulus is small (or too short), we essentially have a passive behavior, similar to an RC circuit.",
     "crumbs": [
       "Lectures",
       "<span class='chapter-number'>13</span>  <span class='chapter-title'>Hodgkin-Huxley model</span>"
@@ -750,7 +750,51 @@
     "href": "Lectures/14_CableEquation.html",
     "title": "14  The cable equation",
     "section": "",
-    "text": "To appear soon\n\n\n\n\nKeener, James, and James Sneyd. 2009. Mathematical Physiology: I: Cellular Physiology. Second. Vol. 8/I. Springer. https://strutture-provincia.primo.exlibrisgroup.com/permalink/39SBT_INST/ghkipk/alma991012367489706186.",
+    "text": "14.1 Derivation of the cable equation\nThe axon is a tubular structure through which ions and currents diffuse primarily along its main axis. As a result, a localized stimulus propagates spatially, though its amplitude diminishes with increasing distance from the point of stimulation. In excitable membranes, the diffusive currents associated with an action potential can be strong enough to trigger additional action potentials in neighboring regions. This cascade effect leads to the propagation of action potentials along the axon.\nWe can approximate the axon with a cylinder:\nThe axon is immersed in an extracellular medium (the bath solution) that we also suppose cylindrical in first approximation. Usually, the extracellular space is much larger in volume than the intracellular one. The cellular membrane, where ion channels are, is the boundary between the extra- and intra-cellular regions. We also suppose that all quantities (currents, potential) vary only in the longitudinal direction.\nConsider a intra-cellular (resp. extra-cellular) cross-section of area \\(A_i\\) (resp. \\(A_e\\)) and length \\(\\mathrm{d}x\\). We denote the intra- and extra-cellular electrical potential along the longitudinal direction with \\(\\phi_i(x,t)\\) and \\(\\phi_e(x,t)\\). For the Ohm’s law, we have that the intra- and extra-cellular currents are: \\[\n\\begin{aligned}\nI_i(x,t) &= - \\frac{1}{R_i} \\cdot \\bigl(\\phi_i(x+\\mathrm{d}x) - \\phi_i(x) \\bigl), \\\\\nI_e(x,t) &= - \\frac{1}{R_e} \\cdot \\bigr(\\phi_e(x+\\mathrm{d}x) - \\phi_e(x) \\bigr),\n\\end{aligned}\n\\]\nwhere \\(I_i(x,t)\\) and \\(I_e(x,t)\\) are the currents and \\(R_e\\), \\(R_i\\) are the resistances of the cross-sections. Remember that the resistance is: \\[\nR = \\frac{r\\ell}{A},\n\\]\nwhere \\(r\\) is the resistivity, \\(A\\) the cross-section, and \\(\\ell\\) the length. Therefore: \\[\n\\begin{aligned}\nI_i(x,t) &= - \\frac{A_i}{r_i} \\frac{\\phi_i(x+\\mathrm{d}x) - \\phi_i(x)}{\\mathrm{d}x}\n\\xrightarrow{\\mathrm{d}x\\to 0} -\\frac{A_i}{r_i}\\frac{\\partial\\phi_i}{\\partial x}, \\\\\nI_e(x,t) &= - \\frac{A_e}{r_e} \\frac{\\phi_e(x+\\mathrm{d}x) - \\phi_e(x)}{\\mathrm{d}x}\n\\xrightarrow{\\mathrm{d}x\\to 0} -\\frac{A_e}{r_e}\\frac{\\partial\\phi_e}{\\partial x}.\n\\end{aligned}\n\\]\nNow we do a balance of the currents. For the intracellular section, we have 3 surfaces for the cylinder: the two ends, at \\(x\\) and \\(x+\\mathrm{d}x\\), and the membrane. By convention, the transmembrane current density, denoted by \\(J_m(x,t)\\), flows from the intracellular to the extracellular space. Summing up we have: \\[\nI_i(x+\\mathrm{d}x,t) = I_i(x,t) - \\int_{x}^{x+\\mathrm{d}x} p J_m(z,t) \\: \\mathrm{d}z,\n\\]\nwhere \\(p\\) is the perimeter of the axon. Rearranging, diving by \\(\\mathrm{d}x\\), and taking the limit assuming that \\(J_m\\) is regular, we have: \\[\n\\frac{\\partial I_i}{\\partial x} = - p J_m(x,t).\n\\]\nFor the extracellular space, the hollow cylinder has 4 faces: the ends, the membrane, and the outer surface. For this last one, we suppose that the bath is insulated, so there is no current flow through it. For the rest is as above: \\[\n\\begin{split}\n&I_e(x+\\mathrm{d}x,t) = I_e(x,t) + \\int_{x}^{x+\\mathrm{d}x} p J_m(z,t) \\: \\mathrm{d}z, \\\\\n\\leadsto{}& \\frac{\\partial I_e}{\\partial x} = p J_m(x,t).\n\\end{split}\n\\]\nThe transmembrane current density (current per unit area) depends on the transmembrane voltage, according to the Hodgkin-Huxley model, in Equation 13.1: \\[\nJ_m(x,t) = C_m \\frac{\\partial V_m}{\\partial t} + I_\\text{ion}(V_m),\n\\]\nwhere \\(V_m(x,t) = \\phi_i(x,t)-\\phi_e(x,t)\\) is the transmembrane potential and \\(I_\\text{ion}\\) is the sum of ion currents. Also the gating variables, \\(m(x,t)\\), \\(n(x,t)\\), \\(h(x,t)\\), are defined at each point of the membrane, that is they vary both in space and time.\nWe can now put all together and obtain the following system: \\[\n\\left\\{\\begin{aligned}\n\\frac{\\partial}{\\partial x}\\Bigl(\\frac{A_i}{r_i}\\frac{\\partial\\phi_i}{\\partial x} \\Bigr) &= p \\Bigl( C_m \\frac{\\partial V_m}{\\partial t} + I_\\text{ion}(V_m) \\Bigr), \\\\\n\\frac{\\partial}{\\partial x}\\Bigl(\\frac{A_e}{r_e}\\frac{\\partial\\phi_e}{\\partial x} \\Bigr) &= - p \\Bigl( C_m \\frac{\\partial V_m}{\\partial t} + I_\\text{ion}(V_m) \\Bigr), \\\\\nV_m = \\phi_i - \\phi_e.\n\\end{aligned}\\right.\n\\tag{14.1}\\]\nThe above system can be further simplified by exploiting some symmetries. Summing up the first 2 equations we have: \\[\n\\frac{\\partial}{\\partial x}\\Bigl(\n\\frac{A_i}{r_i}\\frac{\\partial\\phi_i}{\\partial x} +\n\\frac{A_e}{r_e}\\frac{\\partial\\phi_e}{\\partial x}\n\\Bigr) = 0,\n\\]\nhence: \\[\n\\frac{A_i}{r_i}\\frac{\\partial\\phi_i}{\\partial x} +\n\\frac{A_e}{r_e}\\frac{\\partial\\phi_e}{\\partial x} = I_\\text{tot}(t),\n\\]\nwhere \\(I_\\text{tot}(t)\\) is the total current. Now we replace \\(\\phi_i\\), since \\(\\phi_i = \\phi_e + V_m\\): \\[\n\\frac{A_i}{r_i}\\frac{\\partial V_m}{\\partial x} +\n\\Bigl(\\frac{A_i}{r_i}+\\frac{A_e}{r_e}\\Bigr)\\frac{\\partial\\phi_e}{\\partial x} = I_\\text{tot}(t),\n\\]\nand solve with respect to \\(\\phi_e\\): \\[\n\\frac{\\partial\\phi_e}{\\partial x} = \\frac{r_i r_e}{A_i r_e + A_e r_i} I_\\text{tot}(t)\n-\\frac{A_i r_e}{A_i r_e + A_e r_i} \\frac{\\partial V_m}{\\partial x}.\n\\]\nNow we replace this expression into the second equation of Equation 14.1. We have that: \\[\n\\frac{\\partial}{\\partial x}\\Bigl(\\frac{A_e}{r_e}\\frac{\\partial\\phi_e}{\\partial x}\\Bigr)\n= \\frac{\\partial}{\\partial x}\\Bigl(\\frac{A_e r_i}{A_i r_e + A_e r_i}\\Bigr) I_\\text{tot}(t)\n-\\frac{\\partial}{\\partial x}\\Bigl(\\frac{A_i A_e}{A_i r_e + A_e r_i} \\frac{\\partial V_m}{\\partial x}\\Bigr).\n\\]\nAssuming that the cross-section \\(A\\) is constant, as well as the resistivities, the first term cancels and we end up with the following equation cable equation: \\[\np \\Bigl( C_m \\frac{\\partial V_m}{\\partial t} + I_\\text{ion}(V_m) \\Bigr) =\n\\frac{A_i A_e}{A_i r_e + A_e r_i} \\frac{\\partial^2 V_m}{\\partial x^2}.\n\\tag{14.2}\\]\nNote that this equation has only \\(V_m\\) as variable, and not \\(\\phi_i\\) and \\(\\phi_e\\). In this way, we can approximate the transmembrane potential without caring of the potential in the whole space.",
+    "crumbs": [
+      "Lectures",
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>The cable equation</span>"
+    ]
+  },
+  {
+    "objectID": "Lectures/14_CableEquation.html#non-dimensionalization",
+    "href": "Lectures/14_CableEquation.html#non-dimensionalization",
+    "title": "14  The cable equation",
+    "section": "14.2 Non-dimensionalization",
+    "text": "14.2 Non-dimensionalization\nWe rescale the time and space as follows: \\[\n\\tilde{x} = \\frac{x}{\\lambda_m}, \\quad \\tilde{t} = \\frac{t}{\\tau_m},\n\\]\nwhere \\(\\lambda_m\\) and \\(\\tau_m\\) are respectively the space and time membrane constants. We also consider the membrane specific resistance at rest as: \\[\nR_m = \\left. \\frac{\\mathrm{d}I_\\text{ion}}{\\mathrm{d}V_m}\\right|_{\\text{equilibrium}}\n\\]\nand define the \\(f = - R_m I_\\text{ion}\\) as the rescaled current. Substituting into the equation we have: \\[\n\\frac{C_m R_m}{\\tau_m} \\frac{\\partial V_m}{\\partial\\tilde{t}} - f(V_m) =\n\\frac{A_i A_e R_m}{p(A_i r_e + A_e r_i)} \\frac{1}{\\lambda_m^2}\\frac{\\partial^2 V_m}{\\partial \\tilde{x}^2}.\n\\]\nTaking: \\[\n\\begin{aligned}\n\\tau_m &= C_m R_m, \\\\\n\\lambda^2_m &= \\frac{A_i A_e R_m}{p(A_i r_e + A_e r_i)},\n\\end{aligned}\n\\]\nwe reduce the equation to: \\[\n\\frac{\\partial \\tilde{V}_m}{\\partial\\tilde{t}} - f(\\tilde{V}_m) = \\frac{\\partial^2 \\tilde{V}_m}{\\partial \\tilde{x}^2},\n\\tag{14.3}\\]\nwhich is a non-linear reaction-diffusion equation in the variable \\(V_m\\) and the gating variables. The equation is a partial differential equation, because we have derivatives with respect to both \\(x\\) and \\(t\\).",
+    "crumbs": [
+      "Lectures",
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>The cable equation</span>"
+    ]
+  },
+  {
+    "objectID": "Lectures/14_CableEquation.html#travelling-waves",
+    "href": "Lectures/14_CableEquation.html#travelling-waves",
+    "title": "14  The cable equation",
+    "section": "14.3 Travelling waves",
+    "text": "14.3 Travelling waves\nA key characteristic of some reaction-diffusion systems are travelling waves, that is solutions of the form: \\[\nV_m(x,t) = U(x + ct) = U(\\xi),\n\\]\nfor some function \\(U(\\xi)\\) (the wave profile) and velocity \\(c\\). In space-time, \\(V_m(x,t)\\) will look the same along the characteristics \\(\\xi = x + ct\\). The variable \\(\\xi\\) is also called travelling coordinate. Note that both \\(U\\) and \\(c\\) are still unknowns (unless we solve the cable equation), but at least we reduced the dimensionality of the problem from \\((x,t)\\) to only \\(\\xi\\).\nA travelling wave should like this (ignore the interaction with the boundaries): \nGiven a travelling wave for the cable equation in Equation 14.3, we have: \\[\n\\tilde{V}_m(\\tilde{x},\\tilde{t}) = \\tilde{U}(\\tilde{x} + s\\tilde{t})\n= \\tilde{U}\\Bigl(\\frac{x}{\\lambda_m} + s \\frac{t}{\\tau_m} \\Bigr)\n= \\tilde{U}\\Bigl(\\frac{x + s\\frac{\\lambda_m}{\\tau_m}t}{\\lambda_m}\\Bigr)\n= U(x + ct),\n\\]\nwhere \\(\\xi = \\lambda_m \\tilde{\\xi}\\) and \\[\nc = s \\frac{\\lambda_m}{\\tau_m},\n\\]\nis the velocity in terms of a parameter \\(s\\) (the velocity in the rescaled equations) and the time and space constants. The advantage of this formula is that \\(s\\) is a fixed parameter, only depending on \\(f\\) (thus, the ionic dynamics). Replacing the true values we have: \\[\nc = s \\frac{1}{R_m C_m} \\sqrt{\\frac{A_i A_e R_m}{p(A_i r_e + A_e r_i)}}.\n\\]\nFor a cylindrical axon of diameter \\(d\\) and \\(p = \\pi d\\), \\(A_i = \\pi d^2/4\\). We also take \\(A_i \\to \\infty\\), because we assume that the bath is very large compared to the size of the axon. Thus: \\[\nc = \\frac{s}{C_m} \\sqrt{\\frac{d}{4 R_m r_i}}.\n\\]\nWith this expression we see that the velocity of propagation increases when \\(d\\) increases, or when the intracellular (or cytoplasmic) resistivity decreases, or when the membrane conductivity \\(R_m^{-1}\\) increases. In the squid, the axon is giant because \\(d\\) is large, and this ensures a fast propagation in the body. Alternatively, we can reduce (or even block) the propagation by reducing sodium channels, because \\(R_m^{-1} \\approx g_{\\ce{Na}}\\) at rest, or increase the speed by increasing the density of channels per unit area of the membrane.",
+    "crumbs": [
+      "Lectures",
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>The cable equation</span>"
+    ]
+  },
+  {
+    "objectID": "Lectures/14_CableEquation.html#fitzhugh-nagumo-model-with-diffusion",
+    "href": "Lectures/14_CableEquation.html#fitzhugh-nagumo-model-with-diffusion",
+    "title": "14  The cable equation",
+    "section": "14.4 FitzHugh-Nagumo model with diffusion",
+    "text": "14.4 FitzHugh-Nagumo model with diffusion\nWe still need to prove that travelling waves actually exist for the cable equation. We can tackle the problem by studying the FitzHugh-Nagumo approximation of the Hodgkin-Huxley model: \\[\n\\left\\{\\begin{aligned}\n\\varepsilon \\frac{\\partial V}{\\partial t} &= \\varepsilon^2 \\frac{\\partial^2 V}{\\partial x^2} + f(V) - w, \\\\\n\\frac{\\partial w}{\\partial t} &= v - \\gamma w = g(v,w),\n\\end{aligned}\\right.\n\\]\nwith \\(\\varepsilon\\ll 1\\). Note that we are assuming \\(\\tau_m = \\mathcal{O}(\\varepsilon)\\) and \\(\\lambda_m = \\mathcal{O}(\\varepsilon)\\), so that \\(c = \\mathcal{O}(1)\\), that is the velocity is finite in the limit. (Unless \\(s\\) goes to infinity with \\(\\varepsilon\\), but this will not be the case.)\nWe already studied the FitzHugh-Nagumo system in the singular limit \\(\\varepsilon\\to 0\\). We can do the same here, but we need some care.",
+    "crumbs": [
+      "Lectures",
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>The cable equation</span>"
+    ]
+  },
+  {
+    "objectID": "Lectures/14_CableEquation.html#the-bistable-approximation",
+    "href": "Lectures/14_CableEquation.html#the-bistable-approximation",
+    "title": "14  The cable equation",
+    "section": "14.5 The bistable approximation",
+    "text": "14.5 The bistable approximation\nFor the sake of simplicity, we ignore the the repolarization, that is we set \\(g(v,w) = 0\\) and \\(w=0\\). That is, once excited, the membrane remains so, and never recovers. This is not realistic, but it considerably simplifies the analysis. Therefore, we study the so-called bistable or Nagumo equation: \\[\n\\varepsilon \\frac{\\partial V}{\\partial t} = \\varepsilon^2 \\frac{\\partial^2 V}{\\partial x^2} + f(V).\n\\tag{14.4}\\]\n\n14.5.1 The slow system\nWe substitute: \\[\nV(x,t) = U(\\xi) = U(x+st),\n\\]\nand obtain: \\[\ns \\varepsilon U' = \\varepsilon^2 U''+ f(U),\n\\]\nwhere the derivatives are with respect to \\(\\xi\\). Taking \\(\\varepsilon=0\\) we have: \\[\n0 = f(U).\n\\]\nRemember that \\(f(U)\\) is a cubic function, \\[\nf(U) = U(1-U)(U-\\alpha).\n\\]\nThe equation \\(f(U) = 0\\) has 3 solutions, or branches, see Section 13.4.2. That is, we denote the solutions as \\[\nU_- \\le U_0 \\le U_+,\n\\]\nwhere \\(U_- = 0\\), \\(U_0=\\alpha\\), \\(U_+=1\\) for this particular choice of \\(f(U)\\).\nTherefore, on the slow scale, the axon can only be in 3 states: resting \\(U=U_-\\), excited \\(U=U_+\\), or the threshold state \\(U=U_0\\). However, as we are going to see, the threshold state is unstable, so the axon can only be excited or resting. Note that this yields a partition of the travelling domain \\(\\xi\\) into regions where the axon is either excited or resting. In the physical space \\((x,t)\\), such partitions remain, and they move with constant speed \\(s\\). We still don’t know the velocity (even its sign), though.\n\n\n\n\n\n\n\n\n\n\n\n\n14.5.2 The fast system\nTo recover the speed, we must “zoom in” around the interfaces between excited and resting regions. Therefore, we set: \\[\nV(x,t) = U\\Bigl( \\frac{x+st}{\\varepsilon} \\Bigr).\n\\]\nAfter substitution we obtain: \\[\ns U' = U''+ f(U),\n\\tag{14.5}\\]\nfor \\(\\xi\\in\\mathbb{R}\\). This is a second-order, non-linear ODE. In order to solve it, we need some boundary conditions. The most interesting cases are when we are at the interface between excited and resting regions, otherwise the solution is constant and the equation is trivially satisfied. We can have 2 cases:\n\n\\(U(-\\infty) = U_-\\) and \\(U(+\\infty) = U_+\\), like the left boundary of the figure above, or\n\\(U(-\\infty) = U_+\\) and \\(U(+\\infty) = U_-\\), like the right boundary of the figure above.\n\nIn general, we expect that the front moves from the excited region to the resting region, because we excite the neighbor tissue. We can prove this fact more precisely.\nWe multiply Equation 14.5 by \\(U'\\) and then integrate: \\[\ns \\int_{\\mathbb{R}} (U')^2 \\,\\mathrm{d}\\xi =\n\\int_{\\mathbb{R}} U' U'' \\,\\mathrm{d}\\xi\n+ \\int_{\\mathbb{R}} f(U)U' \\,\\mathrm{d}\\xi.\n\\]\nNow, \\(U''U' = (1/2(U')^2)'\\), so we can integrate the second term, and \\(U'\\mathrm{d}\\xi = \\mathrm{d}U\\), to simplify the third integral: \\[\ns \\int_{\\mathbb{R}} (U')^2 \\,\\mathrm{d}\\xi =\n\\frac{1}{2} \\Bigl[ (U')^2 \\Bigr]_{-\\infty}^{+\\infty}\n+ \\int_{U(-\\infty)}^{U(\\infty)} f(U) \\,\\mathrm{d}U.\n\\]\nWe need \\(U'(\\xi)\\to 0\\) for \\(\\xi\\to\\pm\\infty\\), otherwise the first integral in \\((U')^2\\) would be unbounded. Hence, the boundary terms cancel and we get: \\[\ns = \\frac{\\int_{U(-\\infty)}^{U(\\infty)} f(U) \\,\\mathrm{d}U}{\\int_{\\mathbb{R}} (U')^2 \\,\\mathrm{d}\\xi}.\n\\]\nUsing the boundary conditions for \\(U\\) at infinity, we have: \\[\ns = \\frac{\\int_{U_-}^{U_+} f(U) \\,\\mathrm{d}U}{\\int_{\\mathbb{R}} (U')^2 \\,\\mathrm{d}\\xi}.\n\\]\nThe denominator is always strictly positive (when zero, the solution is constant.) Hence, the sign of \\(s\\) is determined by the signed area of \\(f(U)\\) between \\(U_-\\) and \\(U_+\\). For the cubic \\(f(U)\\), this will depend on the position of \\(\\alpha\\): when \\(\\alpha &lt; 1/2\\), then \\(s &gt; 0\\), otherwise \\(s&lt;0\\). We henceforth always assume \\(\\alpha &lt; 1/2\\) (the other case is symmetric.) Note that for \\(\\alpha = 1/2\\) we have \\(s=0\\), so no propagation (standing wave).\nIn summary,\n\n\\(s &gt; 0\\) for the left boundary (\\(U_-\\) to \\(U_+\\)), so the wave moves to the left,\n\\(s &lt; 0\\) for the right boundary (\\(U_+\\) to \\(U_-\\)), so the wave moves to the right.\n\n\n\n\n\n\n\n\n\n\n\nThe above formula does not give us a clue of the actual value of \\(s\\) (just the sign). For the cubic \\(f\\), we can actually perform the full computation and find \\(s\\) (and \\(U\\)) exactly. For a general cubic-like \\(f\\), it is possible to prove the existence and uniqueness of the travelling wave.\nWe go back to Equation 14.5, and recast it as a system: \\[\n\\left\\{ \\begin{aligned}\nU' &= Z, \\\\\nZ' &= sZ - f(U).\n\\end{aligned} \\right.\n\\]\nWe focus on connecting \\(U_-\\) to \\(U^+\\) (the left boundary). Therefore, we look for a trajectory of the system that connects \\((0,0)\\) to \\((1,0)\\), that is \\(U(\\xi)\\to U_- = 0\\) for \\(\\xi\\to-\\infty\\), and \\(U(\\xi)\\to U_+ = 1\\) for \\(\\xi\\to\\infty\\). Of course, \\(Z(\\xi)=U'(\\xi)\\to 0\\) for \\(\\xi\\to\\pm\\infty\\).\nThe system has 3 equilibria: \\(E_0=(0,0)\\), \\(E_1=(1,0)\\) and \\(E_\\alpha=(\\alpha,0)\\). For their stability, we look at the Jacobian: \\[\nJ = \\begin{pmatrix}\n0 & 1 \\\\\n-f'(U) & s\n\\end{pmatrix}.\n\\]\nWe have that \\(\\operatorname{tr}J = s &gt; 0\\), so no equilibrium is stable. Since \\(\\det J = f'(U)\\), we have that \\(E_0\\) and \\(E_1\\) are saddles, and \\(E_\\alpha\\) is unstable.\nThe objective is construct an orbit that connects \\(E_0\\) to \\(E_1\\). Such orbit is called heteroclinic, and it only exists for a very specific value of \\(s\\): for this value, we have a heteroclinic bifurcation. Since the orbit must start from \\(E_0\\), we can follow the unstable manifold of \\(E_0\\). Likewise, since we need to converge into \\(E_1\\), we can follow the stable manifold of \\(E_1\\). The bifurcation occurs when the two manifolds collide and merge.\nTo understand what is happening, we need the phase portrait:\n\nWe see that for small \\(s\\), the unstable manifold of \\(E_0\\) falls too short, it does not reach \\(E_1\\) and instead diverges to \\(-\\infty\\). For large values of \\(s\\), the unstable manifold always stays high, and eventually diverges to \\(+\\infty\\) without reaching \\(E_1\\). With a bisection argument, since \\(E_0\\) depends continuously on \\(s\\), there must exists a value \\(\\bar{s}\\) such that the unstable manifold reaches exactly \\(E_1\\). This value gives the heteroclinic orbit.\nLuckily, for \\(s=\\bar{s}\\), the orbit is a parabola, so there must be: \\[\nZ = h(U) = bU(1-U),\n\\]\nfor some value of \\(b&gt;0\\). Therefore: \\[\nZ' = h(U)' = h'(U)U' = b(1-2U)Z = b^2U(1-U)(1-2U).\n\\]\nSubstituting into the equation for \\(Z'\\): \\[\nb^2U(1-U)(1-2U) = s bU(1-U) - U(1-U)(U-\\alpha).\n\\]\nWe can remove some terms and collect: \\[\nbs-b^2 + \\alpha + (1-2 b^2) U = 0.\n\\]\nThis expression must be zero for every \\(\\xi\\in\\mathbb{R}\\), thus the coefficients must be zero. We have: \\[\nb = \\pm\\frac{\\sqrt{2}}{2}, \\quad s = \\pm\\frac{\\sqrt{2}}{2}(1-2\\alpha).\n\\]\nWe take the solution with the plus, because \\(s&gt;0\\) and \\(b&gt;0\\). The other solution is also possible, but connects \\(E_1\\) to \\(E_0\\). So we conclude that the propagation velocity is: \\[\ns = \\frac{\\sqrt{2}}{2}(1-2\\alpha).\n\\tag{14.6}\\]\nWe can also compute the front shape \\(U(\\xi)\\). Since \\(U' = Z = h(U)\\), we need to solve: \\[\nU' = b U(1-U),\n\\]\nwhich is the logistic equation! The general solution is: \\[\nU(\\xi) = \\frac{1}{1 + C e^{-b\\xi}}.\n\\]\nThe constant is arbitrary, and we cannot determine it from the boundary conditions, because \\(U(\\xi)\\to 1\\) for \\(\\xi\\to\\infty\\) and \\(U(\\xi)\\to 0\\) for \\(\\xi\\to-\\infty\\), for any \\(C&gt;0\\). The arbitrariness is expected, because the heteroclinic orbit is defined up to a phase shift (if we put \\(\\hat\\xi = \\xi + \\xi_0\\) the solution is the same.) Therefore, we set \\(C=e^{-b\\xi_0}\\) or more simply \\(C=1\\).\nWe also note that: \\[\n\\tanh \\xi = \\frac{e^{2\\xi}-1}{e^{2\\xi}+1},\n\\]\nso, \\[\nU(\\xi)=\\frac{1}{1+e^{-b\\xi}} = \\frac{1}{2}\\bigl( \\tanh(b\\xi/2) + 1 \\bigr)\n= \\frac{1}{2}\\left( \\tanh\\Bigl(\\frac{\\xi}{2\\sqrt{2}}\\Bigr) + 1 \\right).\n\\]\nFor the other case, when we connect \\(U_+\\) to \\(U_-\\), the solution is exactly the opposite.\nIn conclusion, the solution is: \\[\nV(x,t) = U\\Bigl( \\frac{x+st}{\\varepsilon} \\Bigr)\n= \\frac{1}{2}\\left( \\tanh\\Bigl(\\frac{x+st}{2\\varepsilon\\sqrt{2}}\\Bigr) + 1 \\right),\n\\]\nand \\(s\\) as in Equation 14.6. The solution is actually exact for Equation 14.4, we don’t even need the fast-slow analysis. In the limit \\(\\varepsilon\\to 0\\), we recover the slow dynamics: the solution converges to a Heaviside function and the front moves with velocity \\(s\\).\n\n\n\n\nKeener, James, and James Sneyd. 2009. Mathematical Physiology: I: Cellular Physiology. Second. Vol. 8/I. Springer. https://strutture-provincia.primo.exlibrisgroup.com/permalink/39SBT_INST/ghkipk/alma991012367489706186.",
     "crumbs": [
       "Lectures",
       "<span class='chapter-number'>14</span>  <span class='chapter-title'>The cable equation</span>"
@@ -1403,6 +1447,215 @@
     "crumbs": [
       "Assignments",
       "Feedbacks"
+    ]
+  },
+  {
+    "objectID": "Assignments/08_elec.html",
+    "href": "Assignments/08_elec.html",
+    "title": "Electrophysiology",
+    "section": "",
+    "text": "FitzHugh-Nagumo model\nConsider the FHN system: \\[\n\\left\\{\\begin{aligned}\n\\varepsilon v' &= f(v) - w + I_\\text{app}, \\\\\nw' &= v - \\gamma w,\n\\end{aligned}\\right.\n\\]\nwith \\(f(v) = v(1-v)(v-\\alpha)\\) and \\(I_\\text{app} \\in \\mathbb{R}\\). We assume that \\(\\varepsilon \\ll 1\\), so that we can always apply the singular perturbation analysis.",
+    "crumbs": [
+      "Assignments",
+      "Electrophysiology"
+    ]
+  },
+  {
+    "objectID": "Assignments/08_elec.html#fitzhugh-nagumo-model",
+    "href": "Assignments/08_elec.html#fitzhugh-nagumo-model",
+    "title": "Electrophysiology",
+    "section": "",
+    "text": "Show that for \\(I_\\text{app}&gt;0\\) constant and sufficiently large (but not too large), the system has a (singular) limit cycle. Provide a formula for the period.\nTry to sketch the bifurcation diagram with respect to \\(I_\\text{app}\\), mentioning all bifurcations.\nAnode break excitation is when the potential is slowly decreased (thus, \\(I_\\text{app}\\) is negative rather than positive) and then switched off. Can we trigger an action potential in this way? Does it work also when the application time of the current is short?",
+    "crumbs": [
+      "Assignments",
+      "Electrophysiology"
+    ]
+  },
+  {
+    "objectID": "Assignments/08_elec.html#roger-mcculloch-model",
+    "href": "Assignments/08_elec.html#roger-mcculloch-model",
+    "title": "Electrophysiology",
+    "section": "Roger-McCulloch model",
+    "text": "Roger-McCulloch model\nConsider the Roger-McCulloch system: \\[\n\\left\\{\\begin{aligned}\n\\varepsilon v' &= -kv(v-\\alpha)(v-1) - vw + I_\\text{app}, \\\\\nw' &= v - \\gamma w,\n\\end{aligned}\\right.\n\\]\nSuppose \\(\\varepsilon \\ll 1\\). The parameters have the same meaning as in the FitzHugh-Nagumo system.\n\nConsider \\(I_\\text{app}=0\\). Study the phase portrait and show how an action potential may occur.\nWhat does it happen when \\(I_\\text{app}\\neq 0\\)? Is the situation similar to the previous exercise?",
+    "crumbs": [
+      "Assignments",
+      "Electrophysiology"
+    ]
+  },
+  {
+    "objectID": "Assignments/08_elec.html#hodgkin-huxley-model",
+    "href": "Assignments/08_elec.html#hodgkin-huxley-model",
+    "title": "Electrophysiology",
+    "section": "Hodgkin-Huxley model",
+    "text": "Hodgkin-Huxley model\nWhen using the voltage-clamp technique, the total transmembrane current can be accurately measured. However, Hodgkin and Huxley were interested in the individual sodium \\(I_{\\ce{Na}}\\) and potassium \\(I_{\\ce{K}}\\) currents. How can we estimate them from \\(I_\\text{tot} = I_{\\ce{Na}} + I_{\\ce{K}}\\)? This exercise addresses the question.\n\nAre there potential levels (fixed by clamping) at which we can measure a pure $ I_{}$ or \\(I_{\\ce{K}}\\) current?\n\n\nSuppose 90% of the \\(\\ce{Na+}\\) in the bath of a squid axon is replaced by inert choline, preserving electroneutrality. What happens to the equilibrium potentials?\n\n\nExplain why replacing the extracellular \\(\\ce{Na+}\\) with choline has little effect on the resting potential of an axon. Calculate the new resting potential with 90% of the extracellular \\(\\ce{Na+}\\) removed. Why is the same not true if \\(\\ce{K+}\\) is replaced? Assume \\(m = 0.0532\\), \\(n = 0.3184\\), \\(h=0.5945\\) (constants), \\(\\bar{g}_{\\ce{Na}} = 120\\,\\text{mS}\\), \\(\\bar{g}_{\\ce{K}} = 36\\,\\text{mS}\\), \\(\\bar{g}_\\text{leak} =0.3\\,\\text{mS}\\), \\(V_\\text{leak} = -54.4\\,\\text{mV}\\) and \\(V_{\\ce{K}} = -77.3\\,\\text{mV}\\).\n\n\nSuppose we know \\(K = I^1_{\\ce{Na}}/I^2_{\\ce{Na}}\\), where \\(I^1_{\\ce{Na}}\\) is the normal sodium current and \\(I^2_{\\ce{Na}}\\) is the one obtained with 90% of extracellular sodium replaced by choline. Suppose also that \\(K\\) does not change over time and \\(I^1_{\\ce{K}}=I^2_{\\ce{K}}\\). Find \\(I^1_{\\ce{Na}}\\) and \\(I^2_{\\ce{Na}}\\) from \\(I^1_\\text{tot}\\) and \\(I^2_\\text{tot}\\). (A possible way to measure \\(K\\) is to look at \\(I_{\\ce{tot}}\\) immediately after the voltage clamp, because most of the initial current is carried by sodium.)\n\n\nNowadays a simpler way to block channels is with drugs. Tetrodotoxin (TTX) is a powerful neurotoxin, famous for the puffer fish. TTX acts by blocking the sodium channels, hence making them unavailable for action potential formation.\nHere is how we can model it. If \\(P_0\\) represents the total number of \\(\\ce{Na+}\\) channels, and we denote by \\(\\ce{P}\\) and \\(\\ce{B}\\) respectively the number of non-blocked and blocked channels, then the reaction is \\[\n\\ce{P + TTX &lt;=&gt;[k_{-1}][k_1] B}.\n\\]\nModify the sodium conductance to account for the presence of .",
+    "crumbs": [
+      "Assignments",
+      "Electrophysiology"
+    ]
+  },
+  {
+    "objectID": "Assignments/08_elec.html#gating-mechanism",
+    "href": "Assignments/08_elec.html#gating-mechanism",
+    "title": "Electrophysiology",
+    "section": "Gating mechanism",
+    "text": "Gating mechanism\nA ion channel can be modelled with a Markov model. For instance, for a channel we have the following state diagram:\n\n\n\n\n\n\n\n\n\n\nHere we want to show that the probability of the state \\(I_2\\) is exactly \\(n^2(t)\\), where: \\[\n\\frac{\\mathrm{d}n}{\\mathrm{d}t} = \\alpha_n (1-n) - \\beta_n n.\n\\]\n\nWrite down the equations of the system, where \\(s_k(t)=\\mathbb{P}[\\text{state is $I_k$}]\\), with \\(k=0,1,2\\). Observe that \\(s_0(t) + s_1(t) + s_2(t) = 1\\).\nSet \\(s_0(t)=(1-n)^2\\), \\(s_1(t)=2n(1-n)\\), \\(s_2(t)=n^2\\), with \\(n(t)\\) solution of the above ODE. Show that this choice provides a solution of the full system.\nTry to generalize to a system with \\(k+1\\) states, showing that the ODE is always the same with the probability of \\(I_k\\) being \\(n^k(t)\\).",
+    "crumbs": [
+      "Assignments",
+      "Electrophysiology"
+    ]
+  },
+  {
+    "objectID": "Assignments/08_elec.html#multidimensional-fronts",
+    "href": "Assignments/08_elec.html#multidimensional-fronts",
+    "title": "Electrophysiology",
+    "section": "Multidimensional fronts",
+    "text": "Multidimensional fronts\nIn excitable media like the cardiac tissue, the cable equation generalises to its multidimensional version: \\[\n\\varepsilon \\frac{\\partial V}{\\partial t} = \\varepsilon^2 \\Delta V + f(V).\n\\]\nwhere \\(\\Delta\\) is the Laplacian, that is for \\(x = (x_1,x_2,\\ldots,x_n)\\in\\mathbb{R}^n\\) we have: \\[\n\\Delta V = \\frac{\\partial^2 V}{\\partial x_1^2} + \\frac{\\partial^2 V}{\\partial x_2^2} + \\cdot + \\frac{\\partial^2 V}{\\partial x_n^2}.\n\\]\n\nShow that a planar wave, that is \\(V(x,t) = U(\\frac{x\\cdot\\vec{k}+st}{\\varepsilon})\\) with \\(\\vec{k}\\) the unit vector pointing in the propagation direction, one has exactly the 1-D result for the velocity: \\[\ns = \\frac{1}{\\sqrt{2}}(2\\alpha-1).\n\\]\nConsider now a spherical front, that is \\(V(x,t) = U(\\frac{|x| + st}{\\varepsilon}) = U(r + st)\\) where \\(r=|x|\\) is the radius of the sphere. Using the fast system, show that the speed is as follows: \\[\ns = s_0 - \\kappa \\varepsilon,\n\\]\nwhere \\(s_0\\) is the speed of a planar front and \\(\\kappa = \\frac{n-1}{r}\\) is the curvature of the front. Show that, compared to a planar front, the velocity of a concave front is larger and for a convex front is lower.",
+    "crumbs": [
+      "Assignments",
+      "Electrophysiology"
+    ]
+  },
+  {
+    "objectID": "Assignments/10_extra.html",
+    "href": "Assignments/10_extra.html",
+    "title": "Extra exercises",
+    "section": "",
+    "text": "Seasons\nLet us consider a population growing according to the logistic model, but with periodic carrying capacity \\(K\\), e.g., \\[\nK(t) = K_0 \\bigl(1 + \\varepsilon \\cos(\\omega t)\\bigr),\n\\]\nwith \\(0 &lt; \\varepsilon &lt; 1\\). Precisely, population size \\(N(t)\\) satisfies the equation \\[\nN'(t) = r\\Bigl( 1- \\frac{N}{K(t)} \\Bigr)N,\n\\]\nwhere \\(r &gt; 0\\).",
+    "crumbs": [
+      "Assignments",
+      "Extra exercises"
+    ]
+  },
+  {
+    "objectID": "Assignments/10_extra.html#seasons",
+    "href": "Assignments/10_extra.html#seasons",
+    "title": "Extra exercises",
+    "section": "",
+    "text": "Show that, using the same trick used for solving the logistic equation, the solutions of can be written explicitely, although involving integrals that may be impossible to evaluate analytically.\nDraw the direction field for this equation. Try to draw one solution of the equation, and convince yourself that it will converge to a positive periodic solution.",
+    "crumbs": [
+      "Assignments",
+      "Extra exercises"
+    ]
+  },
+  {
+    "objectID": "Assignments/10_extra.html#mutualism",
+    "href": "Assignments/10_extra.html#mutualism",
+    "title": "Extra exercises",
+    "section": "Mutualism",
+    "text": "Mutualism\nIt is assumed that the dynamics of the density of two mutualistic species follows, for each species, the logistic equation where however the carrying capacity increases due to the presence of the other species \\[\n\\left\\{\\begin{aligned}\nN_1'(t) &= r_1 N_1 \\Bigl( 1 - \\frac{N_1}{K_1 + a N_2} \\Bigr), \\\\\nN_2'(t) &= r_2 N_2 \\Bigl( 1 - \\frac{N_2}{K_2 + b N_1} \\Bigr).\n\\end{aligned}\\right.\n\\]\n\nExplain why, according to this model, the interaction of the two species is of mutualistic type.\nAssuming \\(0 &lt; ab &lt; 1\\), draw the isoclines of the systems and the vector field.\nCan we understand from the vector-field the long-time behaviour of the solutions?\nWhat happens if \\(ab &gt; 1\\)?",
+    "crumbs": [
+      "Assignments",
+      "Extra exercises"
+    ]
+  },
+  {
+    "objectID": "Assignments/10_extra.html#plant-herbivore-system",
+    "href": "Assignments/10_extra.html#plant-herbivore-system",
+    "title": "Extra exercises",
+    "section": "Plant-herbivore system",
+    "text": "Plant-herbivore system\nThe following system has been proposed to study a plant-herbivore system: \\(q\\) represents plant quality (low \\(q\\) means that the plant is toxic because of chemicals released, while high \\(q\\) means that the plant is a good food for the herbivores). We assume that quality decreases (toxic compounds are synthetised) as a result of high herbivory). The density of herbivores is \\(H(t)\\) and their growth rate depends on the quality of food they consume. The model equations are \\[\n\\begin{cases}\nq' = k_1 - k_2 q H(H-H_0), & \\\\\nH' = k_3 H (1 - k_4 H/q), &\n\\end{cases}\n\\]\n\nExplain why the equations correspond to the biological assumptions, and suggest possible meanings for its parameters.\nShow that the equations can be written in dimensionless form as follows \\[\n\\begin{cases}\nx' = 1 - kxy(y-1), & \\\\\ny' = \\alpha y(1- y/x), &\n\\end{cases}\n\\]\nDetermine \\(k\\) and \\(\\alpha\\) in terms of the original parameters.\nShow (graphically) that there is only one positive equilibrium.\nDetermine its stability from a qualitative analysis of the isoclines.",
+    "crumbs": [
+      "Assignments",
+      "Extra exercises"
+    ]
+  },
+  {
+    "objectID": "Assignments/10_extra.html#mooses-and-wolves",
+    "href": "Assignments/10_extra.html#mooses-and-wolves",
+    "title": "Extra exercises",
+    "section": "Mooses and wolves",
+    "text": "Mooses and wolves\nIn all Canada moose are preyed by packs of wolves that cause a relevant mortality. The ecologist Messier (1994) has collected data in different areas in the country and found that the following relation (approximately) holds between the density \\(W\\) (# of wolves per km\\({}^2\\)) of wolves and the density \\(M\\) (# of moose per km\\({}^2\\)) of moose: \\[\nW = \\frac{0.0587(M-0.3)}{0.76+M}.\\tag{1}\n\\]\n\nLet us interpret this relation as the isocline of predators, i.e. the equilibrium number of wolves for each constant density \\(M\\) of moose. Is it possible to obtain such an isocline from a prey-predator system of Gause-Rosenzweig-McArthur type?\nSuppose instead that the numerical response of wolves has the Holling-type 2 form \\[\n\\pi(M) = \\frac{a M}{1+a T_h M},\n\\]\nand that mortality of wolves is equal to \\(\\mu_0 +\\mu_1 W\\). Find the constants \\(a/\\mu_1\\), \\(aT_h\\) and \\(\\mu_0/\\mu_1\\) such that the predator isocline can be written as \\((1)\\). Hint: we cannot determine all 4 parameters \\((a, T_h, \\mu_0, \\mu_1)\\) by this relation, but only 3 combinations of them.\nAssume that, in absence of wolves, the growth of moose is logistic with intrinsic growth rate equal to \\(0.51\\) years\\({}^{-1}\\) and carrying capacity equal to \\(0.5\\) moose per km\\(^2\\).\nFurthermore, assume that the functional response is proportional to the numerical response (the one found at the previous point).\nDraw the prey and predator isoclines and show that there exists a unique positive equilibrium of the system.\nStudy the stability of the positive equilibrium. Hint: it is enough computing the signs of the terms of the Jacobian at the equilibrium; the computations are easier using the function \\(\\Phi(M)\\) defined for the isocline \\(W=\\Phi(M)\\).",
+    "crumbs": [
+      "Assignments",
+      "Extra exercises"
+    ]
+  },
+  {
+    "objectID": "Assignments/10_extra.html#fishing",
+    "href": "Assignments/10_extra.html#fishing",
+    "title": "Extra exercises",
+    "section": "Fishing",
+    "text": "Fishing\nConsider the predator-prey model with logistic prey growth rate and bilinear predation rate \\[\n\\left\\{\\begin{aligned}\nH'(t) &= r \\Bigl( 1 - \\frac{H}{K} \\Bigr) H - a H P, \\\\\nP'(t) &= -\\mu P + \\gamma a H P.\n\\end{aligned}\\right.\n\\]\nAssume that the parameters are such that a positive equilibrium exists, and add fishing to the equations of prey and predators, following Volterra’s assumptions.\n\nShow that, if the fishing effort becomes large, the predators will get extinct; if it becomes even larger, the prey also will get extinct.\nShow that, with lower fishing efforts, the equilibrium predator density decreases and the equilibrium prey density increases.\nChange the time unit to \\(\\tau = rt\\) and the variable \\(H\\) to \\(u = H/K\\) and write down the resulting system.\nPropose a change of variable also for \\(P\\) such to further decrease the number of parameters of the resulting system.",
+    "crumbs": [
+      "Assignments",
+      "Extra exercises"
+    ]
+  },
+  {
+    "objectID": "Assignments/10_extra.html#gause-rosenzweig-mcarthur-model",
+    "href": "Assignments/10_extra.html#gause-rosenzweig-mcarthur-model",
+    "title": "Extra exercises",
+    "section": "Gause-Rosenzweig-McArthur model",
+    "text": "Gause-Rosenzweig-McArthur model\nGause-Rosenzweig-McArthur predator-prey models with logistic prey growth rate have the following structure \\[\n\\left\\{\\begin{aligned}\nH'(t) &= r \\Bigl( 1 - \\frac{H}{K} \\Bigr) H - \\pi(H)P, \\\\\nP'(t) &= -\\mu P + \\gamma \\pi(H) P.\n\\end{aligned}\\right.\n\\]\nwhere \\(\\pi(H)\\) is a function, named functional response, representing the per capita predation rate, i.e., the number of prey captured by each predator in unit time.\nAssume that \\(\\pi(H)\\) is an increasing function such that: \\[\np(0)=0, \\quad \\lim_{H\\to\\infty} \\pi(H) = \\bar{p} &lt; +\\infty.\n\\]\nThe protypical example is Holling type-2 function \\[\n\\pi_2(H)=\\frac{aH}{1+aT_h H}, \\quad \\lim_{H\\to\\infty} \\pi_2(H) = \\frac{1}{T_h} &lt; +\\infty.\n\\]\n\nShow graphically that, if \\(\\gamma \\bar{p} &gt; \\mu\\), there exists a unique \\(H_*\\) such that \\(\\gamma \\pi(H_*) = \\mu\\). Compute \\(H_*\\) in the case of the Holling type-2 function.\nCompute the isoclines of the system, showing that \\(H' = 0\\) if and only if \\(H = 0\\) or \\(P = \\Phi(H)\\) for an appropriate function \\(\\Phi\\). Compute the function \\(\\Phi(H)\\) in the case of the Holling type-2 function.\nShow that the system has a positive equilibrium \\(E_*\\) if and only if \\(K &gt; H_*\\).",
+    "crumbs": [
+      "Assignments",
+      "Extra exercises"
+    ]
+  },
+  {
+    "objectID": "Assignments/10_extra.html#competition",
+    "href": "Assignments/10_extra.html#competition",
+    "title": "Extra exercises",
+    "section": "Competition",
+    "text": "Competition\nConsider the following system describing competition between two species: \\[\n\\left\\{\\begin{aligned}\nN_1' &= (122 - 3N_1 - N_1^2 - N_2)N_1, \\\\\nN_2' &= (80 - 2N_1 - N_2)N_2.\n\\end{aligned}\\right.\n\\]\n\nDraw the isoclines of the system and find its equilibria.\nIdentify what can be defined the carrying capacity for each species.\nFind out the behaviour of the solutions of the system (a graphical analysis may help).\nDiscuss the assumptions of the model.",
+    "crumbs": [
+      "Assignments",
+      "Extra exercises"
+    ]
+  },
+  {
+    "objectID": "Assignments/10_extra.html#population-dynamics",
+    "href": "Assignments/10_extra.html#population-dynamics",
+    "title": "Extra exercises",
+    "section": "Population dynamics",
+    "text": "Population dynamics\nWe model the population dynamics of a species of insects by the following system of differential equations: \\[\n\\left\\{\\begin{aligned}\nJ' &= \\beta_0 \\phi(A)A - (\\rho + \\mu_J)J, \\\\\nA' &= \\rho J - \\mu_A A.\n\\end{aligned}\\right.\n\\]\nwhere \\(J(t)\\) represents the density of juveniles, and \\(A(t)\\) represent the density of adults.\nIn order to fit the parameters of the model, we use some information obtained by raising the insects in the laboratory. We know that under those conditions\n\naround \\(70\\%\\) of the larvae emerging from eggs reach the adult stage;\n14 days is the average age at which the adult stage is reached;\nthe average length of the adult stage is 30 days;\neach (female) adult produces on the average 120 eggs during its whole life.\n\n\nUse this information to choose all parameters of the model, except for the function \\(\\phi\\).\nLaboratory experiments cannot yield reliable information on the function\\(\\phi\\). Instead we assume that \\[\n\\phi(x) = e^{-\\gamma x}.\n\\]\nEstimate \\(\\gamma\\), using the information that the density of the juvenile stages of the insect in a cultivated area is around \\(0.7\\,\\text{per m}^2\\) and that this must correspond to the equilibrium of model.\nAnalyse the stability of the equilibrium you just found of system.\nThe complete data on the age at which the adult stage is reached are shown in the histogram below. Do you think that these data are compatible with the assumptions implicit in model? If not, do you have suggestions on how to modify?",
+    "crumbs": [
+      "Assignments",
+      "Extra exercises"
+    ]
+  },
+  {
+    "objectID": "Assignments/10_extra.html#seir-model",
+    "href": "Assignments/10_extra.html#seir-model",
+    "title": "Extra exercises",
+    "section": "SEIR model",
+    "text": "SEIR model\nAn extension of SIR models is to introduce a class \\(E\\) (Exposed) of individuals that have been infected, but are not yet infectious. Consider thus an SEIR model (with births and deaths) similar to the SIR model, assuming that individuals in \\(E\\) move to the class \\(I\\) at rate \\(\\nu\\).\n\nFind the equilibria of the system, discussing the conditions under which a positive equilibrium exists.\nStudy the stability of the disease-free equilibrium, and write down the condition for its stability as \\(R_0 &lt; 1\\) for an appropriately defined quantity \\(R_0\\).\nNoting that \\(R_0\\) will differ (slightly) from that obtained for the SIR model, interpret it anyway as the average number of new infections produced by a newly infected individual along her/his infectious period, assuming everybody else is susceptible.\nDoes the value of \\(R_0\\) change if we consider instead an SEIRS model in which immunity decays?",
+    "crumbs": [
+      "Assignments",
+      "Extra exercises"
+    ]
+  },
+  {
+    "objectID": "Assignments/10_extra.html#asymptomatics",
+    "href": "Assignments/10_extra.html#asymptomatics",
+    "title": "Extra exercises",
+    "section": "Asymptomatics",
+    "text": "Asymptomatics\nIt is known that infections with the same pathogen strain can give to diseases of different severities according to the person infected. We model this by modifying the SEIR model of the previous problem; we assume that there may be infected individuals that are severely ill \\(I\\) and others that are asymptomatic \\(A\\); it is assumed that at the end of the incubation period, infected individuals become \\(I\\) with probability \\(p\\) and \\(A\\) with probability \\(1−p\\). Furthermore the infectiousness of asymptomatic individuals is equal to \\(\\phi\\) times the infectiousness of severely ill, and the mean duration of the \\(A\\) stage is (neglecting deaths) \\(1/\\alpha\\), while that of the \\(I\\) stage is \\(1\\gamma\\).\n\nWrite down an ODE model for the classes of susceptibles \\((S)\\), exposed \\((E)\\), severely ill \\((I)\\), asymptomatic \\((A)\\) and removed \\((R)\\) individuals consistent with this verbal description.\nIf empirical information is missing, would you expect \\(\\phi\\) to be greater or smaller than 1? And \\(\\alpha\\) smaller or greater than \\(\\gamma\\)? Discuss.\nFind \\(R_0\\) in an intuitive way, by looking at the possible paths of a newly infected individual, and the average number of infections caused along each path.\nShow that the disease-free equilibrium is asymptotically stable (resp. unstable) if \\(R_0 &lt; 1\\) (resp. \\(R_0 &gt; 1\\)).\nShow that the system has a unique positive equilibrium if and only if \\(R_0 &gt; 1\\).",
+    "crumbs": [
+      "Assignments",
+      "Extra exercises"
+    ]
+  },
+  {
+    "objectID": "Assignments/10_extra.html#a-feedback-network",
+    "href": "Assignments/10_extra.html#a-feedback-network",
+    "title": "Extra exercises",
+    "section": "A feedback network",
+    "text": "A feedback network\nConsider a small molecular network as presented in the following scheme:\n\nWe assume that \\(E\\) gets phosphorylated and de-phosphorylated following Michaelis-Menten type reactions; the reaction rates for \\(X\\) are instead of linear type with respect to \\(E_p\\) (rate \\(k_1'\\)) and we assume that \\(X\\) is synthetized (at rate \\(k_1\\)) also in absence of \\(E_p\\). The product \\(X\\) is removed at rate \\(k_2\\).\n\nDoes the scheme model a negative or a positive feedback loop?\nWrite down a system of equations representing the scheme.\nStudy the equations satisfied by equilibria; this will involve the Goldbeter-Koshland function.\nConsider the bifurcation graph of equilibria with respect to the parameter \\(k_1\\); show that, when the half-saturation constants of Michaelis-Menten reactions are small (this because of the shape of the Goldbeter-Koshland function), there is one equilibrium for small \\(k_1'\\) or large \\(k_1'\\), and three equilibria for intermediate \\(k_1'\\).",
+    "crumbs": [
+      "Assignments",
+      "Extra exercises"
+    ]
+  },
+  {
+    "objectID": "Assignments/10_extra.html#gene-transcription",
+    "href": "Assignments/10_extra.html#gene-transcription",
+    "title": "Extra exercises",
+    "section": "Gene Transcription",
+    "text": "Gene Transcription\nNote: this model has been proposed by JS Griffith in 1968 in two papers on positive and negative feedback loops.\nConsider the simple case of a protein that activates transcription of its own gene, as in the following figure:\n\nThis mechanism is described by a pair of ordinary differential equations: \\[\n\\left\\{\\begin{aligned}{}\n[M]' &= \\nu_1 \\frac{\\varepsilon^2 + ([P]/K_\\ell)^2}{1 + ([P]/K_\\ell)^2} - k_2 [M], \\\\\n[P]' &= k_3 [M] − k_4 [P].\n\\end{aligned}\\right.\n\\]\n\nHow must the variables be scaled to write the ODEs in dimensionless form: \\[\n\\left\\{\\begin{aligned}\n\\frac{\\mathrm{d}x}{\\mathrm{d}\\tau} &= \\frac{\\varepsilon^2 + y^2}{1 + y^2} - x, \\\\\n\\frac{\\mathrm{d}y}{\\mathrm{d}\\tau} &= \\kappa( \\sigma x-y).\n\\end{aligned}\\right.\n\\]\nAssume \\(\\varepsilon = 0.2\\), \\(\\kappa = 1\\). Draw phase plane portraits for several values of \\(\\sigma\\).\nShow graphically how the number of equilibria of the system changes with \\(\\sigma\\).\nPlot the equilibrium value of \\(y\\) as a function of \\(\\sigma\\). Hint: it is enough a picture showing the qualitative pattern.",
+    "crumbs": [
+      "Assignments",
+      "Extra exercises"
     ]
   },
   {

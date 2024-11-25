@@ -180,9 +180,6 @@ window.Quarto = {
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="../">Mathematical Biology</a> 
-        <div class="sidebar-tools-main">
-    <a href="../Mathematical-Biology.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
-</div>
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -409,6 +406,18 @@ window.Quarto = {
  <span class="menu-text">Feedbacks</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Assignments/08_elec.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Electrophysiology</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Assignments/10_extra.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Extra exercises</span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -456,7 +465,7 @@ window.Quarto = {
   <li><a href="#the-fitzhugh-nagumo-model" id="toc-the-fitzhugh-nagumo-model" class="nav-link" data-scroll-target="#the-fitzhugh-nagumo-model"><span class="header-section-number">13.4</span> The FitzHugh-Nagumo model</a>
   <ul class="collapse">
   <li><a href="#fast-dynamics" id="toc-fast-dynamics" class="nav-link" data-scroll-target="#fast-dynamics"><span class="header-section-number">13.4.1</span> Fast dynamics</a></li>
-  <li><a href="#slow-dynamics" id="toc-slow-dynamics" class="nav-link" data-scroll-target="#slow-dynamics"><span class="header-section-number">13.4.2</span> Slow dynamics</a></li>
+  <li><a href="#sec-slowFHN" id="toc-sec-slowFHN" class="nav-link" data-scroll-target="#sec-slowFHN"><span class="header-section-number">13.4.2</span> Slow dynamics</a></li>
   <li><a href="#oscillations" id="toc-oscillations" class="nav-link" data-scroll-target="#oscillations"><span class="header-section-number">13.4.3</span> Oscillations</a></li>
   </ul></li>
   </ul>
@@ -486,7 +495,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">November 13, 2024</p>
+      <p class="date-modified">November 24, 2024</p>
     </div>
   </div>
     
@@ -499,14 +508,14 @@ window.Quarto = {
 
 <section id="the-model" class="level2" data-number="13.1">
 <h2 data-number="13.1" class="anchored" data-anchor-id="the-model"><span class="header-section-number">13.1</span> The model</h2>
-<p>The complete form of the Hodgkin-Huxley model is the following: <span class="math display">\[
+<p>The complete form of the Hodgkin-Huxley model is the following: <span id="eq-hh"><span class="math display">\[
 \left\{ \begin{aligned}
 - C_\mathrm{m} \frac{\mathrm{d}V_\mathrm{m}}{\mathrm{d}t} &amp;= \bar{g}_\text{Na} m^3 h (V - V_\text{Na}) + \bar{g}_\text{K} n^4 (V - V_\text{K})+ \bar{g}_\text{leak} (V - V_\text{leak}) - I_\mathrm{stim}(t), \\
 \frac{\mathrm{d}n}{\mathrm{d}t} &amp;= \alpha_n(V_\mathrm{m}) (1-n) - \beta_n(V_\mathrm{m}) n, \\
 \frac{\mathrm{d}m}{\mathrm{d}t} &amp;= \alpha_m(V_\mathrm{m}) (1-m) - \beta_m(V_\mathrm{m}) m, \\
 \frac{\mathrm{d}h}{\mathrm{d}t} &amp;= \alpha_h(V_\mathrm{m}) (1-h) - \beta_h(V_\mathrm{m}) h.
 \end{aligned}\right.
-\]</span></p>
+\tag{13.1}\]</span></span></p>
 <p>The parameters of the model per <span class="math inline">\(1\,\text{cm}^2\)</span> are as follows: <span class="math inline">\(C_\mathrm{m} = 1\,\text{$\mu$F}\)</span>, <span class="math inline">\(g_\text{Na} = 120\,\text{mS}\)</span>, <span class="math inline">\(g_\text{K} = 36\,\text{mS}\)</span>, <span class="math inline">\(g_\text{leak} = 0.3\,\text{mS}\)</span>, <span class="math inline">\(V_\text{Na} = 55\,\text{mV}\)</span>, <span class="math inline">\(V_\text{K} = -77\,\text{mV}\)</span>, <span class="math inline">\(V_\text{leak} = -54.4\,\text{mV}\)</span>.</p>
 <p>Concerning the transition rates, we have the following for <span class="math inline">\(\tau_{\{m,h,n\}}(V_m)\)</span> and <span class="math inline">\({\{m,h,n\}}_\infty\)</span>:</p>
 <div id="58ea52f8" class="cell" data-execution_count="2">
@@ -1000,8 +1009,8 @@ V_-(w) \le V_0(w) \le V_+(w)
 \]</span></p>
 <p>that exists for <span class="math inline">\(w_* &lt; w &lt; w^*\)</span>. Otherwise, we only have either <span class="math inline">\(V_-(w)\)</span> or <span class="math inline">\(V_+(w)\)</span>. The equilibria <span class="math inline">\(V_\pm(w)\)</span> are always stable, while <span class="math inline">\(V_0(w)\)</span> is unstable (the threshold).</p>
 </section>
-<section id="slow-dynamics" class="level3" data-number="13.4.2">
-<h3 data-number="13.4.2" class="anchored" data-anchor-id="slow-dynamics"><span class="header-section-number">13.4.2</span> Slow dynamics</h3>
+<section id="sec-slowFHN" class="level3" data-number="13.4.2">
+<h3 data-number="13.4.2" class="anchored" data-anchor-id="sec-slowFHN"><span class="header-section-number">13.4.2</span> Slow dynamics</h3>
 <p>In the original system, we set <span class="math inline">\(\varepsilon=0\)</span> to obtain: <span class="math display">\[
 \left\{ \begin{aligned}
 0 &amp;= f(V) - w, \\

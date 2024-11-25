@@ -6,9 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="dcterms.date" content="2024-10-02">
+<meta name="dcterms.date" content="2024-11-24">
 
-<title>Lab 02: Predation – Mathematical Biology</title>
+<title>Extra exercises – Mathematical Biology</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -21,81 +21,27 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
-/* CSS for citations */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-  margin-bottom: 0em;
-}
-.hanging-indent div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}</style>
+</style>
 
 
-<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
-<script src="../../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../../">
-<link href="../../Laboratories/03_Bifurcations/lab_Bifurcations.html" rel="next">
-<link href="../../Laboratories/01_ODE_Integration/lab_ODEinteg.html" rel="prev">
-<script src="../../site_libs/quarto-html/quarto.js"></script>
-<script src="../../site_libs/quarto-html/popper.min.js"></script>
-<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../Lectures/IntroODE.html" rel="next">
+<link href="../Assignments/08_elec.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -164,7 +110,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../Laboratories/01_ODE_Integration/lab_ODEinteg.html">Labs</a></li><li class="breadcrumb-item"><a href="../../Laboratories/02_Predation/lab_Predation.html">Lab 02: Predation</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../Assignments/01_recap_ODEs.html">Assignments</a></li><li class="breadcrumb-item"><a href="../Assignments/10_extra.html">Extra exercises</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -179,7 +125,7 @@ window.Quarto = {
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="../../">Mathematical Biology</a> 
+      <a href="../">Mathematical Biology</a> 
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -191,13 +137,13 @@ window.Quarto = {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../index.html" class="sidebar-item-text sidebar-link">
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Welcome</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../projects2024.html" class="sidebar-item-text sidebar-link">
+  <a href="../projects2024.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Projects</span></a>
   </div>
 </li>
@@ -212,91 +158,91 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../Lectures/01_Bathtub.html" class="sidebar-item-text sidebar-link">
+  <a href="../Lectures/01_Bathtub.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Bathtub model</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../Lectures/02_Population.html" class="sidebar-item-text sidebar-link">
+  <a href="../Lectures/02_Population.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Population dynamics</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../Lectures/03_Logistic.html" class="sidebar-item-text sidebar-link">
+  <a href="../Lectures/03_Logistic.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Logistic model</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../Lectures/04_Predation.html" class="sidebar-item-text sidebar-link">
+  <a href="../Lectures/04_Predation.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Predation models</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../Lectures/05_LotkaVolterra.html" class="sidebar-item-text sidebar-link">
+  <a href="../Lectures/05_LotkaVolterra.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Lotka-Volterra model</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../Lectures/06_Gause.html" class="sidebar-item-text sidebar-link">
+  <a href="../Lectures/06_Gause.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Gause type models</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../Lectures/07_RM.html" class="sidebar-item-text sidebar-link">
+  <a href="../Lectures/07_RM.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Rosenzweig-MacArthur model</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../Lectures/08_MichaelisMenten.html" class="sidebar-item-text sidebar-link">
+  <a href="../Lectures/08_MichaelisMenten.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Michaelis-Menten law</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../Lectures/09_FastSlow.html" class="sidebar-item-text sidebar-link">
+  <a href="../Lectures/09_FastSlow.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Fast-Slow systems</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../Lectures/10_Inhibition.html" class="sidebar-item-text sidebar-link">
+  <a href="../Lectures/10_Inhibition.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Inhibition</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../Lectures/11_FeedbackLoops.html" class="sidebar-item-text sidebar-link">
+  <a href="../Lectures/11_FeedbackLoops.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Feedback loops</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../Lectures/12_Bioelectricity.html" class="sidebar-item-text sidebar-link">
+  <a href="../Lectures/12_Bioelectricity.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Bioelectricity</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../Lectures/13_HodgkinHuxley.html" class="sidebar-item-text sidebar-link">
+  <a href="../Lectures/13_HodgkinHuxley.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Hodgkin-Huxley model</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../Lectures/14_CableEquation.html" class="sidebar-item-text sidebar-link">
+  <a href="../Lectures/14_CableEquation.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">The cable equation</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../Lectures/references.html" class="sidebar-item-text sidebar-link">
+  <a href="../Lectures/references.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">References</span></a>
   </div>
 </li>
@@ -313,43 +259,43 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../Laboratories/01_ODE_Integration/lab_ODEinteg.html" class="sidebar-item-text sidebar-link">
+  <a href="../Laboratories/01_ODE_Integration/lab_ODEinteg.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Lab 01: Numerical integration</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../Laboratories/02_Predation/lab_Predation.html" class="sidebar-item-text sidebar-link active">
+  <a href="../Laboratories/02_Predation/lab_Predation.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Lab 02: Predation</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../Laboratories/03_Bifurcations/lab_Bifurcations.html" class="sidebar-item-text sidebar-link">
+  <a href="../Laboratories/03_Bifurcations/lab_Bifurcations.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Lab 03: Bifurcations</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../Laboratories/04_Chaos/lab_chaos.html" class="sidebar-item-text sidebar-link">
+  <a href="../Laboratories/04_Chaos/lab_chaos.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Lab 04: Chaos</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../Laboratories/05_Feedbacks/lab_feedback.html" class="sidebar-item-text sidebar-link">
+  <a href="../Laboratories/05_Feedbacks/lab_feedback.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Lab 05: Feedback loops</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../Laboratories/06_Electrophysiology/lab_ep.html" class="sidebar-item-text sidebar-link">
+  <a href="../Laboratories/06_Electrophysiology/lab_ep.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Lab 06: Electrophysiology</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../Laboratories/07_Param/lab_param.html" class="sidebar-item-text sidebar-link">
+  <a href="../Laboratories/07_Param/lab_param.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Lab 07: Parameter fitting</span></a>
   </div>
 </li>
@@ -366,55 +312,55 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../Assignments/01_recap_ODEs.html" class="sidebar-item-text sidebar-link">
+  <a href="../Assignments/01_recap_ODEs.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Solving ODEs</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../Assignments/02_population.html" class="sidebar-item-text sidebar-link">
+  <a href="../Assignments/02_population.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Population dynamics</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../Assignments/03_spruce.html" class="sidebar-item-text sidebar-link">
+  <a href="../Assignments/03_spruce.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Predation</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../Assignments/04_systems.html" class="sidebar-item-text sidebar-link">
+  <a href="../Assignments/04_systems.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">System of ODEs</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../Assignments/05_predators.html" class="sidebar-item-text sidebar-link">
+  <a href="../Assignments/05_predators.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Prey-predator systems</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../Assignments/06_reactions.html" class="sidebar-item-text sidebar-link">
+  <a href="../Assignments/06_reactions.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Reactions</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../Assignments/07_feedbacks.html" class="sidebar-item-text sidebar-link">
+  <a href="../Assignments/07_feedbacks.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Feedbacks</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../Assignments/08_elec.html" class="sidebar-item-text sidebar-link">
+  <a href="../Assignments/08_elec.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Electrophysiology</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../Assignments/10_extra.html" class="sidebar-item-text sidebar-link">
+  <a href="../Assignments/10_extra.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Extra exercises</span></a>
   </div>
 </li>
@@ -431,19 +377,19 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../Lectures/IntroODE.html" class="sidebar-item-text sidebar-link">
+  <a href="../Lectures/IntroODE.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Introduction to ODEs</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../Lectures/bifurcations.html" class="sidebar-item-text sidebar-link">
+  <a href="../Lectures/bifurcations.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Introduction to bifurcations</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../Laboratories/00_Intro_Matlab/introMATLAB.html" class="sidebar-item-text sidebar-link">
+  <a href="../Laboratories/00_Intro_Matlab/introMATLAB.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Introduction to MATLAB</span></span></a>
   </div>
 </li>
@@ -459,22 +405,28 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#holling-type-predation" id="toc-holling-type-predation" class="nav-link active" data-scroll-target="#holling-type-predation">Holling type predation</a>
-  <ul class="collapse">
-  <li><a href="#the-experiment" id="toc-the-experiment" class="nav-link" data-scroll-target="#the-experiment">The experiment</a></li>
-  <li><a href="#the-analysis" id="toc-the-analysis" class="nav-link" data-scroll-target="#the-analysis">The analysis</a></li>
-  <li><a href="#import-data" id="toc-import-data" class="nav-link" data-scroll-target="#import-data">Import data</a></li>
-  <li><a href="#fitting" id="toc-fitting" class="nav-link" data-scroll-target="#fitting">Fitting</a></li>
-  </ul></li>
+  <li><a href="#seasons" id="toc-seasons" class="nav-link active" data-scroll-target="#seasons">Seasons</a></li>
+  <li><a href="#mutualism" id="toc-mutualism" class="nav-link" data-scroll-target="#mutualism">Mutualism</a></li>
+  <li><a href="#plant-herbivore-system" id="toc-plant-herbivore-system" class="nav-link" data-scroll-target="#plant-herbivore-system">Plant-herbivore system</a></li>
+  <li><a href="#mooses-and-wolves" id="toc-mooses-and-wolves" class="nav-link" data-scroll-target="#mooses-and-wolves">Mooses and wolves</a></li>
+  <li><a href="#fishing" id="toc-fishing" class="nav-link" data-scroll-target="#fishing">Fishing</a></li>
+  <li><a href="#gause-rosenzweig-mcarthur-model" id="toc-gause-rosenzweig-mcarthur-model" class="nav-link" data-scroll-target="#gause-rosenzweig-mcarthur-model">Gause-Rosenzweig-McArthur model</a></li>
+  <li><a href="#competition" id="toc-competition" class="nav-link" data-scroll-target="#competition">Competition</a></li>
+  <li><a href="#population-dynamics" id="toc-population-dynamics" class="nav-link" data-scroll-target="#population-dynamics">Population dynamics</a></li>
+  <li><a href="#seir-model" id="toc-seir-model" class="nav-link" data-scroll-target="#seir-model">SEIR model</a></li>
+  <li><a href="#asymptomatics" id="toc-asymptomatics" class="nav-link" data-scroll-target="#asymptomatics">Asymptomatics</a></li>
+  <li><a href="#a-feedback-network" id="toc-a-feedback-network" class="nav-link" data-scroll-target="#a-feedback-network">A feedback network</a></li>
+  <li><a href="#gene-transcription" id="toc-gene-transcription" class="nav-link" data-scroll-target="#gene-transcription">Gene Transcription</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../Laboratories/01_ODE_Integration/lab_ODEinteg.html">Labs</a></li><li class="breadcrumb-item"><a href="../../Laboratories/02_Predation/lab_Predation.html">Lab 02: Predation</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../Assignments/01_recap_ODEs.html">Assignments</a></li><li class="breadcrumb-item"><a href="../Assignments/10_extra.html">Extra exercises</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Lab 02: Predation</h1>
+<h1 class="title">Extra exercises</h1>
+<p class="subtitle lead">Assignment extra</p>
 </div>
 
 
@@ -485,14 +437,14 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">October 2, 2024</p>
+      <p class="date">November 24, 2024</p>
     </div>
   </div>
   
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">November 12, 2024</p>
+      <p class="date-modified">November 24, 2024</p>
     </div>
   </div>
     
@@ -503,128 +455,209 @@ window.Quarto = {
 </header>
 
 
-<section id="holling-type-predation" class="level2">
-<h2 class="anchored" data-anchor-id="holling-type-predation">Holling type predation</h2>
-<p>Holling type functional responses can be experimentally observed with a simple game. This is inspired to the MSc thesis from <span class="citation" data-cites="pulley2020">Pulley (<a href="../../Lectures/references.html#ref-pulley2020" role="doc-biblioref">2020</a>)</span>, where the author proposes a similar game with marshmallows.</p>
-<section id="the-experiment" class="level3">
-<h3 class="anchored" data-anchor-id="the-experiment">The experiment</h3>
-<p>We need the following tools:</p>
-<ul>
-<li>A desk or a clean area where to perform the experiment;</li>
-<li>Two stopwatches (there’s an app in every phone);</li>
-<li>A bag of small objects to be collected or eaten. In the original proposal, they were marshmallow, which can be eaten. If you’re concerned about your diet or teeth, you can use other objects (coins, beans, pens,…)</li>
-<li>A blindfold.</li>
-<li>A group of at least 4 students.</li>
-</ul>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="desk_with_candies.jpg" class="img-fluid figure-img"></p>
-<figcaption>Desk with a <span class="math inline">\(0.31\,\text{m}^2\)</span> delimited area with <span class="math inline">\(N=16\)</span> candies. The density here is <span class="math inline">\(16/0.31 \approx 52\,\text{candies}/\text{m}^2\)</span>. You can measure the area with an app.</figcaption>
-</figure>
-</div>
-<p>The game is as follows:</p>
+<section id="seasons" class="level2">
+<h2 class="anchored" data-anchor-id="seasons">Seasons</h2>
+<p>Let us consider a population growing according to the logistic model, but with periodic carrying capacity <span class="math inline">\(K\)</span>, e.g., <span class="math display">\[
+K(t) = K_0 \bigl(1 + \varepsilon \cos(\omega t)\bigr),
+\]</span></p>
+<p>with <span class="math inline">\(0 &lt; \varepsilon &lt; 1\)</span>. Precisely, population size <span class="math inline">\(N(t)\)</span> satisfies the equation <span class="math display">\[
+N'(t) = r\Bigl( 1- \frac{N}{K(t)} \Bigr)N,
+\]</span></p>
+<p>where <span class="math inline">\(r &gt; 0\)</span>.</p>
 <ol type="1">
-<li>We <em>randomly</em> place on the desk a certain number of objects. We take note of this number <span class="math inline">\(N\)</span>;</li>
-<li>Student A is blindfolded;</li>
-<li>Student B says “Go!” and starts the stopwatch. In the meanwhile, student A starts searching on the desk for an object.</li>
-<li>When Student A finds one object, he will collect/eat it.</li>
-<li>Student C, with another stopwatch, will measure the total time spent eating/collecting. Thus, it starts the stopwatch when student A picks up the object, and stops it when student A starts searching again.</li>
-<li>Student D will put a new object at random on the desk so to keep <span class="math inline">\(N\)</span> constant.</li>
+<li><p>Show that, using the same trick used for solving the logistic equation, the solutions of can be written explicitely, although involving integrals that may be impossible to evaluate analytically.</p></li>
+<li><p>Draw the direction field for this equation. Try to draw one solution of the equation, and convince yourself that it will converge to a positive periodic solution.</p></li>
 </ol>
-<p>The experiment can last 90 seconds. At the end of the experiment, we need to mark</p>
+</section>
+<section id="mutualism" class="level2">
+<h2 class="anchored" data-anchor-id="mutualism">Mutualism</h2>
+<p>It is assumed that the dynamics of the density of two mutualistic species follows, for each species, the logistic equation where however the carrying capacity increases due to the presence of the other species <span class="math display">\[
+\left\{\begin{aligned}
+N_1'(t) &amp;= r_1 N_1 \Bigl( 1 - \frac{N_1}{K_1 + a N_2} \Bigr), \\
+N_2'(t) &amp;= r_2 N_2 \Bigl( 1 - \frac{N_2}{K_2 + b N_1} \Bigr).
+\end{aligned}\right.
+\]</span></p>
+<ol type="1">
+<li><p>Explain why, according to this model, the interaction of the two species is of mutualistic type.</p></li>
+<li><p>Assuming <span class="math inline">\(0 &lt; ab &lt; 1\)</span>, draw the isoclines of the systems and the vector field.</p></li>
+<li><p>Can we understand from the vector-field the long-time behaviour of the solutions?</p></li>
+<li><p>What happens if <span class="math inline">\(ab &gt; 1\)</span>?</p></li>
+</ol>
+</section>
+<section id="plant-herbivore-system" class="level2">
+<h2 class="anchored" data-anchor-id="plant-herbivore-system">Plant-herbivore system</h2>
+<p>The following system has been proposed to study a plant-herbivore system: <span class="math inline">\(q\)</span> represents plant quality (low <span class="math inline">\(q\)</span> means that the plant is toxic because of chemicals released, while high <span class="math inline">\(q\)</span> means that the plant is a good food for the herbivores). We assume that quality decreases (toxic compounds are synthetised) as a result of high herbivory). The density of herbivores is <span class="math inline">\(H(t)\)</span> and their growth rate depends on the quality of food they consume. The model equations are <span class="math display">\[
+\begin{cases}
+q' = k_1 - k_2 q H(H-H_0), &amp; \\
+H' = k_3 H (1 - k_4 H/q), &amp;
+\end{cases}
+\]</span></p>
+<ol type="1">
+<li><p>Explain why the equations correspond to the biological assumptions, and suggest possible meanings for its parameters.</p></li>
+<li><p>Show that the equations can be written in dimensionless form as follows <span class="math display">\[
+\begin{cases}
+x' = 1 - kxy(y-1), &amp; \\
+y' = \alpha y(1- y/x), &amp;
+\end{cases}
+\]</span></p>
+<p>Determine <span class="math inline">\(k\)</span> and <span class="math inline">\(\alpha\)</span> in terms of the original parameters.</p></li>
+<li><p>Show (graphically) that there is only one positive equilibrium.</p></li>
+<li><p>Determine its stability from a qualitative analysis of the isoclines.</p></li>
+</ol>
+</section>
+<section id="mooses-and-wolves" class="level2">
+<h2 class="anchored" data-anchor-id="mooses-and-wolves">Mooses and wolves</h2>
+<p>In all Canada moose are preyed by packs of wolves that cause a relevant mortality. The ecologist Messier (1994) has collected data in different areas in the country and found that the following relation (approximately) holds between the density <span class="math inline">\(W\)</span> (# of wolves per km<span class="math inline">\({}^2\)</span>) of wolves and the density <span class="math inline">\(M\)</span> (# of moose per km<span class="math inline">\({}^2\)</span>) of moose: <span class="math display">\[
+W = \frac{0.0587(M-0.3)}{0.76+M}.\tag{1}
+\]</span></p>
+<ol type="1">
+<li><p>Let us interpret this relation as the isocline of predators, i.e.&nbsp;the equilibrium number of wolves for each constant density <span class="math inline">\(M\)</span> of moose. Is it possible to obtain such an isocline from a prey-predator system of Gause-Rosenzweig-McArthur type?</p></li>
+<li><p>Suppose instead that the numerical response of wolves has the Holling-type 2 form <span class="math display">\[
+\pi(M) = \frac{a M}{1+a T_h M},
+\]</span></p>
+<p>and that mortality of wolves is equal to <span class="math inline">\(\mu_0 +\mu_1 W\)</span>. Find the constants <span class="math inline">\(a/\mu_1\)</span>, <span class="math inline">\(aT_h\)</span> and <span class="math inline">\(\mu_0/\mu_1\)</span> such that the predator isocline can be written as <span class="math inline">\((1)\)</span>. <em>Hint: we cannot determine all 4 parameters <span class="math inline">\((a, T_h, \mu_0, \mu_1)\)</span> by this relation, but only 3 combinations of them.</em></p></li>
+<li><p>Assume that, in absence of wolves, the growth of moose is logistic with intrinsic growth rate equal to <span class="math inline">\(0.51\)</span> years<span class="math inline">\({}^{-1}\)</span> and carrying capacity equal to <span class="math inline">\(0.5\)</span> moose per km<span class="math inline">\(^2\)</span>.</p>
+<p>Furthermore, assume that the functional response is proportional to the numerical response (the one found at the previous point).</p>
+<p>Draw the prey and predator isoclines and show that there exists a unique positive equilibrium of the system.</p></li>
+<li><p>Study the stability of the positive equilibrium. <em>Hint: it is enough computing the signs of the terms of the Jacobian at the equilibrium; the computations are easier using the function <span class="math inline">\(\Phi(M)\)</span> defined for the isocline <span class="math inline">\(W=\Phi(M)\)</span>.</em></p></li>
+</ol>
+</section>
+<section id="fishing" class="level2">
+<h2 class="anchored" data-anchor-id="fishing">Fishing</h2>
+<p>Consider the predator-prey model with logistic prey growth rate and bilinear predation rate <span class="math display">\[
+\left\{\begin{aligned}
+H'(t) &amp;= r \Bigl( 1 - \frac{H}{K} \Bigr) H - a H P, \\
+P'(t) &amp;= -\mu P + \gamma a H P.
+\end{aligned}\right.
+\]</span></p>
+<p>Assume that the parameters are such that a positive equilibrium exists, and add fishing to the equations of prey and predators, following Volterra’s assumptions.</p>
+<ol type="1">
+<li><p>Show that, if the fishing effort becomes large, the predators will get extinct; if it becomes even larger, the prey also will get extinct.</p></li>
+<li><p>Show that, with lower fishing efforts, the equilibrium predator density decreases and the equilibrium prey density increases.</p></li>
+<li><p>Change the time unit to <span class="math inline">\(\tau = rt\)</span> and the variable <span class="math inline">\(H\)</span> to <span class="math inline">\(u = H/K\)</span> and write down the resulting system.</p></li>
+<li><p>Propose a change of variable also for <span class="math inline">\(P\)</span> such to further decrease the number of parameters of the resulting system.</p></li>
+</ol>
+</section>
+<section id="gause-rosenzweig-mcarthur-model" class="level2">
+<h2 class="anchored" data-anchor-id="gause-rosenzweig-mcarthur-model">Gause-Rosenzweig-McArthur model</h2>
+<p>Gause-Rosenzweig-McArthur predator-prey models with logistic prey growth rate have the following structure <span class="math display">\[
+\left\{\begin{aligned}
+H'(t) &amp;= r \Bigl( 1 - \frac{H}{K} \Bigr) H - \pi(H)P, \\
+P'(t) &amp;= -\mu P + \gamma \pi(H) P.
+\end{aligned}\right.
+\]</span></p>
+<p>where <span class="math inline">\(\pi(H)\)</span> is a function, named <em>functional response</em>, representing the per capita predation rate, i.e., the number of prey captured by each predator in unit time.</p>
+<p>Assume that <span class="math inline">\(\pi(H)\)</span> is an increasing function such that: <span class="math display">\[
+p(0)=0, \quad \lim_{H\to\infty} \pi(H) = \bar{p} &lt; +\infty.
+\]</span></p>
+<p>The protypical example is Holling type-2 function <span class="math display">\[
+\pi_2(H)=\frac{aH}{1+aT_h H}, \quad \lim_{H\to\infty} \pi_2(H) = \frac{1}{T_h} &lt; +\infty.
+\]</span></p>
+<ol type="1">
+<li><p>Show graphically that, if <span class="math inline">\(\gamma \bar{p} &gt; \mu\)</span>, there exists a unique <span class="math inline">\(H_*\)</span> such that <span class="math inline">\(\gamma \pi(H_*) = \mu\)</span>. Compute <span class="math inline">\(H_*\)</span> in the case of the Holling type-2 function.</p></li>
+<li><p>Compute the isoclines of the system, showing that <span class="math inline">\(H' = 0\)</span> if and only if <span class="math inline">\(H = 0\)</span> or <span class="math inline">\(P = \Phi(H)\)</span> for an appropriate function <span class="math inline">\(\Phi\)</span>. Compute the function <span class="math inline">\(\Phi(H)\)</span> in the case of the Holling type-2 function.</p></li>
+<li><p>Show that the system has a positive equilibrium <span class="math inline">\(E_*\)</span> if and only if <span class="math inline">\(K &gt; H_*\)</span>.</p></li>
+</ol>
+</section>
+<section id="competition" class="level2">
+<h2 class="anchored" data-anchor-id="competition">Competition</h2>
+<p>Consider the following system describing competition between two species: <span class="math display">\[
+\left\{\begin{aligned}
+N_1' &amp;= (122 - 3N_1 - N_1^2 - N_2)N_1, \\
+N_2' &amp;= (80 - 2N_1 - N_2)N_2.
+\end{aligned}\right.
+\]</span></p>
+<ol type="1">
+<li><p>Draw the isoclines of the system and find its equilibria.</p></li>
+<li><p>Identify what can be defined the carrying capacity for each species.</p></li>
+<li><p>Find out the behaviour of the solutions of the system (a graphical analysis may help).</p></li>
+<li><p>Discuss the assumptions of the model.</p></li>
+</ol>
+</section>
+<section id="population-dynamics" class="level2">
+<h2 class="anchored" data-anchor-id="population-dynamics">Population dynamics</h2>
+<p>We model the population dynamics of a species of insects by the following system of differential equations: <span class="math display">\[
+\left\{\begin{aligned}
+J' &amp;= \beta_0 \phi(A)A - (\rho + \mu_J)J, \\
+A' &amp;= \rho J - \mu_A A.
+\end{aligned}\right.
+\]</span></p>
+<p>where <span class="math inline">\(J(t)\)</span> represents the density of juveniles, and <span class="math inline">\(A(t)\)</span> represent the density of adults.</p>
+<p>In order to fit the parameters of the model, we use some information obtained by raising the insects in the laboratory. We know that under those conditions</p>
 <ul>
-<li>the total number of preys <span class="math inline">\(N\)</span>,</li>
-<li>the total number of preys captured <span class="math inline">\(C\)</span>,</li>
-<li>the total handling time <span class="math inline">\(T^*\)</span>.</li>
+<li>around <span class="math inline">\(70\%\)</span> of the larvae emerging from eggs reach the adult stage;</li>
+<li>14 days is the average age at which the adult stage is reached;</li>
+<li>the average length of the adult stage is 30 days;</li>
+<li>each (female) adult produces on the average 120 eggs during its whole life.</li>
 </ul>
-<p>To avoid statistical fluctuations, we repeat the experiment 3 times. Data can be collected in a table. You can use the following link to copy the table: <a href="https://docs.google.com/spreadsheets/d/1_IBqPAdJ2o9OHlb3PWA8rnva16-ZTbeUJMmrM8j-wHs/edit?usp=sharing">CandyLab spreadsheet</a>.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="spreadsheet.png" class="img-fluid figure-img"></p>
-<figcaption>Spreadsheet for data collection</figcaption>
-</figure>
-</div>
-<p>Once done, we compute the handling time <span class="math inline">\(T_h = \bar{T}^*/\bar{C}\)</span>.</p>
+<ol type="1">
+<li><p>Use this information to choose all parameters of the model, except for the function <span class="math inline">\(\phi\)</span>.</p></li>
+<li><p>Laboratory experiments cannot yield reliable information on the function<span class="math inline">\(\phi\)</span>. Instead we assume that <span class="math display">\[
+\phi(x) = e^{-\gamma x}.
+\]</span></p>
+<p>Estimate <span class="math inline">\(\gamma\)</span>, using the information that the density of the juvenile stages of the insect in a cultivated area is around <span class="math inline">\(0.7\,\text{per m}^2\)</span> and that this must correspond to the equilibrium of model.</p></li>
+<li><p>Analyse the stability of the equilibrium you just found of system.</p></li>
+<li><p>The complete data on the age at which the adult stage is reached are shown in the histogram below. Do you think that these data are compatible with the assumptions implicit in model? If not, do you have suggestions on how to modify?</p>
+<p><img src="histogram_insects.png" class="img-fluid"></p></li>
+</ol>
 </section>
-<section id="the-analysis" class="level3">
-<h3 class="anchored" data-anchor-id="the-analysis">The analysis</h3>
-<p>Suppose that <span class="math inline">\(T\)</span> is the total experiment time (90 seconds for us). During this time, we spend <span class="math inline">\(T_s\)</span> in searching for a prey, and <span class="math inline">\(T_h\)</span> in handling a prey. Thus, we have <span class="math display">\[
-T = T_s + C T_h,
-\]</span></p>
-<p>where the total handling time is multiplied by the number of prey captured. The assumption we make is that the total number of captured preys is proportional to the searching time and the total number of prey <span class="math inline">\(N\)</span>. So: <span class="math display">\[
-C = a N T_s,
-\]</span></p>
-<p>for some <span class="math inline">\(a&gt;0\)</span>. Substituting <span class="math inline">\(T_s\)</span> we obtain: <span class="math display">\[
-C = a N T_s = a N (T - C T_h),
-\]</span></p>
-<p>that we can solve for <span class="math inline">\(C/T\)</span>, that is the rate of predation (number of prey captured per unit time): <span class="math display">\[
-\frac{C}{T} = \frac{a N}{1 + a T_h N}
-\]</span></p>
-<p>So, the functional response should be exactly Holling type II.</p>
+<section id="seir-model" class="level2">
+<h2 class="anchored" data-anchor-id="seir-model">SEIR model</h2>
+<p>An extension of SIR models is to introduce a class <span class="math inline">\(E\)</span> (Exposed) of individuals that have been infected, but are not yet infectious. Consider thus an SEIR model (with births and deaths) similar to the SIR model, assuming that individuals in <span class="math inline">\(E\)</span> move to the class <span class="math inline">\(I\)</span> at rate <span class="math inline">\(\nu\)</span>.</p>
+<ol type="1">
+<li><p>Find the equilibria of the system, discussing the conditions under which a positive equilibrium exists.</p></li>
+<li><p>Study the stability of the disease-free equilibrium, and write down the condition for its stability as <span class="math inline">\(R_0 &lt; 1\)</span> for an appropriately defined quantity <span class="math inline">\(R_0\)</span>.</p></li>
+<li><p>Noting that <span class="math inline">\(R_0\)</span> will differ (slightly) from that obtained for the SIR model, interpret it anyway as the average number of new infections produced by a newly infected individual along her/his infectious period, assuming everybody else is susceptible.</p></li>
+<li><p>Does the value of <span class="math inline">\(R_0\)</span> change if we consider instead an SEIRS model in which immunity decays?</p></li>
+</ol>
 </section>
-<section id="import-data" class="level3">
-<h3 class="anchored" data-anchor-id="import-data">Import data</h3>
-<p>Before trying any fitting, we need to import the data into a software. For instance, this can be MATLAB or Python.</p>
-<p>Save and download the spreadsheet as <code>csv</code> format.</p>
-<div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" aria-current="page">MATLAB</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">Python</a></li></ul>
-<div class="tab-content">
-<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
-<p>Use the <code>Import Data</code> button, then select the columns of your spreadsheet. The variables will appear in your workplace.</p>
-<p><img src="ImportGUI.png" class="img-fluid"></p>
-<p>You can access the variables with <code>CandyLabGroup.NumberOfCandies</code>, for instance. Just type <code>CandyLabGroup</code> to see all variables.</p>
-<p>Plot the results.</p>
-</div>
-<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
-<p>In Python there is no GUI for importing <code>csv</code> files, but you can use a module:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> csv</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> csv</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">'CandyLab - Group 1.csv'</span>) <span class="im">as</span> csvfile:</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    reader <span class="op">=</span> csv.reader(csvfile)</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    lines <span class="op">=</span> <span class="bu">list</span>(reader)</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>N  <span class="op">=</span> [<span class="bu">int</span>(l[<span class="dv">0</span>]) <span class="cf">for</span> l <span class="kw">in</span> lines[<span class="dv">3</span>:]]</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>C1 <span class="op">=</span> [<span class="bu">int</span>(l[<span class="dv">1</span>]) <span class="cf">for</span> l <span class="kw">in</span> lines[<span class="dv">3</span>:]]</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>C2 <span class="op">=</span> [<span class="bu">int</span>(l[<span class="dv">2</span>]) <span class="cf">for</span> l <span class="kw">in</span> lines[<span class="dv">3</span>:]]</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>C3 <span class="op">=</span> [<span class="bu">int</span>(l[<span class="dv">3</span>]) <span class="cf">for</span> l <span class="kw">in</span> lines[<span class="dv">3</span>:]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</div>
-</div>
+<section id="asymptomatics" class="level2">
+<h2 class="anchored" data-anchor-id="asymptomatics">Asymptomatics</h2>
+<p>It is known that infections with the same pathogen strain can give to diseases of different severities according to the person infected. We model this by modifying the SEIR model of the previous problem; we assume that there may be infected individuals that are severely ill <span class="math inline">\(I\)</span> and others that are asymptomatic <span class="math inline">\(A\)</span>; it is assumed that at the end of the incubation period, infected individuals become <span class="math inline">\(I\)</span> with probability <span class="math inline">\(p\)</span> and <span class="math inline">\(A\)</span> with probability <span class="math inline">\(1−p\)</span>. Furthermore the infectiousness of asymptomatic individuals is equal to <span class="math inline">\(\phi\)</span> times the infectiousness of severely ill, and the mean duration of the <span class="math inline">\(A\)</span> stage is (neglecting deaths) <span class="math inline">\(1/\alpha\)</span>, while that of the <span class="math inline">\(I\)</span> stage is <span class="math inline">\(1\gamma\)</span>.</p>
+<ol type="1">
+<li><p>Write down an ODE model for the classes of susceptibles <span class="math inline">\((S)\)</span>, exposed <span class="math inline">\((E)\)</span>, severely ill <span class="math inline">\((I)\)</span>, asymptomatic <span class="math inline">\((A)\)</span> and removed <span class="math inline">\((R)\)</span> individuals consistent with this verbal description.</p></li>
+<li><p>If empirical information is missing, would you expect <span class="math inline">\(\phi\)</span> to be greater or smaller than 1? And <span class="math inline">\(\alpha\)</span> smaller or greater than <span class="math inline">\(\gamma\)</span>? Discuss.</p></li>
+<li><p>Find <span class="math inline">\(R_0\)</span> in an intuitive way, by looking at the possible paths of a newly infected individual, and the average number of infections caused along each path.</p></li>
+<li><p>Show that the disease-free equilibrium is asymptotically stable (resp. unstable) if <span class="math inline">\(R_0 &lt; 1\)</span> (resp. <span class="math inline">\(R_0 &gt; 1\)</span>).</p></li>
+<li><p>Show that the system has a unique positive equilibrium if and only if <span class="math inline">\(R_0 &gt; 1\)</span>.</p></li>
+</ol>
 </section>
-<section id="fitting" class="level3">
-<h3 class="anchored" data-anchor-id="fitting">Fitting</h3>
-<p>The objective is to fit the function: <span class="math display">\[
-\frac{C}{T} = \frac{a N}{1 + a T_h N}
-\]</span></p>
-<p>Since <span class="math inline">\(T\)</span> is fixed, we can fit <span class="math inline">\(C\)</span> versus <span class="math inline">\(N\)</span> for various values, and find <span class="math inline">\(a\)</span> and <span class="math inline">\(T_h\)</span>.</p>
-<p>There are at least 2 options you can try:</p>
-<section id="option-1-linear-fit-via-lineweaverburk-plot" class="level4">
-<h4 class="anchored" data-anchor-id="option-1-linear-fit-via-lineweaverburk-plot">Option 1: Linear fit via Lineweaver–Burk plot</h4>
-<p>The <a href="https://en.wikipedia.org/wiki/Lineweaver–Burk_plot">Lineweaver–Burk plot</a> uses a simple transformation to make the above equation linear. In fact: <span class="math display">\[
-y = \frac{T}{C} = \frac{1}{a} \frac{1}{N} + T_h = \alpha x + \beta.
-\]</span></p>
-<p>So, the Holling type II relationship is <em>linear</em> with respect to the reciprocal. We can perform a linear regression to find the coefficients (use <code>polyfit</code>).</p>
+<section id="a-feedback-network" class="level2">
+<h2 class="anchored" data-anchor-id="a-feedback-network">A feedback network</h2>
+<p>Consider a small molecular network as presented in the following scheme:</p>
+<p><img src="exercise13.svg" class="img-fluid"></p>
+<p>We assume that <span class="math inline">\(E\)</span> gets phosphorylated and de-phosphorylated following Michaelis-Menten type reactions; the reaction rates for <span class="math inline">\(X\)</span> are instead of linear type with respect to <span class="math inline">\(E_p\)</span> (rate <span class="math inline">\(k_1'\)</span>) and we assume that <span class="math inline">\(X\)</span> is synthetized (at rate <span class="math inline">\(k_1\)</span>) also in absence of <span class="math inline">\(E_p\)</span>. The product <span class="math inline">\(X\)</span> is removed at rate <span class="math inline">\(k_2\)</span>.</p>
+<ol type="1">
+<li><p>Does the scheme model a negative or a positive feedback loop?</p></li>
+<li><p>Write down a system of equations representing the scheme.</p></li>
+<li><p>Study the equations satisfied by equilibria; this will involve the Goldbeter-Koshland function.</p></li>
+<li><p>Consider the bifurcation graph of equilibria with respect to the parameter <span class="math inline">\(k_1\)</span>; show that, when the half-saturation constants of Michaelis-Menten reactions are small (this because of the shape of the Goldbeter-Koshland function), there is one equilibrium for small <span class="math inline">\(k_1'\)</span> or large <span class="math inline">\(k_1'\)</span>, and three equilibria for intermediate <span class="math inline">\(k_1'\)</span>.</p></li>
+</ol>
 </section>
-<section id="option-2-nonlinear-regression" class="level4">
-<h4 class="anchored" data-anchor-id="option-2-nonlinear-regression">Option 2: Nonlinear regression</h4>
-<p>We can approach the problem as follows: find <span class="math inline">\((a,T_h)\)</span> such that <span class="math display">\[
-g(a,T_h) := \sum_{i=1}^3 \left( \frac{C}{T_i} - \frac{a N_i}{1 + a T_h N_i} \right)^2 \quad\to\quad\min.
+<section id="gene-transcription" class="level2">
+<h2 class="anchored" data-anchor-id="gene-transcription">Gene Transcription</h2>
+<p><em>Note: this model has been proposed by JS Griffith in 1968 in two papers on <a href="https://www.sciencedirect.com/science/article/pii/0022519368901902">positive</a> and <a href="https://www.sciencedirect.com/science/article/pii/0022519368901896">negative</a> feedback loops.</em></p>
+<p>Consider the simple case of a protein that activates transcription of its own gene, as in the following figure:</p>
+<p><img src="griffith.png" class="img-fluid"></p>
+<p>This mechanism is described by a pair of ordinary differential equations: <span class="math display">\[
+\left\{\begin{aligned}{}
+[M]' &amp;= \nu_1 \frac{\varepsilon^2 + ([P]/K_\ell)^2}{1 + ([P]/K_\ell)^2} - k_2 [M], \\
+[P]' &amp;= k_3 [M] − k_4 [P].
+\end{aligned}\right.
 \]</span></p>
-<p>This problem can be solved via optimization. In MATLAB, you can use <code>nlinfit</code> function, in Python <code>scipy.optimize.curve_fit</code>.</p>
-<p>Otherwise, you can try to use a steepest descrent approach: given an initial guess <span class="math inline">\((a^{(0)},T_h^{(0)})\)</span>, we update with: <span class="math display">\[
-(a^{(k+1)},T_h^{(k+1)}) = (a^{(k)},T_h^{(k)}) - \eta \nabla g((a^{(k)},T_h^{(k)})),
-\]</span></p>
-<p>where <span class="math inline">\(\eta&gt;0\)</span> is the step length or learning rate.</p>
+<ol type="1">
+<li><p>How must the variables be scaled to write the ODEs in dimensionless form: <span class="math display">\[
+\left\{\begin{aligned}
+\frac{\mathrm{d}x}{\mathrm{d}\tau} &amp;= \frac{\varepsilon^2 + y^2}{1 + y^2} - x, \\
+\frac{\mathrm{d}y}{\mathrm{d}\tau} &amp;= \kappa( \sigma x-y).
+\end{aligned}\right.
+\]</span></p></li>
+<li><p>Assume <span class="math inline">\(\varepsilon = 0.2\)</span>, <span class="math inline">\(\kappa = 1\)</span>. Draw phase plane portraits for several values of <span class="math inline">\(\sigma\)</span>.</p></li>
+<li><p>Show graphically how the number of equilibria of the system changes with <span class="math inline">\(\sigma\)</span>.</p></li>
+<li><p>Plot the equilibrium value of <span class="math inline">\(y\)</span> as a function of <span class="math inline">\(\sigma\)</span>. <em>Hint: it is enough a picture showing the qualitative pattern.</em></p></li>
+</ol>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
-<div id="ref-pulley2020" class="csl-entry" role="listitem">
-Pulley, Melissa. 2020. <span>“The Marshmallow Lab: A Project-Based Approach to Understanding Functional Responses.”</span> Master’s thesis, Utah State University. <a href="https://doi.org/10.26076/neyp-cc41">https://doi.org/10.26076/neyp-cc41</a>.
-</div>
-</div>
-</section>
-</section>
 </section>
 
 </main> <!-- /main -->
@@ -1050,13 +1083,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../../Laboratories/01_ODE_Integration/lab_ODEinteg.html" class="pagination-link" aria-label="Lab 01: Numerical integration">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Lab 01: Numerical integration</span>
+      <a href="../Assignments/08_elec.html" class="pagination-link" aria-label="Electrophysiology">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Electrophysiology</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../Laboratories/03_Bifurcations/lab_Bifurcations.html" class="pagination-link" aria-label="Lab 03: Bifurcations">
-        <span class="nav-page-text">Lab 03: Bifurcations</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../Lectures/IntroODE.html" class="pagination-link" aria-label="Introduction to ODEs">
+        <span class="nav-page-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Introduction to ODEs</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

@@ -6,9 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="dcterms.date" content="2024-10-02">
+<meta name="dcterms.date" content="2024-11-25">
 
-<title>Lab 02: Predation – Mathematical Biology</title>
+<title>Electrophysiology – Mathematical Biology</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -21,81 +21,27 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
-/* CSS for citations */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-  margin-bottom: 0em;
-}
-.hanging-indent div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}</style>
+</style>
 
 
-<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
-<script src="../../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../../">
-<link href="../../Laboratories/03_Bifurcations/lab_Bifurcations.html" rel="next">
-<link href="../../Laboratories/01_ODE_Integration/lab_ODEinteg.html" rel="prev">
-<script src="../../site_libs/quarto-html/quarto.js"></script>
-<script src="../../site_libs/quarto-html/popper.min.js"></script>
-<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../Assignments/10_extra.html" rel="next">
+<link href="../Assignments/07_feedbacks.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -164,7 +110,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../Laboratories/01_ODE_Integration/lab_ODEinteg.html">Labs</a></li><li class="breadcrumb-item"><a href="../../Laboratories/02_Predation/lab_Predation.html">Lab 02: Predation</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../Assignments/01_recap_ODEs.html">Assignments</a></li><li class="breadcrumb-item"><a href="../Assignments/08_elec.html">Electrophysiology</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -179,7 +125,7 @@ window.Quarto = {
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="../../">Mathematical Biology</a> 
+      <a href="../">Mathematical Biology</a> 
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -191,13 +137,13 @@ window.Quarto = {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../index.html" class="sidebar-item-text sidebar-link">
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Welcome</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../projects2024.html" class="sidebar-item-text sidebar-link">
+  <a href="../projects2024.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Projects</span></a>
   </div>
 </li>
@@ -212,91 +158,91 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../Lectures/01_Bathtub.html" class="sidebar-item-text sidebar-link">
+  <a href="../Lectures/01_Bathtub.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Bathtub model</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../Lectures/02_Population.html" class="sidebar-item-text sidebar-link">
+  <a href="../Lectures/02_Population.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Population dynamics</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../Lectures/03_Logistic.html" class="sidebar-item-text sidebar-link">
+  <a href="../Lectures/03_Logistic.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Logistic model</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../Lectures/04_Predation.html" class="sidebar-item-text sidebar-link">
+  <a href="../Lectures/04_Predation.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Predation models</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../Lectures/05_LotkaVolterra.html" class="sidebar-item-text sidebar-link">
+  <a href="../Lectures/05_LotkaVolterra.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Lotka-Volterra model</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../Lectures/06_Gause.html" class="sidebar-item-text sidebar-link">
+  <a href="../Lectures/06_Gause.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Gause type models</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../Lectures/07_RM.html" class="sidebar-item-text sidebar-link">
+  <a href="../Lectures/07_RM.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Rosenzweig-MacArthur model</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../Lectures/08_MichaelisMenten.html" class="sidebar-item-text sidebar-link">
+  <a href="../Lectures/08_MichaelisMenten.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Michaelis-Menten law</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../Lectures/09_FastSlow.html" class="sidebar-item-text sidebar-link">
+  <a href="../Lectures/09_FastSlow.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Fast-Slow systems</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../Lectures/10_Inhibition.html" class="sidebar-item-text sidebar-link">
+  <a href="../Lectures/10_Inhibition.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Inhibition</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../Lectures/11_FeedbackLoops.html" class="sidebar-item-text sidebar-link">
+  <a href="../Lectures/11_FeedbackLoops.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Feedback loops</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../Lectures/12_Bioelectricity.html" class="sidebar-item-text sidebar-link">
+  <a href="../Lectures/12_Bioelectricity.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Bioelectricity</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../Lectures/13_HodgkinHuxley.html" class="sidebar-item-text sidebar-link">
+  <a href="../Lectures/13_HodgkinHuxley.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Hodgkin-Huxley model</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../Lectures/14_CableEquation.html" class="sidebar-item-text sidebar-link">
+  <a href="../Lectures/14_CableEquation.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">The cable equation</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../Lectures/references.html" class="sidebar-item-text sidebar-link">
+  <a href="../Lectures/references.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">References</span></a>
   </div>
 </li>
@@ -313,43 +259,43 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../Laboratories/01_ODE_Integration/lab_ODEinteg.html" class="sidebar-item-text sidebar-link">
+  <a href="../Laboratories/01_ODE_Integration/lab_ODEinteg.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Lab 01: Numerical integration</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../Laboratories/02_Predation/lab_Predation.html" class="sidebar-item-text sidebar-link active">
+  <a href="../Laboratories/02_Predation/lab_Predation.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Lab 02: Predation</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../Laboratories/03_Bifurcations/lab_Bifurcations.html" class="sidebar-item-text sidebar-link">
+  <a href="../Laboratories/03_Bifurcations/lab_Bifurcations.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Lab 03: Bifurcations</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../Laboratories/04_Chaos/lab_chaos.html" class="sidebar-item-text sidebar-link">
+  <a href="../Laboratories/04_Chaos/lab_chaos.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Lab 04: Chaos</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../Laboratories/05_Feedbacks/lab_feedback.html" class="sidebar-item-text sidebar-link">
+  <a href="../Laboratories/05_Feedbacks/lab_feedback.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Lab 05: Feedback loops</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../Laboratories/06_Electrophysiology/lab_ep.html" class="sidebar-item-text sidebar-link">
+  <a href="../Laboratories/06_Electrophysiology/lab_ep.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Lab 06: Electrophysiology</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../Laboratories/07_Param/lab_param.html" class="sidebar-item-text sidebar-link">
+  <a href="../Laboratories/07_Param/lab_param.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Lab 07: Parameter fitting</span></a>
   </div>
 </li>
@@ -366,55 +312,55 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../Assignments/01_recap_ODEs.html" class="sidebar-item-text sidebar-link">
+  <a href="../Assignments/01_recap_ODEs.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Solving ODEs</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../Assignments/02_population.html" class="sidebar-item-text sidebar-link">
+  <a href="../Assignments/02_population.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Population dynamics</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../Assignments/03_spruce.html" class="sidebar-item-text sidebar-link">
+  <a href="../Assignments/03_spruce.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Predation</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../Assignments/04_systems.html" class="sidebar-item-text sidebar-link">
+  <a href="../Assignments/04_systems.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">System of ODEs</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../Assignments/05_predators.html" class="sidebar-item-text sidebar-link">
+  <a href="../Assignments/05_predators.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Prey-predator systems</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../Assignments/06_reactions.html" class="sidebar-item-text sidebar-link">
+  <a href="../Assignments/06_reactions.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Reactions</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../Assignments/07_feedbacks.html" class="sidebar-item-text sidebar-link">
+  <a href="../Assignments/07_feedbacks.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Feedbacks</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../Assignments/08_elec.html" class="sidebar-item-text sidebar-link">
+  <a href="../Assignments/08_elec.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Electrophysiology</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../Assignments/10_extra.html" class="sidebar-item-text sidebar-link">
+  <a href="../Assignments/10_extra.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Extra exercises</span></a>
   </div>
 </li>
@@ -431,19 +377,19 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../Lectures/IntroODE.html" class="sidebar-item-text sidebar-link">
+  <a href="../Lectures/IntroODE.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Introduction to ODEs</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../Lectures/bifurcations.html" class="sidebar-item-text sidebar-link">
+  <a href="../Lectures/bifurcations.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Introduction to bifurcations</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../Laboratories/00_Intro_Matlab/introMATLAB.html" class="sidebar-item-text sidebar-link">
+  <a href="../Laboratories/00_Intro_Matlab/introMATLAB.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Introduction to MATLAB</span></span></a>
   </div>
 </li>
@@ -459,22 +405,21 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#holling-type-predation" id="toc-holling-type-predation" class="nav-link active" data-scroll-target="#holling-type-predation">Holling type predation</a>
-  <ul class="collapse">
-  <li><a href="#the-experiment" id="toc-the-experiment" class="nav-link" data-scroll-target="#the-experiment">The experiment</a></li>
-  <li><a href="#the-analysis" id="toc-the-analysis" class="nav-link" data-scroll-target="#the-analysis">The analysis</a></li>
-  <li><a href="#import-data" id="toc-import-data" class="nav-link" data-scroll-target="#import-data">Import data</a></li>
-  <li><a href="#fitting" id="toc-fitting" class="nav-link" data-scroll-target="#fitting">Fitting</a></li>
-  </ul></li>
+  <li><a href="#fitzhugh-nagumo-model" id="toc-fitzhugh-nagumo-model" class="nav-link active" data-scroll-target="#fitzhugh-nagumo-model">FitzHugh-Nagumo model</a></li>
+  <li><a href="#roger-mcculloch-model" id="toc-roger-mcculloch-model" class="nav-link" data-scroll-target="#roger-mcculloch-model">Roger-McCulloch model</a></li>
+  <li><a href="#hodgkin-huxley-model" id="toc-hodgkin-huxley-model" class="nav-link" data-scroll-target="#hodgkin-huxley-model">Hodgkin-Huxley model</a></li>
+  <li><a href="#gating-mechanism" id="toc-gating-mechanism" class="nav-link" data-scroll-target="#gating-mechanism">Gating mechanism</a></li>
+  <li><a href="#multidimensional-fronts" id="toc-multidimensional-fronts" class="nav-link" data-scroll-target="#multidimensional-fronts">Multidimensional fronts</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../Laboratories/01_ODE_Integration/lab_ODEinteg.html">Labs</a></li><li class="breadcrumb-item"><a href="../../Laboratories/02_Predation/lab_Predation.html">Lab 02: Predation</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../Assignments/01_recap_ODEs.html">Assignments</a></li><li class="breadcrumb-item"><a href="../Assignments/08_elec.html">Electrophysiology</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Lab 02: Predation</h1>
+<h1 class="title">Electrophysiology</h1>
+<p class="subtitle lead">Assignment 8</p>
 </div>
 
 
@@ -485,14 +430,14 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">October 2, 2024</p>
+      <p class="date">November 25, 2024</p>
     </div>
   </div>
   
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">November 12, 2024</p>
+      <p class="date-modified">November 25, 2024</p>
     </div>
   </div>
     
@@ -503,128 +448,99 @@ window.Quarto = {
 </header>
 
 
-<section id="holling-type-predation" class="level2">
-<h2 class="anchored" data-anchor-id="holling-type-predation">Holling type predation</h2>
-<p>Holling type functional responses can be experimentally observed with a simple game. This is inspired to the MSc thesis from <span class="citation" data-cites="pulley2020">Pulley (<a href="../../Lectures/references.html#ref-pulley2020" role="doc-biblioref">2020</a>)</span>, where the author proposes a similar game with marshmallows.</p>
-<section id="the-experiment" class="level3">
-<h3 class="anchored" data-anchor-id="the-experiment">The experiment</h3>
-<p>We need the following tools:</p>
-<ul>
-<li>A desk or a clean area where to perform the experiment;</li>
-<li>Two stopwatches (there’s an app in every phone);</li>
-<li>A bag of small objects to be collected or eaten. In the original proposal, they were marshmallow, which can be eaten. If you’re concerned about your diet or teeth, you can use other objects (coins, beans, pens,…)</li>
-<li>A blindfold.</li>
-<li>A group of at least 4 students.</li>
-</ul>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="desk_with_candies.jpg" class="img-fluid figure-img"></p>
-<figcaption>Desk with a <span class="math inline">\(0.31\,\text{m}^2\)</span> delimited area with <span class="math inline">\(N=16\)</span> candies. The density here is <span class="math inline">\(16/0.31 \approx 52\,\text{candies}/\text{m}^2\)</span>. You can measure the area with an app.</figcaption>
-</figure>
-</div>
-<p>The game is as follows:</p>
+<section id="fitzhugh-nagumo-model" class="level2">
+<h2 class="anchored" data-anchor-id="fitzhugh-nagumo-model">FitzHugh-Nagumo model</h2>
+<p>Consider the FHN system: <span class="math display">\[
+\left\{\begin{aligned}
+\varepsilon v' &amp;= f(v) - w + I_\text{app}, \\
+w' &amp;= v - \gamma w,
+\end{aligned}\right.
+\]</span></p>
+<p>with <span class="math inline">\(f(v) = v(1-v)(v-\alpha)\)</span> and <span class="math inline">\(I_\text{app} \in \mathbb{R}\)</span>. We assume that <span class="math inline">\(\varepsilon \ll 1\)</span>, so that we can always apply the singular perturbation analysis.</p>
 <ol type="1">
-<li>We <em>randomly</em> place on the desk a certain number of objects. We take note of this number <span class="math inline">\(N\)</span>;</li>
-<li>Student A is blindfolded;</li>
-<li>Student B says “Go!” and starts the stopwatch. In the meanwhile, student A starts searching on the desk for an object.</li>
-<li>When Student A finds one object, he will collect/eat it.</li>
-<li>Student C, with another stopwatch, will measure the total time spent eating/collecting. Thus, it starts the stopwatch when student A picks up the object, and stops it when student A starts searching again.</li>
-<li>Student D will put a new object at random on the desk so to keep <span class="math inline">\(N\)</span> constant.</li>
+<li><p>Show that for <span class="math inline">\(I_\text{app}&gt;0\)</span> constant and sufficiently large (but not too large), the system has a (singular) limit cycle. Provide a formula for the period.</p></li>
+<li><p>Try to sketch the bifurcation diagram with respect to <span class="math inline">\(I_\text{app}\)</span>, mentioning all bifurcations.</p></li>
+<li><p><em>Anode break excitation</em> is when the potential is slowly decreased (thus, <span class="math inline">\(I_\text{app}\)</span> is negative rather than positive) and then switched off. Can we trigger an action potential in this way? Does it work also when the application time of the current is short?</p></li>
 </ol>
-<p>The experiment can last 90 seconds. At the end of the experiment, we need to mark</p>
-<ul>
-<li>the total number of preys <span class="math inline">\(N\)</span>,</li>
-<li>the total number of preys captured <span class="math inline">\(C\)</span>,</li>
-<li>the total handling time <span class="math inline">\(T^*\)</span>.</li>
-</ul>
-<p>To avoid statistical fluctuations, we repeat the experiment 3 times. Data can be collected in a table. You can use the following link to copy the table: <a href="https://docs.google.com/spreadsheets/d/1_IBqPAdJ2o9OHlb3PWA8rnva16-ZTbeUJMmrM8j-wHs/edit?usp=sharing">CandyLab spreadsheet</a>.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="spreadsheet.png" class="img-fluid figure-img"></p>
-<figcaption>Spreadsheet for data collection</figcaption>
-</figure>
-</div>
-<p>Once done, we compute the handling time <span class="math inline">\(T_h = \bar{T}^*/\bar{C}\)</span>.</p>
 </section>
-<section id="the-analysis" class="level3">
-<h3 class="anchored" data-anchor-id="the-analysis">The analysis</h3>
-<p>Suppose that <span class="math inline">\(T\)</span> is the total experiment time (90 seconds for us). During this time, we spend <span class="math inline">\(T_s\)</span> in searching for a prey, and <span class="math inline">\(T_h\)</span> in handling a prey. Thus, we have <span class="math display">\[
-T = T_s + C T_h,
+<section id="roger-mcculloch-model" class="level2">
+<h2 class="anchored" data-anchor-id="roger-mcculloch-model">Roger-McCulloch model</h2>
+<p>Consider the Roger-McCulloch system: <span class="math display">\[
+\left\{\begin{aligned}
+\varepsilon v' &amp;= -kv(v-\alpha)(v-1) - vw + I_\text{app}, \\
+w' &amp;= v - \gamma w,
+\end{aligned}\right.
 \]</span></p>
-<p>where the total handling time is multiplied by the number of prey captured. The assumption we make is that the total number of captured preys is proportional to the searching time and the total number of prey <span class="math inline">\(N\)</span>. So: <span class="math display">\[
-C = a N T_s,
-\]</span></p>
-<p>for some <span class="math inline">\(a&gt;0\)</span>. Substituting <span class="math inline">\(T_s\)</span> we obtain: <span class="math display">\[
-C = a N T_s = a N (T - C T_h),
-\]</span></p>
-<p>that we can solve for <span class="math inline">\(C/T\)</span>, that is the rate of predation (number of prey captured per unit time): <span class="math display">\[
-\frac{C}{T} = \frac{a N}{1 + a T_h N}
-\]</span></p>
-<p>So, the functional response should be exactly Holling type II.</p>
+<p>Suppose <span class="math inline">\(\varepsilon \ll 1\)</span>. The parameters have the same meaning as in the FitzHugh-Nagumo system.</p>
+<ol type="1">
+<li><p>Consider <span class="math inline">\(I_\text{app}=0\)</span>. Study the phase portrait and show how an action potential may occur.</p></li>
+<li><p>What does it happen when <span class="math inline">\(I_\text{app}\neq 0\)</span>? Is the situation similar to the previous exercise?</p></li>
+</ol>
 </section>
-<section id="import-data" class="level3">
-<h3 class="anchored" data-anchor-id="import-data">Import data</h3>
-<p>Before trying any fitting, we need to import the data into a software. For instance, this can be MATLAB or Python.</p>
-<p>Save and download the spreadsheet as <code>csv</code> format.</p>
-<div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" aria-current="page">MATLAB</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">Python</a></li></ul>
-<div class="tab-content">
-<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
-<p>Use the <code>Import Data</code> button, then select the columns of your spreadsheet. The variables will appear in your workplace.</p>
-<p><img src="ImportGUI.png" class="img-fluid"></p>
-<p>You can access the variables with <code>CandyLabGroup.NumberOfCandies</code>, for instance. Just type <code>CandyLabGroup</code> to see all variables.</p>
-<p>Plot the results.</p>
-</div>
-<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
-<p>In Python there is no GUI for importing <code>csv</code> files, but you can use a module:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> csv</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> csv</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">'CandyLab - Group 1.csv'</span>) <span class="im">as</span> csvfile:</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    reader <span class="op">=</span> csv.reader(csvfile)</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    lines <span class="op">=</span> <span class="bu">list</span>(reader)</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>N  <span class="op">=</span> [<span class="bu">int</span>(l[<span class="dv">0</span>]) <span class="cf">for</span> l <span class="kw">in</span> lines[<span class="dv">3</span>:]]</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>C1 <span class="op">=</span> [<span class="bu">int</span>(l[<span class="dv">1</span>]) <span class="cf">for</span> l <span class="kw">in</span> lines[<span class="dv">3</span>:]]</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>C2 <span class="op">=</span> [<span class="bu">int</span>(l[<span class="dv">2</span>]) <span class="cf">for</span> l <span class="kw">in</span> lines[<span class="dv">3</span>:]]</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>C3 <span class="op">=</span> [<span class="bu">int</span>(l[<span class="dv">3</span>]) <span class="cf">for</span> l <span class="kw">in</span> lines[<span class="dv">3</span>:]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</div>
-</div>
+<section id="hodgkin-huxley-model" class="level2">
+<h2 class="anchored" data-anchor-id="hodgkin-huxley-model">Hodgkin-Huxley model</h2>
+<p>When using the voltage-clamp technique, the total transmembrane current can be accurately measured. However, Hodgkin and Huxley were interested in the <em>individual</em> sodium <span class="math inline">\(I_{\ce{Na}}\)</span> and potassium <span class="math inline">\(I_{\ce{K}}\)</span> currents. How can we estimate them from <span class="math inline">\(I_\text{tot} = I_{\ce{Na}} + I_{\ce{K}}\)</span>? This exercise addresses the question.</p>
+<ol type="1">
+<li>Are there potential levels (fixed by clamping) at which we can measure a pure $ I_{}$ or <span class="math inline">\(I_{\ce{K}}\)</span> current?</li>
+</ol>
+<ol start="2" type="1">
+<li>Suppose 90% of the <span class="math inline">\(\ce{Na+}\)</span> in the bath of a squid axon is replaced by inert choline, preserving electroneutrality. What happens to the equilibrium potentials?</li>
+</ol>
+<ol start="3" type="1">
+<li>Explain why replacing the extracellular <span class="math inline">\(\ce{Na+}\)</span> with choline has little effect on the resting potential of an axon. Calculate the new resting potential with 90% of the extracellular <span class="math inline">\(\ce{Na+}\)</span> removed. Why is the same not true if <span class="math inline">\(\ce{K+}\)</span> is replaced? Assume <span class="math inline">\(m = 0.0532\)</span>, <span class="math inline">\(n = 0.3184\)</span>, <span class="math inline">\(h=0.5945\)</span> (constants), <span class="math inline">\(\bar{g}_{\ce{Na}} = 120\,\text{mS}\)</span>, <span class="math inline">\(\bar{g}_{\ce{K}} = 36\,\text{mS}\)</span>, <span class="math inline">\(\bar{g}_\text{leak} =0.3\,\text{mS}\)</span>, <span class="math inline">\(V_\text{leak} = -54.4\,\text{mV}\)</span> and <span class="math inline">\(V_{\ce{K}} = -77.3\,\text{mV}\)</span>.</li>
+</ol>
+<ol start="4" type="1">
+<li>Suppose we know <span class="math inline">\(K = I^1_{\ce{Na}}/I^2_{\ce{Na}}\)</span>, where <span class="math inline">\(I^1_{\ce{Na}}\)</span> is the normal sodium current and <span class="math inline">\(I^2_{\ce{Na}}\)</span> is the one obtained with 90% of extracellular sodium replaced by choline. Suppose also that <span class="math inline">\(K\)</span> does not change over time and <span class="math inline">\(I^1_{\ce{K}}=I^2_{\ce{K}}\)</span>. Find <span class="math inline">\(I^1_{\ce{Na}}\)</span> and <span class="math inline">\(I^2_{\ce{Na}}\)</span> from <span class="math inline">\(I^1_\text{tot}\)</span> and <span class="math inline">\(I^2_\text{tot}\)</span>. (A possible way to measure <span class="math inline">\(K\)</span> is to look at <span class="math inline">\(I_{\ce{tot}}\)</span> immediately after the voltage clamp, because most of the initial current is carried by sodium.)</li>
+</ol>
+<ol start="5" type="1">
+<li><p>Nowadays a simpler way to block channels is with drugs. Tetrodotoxin (TTX) is a powerful neurotoxin, famous for the puffer fish. TTX acts by blocking the sodium channels, hence making them unavailable for action potential formation.</p>
+<p>Here is how we can model it. If <span class="math inline">\(P_0\)</span> represents the total number of <span class="math inline">\(\ce{Na+}\)</span> channels, and we denote by <span class="math inline">\(\ce{P}\)</span> and <span class="math inline">\(\ce{B}\)</span> respectively the number of non-blocked and blocked channels, then the reaction is <span class="math display">\[
+\ce{P + TTX &lt;=&gt;[k_{-1}][k_1] B}.
+\]</span></p>
+<p>Modify the sodium conductance to account for the presence of .</p></li>
+</ol>
 </section>
-<section id="fitting" class="level3">
-<h3 class="anchored" data-anchor-id="fitting">Fitting</h3>
-<p>The objective is to fit the function: <span class="math display">\[
-\frac{C}{T} = \frac{a N}{1 + a T_h N}
+<section id="gating-mechanism" class="level2">
+<h2 class="anchored" data-anchor-id="gating-mechanism">Gating mechanism</h2>
+<p>A ion channel can be modelled with a Markov model. For instance, for a channel we have the following state diagram:</p>
+<div>
+
+</div>
+<div class="quarto-layout-panel" data-layout-ncol="1">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 100.0%;justify-content: flex-start;">
+<img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0nMS4wJyBlbmNvZGluZz0nVVRGLTgnPz4KPCEtLSBUaGlzIGZpbGUgd2FzIGdlbmVyYXRlZCBieSBkdmlzdmdtIDMuMi4yIC0tPgo8c3ZnIHZlcnNpb249JzEuMScgeG1sbnM9J2h0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnJyB4bWxuczp4bGluaz0naHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluaycgd2lkdGg9JzM1MC4zODA5MDNwdCcgaGVpZ2h0PSc2Mi44NjkyOHB0JyB2aWV3Qm94PSctNzIuMDAwMDA0IC03Mi4wMDAwMDMgMzUwLjM4MDkwMyA2Mi44NjkyOCc+CjxkZWZzPgo8cGF0aCBpZD0nZzItNDgnIGQ9J00zLjU5ODUwNi0yLjIyNDY1OEMzLjU5ODUwNi0yLjk5MTc4MSAzLjUwNzg0Ni0zLjU0MjcxNSAzLjE4NzA0OS00LjAzMDg4NEMyLjk3MDg1OS00LjM1MTY4MSAyLjUzODQ4MS00LjYzMDYzNSAxLjk4MDU3My00LjYzMDYzNUMuMzYyNjQtNC42MzA2MzUgLjM2MjY0LTIuNzI2Nzc1IC4zNjI2NC0yLjIyNDY1OFMuMzYyNjQgLjEzOTQ3NyAxLjk4MDU3MyAuMTM5NDc3UzMuNTk4NTA2LTEuNzIyNTQgMy41OTg1MDYtMi4yMjQ2NThaTTEuOTgwNTczLS4wNTU3OTFDMS42NTk3NzYtLjA1NTc5MSAxLjIzNDM3MS0uMjQ0MDg1IDEuMDk0ODk0LS44MTU5NEMuOTk3MjYtMS4yMjczOTcgLjk5NzI2LTEuNzk5MjUzIC45OTcyNi0yLjMxNTMxOEMuOTk3MjYtMi44MjQ0MDggLjk5NzI2LTMuMzU0NDIxIDEuMTAxODY4LTMuNzM3OTgzQzEuMjQ4MzE5LTQuMjg4OTE3IDEuNjk0NjQ1LTQuNDM1MzY3IDEuOTgwNTczLTQuNDM1MzY3QzIuMzU3MTYxLTQuNDM1MzY3IDIuNzE5ODAxLTQuMjA1MjMgMi44NDUzMy0zLjgwMDc0N0MyLjk1NjkxMi0zLjQyNDE1OSAyLjk2Mzg4NS0yLjkyMjA0MiAyLjk2Mzg4NS0yLjMxNTMxOEMyLjk2Mzg4NS0xLjc5OTI1MyAyLjk2Mzg4NS0xLjI4MzE4OCAyLjg3MzIyNS0uODQzODM2QzIuNzMzNzQ4LS4yMDkyMTUgMi4yNTk1MjctLjA1NTc5MSAxLjk4MDU3My0uMDU1NzkxWicvPgo8cGF0aCBpZD0nZzItNDknIGQ9J00yLjMzNjIzOS00LjQzNTM2N0MyLjMzNjIzOS00LjYyMzY2MSAyLjMyMjI5MS00LjYzMDYzNSAyLjEyNzAyNC00LjYzMDYzNUMxLjY4MDY5Ny00LjE5MTI4MyAxLjA0NjA3Ny00LjE4NDMwOSAuNzYwMTQ5LTQuMTg0MzA5Vi0zLjkzMzI1Qy45Mjc1MjItMy45MzMyNSAxLjM4Nzc5Ni0zLjkzMzI1IDEuNzcxMzU3LTQuMTI4NTE4Vi0uNTcxODU2QzEuNzcxMzU3LS4zNDE3MTkgMS43NzEzNTctLjI1MTA1OSAxLjA3Mzk3My0uMjUxMDU5SC44MDg5NjZWMEMuOTM0NDk2LS4wMDY5NzQgMS43OTIyNzktLjAyNzg5NSAyLjA1MDMxMS0uMDI3ODk1QzIuMjY2NTAxLS4wMjc4OTUgMy4xNDUyMDUtLjAwNjk3NCAzLjI5ODYzIDBWLS4yNTEwNTlIMy4wMzM2MjRDMi4zMzYyMzktLjI1MTA1OSAyLjMzNjIzOS0uMzQxNzE5IDIuMzM2MjM5LS41NzE4NTZWLTQuNDM1MzY3WicvPgo8cGF0aCBpZD0nZzItNTAnIGQ9J00zLjUyMTc5My0xLjI2OTI0SDMuMjg0NjgyQzMuMjYzNzYxLTEuMTE1ODE2IDMuMTk0MDIyLS43MDQzNTkgMy4xMDMzNjItLjYzNDYyQzMuMDQ3NTcyLS41OTI3NzcgMi41MTA1ODUtLjU5Mjc3NyAyLjQxMjk1MS0uNTkyNzc3SDEuMTI5NzYzQzEuODYyMDE3LTEuMjQxMzQ1IDIuMTA2MTAyLTEuNDM2NjEzIDIuNTI0NTMzLTEuNzY0Mzg0QzMuMDQwNTk4LTIuMTc1ODQxIDMuNTIxNzkzLTIuNjA4MjE5IDMuNTIxNzkzLTMuMjcwNzM1QzMuNTIxNzkzLTQuMTE0NTcgMi43ODI1NjUtNC42MzA2MzUgMS44ODk5MTMtNC42MzA2MzVDMS4wMjUxNTYtNC42MzA2MzUgLjQzOTM1Mi00LjAyMzkxIC40MzkzNTItMy4zODIzMTZDLjQzOTM1Mi0zLjAyNjY1IC43MzkyMjgtMi45OTE3ODEgLjgwODk2Ni0yLjk5MTc4MUMuOTc2MzM5LTIuOTkxNzgxIDEuMTc4NTgtMy4xMTAzMzYgMS4xNzg1OC0zLjM2MTM5NUMxLjE3ODU4LTMuNDg2OTI0IDEuMTI5NzYzLTMuNzMxMDA5IC43NjcxMjMtMy43MzEwMDlDLjk4MzMxMy00LjIyNjE1MiAxLjQ1NzUzNC00LjM3OTU3NyAxLjc4NTMwNS00LjM3OTU3N0MyLjQ4MjY5LTQuMzc5NTc3IDIuODQ1MzMtMy44MzU2MTYgMi44NDUzMy0zLjI3MDczNUMyLjg0NTMzLTIuNjY0MDEgMi40MTI5NTEtMi4xODI4MTQgMi4xODk3ODgtMS45MzE3NTZMLjUwOTA5MS0uMjcxOThDLjQzOTM1Mi0uMjA5MjE1IC40MzkzNTItLjE5NTI2OCAuNDM5MzUyIDBIMy4zMTI1NzhMMy41MjE3OTMtMS4yNjkyNFonLz4KPHBhdGggaWQ9J2cxLTExJyBkPSdNMy44MTQ2OTUtLjk4MzMxM0M0LjQ1NjI4OS0xLjY0NTgyOCA0LjcxNDMyMS0yLjU3MzM1IDQuNzE0MzIxLTIuNjUwMDYyQzQuNzE0MzIxLTIuNzQwNzIyIDQuNjMwNjM1LTIuNzQwNzIyIDQuNTk1NzY2LTIuNzQwNzIyQzQuNDk4MTMyLTIuNzQwNzIyIDQuNDk4MTMyLTIuNzE5ODAxIDQuNDQ5MzE1LTIuNTY2Mzc2QzQuMzIzNzg2LTIuMTA2MTAyIDQuMDkzNjQ5LTEuNjgwNjk3IDMuODAwNzQ3LTEuMzA0MTFDMy43OTM3NzMtMS40MDg3MTcgMy43Nzk4MjYtMS44NzU5NjUgMy43NjU4NzgtMS45Mzg3M0MzLjY2MTI3LTIuNjI5MTQxIDMuMTM4MjMyLTMuMDc1NDY3IDIuNDQwODQ3LTMuMDc1NDY3QzEuNDE1NjkxLTMuMDc1NDY3IC40MzIzNzktMi4xMjAwNSAuNDMyMzc5LTEuMTQzNzExQy40MzIzNzktLjUwMjExNyAuODk5NjI2IC4wNjk3MzggMS43MDg1OTMgLjA2OTczOEMyLjM1MDE4NyAuMDY5NzM4IDIuOTI5MDE2LS4yMjMxNjMgMy4zMTk1NTItLjUyMzAzOUMzLjQ3OTk1LS4wMTM5NDggMy44MzU2MTYgLjA2OTczOCA0LjA0NDgzMiAuMDY5NzM4QzQuNDQ5MzE1IC4wNjk3MzggNC43MDAzNzQtLjI3MTk4IDQuNzAwMzc0LS40MTg0MzFDNC43MDAzNzQtLjUwMjExNyA0LjYxNjY4Ny0uNTAyMTE3IDQuNTgxODE4LS41MDIxMTdDNC40OTExNTgtLjUwMjExNyA0LjQ3NzIxLS40NzQyMjIgNC40NjMyNjMtLjQzMjM3OUM0LjM2NTYyOS0uMTY3MzcyIDQuMTQ5NDQtLjEyNTUyOSA0LjA2NTc1My0uMTI1NTI5QzMuOTY4MTItLjEyNTUyOSAzLjg0OTU2NC0uMTI1NTI5IDMuODE0Njk1LS45ODMzMTNaTTMuMjcwNzM1LS43NDYyMDJDMi41ODcyOTgtLjE4ODI5NCAxLjk5NDUyMS0uMTI1NTI5IDEuNzI5NTE0LS4xMjU1MjlDMS4yNjkyNC0uMTI1NTI5IDEuMDExMjA4LS40MzIzNzkgMS4wMTEyMDgtLjg5OTYyNkMxLjAxMTIwOC0xLjEwMTg2OCAxLjEwODg0Mi0xLjg2MjAxNyAxLjQ3MTQ4Mi0yLjM0MzIxM0MxLjc5MjI3OS0yLjc2MTY0NCAyLjE4OTc4OC0yLjg4MDE5OSAyLjQzMzg3My0yLjg4MDE5OUMyLjk5MTc4MS0yLjg4MDE5OSAzLjE1MjE3OS0yLjM0MzIxMyAzLjIwNzk3LTEuOTEwODM0QzMuMjQ5ODEzLTEuNjEwOTU5IDMuMjM1ODY2LTEuMTE1ODE2IDMuMjcwNzM1LS43NDYyMDJaJy8+CjxwYXRoIGlkPSdnMS0xMicgZD0nTTQuNDE0NDQ2LTMuOTQ3MTk4QzQuNDE0NDQ2LTQuNTYwODk3IDMuODg0NDMzLTQuOTE2NTYzIDMuMjcwNzM1LTQuOTE2NTYzQzIuMzE1MzE4LTQuOTE2NTYzIDEuNjEwOTU5LTMuODI4NjQzIDEuNDM2NjEzLTMuMTI0Mjg0TC4zNDE3MTkgMS4yNjkyNEMuMzI3NzcxIDEuMzE4MDU3IC4zOTc1MDkgMS4zNTI5MjcgLjQzOTM1MiAxLjM1MjkyN0MuNTAyMTE3IDEuMzUyOTI3IC41NTc5MDggMS4zNDU5NTMgLjU3MTg1NiAxLjMwNDExTDEuMDM5MTAzLS41NTc5MDhDMS4xODU1NTQtLjIzNzExMSAxLjUyMDI5OSAuMDYyNzY1IDIuMDg1MTgxIC4wNjI3NjVDMy4wNjE1MTkgLjA2Mjc2NSA0LjE2MzM4Ny0uNjQxNTk0IDQuMTYzMzg3LTEuNzA4NTkzQzQuMTYzMzg3LTIuMTIwMDUgMy45NzUwOTMtMi41Mzg0ODEgMy42MTk0MjctMi43Njg2MThDMy45NjExNDYtMi45ODQ4MDcgNC40MTQ0NDYtMy4zODIzMTYgNC40MTQ0NDYtMy45NDcxOThaTTMuMDMzNjI0LTIuNzc1NTkyQzIuOTI5MDE2LTIuNzU0NjcgMi44ODAxOTktMi43MjY3NzUgMi42Nzc5NTgtMi43MjY3NzVDMi41NjYzNzYtMi43MjY3NzUgMi4zOTkwMDQtMi43MzM3NDggMi4zNTAxODctMi43NjE2NDRDMi40MTk5MjUtMi44MDM0ODcgMi42MTUxOTMtMi44MTA0NjEgMi42Nzc5NTgtMi44MTA0NjFDMi43ODI1NjUtMi44MTA0NjEgMi45MzU5OS0yLjgwMzQ4NyAzLjAzMzYyNC0yLjc3NTU5MlpNMy45NTQxNzItNC4wNzI3MjdDMy45NTQxNzItMy43MDMxMTMgMy43NzI4NTItMy4xNTkxNTMgMy4zNDA0NzMtMi45MTUwNjhDMy4yMDc5Ny0yLjk1NjkxMiAzLjA3NTQ2Ny0zLjAwNTcyOSAyLjY4NDkzMi0zLjAwNTcyOUMyLjQ0MDg0Ny0zLjAwNTcyOSAyLjA5MjE1NC0yLjk5MTc4MSAyLjA5MjE1NC0yLjc0MDcyMkMyLjA5MjE1NC0yLjU2NjM3NiAyLjMwODM0NC0yLjUzODQ4MSAyLjY2NDAxLTIuNTM4NDgxQzIuOTAxMTIxLTIuNTM4NDgxIDMuMTEwMzM2LTIuNTczMzUgMy4zMjY1MjYtMi42MzYxMTVDMy41MzU3NDEtMi40ODk2NjQgMy42NDczMjMtMi4yMDM3MzYgMy42NDczMjMtMS44OTY4ODdDMy42NDczMjMtLjg4NTY3OSAyLjk1NjkxMi0uMTMyNTAzIDIuMTA2MTAyLS4xMzI1MDNDMS41NjkxMTYtLjEzMjUwMyAxLjE4NTU1NC0uNDYwMjc0IDEuMTg1NTU0LTEuMDExMjA4QzEuMTg1NTU0LTEuMDgwOTQ2IDEuMTkyNTI4LTEuMTUwNjg1IDEuMjA2NDc2LTEuMjEzNDVMMS42NjY3NS0zLjA2ODQ5M0MxLjgzNDEyMi0zLjczMTAwOSAyLjQ0NzgyMS00LjcyMTI5NSAzLjI1Njc4Ny00LjcyMTI5NUMzLjY2ODI0NC00LjcyMTI5NSAzLjk1NDE3Mi00LjQ5ODEzMiAzLjk1NDE3Mi00LjA3MjcyN1onLz4KPHBhdGggaWQ9J2cwLTczJyBkPSdNMy43MjYwMjctNi4wMzczNkMzLjgxNTY5MS02LjM5NjAxNSAzLjg0NTU3OS02LjQ5NTY0MSA0LjYzMjYyOC02LjQ5NTY0MUM0Ljg3MTczMS02LjQ5NTY0MSA0Ljk1MTQzMi02LjQ5NTY0MSA0Ljk1MTQzMi02LjY4NDkzMkM0Ljk1MTQzMi02LjgwNDQ4MyA0Ljg0MTg0My02LjgwNDQ4MyA0LjgwMTk5My02LjgwNDQ4M0M0LjUxMzA3Ni02LjgwNDQ4MyAzLjc3NTg0MS02Ljc3NDU5NSAzLjQ4NjkyNC02Ljc3NDU5NUMzLjE4ODA0NS02Ljc3NDU5NSAyLjQ2MDc3Mi02LjgwNDQ4MyAyLjE2MTg5My02LjgwNDQ4M0MyLjA5MjE1NC02LjgwNDQ4MyAxLjk2MjY0LTYuODA0NDgzIDEuOTYyNjQtNi42MDUyM0MxLjk2MjY0LTYuNDk1NjQxIDIuMDUyMzA0LTYuNDk1NjQxIDIuMjQxNTk0LTYuNDk1NjQxQzIuNjYwMDI1LTYuNDk1NjQxIDIuOTI5MDE2LTYuNDk1NjQxIDIuOTI5MDE2LTYuMzA2MzUxQzIuOTI5MDE2LTYuMjU2NTM4IDIuOTI5MDE2LTYuMjM2NjEzIDIuOTA5MDkxLTYuMTQ2OTQ5TDEuNTY0MTM0LS43NzcwODZDMS40NzQ0NzEtLjQwODQ2OCAxLjQ0NDU4My0uMzA4ODQyIC42NTc1MzQtLjMwODg0MkMuNDI4Mzk0LS4zMDg4NDIgLjMzODczLS4zMDg4NDIgLjMzODczLS4xMDk1ODlDLjMzODczIDAgLjQ1ODI4MSAwIC40ODgxNjkgMEMuNzc3MDg2IDAgMS41MDQzNTktLjAyOTg4OCAxLjc5MzI3NS0uMDI5ODg4QzIuMDkyMTU0LS4wMjk4ODggMi44MjkzOSAwIDMuMTI4MjY5IDBDMy4yMDc5NyAwIDMuMzI3NTIyIDAgMy4zMjc1MjItLjE4OTI5QzMuMzI3NTIyLS4zMDg4NDIgMy4yNDc4MjEtLjMwODg0MiAzLjAyODY0My0uMzA4ODQyQzIuODQ5MzE1LS4zMDg4NDIgMi43OTk1MDItLjMwODg0MiAyLjYwMDI0OS0uMzI4NzY3QzIuMzkxMDM0LS4zNDg2OTIgMi4zNTExODMtLjM4ODU0MyAyLjM1MTE4My0uNDk4MTMyQzIuMzUxMTgzLS41Nzc4MzMgMi4zNzExMDgtLjY1NzUzNCAyLjM5MTAzNC0uNzI3MjczTDMuNzI2MDI3LTYuMDM3MzZaJy8+CjwvZGVmcz4KPGcgaWQ9J3BhZ2UxJz4KPGcgc3Ryb2tlLW1pdGVybGltaXQ9JzEwJyB0cmFuc2Zvcm09J3RyYW5zbGF0ZSg3Mi4zNjE5NTksLTQwLjU2NTM2MylzY2FsZSgwLjk5NjI2NCwtMC45OTYyNjQpJz4KPGcgZmlsbD0nIzAwMCcgc3Ryb2tlPScjMDAwJz4KPGcgc3Ryb2tlLXdpZHRoPScwLjQnPgo8ZyB0cmFuc2Zvcm09J21hdHJpeCgyLjAsMC4wLDAuMCwyLjAsLTEzOC4yMzczNywtMy42MDg5NSknPgo8ZyBzdHJva2U9J25vbmUnIHRyYW5zZm9ybT0nc2NhbGUoLTEuMDAzNzUsMS4wMDM3NSl0cmFuc2xhdGUoNzIuMzYxOTU5LC00MC41NjUzNjMpc2NhbGUoLTEsLTEpJz4KPGcgZmlsbD0nIzAwMCc+CjxnIHN0cm9rZT0nbm9uZSc+CjxnIHN0cm9rZT0nIzAwMCcgc3Ryb2tlLW1pdGVybGltaXQ9JzEwJyB0cmFuc2Zvcm09J3RyYW5zbGF0ZSgxNDEuMjIyNDE1LC00My4yMjIwNzMpc2NhbGUoMC45OTYyNjQsLTAuOTk2MjY0KSc+CjxnIGZpbGw9JyMwMDAnIHN0cm9rZT0nIzAwMCc+CjxnIHN0cm9rZS13aWR0aD0nMC40Jz4KPGcgdHJhbnNmb3JtPSd0cmFuc2xhdGUoLTY5LjExODY4LC0yLjY2NjY3KSc+CjxnIHN0cm9rZT0nbm9uZScgdHJhbnNmb3JtPSdzY2FsZSgtMS4wMDM3NSwxLjAwMzc1KXRyYW5zbGF0ZSgxNDEuMjIyNDE1LC00My4yMjIwNzMpc2NhbGUoLTEsLTEpJz4KPGcgc3Ryb2tlPScjMDAwJyBzdHJva2UtbWl0ZXJsaW1pdD0nMTAnIHRyYW5zZm9ybT0ndHJhbnNsYXRlKDE0OS45MzYyNTksLTQzLjIyMjA3MylzY2FsZSgwLjk5NjI2NCwtMC45OTYyNjQpJz4KPGcgdHJhbnNmb3JtPSd0cmFuc2xhdGUoLTQuNDQwOTgsMC4wKSc+CjxnIHN0cm9rZT0nbm9uZScgdHJhbnNmb3JtPSdzY2FsZSgtMS4wMDM3NSwxLjAwMzc1KXRyYW5zbGF0ZSgxNDkuOTM2MjU5LC00My4yMjIwNzMpc2NhbGUoLTEsLTEpJz4KPGcgZmlsbD0nIzAwMCc+CjxnIHN0cm9rZT0nbm9uZSc+Cjx1c2UgeD0nMTQ5LjkzNjI1OScgeT0nLTQzLjIyMjA3MycgeGxpbms6aHJlZj0nI2cwLTczJy8+Cjx1c2UgeD0nMTU0LjMxNTY4MycgeT0nLTQxLjcyNzY5MicgeGxpbms6aHJlZj0nI2cyLTQ4Jy8+CjwvZz4KPC9nPgo8L2c+CjwvZz4KPC9nPgo8ZyBzdHJva2U9JyMwMDAnIHN0cm9rZS1taXRlcmxpbWl0PScxMCcgdHJhbnNmb3JtPSd0cmFuc2xhdGUoMjA5Ljg4MzYyMSwtNDMuMjIyMDczKXNjYWxlKDAuOTk2MjY0LC0wLjk5NjI2NCknPgo8ZyB0cmFuc2Zvcm09J3RyYW5zbGF0ZSgtNC40NDA5OCwwLjApJz4KPGcgc3Ryb2tlPSdub25lJyB0cmFuc2Zvcm09J3NjYWxlKC0xLjAwMzc1LDEuMDAzNzUpdHJhbnNsYXRlKDIwOS44ODM2MjEsLTQzLjIyMjA3MylzY2FsZSgtMSwtMSknPgo8ZyBmaWxsPScjMDAwJz4KPGcgc3Ryb2tlPSdub25lJz4KPHVzZSB4PScyMDkuODgzNjIxJyB5PSctNDMuMjIyMDczJyB4bGluazpocmVmPScjZzAtNzMnLz4KPHVzZSB4PScyMTQuMjYzMDQ2JyB5PSctNDEuNzI3NjkyJyB4bGluazpocmVmPScjZzItNDknLz4KPC9nPgo8L2c+CjwvZz4KPC9nPgo8L2c+CjxnIHN0cm9rZT0nIzAwMCcgc3Ryb2tlLW1pdGVybGltaXQ9JzEwJyB0cmFuc2Zvcm09J3RyYW5zbGF0ZSgyNzAuMDMwMjMzLC00My4yMjIwNzMpc2NhbGUoMC45OTYyNjQsLTAuOTk2MjY0KSc+CjxwYXRoIGQ9J00tOC43NDY1Mi04LjcxNDQySDguNzQ2NTJWMTQuMDQ3NzZILTguNzQ2NTJaJyBmaWxsPSdub25lJy8+CjxnIHRyYW5zZm9ybT0ndHJhbnNsYXRlKC00LjQ0MDk4LDAuMCknPgo8ZyBzdHJva2U9J25vbmUnIHRyYW5zZm9ybT0nc2NhbGUoLTEuMDAzNzUsMS4wMDM3NSl0cmFuc2xhdGUoMjcwLjAzMDIzMywtNDMuMjIyMDczKXNjYWxlKC0xLC0xKSc+CjxnIGZpbGw9JyMwMDAnPgo8ZyBzdHJva2U9J25vbmUnPgo8dXNlIHg9JzI3MC4wMzAyMzMnIHk9Jy00My4yMjIwNzMnIHhsaW5rOmhyZWY9JyNnMC03MycvPgo8dXNlIHg9JzI3NC40MDk2NTgnIHk9Jy00MS43Mjc2OTInIHhsaW5rOmhyZWY9JyNnMi01MCcvPgo8L2c+CjwvZz4KPC9nPgo8L2c+CjwvZz4KPC9nPgo8L2c+CjxnIHN0cm9rZS13aWR0aD0nMC4zOTk5OCc+CjxwYXRoIGQ9J00tNDUuOTM1MSAyLjI0NDQySC0xNS4wMzcwMicgZmlsbD0nbm9uZScvPgo8ZyB0cmFuc2Zvcm09J3RyYW5zbGF0ZSgtMTQuODM3MDQsMi4yNDQ0MiknPgo8ZyBzdHJva2UtZGFzaGFycmF5PSdub25lJyBzdHJva2UtZGFzaG9mZnNldD0nMC4wJz4KIDxnIHN0cm9rZS1saW5lY2FwPSdyb3VuZCc+CiA8ZyBzdHJva2UtbGluZWpvaW49J3JvdW5kJz4KIDxwYXRoIGQ9J00tMi4wNzk4OCAyLjM5OTg2Qy0xLjY5OTg5IC45NTk5Mi0uODUzMTMgLjI3OTk4IDAgMEgtLjM5OTk4JyBmaWxsPSdub25lJy8+CiA8L2c+CiA8L2c+CiA8L2c+CjwvZz4KPGcgdHJhbnNmb3JtPSd0cmFuc2xhdGUoLTM0Ljg3ODUyLDQuNTk3MTcpJz4KPGcgc3Ryb2tlPSdub25lJyB0cmFuc2Zvcm09J3NjYWxlKC0xLjAwMzc1LDEuMDAzNzUpdHJhbnNsYXRlKDE0MS4yMjI0MTUsLTQzLjIyMjA3MylzY2FsZSgtMSwtMSknPgo8ZyBmaWxsPScjMDAwJz4KPGcgc3Ryb2tlPSdub25lJz4KPHVzZSB4PScxNDEuMjIyNDE1JyB5PSctNDMuMjIyMDczJyB4bGluazpocmVmPScjZzItNTAnLz4KPHVzZSB4PScxNDUuMTkzNjU1JyB5PSctNDMuMjIyMDczJyB4bGluazpocmVmPScjZzEtMTEnLz4KPC9nPgo8L2c+CjwvZz4KPC9nPgo8L2c+CjxnIHN0cm9rZS13aWR0aD0nMC4zOTk5OCc+CjxwYXRoIGQ9J00tMTQuNjM3MDUtMi41Nzc3NkgtNDUuNTM1MTQnIGZpbGw9J25vbmUnLz4KPGcgdHJhbnNmb3JtPSdtYXRyaXgoLTEuMCwwLjAsMC4wLC0xLjAsLTQ1LjczNTEyLC0yLjU3Nzc2KSc+CjxnIHN0cm9rZS1kYXNoYXJyYXk9J25vbmUnIHN0cm9rZS1kYXNob2Zmc2V0PScwLjAnPgogPGcgc3Ryb2tlLWxpbmVjYXA9J3JvdW5kJz4KIDxnIHN0cm9rZS1saW5lam9pbj0ncm91bmQnPgogPHBhdGggZD0nTS0yLjA3OTg4IDIuMzk5ODZDLTEuNjk5ODkgLjk1OTkyLS44NTMxMyAuMjc5OTggMCAwSC0uMzk5OTgnIGZpbGw9J25vbmUnLz4KIDwvZz4KIDwvZz4KIDwvZz4KPC9nPgo8ZyB0cmFuc2Zvcm09J3RyYW5zbGF0ZSgtMzIuNzMzMTQsLTkuNzkxNjEpJz4KPGcgc3Ryb2tlPSdub25lJyB0cmFuc2Zvcm09J3NjYWxlKC0xLjAwMzc1LDEuMDAzNzUpdHJhbnNsYXRlKDE0MS4yMjI0MTUsLTQzLjIyMjA3MylzY2FsZSgtMSwtMSknPgo8ZyBmaWxsPScjMDAwJz4KPGcgc3Ryb2tlPSdub25lJz4KPHVzZSB4PScxNDEuMjIyNDE1JyB5PSctNDMuMjIyMDczJyB4bGluazpocmVmPScjZzEtMTInLz4KPC9nPgo8L2c+CjwvZz4KPC9nPgo8L2c+CjxnIHN0cm9rZS13aWR0aD0nMC4zOTk5OCc+CjxwYXRoIGQ9J00xNC4yMzcwNiAyLjI0NDQySDQ1LjMzNTE0JyBmaWxsPSdub25lJy8+CjxnIHRyYW5zZm9ybT0ndHJhbnNsYXRlKDQ1LjUzNTEzLDIuMjQ0NDIpJz4KPGcgc3Ryb2tlLWRhc2hhcnJheT0nbm9uZScgc3Ryb2tlLWRhc2hvZmZzZXQ9JzAuMCc+CiA8ZyBzdHJva2UtbGluZWNhcD0ncm91bmQnPgogPGcgc3Ryb2tlLWxpbmVqb2luPSdyb3VuZCc+CiA8cGF0aCBkPSdNLTIuMDc5ODggMi4zOTk4NkMtMS42OTk4OSAuOTU5OTItLjg1MzEzIC4yNzk5OCAwIDBILS4zOTk5OCcgZmlsbD0nbm9uZScvPgogPC9nPgogPC9nPgogPC9nPgo8L2c+CjxnIHRyYW5zZm9ybT0ndHJhbnNsYXRlKDI3LjM4NjcsNC41OTcxNyknPgo8ZyBzdHJva2U9J25vbmUnIHRyYW5zZm9ybT0nc2NhbGUoLTEuMDAzNzUsMS4wMDM3NSl0cmFuc2xhdGUoMTQxLjIyMjQxNSwtNDMuMjIyMDczKXNjYWxlKC0xLC0xKSc+CjxnIGZpbGw9JyMwMDAnPgo8ZyBzdHJva2U9J25vbmUnPgo8dXNlIHg9JzE0MS4yMjI0MTUnIHk9Jy00My4yMjIwNzMnIHhsaW5rOmhyZWY9JyNnMS0xMScvPgo8L2c+CjwvZz4KPC9nPgo8L2c+CjwvZz4KPGcgc3Ryb2tlLXdpZHRoPScwLjM5OTk4Jz4KPHBhdGggZD0nTTQ1LjczNTEtMi41Nzc3NkgxNC42MzcwMicgZmlsbD0nbm9uZScvPgo8ZyB0cmFuc2Zvcm09J21hdHJpeCgtMS4wLDAuMCwwLjAsLTEuMCwxNC40MzcwNCwtMi41Nzc3NiknPgo8ZyBzdHJva2UtZGFzaGFycmF5PSdub25lJyBzdHJva2UtZGFzaG9mZnNldD0nMC4wJz4KIDxnIHN0cm9rZS1saW5lY2FwPSdyb3VuZCc+CiA8ZyBzdHJva2UtbGluZWpvaW49J3JvdW5kJz4KIDxwYXRoIGQ9J00tMi4wNzk4OCAyLjM5OTg2Qy0xLjY5OTg5IC45NTk5Mi0uODUzMTMgLjI3OTk4IDAgMEgtLjM5OTk4JyBmaWxsPSdub25lJy8+CiA8L2c+CiA8L2c+CiA8L2c+CjwvZz4KPGcgdHJhbnNmb3JtPSd0cmFuc2xhdGUoMjUuNTQ1OTYsLTkuNzkxNjEpJz4KPGcgc3Ryb2tlPSdub25lJyB0cmFuc2Zvcm09J3NjYWxlKC0xLjAwMzc1LDEuMDAzNzUpdHJhbnNsYXRlKDE0MS4yMjI0MTUsLTQzLjIyMjA3MylzY2FsZSgtMSwtMSknPgo8ZyBmaWxsPScjMDAwJz4KPGcgc3Ryb2tlPSdub25lJz4KPHVzZSB4PScxNDEuMjIyNDE1JyB5PSctNDMuMjIyMDczJyB4bGluazpocmVmPScjZzItNTAnLz4KPHVzZSB4PScxNDUuMTkzNjU1JyB5PSctNDMuMjIyMDczJyB4bGluazpocmVmPScjZzEtMTInLz4KPC9nPgo8L2c+CjwvZz4KPC9nPgo8L2c+CjwvZz4KPC9nPgo8L2c+CjwvZz4KPC9nPgo8L2c+CjwvZz4KPC9nPgo8L2c+CjwvZz4KPC9nPgo8L3N2Zz4=" class="img-fluid">
+</div>
+</div>
+</div>
+<p>Here we want to show that the probability of the state <span class="math inline">\(I_2\)</span> is exactly <span class="math inline">\(n^2(t)\)</span>, where: <span class="math display">\[
+\frac{\mathrm{d}n}{\mathrm{d}t} = \alpha_n (1-n) - \beta_n n.
 \]</span></p>
-<p>Since <span class="math inline">\(T\)</span> is fixed, we can fit <span class="math inline">\(C\)</span> versus <span class="math inline">\(N\)</span> for various values, and find <span class="math inline">\(a\)</span> and <span class="math inline">\(T_h\)</span>.</p>
-<p>There are at least 2 options you can try:</p>
-<section id="option-1-linear-fit-via-lineweaverburk-plot" class="level4">
-<h4 class="anchored" data-anchor-id="option-1-linear-fit-via-lineweaverburk-plot">Option 1: Linear fit via Lineweaver–Burk plot</h4>
-<p>The <a href="https://en.wikipedia.org/wiki/Lineweaver–Burk_plot">Lineweaver–Burk plot</a> uses a simple transformation to make the above equation linear. In fact: <span class="math display">\[
-y = \frac{T}{C} = \frac{1}{a} \frac{1}{N} + T_h = \alpha x + \beta.
-\]</span></p>
-<p>So, the Holling type II relationship is <em>linear</em> with respect to the reciprocal. We can perform a linear regression to find the coefficients (use <code>polyfit</code>).</p>
+<ol type="1">
+<li><p>Write down the equations of the system, where <span class="math inline">\(s_k(t)=\mathbb{P}[\text{state is $I_k$}]\)</span>, with <span class="math inline">\(k=0,1,2\)</span>. Observe that <span class="math inline">\(s_0(t) + s_1(t) + s_2(t) = 1\)</span>.</p></li>
+<li><p>Set <span class="math inline">\(s_0(t)=(1-n)^2\)</span>, <span class="math inline">\(s_1(t)=2n(1-n)\)</span>, <span class="math inline">\(s_2(t)=n^2\)</span>, with <span class="math inline">\(n(t)\)</span> solution of the above ODE. Show that this choice provides a solution of the full system.</p></li>
+<li><p>Try to generalize to a system with <span class="math inline">\(k+1\)</span> states, showing that the ODE is always the same with the probability of <span class="math inline">\(I_k\)</span> being <span class="math inline">\(n^k(t)\)</span>.</p></li>
+</ol>
 </section>
-<section id="option-2-nonlinear-regression" class="level4">
-<h4 class="anchored" data-anchor-id="option-2-nonlinear-regression">Option 2: Nonlinear regression</h4>
-<p>We can approach the problem as follows: find <span class="math inline">\((a,T_h)\)</span> such that <span class="math display">\[
-g(a,T_h) := \sum_{i=1}^3 \left( \frac{C}{T_i} - \frac{a N_i}{1 + a T_h N_i} \right)^2 \quad\to\quad\min.
+<section id="multidimensional-fronts" class="level2">
+<h2 class="anchored" data-anchor-id="multidimensional-fronts">Multidimensional fronts</h2>
+<p>In excitable media like the cardiac tissue, the cable equation generalises to its multidimensional version: <span class="math display">\[
+\varepsilon \frac{\partial V}{\partial t} = \varepsilon^2 \Delta V + f(V).
 \]</span></p>
-<p>This problem can be solved via optimization. In MATLAB, you can use <code>nlinfit</code> function, in Python <code>scipy.optimize.curve_fit</code>.</p>
-<p>Otherwise, you can try to use a steepest descrent approach: given an initial guess <span class="math inline">\((a^{(0)},T_h^{(0)})\)</span>, we update with: <span class="math display">\[
-(a^{(k+1)},T_h^{(k+1)}) = (a^{(k)},T_h^{(k)}) - \eta \nabla g((a^{(k)},T_h^{(k)})),
+<p>where <span class="math inline">\(\Delta\)</span> is the Laplacian, that is for <span class="math inline">\(x = (x_1,x_2,\ldots,x_n)\in\mathbb{R}^n\)</span> we have: <span class="math display">\[
+\Delta V = \frac{\partial^2 V}{\partial x_1^2} + \frac{\partial^2 V}{\partial x_2^2} + \cdot + \frac{\partial^2 V}{\partial x_n^2}.
 \]</span></p>
-<p>where <span class="math inline">\(\eta&gt;0\)</span> is the step length or learning rate.</p>
+<ol type="1">
+<li><p>Show that a planar wave, that is <span class="math inline">\(V(x,t) = U(\frac{x\cdot\vec{k}+st}{\varepsilon})\)</span> with <span class="math inline">\(\vec{k}\)</span> the unit vector pointing in the propagation direction, one has exactly the 1-D result for the velocity: <span class="math display">\[
+s = \frac{1}{\sqrt{2}}(2\alpha-1).
+\]</span></p></li>
+<li><p>Consider now a spherical front, that is <span class="math inline">\(V(x,t) = U(\frac{|x| + st}{\varepsilon}) = U(r + st)\)</span> where <span class="math inline">\(r=|x|\)</span> is the radius of the sphere. Using the fast system, show that the speed is as follows: <span class="math display">\[
+s = s_0 - \kappa \varepsilon,
+\]</span></p>
+<p>where <span class="math inline">\(s_0\)</span> is the speed of a planar front and <span class="math inline">\(\kappa = \frac{n-1}{r}\)</span> is the <em>curvature</em> of the front. Show that, compared to a planar front, the velocity of a concave front is larger and for a convex front is lower.</p></li>
+</ol>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
-<div id="ref-pulley2020" class="csl-entry" role="listitem">
-Pulley, Melissa. 2020. <span>“The Marshmallow Lab: A Project-Based Approach to Understanding Functional Responses.”</span> Master’s thesis, Utah State University. <a href="https://doi.org/10.26076/neyp-cc41">https://doi.org/10.26076/neyp-cc41</a>.
-</div>
-</div>
-</section>
-</section>
 </section>
 
 </main> <!-- /main -->
@@ -1050,13 +966,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../../Laboratories/01_ODE_Integration/lab_ODEinteg.html" class="pagination-link" aria-label="Lab 01: Numerical integration">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Lab 01: Numerical integration</span>
+      <a href="../Assignments/07_feedbacks.html" class="pagination-link" aria-label="Feedbacks">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Feedbacks</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../Laboratories/03_Bifurcations/lab_Bifurcations.html" class="pagination-link" aria-label="Lab 03: Bifurcations">
-        <span class="nav-page-text">Lab 03: Bifurcations</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../Assignments/10_extra.html" class="pagination-link" aria-label="Extra exercises">
+        <span class="nav-page-text">Extra exercises</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
