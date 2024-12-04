@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.57">
+<meta name="generator" content="quarto-1.6.39">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -92,10 +92,10 @@ div.csl-indent {
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-e26003cea8cd680ca0c55a263523d882.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-626149efe8f5d16e1d391ba177679bf0.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -180,6 +180,9 @@ window.Quarto = {
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="../">Mathematical Biology</a> 
+        <div class="sidebar-tools-main">
+    <a href="../Mathematical-Biology.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
+</div>
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -518,7 +521,7 @@ window.Quarto = {
 \tag{13.1}\]</span></span></p>
 <p>The parameters of the model per <span class="math inline">\(1\,\text{cm}^2\)</span> are as follows: <span class="math inline">\(C_\mathrm{m} = 1\,\text{$\mu$F}\)</span>, <span class="math inline">\(g_\text{Na} = 120\,\text{mS}\)</span>, <span class="math inline">\(g_\text{K} = 36\,\text{mS}\)</span>, <span class="math inline">\(g_\text{leak} = 0.3\,\text{mS}\)</span>, <span class="math inline">\(V_\text{Na} = 55\,\text{mV}\)</span>, <span class="math inline">\(V_\text{K} = -77\,\text{mV}\)</span>, <span class="math inline">\(V_\text{leak} = -54.4\,\text{mV}\)</span>.</p>
 <p>Concerning the transition rates, we have the following for <span class="math inline">\(\tau_{\{m,h,n\}}(V_m)\)</span> and <span class="math inline">\({\{m,h,n\}}_\infty\)</span>:</p>
-<div id="58ea52f8" class="cell" data-execution_count="2">
+<div id="ec2ee30a" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -573,7 +576,7 @@ window.Quarto = {
 </div>
 </div>
 <p>If we apply a square stimulus, we obtain the following solution:</p>
-<div id="0dbd1754" class="cell" data-execution_count="3">
+<div id="8c64213c" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -636,7 +639,7 @@ window.Quarto = {
 \end{aligned}\right.
 \]</span></p>
 <p>In the <span class="math inline">\((V_m, m)\)</span> phase space, we have:</p>
-<div id="5d348352" class="cell" data-execution_count="4">
+<div id="4f269baf" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -767,7 +770,7 @@ window.Quarto = {
 </ol>
 <p>The saddle has a stable manifold, indicated in the above figure, that separates the phase space in two parts: if we start from the right of it, we converge towards the resting equilibrium, otherwise we go towards the excited state. The bistable behavior explains the excitability of the system: starting from the resting membrane potential, if we apply a sufficiently large current we can move the state to the right of the manifold, and obtain an action potential.</p>
 <p>Therefore, the fast dynamics brings the system to the excited state (the upstroke phase of the action potential). Once we reach the equilibrium, the slow dynamics enters, moving <span class="math inline">\(n\)</span> and <span class="math inline">\(h\)</span> away from their resting value. In particular, <span class="math inline">\(n\)</span> will increase while <span class="math inline">\(h\)</span> will decrease. As we do so, the nullcline for <span class="math inline">\(V_m\)</span>, in the fast system, will shift:</p>
-<div id="39fb00c1" class="cell" data-execution_count="5">
+<div id="7b90938b" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -826,7 +829,7 @@ window.Quarto = {
 <li>(Fast) Since the encountered a tipping point, we cannot continue the slow dynamics and we need to integrate the fast system. After the bifurcation, there is only one equilibrium left, the resting state, so the system will converge there (quickly).</li>
 <li>(Slow) Once back at the resting state, the slow system will continue on the lower branch of equilibria, defined by <span class="math inline">\(V_\text{rest}(h,h)\)</span> and <span class="math inline">\(m(h,n)=m_\infty(V_\text{rest}(h,n))\)</span>. Here, <span class="math inline">\(n\)</span> will decrease and <span class="math inline">\(h\)</span> will increase, moving back the system to the original equilibrium.</li>
 </ol>
-<div id="9a987199" class="cell" data-execution_count="6">
+<div id="f9d34ed6" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -888,7 +891,7 @@ window.Quarto = {
 \end{aligned}\right.
 \]</span></p>
 <p>In the phase plane, nullclines are <span class="math inline">\(n = n_\infty(V_m)\)</span> and another function that looks like a cubic function:</p>
-<div id="51c96a75" class="cell" data-execution_count="7">
+<div id="d1a0b9b1" class="cell" data-execution_count="7">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -963,7 +966,7 @@ window.Quarto = {
 \dot{V} = f(V) - w_0.
 \]</span></p>
 <p>Depending on <span class="math inline">\(w_0\)</span>, we can have a different number of equilibria:</p>
-<div id="4f620942" class="cell" data-execution_count="8">
+<div id="0e77f116" class="cell" data-execution_count="8">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -1021,7 +1024,7 @@ V_-(w) \le V_0(w) \le V_+(w)
 \frac{\mathrm{d}w}{\mathrm{d}t} = V_\pm(w) - \gamma w = G_\pm(w),
 \]</span></p>
 <p>which dictated the slow dynamics.</p>
-<div id="f28a924b" class="cell" data-execution_count="9">
+<div id="c7bb8f65" class="cell" data-execution_count="9">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -1091,7 +1094,7 @@ T_r = \int_{w^*}^{0} \frac{\mathrm{d}w}{V_-(w)-\gamma w},
 <h3 data-number="13.4.3" class="anchored" data-anchor-id="oscillations"><span class="header-section-number">13.4.3</span> Oscillations</h3>
 <p>Suppose now that we apply a constant current <span class="math inline">\(I&gt;0\)</span>. The analysis is as before with a minor difference: the cubic is shifted vertically. The equilibrium is also non-zero now.</p>
 <p>Suppose we start for the origin at time <span class="math inline">\(t=0\)</span>, and then we apply a current <span class="math inline">\(I&gt;0\)</span>. The cubic will shift upwards, and the state is not at equilibrium anymore. The fast-slow dynamics is the same as before.</p>
-<div id="c0021ed4" class="cell" data-execution_count="10">
+<div id="d75173b3" class="cell" data-execution_count="10">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -1144,7 +1147,7 @@ T_r = \int_{w^*}^{0} \frac{\mathrm{d}w}{V_-(w)-\gamma w},
 </div>
 </div>
 <p>However, if we increase <span class="math inline">\(I\)</span>, we end up in the following situation:</p>
-<div id="1af2d7a2" class="cell" data-execution_count="11">
+<div id="1ef5700e" class="cell" data-execution_count="11">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -1289,8 +1292,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   });
   clipboard.on('success', onCopySuccess);
   if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-    // For code content inside modals, clipBoardJS needs to be initialized with a container option
-    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
     const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
       text: getTextToCopy,
       container: window.document.getElementById('quarto-embedded-source-code-modal')
@@ -1401,7 +1402,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (window.Quarto?.typesetMath) {
         window.Quarto.typesetMath(note);
       }
-      // TODO in 1.5, we should make sure this works without a callout special case
       if (note.classList.contains("callout")) {
         return note.outerHTML;
       } else {
