@@ -440,7 +440,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">November 25, 2024</p>
+      <p class="date-modified">December 30, 2024</p>
     </div>
   </div>
     
@@ -461,10 +461,96 @@ w' &amp;= v - \gamma w,
 \]</span></p>
 <p>with <span class="math inline">\(f(v) = v(1-v)(v-\alpha)\)</span> and <span class="math inline">\(I_\text{app} \in \mathbb{R}\)</span>. We assume that <span class="math inline">\(\varepsilon \ll 1\)</span>, so that we can always apply the singular perturbation analysis.</p>
 <ol type="1">
-<li><p>Show that for <span class="math inline">\(I_\text{app}&gt;0\)</span> constant and sufficiently large (but not too large), the system has a (singular) limit cycle. Provide a formula for the period.</p></li>
-<li><p>Try to sketch the bifurcation diagram with respect to <span class="math inline">\(I_\text{app}\)</span>, mentioning all bifurcations.</p></li>
-<li><p><em>Anode break excitation</em> is when the potential is slowly decreased (thus, <span class="math inline">\(I_\text{app}\)</span> is negative rather than positive) and then switched off. Can we trigger an action potential in this way? Does it work also when the application time of the current is short?</p></li>
+<li>Show that for <span class="math inline">\(I_\text{app}&gt;0\)</span> constant and sufficiently large (but not too large), the system has a (singular) limit cycle. Provide a formula for the period.</li>
 </ol>
+<div class="callout callout-style-default callout-tip callout-titled" title="Solution">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>First notice that when <span class="math inline">\(I_\text{app}\)</span> is sufficiently large, the (unique) equilibrium <span class="math inline">\((\bar{v},\bar{w})\)</span> becomes unstable, <span class="math display">\[
+J = \begin{pmatrix}
+\varepsilon^{-1}f'(v) &amp; -\varepsilon^{-1} \\
+1 &amp; -\gamma
+\end{pmatrix}
+\]</span></p>
+<p>because the trace <span class="math inline">\(\operatorname{tr}J = \varepsilon^{-1}f'(\bar{v}) - \gamma\)</span> will become positive when <span class="math inline">\(f'(\bar{v})&gt;\varepsilon\gamma\)</span>. Therefore, there is the opportunity for a limit cycle to appear (this can be shown with a trapping region).</p>
+<p>The analysis is the same as the one seen in class.</p>
+<p>The fast system reads: <span class="math display">\[
+\left\{\begin{aligned}
+\dot{v} &amp;= f(v) - w + I_\text{app}, \\
+\dot{w} &amp;= \varepsilon (v - \gamma w).
+\end{aligned}\right.
+\]</span></p>
+<p>In the singular limit, <span class="math inline">\(\varepsilon \to 0\)</span>, the system reduces to: <span class="math display">\[
+\left\{\begin{aligned}
+\dot{v} &amp;= f(v) - w + I_\text{app}, \\
+\dot{w} &amp;= 0,
+\end{aligned}\right.
+\]</span></p>
+<p>so <span class="math inline">\(w=w_0\)</span>. The first equation has up to three equilibria, two stable branches <span class="math inline">\(V_{\pm}(w_0)\)</span> and one unstable <span class="math inline">\(V_0(w_0)\)</span> such that <span class="math display">\[
+f(V_{\pm,0}(w_0)) - w_0 + I_\text{app} = 0.
+\]</span></p>
+<p>The existence the branches depends on <span class="math inline">\(w_0\)</span>, <span class="math inline">\(V_+\)</span> exists for <span class="math inline">\(w_0 &lt; w^*\)</span> and <span class="math inline">\(V_-\)</span> exists for <span class="math inline">\(w_0 &gt; w_*\)</span> and <span class="math inline">\(V_0\)</span> for <span class="math inline">\(w_* &lt; w_0 &lt; w^*\)</span>, where <span class="math inline">\(w_*\)</span> and <span class="math inline">\(w^*\)</span> are local min and max of <span class="math inline">\(f(v)+I_\text{app}\)</span>.</p>
+<p>In the slow system, assuming <span class="math inline">\(v\)</span> is at equilibrium, we have the following dynamic for <span class="math inline">\(w\)</span> <span id="eq-slow"><span class="math display">\[
+w' = V_{\pm}(w) - \gamma w.
+\tag{1}\]</span></span></p>
+<p>If the equilibrium of the system is such that <span class="math inline">\(w_* &lt; \bar{w} &lt; w^*\)</span>, then we have a singular limit cycle. This can be seen from <a href="../Lectures/13_HodgkinHuxley.html#fig-fhncurr" class="quarto-xref">Figure&nbsp;<span>13.1</span></a>, if we follow the path from the initial condition, we first have a fast branch from <span class="math inline">\((v_0,w_0)\)</span> to <span class="math inline">\((V_+(w_0),w_0)\)</span>, then we continue as follows: <span class="math display">\[
+(V_+(w_0),w_0) \leadsto (V_+(w^*),w^*) \leadsto (V_-(w^*),w^*) \leadsto (V_-(w_*),w_*) \leadsto \cdots
+\]</span></p>
+<p>We can estimate the period from <a href="#eq-slow" class="quarto-xref">Equation&nbsp;<span>1</span></a>: <span class="math display">\[
+T = t_e + t_r = \int_{w_*}^{w^*} \Bigl( \frac{1}{V_+(w)-w} - \frac{1}{V_-(w)-w} \Bigr) \mathrm{d}w,
+\]</span></p>
+<p>where <span class="math inline">\(t_e\)</span> and <span class="math inline">\(t_r\)</span> are respectively the excited and recovery time.</p>
+</div>
+</div>
+</div>
+<ol start="2" type="1">
+<li>Try to sketch the bifurcation diagram with respect to <span class="math inline">\(I_\text{app}\)</span>, mentioning all bifurcations.</li>
+</ol>
+<div class="callout callout-style-default callout-tip callout-titled" title="Solution">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>We have two Hopf bifurcations, for <span class="math inline">\(I_\text{app}\)</span> such that <span class="math inline">\(\bar{w}=w_*\)</span> or <span class="math inline">\(\bar{w}=w^*\)</span>. In the range <span class="math inline">\(w_* &lt; \bar{w} &lt; w^*\)</span> we have a limit cycle, that is attractive. The equilibrium <span class="math inline">\((\bar{v},\bar{w})\)</span> is stable outside this range and unstable when the limit cycle is present.</p>
+</div>
+</div>
+</div>
+<ol start="3" type="1">
+<li><em>Anode break excitation</em> is when the potential is slowly decreased (thus, <span class="math inline">\(I_\text{app}\)</span> is negative rather than positive) and then switched off. Can we trigger an action potential in this way? Does it work also when the application time of the current is short?</li>
+</ol>
+<div class="callout callout-style-default callout-tip callout-titled" title="Solution">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Yes, it works. If we switch on the current <span class="math inline">\(v\)</span> starts to decrease, but since it is slow, we follow the equilibrium of the system. If we apply the current for sufficiently long time to bring <span class="math inline">\(\bar{w}\)</span> below <span class="math inline">\(w_*\)</span>, then when we switch off the current the fast dynamics will bring this new initial condition to the stable branch <span class="math inline">\(V_+(w)\)</span>, triggering an action potential. So, it’s not the magnitude that matters, but the time of application of the current.</p>
+<p>When we apply a strong negative current for short time, the system will first go (fast dynamics) to <span class="math inline">\((V_-(0),0)\)</span>, and then back to <span class="math inline">\((0,0)\)</span> when the current is switched off. However, if we keep the current on, the slow dynamic will be present following <span class="math inline">\(V_-(w)\)</span> for negative <span class="math inline">\(w\)</span>, because <span class="math inline">\(w'&lt;0\)</span>. If we wait enough time (try to estimate it), then we can trigger the action potential.</p>
+</div>
+</div>
+</div>
 </section>
 <section id="roger-mcculloch-model" class="level2">
 <h2 class="anchored" data-anchor-id="roger-mcculloch-model">Roger-McCulloch model</h2>
@@ -476,25 +562,160 @@ w' &amp;= v - \gamma w,
 \]</span></p>
 <p>Suppose <span class="math inline">\(\varepsilon \ll 1\)</span>. The parameters have the same meaning as in the FitzHugh-Nagumo system.</p>
 <ol type="1">
-<li><p>Consider <span class="math inline">\(I_\text{app}=0\)</span>. Study the phase portrait and show how an action potential may occur.</p></li>
-<li><p>What does it happen when <span class="math inline">\(I_\text{app}\neq 0\)</span>? Is the situation similar to the previous exercise?</p></li>
+<li>Consider <span class="math inline">\(I_\text{app}=0\)</span>. Study the phase portrait and show how an action potential may occur.</li>
 </ol>
+<div class="callout callout-style-default callout-tip callout-titled" title="Solution">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>This system is a very minor modification of the previous one, and the dynamics is similar. The only difference is the fast subsystem: <span class="math display">\[
+\dot{v} = -kv(v-\alpha)(v-1) - v w_0 = F(v)
+\]</span></p>
+<p>and the equilibria are <span class="math inline">\(v_0=0\)</span> and the roots of <span class="math inline">\(k(v-\alpha)(v-1)+w_0=0\)</span>. For <span class="math inline">\(w_0 &lt; w^*\)</span> we always have 2 roots, <span class="math inline">\(v_1(w_0) &lt; v_2(w_0)\)</span>.</p>
+<p>For the stability, we have that <span class="math inline">\(v_0\)</span> and <span class="math inline">\(v_1(w_0)\)</span> are stable, while <span class="math inline">\(v_2(w_0)\)</span> is unstable, unless <span class="math inline">\(w &lt; w_* = -k\alpha\)</span>. For <span class="math inline">\(w=w_*\)</span> there is a swap of stability between <span class="math inline">\(v_0\)</span> and <span class="math inline">\(v_1\)</span>. Therefore, we can define</p>
+<ul>
+<li><span class="math inline">\(V_-(w) = 0\)</span> for <span class="math inline">\(w &gt; w_*\)</span> and <span class="math inline">\(V_-(w) = v_1(w)\)</span> for <span class="math inline">\(w &lt; w_*\)</span>;</li>
+<li><span class="math inline">\(V_0(w) = v_1(w)\)</span> for <span class="math inline">\(w_* &lt; w &lt; w^*\)</span> and <span class="math inline">\(V_0(w) = 0\)</span> for <span class="math inline">\(w &lt; w_*\)</span>;</li>
+<li><span class="math inline">\(V_+(w) = v_2(w)\)</span> for <span class="math inline">\(w &lt; w^*\)</span>.</li>
+</ul>
+<p>With this definition, the theory is the same as before. To trigger an action potential, we need to start with <span class="math inline">\(v&gt;0\)</span> and <span class="math inline">\(w &lt; k(v-\alpha)(v-1)\)</span>.</p>
+</div>
+</div>
+</div>
+<ol start="2" type="1">
+<li>What does it happen when <span class="math inline">\(I_\text{app}\neq 0\)</span>? Is the situation similar to the previous exercise?</li>
+</ol>
+<div class="callout callout-style-default callout-tip callout-titled" title="Solution">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>We can check graphically that this is not the case, we cannot have a limit cycle. For <span class="math inline">\(I_\text{app}\neq 0\)</span>, the <span class="math inline">\(v\)</span>-nullcline is cubic-like for small <span class="math inline">\(I_\text{app}\)</span>, but then it loses the bistability before we could mimic a situation like in the previous exercise. However, it is not simple to prove analytically.</p>
+</div>
+</div>
+</div>
 </section>
 <section id="hodgkin-huxley-model" class="level2">
 <h2 class="anchored" data-anchor-id="hodgkin-huxley-model">Hodgkin-Huxley model</h2>
 <p>When using the voltage-clamp technique, the total transmembrane current can be accurately measured. However, Hodgkin and Huxley were interested in the <em>individual</em> sodium <span class="math inline">\(I_{\ce{Na}}\)</span> and potassium <span class="math inline">\(I_{\ce{K}}\)</span> currents. How can we estimate them from <span class="math inline">\(I_\text{tot} = I_{\ce{Na}} + I_{\ce{K}}\)</span>? This exercise addresses the question.</p>
 <ol type="1">
-<li>Are there potential levels (fixed by clamping) at which we can measure a pure $ I_{}$ or <span class="math inline">\(I_{\ce{K}}\)</span> current?</li>
+<li>Are there potential levels (fixed by clamping) at which we can measure a pure <span class="math inline">\(I_{\ce{Na}}\)</span> or <span class="math inline">\(I_{\ce{K}}\)</span> current?</li>
 </ol>
+<div class="callout callout-style-default callout-tip callout-titled" title="Solution">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Yes, at the Nernst potentials. When <span class="math inline">\(V=V_{\ce{Na}}\)</span>, <span class="math inline">\(I_{\ce{Na}} = 0\)</span> so <span class="math inline">\(I_\text{tot} = I_{\ce{K}}\)</span>, and when <span class="math inline">\(V=V_{\ce{K}}\)</span>, <span class="math inline">\(I_{\ce{K}}=0\)</span> so <span class="math inline">\(I_\text{tot} = I_{\ce{Na}}\)</span>. Of course, in this case we only get the current for a specific value of <span class="math inline">\(V\)</span>, and not for all values, so we cannot use it to determine the gating dynamics.</p>
+</div>
+</div>
+</div>
 <ol start="2" type="1">
 <li>Suppose 90% of the <span class="math inline">\(\ce{Na+}\)</span> in the bath of a squid axon is replaced by inert choline, preserving electroneutrality. What happens to the equilibrium potentials?</li>
 </ol>
+<div class="callout callout-style-default callout-tip callout-titled" title="Solution">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Only <span class="math inline">\(V_{\ce{Na}}\)</span> is affected. From the Nernst equation: <span class="math display">\[
+V^1_{\ce{Na}} = \frac{RT}{zF}\ln\frac{\ce{[Na+]^1_e}}{\ce{[Na+]^1_i}}
+\]</span></p>
+<p>where we use “1” to reference quantities (no choline).</p>
+<p>If w replace 90% of the extracellular sodium, then <span class="math inline">\(\ce{[Na+]^2_e} = 0.1\ce{[Na+]^1_e}\)</span> and <span class="math inline">\(\ce{[Na+]^1_i}=\ce{[Na+]^2_i}\)</span> so we have: <span class="math display">\[
+\begin{split}
+V^2_{\ce{Na}} &amp;= \frac{RT}{zF}\ln\frac{\ce{[Na+]^2_e}}{\ce{[Na+]^2_i}} \\
+&amp;= \frac{RT}{zF}\ln\frac{0.1\ce{[Na+]^1_e}}{\ce{[Na+]^1_i}} \\
+&amp;= V^1_{\ce{Na}} - \frac{RT}{zF}\ln 10
+\end{split}
+\]</span></p>
+<p>With the actual numbers (see the <a href="../Lectures/12_Bioelectricity.html#tbl-nernst" class="quarto-xref">Table&nbsp;<span>12.1</span></a>), <span class="math inline">\(V^2_{\ce{Na}} \approx -3.48\,\text{mV}\)</span>.</p>
+</div>
+</div>
+</div>
 <ol start="3" type="1">
 <li>Explain why replacing the extracellular <span class="math inline">\(\ce{Na+}\)</span> with choline has little effect on the resting potential of an axon. Calculate the new resting potential with 90% of the extracellular <span class="math inline">\(\ce{Na+}\)</span> removed. Why is the same not true if <span class="math inline">\(\ce{K+}\)</span> is replaced? Assume <span class="math inline">\(m = 0.0532\)</span>, <span class="math inline">\(n = 0.3184\)</span>, <span class="math inline">\(h=0.5945\)</span> (constants), <span class="math inline">\(\bar{g}_{\ce{Na}} = 120\,\text{mS}\)</span>, <span class="math inline">\(\bar{g}_{\ce{K}} = 36\,\text{mS}\)</span>, <span class="math inline">\(\bar{g}_\text{leak} =0.3\,\text{mS}\)</span>, <span class="math inline">\(V_\text{leak} = -54.4\,\text{mV}\)</span> and <span class="math inline">\(V_{\ce{K}} = -77.3\,\text{mV}\)</span>.</li>
 </ol>
+<div class="callout callout-style-default callout-tip callout-titled" title="Solution">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Using the formula: <span class="math display">\[
+V_\text{eq} = \frac{g_{\ce{Na}}V_{\ce{Na}}+g_{\ce{K}}V_{\ce{K}}+g_l V_l}{g_{\ce{Na}}+g_{\ce{K}}+g_l}
+\]</span></p>
+<p>with <span class="math inline">\(g_{\ce{Na}} = \bar{g}_{\ce{Na}} m^3 h\)</span>, <span class="math inline">\(g_{\ce{K}} = \bar{g}_{\ce{K}} n^4\)</span>. With <span class="math inline">\(V_{\ce{Na}} = V_{\ce{Na}}^1\)</span> we obtain <span class="math inline">\(V^1_\text{eq} \approx -65\,\text{mV}\)</span>, with <span class="math inline">\(V_{\ce{Na}}^2\)</span> we have <span class="math inline">\(V^2_\text{eq} \approx -66\,\text{mV}\)</span>.</p>
+<p>The reason is that while <span class="math inline">\(V_{\ce{Na}}\)</span> changes significantly, most of the channels are closed because <span class="math inline">\(m\approx 0\)</span>, so they contribute little to the resting membrane potential.</p>
+<p>If we change the extracellular <span class="math inline">\(\ce{K+}\)</span>, then <span class="math inline">\(V^2_{\ce{K}} \approx -136\,\text{mV}\)</span> and the new resting membrane potential would be <span class="math inline">\(V^2_\text{rest}\approx -136\,\text{mV}\)</span>. In fact, <span class="math inline">\(n\neq 0\)</span>, so potassium channels contribute the most to the resting membrane potential.</p>
+</div>
+</div>
+</div>
 <ol start="4" type="1">
 <li>Suppose we know <span class="math inline">\(K = I^1_{\ce{Na}}/I^2_{\ce{Na}}\)</span>, where <span class="math inline">\(I^1_{\ce{Na}}\)</span> is the normal sodium current and <span class="math inline">\(I^2_{\ce{Na}}\)</span> is the one obtained with 90% of extracellular sodium replaced by choline. Suppose also that <span class="math inline">\(K\)</span> does not change over time and <span class="math inline">\(I^1_{\ce{K}}=I^2_{\ce{K}}\)</span>. Find <span class="math inline">\(I^1_{\ce{Na}}\)</span> and <span class="math inline">\(I^2_{\ce{Na}}\)</span> from <span class="math inline">\(I^1_\text{tot}\)</span> and <span class="math inline">\(I^2_\text{tot}\)</span>. (A possible way to measure <span class="math inline">\(K\)</span> is to look at <span class="math inline">\(I_{\ce{tot}}\)</span> immediately after the voltage clamp, because most of the initial current is carried by sodium.)</li>
 </ol>
+<div class="callout callout-style-default callout-tip callout-titled" title="Solution">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-9" class="callout-9-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Since <span class="math inline">\(I^1_\text{tot} = I^1_{\ce{Na}} + I^1\ce{K}\)</span> and <span class="math inline">\(I^2_\text{tot} = I^2_{\ce{Na}} + I^2\ce{K}\)</span>, we solve the system: <span class="math display">\[
+\begin{aligned}
+I^1_\text{tot} &amp;= I^1_{\ce{Na}} + I^1\ce{K}, \\
+I^2_\text{tot} &amp;= 1/K I^1_{\ce{Na}} + I^1\ce{K}.
+\end{aligned}
+\]</span></p>
+<p>The solution is: <span class="math display">\[
+\begin{aligned}
+I^1_{\ce{Na}} &amp;= \frac{K}{1-K}(I^2_\text{tot} - I^1_\text{tot}), \\
+I^1_{\ce{K}}  &amp;= \frac{KI^2_\text{tot}- I^1_\text{tot}}{1-K}.
+\end{aligned}
+\]</span></p>
+</div>
+</div>
+</div>
 <ol start="5" type="1">
 <li><p>Nowadays a simpler way to block channels is with drugs. Tetrodotoxin (TTX) is a powerful neurotoxin, famous for the puffer fish. TTX acts by blocking the sodium channels, hence making them unavailable for action potential formation.</p>
 <p>Here is how we can model it. If <span class="math inline">\(P_0\)</span> represents the total number of <span class="math inline">\(\ce{Na+}\)</span> channels, and we denote by <span class="math inline">\(\ce{P}\)</span> and <span class="math inline">\(\ce{B}\)</span> respectively the number of non-blocked and blocked channels, then the reaction is <span class="math display">\[
@@ -502,6 +723,28 @@ w' &amp;= v - \gamma w,
 \]</span></p>
 <p>Modify the sodium conductance to account for the presence of .</p></li>
 </ol>
+<div class="callout callout-style-default callout-tip callout-titled" title="Solution">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-10" class="callout-10-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>With the quasi-equilibrium approximation, knowing that <span class="math inline">\(\ce{[P]}+\ce{[B]}=\ce{[P]_0}\)</span>, we have: <span class="math display">\[
+\frac{P}{P_0} = \frac{1}{1 + \ce{TTX}/K_1}.
+\]</span></p>
+<p>where <span class="math inline">\(K_1 = \frac{k_{-1}}{k_1}\)</span>.</p>
+<p>The maximum sodium conductance is proportional to the number of available channels. Hence, <span class="math display">\[
+\bar{g}_{\ce{Na}}(\ce{TTX}) = \frac{\bar{g}^\text{max}_{\ce{Na}}}{1 + \ce{TTX}/K_1}.
+\]</span></p>
+</div>
+</div>
+</div>
 </section>
 <section id="gating-mechanism" class="level2">
 <h2 class="anchored" data-anchor-id="gating-mechanism">Gating mechanism</h2>
@@ -517,13 +760,125 @@ w' &amp;= v - \gamma w,
 </div>
 </div>
 <p>Here we want to show that the probability of the state <span class="math inline">\(I_2\)</span> is exactly <span class="math inline">\(n^2(t)\)</span>, where: <span class="math display">\[
-\frac{\mathrm{d}n}{\mathrm{d}t} = \alpha_n (1-n) - \beta_n n.
+\frac{\mathrm{d}n}{\mathrm{d}t} = \alpha (1-n) - \beta n.
 \]</span></p>
 <ol type="1">
-<li><p>Write down the equations of the system, where <span class="math inline">\(s_k(t)=\mathbb{P}[\text{state is $I_k$}]\)</span>, with <span class="math inline">\(k=0,1,2\)</span>. Observe that <span class="math inline">\(s_0(t) + s_1(t) + s_2(t) = 1\)</span>.</p></li>
-<li><p>Set <span class="math inline">\(s_0(t)=(1-n)^2\)</span>, <span class="math inline">\(s_1(t)=2n(1-n)\)</span>, <span class="math inline">\(s_2(t)=n^2\)</span>, with <span class="math inline">\(n(t)\)</span> solution of the above ODE. Show that this choice provides a solution of the full system.</p></li>
-<li><p>Try to generalize to a system with <span class="math inline">\(k+1\)</span> states, showing that the ODE is always the same with the probability of <span class="math inline">\(I_k\)</span> being <span class="math inline">\(n^k(t)\)</span>.</p></li>
+<li>Write down the equations of the system, where <span class="math inline">\(s_k(t)=\mathbb{P}[\text{state is $I_k$}]\)</span>, with <span class="math inline">\(k=0,1,2\)</span>. Observe that <span class="math inline">\(s_0(t) + s_1(t) + s_2(t) = 1\)</span>.</li>
 </ol>
+<div class="callout callout-style-default callout-tip callout-titled" title="Solution">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-11" class="callout-11-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The system is:</p>
+<p><span class="math display">\[
+\left\{\begin{aligned}
+  s_0' &amp;= -2\alpha s_0 + \beta s_1, \\
+  s_1' &amp;=  2\alpha s_0 - \beta s_1 - \alpha s_1 + 2\beta s_2, \\
+  s_2' &amp;=  \alpha s_1 - 2\beta s_2.
+\end{aligned}\right.
+\]</span></p>
+<p>Note that <span class="math inline">\(s_0'+s_1'+s_2'=0\)</span>, so their sum is constant. Since their are probabilities, their sum is 1.</p>
+</div>
+</div>
+</div>
+<ol start="2" type="1">
+<li>Set <span class="math inline">\(s_0(t)=(1-n)^2\)</span>, <span class="math inline">\(s_1(t)=2n(1-n)\)</span>, <span class="math inline">\(s_2(t)=n^2\)</span>, with <span class="math inline">\(n(t)\)</span> solution of the above ODE. Show that this choice provides a solution of the full system.</li>
+</ol>
+<div class="callout callout-style-default callout-tip callout-titled" title="Solution">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-12" class="callout-12-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>First, compute the derivatives of <span class="math inline">\(s_0(t)\)</span>, <span class="math inline">\(s_1(t)\)</span>, and <span class="math inline">\(s_2(t)\)</span>:</p>
+<p><span class="math display">\[
+\begin{aligned}
+  s_0' &amp;= 2(1-n)(-n'), \\
+  s_1' &amp;= 2(1-2n)(n'), \\
+  s_2' &amp;= 2n(n').
+\end{aligned}
+\]</span></p>
+<p>Now, substitute these into the system of equations:</p>
+<p><span class="math display">\[
+\begin{aligned}
+  -2(1-n) n' &amp;= -2\alpha (1-n)^2 + \beta 2n(1-n), \\
+  2(1-2n) n' &amp;= 2\alpha (1-n)^2 - \beta \cdot 2n(1-n) - \alpha \cdot 2n(1-n) + 2\beta n^2, \\
+  2n n' &amp;= \alpha \cdot 2n(1-n) - 2\beta n^2.
+\end{aligned}
+\]</span></p>
+<p>Simplify each equation to verify that all sides correspond to the same equation <span class="math display">\[
+n' = \alpha(1-n) - \beta n.
+\]</span></p>
+</div>
+</div>
+</div>
+<ol start="3" type="1">
+<li>Try to generalize to a system with <span class="math inline">\(k+1\)</span> states, showing that the ODE is always the same with the probability of <span class="math inline">\(I_k\)</span> being <span class="math inline">\(n^k(t)\)</span>.</li>
+</ol>
+<div class="callout callout-style-default callout-tip callout-titled" title="Solution">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-13" class="callout-13-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The diagram will look like this</p>
+<div>
+
+</div>
+<div class="quarto-layout-panel" data-layout-ncol="1">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 100.0%;justify-content: flex-start;">
+<img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0nMS4wJyBlbmNvZGluZz0nVVRGLTgnPz4KPCEtLSBUaGlzIGZpbGUgd2FzIGdlbmVyYXRlZCBieSBkdmlzdmdtIDMuMi4yIC0tPgo8c3ZnIHZlcnNpb249JzEuMScgeG1sbnM9J2h0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnJyB4bWxuczp4bGluaz0naHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluaycgd2lkdGg9Jzk5MC45MTk5NjZwdCcgaGVpZ2h0PSc2OC43NDA1NzNwdCcgdmlld0JveD0nLTcyLjAwMDAwNCAtNzIuMDAwMDAyIDk5MC45MTk5NjYgNjguNzQwNTczJz4KPGRlZnM+CjxwYXRoIGlkPSdnMy0xMScgZD0nTTMuODE0Njk1LS45ODMzMTNDNC40NTYyODktMS42NDU4MjggNC43MTQzMjEtMi41NzMzNSA0LjcxNDMyMS0yLjY1MDA2MkM0LjcxNDMyMS0yLjc0MDcyMiA0LjYzMDYzNS0yLjc0MDcyMiA0LjU5NTc2Ni0yLjc0MDcyMkM0LjQ5ODEzMi0yLjc0MDcyMiA0LjQ5ODEzMi0yLjcxOTgwMSA0LjQ0OTMxNS0yLjU2NjM3NkM0LjMyMzc4Ni0yLjEwNjEwMiA0LjA5MzY0OS0xLjY4MDY5NyAzLjgwMDc0Ny0xLjMwNDExQzMuNzkzNzczLTEuNDA4NzE3IDMuNzc5ODI2LTEuODc1OTY1IDMuNzY1ODc4LTEuOTM4NzNDMy42NjEyNy0yLjYyOTE0MSAzLjEzODIzMi0zLjA3NTQ2NyAyLjQ0MDg0Ny0zLjA3NTQ2N0MxLjQxNTY5MS0zLjA3NTQ2NyAuNDMyMzc5LTIuMTIwMDUgLjQzMjM3OS0xLjE0MzcxMUMuNDMyMzc5LS41MDIxMTcgLjg5OTYyNiAuMDY5NzM4IDEuNzA4NTkzIC4wNjk3MzhDMi4zNTAxODcgLjA2OTczOCAyLjkyOTAxNi0uMjIzMTYzIDMuMzE5NTUyLS41MjMwMzlDMy40Nzk5NS0uMDEzOTQ4IDMuODM1NjE2IC4wNjk3MzggNC4wNDQ4MzIgLjA2OTczOEM0LjQ0OTMxNSAuMDY5NzM4IDQuNzAwMzc0LS4yNzE5OCA0LjcwMDM3NC0uNDE4NDMxQzQuNzAwMzc0LS41MDIxMTcgNC42MTY2ODctLjUwMjExNyA0LjU4MTgxOC0uNTAyMTE3QzQuNDkxMTU4LS41MDIxMTcgNC40NzcyMS0uNDc0MjIyIDQuNDYzMjYzLS40MzIzNzlDNC4zNjU2MjktLjE2NzM3MiA0LjE0OTQ0LS4xMjU1MjkgNC4wNjU3NTMtLjEyNTUyOUMzLjk2ODEyLS4xMjU1MjkgMy44NDk1NjQtLjEyNTUyOSAzLjgxNDY5NS0uOTgzMzEzWk0zLjI3MDczNS0uNzQ2MjAyQzIuNTg3Mjk4LS4xODgyOTQgMS45OTQ1MjEtLjEyNTUyOSAxLjcyOTUxNC0uMTI1NTI5QzEuMjY5MjQtLjEyNTUyOSAxLjAxMTIwOC0uNDMyMzc5IDEuMDExMjA4LS44OTk2MjZDMS4wMTEyMDgtMS4xMDE4NjggMS4xMDg4NDItMS44NjIwMTcgMS40NzE0ODItMi4zNDMyMTNDMS43OTIyNzktMi43NjE2NDQgMi4xODk3ODgtMi44ODAxOTkgMi40MzM4NzMtMi44ODAxOTlDMi45OTE3ODEtMi44ODAxOTkgMy4xNTIxNzktMi4zNDMyMTMgMy4yMDc5Ny0xLjkxMDgzNEMzLjI0OTgxMy0xLjYxMDk1OSAzLjIzNTg2Ni0xLjExNTgxNiAzLjI3MDczNS0uNzQ2MjAyWicvPgo8cGF0aCBpZD0nZzMtMTInIGQ9J000LjQxNDQ0Ni0zLjk0NzE5OEM0LjQxNDQ0Ni00LjU2MDg5NyAzLjg4NDQzMy00LjkxNjU2MyAzLjI3MDczNS00LjkxNjU2M0MyLjMxNTMxOC00LjkxNjU2MyAxLjYxMDk1OS0zLjgyODY0MyAxLjQzNjYxMy0zLjEyNDI4NEwuMzQxNzE5IDEuMjY5MjRDLjMyNzc3MSAxLjMxODA1NyAuMzk3NTA5IDEuMzUyOTI3IC40MzkzNTIgMS4zNTI5MjdDLjUwMjExNyAxLjM1MjkyNyAuNTU3OTA4IDEuMzQ1OTUzIC41NzE4NTYgMS4zMDQxMUwxLjAzOTEwMy0uNTU3OTA4QzEuMTg1NTU0LS4yMzcxMTEgMS41MjAyOTkgLjA2Mjc2NSAyLjA4NTE4MSAuMDYyNzY1QzMuMDYxNTE5IC4wNjI3NjUgNC4xNjMzODctLjY0MTU5NCA0LjE2MzM4Ny0xLjcwODU5M0M0LjE2MzM4Ny0yLjEyMDA1IDMuOTc1MDkzLTIuNTM4NDgxIDMuNjE5NDI3LTIuNzY4NjE4QzMuOTYxMTQ2LTIuOTg0ODA3IDQuNDE0NDQ2LTMuMzgyMzE2IDQuNDE0NDQ2LTMuOTQ3MTk4Wk0zLjAzMzYyNC0yLjc3NTU5MkMyLjkyOTAxNi0yLjc1NDY3IDIuODgwMTk5LTIuNzI2Nzc1IDIuNjc3OTU4LTIuNzI2Nzc1QzIuNTY2Mzc2LTIuNzI2Nzc1IDIuMzk5MDA0LTIuNzMzNzQ4IDIuMzUwMTg3LTIuNzYxNjQ0QzIuNDE5OTI1LTIuODAzNDg3IDIuNjE1MTkzLTIuODEwNDYxIDIuNjc3OTU4LTIuODEwNDYxQzIuNzgyNTY1LTIuODEwNDYxIDIuOTM1OTktMi44MDM0ODcgMy4wMzM2MjQtMi43NzU1OTJaTTMuOTU0MTcyLTQuMDcyNzI3QzMuOTU0MTcyLTMuNzAzMTEzIDMuNzcyODUyLTMuMTU5MTUzIDMuMzQwNDczLTIuOTE1MDY4QzMuMjA3OTctMi45NTY5MTIgMy4wNzU0NjctMy4wMDU3MjkgMi42ODQ5MzItMy4wMDU3MjlDMi40NDA4NDctMy4wMDU3MjkgMi4wOTIxNTQtMi45OTE3ODEgMi4wOTIxNTQtMi43NDA3MjJDMi4wOTIxNTQtMi41NjYzNzYgMi4zMDgzNDQtMi41Mzg0ODEgMi42NjQwMS0yLjUzODQ4MUMyLjkwMTEyMS0yLjUzODQ4MSAzLjExMDMzNi0yLjU3MzM1IDMuMzI2NTI2LTIuNjM2MTE1QzMuNTM1NzQxLTIuNDg5NjY0IDMuNjQ3MzIzLTIuMjAzNzM2IDMuNjQ3MzIzLTEuODk2ODg3QzMuNjQ3MzIzLS44ODU2NzkgMi45NTY5MTItLjEzMjUwMyAyLjEwNjEwMi0uMTMyNTAzQzEuNTY5MTE2LS4xMzI1MDMgMS4xODU1NTQtLjQ2MDI3NCAxLjE4NTU1NC0xLjAxMTIwOEMxLjE4NTU1NC0xLjA4MDk0NiAxLjE5MjUyOC0xLjE1MDY4NSAxLjIwNjQ3Ni0xLjIxMzQ1TDEuNjY2NzUtMy4wNjg0OTNDMS44MzQxMjItMy43MzEwMDkgMi40NDc4MjEtNC43MjEyOTUgMy4yNTY3ODctNC43MjEyOTVDMy42NjgyNDQtNC43MjEyOTUgMy45NTQxNzItNC40OTgxMzIgMy45NTQxNzItNC4wNzI3MjdaJy8+CjxwYXRoIGlkPSdnMy0xMDYnIGQ9J00zLjA2MTUxOS00LjM1ODY1NUMzLjA2MTUxOS00LjQ3NzIxIDIuOTcwODU5LTQuNjIzNjYxIDIuNzgyNTY1LTQuNjIzNjYxQzIuNTgwMzI0LTQuNjIzNjYxIDIuMzkyMDMtNC40MjgzOTQgMi4zOTIwMy00LjI0MDFDMi4zOTIwMy00LjEyODUxOCAyLjQ3NTcxNi0zLjk3NTA5MyAyLjY3MDk4NC0zLjk3NTA5M0MyLjg1OTI3OC0zLjk3NTA5MyAzLjA2MTUxOS00LjE1NjQxMyAzLjA2MTUxOS00LjM1ODY1NVpNMS41ODMwNjQgLjM0MTcxOUMxLjQ2NDUwOCAuODIyOTE0IDEuMDk0ODk0IDEuMjI3Mzk3IC42ODM0MzcgMS4yMjczOTdDLjU5Mjc3NyAxLjIyNzM5NyAuNTA5MDkxIDEuMjEzNDUgLjQzMjM3OSAxLjE4NTU1NEMuNjEzNjk5IDEuMTAxODY4IC42Njk0ODkgLjkzNDQ5NiAuNjY5NDg5IC44Mjk4ODhDLjY2OTQ4OSAuNjYyNTE2IC41MzY5ODYgLjU3MTg1NiAuMzk3NTA5IC41NzE4NTZDLjE4MTMyIC41NzE4NTYgMCAuNzYwMTQ5IDAgLjk4MzMxM0MwIDEuMjQ4MzE5IC4yNzE5OCAxLjQyMjY2NSAuNjkwNDExIDEuNDIyNjY1UzEuOTI0NzgyIDEuMTcxNjA2IDIuMTQwOTcxIC4zMjA3OTdMMi43Njg2MTgtMi4xNzU4NDFDMi43ODk1MzktMi4yNTI1NTMgMi44MDM0ODctMi4zMTUzMTggMi44MDM0ODctMi40MTk5MjVDMi44MDM0ODctMi44MDM0ODcgMi40NzU3MTYtMy4wNzU0NjcgMi4wNTcyODUtMy4wNzU0NjdDMS4yODMxODgtMy4wNzU0NjcgLjgzNjg2Mi0yLjEwNjEwMiAuODM2ODYyLTIuMDA4NDY4Qy44MzY4NjItMS45MTc4MDggLjkzNDQ5Ni0xLjkxNzgwOCAuOTU1NDE3LTEuOTE3ODA4QzEuMDM5MTAzLTEuOTE3ODA4IDEuMDQ2MDc3LTEuOTM4NzMgMS4wOTQ4OTQtMi4wNDMzMzdDMS4yNjkyNC0yLjQ0NzgyMSAxLjYzMTg4LTIuODgwMTk5IDIuMDM2MzY0LTIuODgwMTk5QzIuMjEwNzEtMi44ODAxOTkgMi4yNzM0NzQtMi43NjE2NDQgMi4yNzM0NzQtMi41Mzg0ODFDMi4yNzM0NzQtMi40NjE3NjggMi4yNTk1MjctMi4zNjQxMzQgMi4yNTI1NTMtMi4zMjkyNjVMMS41ODMwNjQgLjM0MTcxOVonLz4KPHBhdGggaWQ9J2czLTEwNycgZD0nTTIuMTgyODE0LTQuNjMwNjM1QzIuMTg5Nzg4LTQuNjQ0NTgzIDIuMjEwNzEtNC43MzUyNDMgMi4yMTA3MS00Ljc0MjIxN0MyLjIxMDcxLTQuNzc3MDg2IDIuMTgyODE0LTQuODM5ODUxIDIuMDk5MTI4LTQuODM5ODUxQzEuOTU5NjUxLTQuODM5ODUxIDEuMzgwODIyLTQuNzg0MDYgMS4yMDY0NzYtNC43NzAxMTJDMS4xNTA2ODUtNC43NjMxMzggMS4wNTMwNTEtNC43NTYxNjQgMS4wNTMwNTEtNC42MDk3MTRDMS4wNTMwNTEtNC41MTIwOCAxLjE1MDY4NS00LjUxMjA4IDEuMjM0MzcxLTQuNTEyMDhDMS41NjkxMTYtNC41MTIwOCAxLjU2OTExNi00LjQ2MzI2MyAxLjU2OTExNi00LjQwNzQ3MkMxLjU2OTExNi00LjM1ODY1NSAxLjU1NTE2OC00LjMxNjgxMiAxLjU0MTIyLTQuMjU0MDQ3TC41NTc5MDgtLjMwNjg0OUMuNTIzMDM5LS4xODEzMiAuNTIzMDM5LS4xNjczNzIgLjUyMzAzOS0uMTUzNDI1Qy41MjMwMzktLjA0ODgxNyAuNjA2NzI1IC4wNjk3MzggLjc2MDE0OSAuMDY5NzM4Qy45NDg0NDMgLjA2OTczOCAxLjAzOTEwMy0uMDY5NzM4IDEuMDgwOTQ2LS4yMjMxNjNDMS4wOTQ4OTQtLjI1MTA1OSAxLjM5NDc3LTEuNDc4NDU2IDEuNDIyNjY1LTEuNTc2MDlDMS45MTc4MDgtMS41MjcyNzMgMi4zMTUzMTgtMS4zNjY4NzQgMi4zMTUzMTgtMS4wMDQyMzRDMi4zMTUzMTgtLjk2OTM2NSAyLjMxNTMxOC0uOTM0NDk2IDIuMzAxMzctLjg2NDc1N0MyLjI3MzQ3NC0uNzYwMTQ5IDIuMjczNDc0LS43MjUyOCAyLjI3MzQ3NC0uNjQ4NTY4QzIuMjczNDc0LS4xNTM0MjUgMi42Nzc5NTggLjA2OTczOCAzLjAxMjcwMiAuMDY5NzM4QzMuNjg5MTY2IC4wNjk3MzggMy44OTgzODEtLjk5MDI4NiAzLjg5ODM4MS0uOTk3MjZDMy44OTgzODEtMS4wODc5MiAzLjgwNzcyMS0xLjA4NzkyIDMuNzg2OC0xLjA4NzkyQzMuNjg5MTY2LTEuMDg3OTIgMy42ODIxOTItMS4wNTMwNTEgMy42NDczMjMtLjkyMDU0OEMzLjU2MzYzNi0uNjIwNjcyIDMuMzc1MzQyLS4xMjU1MjkgMy4wMzM2MjQtLjEyNTUyOUMyLjg0NTMzLS4xMjU1MjkgMi43ODk1MzktLjI5OTg3NSAyLjc4OTUzOS0uNDg4MTY5QzIuNzg5NTM5LS42MDY3MjUgMi43ODk1MzktLjYyMDY3MiAyLjgzMTM4Mi0uODAxOTkzQzIuODM4MzU2LS44MjI5MTQgMi44NjYyNTItLjk0MTQ2OSAyLjg2NjI1Mi0xLjAxODE4MkMyLjg2NjI1Mi0xLjYzODg1NCAyLjAyOTM5LTEuNzM2NDg4IDEuNzM2NDg4LTEuNzU3NDFDMS45Mzg3My0xLjg4MjkzOSAyLjE5Njc2Mi0yLjExMzA3NiAyLjMxNTMxOC0yLjIxNzY4NEMyLjY3MDk4NC0yLjU1MjQyOCAzLjAxOTY3Ni0yLjg4MDE5OSAzLjQxMDIxMi0yLjg4MDE5OUMzLjQ5Mzg5OC0yLjg4MDE5OSAzLjU4NDU1OC0yLjg1OTI3OCAzLjY0MDM0OS0yLjc4OTUzOUMzLjM0MDQ3My0yLjc0MDcyMiAzLjI3NzcwOS0yLjUwMzYxMSAzLjI3NzcwOS0yLjM5OTAwNEMzLjI3NzcwOS0yLjI0NTU3OSAzLjM5NjI2NC0yLjE0MDk3MSAzLjU1NjY2My0yLjE0MDk3MUMzLjc0NDk1Ni0yLjE0MDk3MSAzLjk1NDE3Mi0yLjI5NDM5NiAzLjk1NDE3Mi0yLjU4NzI5OEMzLjk1NDE3Mi0yLjgxNzQzNSAzLjc4NjgtMy4wNzU0NjcgMy40MTcxODYtMy4wNzU0NjdDMy4wMTk2NzYtMy4wNzU0NjcgMi42NTcwMzYtMi43ODk1MzkgMi4zMDEzNy0yLjQ2MTc2OEMyLjAwODQ2OC0yLjE4MjgxNCAxLjc3ODMzMS0xLjk2NjYyNSAxLjQ5MjQwMy0xLjg0ODA3TDIuMTgyODE0LTQuNjMwNjM1WicvPgo8cGF0aCBpZD0nZzEtMCcgZD0nTTUuMTg4NTQzLTEuNTc2MDlDNS4zMDAxMjUtMS41NzYwOSA1LjQ2NzQ5Ny0xLjU3NjA5IDUuNDY3NDk3LTEuNzQzNDYyQzUuNDY3NDk3LTEuOTE3ODA4IDUuMzA3MDk4LTEuOTE3ODA4IDUuMTg4NTQzLTEuOTE3ODA4SDEuMDMyMTNDLjkyMDU0OC0xLjkxNzgwOCAuNzUzMTc2LTEuOTE3ODA4IC43NTMxNzYtMS43NTA0MzZDLjc1MzE3Ni0xLjU3NjA5IC45MTM1NzQtMS41NzYwOSAxLjAzMjEzLTEuNTc2MDlINS4xODg1NDNaJy8+CjxwYXRoIGlkPSdnMC0xJyBkPSdNMS45MTI4MjctMi40OTA2NkMxLjkxMjgyNy0yLjc3OTU3NyAxLjY3MzcyNC0zLjAxODY4IDEuMzg0ODA3LTMuMDE4NjhTLjg1Njc4Ny0yLjc3OTU3NyAuODU2Nzg3LTIuNDkwNjZTMS4wOTU4OS0xLjk2MjY0IDEuMzg0ODA3LTEuOTYyNjRTMS45MTI4MjctMi4yMDE3NDMgMS45MTI4MjctMi40OTA2NlonLz4KPHBhdGggaWQ9J2c0LTQwJyBkPSdNMi40NzU3MTYtNS4yMzAzODZDMS4xNTA2ODUtNC4yOTU4OSAuODAxOTkzLTIuODE3NDM1IC44MDE5OTMtMS43NTA0MzZDLjgwMTk5My0uNzY3MTIzIDEuMDk0ODk0IC43NjAxNDkgMi40NzU3MTYgMS43MzY0ODhDMi41MzE1MDcgMS43MzY0ODggMi42MTUxOTMgMS43MzY0ODggMi42MTUxOTMgMS42NTI4MDJDMi42MTUxOTMgMS42MTA5NTkgMi41OTQyNzEgMS41OTcwMTEgMi41NDU0NTUgMS41NDgxOTRDMS42MTc5MzMgLjcxMTMzMyAxLjI3NjIxNC0uNDc0MjIyIDEuMjc2MjE0LTEuNzQzNDYyQzEuMjc2MjE0LTMuNjI2NDAxIDEuOTk0NTIxLTQuNTQ2OTQ5IDIuNTY2Mzc2LTUuMDYzMDE0QzIuNTk0MjcxLTUuMDkwOTA5IDIuNjE1MTkzLTUuMTExODMxIDIuNjE1MTkzLTUuMTQ2N0MyLjYxNTE5My01LjIzMDM4NiAyLjUzMTUwNy01LjIzMDM4NiAyLjQ3NTcxNi01LjIzMDM4NlonLz4KPHBhdGggaWQ9J2c0LTQxJyBkPSdNLjYyNzY0Ni01LjIzMDM4NkMuNTc4ODI5LTUuMjMwMzg2IC40OTUxNDMtNS4yMzAzODYgLjQ5NTE0My01LjE0NjdDLjQ5NTE0My01LjExMTgzMSAuNTE2MDY1LTUuMDkwOTA5IC41NTc5MDgtNS4wNDIwOTJDMS4xNTc2NTktNC40OTExNTggMS44MjcxNDgtMy41NDk2ODkgMS44MjcxNDgtMS43NTA0MzZDMS44MjcxNDgtLjI5MjkwMiAxLjM3Mzg0OCAuODA4OTY2IC42MjA2NzIgMS40OTI0MDNDLjUwMjExNyAxLjYxMDk1OSAuNDk1MTQzIDEuNjE3OTMzIC40OTUxNDMgMS42NTI4MDJTLjUxNjA2NSAxLjczNjQ4OCAuNTg1ODAzIDEuNzM2NDg4Qy42Njk0ODkgMS43MzY0ODggMS4zMzIwMDUgMS4yNzYyMTQgMS43OTIyNzkgLjQwNDQ4M0MyLjA5OTEyOC0uMTc0MzQ2IDIuMzAxMzctLjkyNzUyMiAyLjMwMTM3LTEuNzQzNDYyQzIuMzAxMzctMi43MjY3NzUgMi4wMDg0NjgtNC4yNTQwNDcgLjYyNzY0Ni01LjIzMDM4NlonLz4KPHBhdGggaWQ9J2c0LTQzJyBkPSdNMy4yMjg4OTItMS41NzYwOUg1LjM2Mjg4OUM1LjQ1MzU0OS0xLjU3NjA5IDUuNjIwOTIyLTEuNTc2MDkgNS42MjA5MjItMS43NDM0NjJDNS42MjA5MjItMS45MTc4MDggNS40NjA1MjMtMS45MTc4MDggNS4zNjI4ODktMS45MTc4MDhIMy4yMjg4OTJWLTQuMDU4NzhDMy4yMjg4OTItNC4xNDk0NCAzLjIyODg5Mi00LjMxNjgxMiAzLjA2MTUxOS00LjMxNjgxMkMyLjg4NzE3My00LjMxNjgxMiAyLjg4NzE3My00LjE1NjQxMyAyLjg4NzE3My00LjA1ODc4Vi0xLjkxNzgwOEguNzQ2MjAyQy42NTU1NDItMS45MTc4MDggLjQ4ODE2OS0xLjkxNzgwOCAuNDg4MTY5LTEuNzUwNDM2Qy40ODgxNjktMS41NzYwOSAuNjQ4NTY4LTEuNTc2MDkgLjc0NjIwMi0xLjU3NjA5SDIuODg3MTczVi41NjQ4ODJDMi44ODcxNzMgLjY1NTU0MiAyLjg4NzE3MyAuODIyOTE0IDMuMDU0NTQ1IC44MjI5MTRDMy4yMjg4OTIgLjgyMjkxNCAzLjIyODg5MiAuNjYyNTE2IDMuMjI4ODkyIC41NjQ4ODJWLTEuNTc2MDlaJy8+CjxwYXRoIGlkPSdnNC00OCcgZD0nTTMuNTk4NTA2LTIuMjI0NjU4QzMuNTk4NTA2LTIuOTkxNzgxIDMuNTA3ODQ2LTMuNTQyNzE1IDMuMTg3MDQ5LTQuMDMwODg0QzIuOTcwODU5LTQuMzUxNjgxIDIuNTM4NDgxLTQuNjMwNjM1IDEuOTgwNTczLTQuNjMwNjM1Qy4zNjI2NC00LjYzMDYzNSAuMzYyNjQtMi43MjY3NzUgLjM2MjY0LTIuMjI0NjU4Uy4zNjI2NCAuMTM5NDc3IDEuOTgwNTczIC4xMzk0NzdTMy41OTg1MDYtMS43MjI1NCAzLjU5ODUwNi0yLjIyNDY1OFpNMS45ODA1NzMtLjA1NTc5MUMxLjY1OTc3Ni0uMDU1NzkxIDEuMjM0MzcxLS4yNDQwODUgMS4wOTQ4OTQtLjgxNTk0Qy45OTcyNi0xLjIyNzM5NyAuOTk3MjYtMS43OTkyNTMgLjk5NzI2LTIuMzE1MzE4Qy45OTcyNi0yLjgyNDQwOCAuOTk3MjYtMy4zNTQ0MjEgMS4xMDE4NjgtMy43Mzc5ODNDMS4yNDgzMTktNC4yODg5MTcgMS42OTQ2NDUtNC40MzUzNjcgMS45ODA1NzMtNC40MzUzNjdDMi4zNTcxNjEtNC40MzUzNjcgMi43MTk4MDEtNC4yMDUyMyAyLjg0NTMzLTMuODAwNzQ3QzIuOTU2OTEyLTMuNDI0MTU5IDIuOTYzODg1LTIuOTIyMDQyIDIuOTYzODg1LTIuMzE1MzE4QzIuOTYzODg1LTEuNzk5MjUzIDIuOTYzODg1LTEuMjgzMTg4IDIuODczMjI1LS44NDM4MzZDMi43MzM3NDgtLjIwOTIxNSAyLjI1OTUyNy0uMDU1NzkxIDEuOTgwNTczLS4wNTU3OTFaJy8+CjxwYXRoIGlkPSdnNC00OScgZD0nTTIuMzM2MjM5LTQuNDM1MzY3QzIuMzM2MjM5LTQuNjIzNjYxIDIuMzIyMjkxLTQuNjMwNjM1IDIuMTI3MDI0LTQuNjMwNjM1QzEuNjgwNjk3LTQuMTkxMjgzIDEuMDQ2MDc3LTQuMTg0MzA5IC43NjAxNDktNC4xODQzMDlWLTMuOTMzMjVDLjkyNzUyMi0zLjkzMzI1IDEuMzg3Nzk2LTMuOTMzMjUgMS43NzEzNTctNC4xMjg1MThWLS41NzE4NTZDMS43NzEzNTctLjM0MTcxOSAxLjc3MTM1Ny0uMjUxMDU5IDEuMDczOTczLS4yNTEwNTlILjgwODk2NlYwQy45MzQ0OTYtLjAwNjk3NCAxLjc5MjI3OS0uMDI3ODk1IDIuMDUwMzExLS4wMjc4OTVDMi4yNjY1MDEtLjAyNzg5NSAzLjE0NTIwNS0uMDA2OTc0IDMuMjk4NjMgMFYtLjI1MTA1OUgzLjAzMzYyNEMyLjMzNjIzOS0uMjUxMDU5IDIuMzM2MjM5LS4zNDE3MTkgMi4zMzYyMzktLjU3MTg1NlYtNC40MzUzNjdaJy8+CjxwYXRoIGlkPSdnNC01MCcgZD0nTTMuNTIxNzkzLTEuMjY5MjRIMy4yODQ2ODJDMy4yNjM3NjEtMS4xMTU4MTYgMy4xOTQwMjItLjcwNDM1OSAzLjEwMzM2Mi0uNjM0NjJDMy4wNDc1NzItLjU5Mjc3NyAyLjUxMDU4NS0uNTkyNzc3IDIuNDEyOTUxLS41OTI3NzdIMS4xMjk3NjNDMS44NjIwMTctMS4yNDEzNDUgMi4xMDYxMDItMS40MzY2MTMgMi41MjQ1MzMtMS43NjQzODRDMy4wNDA1OTgtMi4xNzU4NDEgMy41MjE3OTMtMi42MDgyMTkgMy41MjE3OTMtMy4yNzA3MzVDMy41MjE3OTMtNC4xMTQ1NyAyLjc4MjU2NS00LjYzMDYzNSAxLjg4OTkxMy00LjYzMDYzNUMxLjAyNTE1Ni00LjYzMDYzNSAuNDM5MzUyLTQuMDIzOTEgLjQzOTM1Mi0zLjM4MjMxNkMuNDM5MzUyLTMuMDI2NjUgLjczOTIyOC0yLjk5MTc4MSAuODA4OTY2LTIuOTkxNzgxQy45NzYzMzktMi45OTE3ODEgMS4xNzg1OC0zLjExMDMzNiAxLjE3ODU4LTMuMzYxMzk1QzEuMTc4NTgtMy40ODY5MjQgMS4xMjk3NjMtMy43MzEwMDkgLjc2NzEyMy0zLjczMTAwOUMuOTgzMzEzLTQuMjI2MTUyIDEuNDU3NTM0LTQuMzc5NTc3IDEuNzg1MzA1LTQuMzc5NTc3QzIuNDgyNjktNC4zNzk1NzcgMi44NDUzMy0zLjgzNTYxNiAyLjg0NTMzLTMuMjcwNzM1QzIuODQ1MzMtMi42NjQwMSAyLjQxMjk1MS0yLjE4MjgxNCAyLjE4OTc4OC0xLjkzMTc1NkwuNTA5MDkxLS4yNzE5OEMuNDM5MzUyLS4yMDkyMTUgLjQzOTM1Mi0uMTk1MjY4IC40MzkzNTIgMEgzLjMxMjU3OEwzLjUyMTc5My0xLjI2OTI0WicvPgo8cGF0aCBpZD0nZzItNzMnIGQ9J00zLjcyNjAyNy02LjAzNzM2QzMuODE1NjkxLTYuMzk2MDE1IDMuODQ1NTc5LTYuNDk1NjQxIDQuNjMyNjI4LTYuNDk1NjQxQzQuODcxNzMxLTYuNDk1NjQxIDQuOTUxNDMyLTYuNDk1NjQxIDQuOTUxNDMyLTYuNjg0OTMyQzQuOTUxNDMyLTYuODA0NDgzIDQuODQxODQzLTYuODA0NDgzIDQuODAxOTkzLTYuODA0NDgzQzQuNTEzMDc2LTYuODA0NDgzIDMuNzc1ODQxLTYuNzc0NTk1IDMuNDg2OTI0LTYuNzc0NTk1QzMuMTg4MDQ1LTYuNzc0NTk1IDIuNDYwNzcyLTYuODA0NDgzIDIuMTYxODkzLTYuODA0NDgzQzIuMDkyMTU0LTYuODA0NDgzIDEuOTYyNjQtNi44MDQ0ODMgMS45NjI2NC02LjYwNTIzQzEuOTYyNjQtNi40OTU2NDEgMi4wNTIzMDQtNi40OTU2NDEgMi4yNDE1OTQtNi40OTU2NDFDMi42NjAwMjUtNi40OTU2NDEgMi45MjkwMTYtNi40OTU2NDEgMi45MjkwMTYtNi4zMDYzNTFDMi45MjkwMTYtNi4yNTY1MzggMi45MjkwMTYtNi4yMzY2MTMgMi45MDkwOTEtNi4xNDY5NDlMMS41NjQxMzQtLjc3NzA4NkMxLjQ3NDQ3MS0uNDA4NDY4IDEuNDQ0NTgzLS4zMDg4NDIgLjY1NzUzNC0uMzA4ODQyQy40MjgzOTQtLjMwODg0MiAuMzM4NzMtLjMwODg0MiAuMzM4NzMtLjEwOTU4OUMuMzM4NzMgMCAuNDU4MjgxIDAgLjQ4ODE2OSAwQy43NzcwODYgMCAxLjUwNDM1OS0uMDI5ODg4IDEuNzkzMjc1LS4wMjk4ODhDMi4wOTIxNTQtLjAyOTg4OCAyLjgyOTM5IDAgMy4xMjgyNjkgMEMzLjIwNzk3IDAgMy4zMjc1MjIgMCAzLjMyNzUyMi0uMTg5MjlDMy4zMjc1MjItLjMwODg0MiAzLjI0NzgyMS0uMzA4ODQyIDMuMDI4NjQzLS4zMDg4NDJDMi44NDkzMTUtLjMwODg0MiAyLjc5OTUwMi0uMzA4ODQyIDIuNjAwMjQ5LS4zMjg3NjdDMi4zOTEwMzQtLjM0ODY5MiAyLjM1MTE4My0uMzg4NTQzIDIuMzUxMTgzLS40OTgxMzJDMi4zNTExODMtLjU3NzgzMyAyLjM3MTEwOC0uNjU3NTM0IDIuMzkxMDM0LS43MjcyNzNMMy43MjYwMjctNi4wMzczNlonLz4KPC9kZWZzPgo8ZyBpZD0ncGFnZTEnPgo8ZyBzdHJva2UtbWl0ZXJsaW1pdD0nMTAnIHRyYW5zZm9ybT0ndHJhbnNsYXRlKDMyOC40OTExMDUsLTM3LjYyOTcxNylzY2FsZSgwLjk5NjI2NCwtMC45OTYyNjQpJz4KPGcgZmlsbD0nIzAwMCcgc3Ryb2tlPScjMDAwJz4KPGcgc3Ryb2tlLXdpZHRoPScwLjQnPgo8ZyB0cmFuc2Zvcm09J21hdHJpeCgyLjAsMC4wLDAuMCwyLjAsLTM5NS4zMjcsLTUuMCknPgo8ZyBzdHJva2U9J25vbmUnIHRyYW5zZm9ybT0nc2NhbGUoLTEuMDAzNzUsMS4wMDM3NSl0cmFuc2xhdGUoMzI4LjQ5MTEwNSwtMzcuNjI5NzE3KXNjYWxlKC0xLC0xKSc+CjxnIGZpbGw9JyMwMDAnPgo8ZyBzdHJva2U9J25vbmUnPgo8ZyBzdHJva2U9JyMwMDAnIHN0cm9rZS1taXRlcmxpbWl0PScxMCcgdHJhbnNmb3JtPSd0cmFuc2xhdGUoNTI1LjQxNjEzNCwtNDAuMDQ3MDQzKXNjYWxlKDAuOTk2MjY0LC0wLjk5NjI2NCknPgo8ZyBmaWxsPScjMDAwJyBzdHJva2U9JyMwMDAnPgo8ZyBzdHJva2Utd2lkdGg9JzAuNCc+CjxnIHRyYW5zZm9ybT0ndHJhbnNsYXRlKC0xOTcuNjYzNSwtMi40MjYzOSknPgo8ZyBzdHJva2U9J25vbmUnIHRyYW5zZm9ybT0nc2NhbGUoLTEuMDAzNzUsMS4wMDM3NSl0cmFuc2xhdGUoNTI1LjQxNjEzNCwtNDAuMDQ3MDQzKXNjYWxlKC0xLC0xKSc+CjxnIHN0cm9rZT0nIzAwMCcgc3Ryb2tlLW1pdGVybGltaXQ9JzEwJyB0cmFuc2Zvcm09J3RyYW5zbGF0ZSg1MzQuMTI5OTc4LC00MC4wNDcwNDMpc2NhbGUoMC45OTYyNjQsLTAuOTk2MjY0KSc+CjxnIHRyYW5zZm9ybT0ndHJhbnNsYXRlKC00LjQ0MDk4LDAuMCknPgo8ZyBzdHJva2U9J25vbmUnIHRyYW5zZm9ybT0nc2NhbGUoLTEuMDAzNzUsMS4wMDM3NSl0cmFuc2xhdGUoNTM0LjEyOTk3OCwtNDAuMDQ3MDQzKXNjYWxlKC0xLC0xKSc+CjxnIGZpbGw9JyMwMDAnPgo8ZyBzdHJva2U9J25vbmUnPgo8dXNlIHg9JzUzNC4xMjk5NzgnIHk9Jy00MC4wNDcwNDMnIHhsaW5rOmhyZWY9JyNnMi03MycvPgo8dXNlIHg9JzUzOC41MDk0MDInIHk9Jy0zOC41NTI2NjMnIHhsaW5rOmhyZWY9JyNnNC00OCcvPgo8L2c+CjwvZz4KPC9nPgo8L2c+CjwvZz4KPGcgc3Ryb2tlPScjMDAwJyBzdHJva2UtbWl0ZXJsaW1pdD0nMTAnIHRyYW5zZm9ybT0ndHJhbnNsYXRlKDU5NC4wNzczNCwtNDAuMDQ3MDQzKXNjYWxlKDAuOTk2MjY0LC0wLjk5NjI2NCknPgo8ZyB0cmFuc2Zvcm09J3RyYW5zbGF0ZSgtNC40NDA5OCwwLjApJz4KPGcgc3Ryb2tlPSdub25lJyB0cmFuc2Zvcm09J3NjYWxlKC0xLjAwMzc1LDEuMDAzNzUpdHJhbnNsYXRlKDU5NC4wNzczNCwtNDAuMDQ3MDQzKXNjYWxlKC0xLC0xKSc+CjxnIGZpbGw9JyMwMDAnPgo8ZyBzdHJva2U9J25vbmUnPgo8dXNlIHg9JzU5NC4wNzczNCcgeT0nLTQwLjA0NzA0MycgeGxpbms6aHJlZj0nI2cyLTczJy8+Cjx1c2UgeD0nNTk4LjQ1Njc2NCcgeT0nLTM4LjU1MjY2MycgeGxpbms6aHJlZj0nI2c0LTQ5Jy8+CjwvZz4KPC9nPgo8L2c+CjwvZz4KPC9nPgo8ZyBzdHJva2U9JyMwMDAnIHN0cm9rZS1taXRlcmxpbWl0PScxMCcgdHJhbnNmb3JtPSd0cmFuc2xhdGUoNjU1LjQxMTgxOSwtNDAuMDQ3MDQzKXNjYWxlKDAuOTk2MjY0LC0wLjk5NjI2NCknPgo8ZyB0cmFuc2Zvcm09J3RyYW5zbGF0ZSgtNS44MzMzLDAuMCknPgo8ZyBzdHJva2U9J25vbmUnIHRyYW5zZm9ybT0nc2NhbGUoLTEuMDAzNzUsMS4wMDM3NSl0cmFuc2xhdGUoNjU1LjQxMTgxOSwtNDAuMDQ3MDQzKXNjYWxlKC0xLC0xKSc+CjxnIGZpbGw9JyMwMDAnPgo8ZyBzdHJva2U9J25vbmUnPgo8dXNlIHg9JzY1NS40MTE4MTknIHk9Jy00MC4wNDcwNDMnIHhsaW5rOmhyZWY9JyNnMC0xJy8+Cjx1c2UgeD0nNjU5LjgzOTYyNycgeT0nLTQwLjA0NzA0MycgeGxpbms6aHJlZj0nI2cwLTEnLz4KPHVzZSB4PSc2NjQuMjY3NDM1JyB5PSctNDAuMDQ3MDQzJyB4bGluazpocmVmPScjZzAtMScvPgo8L2c+CjwvZz4KPC9nPgo8L2c+CjwvZz4KPGcgc3Ryb2tlPScjMDAwJyBzdHJva2UtbWl0ZXJsaW1pdD0nMTAnIHRyYW5zZm9ybT0ndHJhbnNsYXRlKDcxNi42MTA1MzIsLTQwLjA0NzA0MylzY2FsZSgwLjk5NjI2NCwtMC45OTYyNjQpJz4KPGcgdHJhbnNmb3JtPSd0cmFuc2xhdGUoLTQuMzA0NywwLjApJz4KPGcgc3Ryb2tlPSdub25lJyB0cmFuc2Zvcm09J3NjYWxlKC0xLjAwMzc1LDEuMDAzNzUpdHJhbnNsYXRlKDcxNi42MTA1MzIsLTQwLjA0NzA0MylzY2FsZSgtMSwtMSknPgo8ZyBmaWxsPScjMDAwJz4KPGcgc3Ryb2tlPSdub25lJz4KPHVzZSB4PSc3MTYuNjEwNTMyJyB5PSctNDAuMDQ3MDQzJyB4bGluazpocmVmPScjZzItNzMnLz4KPHVzZSB4PSc3MjAuOTg5OTU2JyB5PSctMzguNTUyNjYzJyB4bGluazpocmVmPScjZzMtMTA2Jy8+CjwvZz4KPC9nPgo8L2c+CjwvZz4KPC9nPgo8ZyBzdHJva2U9JyMwMDAnIHN0cm9rZS1taXRlcmxpbWl0PScxMCcgdHJhbnNmb3JtPSd0cmFuc2xhdGUoNzc3LjgwOTI0NCwtNDAuMDQ3MDQzKXNjYWxlKDAuOTk2MjY0LC0wLjk5NjI2NCknPgo8ZyB0cmFuc2Zvcm09J3RyYW5zbGF0ZSgtNS44MzMzLDAuMCknPgo8ZyBzdHJva2U9J25vbmUnIHRyYW5zZm9ybT0nc2NhbGUoLTEuMDAzNzUsMS4wMDM3NSl0cmFuc2xhdGUoNzc3LjgwOTI0NCwtNDAuMDQ3MDQzKXNjYWxlKC0xLC0xKSc+CjxnIGZpbGw9JyMwMDAnPgo8ZyBzdHJva2U9J25vbmUnPgo8dXNlIHg9Jzc3Ny44MDkyNDQnIHk9Jy00MC4wNDcwNDMnIHhsaW5rOmhyZWY9JyNnMC0xJy8+Cjx1c2UgeD0nNzgyLjIzNzA1MicgeT0nLTQwLjA0NzA0MycgeGxpbms6aHJlZj0nI2cwLTEnLz4KPHVzZSB4PSc3ODYuNjY0ODYnIHk9Jy00MC4wNDcwNDMnIHhsaW5rOmhyZWY9JyNnMC0xJy8+CjwvZz4KPC9nPgo8L2c+CjwvZz4KPC9nPgo8ZyBzdHJva2U9JyMwMDAnIHN0cm9rZS1taXRlcmxpbWl0PScxMCcgdHJhbnNmb3JtPSd0cmFuc2xhdGUoODQ0LjQ1ODg5LC00MC4wNDcwNDMpc2NhbGUoMC45OTYyNjQsLTAuOTk2MjY0KSc+CjxnIHRyYW5zZm9ybT0ndHJhbnNsYXRlKC05Ljc3NjA4LDAuMCknPgo8ZyBzdHJva2U9J25vbmUnIHRyYW5zZm9ybT0nc2NhbGUoLTEuMDAzNzUsMS4wMDM3NSl0cmFuc2xhdGUoODQ0LjQ1ODg5LC00MC4wNDcwNDMpc2NhbGUoLTEsLTEpJz4KPGcgZmlsbD0nIzAwMCc+CjxnIHN0cm9rZT0nbm9uZSc+Cjx1c2UgeD0nODQ0LjQ1ODg5JyB5PSctNDAuMDQ3MDQzJyB4bGluazpocmVmPScjZzItNzMnLz4KPHVzZSB4PSc4NDguODM4MzE0JyB5PSctMzguNTUyNjYzJyB4bGluazpocmVmPScjZzMtMTA3Jy8+Cjx1c2UgeD0nODUzLjI0MTk2OCcgeT0nLTM4LjU1MjY2MycgeGxpbms6aHJlZj0nI2cxLTAnLz4KPHVzZSB4PSc4NTkuNDY4NjQ4JyB5PSctMzguNTUyNjYzJyB4bGluazpocmVmPScjZzQtNDknLz4KPC9nPgo8L2c+CjwvZz4KPC9nPgo8L2c+CjxnIHN0cm9rZT0nIzAwMCcgc3Ryb2tlLW1pdGVybGltaXQ9JzEwJyB0cmFuc2Zvcm09J3RyYW5zbGF0ZSg5MTAuMTM2ODgzLC00MC4wNDcwNDMpc2NhbGUoMC45OTYyNjQsLTAuOTk2MjY0KSc+CjxwYXRoIGQ9J00tOC45NjM1NS04LjcxNDQySDguOTYzNTVWMTQuMDQ3NzZILTguOTYzNTVaJyBmaWxsPSdub25lJy8+CjxnIHRyYW5zZm9ybT0ndHJhbnNsYXRlKC00LjY1OCwwLjApJz4KPGcgc3Ryb2tlPSdub25lJyB0cmFuc2Zvcm09J3NjYWxlKC0xLjAwMzc1LDEuMDAzNzUpdHJhbnNsYXRlKDkxMC4xMzY4ODMsLTQwLjA0NzA0MylzY2FsZSgtMSwtMSknPgo8ZyBmaWxsPScjMDAwJz4KPGcgc3Ryb2tlPSdub25lJz4KPHVzZSB4PSc5MTAuMTM2ODgzJyB5PSctNDAuMDQ3MDQzJyB4bGluazpocmVmPScjZzItNzMnLz4KPHVzZSB4PSc5MTQuNTE2MzA3JyB5PSctMzguNTUyNjYzJyB4bGluazpocmVmPScjZzMtMTA3Jy8+CjwvZz4KPC9nPgo8L2c+CjwvZz4KPC9nPgo8L2c+CjwvZz4KPGcgc3Ryb2tlLXdpZHRoPScwLjM5OTk4Jz4KPHBhdGggZD0nTS0xNzQuNDc5OTIgMi40ODQ3SC0xNDMuNTgxODMnIGZpbGw9J25vbmUnLz4KPGcgdHJhbnNmb3JtPSd0cmFuc2xhdGUoLTE0My4zODE4NSwyLjQ4NDcpJz4KPGcgc3Ryb2tlLWRhc2hhcnJheT0nbm9uZScgc3Ryb2tlLWRhc2hvZmZzZXQ9JzAuMCc+CiA8ZyBzdHJva2UtbGluZWNhcD0ncm91bmQnPgogPGcgc3Ryb2tlLWxpbmVqb2luPSdyb3VuZCc+CiA8cGF0aCBkPSdNLTIuMDc5ODggMi4zOTk4NkMtMS42OTk4OSAuOTU5OTItLjg1MzEzIC4yNzk5OCAwIDBILS4zOTk5OCcgZmlsbD0nbm9uZScvPgogPC9nPgogPC9nPgogPC9nPgo8L2c+CjxnIHRyYW5zZm9ybT0ndHJhbnNsYXRlKC0xNjMuNjQwMzcsNC44Mzc0NSknPgo8ZyBzdHJva2U9J25vbmUnIHRyYW5zZm9ybT0nc2NhbGUoLTEuMDAzNzUsMS4wMDM3NSl0cmFuc2xhdGUoNTI1LjQxNjEzNCwtNDAuMDQ3MDQzKXNjYWxlKC0xLC0xKSc+CjxnIGZpbGw9JyMwMDAnPgo8ZyBzdHJva2U9J25vbmUnPgo8dXNlIHg9JzUyNS40MTYxMzQnIHk9Jy00MC4wNDcwNDMnIHhsaW5rOmhyZWY9JyNnMy0xMDcnLz4KPHVzZSB4PSc1MjkuODE5Nzg4JyB5PSctNDAuMDQ3MDQzJyB4bGluazpocmVmPScjZzMtMTEnLz4KPC9nPgo8L2c+CjwvZz4KPC9nPgo8L2c+CjxnIHN0cm9rZS13aWR0aD0nMC4zOTk5OCc+CjxwYXRoIGQ9J00tMTQzLjE4MTg3LTIuMzM3NDhILTE3NC4wNzk5NicgZmlsbD0nbm9uZScvPgo8ZyB0cmFuc2Zvcm09J21hdHJpeCgtMS4wLDAuMCwwLjAsLTEuMCwtMTc0LjI3OTk0LC0yLjMzNzQ4KSc+CjxnIHN0cm9rZS1kYXNoYXJyYXk9J25vbmUnIHN0cm9rZS1kYXNob2Zmc2V0PScwLjAnPgogPGcgc3Ryb2tlLWxpbmVjYXA9J3JvdW5kJz4KIDxnIHN0cm9rZS1saW5lam9pbj0ncm91bmQnPgogPHBhdGggZD0nTS0yLjA3OTg4IDIuMzk5ODZDLTEuNjk5ODkgLjk1OTkyLS44NTMxMyAuMjc5OTggMCAwSC0uMzk5OTgnIGZpbGw9J25vbmUnLz4KIDwvZz4KIDwvZz4KIDwvZz4KPC9nPgo8ZyB0cmFuc2Zvcm09J3RyYW5zbGF0ZSgtMTYxLjI3Nzk1LC05LjU1MTMzKSc+CjxnIHN0cm9rZT0nbm9uZScgdHJhbnNmb3JtPSdzY2FsZSgtMS4wMDM3NSwxLjAwMzc1KXRyYW5zbGF0ZSg1MjUuNDE2MTM0LC00MC4wNDcwNDMpc2NhbGUoLTEsLTEpJz4KPGcgZmlsbD0nIzAwMCc+CjxnIHN0cm9rZT0nbm9uZSc+Cjx1c2UgeD0nNTI1LjQxNjEzNCcgeT0nLTQwLjA0NzA0MycgeGxpbms6aHJlZj0nI2czLTEyJy8+CjwvZz4KPC9nPgo8L2c+CjwvZz4KPC9nPgo8ZyBzdHJva2Utd2lkdGg9JzAuMzk5OTgnPgo8cGF0aCBkPSdNLTExNC4zMDc3NSAyLjQ4NDdILTgzLjQwOTY3JyBmaWxsPSdub25lJy8+CjxnIHRyYW5zZm9ybT0ndHJhbnNsYXRlKC04My4yMDk2OSwyLjQ4NDcpJz4KPGcgc3Ryb2tlLWRhc2hhcnJheT0nbm9uZScgc3Ryb2tlLWRhc2hvZmZzZXQ9JzAuMCc+CiA8ZyBzdHJva2UtbGluZWNhcD0ncm91bmQnPgogPGcgc3Ryb2tlLWxpbmVqb2luPSdyb3VuZCc+CiA8cGF0aCBkPSdNLTIuMDc5ODggMi4zOTk4NkMtMS42OTk4OSAuOTU5OTItLjg1MzEzIC4yNzk5OCAwIDBILS4zOTk5OCcgZmlsbD0nbm9uZScvPgogPC9nPgogPC9nPgogPC9nPgo8L2c+CjxnIHRyYW5zZm9ybT0ndHJhbnNsYXRlKC0xMTEuNzExMjksNi41ODc0NSknPgo8ZyBzdHJva2U9J25vbmUnIHRyYW5zZm9ybT0nc2NhbGUoLTEuMDAzNzUsMS4wMDM3NSl0cmFuc2xhdGUoNTI1LjQxNjEzNCwtNDAuMDQ3MDQzKXNjYWxlKC0xLC0xKSc+CjxnIGZpbGw9JyMwMDAnPgo8ZyBzdHJva2U9J25vbmUnPgo8dXNlIHg9JzUyNS40MTYxMzQnIHk9Jy00MC4wNDcwNDMnIHhsaW5rOmhyZWY9JyNnNC00MCcvPgo8dXNlIHg9JzUyOC41Mjk0NzcnIHk9Jy00MC4wNDcwNDMnIHhsaW5rOmhyZWY9JyNnMy0xMDcnLz4KPHVzZSB4PSc1MzIuOTMzMTMxJyB5PSctNDAuMDQ3MDQzJyB4bGluazpocmVmPScjZzEtMCcvPgo8dXNlIHg9JzUzOS4xNTk4MScgeT0nLTQwLjA0NzA0MycgeGxpbms6aHJlZj0nI2c0LTQ5Jy8+Cjx1c2UgeD0nNTQzLjEzMTA1MScgeT0nLTQwLjA0NzA0MycgeGxpbms6aHJlZj0nI2c0LTQxJy8+Cjx1c2UgeD0nNTQ2LjI0NDM5NCcgeT0nLTQwLjA0NzA0MycgeGxpbms6aHJlZj0nI2czLTExJy8+CjwvZz4KPC9nPgo8L2c+CjwvZz4KPC9nPgo8ZyBzdHJva2Utd2lkdGg9JzAuMzk5OTgnPgo8cGF0aCBkPSdNLTgzLjAwOTctMi4zMzc0OEgtMTEzLjkwNzc5JyBmaWxsPSdub25lJy8+CjxnIHRyYW5zZm9ybT0nbWF0cml4KC0xLjAsMC4wLDAuMCwtMS4wLC0xMTQuMTA3NzcsLTIuMzM3NDgpJz4KPGcgc3Ryb2tlLWRhc2hhcnJheT0nbm9uZScgc3Ryb2tlLWRhc2hvZmZzZXQ9JzAuMCc+CiA8ZyBzdHJva2UtbGluZWNhcD0ncm91bmQnPgogPGcgc3Ryb2tlLWxpbmVqb2luPSdyb3VuZCc+CiA8cGF0aCBkPSdNLTIuMDc5ODggMi4zOTk4NkMtMS42OTk4OSAuOTU5OTItLjg1MzEzIC4yNzk5OCAwIDBILS4zOTk5OCcgZmlsbD0nbm9uZScvPgogPC9nPgogPC9nPgogPC9nPgo8L2c+CjxnIHRyYW5zZm9ybT0ndHJhbnNsYXRlKC0xMDMuMDk4ODUsLTkuNTUxMzMpJz4KPGcgc3Ryb2tlPSdub25lJyB0cmFuc2Zvcm09J3NjYWxlKC0xLjAwMzc1LDEuMDAzNzUpdHJhbnNsYXRlKDUyNS40MTYxMzQsLTQwLjA0NzA0MylzY2FsZSgtMSwtMSknPgo8ZyBmaWxsPScjMDAwJz4KPGcgc3Ryb2tlPSdub25lJz4KPHVzZSB4PSc1MjUuNDE2MTM0JyB5PSctNDAuMDQ3MDQzJyB4bGluazpocmVmPScjZzQtNTAnLz4KPHVzZSB4PSc1MjkuMzg3Mzc0JyB5PSctNDAuMDQ3MDQzJyB4bGluazpocmVmPScjZzMtMTInLz4KPC9nPgo8L2c+CjwvZz4KPC9nPgo8L2c+CjxnIHN0cm9rZS13aWR0aD0nMC4zOTk5OCc+CjxwYXRoIGQ9J00tNTEuMzUwOTUgMi40ODQ3SC0yMC40NTI4NycgZmlsbD0nbm9uZScvPgo8ZyB0cmFuc2Zvcm09J3RyYW5zbGF0ZSgtMjAuMjUyODgsMi40ODQ3KSc+CjxnIHN0cm9rZS1kYXNoYXJyYXk9J25vbmUnIHN0cm9rZS1kYXNob2Zmc2V0PScwLjAnPgogPGcgc3Ryb2tlLWxpbmVjYXA9J3JvdW5kJz4KIDxnIHN0cm9rZS1saW5lam9pbj0ncm91bmQnPgogPHBhdGggZD0nTS0yLjA3OTg4IDIuMzk5ODZDLTEuNjk5ODkgLjk1OTkyLS44NTMxMyAuMjc5OTggMCAwSC0uMzk5OTgnIGZpbGw9J25vbmUnLz4KIDwvZz4KIDwvZz4KIDwvZz4KPC9nPgo8ZyB0cmFuc2Zvcm09J3RyYW5zbGF0ZSgtNTMuNjgwNzMsNi41ODc0NSknPgo8ZyBzdHJva2U9J25vbmUnIHRyYW5zZm9ybT0nc2NhbGUoLTEuMDAzNzUsMS4wMDM3NSl0cmFuc2xhdGUoNTI1LjQxNjEzNCwtNDAuMDQ3MDQzKXNjYWxlKC0xLC0xKSc+CjxnIGZpbGw9JyMwMDAnPgo8ZyBzdHJva2U9J25vbmUnPgo8dXNlIHg9JzUyNS40MTYxMzQnIHk9Jy00MC4wNDcwNDMnIHhsaW5rOmhyZWY9JyNnNC00MCcvPgo8dXNlIHg9JzUyOC41Mjk0NzcnIHk9Jy00MC4wNDcwNDMnIHhsaW5rOmhyZWY9JyNnMy0xMDcnLz4KPHVzZSB4PSc1MzIuOTMzMTMxJyB5PSctNDAuMDQ3MDQzJyB4bGluazpocmVmPScjZzEtMCcvPgo8dXNlIHg9JzUzOS4xNTk4MScgeT0nLTQwLjA0NzA0MycgeGxpbms6aHJlZj0nI2czLTEwNicvPgo8dXNlIHg9JzU0Mi44NTk1JyB5PSctNDAuMDQ3MDQzJyB4bGluazpocmVmPScjZzQtNDMnLz4KPHVzZSB4PSc1NDguOTc1NDgzJyB5PSctNDAuMDQ3MDQzJyB4bGluazpocmVmPScjZzQtNDknLz4KPHVzZSB4PSc1NTIuOTQ2NzI0JyB5PSctNDAuMDQ3MDQzJyB4bGluazpocmVmPScjZzQtNDEnLz4KPHVzZSB4PSc1NTYuMDYwMDY3JyB5PSctNDAuMDQ3MDQzJyB4bGluazpocmVmPScjZzMtMTEnLz4KPC9nPgo8L2c+CjwvZz4KPC9nPgo8L2c+CjxnIHN0cm9rZS13aWR0aD0nMC4zOTk5OCc+CjxwYXRoIGQ9J00tMjAuMDUyOS0yLjMzNzQ4SC01MC45NTA5OScgZmlsbD0nbm9uZScvPgo8ZyB0cmFuc2Zvcm09J21hdHJpeCgtMS4wLDAuMCwwLjAsLTEuMCwtNTEuMTUwOTcsLTIuMzM3NDgpJz4KPGcgc3Ryb2tlLWRhc2hhcnJheT0nbm9uZScgc3Ryb2tlLWRhc2hvZmZzZXQ9JzAuMCc+CiA8ZyBzdHJva2UtbGluZWNhcD0ncm91bmQnPgogPGcgc3Ryb2tlLWxpbmVqb2luPSdyb3VuZCc+CiA8cGF0aCBkPSdNLTIuMDc5ODggMi4zOTk4NkMtMS42OTk4OSAuOTU5OTItLjg1MzEzIC4yNzk5OCAwIDBILS4zOTk5OCcgZmlsbD0nbm9uZScvPgogPC9nPgogPC9nPgogPC9nPgo8L2c+CjxnIHRyYW5zZm9ybT0ndHJhbnNsYXRlKC00MC4wMDU3NywtOS41NTEzMyknPgo8ZyBzdHJva2U9J25vbmUnIHRyYW5zZm9ybT0nc2NhbGUoLTEuMDAzNzUsMS4wMDM3NSl0cmFuc2xhdGUoNTI1LjQxNjEzNCwtNDAuMDQ3MDQzKXNjYWxlKC0xLC0xKSc+CjxnIGZpbGw9JyMwMDAnPgo8ZyBzdHJva2U9J25vbmUnPgo8dXNlIHg9JzUyNS40MTYxMzQnIHk9Jy00MC4wNDcwNDMnIHhsaW5rOmhyZWY9JyNnMy0xMDYnLz4KPHVzZSB4PSc1MjkuMTE1ODIzJyB5PSctNDAuMDQ3MDQzJyB4bGluazpocmVmPScjZzMtMTInLz4KPC9nPgo8L2c+CjwvZz4KPC9nPgo8L2c+CjxnIHN0cm9rZS13aWR0aD0nMC4zOTk5OCc+CjxwYXRoIGQ9J004LjU0ODY2IDIuNDg0N0gzOS40NDY3NScgZmlsbD0nbm9uZScvPgo8ZyB0cmFuc2Zvcm09J3RyYW5zbGF0ZSgzOS42NDY3MywyLjQ4NDcpJz4KPGcgc3Ryb2tlLWRhc2hhcnJheT0nbm9uZScgc3Ryb2tlLWRhc2hvZmZzZXQ9JzAuMCc+CiA8ZyBzdHJva2UtbGluZWNhcD0ncm91bmQnPgogPGcgc3Ryb2tlLWxpbmVqb2luPSdyb3VuZCc+CiA8cGF0aCBkPSdNLTIuMDc5ODggMi4zOTk4NkMtMS42OTk4OSAuOTU5OTItLjg1MzEzIC4yNzk5OCAwIDBILS4zOTk5OCcgZmlsbD0nbm9uZScvPgogPC9nPgogPC9nPgogPC9nPgo8L2c+CjxnIHRyYW5zZm9ybT0ndHJhbnNsYXRlKDExLjI4MTQyLDYuNTg3NDUpJz4KPGcgc3Ryb2tlPSdub25lJyB0cmFuc2Zvcm09J3NjYWxlKC0xLjAwMzc1LDEuMDAzNzUpdHJhbnNsYXRlKDUyNS40MTYxMzQsLTQwLjA0NzA0MylzY2FsZSgtMSwtMSknPgo8ZyBmaWxsPScjMDAwJz4KPGcgc3Ryb2tlPSdub25lJz4KPHVzZSB4PSc1MjUuNDE2MTM0JyB5PSctNDAuMDQ3MDQzJyB4bGluazpocmVmPScjZzQtNDAnLz4KPHVzZSB4PSc1MjguNTI5NDc3JyB5PSctNDAuMDQ3MDQzJyB4bGluazpocmVmPScjZzMtMTA3Jy8+Cjx1c2UgeD0nNTMyLjkzMzEzMScgeT0nLTQwLjA0NzA0MycgeGxpbms6aHJlZj0nI2cxLTAnLz4KPHVzZSB4PSc1MzkuMTU5ODEnIHk9Jy00MC4wNDcwNDMnIHhsaW5rOmhyZWY9JyNnMy0xMDYnLz4KPHVzZSB4PSc1NDIuODU5NScgeT0nLTQwLjA0NzA0MycgeGxpbms6aHJlZj0nI2c0LTQxJy8+Cjx1c2UgeD0nNTQ1Ljk3Mjg0MycgeT0nLTQwLjA0NzA0MycgeGxpbms6aHJlZj0nI2czLTExJy8+CjwvZz4KPC9nPgo8L2c+CjwvZz4KPC9nPgo8ZyBzdHJva2Utd2lkdGg9JzAuMzk5OTgnPgo8cGF0aCBkPSdNMzkuODQ2NzEtMi4zMzc0OEg4Ljk0ODYyJyBmaWxsPSdub25lJy8+CjxnIHRyYW5zZm9ybT0nbWF0cml4KC0xLjAsMC4wLDAuMCwtMS4wLDguNzQ4NjQsLTIuMzM3NDgpJz4KPGcgc3Ryb2tlLWRhc2hhcnJheT0nbm9uZScgc3Ryb2tlLWRhc2hvZmZzZXQ9JzAuMCc+CiA8ZyBzdHJva2UtbGluZWNhcD0ncm91bmQnPgogPGcgc3Ryb2tlLWxpbmVqb2luPSdyb3VuZCc+CiA8cGF0aCBkPSdNLTIuMDc5ODggMi4zOTk4NkMtMS42OTk4OSAuOTU5OTItLjg1MzEzIC4yNzk5OCAwIDBILS4zOTk5OCcgZmlsbD0nbm9uZScvPgogPC9nPgogPC9nPgogPC9nPgo8L2c+CjxnIHRyYW5zZm9ybT0ndHJhbnNsYXRlKDExLjcwNjMxLC05Ljk0MDIzKSc+CjxnIHN0cm9rZT0nbm9uZScgdHJhbnNmb3JtPSdzY2FsZSgtMS4wMDM3NSwxLjAwMzc1KXRyYW5zbGF0ZSg1MjUuNDE2MTM0LC00MC4wNDcwNDMpc2NhbGUoLTEsLTEpJz4KPGcgZmlsbD0nIzAwMCc+CjxnIHN0cm9rZT0nbm9uZSc+Cjx1c2UgeD0nNTI1LjQxNjEzNCcgeT0nLTQwLjA0NzA0MycgeGxpbms6aHJlZj0nI2c0LTQwJy8+Cjx1c2UgeD0nNTI4LjUyOTQ3NycgeT0nLTQwLjA0NzA0MycgeGxpbms6aHJlZj0nI2czLTEwNicvPgo8dXNlIHg9JzUzMi4yMjkxNjYnIHk9Jy00MC4wNDcwNDMnIHhsaW5rOmhyZWY9JyNnNC00MycvPgo8dXNlIHg9JzUzOC4zNDUxNScgeT0nLTQwLjA0NzA0MycgeGxpbms6aHJlZj0nI2c0LTQ5Jy8+Cjx1c2UgeD0nNTQyLjMxNjM5JyB5PSctNDAuMDQ3MDQzJyB4bGluazpocmVmPScjZzQtNDEnLz4KPHVzZSB4PSc1NDUuNDI5NzMzJyB5PSctNDAuMDQ3MDQzJyB4bGluazpocmVmPScjZzMtMTInLz4KPC9nPgo8L2c+CjwvZz4KPC9nPgo8L2c+CjxnIHN0cm9rZS13aWR0aD0nMC4zOTk5OCc+CjxwYXRoIGQ9J003MS41MDU0NiAyLjQ4NDdIMTAyLjQwMzU1JyBmaWxsPSdub25lJy8+CjxnIHRyYW5zZm9ybT0ndHJhbnNsYXRlKDEwMi42MDM1MywyLjQ4NDcpJz4KPGcgc3Ryb2tlLWRhc2hhcnJheT0nbm9uZScgc3Ryb2tlLWRhc2hvZmZzZXQ9JzAuMCc+CiA8ZyBzdHJva2UtbGluZWNhcD0ncm91bmQnPgogPGcgc3Ryb2tlLWxpbmVqb2luPSdyb3VuZCc+CiA8cGF0aCBkPSdNLTIuMDc5ODggMi4zOTk4NkMtMS42OTk4OSAuOTU5OTItLjg1MzEzIC4yNzk5OCAwIDBILS4zOTk5OCcgZmlsbD0nbm9uZScvPgogPC9nPgogPC9nPgogPC9nPgo8L2c+CjxnIHRyYW5zZm9ybT0ndHJhbnNsYXRlKDgyLjU2MjA0LDQuODM3NDUpJz4KPGcgc3Ryb2tlPSdub25lJyB0cmFuc2Zvcm09J3NjYWxlKC0xLjAwMzc1LDEuMDAzNzUpdHJhbnNsYXRlKDUyNS40MTYxMzQsLTQwLjA0NzA0MylzY2FsZSgtMSwtMSknPgo8ZyBmaWxsPScjMDAwJz4KPGcgc3Ryb2tlPSdub25lJz4KPHVzZSB4PSc1MjUuNDE2MTM0JyB5PSctNDAuMDQ3MDQzJyB4bGluazpocmVmPScjZzQtNTAnLz4KPHVzZSB4PSc1MjkuMzg3Mzc0JyB5PSctNDAuMDQ3MDQzJyB4bGluazpocmVmPScjZzMtMTEnLz4KPC9nPgo8L2c+CjwvZz4KPC9nPgo8L2c+CjxnIHN0cm9rZS13aWR0aD0nMC4zOTk5OCc+CjxwYXRoIGQ9J00xMDIuODAzNTEtMi4zMzc0OEg3MS45MDU0MycgZmlsbD0nbm9uZScvPgo8ZyB0cmFuc2Zvcm09J21hdHJpeCgtMS4wLDAuMCwwLjAsLTEuMCw3MS43MDU0NCwtMi4zMzc0OCknPgo8ZyBzdHJva2UtZGFzaGFycmF5PSdub25lJyBzdHJva2UtZGFzaG9mZnNldD0nMC4wJz4KIDxnIHN0cm9rZS1saW5lY2FwPSdyb3VuZCc+CiA8ZyBzdHJva2UtbGluZWpvaW49J3JvdW5kJz4KIDxwYXRoIGQ9J00tMi4wNzk4OCAyLjM5OTg2Qy0xLjY5OTg5IC45NTk5Mi0uODUzMTMgLjI3OTk4IDAgMEgtLjM5OTk4JyBmaWxsPSdub25lJy8+CiA8L2c+CiA8L2c+CiA8L2c+CjwvZz4KPGcgdHJhbnNmb3JtPSd0cmFuc2xhdGUoNzQuMjU0MjYsLTkuOTQwMjMpJz4KPGcgc3Ryb2tlPSdub25lJyB0cmFuc2Zvcm09J3NjYWxlKC0xLjAwMzc1LDEuMDAzNzUpdHJhbnNsYXRlKDUyNS40MTYxMzQsLTQwLjA0NzA0MylzY2FsZSgtMSwtMSknPgo8ZyBmaWxsPScjMDAwJz4KPGcgc3Ryb2tlPSdub25lJz4KPHVzZSB4PSc1MjUuNDE2MTM0JyB5PSctNDAuMDQ3MDQzJyB4bGluazpocmVmPScjZzQtNDAnLz4KPHVzZSB4PSc1MjguNTI5NDc3JyB5PSctNDAuMDQ3MDQzJyB4bGluazpocmVmPScjZzMtMTA3Jy8+Cjx1c2UgeD0nNTMyLjkzMzEzMScgeT0nLTQwLjA0NzA0MycgeGxpbms6aHJlZj0nI2cxLTAnLz4KPHVzZSB4PSc1MzkuMTU5ODEnIHk9Jy00MC4wNDcwNDMnIHhsaW5rOmhyZWY9JyNnNC00OScvPgo8dXNlIHg9JzU0My4xMzEwNTEnIHk9Jy00MC4wNDcwNDMnIHhsaW5rOmhyZWY9JyNnNC00MScvPgo8dXNlIHg9JzU0Ni4yNDQzOTQnIHk9Jy00MC4wNDcwNDMnIHhsaW5rOmhyZWY9JyNnMy0xMicvPgo8L2c+CjwvZz4KPC9nPgo8L2c+CjwvZz4KPGcgc3Ryb2tlLXdpZHRoPScwLjM5OTk4Jz4KPHBhdGggZD0nTTE0Mi4zNDc4MiAyLjQ4NDdIMTczLjQ0NTknIGZpbGw9J25vbmUnLz4KPGcgdHJhbnNmb3JtPSd0cmFuc2xhdGUoMTczLjY0NTg5LDIuNDg0NyknPgo8ZyBzdHJva2UtZGFzaGFycmF5PSdub25lJyBzdHJva2UtZGFzaG9mZnNldD0nMC4wJz4KIDxnIHN0cm9rZS1saW5lY2FwPSdyb3VuZCc+CiA8ZyBzdHJva2UtbGluZWpvaW49J3JvdW5kJz4KIDxwYXRoIGQ9J00tMi4wNzk4OCAyLjM5OTg2Qy0xLjY5OTg5IC45NTk5Mi0uODUzMTMgLjI3OTk4IDAgMEgtLjM5OTk4JyBmaWxsPSdub25lJy8+CiA8L2c+CiA8L2c+CiA8L2c+CjwvZz4KPGcgdHJhbnNmb3JtPSd0cmFuc2xhdGUoMTU1LjQ5NzQ3LDQuODM3NDUpJz4KPGcgc3Ryb2tlPSdub25lJyB0cmFuc2Zvcm09J3NjYWxlKC0xLjAwMzc1LDEuMDAzNzUpdHJhbnNsYXRlKDUyNS40MTYxMzQsLTQwLjA0NzA0MylzY2FsZSgtMSwtMSknPgo8ZyBmaWxsPScjMDAwJz4KPGcgc3Ryb2tlPSdub25lJz4KPHVzZSB4PSc1MjUuNDE2MTM0JyB5PSctNDAuMDQ3MDQzJyB4bGluazpocmVmPScjZzMtMTEnLz4KPC9nPgo8L2c+CjwvZz4KPC9nPgo8L2c+CjxnIHN0cm9rZS13aWR0aD0nMC4zOTk5OCc+CjxwYXRoIGQ9J00xNzMuODQ1ODctMi4zMzc0OEgxNDIuNzQ3NzknIGZpbGw9J25vbmUnLz4KPGcgdHJhbnNmb3JtPSdtYXRyaXgoLTEuMCwwLjAsMC4wLC0xLjAsMTQyLjU0NzgsLTIuMzM3NDgpJz4KPGcgc3Ryb2tlLWRhc2hhcnJheT0nbm9uZScgc3Ryb2tlLWRhc2hvZmZzZXQ9JzAuMCc+CiA8ZyBzdHJva2UtbGluZWNhcD0ncm91bmQnPgogPGcgc3Ryb2tlLWxpbmVqb2luPSdyb3VuZCc+CiA8cGF0aCBkPSdNLTIuMDc5ODggMi4zOTk4NkMtMS42OTk4OSAuOTU5OTItLjg1MzEzIC4yNzk5OCAwIDBILS4zOTk5OCcgZmlsbD0nbm9uZScvPgogPC9nPgogPC9nPgogPC9nPgo8L2c+CjxnIHRyYW5zZm9ybT0ndHJhbnNsYXRlKDE1My40Mzk3LC05LjU1MTMzKSc+CjxnIHN0cm9rZT0nbm9uZScgdHJhbnNmb3JtPSdzY2FsZSgtMS4wMDM3NSwxLjAwMzc1KXRyYW5zbGF0ZSg1MjUuNDE2MTM0LC00MC4wNDcwNDMpc2NhbGUoLTEsLTEpJz4KPGcgZmlsbD0nIzAwMCc+CjxnIHN0cm9rZT0nbm9uZSc+Cjx1c2UgeD0nNTI1LjQxNjEzNCcgeT0nLTQwLjA0NzA0MycgeGxpbms6aHJlZj0nI2czLTEwNycvPgo8dXNlIHg9JzUyOS44MTk3ODgnIHk9Jy00MC4wNDcwNDMnIHhsaW5rOmhyZWY9JyNnMy0xMicvPgo8L2c+CjwvZz4KPC9nPgo8L2c+CjwvZz4KPC9nPgo8L2c+CjwvZz4KPC9nPgo8L2c+CjwvZz4KPC9nPgo8L2c+CjwvZz4KPC9nPgo8L2c+Cjwvc3ZnPg==" class="img-fluid">
+</div>
+</div>
+</div>
+<p>The <span class="math inline">\(j\)</span>-th state satisfies <span id="eq-first"><span class="math display">\[
+s_j' = (k-j+1)\alpha s_{j-1} - (k-j)\alpha s_j - j \beta s_j + (j+1)\beta s_{j+1}.
+\tag{2}\]</span></span></p>
+<p>Of course we assume that <span class="math inline">\(s_{-1}\)</span> and <span class="math inline">\(s_{k+1}\)</span> do not appear in the equations for <span class="math inline">\(j=0\)</span> and <span class="math inline">\(j=k\)</span>.</p>
+<p>Now set <span class="math display">\[
+s_j=\binom{k}{j} n^j (1-n)^{k-j},
+\]</span></p>
+<p>with <span class="math inline">\(n\)</span> solution of the ODE <span class="math inline">\(n' = \alpha (1-n) - \beta n\)</span>. Note that <span class="math inline">\(s_k = n^k\)</span>.</p>
+<p>We compute the derivative: <span class="math display">\[
+s_j' = \binom{k}{j} \left[ j n^{j-1} (1-n)^{k-j} - (k-j) n^j (1-n)^{k-j-1} \right] n',
+\]</span></p>
+<p>which should match the right hand side of <a href="#eq-first" class="quarto-xref">Equation&nbsp;<span>2</span></a>. Note that: <span class="math display">\[
+\begin{aligned}
+s_{j-1} &amp;= \binom{k}{j-1} n^{j-1} (1-n)^{k-j+1} = \binom{k}{j} \frac{j}{k-j+1} n^{j-1} (1-n)^{k-j+1}, \\
+s_{j+1} &amp;= \binom{k}{j+1} n^{j+1} (1-n)^{k-j-1} = \binom{k}{j} \frac{k-j}{j+1} n^{j+1} (1-n)^{k-j-1}.
+\end{aligned}
+\]</span></p>
+<p>In fact substituting into <a href="#eq-first" class="quarto-xref">Equation&nbsp;<span>2</span></a> yields: <span class="math display">\[
+\begin{split}
+s_j' &amp;= \binom{k}{j} \Bigl[ \alpha(1-n) \bigl( jn^{j-1} (1-n)^{k-j} - (k-j)n^j (1-n)^{k-j-1} \bigr) \\
+     &amp;- \beta n \bigl( j n^{j-1} (1-n)^{k-j} - (k-j)n^{j} (1-n)^{k-j-1} \bigr) \Bigr] \\
+     &amp;= \binom{k}{j} \bigl( jn^{j-1} (1-n)^{k-j} - (k-j)n^j (1-n)^{k-j-1} \bigr) \bigl( \alpha(1-n) - \beta n \bigr).
+\end{split}
+\]</span></p>
+</div>
+</div>
+</div>
 </section>
 <section id="multidimensional-fronts" class="level2">
 <h2 class="anchored" data-anchor-id="multidimensional-fronts">Multidimensional fronts</h2>
@@ -534,14 +889,140 @@ w' &amp;= v - \gamma w,
 \Delta V = \frac{\partial^2 V}{\partial x_1^2} + \frac{\partial^2 V}{\partial x_2^2} + \cdot + \frac{\partial^2 V}{\partial x_n^2}.
 \]</span></p>
 <ol type="1">
-<li><p>Show that a planar wave, that is <span class="math inline">\(V(x,t) = U(\frac{x\cdot\vec{k}+st}{\varepsilon})\)</span> with <span class="math inline">\(\vec{k}\)</span> the unit vector pointing in the propagation direction, one has exactly the 1-D result for the velocity: <span class="math display">\[
+<li>Show that a planar wave, that is <span class="math inline">\(V(x,t) = U(\frac{x\cdot\vec{k}+st}{\varepsilon})\)</span> with <span class="math inline">\(\vec{k}\)</span> the unit vector pointing in the propagation direction, one has exactly the 1-D result for the velocity: <span class="math display">\[
 s = \frac{1}{\sqrt{2}}(2\alpha-1).
-\]</span></p></li>
+\]</span></li>
+</ol>
+<div class="callout callout-style-default callout-tip callout-titled" title="Solution">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-14" class="callout-14-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>For convenience we set <span class="math display">\[
+\xi = \frac{x \cdot \vec{k} + st}{\varepsilon}.
+\]</span></p>
+<p>We start by substituting the planar wave solution into the multidimensional cable equation: <span class="math display">\[
+\begin{aligned}
+\frac{\partial V}{\partial t}   &amp;= \frac{s}{\varepsilon} U'(\xi), \\
+\frac{\partial V^2}{\partial x_i^2} &amp;= \frac{k_i^2}{\varepsilon^2} U''(\xi).
+\end{aligned}
+\]</span></p>
+<p>Summing over all spatial dimensions, we get: <span class="math display">\[
+\Delta V = \frac{1}{\varepsilon^2} U''(\xi)
+\]</span></p>
+<p>since <span class="math inline">\(\vec{k}\)</span> is a unit vector, so <span class="math inline">\(\sum_i k_i^2 = 1\)</span>. Substituting these into the cable equation, we obtain: <span class="math display">\[
+\varepsilon \frac{s}{\varepsilon} U' = \varepsilon^2 \frac{1}{\varepsilon^2} U'' + f(U),
+\]</span></p>
+<p>which simplifies to: <span class="math display">\[
+s U' = U'' + f(U).
+\]</span></p>
+<p>This is exactly the same as the 1-D cable equation. Therefore, the speed of the planar wave is: <span class="math display">\[
+s = \frac{1}{\sqrt{2}}(2\alpha - 1).
+\]</span></p>
+</div>
+</div>
+</div>
+<ol start="2" type="1">
 <li><p>Consider now a spherical front, that is <span class="math inline">\(V(x,t) = U(\frac{|x| + st}{\varepsilon}) = U(r + st)\)</span> where <span class="math inline">\(r=|x|\)</span> is the radius of the sphere. Using the fast system, show that the speed is as follows: <span class="math display">\[
 s = s_0 - \kappa \varepsilon,
 \]</span></p>
 <p>where <span class="math inline">\(s_0\)</span> is the speed of a planar front and <span class="math inline">\(\kappa = \frac{n-1}{r}\)</span> is the <em>curvature</em> of the front. Show that, compared to a planar front, the velocity of a concave front is larger and for a convex front is lower.</p></li>
 </ol>
+<div class="callout callout-style-default callout-tip callout-titled" title="Solution">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-15-contents" aria-controls="callout-15" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-15" class="callout-15-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Proceeding as before, we set <span class="math display">\[
+\xi = \frac{r + st}{\varepsilon}.
+\]</span></p>
+<p>Note that: <span class="math display">\[
+\begin{aligned}
+r &amp;= \sqrt{\sum_i x_i^2}, \\
+\frac{\partial r}{\partial x_i} &amp;= \frac{x_i}{\sqrt{\sum_i x_i^2}} = \frac{x_i}{r}.
+\end{aligned}
+\]</span></p>
+<p>Substituting into the cable equation we have: <span class="math display">\[
+\begin{aligned}
+\frac{\partial V}{\partial t} &amp;= \frac{s}{\varepsilon} U'(\xi), \\
+\frac{\partial V}{\partial x_i} &amp;= \frac{1}{\varepsilon} U'(\xi) \frac{\partial r}{\partial x_i}
+    = \frac{x_i}{\varepsilon r} U'(\xi), \\
+\frac{\partial^2 V}{\partial x_i^2} &amp;= \frac{x_i}{\varepsilon^2 r} U''(\xi) \frac{\partial r}{\partial x_i}
+    + \frac{\partial}{\partial x_i} \Bigl( \frac{x_i}{\varepsilon r} \Bigr) U'(\xi) \\
+    &amp;= \frac{x^2_i}{\varepsilon^2 r^2} U''(\xi)
+    + \frac{r^2 - x_i^2 }{\varepsilon r^3} U'(\xi).
+\end{aligned}
+\]</span></p>
+<p>The Laplacian in spherical coordinates is given by: <span class="math display">\[
+\begin{split}
+\Delta V &amp;= \frac{\sum_i x^2_i}{\varepsilon^2 r^2} U''(\xi) + \sum_i \frac{r^2 - x_i^2}{\varepsilon r^3} U'(\xi) \\
+&amp;= \frac{1}{\varepsilon^2} U''(\xi) + \frac{n - 1}{\varepsilon r} U'(\xi).
+\end{split}
+\]</span></p>
+<p>Substituting these into the cable equation, we obtain: <span class="math display">\[
+s U' = U'' + \kappa \varepsilon U' + f(U),
+\]</span></p>
+<p>where <span class="math inline">\(\kappa = \frac{n-1}{r}\)</span>. Rearranging terms, we get: <span class="math display">\[
+(s - \kappa \varepsilon) U' = U'' + f(U).
+\]</span></p>
+<p>Therefore, the speed of the spherical front is: <span class="math display">\[
+s = s_0 - \kappa \varepsilon,
+\]</span></p>
+<p>where <span class="math inline">\(s_0\)</span> is the speed of a planar front.</p>
+<p>Compared to a planar front, the velocity of a concave front (negative curvature) is larger, and for a convex front (positive curvature) is lower.</p>
+<p><strong>Remark.</strong> The above derivation is not entirely correct. We should perform a complete perturbation analysis. In fact, in the fast coordinate <span class="math inline">\(\xi\)</span>, when we set <span class="math inline">\(\varepsilon\to 0\)</span> the curvature effect disappears.</p>
+<p>The correct analysis is much more complicated, we report it here for completeness. We assume that <span class="math display">\[
+\begin{aligned}
+U(\xi) &amp;= U_0(\xi) + \varepsilon U_1(\xi) + \varepsilon^2 U_2(\xi) + \cdots, \\
+s &amp;= s_0 + \varepsilon s_1 + \varepsilon^2 s_2 + \cdots,
+\end{aligned}
+\]</span></p>
+<p>then we substitute into the equation: <span class="math display">\[
+s_0 U_0 + \varepsilon (s_1 U'_0 + s_0 U_1') + \cdots = U_0'' + \varepsilon U_1'' + \kappa \varepsilon U_0' + f(U_0) + \varepsilon f'(U_0) U_1 + \cdots.
+\]</span></p>
+<p>The polynomial in <span class="math inline">\(\varepsilon\)</span> is zero when each coefficient is zero, that is, <span class="math display">\[
+\begin{aligned}
+&amp;\mathcal{O}(1) &amp;&amp; s_0 U_0 = U_0'' + f(U_0), \\
+&amp;\mathcal{O}(\varepsilon) &amp;&amp; s_1 U'_0 + s_0 U_1' = U_1'' + \kappa U_0' + f'(U_0) U_1.
+\end{aligned}
+\]</span></p>
+<p>The <span class="math inline">\(\mathcal{O}(1)\)</span> yields the planar wave solution, with <span class="math inline">\(s_0\)</span> as in the previous point and <span class="math inline">\(U_0(\xi)\)</span> the <span class="math inline">\(\tanh\)</span> solution.</p>
+<p>The <span class="math inline">\(\mathcal{O}(\varepsilon)\)</span> is a linear ODE of the form: <span class="math display">\[
+\mathcal{L}[U_1] = s_0 U_1' - U_1'' - f'(U_0) U_1 = - s_1 U'_0 + \kappa U_0',
+\]</span></p>
+<p>where <span class="math inline">\(\mathcal{L}[U_1]\)</span> is a second-order (linear) differential operator. This operator is <em>singular</em>, that is there exists a non-trivial solution <span class="math inline">\(U_1\)</span> such that <span class="math inline">\(\mathcal{L}[U_1] = 0\)</span>. This function is <span class="math inline">\(U_0'\)</span>, in fact <span class="math display">\[
+\mathcal{L}[U'_0] = s_0 U_0'' - U_0''' - f'(U_0)U_0' = [s_0 U_0' - U_0'' - f(U_0)]' = 0.
+\]</span></p>
+<p>Therefore, the linear ODE has solutions only if the right hand side is orthogonal to the range of the adjoint operator <span class="math inline">\(\mathcal{L}^*\)</span>. (Think of a linear system <span class="math inline">\(Ax=b\)</span>. When <span class="math inline">\(A\)</span> is non-singular, the system has a unique solution for <em>every</em> <span class="math inline">\(b\)</span>. When <span class="math inline">\(A\)</span> is singular, the system has either no or an infinite number solutions, <em>depending</em> on <span class="math inline">\(b\)</span>. If <span class="math inline">\(b\)</span> is in the range of <span class="math inline">\(A\)</span>, then we have an infinite number. But <span class="math inline">\(b\)</span> in the range of <span class="math inline">\(A\)</span> means <span class="math inline">\(b\cdot w\)</span> for any <span class="math inline">\(w\)</span> in the kernel of <span class="math inline">\(A^T\)</span>.)</p>
+<p>The adjoint operator is: <span class="math display">\[
+\mathcal{L}^*[w] = -s_0 w' - w'' - f'(U_0) w.
+\]</span></p>
+<p>The function <span class="math inline">\(w = e^{-s_0 \xi}U_0'\)</span> is in the kernel of <span class="math inline">\(\mathcal{L}^*\)</span>. The orthogonality condition reads: <span class="math display">\[
+\int_{-\infty}^{\infty} w(\xi)(- s_1 U'_0 + \kappa U_0')\,\mathrm{d}\xi = 0.
+\]</span></p>
+<p>Therefore we have: <span class="math display">\[
+(\kappa-s_1) \int_{-\infty}^{\infty} e^{-s_0 \xi}(U_0')^2\,\mathrm{d}\xi = 0.
+\]</span></p>
+<p>Since the integral is strictly positive, we must have <span class="math inline">\(s_1=\kappa\)</span> and therefore: <span class="math display">\[
+s = s_0 + \kappa \varepsilon + \cdots
+\]</span></p>
+</div>
+</div>
+</div>
 
 
 </section>
